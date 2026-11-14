@@ -14,6 +14,12 @@ export function BookingConfirmationPage() {
   const [error, setError] = useState('')
   const [bookingId, setBookingId] = useState<number | null>(null)
 
+  const [transfer] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}') } catch { return {} } })
+  const [passenger] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}') } catch { return {} } })
+  const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
+  const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '€' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
+  const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
+
   async function handleConfirm() {
     if (!confirmed || processing || completed) return
     setError('')
@@ -52,6 +58,24 @@ export function BookingConfirmationPage() {
       <PublicNavbar />
 
       <main className="pt-32 pb-24 px-margin-page max-w-6xl mx-auto">
+        {completed && bookingId !== null ? (
+          <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
+            <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
+            <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking is Confirmed!</h1>
+            <p className="mb-6 text-on-surface-variant">Your transfer reservation has been created. Please save your booking reference.</p>
+            <p className="text-sm uppercase tracking-wide">Booking Reference</p>
+            <p className="text-4xl font-bold text-admin-primary mb-8">#{bookingId}</p>
+            <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
+              <p><strong>Passenger:</strong> {display(passenger.customerName)}</p>
+              <p><strong>Pickup:</strong> {display(transfer.pickUpLocation)}</p>
+              <p><strong>Destination:</strong> {display(transfer.dropOffLocation)}</p>
+              <p><strong>Schedule:</strong> {schedule}</p>
+              <p><strong>Price:</strong> {price}</p>
+            </div>
+            <a href="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</a>
+          </section>
+        ) : (
+          <>
         <ConfirmationStepper />
 
         <header className="text-center mb-12">
@@ -78,24 +102,24 @@ export function BookingConfirmationPage() {
                 <SummaryBlock
                   icon="flight_takeoff"
                   label="Pickup Location"
-                  value="Dalaman Airport (DLM)"
+                  value={display(transfer.pickUpLocation)}
                 />
                 <SummaryBlock
                   icon="location_on"
                   label="Destination"
-                  value="Fethiye Marina / Center"
+                  value={display(transfer.dropOffLocation)}
                 />
               </div>
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="calendar_today"
                   label="Schedule"
-                  value="15 Oct 2024, 14:30"
+                  value={schedule}
                 />
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
-                  value="Mercedes-Benz Vito Premium"
+                  value={display(transfer.vehicleName ?? transfer.vehicleType ?? transfer.vehicleClass)}
                 />
               </div>
             </div>
@@ -113,7 +137,7 @@ export function BookingConfirmationPage() {
             <div className="py-6 border-y border-on-primary-container/20">
               <div className="flex justify-between items-baseline">
                 <span className="font-body-md text-body-md">Estimated Price</span>
-                <span className="font-title-lg text-title-lg text-white">€75</span>
+                <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
                 All taxes, parking, and tolls included.
@@ -135,10 +159,10 @@ export function BookingConfirmationPage() {
               <h2 className="font-title-md text-title-md">Customer Details</h2>
             </div>
             <div className="space-y-4">
-              <DetailRow label="Full Name" value="Julianna Rodriguez" />
-              <DetailRow label="Phone" value="+44 7911 123456" />
-              <DetailRow label="Email" value="j.rod@example.com" />
-              <DetailRow label="Hotel Name" value="The Yacht Classic Hotel" />
+              <DetailRow label="Full Name" value={display(passenger.customerName)} />
+              <DetailRow label="Phone" value={display(passenger.phoneNumber)} />
+              <DetailRow label="Email" value={display(passenger.email)} />
+              <DetailRow label="Hotel Name" value={display(passenger.hotelName)} />
             </div>
           </section>
 
@@ -220,6 +244,8 @@ export function BookingConfirmationPage() {
             </p>
           </div>
         </section>
+          </>
+        )}
       </main>
 
       <ConfirmationFooter />
