@@ -51,6 +51,12 @@ export function BookingFormPage() {
       setFormError('Please enter pickup, destination, date and time before continuing.')
       return
     }
+    const selectedDateTime = new Date(pickUpDate + 'T' + pickUpTime)
+    if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime.getTime() <= Date.now()) {
+      event.preventDefault()
+      setFormError('Please choose a future pickup date and time.')
+      return
+    }
     setFormError('')
     localStorage.setItem(
       'bookingTransferInfo',
@@ -133,6 +139,7 @@ export function BookingFormPage() {
                   icon="calendar_today"
                   label="Pickup Date"
                   type="date"
+                  min={new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}
                   value={pickUpDate}
                   onChange={setPickUpDate}
                 />
