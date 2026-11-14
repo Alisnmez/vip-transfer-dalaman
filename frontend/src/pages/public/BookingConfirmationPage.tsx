@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { createBooking } from '../../features/booking/api'
 
 const informationLinks = ['Insurance Coverage', 'Trust & Safety']
 const legalLinks = ['Terms of Service', 'Privacy Policy']
@@ -10,14 +11,40 @@ export function BookingConfirmationPage() {
   const [processing, setProcessing] = useState(false)
   const [completed, setCompleted] = useState(false)
 
-  function handleConfirm() {
-    if (!confirmed || processing) return
+  const [error, setError] = useState('')
+  const [bookingId, setBookingId] = useState<number | null>(null)
 
-    setProcessing(true)
-    window.setTimeout(() => {
-      setProcessing(false)
+  async function handleConfirm() {
+    if (!confirmed || processing || completed) return
+    setError('')
+    const savedTransfer = localStorage.getItem('bookingTransferInfo')
+    const savedPassenger = localStorage.getItem('bookingPassengerInfo')
+    if (!savedTransfer || !savedPassenger) {
+      setError('Your booking information is missing. Please start the booking again.')
+      return
+    }
+
+    try {
+      const transfer = JSON.parse(savedTransfer)
+      const passenger = JSON.parse(savedPassenger)
+      setProcessing(true)
+      const booking = await createBooking({
+        customerName: passenger.customerName,
+        passengerCount: transfer.passengerCount,
+        pickUpLocation: transfer.pickUpLocation,
+        dropOffLocation: transfer.dropOffLocation,
+        transferDateTime: `${transfer.pickUpDate}T${transfer.pickUpTime}:00`,
+        price: transfer.price,
+      })
+      setBookingId(booking.id)
       setCompleted(true)
-    }, 900)
+      localStorage.removeItem('bookingTransferInfo')
+      localStorage.removeItem('bookingPassengerInfo')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Booking could not be created.')
+    } finally {
+      setProcessing(false)
+    }
   }
 
   return (
@@ -173,6 +200,8 @@ export function BookingConfirmationPage() {
                 I confirm that all information provided is correct.
               </span>
             </label>
+            {error && <p role="alert" className="text-error">{error}</p>}
+            {bookingId !== null && <p role="status">Booking reference: #{bookingId}</p>}
             <button
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!confirmed || processing || completed}
