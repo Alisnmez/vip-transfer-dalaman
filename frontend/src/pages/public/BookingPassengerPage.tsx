@@ -11,6 +11,7 @@ export function BookingPassengerPage() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [countryCode, setCountryCode] = useState('+90')
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -26,6 +27,10 @@ export function BookingPassengerPage() {
       setError('Please complete your name, phone number and email address.')
       return
     }
+    if (phoneNumber.replace(/\D/g, '').length !== (countryCode === '+90' ? 10 : phoneNumber.replace(/\D/g, '').length) || phoneNumber.replace(/\D/g, '').length < 7 || phoneNumber.replace(/\D/g, '').length > 15 - countryCode.length + 1) {
+      setError('Please enter a valid phone number (7–15 digits internationally; 10 digits for Turkey).')
+      return
+    }
     const transferInfo = JSON.parse(savedTransferInfo)
     if (!transferInfo.pickUpDate || !transferInfo.pickUpTime || !transferInfo.pickUpLocation || !transferInfo.dropOffLocation) {
       setError('Please complete the transfer details first.')
@@ -33,7 +38,7 @@ export function BookingPassengerPage() {
     }
     localStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
-      phoneNumber: phoneNumber.trim(),
+      phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim(),
     }))
     navigate('/booking/confirmation')
@@ -79,13 +84,20 @@ export function BookingPassengerPage() {
                       Phone Number
                     </label>
                     <div className="flex">
-                      <span className="inline-flex items-center px-3 border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg text-on-surface-variant text-label-sm">
-                        +90
-                      </span>
+                      <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber('') }}>
+                        <option value="+90">🇹🇷 +90</option>
+                        <option value="+44">🇬🇧 +44</option>
+                        <option value="+49">🇩🇪 +49</option>
+                        <option value="+33">🇫🇷 +33</option>
+                        <option value="+1">🇺🇸 +1</option>
+                        <option value="+370">🇱🇹 +370</option>
+                      </select>
                       <input
                         className="w-full border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                        onChange={(event) => setPhoneNumber(event.target.value)}
-                        placeholder="(555) 000 00 00"
+                        onChange={(event) => setPhoneNumber(event.target.value.replace(/\D/g, '').slice(0, countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length))}
+                        placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
+                        inputMode="numeric"
+                        maxLength={countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length}
                         type="tel"
                         value={phoneNumber}
                       />
