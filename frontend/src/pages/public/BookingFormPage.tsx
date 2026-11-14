@@ -40,18 +40,27 @@ export function BookingFormPage() {
   const [passengers, setPassengers] = useState(4)
   const [luggages, setLuggages] = useState(3)
   const [babySeats, setBabySeats] = useState(1)
+  const [formError, setFormError] = useState('')
 
   const selectedVehicle =
     vehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? vehicles[1]
 
-  function saveTransferInfo() {
+  function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
+    if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
+      event.preventDefault()
+      setFormError('Please enter pickup, destination, date and time before continuing.')
+      return
+    }
+    setFormError('')
     localStorage.setItem(
       'bookingTransferInfo',
       JSON.stringify({
-        dropOffLocation,
+        dropOffLocation: dropOffLocation.trim(),
+        vehicleName: selectedVehicle.name,
+        tripType,
         passengerCount: passengers,
         pickUpDate,
-        pickUpLocation,
+        pickUpLocation: pickUpLocation.trim(),
         pickUpTime,
         price: Number(selectedVehicle.price.replace('€', '')),
       }),
@@ -210,6 +219,7 @@ export function BookingFormPage() {
                 />
               </div>
 
+              {formError && <p role="alert" className="text-error">{formError}</p>}
               <div className="pt-8 border-t border-outline-variant flex justify-end">
                 <Link
                   className="px-12 py-4 bg-admin-primary text-on-primary font-title-md text-title-md rounded-lg hover:opacity-90 transition-all flex items-center gap-2 group"
