@@ -16,7 +16,8 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
     throw new Error(error?.message ?? 'Request failed')
   }
 
-  return response.json()
+  const responseText = await response.text()
+  return (responseText ? JSON.parse(responseText) : undefined) as T
 }
 
 export function getBookings() {
@@ -41,15 +42,8 @@ export function updateBooking(id: number, data: BookingRequest) {
   })
 }
 
-export async function deleteBooking(id: number) {
-  const response = await fetch(`${BOOKING_URL}/${id}`, {
+export function deleteBooking(id: number) {
+  return request<void>(`${BOOKING_URL}/${id}`, {
     method: 'DELETE',
   })
-
-  if (!response.ok) {
-    const error = await response.json().catch(() => null)
-    throw new Error(error?.message ?? 'Request failed')
-  }
-
-  return response.text()
 }
