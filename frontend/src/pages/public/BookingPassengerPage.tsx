@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { createBooking } from '../../features/booking/api'
 import { PublicNavbar } from './PublicNavbar'
 
 const quickLinks = ['Terms of Service', 'Privacy Policy', 'Insurance Coverage']
@@ -16,35 +15,28 @@ export function BookingPassengerPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  async function handleSubmit() {
+  function handleSubmit() {
     setError('')
-
     const savedTransferInfo = localStorage.getItem('bookingTransferInfo')
     if (!savedTransferInfo) {
       setError('Please fill transfer information first.')
       return
     }
-
-    const transferInfo = JSON.parse(savedTransferInfo)
-    const transferDateTime = `${transferInfo.pickUpDate}T${transferInfo.pickUpTime || '00:00'}:00`
-
-    setLoading(true)
-    try {
-      await createBooking({
-        customerName: `${firstName} ${lastName}`.trim(),
-        passengerCount: transferInfo.passengerCount,
-        pickUpLocation: transferInfo.pickUpLocation,
-        dropOffLocation: transferInfo.dropOffLocation,
-        transferDateTime,
-        price: transferInfo.price,
-      })
-      localStorage.removeItem('bookingTransferInfo')
-      navigate('/booking/confirmation')
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Booking could not be created.')
-    } finally {
-      setLoading(false)
+    if (!firstName.trim() || !lastName.trim() || !phoneNumber.trim() || !email.trim()) {
+      setError('Please complete your name, phone number and email address.')
+      return
     }
+    const transferInfo = JSON.parse(savedTransferInfo)
+    if (!transferInfo.pickUpDate || !transferInfo.pickUpTime || !transferInfo.pickUpLocation || !transferInfo.dropOffLocation) {
+      setError('Please complete the transfer details first.')
+      return
+    }
+    localStorage.setItem('bookingPassengerInfo', JSON.stringify({
+      customerName: `${firstName.trim()} ${lastName.trim()}`,
+      phoneNumber: phoneNumber.trim(),
+      email: email.trim(),
+    }))
+    navigate('/booking/confirmation')
   }
 
   return (
