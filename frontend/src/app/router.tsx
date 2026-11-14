@@ -1,0 +1,57 @@
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+
+import { AdminLayout } from '../layouts/AdminLayout'
+import { PublicLayout } from '../layouts/PublicLayout'
+import { BookingDetailPage } from '../pages/admin/BookingDetailPage'
+import { BookingListPage } from '../pages/admin/BookingListPage'
+import { CalendarPage } from '../pages/admin/CalendarPage'
+import { DashboardPage } from '../pages/admin/DashboardPage'
+import { AnalyticsPage } from '../pages/admin/AnalyticsPage'
+import { DispatchHubPage } from '../pages/admin/DispatchHubPage'
+import { FleetManagementPage } from '../pages/admin/FleetManagementPage'
+import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
+import { BookingFormPage } from '../pages/public/BookingFormPage'
+import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
+import { BookingLookupPage } from '../pages/public/BookingLookupPage'
+import { HomePage } from '../pages/public/HomePage'
+import {
+  ContactPage,
+  RoutesPage,
+  ServicesPage,
+  VehiclesPage,
+} from '../pages/public/InfoPages'
+
+export const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <PublicLayout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'routes', element: <RoutesPage /> },
+      { path: 'vehicles', element: <VehiclesPage /> },
+      { path: 'services', element: <ServicesPage /> },
+      { path: 'contact', element: <ContactPage /> },
+      { path: 'booking', element: <BookingFormPage /> },
+      { path: 'booking/passenger', element: <BookingPassengerPage /> },
+      { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
+      { path: 'booking/lookup', element: <BookingLookupPage /> },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <DashboardPage /> },
+      { path: 'calendar', element: <CalendarPage /> },
+      { path: 'bookings', element: <BookingListPage /> },
+      { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
+      { path: 'fleet-management', element: <FleetManagementPage /> },
+      { path: 'dispatch-hub', element: <DispatchHubPage /> },
+      { path: 'analytics', element: <AnalyticsPage /> },
+    ],
+  },
+  {
+    path: '*',
+    element: <Navigate to="/" replace />,
+  },
+])
