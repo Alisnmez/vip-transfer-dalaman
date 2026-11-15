@@ -22,6 +22,7 @@ public class Booking {
     private BigDecimal price;
     private String phoneNumber;
     private String email;
+    private String countryOfResidence;
     private String transferAddress;
     @jakarta.persistence.Column(length = 2000)
     private String specialRequests;
@@ -111,6 +112,14 @@ public class Booking {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCountryOfResidence() {
+        return countryOfResidence;
+    }
+
+    public void setCountryOfResidence(String countryOfResidence) {
+        this.countryOfResidence = countryOfResidence;
     }
 
     public String getTransferAddress() {
