@@ -36,7 +36,6 @@ public class Booking {
         this.id = id;
     }
 
-
     public String getCustomerName() {
         return customerName;
     }
@@ -84,6 +83,7 @@ public class Booking {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
