@@ -1330,5 +1330,23 @@
     "vehicleId": "minibus",
     "oneWay": 137.5,
     "roundTrip": 275
+  },
+  {
+    "destination": "Faralya",
+    "vehicleId": "vip-minibus",
+    "oneWay": 167.5,
+    "roundTrip": 335
+  },
+  {
+    "destination": "Faralya",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 197.5,
+    "roundTrip": 395
+  },
+  {
+    "destination": "Faralya",
+    "vehicleId": "minibus-long",
+    "oneWay": 167.5,
+    "roundTrip": 335
   }
 ]
