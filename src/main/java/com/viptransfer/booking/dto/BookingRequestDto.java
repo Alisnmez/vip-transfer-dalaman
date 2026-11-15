@@ -1,6 +1,7 @@
 package com.viptransfer.booking.dto;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ public class BookingRequestDto {
     private LocalDateTime transferDateTime;
 
     @NotNull(message = "Price is required.")
+    @DecimalMin(value = "0.01", message = "Price must be greater than zero.")
     private BigDecimal price;
 
     public BookingRequestDto() {
