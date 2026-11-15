@@ -5,6 +5,7 @@ const navItems = [
   { to: '/admin/bookings', label: 'Bookings', icon: 'calendar_month' },
   { to: '/admin/calendar', label: 'Calendar', icon: 'event' },
   { to: '/admin/fleet-management', label: 'Fleet Management', icon: 'directions_car' },
+  { to: '/admin/route-prices', label: 'Route Prices', icon: 'payments' },
   { to: '/admin/dispatch-hub', label: 'Dispatch Hub', icon: 'hub' },
   { to: '/admin/analytics', label: 'Analytics', icon: 'analytics' },
 ]
