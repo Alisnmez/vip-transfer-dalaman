@@ -140,7 +140,7 @@ export function BookingConfirmationPage() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid">
           <section className="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow transition-standard hover:border-primary-fixed-dim">
             <div className="flex items-center gap-3 mb-6 border-b border-outline-variant pb-4">
-              <span className="material-symbols-outlined text-admin-primary">
+              <span translate="no" className="material-symbols-outlined text-admin-primary">
                 directions_car
               </span>
               <h2 className="font-title-md text-title-md text-on-surface">
@@ -208,7 +208,7 @@ export function BookingConfirmationPage() {
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-sm">info</span>
+              <span translate="no" className="material-symbols-outlined text-sm">info</span>
               <span className="font-label-sm text-label-sm">
                 Final price may vary by luggage volume.
               </span>
@@ -217,7 +217,7 @@ export function BookingConfirmationPage() {
 
           <section className="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow">
             <div className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-admin-primary">
+              <span translate="no" className="material-symbols-outlined text-admin-primary">
                 person
               </span>
               <h2 className="font-title-md text-title-md">Customer Details</h2>
@@ -234,7 +234,7 @@ export function BookingConfirmationPage() {
 
           <section className="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow flex flex-col">
             <div className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-secondary">
+              <span translate="no" className="material-symbols-outlined text-secondary">
                 payments
               </span>
               <h2 className="font-title-md text-title-md">Payment Policy</h2>
@@ -262,7 +262,7 @@ export function BookingConfirmationPage() {
                 </div>
               </div>
               <div className="mt-4 flex items-center gap-2 text-admin-primary font-semibold">
-                <span
+                <span translate="no"
                   className="material-symbols-outlined"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
@@ -379,7 +379,7 @@ function SummaryBlock({
   return (
     <div className="flex items-start gap-4">
       <div className="p-2 rounded bg-slate-100 text-admin-primary">
-        <span className="material-symbols-outlined text-[20px]">{icon}</span>
+        <span translate="no" className="material-symbols-outlined text-[20px]">{icon}</span>
       </div>
       <div>
         <p className="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">
