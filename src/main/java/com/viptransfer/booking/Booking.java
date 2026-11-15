@@ -19,6 +19,11 @@ public class Booking {
     private String dropOffLocation;
     private LocalDateTime transferDateTime;
     private BigDecimal price;
+    private String phoneNumber;
+    private String email;
+    private String vehicleId;
+    private String tripType;
+    private String status = "PENDING";
 
     public Booking() {
     }
@@ -38,7 +43,9 @@ public class Booking {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
-    }public Integer getPassengerCount() {
+    }
+
+    public Integer getPassengerCount() {
         return passengerCount;
     }
 
@@ -77,5 +84,43 @@ public class Booking {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
