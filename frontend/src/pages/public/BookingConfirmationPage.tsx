@@ -41,6 +41,8 @@ export function BookingConfirmationPage() {
         dropOffLocation: transfer.dropOffLocation,
         transferDateTime: `${transfer.pickUpDate}T${transfer.pickUpTime}:00`,
         price: transfer.price,
+        vehicleId: transfer.vehicleId,
+        tripType: transfer.tripType,
       })
       setBookingId(booking.id)
       setCompleted(true)
