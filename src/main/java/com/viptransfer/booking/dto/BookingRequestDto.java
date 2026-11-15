@@ -36,7 +36,6 @@ public class BookingRequestDto {
     @NotBlank(message = "Email is required.")
     @jakarta.validation.constraints.Email(message = "Email must be valid.")
     private String email;
-    @NotBlank(message = "Exact transfer address is required.")
     private String countryOfResidence;
     private String transferAddress;
     private String specialRequests;
