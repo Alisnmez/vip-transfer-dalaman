@@ -36,6 +36,9 @@ public class BookingRequestDto {
     @NotBlank(message = "Email is required.")
     @jakarta.validation.constraints.Email(message = "Email must be valid.")
     private String email;
+    @NotBlank(message = "Exact transfer address is required.")
+    private String transferAddress;
+    private String specialRequests;
 
     public BookingRequestDto() {
     }
@@ -86,6 +89,22 @@ public class BookingRequestDto {
 
     public void setReturnDateTime(LocalDateTime returnDateTime) {
         this.returnDateTime = returnDateTime;
+    }
+
+    public String getTransferAddress() {
+        return transferAddress;
+    }
+
+    public void setTransferAddress(String transferAddress) {
+        this.transferAddress = transferAddress;
+    }
+
+    public String getSpecialRequests() {
+        return specialRequests;
+    }
+
+    public void setSpecialRequests(String specialRequests) {
+        this.specialRequests = specialRequests;
     }
 
     public String getVehicleId() {
