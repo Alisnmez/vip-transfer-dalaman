@@ -45,7 +45,8 @@ export function BookingFormPage() {
 
   const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? transferVehicles[1]
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
-  const price = findTransferPrice(dropOffLocation, selectedVehicleId, tripType)
+  const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
+  const price = findTransferPrice(routeDestination, selectedVehicleId, tripType)
   const priceLabel = price === null ? 'Select destination' : `£${price.toFixed(2)}`
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
@@ -58,6 +59,11 @@ export function BookingFormPage() {
     if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime.getTime() <= Date.now()) {
       event.preventDefault()
       setFormError('Please choose a future pickup date and time.')
+      return
+    }
+    if (pickUpLocation === dropOffLocation) {
+      event.preventDefault()
+      setFormError('Pickup and destination must be different.')
       return
     }
     if (price === null) {
@@ -137,12 +143,14 @@ export function BookingFormPage() {
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location</label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => setPickUpLocation(event.target.value)}>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
+                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination</label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">Select destination</option>
+                    <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
                     {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
                   </select>
                 </div>
@@ -201,7 +209,7 @@ export function BookingFormPage() {
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="font-title-md text-title-md text-admin-primary">
-                            {findTransferPrice(dropOffLocation, vehicle.id, tripType) === null ? 'Select destination' : `£${findTransferPrice(dropOffLocation, vehicle.id, tripType)?.toFixed(2)}`}
+                            {findTransferPrice(routeDestination, vehicle.id, tripType) === null ? 'Select destination' : `£${findTransferPrice(routeDestination, vehicle.id, tripType)?.toFixed(2)}`}
                           </span>
                           <span
                             className={`material-symbols-outlined text-secondary ${
