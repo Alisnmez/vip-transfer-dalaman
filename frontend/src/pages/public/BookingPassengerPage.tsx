@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { BOOKING_STORAGE_KEYS, readStoredJson, writeStoredJson } from '../../shared/utils/bookingStorage'
 
 const quickLinks = ['Terms of Service', 'Privacy Policy', 'Insurance Coverage']
 const supportLinks = ['Trust & Safety', 'Contact Support', 'Corporate Accounts']
@@ -18,8 +19,8 @@ export function BookingPassengerPage() {
 
   function handleSubmit() {
     setError('')
-    const savedTransferInfo = localStorage.getItem('bookingTransferInfo')
-    if (!savedTransferInfo) {
+    const transferInfo = readStoredJson<{ pickUpDate?: string; pickUpTime?: string; pickUpLocation?: string; dropOffLocation?: string }>(BOOKING_STORAGE_KEYS.transfer)
+    if (!transferInfo) {
       setError('Please fill transfer information first.')
       return
     }
@@ -31,16 +32,15 @@ export function BookingPassengerPage() {
       setError('Please enter a valid phone number (7–15 digits internationally; 10 digits for Turkey).')
       return
     }
-    const transferInfo = JSON.parse(savedTransferInfo)
     if (!transferInfo.pickUpDate || !transferInfo.pickUpTime || !transferInfo.pickUpLocation || !transferInfo.dropOffLocation) {
       setError('Please complete the transfer details first.')
       return
     }
-    localStorage.setItem('bookingPassengerInfo', JSON.stringify({
+    writeStoredJson(BOOKING_STORAGE_KEYS.passenger, {
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim(),
-    }))
+    })
     navigate('/booking/confirmation')
   }
 
