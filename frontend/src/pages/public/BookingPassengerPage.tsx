@@ -285,7 +285,7 @@ function FormField({
 }
 
 function PassengerSummary() {
-  const transfer = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+  const transfer = readStoredJson<Record<string, any>>(BOOKING_STORAGE_KEYS.transfer) ?? {}
   const price = typeof transfer.price === 'number' ? `£${transfer.price.toFixed(2)}` : 'Price to be confirmed'
   return (
     <div className="lg:col-span-4">
