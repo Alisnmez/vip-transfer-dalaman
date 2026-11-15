@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
+import { BOOKING_STORAGE_KEYS, readStoredJson, clearBookingStorage } from '../../shared/utils/bookingStorage'
 
 const informationLinks = ['Insurance Coverage', 'Trust & Safety']
 const legalLinks = ['Terms of Service', 'Privacy Policy']
@@ -14,8 +15,8 @@ export function BookingConfirmationPage() {
   const [error, setError] = useState('')
   const [bookingId, setBookingId] = useState<number | null>(null)
 
-  const [transfer] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}') } catch { return {} } })
-  const [passenger] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}') } catch { return {} } })
+  const [transfer] = useState<Record<string, any>>(() => readStoredJson<Record<string, unknown>>(BOOKING_STORAGE_KEYS.transfer) ?? {})
+  const [passenger] = useState<Record<string, unknown>>(() => readStoredJson<Record<string, unknown>>(BOOKING_STORAGE_KEYS.passenger) ?? {})
   const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
   const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '£' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
@@ -23,16 +24,16 @@ export function BookingConfirmationPage() {
   async function handleConfirm() {
     if (!confirmed || processing || completed) return
     setError('')
-    const savedTransfer = localStorage.getItem('bookingTransferInfo')
-    const savedPassenger = localStorage.getItem('bookingPassengerInfo')
+    const savedTransfer = readStoredJson<Record<string, any>>(BOOKING_STORAGE_KEYS.transfer)
+    const savedPassenger = readStoredJson<Record<string, any>>(BOOKING_STORAGE_KEYS.passenger)
     if (!savedTransfer || !savedPassenger) {
       setError('Your booking information is missing. Please start the booking again.')
       return
     }
 
     try {
-      const transfer = JSON.parse(savedTransfer)
-      const passenger = JSON.parse(savedPassenger)
+      const transfer = savedTransfer
+      const passenger = savedPassenger
       setProcessing(true)
       const booking = await createBooking({
         customerName: passenger.customerName,
@@ -44,8 +45,7 @@ export function BookingConfirmationPage() {
       })
       setBookingId(booking.id)
       setCompleted(true)
-      localStorage.removeItem('bookingTransferInfo')
-      localStorage.removeItem('bookingPassengerInfo')
+      clearBookingStorage()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
