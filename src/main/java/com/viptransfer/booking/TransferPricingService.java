@@ -17,14 +17,25 @@ public class TransferPricingService {
         this.prices = objectMapper.readTree(new ClassPathResource("transfer-prices.json").getInputStream());
     }
 
-    public BigDecimal calculatePrice(String destination, String vehicleId, String tripType) {
+    public BigDecimal calculatePrice(String pickup, String destination, String vehicleId, String tripType) {
         if (destination == null || vehicleId == null || tripType == null
                 || (!"one-way".equals(tripType) && !"round-trip".equals(tripType))) {
             throw new IllegalArgumentException("Invalid transfer pricing details.");
         }
 
+        if (pickup == null || pickup.equals(destination)) {
+            throw new IllegalArgumentException("Pickup and destination must be different.");
+        }
+        String pricedDestination;
+        if ("Dalaman Airport".equals(pickup)) {
+            pricedDestination = destination;
+        } else if ("Dalaman Airport".equals(destination)) {
+            pricedDestination = pickup;
+        } else {
+            throw new IllegalArgumentException("Only airport routes are currently priced.");
+        }
         for (JsonNode entry : prices) {
-            if (destination.equals(entry.path("destination").asText())
+            if (pricedDestination.equals(entry.path("destination").asText())
                     && vehicleId.equals(entry.path("vehicleId").asText())) {
                 String field = "round-trip".equals(tripType) ? "roundTrip" : "oneWay";
                 return entry.path(field).decimalValue();
