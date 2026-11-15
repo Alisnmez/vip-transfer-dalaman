@@ -24,6 +24,8 @@ type PassengerDetails = {
   phoneNumber?: string
   email?: string
   hotelName?: string
+  transferAddress?: string
+  specialRequests?: string
 }
 
 function readSavedDetails<T>(key: string): T {
@@ -68,7 +70,7 @@ export function BookingConfirmationPage() {
       if (!passenger.customerName || !passenger.phoneNumber || !passenger.email ||
           !transfer.passengerCount || !transfer.pickUpLocation || !transfer.dropOffLocation ||
           !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType ||
-          (transfer.tripType === 'round-trip' && (!transfer.returnDate || !transfer.returnTime))) {
+          (transfer.tripType === 'round-trip' && (!transfer.returnDate || !transfer.returnTime)) || !passenger.transferAddress) {
         setError('Please complete all required booking details.')
         return
       }
@@ -83,6 +85,8 @@ export function BookingConfirmationPage() {
         phoneNumber: passenger.phoneNumber,
         email: passenger.email,
         vehicleId: transfer.vehicleId,
+        transferAddress: passenger.transferAddress || '',
+        specialRequests: passenger.specialRequests || '',
         tripType: transfer.tripType,
       })
       setBookingId(booking.id)
@@ -220,7 +224,8 @@ export function BookingConfirmationPage() {
               <DetailRow label="Full Name" value={display(passenger.customerName)} />
               <DetailRow label="Phone" value={display(passenger.phoneNumber)} />
               <DetailRow label="Email" value={display(passenger.email)} />
-              <DetailRow label="Hotel Name" value={display(passenger.hotelName)} />
+              <DetailRow label="Transfer Address in Turkey" value={display(passenger.transferAddress)} />
+              {passenger.specialRequests && <DetailRow label="Special Requests" value={passenger.specialRequests} />}
             </div>
           </section>
 
