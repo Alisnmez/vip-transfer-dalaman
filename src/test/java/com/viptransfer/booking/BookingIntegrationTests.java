@@ -94,4 +94,23 @@ class BookingIntegrationTests {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    void createsReverseAirportTransferAtCatalogPrice() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Return Passenger",
+                "passengerCount", 2,
+                "pickUpLocation", "Fethiye City Center(Any Hotel)",
+                "dropOffLocation", "Dalaman Airport",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "price", new BigDecimal("1.00"),
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.price").value(45.5));
+    }
 }
