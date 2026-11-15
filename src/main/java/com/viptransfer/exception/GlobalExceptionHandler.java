@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponseDto> handleInvalidBooking(IllegalArgumentException ex) {
+        return new ResponseEntity<>(
+                new ErrorResponseDto(HttpStatus.BAD_REQUEST.value(), ex.getMessage()),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
     @ExceptionHandler(BookingNotFoundException.class)
     public ResponseEntity<ErrorResponseDto> handleBookingNotFoundException(BookingNotFoundException ex) {
         ErrorResponseDto errorDto = new ErrorResponseDto(
