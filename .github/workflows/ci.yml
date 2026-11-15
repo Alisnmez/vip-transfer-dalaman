@@ -34,4 +34,4 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - run: ./mvnw -B -DskipTests package
+      - run: mvn -B -DskipTests package
