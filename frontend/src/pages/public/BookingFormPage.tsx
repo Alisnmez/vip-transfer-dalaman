@@ -57,11 +57,11 @@ export function BookingFormPage() {
     names: group.names.filter((name) => destinations.includes(name)),
   }))
   const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
-  const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
-  const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
   const availableDestinations = pickUpLocation === 'Dalaman Airport' ? destinations : ['Dalaman Airport']
   const availableVehicles = transferVehicles.filter((vehicle) => findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
   const effectiveVehicleId = availableVehicles.some((vehicle) => vehicle.id === selectedVehicleId) ? selectedVehicleId : availableVehicles[0]?.id ?? selectedVehicleId
+  const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
+  const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
   const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
