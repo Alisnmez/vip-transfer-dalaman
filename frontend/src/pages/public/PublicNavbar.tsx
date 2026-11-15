@@ -44,7 +44,7 @@ export function PublicNavbar() {
             onClick={() => setMenuOpen((open) => !open)}
             type="button"
           >
-            <span aria-hidden="true" className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
+            <span translate="no" aria-hidden="true" className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
           </button>
         </div>
       </div>
