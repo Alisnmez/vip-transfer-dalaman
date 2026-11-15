@@ -9,6 +9,7 @@ import { DashboardPage } from '../pages/admin/DashboardPage'
 import { AnalyticsPage } from '../pages/admin/AnalyticsPage'
 import { DispatchHubPage } from '../pages/admin/DispatchHubPage'
 import { FleetManagementPage } from '../pages/admin/FleetManagementPage'
+import { RoutePricePage } from '../pages/admin/RoutePricePage'
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
       { path: 'bookings', element: <BookingListPage /> },
       { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
       { path: 'fleet-management', element: <FleetManagementPage /> },
+      { path: 'route-prices', element: <RoutePricePage /> },
       { path: 'dispatch-hub', element: <DispatchHubPage /> },
       { path: 'analytics', element: <AnalyticsPage /> },
     ],
