@@ -15,9 +15,9 @@ import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
 import { HomePage } from '../pages/public/HomePage'
+import { RoutesPage } from '../pages/public/RoutesPage'
 import {
   ContactPage,
-  RoutesPage,
   ServicesPage,
   VehiclesPage,
 } from '../pages/public/InfoPages'
