@@ -1,6 +1,7 @@
 import type { Booking, BookingRequest } from '../types'
 
-const BOOKING_URL = '/bookings'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+const BOOKING_URL = `${API_BASE_URL}/bookings`
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const response = await fetch(url, {
