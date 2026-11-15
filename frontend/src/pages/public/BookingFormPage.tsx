@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { BOOKING_STORAGE_KEYS, writeStoredJson } from '../../shared/utils/bookingStorage'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 
 const vehicleImages = [
@@ -71,9 +72,9 @@ export function BookingFormPage() {
       return
     }
     setFormError('')
-    localStorage.setItem(
-      'bookingTransferInfo',
-      JSON.stringify({
+    writeStoredJson(
+      BOOKING_STORAGE_KEYS.transfer,
+      {
         dropOffLocation: dropOffLocation.trim(),
         vehicleName: selectedVehicle.name,
         tripType,
@@ -84,7 +85,7 @@ export function BookingFormPage() {
         price,
         currency: 'GBP',
         vehicleId: selectedVehicleId,
-      }),
+      },
     )
   }
 
