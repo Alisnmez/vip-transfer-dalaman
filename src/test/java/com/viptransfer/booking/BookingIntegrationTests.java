@@ -39,6 +39,8 @@ class BookingIntegrationTests {
                 "phoneNumber", "+905551234567",
                 "email", "guest@example.com",
                 "transferAddress", "Fethiye City Center, Turkey",
+                "countryOfResidence", "Lithuania",
+                "specialRequests", "Two child seats",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
@@ -61,7 +63,10 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
                 .andExpect(jsonPath("$.passengerCount").value(2))
                 .andExpect(jsonPath("$.status").value("PENDING"))
-                .andExpect(jsonPath("$.email").value("guest@example.com"));
+                .andExpect(jsonPath("$.email").value("guest@example.com"))
+                .andExpect(jsonPath("$.countryOfResidence").value("Lithuania"))
+                .andExpect(jsonPath("$.transferAddress").value("Fethiye City Center, Turkey"))
+                .andExpect(jsonPath("$.specialRequests").value("Two child seats"));
     }
 
     @Test
