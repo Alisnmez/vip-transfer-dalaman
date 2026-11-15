@@ -3,18 +3,6 @@ import { Link } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
 
 const pageContent = {
-  routes: {
-    eyebrow: 'Routes',
-    title: 'Popular Dalaman Transfer Routes',
-    description:
-      'Simple fixed-route transfer options from Dalaman Airport to the most requested coastal destinations.',
-    items: [
-      ['Dalaman Airport to Fethiye', 'From €45. Direct private transfer.'],
-      ['Dalaman Airport to Gocek', 'From €40. Fast marina and hotel access.'],
-      ['Dalaman Airport to Marmaris', 'From €65. Comfortable long-distance route.'],
-      ['Dalaman Airport to Oludeniz', 'From €50. Private transfer to resort areas.'],
-    ],
-  },
   vehicles: {
     eyebrow: 'Vehicles',
     title: 'Professional Transfer Vehicles',
@@ -51,10 +39,6 @@ const pageContent = {
       ['Support Hours', 'Available every day for transfer requests.'],
     ],
   },
-}
-
-export function RoutesPage() {
-  return <InfoPage content={pageContent.routes} />
 }
 
 export function VehiclesPage() {
