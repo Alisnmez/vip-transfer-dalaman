@@ -285,6 +285,8 @@ function FormField({
 }
 
 function PassengerSummary() {
+  const transfer = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+  const price = typeof transfer.price === 'number' ? `£${transfer.price.toFixed(2)}` : 'Price to be confirmed'
   return (
     <div className="lg:col-span-4">
       <div className="sticky top-24 space-y-gutter-grid">
@@ -312,7 +314,7 @@ function PassengerSummary() {
                   directions_car
                 </span>
                 <span className="font-label-sm text-label-sm">
-                  Mercedes Vito or equivalent
+                  {transfer.vehicleName || 'Not selected'}
                 </span>
               </div>
             </div>
@@ -320,22 +322,22 @@ function PassengerSummary() {
               <SummaryPoint
                 icon="location_on"
                 label="Pickup"
-                meta="Nov 15, 2024 at 14:30"
-                value="Dalaman Airport (DLM)"
+                meta={`${transfer.pickUpDate || ""} ${transfer.pickUpTime || ""}`}
+                value={transfer.pickUpLocation || "Not selected"}
               />
               <SummaryPoint
                 icon="near_me"
                 label="Drop-off"
-                value="Hillside Beach Club, Fethiye"
+                value={transfer.dropOffLocation || "Not selected"}
               />
             </div>
             <div className="bg-white/5 rounded-lg p-4 space-y-2">
-              <PriceLine label="Base Fare" value="€75.00" />
+              <PriceLine label="Base Fare" value={price} />
               <PriceLine label="Meet & Greet" value="FREE" />
               <div className="flex justify-between items-center pt-2 border-t border-white/10">
                 <span className="font-title-md text-title-md">Total</span>
                 <span className="font-title-md text-title-md text-secondary-fixed">
-                  €75.00
+                  {price}
                 </span>
               </div>
             </div>
