@@ -25,6 +25,12 @@ public class BookingRequestDto {
     @NotNull(message = "Transfer date and time is required.")
     private LocalDateTime transferDateTime;
 
+    @NotBlank(message = "Vehicle is required.")
+    private String vehicleId;
+
+    @NotBlank(message = "Trip type is required.")
+    private String tripType;
+
     @NotNull(message = "Price is required.")
     @DecimalMin(value = "0.01", message = "Price must be greater than zero.")
     private BigDecimal price;
@@ -79,4 +85,8 @@ public class BookingRequestDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+    public String getVehicleId() { return vehicleId; }
+    public void setVehicleId(String vehicleId) { this.vehicleId = vehicleId; }
+    public String getTripType() { return tripType; }
+    public void setTripType(String tripType) { this.tripType = tripType; }
 }
