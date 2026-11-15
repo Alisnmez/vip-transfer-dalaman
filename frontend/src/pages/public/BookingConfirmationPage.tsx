@@ -40,7 +40,8 @@ export function BookingConfirmationPage() {
         pickUpLocation: transfer.pickUpLocation,
         dropOffLocation: transfer.dropOffLocation,
         transferDateTime: `${transfer.pickUpDate}T${transfer.pickUpTime}:00`,
-        price: transfer.price,
+        phoneNumber: passenger.phoneNumber,
+        email: passenger.email,
         vehicleId: transfer.vehicleId,
         tripType: transfer.tripType,
       })
@@ -63,8 +64,8 @@ export function BookingConfirmationPage() {
         {completed && bookingId !== null ? (
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
-            <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking is Confirmed!</h1>
-            <p className="mb-6 text-on-surface-variant">Your transfer reservation has been created. Please save your booking reference.</p>
+            <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking Request Was Received!</h1>
+            <p className="mb-6 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
             <p className="text-sm uppercase tracking-wide">Booking Reference</p>
             <p className="text-4xl font-bold text-admin-primary mb-8">#{bookingId}</p>
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
@@ -206,7 +207,7 @@ export function BookingConfirmationPage() {
                 </span>
                 <span className="font-label-sm">
                   Secure Booking: Your reservation is safely stored and
-                  instantly confirmed.
+                  submitted for confirmation.
                 </span>
               </div>
             </div>
