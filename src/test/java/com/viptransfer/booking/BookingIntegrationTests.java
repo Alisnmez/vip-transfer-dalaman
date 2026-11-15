@@ -70,4 +70,21 @@ class BookingIntegrationTests {
                         .content(request))
                 .andExpect(status().isBadRequest());
     }
+    @Test
+    void rejectsNegativeBookingPrice() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Price Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "price", new BigDecimal("-1.00")
+        ));
+
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isBadRequest());
+    }
+
 }
