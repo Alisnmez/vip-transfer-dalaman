@@ -59,7 +59,10 @@ export function BookingFormPage() {
   }))
   const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
   const price = findTransferPrice(routeDestination, selectedVehicleId, tripType)
-  const priceLabel = price === null ? 'Select destination' : `£${price.toFixed(2)}`
+  const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
+  const availableDestinations = pickUpLocation === 'Dalaman Airport' ? destinations : ['Dalaman Airport']
+  const availableVehicles = transferVehicles.filter((vehicle) => findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
+  const effectiveVehicleId = availableVehicles.some((vehicle) => vehicle.id === selectedVehicleId) ? selectedVehicleId : availableVehicles[0]?.id ?? selectedVehicleId
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
@@ -80,7 +83,7 @@ export function BookingFormPage() {
     }
     if (price === null) {
       event.preventDefault()
-      setFormError('Please select an available destination and vehicle.')
+      setFormError('This route or vehicle has no published price. Please choose Dalaman Airport as one endpoint and a vehicle with a listed price.')
       return
     }
     if (passengers < 1 || passengers > selectedVehicle.maxPassengers || (selectedVehicle.maxLuggage !== null && luggages > selectedVehicle.maxLuggage)) {
@@ -153,7 +156,7 @@ export function BookingFormPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location</label>
-                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => setPickUpLocation(event.target.value)}>
+                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
                     {groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
@@ -166,8 +169,8 @@ export function BookingFormPage() {
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination</label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">Select destination</option>
-                    <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
-                    {groupedDestinationOptions.map((group) => (
+                    {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">Dalaman Airport (DLM)</option>}
+                    {pickUpLocation === "Dalaman Airport" && groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
                         {group.names.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
                       </optgroup>
@@ -200,7 +203,8 @@ export function BookingFormPage() {
                   Select Vehicle Type
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter-grid">
-                  {transferVehicles.map((vehicle, index) => {
+                  {availableVehicles.map((vehicle) => {
+                    const index = transferVehicles.findIndex((item) => item.id === vehicle.id)
                     const isSelected = selectedVehicleId === vehicle.id
 
                     return (
