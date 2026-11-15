@@ -157,9 +157,23 @@ export function BookingConfirmationPage() {
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="calendar_today"
-                  label="Schedule"
+                  label="Outbound Pickup"
                   value={schedule}
                 />
+                {transfer.tripType === 'round-trip' && (
+                  <>
+                    <SummaryBlock
+                      icon="event"
+                      label="Return Pickup"
+                      value={returnSchedule}
+                    />
+                    <SummaryBlock
+                      icon="sync_alt"
+                      label="Return Route"
+                      value={display(transfer.dropOffLocation) + ' → ' + display(transfer.pickUpLocation)}
+                    />
+                  </>
+                )}
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
