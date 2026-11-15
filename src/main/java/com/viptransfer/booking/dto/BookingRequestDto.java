@@ -37,6 +37,7 @@ public class BookingRequestDto {
     @jakarta.validation.constraints.Email(message = "Email must be valid.")
     private String email;
     @NotBlank(message = "Exact transfer address is required.")
+    private String countryOfResidence;
     private String transferAddress;
     private String specialRequests;
 
@@ -89,6 +90,14 @@ public class BookingRequestDto {
 
     public void setReturnDateTime(LocalDateTime returnDateTime) {
         this.returnDateTime = returnDateTime;
+    }
+
+    public String getCountryOfResidence() {
+        return countryOfResidence;
+    }
+
+    public void setCountryOfResidence(String countryOfResidence) {
+        this.countryOfResidence = countryOfResidence;
     }
 
     public String getTransferAddress() {
