@@ -38,6 +38,7 @@ class BookingIntegrationTests {
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
                 "phoneNumber", "+905551234567",
                 "email", "guest@example.com",
+                "transferAddress", "Fethiye City Center, Turkey",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
