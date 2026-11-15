@@ -18,6 +18,7 @@ public class Booking {
     private String pickUpLocation;
     private String dropOffLocation;
     private LocalDateTime transferDateTime;
+    private LocalDateTime returnDateTime;
     private BigDecimal price;
     private String phoneNumber;
     private String email;
@@ -74,6 +75,14 @@ public class Booking {
 
     public void setTransferDateTime(LocalDateTime transferDateTime) {
         this.transferDateTime = transferDateTime;
+    }
+
+    public LocalDateTime getReturnDateTime() {
+        return returnDateTime;
+    }
+
+    public void setReturnDateTime(LocalDateTime returnDateTime) {
+        this.returnDateTime = returnDateTime;
     }
 
     public BigDecimal getPrice() {
