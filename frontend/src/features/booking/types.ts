@@ -19,5 +19,7 @@ export type BookingRequest = {
   phoneNumber: string
   email: string
   vehicleId: string
+  transferAddress: string
+  specialRequests?: string
   tripType: 'one-way' | 'round-trip'
 }
