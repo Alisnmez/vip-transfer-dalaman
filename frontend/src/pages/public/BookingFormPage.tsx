@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 
-const vehicles = [
+const vehicleImages = [
   {
     id: 'sedan',
     name: 'Business Sedan',
@@ -32,8 +33,8 @@ const vehicles = [
 
 export function BookingFormPage() {
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
-  const [selectedVehicleId, setSelectedVehicleId] = useState('van')
-  const [pickUpLocation, setPickUpLocation] = useState('')
+  const [selectedVehicleId, setSelectedVehicleId] = useState('vip-minivan')
+  const [pickUpLocation, setPickUpLocation] = useState('Dalaman Airport')
   const [dropOffLocation, setDropOffLocation] = useState('')
   const [pickUpDate, setPickUpDate] = useState('')
   const [pickUpTime, setPickUpTime] = useState('')
@@ -42,8 +43,10 @@ export function BookingFormPage() {
   const [babySeats, setBabySeats] = useState(1)
   const [formError, setFormError] = useState('')
 
-  const selectedVehicle =
-    vehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? vehicles[1]
+  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? transferVehicles[1]
+  const destinations = [...new Set(transferPrices.map((price) => price.destination))]
+  const price = findTransferPrice(dropOffLocation, selectedVehicleId, tripType)
+  const priceLabel = price === null ? 'Select destination' : `£${price.toFixed(2)}`
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
@@ -57,6 +60,16 @@ export function BookingFormPage() {
       setFormError('Please choose a future pickup date and time.')
       return
     }
+    if (price === null) {
+      event.preventDefault()
+      setFormError('Please select an available destination and vehicle.')
+      return
+    }
+    if (passengers < 1 || passengers > selectedVehicle.maxPassengers || (selectedVehicle.maxLuggage !== null && luggages > selectedVehicle.maxLuggage)) {
+      event.preventDefault()
+      setFormError('Passenger or luggage count exceeds the selected vehicle capacity.')
+      return
+    }
     setFormError('')
     localStorage.setItem(
       'bookingTransferInfo',
@@ -68,7 +81,9 @@ export function BookingFormPage() {
         pickUpDate,
         pickUpLocation: pickUpLocation.trim(),
         pickUpTime,
-        price: Number(selectedVehicle.price.replace('€', '')),
+        price,
+        currency: 'GBP',
+        vehicleId: selectedVehicleId,
       }),
     )
   }
@@ -118,20 +133,19 @@ export function BookingFormPage() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                <TextField
-                  icon="location_on"
-                  label="Pickup Location"
-                  placeholder="e.g. Dalaman Airport (DLM)"
-                  value={pickUpLocation}
-                  onChange={setPickUpLocation}
-                />
-                <TextField
-                  icon="near_me"
-                  label="Dropoff Location"
-                  placeholder="e.g. Hillside Beach Club, Fethiye"
-                  value={dropOffLocation}
-                  onChange={setDropOffLocation}
-                />
+                <div className="space-y-2">
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location</label>
+                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => setPickUpLocation(event.target.value)}>
+                    <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination</label>
+                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
+                    <option value="">Select destination</option>
+                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                  </select>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
@@ -158,7 +172,7 @@ export function BookingFormPage() {
                   Select Vehicle Type
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter-grid">
-                  {vehicles.map((vehicle) => {
+                  {transferVehicles.map((vehicle, index) => {
                     const isSelected = selectedVehicleId === vehicle.id
 
                     return (
@@ -176,18 +190,18 @@ export function BookingFormPage() {
                           <img
                             alt=""
                             className="object-contain w-4/5 h-4/5"
-                            src={vehicle.image}
+                            src={vehicleImages[index === 0 ? 0 : index >= 5 ? 2 : 1].image}
                           />
                         </div>
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>
                         <p className="text-[11px] text-on-surface-variant mb-3">
-                          {vehicle.description}
+                          Max {vehicle.maxPassengers} passengers{vehicle.maxLuggage === null ? '' : `, ${vehicle.maxLuggage} luggage`}
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="font-title-md text-title-md text-admin-primary">
-                            {vehicle.price}
+                            {findTransferPrice(dropOffLocation, vehicle.id, tripType) === null ? 'Select destination' : `£${findTransferPrice(dropOffLocation, vehicle.id, tripType)?.toFixed(2)}`}
                           </span>
                           <span
                             className={`material-symbols-outlined text-secondary ${
@@ -246,6 +260,11 @@ export function BookingFormPage() {
             babySeats={babySeats}
             passengers={passengers}
             selectedVehicle={selectedVehicle}
+            pickUpLocation={pickUpLocation}
+            dropOffLocation={dropOffLocation}
+            pickUpDate={pickUpDate}
+            pickUpTime={pickUpTime}
+            priceLabel={priceLabel}
           />
         </div>
       </main>
@@ -380,10 +399,20 @@ function BookingSummary({
   babySeats,
   passengers,
   selectedVehicle,
+  pickUpLocation,
+  dropOffLocation,
+  pickUpDate,
+  pickUpTime,
+  priceLabel,
 }: {
   babySeats: number
   passengers: number
-  selectedVehicle: (typeof vehicles)[number]
+  selectedVehicle: (typeof transferVehicles)[number]
+  pickUpLocation: string
+  dropOffLocation: string
+  pickUpDate: string
+  pickUpTime: string
+  priceLabel: string
 }) {
   return (
     <aside className="lg:col-span-4 sticky top-24">
@@ -402,10 +431,10 @@ function BookingSummary({
               <div className="w-3 h-3 rounded-full bg-secondary" />
             </div>
             <div className="flex-1 space-y-4">
-              <SummaryLocation label="Pickup" value="Dalaman Airport (DLM)" />
+              <SummaryLocation label="Pickup" value={pickUpLocation} />
               <SummaryLocation
                 label="Dropoff"
-                value="Hillside Beach Club, Fethiye"
+                value={dropOffLocation || "Select destination"}
               />
             </div>
           </div>
@@ -426,7 +455,7 @@ function BookingSummary({
             <SummaryRow
               icon="calendar_today"
               label="Date & Time"
-              value="12 Oct, 14:30"
+              value={pickUpDate && pickUpTime ? `${pickUpDate} ${pickUpTime}` : "Select date and time"}
             />
           </div>
 
@@ -438,7 +467,7 @@ function BookingSummary({
                 Subtotal
               </span>
               <span className="font-label-sm text-label-sm text-admin-primary">
-                {selectedVehicle.price}.00
+                {priceLabel}
               </span>
             </div>
             <div className="flex justify-between items-center mb-6">
@@ -455,7 +484,7 @@ function BookingSummary({
                   Estimated Total
                 </span>
                 <div className="font-title-lg text-title-lg text-admin-primary">
-                  {selectedVehicle.price}.00
+                  {priceLabel}
                 </div>
               </div>
               <div className="text-[10px] text-on-surface-variant text-right">
