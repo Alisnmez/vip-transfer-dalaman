@@ -201,7 +201,7 @@ export function BookingPassengerPage() {
                   className="flex items-center gap-2 px-6 py-3 border border-outline-variant rounded-lg font-label-sm text-label-sm text-on-surface-variant hover:bg-slate-100 transition-colors active:scale-95"
                   to="/booking"
                 >
-                  <span className="material-symbols-outlined text-base">
+                  <span translate="no" className="material-symbols-outlined text-base">
                     arrow_back
                   </span>
                   Back
@@ -212,7 +212,7 @@ export function BookingPassengerPage() {
                   type="button"
                 >
                   Continue to Confirmation
-                  <span className="material-symbols-outlined text-base">
+                  <span translate="no" className="material-symbols-outlined text-base">
                     arrow_forward
                   </span>
                 </button>
@@ -265,7 +265,7 @@ function StepperItem({
         }`}
       >
         {complete ? (
-          <span className="material-symbols-outlined text-base">check</span>
+          <span translate="no" className="material-symbols-outlined text-base">check</span>
         ) : (
           <span className="font-label-sm text-label-sm">{number}</span>
         )}
@@ -340,7 +340,7 @@ function PassengerSummary() {
                 Booking Summary
               </h3>
               <div className="flex items-center gap-2 opacity-80">
-                <span className="material-symbols-outlined text-sm">
+                <span translate="no" className="material-symbols-outlined text-sm">
                   directions_car
                 </span>
                 <span className="font-label-sm text-label-sm">
@@ -372,7 +372,7 @@ function PassengerSummary() {
               </div>
             </div>
             <div className="flex items-center gap-3 text-status-closed bg-white/5 p-3 rounded-lg">
-              <span
+              <span translate="no"
                 className="material-symbols-outlined"
                 style={{ fontVariationSettings: "'FILL' 1" }}
               >
@@ -387,7 +387,7 @@ function PassengerSummary() {
 
         <div className="bg-slate-100 border border-outline-variant p-6 rounded-xl flex items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-admin-primary">
-            <span className="material-symbols-outlined">headset_mic</span>
+            <span translate="no" className="material-symbols-outlined">headset_mic</span>
           </div>
           <div>
             <p className="font-label-sm text-label-sm text-admin-primary font-bold">
@@ -416,7 +416,7 @@ function SummaryPoint({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <span className="material-symbols-outlined text-primary-fixed-dim">
+      <span translate="no" className="material-symbols-outlined text-primary-fixed-dim">
         {icon}
       </span>
       <div>
@@ -467,7 +467,7 @@ function PassengerFooter() {
               type="email"
             />
             <button className="bg-admin-primary text-white p-2 rounded">
-              <span className="material-symbols-outlined text-sm">send</span>
+              <span translate="no" className="material-symbols-outlined text-sm">send</span>
             </button>
           </div>
         </div>
