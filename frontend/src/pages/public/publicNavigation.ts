@@ -1,5 +1,5 @@
 export const publicNavItems = [
-  { label: 'Home', to: '/' },
+  { label: 'Anasayfa', to: '/' },
   { label: 'Routes', to: '/routes' },
   { label: 'Vehicles', to: '/vehicles' },
   { label: 'Services', to: '/services' },
