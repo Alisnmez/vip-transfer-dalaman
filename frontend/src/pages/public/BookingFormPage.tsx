@@ -43,7 +43,6 @@ export function BookingFormPage() {
   const [babySeats, setBabySeats] = useState(1)
   const [formError, setFormError] = useState('')
 
-  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
     { label: 'MARMARIS DESTINATIONS', names: ['Marmaris(Any Hotel)', 'Icmeler(Any Hotel)', 'Netsel Marina', 'Albatros Marina', 'Yacht Marina', "Cook's Club Adakoy&Adakoy Marina", 'Turunc', 'D Maris Bay', 'Bozburun / Sogut', 'Selimiye', 'Angels Marmaris Hotel'] },
@@ -63,6 +62,7 @@ export function BookingFormPage() {
   const availableDestinations = pickUpLocation === 'Dalaman Airport' ? destinations : ['Dalaman Airport']
   const availableVehicles = transferVehicles.filter((vehicle) => findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
   const effectiveVehicleId = availableVehicles.some((vehicle) => vehicle.id === selectedVehicleId) ? selectedVehicleId : availableVehicles[0]?.id ?? selectedVehicleId
+  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
