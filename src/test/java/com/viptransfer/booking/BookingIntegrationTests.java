@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Map;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -16,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(properties = "app.admin.password=test-admin-password")
 @AutoConfigureMockMvc
 class BookingIntegrationTests {
 
@@ -51,13 +53,26 @@ class BookingIntegrationTests {
 
         Long id = objectMapper.readTree(response).get("id").asLong();
 
-        mockMvc.perform(get("/bookings/{id}", id))
+        mockMvc.perform(get("/bookings/{id}", id)
+                        .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerName").value("Integration Test"))
                 .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
                 .andExpect(jsonPath("$.passengerCount").value(2))
                 .andExpect(jsonPath("$.status").value("PENDING"))
                 .andExpect(jsonPath("$.email").value("guest@example.com"));
+    }
+
+    @Test
+    void blocksAnonymousBookingReadsAndChanges() throws Exception {
+        mockMvc.perform(get("/bookings"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/bookings/1"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("/bookings/1"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/1"))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
