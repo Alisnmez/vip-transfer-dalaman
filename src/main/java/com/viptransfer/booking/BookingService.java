@@ -10,9 +10,11 @@ import java.util.List;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
+    private final TransferPricingService transferPricingService;
 
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingService(BookingRepository bookingRepository, TransferPricingService transferPricingService) {
         this.bookingRepository = bookingRepository;
+        this.transferPricingService = transferPricingService;
     }
 
     public Booking createBooking(BookingRequestDto dto) {
@@ -22,7 +24,7 @@ public class BookingService {
         booking.setPickUpLocation(dto.getPickUpLocation());
         booking.setDropOffLocation(dto.getDropOffLocation());
         booking.setTransferDateTime(dto.getTransferDateTime());
-        booking.setPrice(dto.getPrice());
+        booking.setPrice(transferPricingService.calculatePrice(dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType()));
 
         return bookingRepository.save(booking);
     }
@@ -45,7 +47,7 @@ public class BookingService {
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
         existingBooking.setDropOffLocation(dto.getDropOffLocation());
         existingBooking.setTransferDateTime(dto.getTransferDateTime());
-        existingBooking.setPrice(dto.getPrice());
+        existingBooking.setPrice(transferPricingService.calculatePrice(dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType()));
 
         return bookingRepository.save(existingBooking);
     }
