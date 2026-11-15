@@ -17,7 +17,7 @@ export function BookingConfirmationPage() {
   const [transfer] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}') } catch { return {} } })
   const [passenger] = useState<Record<string, any>>(() => { try { return JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}') } catch { return {} } })
   const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
-  const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '€' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
+  const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '£' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
 
   async function handleConfirm() {
