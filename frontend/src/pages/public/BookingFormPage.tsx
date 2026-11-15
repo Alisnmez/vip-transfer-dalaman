@@ -325,6 +325,7 @@ function TextField({
   onChange,
   placeholder,
   type = 'text',
+  min,
   value,
 }: {
   icon: string
@@ -332,6 +333,7 @@ function TextField({
   onChange?: (value: string) => void
   placeholder?: string
   type?: string
+  min?: string
   value?: string
 }) {
   return (
@@ -348,6 +350,7 @@ function TextField({
           onChange={(event) => onChange?.(event.target.value)}
           placeholder={placeholder}
           type={type}
+          min={min}
           value={value}
         />
       </div>
