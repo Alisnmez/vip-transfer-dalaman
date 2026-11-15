@@ -34,7 +34,7 @@ export function PublicNavbar() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <Link className="hidden rounded-lg bg-admin-primary px-5 py-3 text-base font-semibold text-on-primary transition-opacity hover:opacity-90 sm:inline-flex" to="/booking">
-            Book Now
+            Bok
           </Link>
           <button
             aria-controls="mobile-navigation"
@@ -64,7 +64,7 @@ export function PublicNavbar() {
               </NavLink>
             ))}
             <Link className="mt-3 rounded-lg bg-admin-primary px-5 py-3 text-center font-semibold text-white" onClick={() => setMenuOpen(false)} to="/booking">
-              Book Now
+              Bok
             </Link>
           </div>
         </nav>
