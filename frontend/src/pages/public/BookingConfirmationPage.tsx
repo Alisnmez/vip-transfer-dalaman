@@ -15,8 +15,8 @@ export function BookingConfirmationPage() {
   const [error, setError] = useState('')
   const [bookingId, setBookingId] = useState<number | null>(null)
 
-  const [transfer] = useState<Record<string, any>>(() => readStoredJson<Record<string, unknown>>(BOOKING_STORAGE_KEYS.transfer) ?? {})
-  const [passenger] = useState<Record<string, unknown>>(() => readStoredJson<Record<string, unknown>>(BOOKING_STORAGE_KEYS.passenger) ?? {})
+  const [transfer] = useState<Record<string, any>>(() => readStoredJson<Record<string, any>>(BOOKING_STORAGE_KEYS.transfer) ?? {})
+  const [passenger] = useState<Record<string, any>>(() => readStoredJson<Record<string, any>>(BOOKING_STORAGE_KEYS.passenger) ?? {})
   const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
   const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '£' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
