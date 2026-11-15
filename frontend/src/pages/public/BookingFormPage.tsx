@@ -313,7 +313,7 @@ export function BookingFormPage() {
                   to="/booking/passenger"
                 >
                   Next: Passenger Details
-                  <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+                  <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                     arrow_forward
                   </span>
                 </Link>
@@ -407,7 +407,7 @@ function TextField({
         {label}
       </label>
       <div className="relative">
-        <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
+        <span translate="no" className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
           {icon}
         </span>
         <input
@@ -443,7 +443,7 @@ function CounterField({
           onClick={() => onChange(Math.max(0, value - 1))}
           type="button"
         >
-          <span className="material-symbols-outlined">remove</span>
+          <span translate="no" className="material-symbols-outlined">remove</span>
         </button>
         <input
           className="w-full text-center border-none font-body-md text-body-md focus:ring-0"
@@ -456,7 +456,7 @@ function CounterField({
           onClick={() => onChange(value + 1)}
           type="button"
         >
-          <span className="material-symbols-outlined">add</span>
+          <span translate="no" className="material-symbols-outlined">add</span>
         </button>
       </div>
     </div>
@@ -562,7 +562,7 @@ function BookingSummary({
           </div>
 
           <div className="flex items-center gap-3 p-3 bg-secondary/10 rounded-lg">
-            <span
+            <span translate="no"
               className="material-symbols-outlined text-secondary"
               style={{ fontVariationSettings: "'FILL' 1" }}
             >
@@ -609,7 +609,7 @@ function SummaryRow({
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2 text-on-surface-variant">
-        <span className="material-symbols-outlined text-[20px]">{icon}</span>
+        <span translate="no" className="material-symbols-outlined text-[20px]">{icon}</span>
         <span className="font-body-md text-body-md">{label}</span>
       </div>
       <span className="font-label-sm text-label-sm text-admin-primary">
@@ -654,7 +654,7 @@ function BookingFooter() {
           © 2024 VIP Transfer Dalaman. All rights reserved.
         </p>
         <div className="flex gap-4">
-          <span className="material-symbols-outlined text-on-surface-variant hover:text-admin-primary cursor-pointer">
+          <span translate="no" className="material-symbols-outlined text-on-surface-variant hover:text-admin-primary cursor-pointer">
             language
           </span>
           <span className="font-label-sm text-label-sm text-on-surface-variant">
