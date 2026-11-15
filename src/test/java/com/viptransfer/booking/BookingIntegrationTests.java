@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -35,7 +34,8 @@ class BookingIntegrationTests {
                 "pickUpLocation", "Dalaman Airport",
                 "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("1.00"),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
@@ -55,7 +55,9 @@ class BookingIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerName").value("Integration Test"))
                 .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
-                .andExpect(jsonPath("$.passengerCount").value(2));
+                .andExpect(jsonPath("$.passengerCount").value(2))
+                .andExpect(jsonPath("$.status").value("PENDING"))
+                .andExpect(jsonPath("$.email").value("guest@example.com"));
     }
 
     @Test
@@ -65,7 +67,8 @@ class BookingIntegrationTests {
                 "pickUpLocation", "Dalaman Airport",
                 "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("1.00"),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
@@ -76,14 +79,15 @@ class BookingIntegrationTests {
                 .andExpect(status().isBadRequest());
     }
     @Test
-    void rejectsNegativeBookingPrice() throws Exception {
+    void rejectsBookingWithTooManyPassengers() throws Exception {
         String request = objectMapper.writeValueAsString(Map.of(
-                "customerName", "Price Test",
-                "passengerCount", 2,
+                "customerName", "Capacity Test",
+                "passengerCount", 6,
                 "pickUpLocation", "Dalaman Airport",
                 "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("-1.00"),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
@@ -102,7 +106,8 @@ class BookingIntegrationTests {
                 "pickUpLocation", "Fethiye City Center(Any Hotel)",
                 "dropOffLocation", "Dalaman Airport",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("1.00"),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
