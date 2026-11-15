@@ -48,7 +48,7 @@ export function RoutesPage() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link className="inline-flex min-h-12 items-center justify-center rounded-lg bg-secondary px-7 py-3 text-base font-bold text-admin-primary transition-opacity hover:opacity-90" to="/booking">
-                Book your transfer <span aria-hidden="true" className="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
+                Book your transfer <span translate="no" aria-hidden="true" className="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
               </Link>
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-7 py-3 font-semibold text-white transition-colors hover:bg-white/10" href="#all-routes">
                 Explore routes
@@ -70,7 +70,7 @@ export function RoutesPage() {
               <article className="group flex min-h-48 flex-col justify-between rounded-2xl border border-outline-variant bg-white p-6 shadow-sm transition-shadow hover:shadow-lg" key={route.destination}>
                 <div className="flex items-start justify-between gap-4">
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-admin-primary/5 text-admin-primary">
-                    <span aria-hidden="true" className="material-symbols-outlined">{index % 2 === 0 ? 'location_on' : 'explore'}</span>
+                    <span translate="no" aria-hidden="true" className="material-symbols-outlined">{index % 2 === 0 ? 'location_on' : 'explore'}</span>
                   </span>
                   <span className="rounded-full bg-surface-container-low px-3 py-1 text-xs font-medium text-on-surface-variant">Private transfer</span>
                 </div>
@@ -80,7 +80,7 @@ export function RoutesPage() {
                     <p className="mt-1 text-xs text-on-surface-variant">Dalaman Airport · From {priceLabel(route.from)}</p>
                   </div>
                   <a className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" href="#all-routes" aria-label={`Compare prices for ${route.destination}`}>
-                    <span aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
+                    <span translate="no" aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
                   </a>
                 </div>
               </article>
