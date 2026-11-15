@@ -22,6 +22,7 @@ public class BookingRequestDto {
 
     @NotNull(message = "Transfer date and time is required.")
     private LocalDateTime transferDateTime;
+    private LocalDateTime returnDateTime;
 
     @NotBlank(message = "Vehicle is required.")
     private String vehicleId;
@@ -77,6 +78,14 @@ public class BookingRequestDto {
 
     public void setTransferDateTime(LocalDateTime transferDateTime) {
         this.transferDateTime = transferDateTime;
+    }
+
+    public LocalDateTime getReturnDateTime() {
+        return returnDateTime;
+    }
+
+    public void setReturnDateTime(LocalDateTime returnDateTime) {
+        this.returnDateTime = returnDateTime;
     }
 
     public String getVehicleId() {
