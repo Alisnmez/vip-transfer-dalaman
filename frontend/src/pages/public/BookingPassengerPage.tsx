@@ -126,6 +126,40 @@ export function BookingPassengerPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
+                  <label htmlFor="country-of-residence" className="font-label-sm text-label-sm text-on-surface-variant">Country of Residence *</label>
+                  <select id="country-of-residence" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md bg-white" value={countryOfResidence} onChange={(event) => setCountryOfResidence(event.target.value)} required>
+                    <option value="">Select your country</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Russia">Russia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Lebanon">Lebanon</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Denmark">Denmark</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="United States">United States</option>
+                    <option value="France">France</option>
+                    <option value="Belgium">Belgium</option>
+                    <option value="Romania">Romania</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Norway">Norway</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Ukraine">Ukraine</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="United Arab Emirates">United Arab Emirates</option>
+                    <option value="Saudi Arabia">Saudi Arabia</option>
+                    <option value="Cyprus">Cyprus</option>
+                    <option value="Finland">Finland</option>
+                    <option value="Lithuania">Lithuania</option>
+                    <option value="Latvia">Latvia</option>
+                    <option value="Estonia">Estonia</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  <p className="text-sm text-on-surface-variant">Your home country, not your transfer address in Turkey.</p>
+                </div>
+
+                <div className="flex flex-col gap-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant">
                     {JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}').pickUpLocation === 'Dalaman Airport' ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'} *
                   </label>
