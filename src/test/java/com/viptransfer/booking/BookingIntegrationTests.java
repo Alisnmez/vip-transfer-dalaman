@@ -30,20 +30,19 @@ class BookingIntegrationTests {
 
     @Test
     void createsBookingAndReadsItBackFromPostgres() throws Exception {
-        String request = objectMapper.writeValueAsString(Map.of(
-                "customerName", "Integration Test",
-                "passengerCount", 2,
-                "pickUpLocation", "Dalaman Airport",
-                "dropOffLocation", "Fethiye City Center(Any Hotel)",
-                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "phoneNumber", "+905551234567",
-                "email", "guest@example.com",
-                "transferAddress", "Fethiye City Center, Turkey",
-                "countryOfResidence", "Lithuania",
-                "specialRequests", "Two child seats",
-                "vehicleId", "vip-minivan",
-                "tripType", "one-way"
-        ));
+        String request = objectMapper.writeValueAsString(Map.ofEntries(
+                Map.entry("customerName", "Integration Test"),
+                Map.entry("passengerCount", 2),
+                Map.entry("pickUpLocation", "Dalaman Airport"),
+                Map.entry("dropOffLocation", "Fethiye City Center(Any Hotel)"),
+                Map.entry("transferDateTime", LocalDateTime.now().plusDays(3).toString()),
+                Map.entry("phoneNumber", "+905551234567"),
+                Map.entry("email", "guest@example.com"),
+                Map.entry("transferAddress", "Fethiye City Center, Turkey"),
+                Map.entry("countryOfResidence", "Lithuania"),
+                Map.entry("specialRequests", "Two child seats"),
+                Map.entry("vehicleId", "vip-minivan"),
+                Map.entry("tripType", "one-way"),        ));
 
         String response = mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
