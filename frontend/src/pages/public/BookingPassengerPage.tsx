@@ -176,11 +176,10 @@ export function BookingPassengerPage() {
                 </Link>
                 <button
                   className="flex items-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all active:scale-95"
-                  disabled={loading}
                   onClick={handleSubmit}
                   type="button"
                 >
-                  {loading ? 'Creating Booking...' : 'Continue to Confirmation'}
+                  Continue to Confirmation
                   <span className="material-symbols-outlined text-base">
                     arrow_forward
                   </span>
