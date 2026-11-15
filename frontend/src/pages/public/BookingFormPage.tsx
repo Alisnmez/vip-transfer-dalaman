@@ -43,7 +43,7 @@ export function BookingFormPage() {
   const [babySeats, setBabySeats] = useState(1)
   const [formError, setFormError] = useState('')
 
-  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? transferVehicles[1]
+  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
     { label: 'MARMARIS DESTINATIONS', names: ['Marmaris(Any Hotel)', 'Icmeler(Any Hotel)', 'Netsel Marina', 'Albatros Marina', 'Yacht Marina', "Cook's Club Adakoy&Adakoy Marina", 'Turunc', 'D Maris Bay', 'Bozburun / Sogut', 'Selimiye', 'Angels Marmaris Hotel'] },
@@ -58,7 +58,7 @@ export function BookingFormPage() {
     names: group.names.filter((name) => destinations.includes(name)),
   }))
   const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
-  const price = findTransferPrice(routeDestination, selectedVehicleId, tripType)
+  const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
   const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
   const availableDestinations = pickUpLocation === 'Dalaman Airport' ? destinations : ['Dalaman Airport']
   const availableVehicles = transferVehicles.filter((vehicle) => findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
@@ -104,7 +104,7 @@ export function BookingFormPage() {
         pickUpTime,
         price,
         currency: 'GBP',
-        vehicleId: selectedVehicleId,
+        vehicleId: effectiveVehicleId,
       }),
     )
   }
@@ -205,7 +205,7 @@ export function BookingFormPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
                     const index = transferVehicles.findIndex((item) => item.id === vehicle.id)
-                    const isSelected = selectedVehicleId === vehicle.id
+                    const isSelected = effectiveVehicleId === vehicle.id
 
                     return (
                       <button
