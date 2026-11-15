@@ -22,6 +22,10 @@ public class Booking {
     private BigDecimal price;
     private String phoneNumber;
     private String email;
+    private String transferAddress;
+    @jakarta.persistence.Column(length = 2000)
+    private String specialRequests;
+
     private String vehicleId;
     private String tripType;
     private String status = "PENDING";
@@ -107,6 +111,22 @@ public class Booking {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTransferAddress() {
+        return transferAddress;
+    }
+
+    public void setTransferAddress(String transferAddress) {
+        this.transferAddress = transferAddress;
+    }
+
+    public String getSpecialRequests() {
+        return specialRequests;
+    }
+
+    public void setSpecialRequests(String specialRequests) {
+        this.specialRequests = specialRequests;
     }
 
     public String getVehicleId() {
