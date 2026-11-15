@@ -38,6 +38,8 @@ export function BookingFormPage() {
   const [dropOffLocation, setDropOffLocation] = useState('')
   const [pickUpDate, setPickUpDate] = useState('')
   const [pickUpTime, setPickUpTime] = useState('')
+  const [returnDate, setReturnDate] = useState('')
+  const [returnTime, setReturnTime] = useState('')
   const [passengers, setPassengers] = useState(4)
   const [luggages, setLuggages] = useState(3)
   const [babySeats, setBabySeats] = useState(1)
@@ -76,6 +78,14 @@ export function BookingFormPage() {
       setFormError('Please choose a future pickup date and time.')
       return
     }
+    if (tripType === 'round-trip') {
+      const returnDateTime = new Date(returnDate + 'T' + returnTime)
+      if (!returnDate || !returnTime || Number.isNaN(returnDateTime.getTime()) || returnDateTime <= selectedDateTime) {
+        event.preventDefault()
+        setFormError('Please choose a return date and time after your outbound pickup.')
+        return
+      }
+    }
     if (pickUpLocation === dropOffLocation) {
       event.preventDefault()
       setFormError('Pickup and destination must be different.')
@@ -102,6 +112,8 @@ export function BookingFormPage() {
         pickUpDate,
         pickUpLocation: pickUpLocation.trim(),
         pickUpTime,
+        returnDate: tripType === 'round-trip' ? returnDate : undefined,
+        returnTime: tripType === 'round-trip' ? returnTime : undefined,
         price,
         currency: 'GBP',
         vehicleId: effectiveVehicleId,
@@ -197,6 +209,17 @@ export function BookingFormPage() {
                 />
                 <TextField icon="flight_takeoff" label="Flight Number" placeholder="TK1234" />
               </div>
+
+              {tripType === 'round-trip' && (
+                <div className="space-y-3 rounded-lg border border-outline-variant bg-slate-50 p-4">
+                  <p className="font-semibold">Return journey: {dropOffLocation || 'Destination'} → {pickUpLocation}</p>
+                  <p className="text-sm text-slate-600">Choose when you want to travel back. Your return does not have to be on the same day or at the same time.</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate || new Date().toISOString().slice(0, 10)} value={returnDate} onChange={setReturnDate} />
+                    <TextField icon="schedule" label="Return Time" type="time" value={returnTime} onChange={setReturnTime} />
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-4">
                 <label className="font-label-sm text-label-sm text-on-surface-variant block">
