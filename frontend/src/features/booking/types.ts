@@ -14,7 +14,8 @@ export type BookingRequest = {
   pickUpLocation: string
   dropOffLocation: string
   transferDateTime: string
-  price: number
+  phoneNumber: string
+  email: string
   vehicleId: string
   tripType: 'one-way' | 'round-trip'
 }
