@@ -23,7 +23,9 @@ public class BookingService {
         booking.setPassengerCount(dto.getPassengerCount());
         booking.setPickUpLocation(dto.getPickUpLocation());
         booking.setDropOffLocation(dto.getDropOffLocation());
+        validateSchedule(dto);
         booking.setTransferDateTime(dto.getTransferDateTime());
+        booking.setReturnDateTime(dto.getReturnDateTime());
         booking.setPhoneNumber(dto.getPhoneNumber());
         booking.setEmail(dto.getEmail());
         booking.setVehicleId(dto.getVehicleId());
@@ -31,6 +33,19 @@ public class BookingService {
         booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
         return bookingRepository.save(booking);
+    }
+
+    private void validateSchedule(BookingRequestDto dto) {
+        if (!"one-way".equals(dto.getTripType()) && !"round-trip".equals(dto.getTripType())) {
+            throw new IllegalArgumentException("Invalid trip type.");
+        }
+        if ("round-trip".equals(dto.getTripType())) {
+            if (dto.getReturnDateTime() == null || !dto.getReturnDateTime().isAfter(dto.getTransferDateTime())) {
+                throw new IllegalArgumentException("Return date and time must be after outbound pickup.");
+            }
+        } else if (dto.getReturnDateTime() != null) {
+            throw new IllegalArgumentException("One-way transfers cannot have a return date.");
+        }
     }
 
     public Booking getBooking(Long id) {
@@ -50,7 +65,9 @@ public class BookingService {
         existingBooking.setPassengerCount(dto.getPassengerCount());
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
         existingBooking.setDropOffLocation(dto.getDropOffLocation());
+        validateSchedule(dto);
         existingBooking.setTransferDateTime(dto.getTransferDateTime());
+        existingBooking.setReturnDateTime(dto.getReturnDateTime());
         existingBooking.setPhoneNumber(dto.getPhoneNumber());
         existingBooking.setEmail(dto.getEmail());
         existingBooking.setVehicleId(dto.getVehicleId());
