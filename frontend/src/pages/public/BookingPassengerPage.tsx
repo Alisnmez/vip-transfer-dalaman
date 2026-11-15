@@ -13,6 +13,7 @@ export function BookingPassengerPage() {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [countryCode, setCountryCode] = useState('+90')
   const [email, setEmail] = useState('')
+  const [countryOfResidence, setCountryOfResidence] = useState('')
   const [transferAddress, setTransferAddress] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [error, setError] = useState('')
@@ -37,6 +38,10 @@ export function BookingPassengerPage() {
       setError('Please complete the transfer details first.')
       return
     }
+    if (!countryOfResidence) {
+      setError('Please select your country of residence.')
+      return
+    }
     if (!transferAddress.trim()) {
       setError('Please enter the exact hotel, accommodation or transfer address in Turkey.')
       return
@@ -45,6 +50,7 @@ export function BookingPassengerPage() {
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim(),
+      countryOfResidence,
       transferAddress: transferAddress.trim(),
       specialRequests: specialRequests.trim(),
     }))
