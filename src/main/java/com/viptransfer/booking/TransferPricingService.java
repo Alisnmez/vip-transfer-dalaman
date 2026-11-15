@@ -6,6 +6,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 
 @Service
@@ -14,10 +15,24 @@ public class TransferPricingService {
     private final JsonNode prices;
 
     public TransferPricingService(ObjectMapper objectMapper) throws IOException {
-        this.prices = objectMapper.readTree(new ClassPathResource("transfer-prices.json").getInputStream());
+        try (InputStream input = new ClassPathResource("transfer-prices.json").getInputStream()) {
+            this.prices = objectMapper.readTree(input);
+        }
     }
 
-    public BigDecimal calculatePrice(String pickup, String destination, String vehicleId, String tripType) {
+    public BigDecimal calculatePrice(String pickup, String destination, String vehicleId, String tripType, int passengerCount) {
+        int capacity = switch (vehicleId) {
+            case "taxi" -> 3;
+            case "vip-minivan", "premium-vip-minivan", "maybach", "maybach-plus" -> 5;
+            case "minibus" -> 12;
+            case "vip-minibus" -> 9;
+            case "vip-minibus-long", "minibus-long" -> 16;
+            default -> 0;
+        };
+        if (passengerCount < 1 || passengerCount > capacity) {
+            throw new IllegalArgumentException("Passenger count exceeds the vehicle capacity.");
+        }
+
         if (destination == null || vehicleId == null || tripType == null
                 || (!"one-way".equals(tripType) && !"round-trip".equals(tripType))) {
             throw new IllegalArgumentException("Invalid transfer pricing details.");
