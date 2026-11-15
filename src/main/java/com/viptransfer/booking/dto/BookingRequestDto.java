@@ -1,10 +1,8 @@
 package com.viptransfer.booking.dto;
 
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class BookingRequestDto {
@@ -31,9 +29,12 @@ public class BookingRequestDto {
     @NotBlank(message = "Trip type is required.")
     private String tripType;
 
-    @NotNull(message = "Price is required.")
-    @DecimalMin(value = "0.01", message = "Price must be greater than zero.")
-    private BigDecimal price;
+    @NotBlank(message = "Phone number is required.")
+    private String phoneNumber;
+
+    @NotBlank(message = "Email is required.")
+    @jakarta.validation.constraints.Email(message = "Email must be valid.")
+    private String email;
 
     public BookingRequestDto() {
     }
@@ -78,15 +79,35 @@ public class BookingRequestDto {
         this.transferDateTime = transferDateTime;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getVehicleId() {
+        return vehicleId;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setVehicleId(String vehicleId) {
+        this.vehicleId = vehicleId;
     }
-    public String getVehicleId() { return vehicleId; }
-    public void setVehicleId(String vehicleId) { this.vehicleId = vehicleId; }
-    public String getTripType() { return tripType; }
-    public void setTripType(String tripType) { this.tripType = tripType; }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
