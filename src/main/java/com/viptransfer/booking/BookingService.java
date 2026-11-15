@@ -24,7 +24,11 @@ public class BookingService {
         booking.setPickUpLocation(dto.getPickUpLocation());
         booking.setDropOffLocation(dto.getDropOffLocation());
         booking.setTransferDateTime(dto.getTransferDateTime());
-        booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType()));
+        booking.setPhoneNumber(dto.getPhoneNumber());
+        booking.setEmail(dto.getEmail());
+        booking.setVehicleId(dto.getVehicleId());
+        booking.setTripType(dto.getTripType());
+        booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
         return bookingRepository.save(booking);
     }
@@ -47,7 +51,11 @@ public class BookingService {
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
         existingBooking.setDropOffLocation(dto.getDropOffLocation());
         existingBooking.setTransferDateTime(dto.getTransferDateTime());
-        existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType()));
+        existingBooking.setPhoneNumber(dto.getPhoneNumber());
+        existingBooking.setEmail(dto.getEmail());
+        existingBooking.setVehicleId(dto.getVehicleId());
+        existingBooking.setTripType(dto.getTripType());
+        existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
         return bookingRepository.save(existingBooking);
     }
