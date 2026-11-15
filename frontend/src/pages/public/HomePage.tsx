@@ -40,7 +40,7 @@ export function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
             <div className="flex items-center gap-stack-md group">
               <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-outline group-hover:border-secondary transition-all">
-                <span className="material-symbols-outlined text-primary text-3xl">
+                <span translate="no" className="material-symbols-outlined text-primary text-3xl">
                   support_agent
                 </span>
               </div>
@@ -53,7 +53,7 @@ export function HomePage() {
             </div>
             <div className="flex items-center gap-stack-md group">
               <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-outline group-hover:border-secondary transition-all">
-                <span className="material-symbols-outlined text-primary text-3xl">
+                <span translate="no" className="material-symbols-outlined text-primary text-3xl">
                   payments
                 </span>
               </div>
@@ -66,7 +66,7 @@ export function HomePage() {
             </div>
             <div className="flex items-center gap-stack-md group">
               <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-outline group-hover:border-secondary transition-all">
-                <span className="material-symbols-outlined text-primary text-3xl">
+                <span translate="no" className="material-symbols-outlined text-primary text-3xl">
                   verified_user
                 </span>
               </div>
@@ -96,7 +96,7 @@ export function HomePage() {
             </div>
             <a className="text-secondary font-bold flex items-center gap-2 group" href="#">
               View All Vehicles
-              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+              <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
             </a>
@@ -115,30 +115,30 @@ export function HomePage() {
               </h3>
               <div className="flex gap-4 mb-4 text-on-surface-variant">
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">person</span> 7
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 7
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">luggage</span> 6
+                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 6
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">ac_unit</span> Climate
+                  <span translate="no" className="material-symbols-outlined text-sm">ac_unit</span> Climate
                 </div>
               </div>
               <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Complimentary Refreshments
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   High Speed Wi-Fi
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Professional Chauffeur
@@ -162,30 +162,30 @@ export function HomePage() {
               </h3>
               <div className="flex gap-4 mb-4 text-on-surface-variant">
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">person</span> 9
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 9
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">luggage</span> 10
+                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 10
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">tv</span> Media
+                  <span translate="no" className="material-symbols-outlined text-sm">tv</span> Media
                 </div>
               </div>
               <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Premium Leather Seating
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   On-board Workstation
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Privacy Partition
@@ -209,30 +209,30 @@ export function HomePage() {
               </h3>
               <div className="flex gap-4 mb-4 text-on-surface-variant">
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">person</span> 3
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 3
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">luggage</span> 3
+                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 3
                 </div>
                 <div className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-sm">chair</span> Comfort
+                  <span translate="no" className="material-symbols-outlined text-sm">chair</span> Comfort
                 </div>
               </div>
               <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Discreet Service
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Perfect for Solo Travelers
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-secondary text-xs">
+                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
                     check_circle
                   </span>
                   Modern Fleet Models
@@ -330,7 +330,7 @@ export function HomePage() {
               Book Online Now
             </button>
             <button className="bg-white border border-outline text-on-surface px-12 py-4 rounded-lg font-bold text-lg hover:border-secondary transition-all flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined text-secondary">chat</span>
+              <span translate="no" className="material-symbols-outlined text-secondary">chat</span>
               WhatsApp Support
             </button>
           </div>
@@ -364,13 +364,13 @@ export function HomePage() {
             </p>
             <div className="flex gap-4 mt-4 md:mt-0">
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span className="material-symbols-outlined">corporate_fare</span>
+                <span translate="no" className="material-symbols-outlined">corporate_fare</span>
               </div>
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span className="material-symbols-outlined">public</span>
+                <span translate="no" className="material-symbols-outlined">public</span>
               </div>
               <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span className="material-symbols-outlined">alternate_email</span>
+                <span translate="no" className="material-symbols-outlined">alternate_email</span>
               </div>
             </div>
           </div>
