@@ -62,6 +62,12 @@ export function BookingConfirmationPage() {
     try {
       const transfer = JSON.parse(savedTransfer)
       const passenger = JSON.parse(savedPassenger)
+      if (!passenger.customerName || !passenger.phoneNumber || !passenger.email ||
+          !transfer.passengerCount || !transfer.pickUpLocation || !transfer.dropOffLocation ||
+          !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType) {
+        setError('Please complete all required booking details.')
+        return
+      }
       setProcessing(true)
       const booking = await createBooking({
         customerName: passenger.customerName,
