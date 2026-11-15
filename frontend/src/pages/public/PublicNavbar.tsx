@@ -1,19 +1,19 @@
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 import { publicNavItems } from './publicNavigation'
 
 export function PublicNavbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <header className="fixed left-0 top-0 z-50 h-20 w-full bg-white border-b border-outline-variant shadow-sm">
-      <div className="relative mx-auto flex h-full max-w-container-max items-center justify-between px-gutter">
-        <Link
-          className="text-2xl font-bold text-admin-primary"
-          to="/"
-        >
+    <header className="fixed left-0 top-0 z-50 h-20 w-full border-b border-outline-variant bg-white shadow-sm">
+      <div className="relative mx-auto flex h-full max-w-container-max items-center justify-between gap-3 px-4 sm:px-gutter">
+        <Link className="min-w-0 text-lg font-bold leading-tight tracking-tight text-admin-primary sm:text-2xl" onClick={() => setMenuOpen(false)} to="/">
           VIP Transfer Dalaman
         </Link>
 
-        <nav className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-8">
+        <nav aria-label="Main navigation" className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
           {publicNavItems.map((item) => (
             <NavLink
               className={({ isActive }) =>
@@ -32,18 +32,43 @@ export function PublicNavbar() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <button className="hidden md:block px-5 py-2 text-admin-primary text-base font-semibold hover:bg-slate-100 rounded-lg transition-colors">
-            Login
-          </button>
-          <Link
-            className="px-5 py-2 bg-admin-primary text-on-primary text-base font-semibold rounded-lg hover:opacity-90 transition-opacity"
-            to="/booking"
-          >
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <Link className="hidden rounded-lg bg-admin-primary px-5 py-3 text-base font-semibold text-on-primary transition-opacity hover:opacity-90 sm:inline-flex" to="/booking">
             Book Now
           </Link>
+          <button
+            aria-controls="mobile-navigation"
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-admin-primary hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary lg:hidden"
+            onClick={() => setMenuOpen((open) => !open)}
+            type="button"
+          >
+            <span aria-hidden="true" className="material-symbols-outlined">{menuOpen ? 'close' : 'menu'}</span>
+          </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <nav aria-label="Mobile navigation" className="absolute left-0 right-0 top-full border-b border-slate-200 bg-white px-4 pb-5 pt-3 shadow-xl lg:hidden" id="mobile-navigation">
+          <div className="mx-auto flex max-w-container-max flex-col gap-1">
+            {publicNavItems.map((item) => (
+              <NavLink
+                className={({ isActive }) => `rounded-lg px-4 py-3 text-base font-semibold ${isActive ? 'bg-slate-100 text-admin-primary' : 'text-slate-700 hover:bg-slate-50'}`}
+                end={item.to === '/'}
+                key={item.to}
+                onClick={() => setMenuOpen(false)}
+                to={item.to}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <Link className="mt-3 rounded-lg bg-admin-primary px-5 py-3 text-center font-semibold text-white" onClick={() => setMenuOpen(false)} to="/booking">
+              Book Now
+            </Link>
+          </div>
+        </nav>
+      )}
     </header>
   )
 }
