@@ -8,6 +8,8 @@ type TransferDetails = {
   dropOffLocation?: string
   pickUpDate?: string
   pickUpTime?: string
+  returnDate?: string
+  returnTime?: string
   passengerCount?: number
   vehicleId?: string
   vehicleName?: string
@@ -48,6 +50,7 @@ export function BookingConfirmationPage() {
   const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
   const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '£' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
+  const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
   async function handleConfirm() {
     if (!confirmed || processing || completed) return
@@ -64,7 +67,8 @@ export function BookingConfirmationPage() {
       const passenger = JSON.parse(savedPassenger)
       if (!passenger.customerName || !passenger.phoneNumber || !passenger.email ||
           !transfer.passengerCount || !transfer.pickUpLocation || !transfer.dropOffLocation ||
-          !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType) {
+          !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType ||
+          (transfer.tripType === 'round-trip' && (!transfer.returnDate || !transfer.returnTime))) {
         setError('Please complete all required booking details.')
         return
       }
@@ -75,6 +79,7 @@ export function BookingConfirmationPage() {
         pickUpLocation: transfer.pickUpLocation,
         dropOffLocation: transfer.dropOffLocation,
         transferDateTime: `${transfer.pickUpDate}T${transfer.pickUpTime}:00`,
+        ...(transfer.tripType === 'round-trip' ? { returnDateTime: `${transfer.returnDate}T${transfer.returnTime}:00` } : {}),
         phoneNumber: passenger.phoneNumber,
         email: passenger.email,
         vehicleId: transfer.vehicleId,
@@ -107,6 +112,7 @@ export function BookingConfirmationPage() {
               <p><strong>Passenger:</strong> {display(passenger.customerName)}</p>
               <p><strong>Pickup:</strong> {display(transfer.pickUpLocation)}</p>
               <p><strong>Destination:</strong> {display(transfer.dropOffLocation)}</p>
+              {transfer.tripType === 'round-trip' && <p><strong>Return:</strong> {returnSchedule} ({display(transfer.dropOffLocation)} → {display(transfer.pickUpLocation)})</p>}
               <p><strong>Schedule:</strong> {schedule}</p>
               <p><strong>Price:</strong> {price}</p>
             </div>
