@@ -13,6 +13,8 @@ export function BookingPassengerPage() {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [countryCode, setCountryCode] = useState('+90')
   const [email, setEmail] = useState('')
+  const [transferAddress, setTransferAddress] = useState('')
+  const [specialRequests, setSpecialRequests] = useState('')
   const [error, setError] = useState('')
 
   function handleSubmit() {
@@ -35,10 +37,16 @@ export function BookingPassengerPage() {
       setError('Please complete the transfer details first.')
       return
     }
+    if (!transferAddress.trim()) {
+      setError('Please enter the exact hotel, accommodation or transfer address in Turkey.')
+      return
+    }
     localStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim(),
+      transferAddress: transferAddress.trim(),
+      specialRequests: specialRequests.trim(),
     }))
     navigate('/booking/confirmation')
   }
@@ -111,38 +119,20 @@ export function BookingPassengerPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                  <div className="flex flex-col gap-2">
-                    <label className="font-label-sm text-label-sm text-on-surface-variant">
-                      Country of Residence
-                    </label>
-                    <select className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all appearance-none bg-white">
-                      <option>United Kingdom</option>
-                      <option>Germany</option>
-                      <option>France</option>
-                      <option>Turkey</option>
-                      <option>United States</option>
-                    </select>
-                  </div>
-                  <FormField
-                    label="Hotel / Accommodation Name"
-                    placeholder="e.g. Hillside Beach Club"
-                  />
-                </div>
-
                 <div className="flex flex-col gap-2">
-                  <div className="flex justify-between items-center">
-                    <label className="font-label-sm text-label-sm text-on-surface-variant">
-                      Full Address
-                    </label>
-                    <span className="text-label-xs text-outline italic">
-                      Optional
-                    </span>
-                  </div>
+                  <label className="font-label-sm text-label-sm text-on-surface-variant">
+                    {JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}').pickUpLocation === 'Dalaman Airport' ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'} *
+                  </label>
+                  <p className="text-sm text-on-surface-variant">
+                    Enter the hotel, villa, apartment or exact street address where the driver should meet you or drop you off. Not your home address abroad.
+                  </p>
                   <input
                     className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                    placeholder="Street name, house number, area code"
+                    placeholder="e.g. Green Nature Diamond Hotel, Siteler, Marmaris"
                     type="text"
+                    value={transferAddress}
+                    onChange={(event) => setTransferAddress(event.target.value)}
+                    required
                   />
                 </div>
 
@@ -154,6 +144,8 @@ export function BookingPassengerPage() {
                     className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all resize-none"
                     placeholder="Flight number, child seat requirements, extra luggage details..."
                     rows={4}
+                    value={specialRequests}
+                    onChange={(event) => setSpecialRequests(event.target.value)}
                   />
                 </div>
               </form>
