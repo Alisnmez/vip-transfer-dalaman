@@ -133,4 +133,49 @@ class BookingIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.price").value(45.5));
     }
+    @Test
+    void savesIndependentReturnDateAndTime() throws Exception {
+        LocalDateTime outbound = LocalDateTime.now().plusDays(3).withNano(0);
+        LocalDateTime returning = outbound.plusDays(7).plusHours(2);
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Round Trip Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Marmaris(Any Hotel)",
+                "transferDateTime", outbound.toString(),
+                "returnDateTime", returning.toString(),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "round-trip"
+        ));
+
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.returnDateTime").value(returning.toString()))
+                .andExpect(jsonPath("$.tripType").value("round-trip"));
+    }
+
+    @Test
+    void rejectsRoundTripWithoutReturnDate() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Missing Return Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Marmaris(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "guest@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "round-trip"
+        ));
+
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request))
+                .andExpect(status().isBadRequest());
+    }
+
 }
