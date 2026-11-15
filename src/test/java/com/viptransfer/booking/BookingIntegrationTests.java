@@ -33,9 +33,11 @@ class BookingIntegrationTests {
                 "customerName", "Integration Test",
                 "passengerCount", 2,
                 "pickUpLocation", "Dalaman Airport",
-                "dropOffLocation", "Fethiye",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("75.00")
+                "price", new BigDecimal("1.00"),
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
         ));
 
         String response = mockMvc.perform(post("/bookings")
@@ -44,6 +46,7 @@ class BookingIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.customerName").value("Integration Test"))
+                .andExpect(jsonPath("$.price").value(45.5))
                 .andReturn().getResponse().getContentAsString();
 
         Long id = objectMapper.readTree(response).get("id").asLong();
@@ -51,7 +54,7 @@ class BookingIntegrationTests {
         mockMvc.perform(get("/bookings/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.customerName").value("Integration Test"))
-                .andExpect(jsonPath("$.dropOffLocation").value("Fethiye"))
+                .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
                 .andExpect(jsonPath("$.passengerCount").value(2));
     }
 
@@ -60,9 +63,11 @@ class BookingIntegrationTests {
         String request = objectMapper.writeValueAsString(Map.of(
                 "passengerCount", 2,
                 "pickUpLocation", "Dalaman Airport",
-                "dropOffLocation", "Fethiye",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("75.00")
+                "price", new BigDecimal("1.00"),
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
         ));
 
         mockMvc.perform(post("/bookings")
@@ -76,9 +81,11 @@ class BookingIntegrationTests {
                 "customerName", "Price Test",
                 "passengerCount", 2,
                 "pickUpLocation", "Dalaman Airport",
-                "dropOffLocation", "Fethiye",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
                 "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
-                "price", new BigDecimal("-1.00")
+                "price", new BigDecimal("-1.00"),
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
         ));
 
         mockMvc.perform(post("/bookings")
