@@ -45,6 +45,18 @@ export function BookingFormPage() {
 
   const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? transferVehicles[1]
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
+  const destinationGroups = [
+    { label: 'MARMARIS DESTINATIONS', names: ['Marmaris(Any Hotel)', 'Icmeler(Any Hotel)', 'Netsel Marina', 'Albatros Marina', 'Yacht Marina', "Cook's Club Adakoy&Adakoy Marina", 'Turunc', 'D Maris Bay', 'Bozburun / Sogut', 'Selimiye', 'Angels Marmaris Hotel'] },
+    { label: 'FETHIYE DESTINATIONS', names: ['Fethiye City Center(Any Hotel)', 'Fethiye Liberty Fabay , Liberty Signa', 'Fethiye Sensatori Barut Akra, XO Arnna', 'Oludeniz(Any Hotel)', 'Fethiye Kayakoy', 'Kabak', 'Faralya'] },
+    { label: 'DALAMAN & ORTACA DESTINATIONS', names: ['Sarigerme', 'Dalyan'] },
+    { label: 'GOCEK DESTINATIONS', names: ['Gocek'] },
+    { label: 'KAS & KALKAN DESTINATIONS', names: ['Kalkan', 'Kas'] },
+    { label: 'MUGLA & DATCA DESTINATIONS', names: ['Akyaka', 'Datça'] },
+  ]
+  const groupedDestinationOptions = destinationGroups.map((group) => ({
+    ...group,
+    names: group.names.filter((name) => destinations.includes(name)),
+  }))
   const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
   const price = findTransferPrice(routeDestination, selectedVehicleId, tripType)
   const priceLabel = price === null ? 'Select destination' : `£${price.toFixed(2)}`
@@ -143,7 +155,11 @@ export function BookingFormPage() {
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location</label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => setPickUpLocation(event.target.value)}>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
-                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                    {groupedDestinationOptions.map((group) => (
+                      <optgroup key={group.label} label={group.label}>
+                        {group.names.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                      </optgroup>
+                    ))}
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -151,7 +167,11 @@ export function BookingFormPage() {
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">Select destination</option>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
-                    {destinations.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                    {groupedDestinationOptions.map((group) => (
+                      <optgroup key={group.label} label={group.label}>
+                        {group.names.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
+                      </optgroup>
+                    ))}
                   </select>
                 </div>
               </div>
