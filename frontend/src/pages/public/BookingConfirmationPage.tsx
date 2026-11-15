@@ -24,6 +24,7 @@ type PassengerDetails = {
   phoneNumber?: string
   email?: string
   hotelName?: string
+  countryOfResidence?: string
   transferAddress?: string
   specialRequests?: string
 }
@@ -85,6 +86,7 @@ export function BookingConfirmationPage() {
         phoneNumber: passenger.phoneNumber,
         email: passenger.email,
         vehicleId: transfer.vehicleId,
+        countryOfResidence: passenger.countryOfResidence || '',
         transferAddress: passenger.transferAddress || '',
         specialRequests: passenger.specialRequests || '',
         tripType: transfer.tripType,
@@ -224,6 +226,7 @@ export function BookingConfirmationPage() {
               <DetailRow label="Full Name" value={display(passenger.customerName)} />
               <DetailRow label="Phone" value={display(passenger.phoneNumber)} />
               <DetailRow label="Email" value={display(passenger.email)} />
+              <DetailRow label="Country of Residence" value={display(passenger.countryOfResidence)} />
               <DetailRow label="Transfer Address in Turkey" value={display(passenger.transferAddress)} />
               {passenger.specialRequests && <DetailRow label="Special Requests" value={passenger.specialRequests} />}
             </div>
