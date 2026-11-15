@@ -28,6 +28,7 @@ public class BookingService {
         booking.setReturnDateTime(dto.getReturnDateTime());
         booking.setPhoneNumber(dto.getPhoneNumber());
         booking.setEmail(dto.getEmail());
+        booking.setCountryOfResidence(dto.getCountryOfResidence());
         booking.setTransferAddress(dto.getTransferAddress());
         booking.setSpecialRequests(dto.getSpecialRequests());
         booking.setVehicleId(dto.getVehicleId());
@@ -72,6 +73,7 @@ public class BookingService {
         existingBooking.setReturnDateTime(dto.getReturnDateTime());
         existingBooking.setPhoneNumber(dto.getPhoneNumber());
         existingBooking.setEmail(dto.getEmail());
+        existingBooking.setCountryOfResidence(dto.getCountryOfResidence());
         existingBooking.setTransferAddress(dto.getTransferAddress());
         existingBooking.setSpecialRequests(dto.getSpecialRequests());
         existingBooking.setVehicleId(dto.getVehicleId());
