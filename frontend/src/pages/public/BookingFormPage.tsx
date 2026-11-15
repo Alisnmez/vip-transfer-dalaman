@@ -194,7 +194,8 @@ export function BookingFormPage() {
               <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
                 <span>Published prices cover transfers between Dalaman Airport and the destinations listed above, in either direction.</span>
                 <button type="button" className="rounded-lg border border-outline-variant px-4 py-2 font-semibold text-admin-primary hover:bg-slate-50" onClick={() => {
-                  setPickUpLocation(dropOffLocation || 'Dalaman Airport')
+                  if (!dropOffLocation) return
+                  setPickUpLocation(dropOffLocation)
                   setDropOffLocation(pickUpLocation)
                   setFormError('')
                 }}>⇄ Swap pickup and destination</button>
