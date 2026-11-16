@@ -165,3 +165,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Sorun ve düzeltme:** Onay sayfasında kayıt yalnızca `PENDING` iken buton metni `BOOKING CONFIRMED` diyordu; kullanıcıyı yanıltmamak için `REQUEST RECEIVED` yapıldı. Commit `b88a76c`. CI sonucu henüz doğrulanmadı.
 - **Kanıtlanan test:** `06c4cfa` için GitHub Actions `43843124407` backend PostgreSQL integration test ve React build **success**; `89240d1` için `43843263719` **success**.
 - **Kaldığımız yer:** 1.4 gerçek browser E2E hâlâ bekliyor; test ortamında tarayıcıdan POST/response/DB kaydı doğrulanmalı. Üretimde deneme rezervasyonu oluşturmadan önce test ortamı ve veri temizleme prosedürü kullanılmalı. 1.3 E2E ve migration yönünden açık.
+
+## 2026-11-16 — 1.3 bağımsız rezervasyon ve JSON güvenliği testi
+- **Problem:** Aynı rezervasyon bilgileriyle iki ayrı gerçek rezervasyon oluşturulabilmeli; ayrıca idempotency anahtarı ve request fingerprint halka açık POST yanıtında görünmemeli.
+- **Uygulama:** `BookingIntegrationTests.independentKeysCreateIndependentBookingsWithoutExposingRetryMetadata` eklendi. Aynı payload ile farklı UUID anahtarlarından iki ayrı ID beklenir; yanıtta `idempotencyKey` ve `requestFingerprint` alanları bulunmamalıdır.
+- **Commit:** `8247300`. **Yeni testin CI sonucu henüz doğrulanmadı.**
+- **Sınır:** Bu test Spring MockMvc + gerçek PostgreSQL CI entegrasyonudur, browser E2E değildir. Gerçek tarayıcı, ayrı test ortamı, kontrollü migration ve üretim dağıtım doğrulaması bekliyor.
+- **Kaldığımız yer:** `8247300` CI sonuçlarını doğrula; ardından ayrı test ortamında browser E2E'yi çalıştır. 1.3 TEST BEKLİYOR, 1.4 BEKLİYOR.
