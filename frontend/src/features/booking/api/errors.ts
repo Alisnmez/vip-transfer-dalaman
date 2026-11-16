@@ -1,12 +1,12 @@
 export class BookingApiError extends Error {
-  constructor(
-    message: string,
-    public readonly status: number | null,
-    public readonly uncertain: boolean,
-    options?: ErrorOptions,
-  ) {
+  readonly status: number | null
+  readonly uncertain: boolean
+
+  constructor(message: string, status: number | null, uncertain: boolean, options?: ErrorOptions) {
     super(message, options)
     this.name = 'BookingApiError'
+    this.status = status
+    this.uncertain = uncertain
   }
 }
 
