@@ -28,7 +28,7 @@ export function CalendarPage() {
   const [agendaOpen, setAgendaOpen] = useState(false)
   const [filter, setFilter] = useState('ACTIVE')
   const [bookings, setBookings] = useState<Booking[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loadedKey, setLoadedKey] = useState('')
   const [error, setError] = useState('')
   const [refreshKey, setRefreshKey] = useState(0)
 
@@ -50,22 +50,23 @@ export function CalendarPage() {
   const monthsKey = months.join(',')
   useEffect(() => {
     let active = true
-    setLoading(true)
-    setError('')
     Promise.all(monthsKey.split(',').map(month => getCalendarBookings(month)))
       .then(results => {
         if (!active) return
         setBookings(results.flat())
+        setLoadedKey(`${monthsKey}:${refreshKey}`)
+        setError('')
       })
       .catch(err => {
         if (!active) return
         setBookings([])
+        setLoadedKey(`${monthsKey}:${refreshKey}`)
         setError(err instanceof Error ? err.message : 'Could not load transfers')
       })
-      .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [monthsKey, refreshKey])
 
+  const loading = loadedKey !== `${monthsKey}:${refreshKey}`
   const filtered = bookings.filter(booking => filter === 'ALL' ||
     (filter === 'ACTIVE' ? ['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status)) : bookingStatus(booking.status) === filter))
   const byDay = new Map<string, Booking[]>()
