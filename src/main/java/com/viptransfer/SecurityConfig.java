@@ -31,9 +31,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/bookings/support/request-code", "/bookings/support/verify-code", "/bookings/support/request").permitAll()
-                        // A booking reference and email are not proof of ownership.
-                        // Keep support verification private until email OTP is implemented.
+                        // Customer support uses external messaging, not public booking APIs.
                         .requestMatchers("/bookings/support/**").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
                         .requestMatchers("/bookings", "/bookings/**", "/admin/auth-check").hasRole("ADMIN")
