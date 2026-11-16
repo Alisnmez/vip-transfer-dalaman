@@ -452,3 +452,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingFormPage: yeni rezervasyon sırasında receipt temizleme storage erişimi bağımsız try bloklarında (5c28dd48).
 - BookingFormPage: geri yüklenmiş veya bozuk yolcu/bagaj/çocuk koltuğu sayıları tam sayı ve araç kapasitesine uygun olmalı; validasyonla UI sınırları aynı maxAllowedPassengers/maxAllowedLuggage değerlerini kullanır (0958d19c).
 - Bu üç commit CI sonucu bekleniyor. Gerçek browser E2E, migration güvenliği ve canlı rezervasyon kontrolü açık. Admin paneli değiştirilmedi.
+
+
+## 2026-11-16 — Kaydedilmiş rezervasyon taslaklarının tip güvenliği
+- Önceki CI: 979de62f run 43864141989, 0958d19c run 43864103791, 5c28dd48 run 43864068794, 440c3d2e run 43864050359 completed/success.
+- BookingFormPage: localStorage taslağında yalnızca beklenen string alanlar ve tam sayı sayımlar geri yükleniyor; bozuk/array/null veri varsayılana dönüyor (a63a2587).
+- BookingPassengerPage: kayıtlı yolcu taslağının alan tipleri doğrulanıyor; beklenmeyen türler formu bozamıyor (7c4747a7).
+- BookingConfirmationPage: kaydedilen JSON'un nesne olduğu kontrol ediliyor, geçersiz taslakla POST yapılmıyor; makbuz validasyondan geçen değerlerden üretiliyor (ced7bf06, 16fd0c37).
+- Yeni CI henüz tamamlanmadı; gerçek tarayıcı E2E, canlı veri doğrulaması ve migration güvenliği açık. Admin paneline dokunulmadı.
