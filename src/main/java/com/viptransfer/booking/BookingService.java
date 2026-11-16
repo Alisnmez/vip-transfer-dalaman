@@ -5,6 +5,8 @@ import com.viptransfer.exception.BookingNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import org.springframework.data.domain.Sort;
 import java.util.HexFormat;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -125,18 +127,37 @@ public class BookingService {
     }
 
     public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+        return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
+    @org.springframework.transaction.annotation.Transactional
     public Booking updateBooking(Long id, BookingRequestDto dto) {
         Booking existingBooking = bookingRepository.findById(id)
                 .orElseThrow(() -> new BookingNotFoundException(id));
 
+        boolean fareChanged = !Objects.equals(existingBooking.getPickUpLocation(), dto.getPickUpLocation())
+                || !Objects.equals(existingBooking.getDropOffLocation(), dto.getDropOffLocation())
+                || !Objects.equals(existingBooking.getVehicleId(), dto.getVehicleId())
+                || !Objects.equals(existingBooking.getTripType(), dto.getTripType())
+                || !Objects.equals(existingBooking.getPassengerCount(), dto.getPassengerCount());
+        boolean scheduleChanged = !Objects.equals(existingBooking.getTransferDateTime(), dto.getTransferDateTime())
+                || !Objects.equals(existingBooking.getReturnDateTime(), dto.getReturnDateTime())
+                || !Objects.equals(existingBooking.getTripType(), dto.getTripType());
+        if (scheduleChanged) {
+            validateSchedule(dto);
+        }
+        if (fareChanged && !"PENDING".equals(existingBooking.getStatus())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Fare-changing edits require a pending booking. Confirm any new fare with the customer first.");
+        }
+        if (fareChanged) {
+            transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(),
+                    dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount());
+        }
         existingBooking.setCustomerName(dto.getCustomerName());
         existingBooking.setPassengerCount(dto.getPassengerCount());
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
         existingBooking.setDropOffLocation(dto.getDropOffLocation());
-        validateSchedule(dto);
         existingBooking.setTransferDateTime(dto.getTransferDateTime());
         existingBooking.setReturnDateTime(dto.getReturnDateTime());
         existingBooking.setPhoneNumber(dto.getPhoneNumber());
@@ -151,7 +172,9 @@ public class BookingService {
         existingBooking.setBabySeatCount(dto.getBabySeatCount());
         existingBooking.setVehicleId(dto.getVehicleId());
         existingBooking.setTripType(dto.getTripType());
-        existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
+        if (fareChanged) {
+            existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
+        }
 
         return bookingRepository.save(existingBooking);
     }
@@ -166,11 +189,4 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public String deleteBooking(Long id) {
-        if (!bookingRepository.existsById(id)) {
-            throw new BookingNotFoundException(id);
-        }
-        bookingRepository.deleteById(id);
-        return "Booking with ID " + id + " has been successfully deleted.";
-    }
 }
