@@ -113,6 +113,11 @@ export function BookingFormPage() {
       return
     }
     setFormError('')
+    try {
+      sessionStorage.removeItem('lastBookingReceipt')
+    } catch {
+      // Booking remains possible when browser storage is unavailable.
+    }
     localStorage.setItem(
       'bookingTransferInfo',
       JSON.stringify({
