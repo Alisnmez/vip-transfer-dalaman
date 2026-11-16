@@ -10,14 +10,16 @@ export function BookingDetailPage() {
   const id = Number(bookingId)
   const [booking, setBooking] = useState<Booking | null>(null)
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(Number.isSafeInteger(id) && id > 0)
 
   useEffect(() => {
     if (!Number.isSafeInteger(id) || id < 1) return
+    let active = true
     getBooking(id)
-      .then(setBooking)
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false))
+      .then(value => { if (active) setBooking(value) })
+      .catch((err: Error) => { if (active) setError(err.message) })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
   }, [id])
 
   return (
