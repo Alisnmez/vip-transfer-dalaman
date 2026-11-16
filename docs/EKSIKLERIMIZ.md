@@ -480,3 +480,8 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingFormPage rezervasyon özeti: doğrulanmamış ücretsiz meet-and-greet, vergi/bahşiş dahil, gizli ücret yok ve 24 saat ücretsiz iptal vaatleri kaldırıldı; fiyat ve koşulların işletme onayına tabi olduğu açıklandı (8d2703d2).
 - Aynı sayfanın footer'ında sahte acil telefon, doğrulanmamış e-posta, href=# boş politika bağlantıları, 2024 tarihi ve GBP fiyatlarıyla çelişen EUR etiketi kaldırıldı.
 - Bu, gerçek ödeme/iptal/iletişim kurallarının tanımlanması görevlerini tamamlamaz. Yeni CI ve canlı UI testi bekleniyor. Admin kapsam dışı.
+
+
+## 2026-11-16 — Geçici iletişim bilgileri
+- Kullanıcı talebiyle BookingFormPage footer'ına geçici iletişim bilgileri eklendi: 05555555555 (tel:+905555555555) ve ali_sonmez35@hotmail.com (mailto:). Commit 1f8ec017.
+- Bu bilgiler kullanıcının talebiyle geçicidir; ileride güncellenecek. Diğer sayfalarda iletişim bilgileri tutarlılığı ayrıca kontrol edilmeli. Admin kapsam dışı.
