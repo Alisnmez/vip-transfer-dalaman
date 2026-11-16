@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 
 import { getBooking, updateBooking, updateBookingStatus } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
+import { BookingApiError } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 
 export function BookingDetailPage() {
@@ -10,6 +11,7 @@ export function BookingDetailPage() {
   const id = Number(bookingId)
   const [booking, setBooking] = useState<Booking | null>(null)
   const [error, setError] = useState('')
+  const [errorAction, setErrorAction] = useState('loading booking')
   const [notice, setNotice] = useState('')
   const [saving, setSaving] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -31,7 +33,7 @@ export function BookingDetailPage() {
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
-    catch (err) { setError(err instanceof Error ? err.message : 'Status update failed') }
+    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Status may have changed; reload to verify before retrying.' : err instanceof Error ? err.message : 'Status update failed'); setErrorAction('updating status') }
     finally { setSaving(false) }
   }
 
@@ -57,7 +59,7 @@ export function BookingDetailPage() {
     if (!draft || !booking) return
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
-    catch (err) { setError(err instanceof Error ? err.message : 'Could not save details') }
+    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
     finally { setSaving(false) }
   }
 
@@ -67,7 +69,7 @@ export function BookingDetailPage() {
       <h1 className="mt-6 mb-5 text-2xl font-bold">Booking request #{bookingId}</h1>
       {(!Number.isSafeInteger(id) || id < 1) && <p role="alert">Invalid booking reference.</p>}
       {loading && Number.isSafeInteger(id) && id > 0 && <p>Loading booking...</p>}
-      {error && <p role="alert" className="text-error">Could not load booking: {error}</p>}
+      {error && <p role="alert" className="text-error">Error while {errorAction}: {error}</p>}
       {notice && <p role="status" className="mb-4 text-green-800">{notice}</p>}
       {booking && <div className="mb-5 flex flex-wrap items-end gap-3 rounded-xl border border-outline-variant bg-white p-4">
         <label className="text-sm font-semibold">Booking status
@@ -123,7 +125,7 @@ export function BookingDetailPage() {
           ))}
         </dl>
       )}
-      <p className="mt-6 text-sm text-on-surface-variant">Booking details are read-only. Do not assume a request is confirmed until the operator verifies it.</p>
+      <p className="mt-6 text-sm text-on-surface-variant">Status changes and customer detail edits are separate. Editing details may recalculate the fare. Confirm only after verification.</p>
     </section>
   )
 }
