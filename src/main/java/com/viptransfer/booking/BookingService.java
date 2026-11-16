@@ -129,6 +129,19 @@ public class BookingService {
                 .orElseThrow(() -> new BookingNotFoundException(id));
     }
 
+    public java.util.Map<String, Object> getDashboardSummary() {
+        java.time.LocalDateTime now = java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul"));
+        java.time.LocalDate today = now.toLocalDate();
+        java.util.List<String> activeStatuses = java.util.List.of("PENDING", "CONFIRMED");
+        return java.util.Map.of(
+                "total", bookingRepository.count(),
+                "pending", bookingRepository.countByStatus("PENDING"),
+                "today", bookingRepository.countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
+                        activeStatuses, today.atStartOfDay(), today.plusDays(1).atStartOfDay()),
+                "upcoming", bookingRepository.findTop8ByStatusInAndTransferDateTimeGreaterThanEqualOrderByTransferDateTimeAsc(
+                        activeStatuses, now));
+    }
+
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
