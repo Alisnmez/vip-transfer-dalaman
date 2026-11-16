@@ -430,3 +430,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingPassengerPage: render sırasında korumasız localStorage JSON.parse kaldırıldı; bozuk veride sayfa açılışında çökme önlendi (dfea5315).
 - BookingPassengerPage: localStorage yazma hatası kullanıcıya açıklanıyor, kayıt başarısızsa confirmation sayfasına yönlendirme yapılmıyor (ac198006).
 - Son iki commit CI sonucu henüz kontrol edilmeli. Browser E2E, backend e-posta bildirimleri ve güvenli sorgulama hâlâ açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Transfer formuna geri dönüş ve depolama hatası
+- Önceki CI: d337ae0d run 43862918778, ac198006 run 43862898401, dfea5315 run 43862869383 completed/success.
+- BookingFormPage: kayıtlı transfer bilgileri (tripType, vehicleId, pickup/dropoff, tarih/saat, flightNumber, return, passenger/luggage/baby seats) geri dönüldüğünde veya yenilemede geri yükleniyor; bozuk JSON için güvenli varsayılanlar var (c93e1c48).
+- BookingFormPage: localStorage.setItem başarısızsa Link navigasyonu iptal edilip kullanıcıya hata gösteriliyor. Eski receipt ancak yeni transfer verileri başarıyla kaydedildikten sonra temizleniyor (2f26452c).
+- Yeni commit CI sonuçları bekleniyor. Gerçek browser E2E, canlı API kontrolü ve e-posta bildirimleri hâlâ açık. Admin koduna dokunulmadı.
