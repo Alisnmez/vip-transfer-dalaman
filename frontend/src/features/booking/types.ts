@@ -6,6 +6,7 @@ export type Booking = {
   dropOffLocation: string
   transferDateTime: string
   returnDateTime?: string | null
+  flightNumber?: string | null
   price: number
 }
 
@@ -16,6 +17,7 @@ export type BookingRequest = {
   dropOffLocation: string
   transferDateTime: string
   returnDateTime?: string
+  flightNumber?: string
   phoneNumber: string
   email: string
   vehicleId: string
