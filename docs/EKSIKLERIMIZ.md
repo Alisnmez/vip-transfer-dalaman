@@ -63,6 +63,16 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-17 — Bağımsız denetim düzeltmeleri ve test ekleme
+- **Tamamlanan kod değişiklikleri:** Admin düzenlemede geçmiş rezervasyonların yalnızca iletişim/operasyon bilgileri değiştiğinde tarih ve fiyat yeniden doğrulanmıyor; ücret etkileyen rota/araç/tip/yolcu sayısı değişirse fiyat yeniden hesaplanıyor, `CONFIRMED` vb. kayıtlarda bu değişiklik 409 ile reddediliyor (`b4baf19`). `BookingService.updateBooking` transaction altında.
+- **Veri güvenliği:** Kalıcı DELETE endpoint'i kaldırıldı ve Spring Security'de DELETE açıkça engellendi (`d799a7b`, `f5ed7b4`); frontend kullanılmayan DELETE istemcisi kaldırıldı (`d5cbdbc`). Operasyonel iptal `CANCELLED` üzerinden yapılır.
+- **Liste ve doğrulama:** Backend ID azalan sıralama, frontend ID azalan sıralama (`b4baf19`, `a2a8cbb`); DTO metin alanları DB sütun limitleriyle hizalandı (`dc16217`, `0ce33ab`). Mevcut DB şemasını değiştirebilecek 500 karakterlik adres sütunu değişikliği geri alındı (`f1da442`).
+- **Frontend:** Fiyatı etkileyen değişiklikte kullanıcı onayı soruluyor, yalnızca iletişim değişikliği eski tarife yoksa da engellenmiyor (`82e974e`). Timeout mesajı sabit 60 saniye demiyor (`d6cbcae`).
+- **Test kodu:** `BookingAdminUpdateTest` ile geçmiş tarihli iletişim düzenleme, onaylı rezervasyonda ücret değişimi reddi, bekleyen rezervasyonda yeniden fiyatlama ve liste sıralama testleri eklendi (`135827a`).
+- **Test sonucu:** Testler GitHub'a gönderildi; CI sonuçları henüz alınmadı. Render frontend/backend son commit için queued/build aşamasında. **Canlı ve CI geçmeden TAMAMLANDI denmeyecek.**
+- **Açık kalanlar:** Sunucu tarafı pagination + minimal liste DTO (dashboard toplam sayısı uyumu gerekir); kalıcı audit log/fiyat değişikliği onayı için backend iz kaydı; admin auth hata sınıflandırması; `ddl-auto=update` -> kontrollü migration; `/test/db-check` kaldırma. Bunlar bu turda çözülmüş sayılmaz.
+- **Sıradaki adım:** GitHub CI test sonuçlarını doğrula; hata varsa düzelt. Render live sonrası admin geçmiş rezervasyon düzenlemesi, fiyat korunması, DELETE 403 ve kayıt sıralamasını gerçek veride doğrula.
+
 ## 2026-11-17 — Bağımsız kod denetimi (admin + backend)
 - **Kapsam:** `BookingService`, `BookingController`, `Booking`, `BookingRequestDto`, `SecurityConfig`, `DashboardPage`, `BookingListPage`, `BookingDetailPage`, `AdminLayout`, frontend API, router, application.properties ve CI yapılandırması. Kullanıcının önceden bildirdiği giriş/rota-fiyat hataları bu denetimde yeni bulgu sayılmadı.
 - **Düzeltildi (kod commit `c138359`):** `COMPLETED` rezervasyonlar yaklaşan ve bugünkü açık işlerden çıkarıldı; sadece `PENDING` ve `CONFIRMED` gösteriliyor. CI/canlı doğrulama bekliyor.
