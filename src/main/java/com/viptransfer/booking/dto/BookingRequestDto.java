@@ -15,9 +15,11 @@ public class BookingRequestDto {
     @Min(value = 1, message = "Passenger count must be at least 1.")
     private Integer passengerCount;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Pick-up location is required.")
     private String pickUpLocation;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Drop-off location is required.")
     private String dropOffLocation;
 
@@ -25,18 +27,23 @@ public class BookingRequestDto {
     private LocalDateTime transferDateTime;
     private LocalDateTime returnDateTime;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Vehicle is required.")
     private String vehicleId;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Trip type is required.")
     private String tripType;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Phone number is required.")
     private String phoneNumber;
 
+    @jakarta.validation.constraints.Size(max = 255)
     @NotBlank(message = "Email is required.")
     @jakarta.validation.constraints.Email(message = "Email must be valid.")
     private String email;
+    @jakarta.validation.constraints.Size(max = 255)
     private String countryOfResidence;
     @jakarta.validation.constraints.Size(max = 500, message = "Transfer address must be at most 500 characters.")
     private String transferAddress;
