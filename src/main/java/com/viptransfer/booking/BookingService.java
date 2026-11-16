@@ -179,9 +179,9 @@ public class BookingService {
         if (scheduleChanged) {
             validateSchedule(dto);
         }
-        if (fareChanged && !"PENDING".equals(existingBooking.getStatus())) {
+        if (fareChanged && !java.util.Set.of("PENDING", "CONFIRMED").contains(existingBooking.getStatus() == null ? "PENDING" : existingBooking.getStatus())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
-                    "Fare-changing edits require a pending booking. Confirm any new fare with the customer first.");
+                    "Fare-changing edits are not allowed for completed or cancelled bookings.");
         }
         // Validate before mutating the managed entity. A failed request must not leave partial changes.
         transferPricingService.validateLuggageCapacity(dto.getVehicleId(), dto.getLuggageCount());
