@@ -508,3 +508,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ## 2026-11-16 — Kritik confirmation e-posta regex düzeltmesi
 - BookingConfirmationPage final e-posta regex'inde `\\\\s` ve `\\\\.` çift escape nedeniyle geçerli adresler reddedilebiliyordu; JavaScript regex literal içinde doğru `\\s` ve `\\.` kullanıldı (a7e12833).
 - Önceki altı CI run'ı success olsa da CI yalnızca lint/build çalıştırdığı için davranışsal regresyonu yakalamadı. E2E / birim testleri kritik açık olarak sürüyor. Yeni CI bekleniyor. Admin kapsam dışı.
+
+
+## 2026-11-16 — Final rezervasyon tarih kontrolü
+- Confirmation POST öncesi pickup ve round-trip return tarih/saat biçimleri `YYYY-MM-DD`, `HH:mm` olarak doğrulanıyor (e5faed37).
+- JavaScript Date nesnesinin 31 Şubat gibi tarihleri normalize ederek kabul etmesi engellendi; seçilen takvim günüyle parse edilen gün karşılaştırılıyor (2c6ee709).
+- Tarih/saatin Türkiye saat dilimi yerine tarayıcı yerel saat diliminde yorumlanması ayrı açık risk; E2E ve timezone testleri hâlâ gerekli. Admin kapsam dışı.
