@@ -514,3 +514,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Confirmation POST öncesi pickup ve round-trip return tarih/saat biçimleri `YYYY-MM-DD`, `HH:mm` olarak doğrulanıyor (e5faed37).
 - JavaScript Date nesnesinin 31 Şubat gibi tarihleri normalize ederek kabul etmesi engellendi; seçilen takvim günüyle parse edilen gün karşılaştırılıyor (2c6ee709).
 - Tarih/saatin Türkiye saat dilimi yerine tarayıcı yerel saat diliminde yorumlanması ayrı açık risk; E2E ve timezone testleri hâlâ gerekli. Admin kapsam dışı.
+
+
+## 2026-11-16 — Confirmation tarih regex ve Türkiye saat dilimi
+- Son onay tarih/saat regex'lerindeki yanlış çift escape düzeltildi; önceki CI lint/build bu davranış hatasını yakalayamamıştı (`ce14a1b8`).
+- Final rezervasyon POST öncesi pickup ve return saatleri artık tarayıcının yerel saat dilimi yerine Türkiye yerel saati (UTC+03:00) olarak doğrulanıyor; takvim günü ve gidiş-dönüş sıralaması korunuyor (`63329b28`).
+- Frontend ilk adımın `today` ve tarih kontrolleri ayrıca Türkiye saatine göre hizalanmalı; gerçek tarayıcı E2E ve farklı saat dilimi testleri açık. Admin kapsam dışı.
