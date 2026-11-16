@@ -12,13 +12,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Genel durum:** DEVAM EDİYOR  
 **Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme (TEST BEKLİYOR)**  
-**Bir sonraki somut işlem:** Eşzamanlılık testi CI sonucunu doğrula, gerekirse düzelt; ardından gerçek tarayıcı E2E ve migration planı.
+**Bir sonraki somut işlem:** Gerçek tarayıcı E2E testi, frontend bağımsız rezervasyon yaşam döngüsü ve kontrollü PostgreSQL migration planı.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
 | 1.1 | Backend derleme hatası | TAMAMLANDI | Fazladan virgül düzeltildi; Render backend canlı doğrulandı. `590f582` | Regresyon halinde yeniden aç |
 | 1.2 | PostgreSQL bağlantısı ve mevcut test altyapısı | TAMAMLANDI | Render PostgreSQL bağlantısı ve izole CI PostgreSQL ile 14 başarılı test doğrulandı. `bf60c97`, CI run `43839886864` | Yeni testleri CI'ya ekle |
-| 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | TEST BEKLİYOR | Backend retry koruması CI başarıyla geçti (`59a85ed`, run `43842759471`); frontend anahtarı eklendi (`906d60d`), henüz CI doğrulanmadı | Son CI, yarış testi, tarayıcı E2E ve migration |
+| 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | TEST BEKLİYOR | Eşzamanlı PostgreSQL testi ve React build **başarılı** (`06c4cfa`, run `43843124407`); sayfa yenileme düzeltmesi **başarılı** (`89240d1`, run `43843263719`) | Gerçek tarayıcı E2E, migration ve bağımsız işlem yaşam döngüsü |
 | 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | BEKLİYOR | İzole backend POST/GET testi mevcut; tarayıcı uçtan uca doğrulama yok | Ayrı test ortamında E2E |
 | 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | BEKLİYOR | Önceki backend deploy doğrulandı; yeni idempotency sürümü henüz yok | CI, deploy, log ve güvenli smoke test |
 
@@ -152,3 +152,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Commit:** `89240d1`. **Bu commit'in CI sonucu henüz doğrulanmadı.**
 - **Sınır:** Farklı sekme, gizli pencere veya tarayıcıda retry korunmaz. Aynı sekmede aynı payload ile bağımsız yeni rezervasyonun başarıdan önce gönderilmesi aynı işlem olarak değerlendirilir. Gerçek tarayıcı E2E, yarış testi sonucu ve kontrollü DB migration açık.
 - **Kaldığımız yer:** Son CI ve eşzamanlı test sonuçlarını incele, ardından E2E testlerini çalıştır. 1.3 **TEST BEKLİYOR**.
+
+## 2026-11-16 — 1.3 eşzamanlı test ve sayfa yenileme CI doğrulandı
+- **Eşzamanlı test:** GitHub Actions run `43843124407` (commit `06c4cfa`) **success**. İş detaylarında `Spring Boot PostgreSQL integration tests` işinin `mvn -B test` adımı **success**; `React and TypeScript build` işinin `npm run build` adımı **success**. Bu CI testi gerçek tarayıcı E2E değildir.
+- **Sayfa yenileme düzeltmesi:** `89240d1` için run `43843263719` **success**. Son günlük commit'i `442838d` için run `43843288232` **success**.
+- **Durum:** 1.3 **TEST BEKLİYOR** (CI aşaması geçti, uçtan uca doğrulama ve DB migration eksik). 1.4 ve 1.5 bekliyor.
+- **Kaldığımız yer:** Gerçek tarayıcı üzerinden rezervasyon oluşturma, aynı anahtarla retry, sayfa yenileme, sunucuya kayıt ve üretim dışı ortamda migration doğrulamasını çalıştır. Sadece CI başarılarıyla 1.3 veya 1. madde kapatılmayacak.
