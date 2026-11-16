@@ -101,6 +101,35 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void persistsLuggageAndBabySeatCountsAndRejectsNegativeValues() throws Exception {
+        java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
+                "customerName", "Luggage Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "luggage@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way",
+                "luggageCount", 3
+        ));
+        request.put("babySeatCount", 1);
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(3))
+                .andExpect(jsonPath("$.babySeatCount").value(1));
+
+        request.put("babySeatCount", -1);
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void blocksAnonymousBookingReadsAndChanges() throws Exception {
         mockMvc.perform(get("/bookings"))
                 .andExpect(status().isUnauthorized());
