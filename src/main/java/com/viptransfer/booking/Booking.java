@@ -29,6 +29,8 @@ public class Booking {
 
     @jakarta.persistence.Column(length = 20)
     private String flightNumber;
+    private Integer luggageCount;
+    private Integer babySeatCount;
     private String vehicleId;
     private String tripType;
     private String status = "PENDING";
@@ -39,6 +41,11 @@ public class Booking {
 
     @com.fasterxml.jackson.annotation.JsonIgnore
     private String requestFingerprint;
+
+    public Integer getLuggageCount() { return luggageCount; }
+    public void setLuggageCount(Integer value) { this.luggageCount = value; }
+    public Integer getBabySeatCount() { return babySeatCount; }
+    public void setBabySeatCount(Integer value) { this.babySeatCount = value; }
 
     public String getFlightNumber() { return flightNumber; }
     public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
