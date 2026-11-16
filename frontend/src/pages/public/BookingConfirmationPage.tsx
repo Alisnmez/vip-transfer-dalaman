@@ -109,7 +109,7 @@ export function BookingConfirmationPage() {
       localStorage.removeItem('bookingPassengerInfo')
     } catch (err) {
       setSubmissionUncertain(err instanceof Error && (err.name === 'TypeError' || /did not respond|Unable to reach|network|fetch/i.test(err.message)))
-      setError(err instanceof Error ? err.message : 'Booking could not be created.')
+      setError(err instanceof SyntaxError ? 'Saved booking details are invalid. Please return to the previous steps and enter them again.' : err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
       submittingRef.current = false
       setProcessing(false)
