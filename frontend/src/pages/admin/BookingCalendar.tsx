@@ -39,9 +39,9 @@ export function BookingCalendar() {
 
   useEffect(() => {
     let active = true
-    getCalendarBookings(month)
+    getCalendarBookings(month.slice(0, 7))
       .then(data => { if (active) { setBookings(data); setError('') } })
-      .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Could not load calendar') })
+      .catch(err => { if (active) { setBookings([]); setError(err instanceof Error ? err.message : 'Could not load calendar') } })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [month, revision])
