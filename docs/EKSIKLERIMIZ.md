@@ -89,6 +89,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Tarayıcı depolaması engellendiğinde yolcu ekranı anlaşılır hata gösteriyor (`f61b1582`). Yeni CI ve gerçek canlı E2E henüz doğrulanmadı.
 - Admin kapsam dışı; geçici telefon numarası kullanıcı isteğiyle korunuyor.
 
+## 2026-11-16 — MVP: araç görselleri ve ortak doğrulama
+- Önceki tüm son CI kontrolleri başarılı (`43931186409`). Araç seçim kartlarında yanlış araç modelini temsil edebilen üçüncü taraf fotoğraflar kaldırıldı; araç kategorisine uygun nötr ikonlar kullanılıyor (`d07d529e`). Gerçek filo fotoğrafları doğrulanınca eklenebilir.
+- İlk transfer adımı da yolcu ve son onay ekranlarının kullandığı `validateTransferSelection` fonksiyonuna bağlandı (`4aacb9a7`); kapasite ve güzergâh kuralları tek yerden yönetiliyor.
+- Yeni CI ve gerçek tarayıcı uçtan uca rezervasyon doğrulaması açık; admin kapsam dışı, geçici telefon numarası korunuyor.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
