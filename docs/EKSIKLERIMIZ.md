@@ -526,3 +526,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingFormPage tarih seçicisinin minimum günü artık ziyaretçinin bilgisayarındaki gün değil `Europe/Istanbul` yerel günü (`f23c5485`).
 - İlk adımda pickup ve return zamanları Türkiye UTC+03:00 üzerinden doğrulanıyor, geçersiz takvim tarihleri reddediliyor (`77f0d6e7`). Confirmation ile aynı zaman yorumu hedefleniyor.
 - Otomatik birim/E2E testleri, tarayıcı saat dilimi varyasyonları ve canlı UI kontrolü hâlâ açık. Admin kapsam dışı.
+
+
+## 2026-11-16 — Ortak Türkiye saat modülü
+- `frontend/src/features/booking/turkeyTime.ts` oluşturuldu: `parseTurkeyDateTime` ve `turkeyToday` ortak fonksiyonları (`b5de4eda`). `turkeyToday`, tarayıcı locale formatına güvenmeden `formatToParts` ile ISO günü oluşturuyor.
+- BookingFormPage aynı modülü kullanıyor (`4b031074`), BookingConfirmationPage aynı parser'ı kullanıyor (`8d069896`). Böylece tarih doğrulama kodu tek yerde tutuluyor.
+- Otomatik tarih/saat birim testleri ve farklı timezone E2E testleri henüz yazılmadı; ilgili 1.5 ve 12. madde açık. Admin kapsam dışı.
