@@ -1,4 +1,4 @@
-import { parseTurkeyDateTime } from './turkeyTime'
+import { parseTurkeyDateTime } from './turkeyTime.ts'
 
 /** A confirmed transfer is live from its scheduled Turkey pickup time until completion. */
 export function isBookingLive(status: string | null | undefined, transferDateTime: string | null | undefined, nowMs: number = Date.now()): boolean {
