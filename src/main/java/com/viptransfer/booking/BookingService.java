@@ -92,6 +92,8 @@ public class BookingService {
         booking.setTransferAddress(dto.getTransferAddress());
         booking.setSpecialRequests(dto.getSpecialRequests());
         booking.setFlightNumber(dto.getFlightNumber());
+        booking.setLuggageCount(dto.getLuggageCount());
+        booking.setBabySeatCount(dto.getBabySeatCount());
         booking.setVehicleId(dto.getVehicleId());
         booking.setTripType(dto.getTripType());
         booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
@@ -138,6 +140,8 @@ public class BookingService {
         existingBooking.setTransferAddress(dto.getTransferAddress());
         existingBooking.setSpecialRequests(dto.getSpecialRequests());
         existingBooking.setFlightNumber(dto.getFlightNumber());
+        existingBooking.setLuggageCount(dto.getLuggageCount());
+        existingBooking.setBabySeatCount(dto.getBabySeatCount());
         existingBooking.setVehicleId(dto.getVehicleId());
         existingBooking.setTripType(dto.getTripType());
         existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
