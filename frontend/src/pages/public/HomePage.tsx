@@ -45,9 +45,9 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">24/7 Support</h3>
+                <h3 className="font-title-md text-on-surface">Booking Assistance</h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Real-time assistance for every booking.
+                  Send your transfer details with your booking request.
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export function HomePage() {
                   Professional Drivers
                 </h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Vetted, English-speaking experts.
+                  Vehicle options for private airport transfers.
                 </p>
               </div>
             </div>
@@ -91,15 +91,15 @@ export function HomePage() {
                 Our Vehicles
               </h2>
               <p className="text-on-surface-variant mt-2">
-                Pristine vehicles maintained to the highest safety standards.
+                Explore vehicle options for your transfer.
               </p>
             </div>
-            <a className="text-secondary font-bold flex items-center gap-2 group" href="#">
+            <Link className="text-secondary font-bold flex items-center gap-2 group" to="/vehicles">
               View All Vehicles
               <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
             <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
@@ -144,9 +144,9 @@ export function HomePage() {
                   Professional Chauffeur
                 </li>
               </ul>
-              <button className="w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Select Vehicle
-              </button>
+              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+                Book This Transfer
+              </Link>
             </div>
 
             <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
@@ -191,9 +191,9 @@ export function HomePage() {
                   Privacy Partition
                 </li>
               </ul>
-              <button className="w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Select Vehicle
-              </button>
+              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+                Book This Transfer
+              </Link>
             </div>
 
             <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
@@ -238,9 +238,9 @@ export function HomePage() {
                   Modern Fleet Models
                 </li>
               </ul>
-              <button className="w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Select Vehicle
-              </button>
+              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+                Book This Transfer
+              </Link>
             </div>
           </div>
         </div>
@@ -269,7 +269,7 @@ export function HomePage() {
                 <p className="text-white/80 mb-4">
                   Daily private transfers to Fethiye Business Districts and Marina.
                 </p>
-                <div className="text-secondary font-bold text-2xl">From €45.00</div>
+                <div className="text-secondary font-bold text-2xl">See live prices when booking</div>
               </div>
             </div>
 
@@ -284,7 +284,7 @@ export function HomePage() {
                 <h3 className="font-headline-lg text-2xl text-white mb-1">
                   Dalaman to Gocek
                 </h3>
-                <div className="text-secondary font-bold">From €40.00</div>
+                <div className="text-secondary font-bold">See live prices when booking</div>
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">Marmaris</h3>
-                <div className="text-secondary font-bold">From €65.00</div>
+                <div className="text-secondary font-bold">See live prices when booking</div>
               </div>
             </div>
 
@@ -310,7 +310,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">Oludeniz</h3>
-                <div className="text-secondary font-bold">From €50.00</div>
+                <div className="text-secondary font-bold">See live prices when booking</div>
               </div>
             </div>
           </div>
@@ -323,16 +323,16 @@ export function HomePage() {
             Ready for a Seamless Journey?
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl mx-auto">
-            Secure your private transfer in minutes. Transparent corporate pricing, no prepayment required for established accounts.
+            Send your transfer request online and review the route price before submitting.
           </p>
           <div className="flex flex-col md:flex-row gap-stack-md justify-center">
-            <button className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
+            <Link to="/booking" className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
               Book Online Now
-            </button>
-            <button className="bg-white border border-outline text-on-surface px-12 py-4 rounded-lg font-bold text-lg hover:border-secondary transition-all flex items-center justify-center gap-2">
+            </Link>
+            <Link to="/contact" className="bg-white border border-outline text-on-surface px-12 py-4 rounded-lg font-bold text-lg hover:border-secondary transition-all flex items-center justify-center gap-2">
               <span translate="no" className="material-symbols-outlined text-secondary">chat</span>
-              WhatsApp Support
-            </button>
+              Contact Us
+            </Link>
           </div>
         </div>
       </section>
@@ -344,35 +344,16 @@ export function HomePage() {
               VIP Transfer Dalaman
             </div>
             <div className="flex flex-wrap gap-stack-lg">
-              <a className="text-white/60 hover:text-white transition-colors font-body-md" href="#">
-                Privacy Policy
-              </a>
-              <a className="text-white/60 hover:text-white transition-colors font-body-md" href="#">
-                Terms of Service
-              </a>
-              <a className="text-white/60 hover:text-white transition-colors font-body-md" href="#">
-                Vehicle Insurance
-              </a>
-              <a className="text-white/60 hover:text-white transition-colors font-body-md" href="#">
-                Contact Us
-              </a>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">Services</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">Vehicles</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">Contact Us</Link>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
             <p className="text-white/40 font-body-md">
-              © 2024 VIP Transfer Dalaman. All rights reserved.
+              © {new Date().getFullYear()} VIP Transfer Dalaman. All rights reserved.
             </p>
-            <div className="flex gap-4 mt-4 md:mt-0">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span translate="no" className="material-symbols-outlined">corporate_fare</span>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span translate="no" className="material-symbols-outlined">public</span>
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white/60 hover:text-secondary hover:border-secondary transition-all cursor-pointer">
-                <span translate="no" className="material-symbols-outlined">alternate_email</span>
-              </div>
-            </div>
+
           </div>
         </div>
       </footer>
