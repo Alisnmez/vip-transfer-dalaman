@@ -215,6 +215,27 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void adminBookingListRequiresValidCredentials() throws Exception {
+        String valid = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+        String invalid = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:wrong-password".getBytes(StandardCharsets.UTF_8));
+
+        mockMvc.perform(get("/bookings")
+                        .header("Authorization", invalid))
+                .andExpect(status().isUnauthorized());
+
+        mockMvc.perform(get("/bookings")
+                        .header("Authorization", valid))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+
+        mockMvc.perform(get("/bookings/1")
+                        .header("Authorization", invalid))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     void rejectsBookingWithoutRequiredCustomerName() throws Exception {
         String request = objectMapper.writeValueAsString(Map.of(
                 "passengerCount", 2,
