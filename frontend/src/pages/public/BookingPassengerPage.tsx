@@ -88,8 +88,8 @@ export function BookingPassengerPage() {
       setError('Please enter a valid phone number (7–15 digits internationally; 10 digits for Turkey).')
       return
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError('Please enter a valid email address.')
+    if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
+      setEmailError('Please enter a valid email address.')
       return
     }
     let transferInfo: Record<string, unknown>
