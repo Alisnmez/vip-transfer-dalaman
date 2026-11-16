@@ -35,10 +35,12 @@ export function BookingListPage() {
   }, [])
 
   const query = search.trim().toLowerCase()
-  const visibleBookings = bookings.filter(booking =>
-    `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
-      .toLowerCase().includes(query),
-  )
+  const visibleBookings = bookings
+    .filter(booking =>
+      `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
+        .toLowerCase().includes(query),
+    )
+    .sort((a, b) => b.id - a.id)
 
   return (
     <main className="flex min-h-0 flex-1 flex-col bg-surface">
