@@ -35,7 +35,18 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 | 2.3 | Bagaj bilgisi | TEST BEKLİYOR | Genel sınır 0–8; araç bazlı kapasite API create/update tarafında uygulanıyor, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
 | 2.4 | Çocuk koltuğu | TEST BEKLİYOR | babySeatCount DTO/entity/frontend payload'da mevcut; güncel sınır 0–2, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
 
-### 3–12. Diğer ana maddeler
+### 3. Gerçek fiyat, ödeme ve iptal kuralları
+
+**Genel durum:** DEVAM EDİYOR — 2026-11-16 kod denetimi yapıldı; ticari koşullar doğrulanmadan fiyatlar değiştirilmez.
+
+| No | Alt iş | Durum | Kanıt | Sonraki adım |
+|---|---|---|---|---|
+| 3.1 | Fiyatın sunucuda hesaplanması | TAMAMLANDI | `BookingService` fiyatı `TransferPricingService.calculatePrice` ile sunucudaki `transfer-prices.json` dosyasından hesaplıyor; istemci fiyatına güvenilmiyor. Önceki fiyat testleri CI'da geçti. | Ticari fiyat onayı ayrı 3.2'de |
+| 3.2 | Gerçek tarife ve rakip karşılaştırması | BLOKE | Fiyat kataloğu mevcut, fakat işletme maliyetleri ve güncel Petunia Travel fiyatları doğrulanmış değil. | Kaynak fiyatlar, tarih, rota, araç sınıfı, para birimi ve minimum kârı doğrula; ardından tek yön -£2,50 / gidiş-dönüş -£5 hedefini değerlendir |
+| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | BEKLİYOR | Rezervasyon POST'u talep oluşturuyor; ödeme sağlayıcısı veya tahsilat koşulu doğrulanmadı. | İşletmenin kabul ettiği ödeme yöntemini ve ödeme zamanını kararlaştır; doğrulanmamış ödeme vaadi yazma |
+| 3.4 | İptal ve iade koşulları | BEKLİYOR | İşletme tarafından onaylanmış iptal/iade süresi ve koşulu belgelenmedi. | İşletme politikasını netleştir, sonra sayfaya ekle |
+
+### 4–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
 
@@ -50,6 +61,14 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 3'e geçiş ve kod denetimi
+- **Problem:** 1 ve 2'deki mevcut kodu tekrar yazmadan 3. maddeye geçmek; fiyat, ödeme ve iptal alanlarının gerçekten uygulanıp uygulanmadığını ayırmak.
+- **Kanıt:** `BookingService` sunucu fiyatını katalogdan hesaplıyor; `TransferPricingService` havalimanı güzergâhı, araç ve yolcu kapasitesini denetliyor. `frontend/src/pages/public/InfoPages.tsx` iletişim bilgilerini gösteriyor, ancak onaylı ödeme/iptal şartları burada bulunmuyor. Katalog fiyatları ticari olarak henüz doğrulanmış değil.
+- **Neden:** Teknik fiyat hesaplama doğruluğu, gerçek piyasa fiyatı ve işletme politikasının doğruluğuyla aynı şey değil.
+- **Düzeltme:** 3.1–3.4 alt görevleri açıldı; hiçbir fiyat veya ödeme vaadi tahminle değiştirilmedi. Önceki `.gitignore` güvenlik değişikliği `f801e5b` burada geriye dönük kaydedildi.
+- **Test:** Bu adım yalnızca kaynak kodu incelemesidir; yeni test veya canlı fiyat doğrulaması çalıştırılmadı.
+- **Sonuç:** 3.1 mevcut kod/test kanıtıyla tamam; 3.2 ticari doğrulama bekliyor, 3.3–3.4 işletme kararı bekliyor. 1.3/1.5 ve 2.1–2.4 son canlı E2E testleri kapanmış sayılmadı.
 
 ## İlk yayın odağı (2026-11-16)
 - Kullanıcı isteğiyle MVP yayın önceliğine geçildi: `docs/ILK_YAYIN_KONTROL_LISTESI.md` GO/NO-GO kontrol listesi. 1.5 canlı rezervasyon smoke, doğrulanmış fiyat/iletişim/yasal metinler ve CI yayın blokajı; 5–12 ileri özellikler uygun oldukça ilk yayın sonrasına ertelenebilir. Otomatik e-posta olmadığı açıkça belirtilir.
