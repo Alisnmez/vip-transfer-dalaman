@@ -50,6 +50,7 @@ export function BookingConfirmationPage() {
 
   const [error, setError] = useState('')
   const [bookingId, setBookingId] = useState<number | null>(null)
+  const [submissionUncertain, setSubmissionUncertain] = useState(false)
 
   const [transfer] = useState<TransferDetails>(() => readSavedDetails<TransferDetails>('bookingTransferInfo'))
   const [passenger] = useState<PassengerDetails>(() => readSavedDetails<PassengerDetails>('bookingPassengerInfo'))
@@ -62,6 +63,7 @@ export function BookingConfirmationPage() {
     if (!confirmed || submittingRef.current || processing || completed) return
     submittingRef.current = true
     setError('')
+    setSubmissionUncertain(false)
     const savedTransfer = localStorage.getItem('bookingTransferInfo')
     const savedPassenger = localStorage.getItem('bookingPassengerInfo')
     if (!savedTransfer || !savedPassenger) {
@@ -106,6 +108,7 @@ export function BookingConfirmationPage() {
       localStorage.removeItem('bookingTransferInfo')
       localStorage.removeItem('bookingPassengerInfo')
     } catch (err) {
+      setSubmissionUncertain(err instanceof Error && (err.name === 'TypeError' || /did not respond|Unable to reach|network|fetch/i.test(err.message)))
       setError(err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
       submittingRef.current = false
@@ -284,6 +287,7 @@ export function BookingConfirmationPage() {
               </span>
             </label>
             {error && <p role="alert" className="text-error">{error}</p>}
+            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open and use the same confirmation button to retry safely; do not start a new booking unless you know the first request was not received.</p>}
             {bookingId !== null && <p role="status">Booking reference: #{bookingId}</p>}
             <button
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
