@@ -56,7 +56,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
-| 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`). | CI sonucu, canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
+| 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`, `a497030a`). React ve PostgreSQL CI `43952884744` başarılı. | Canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
 
@@ -73,6 +73,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Admin CI düzeltmesi ve ilk yayın değerlendirmesi
+- **Sorun:** `AdminLayout` içindeki `useLocation` koşullu çağrıldığı için React lint kırıldı (run `43952560910`).
+- **Düzeltme:** Hook bileşenin başına taşındı (`a497030a`).
+- **Test:** GitHub Actions `43952884744` React ve Spring Boot/PostgreSQL işlerinin ikisi de başarılı.
+- **Kalan kritik işler:** Yetkisiz/yetkili admin canlı erişim testi, gerçek rezervasyon listesi/detayı, staging E2E, fiyat ve işletme koşulları onayı, iletişim/legal/SEO yayın kontrolü. CI başarısı canlı yayına hazır olunduğunu tek başına kanıtlamaz.
 
 ## 2026-11-16 — Görev 4 admin kimlik doğrulama
 - **Sorun:** Backend ADMIN rolü gerektirse de admin React API çağrılarında Authorization yoktu; admin sayfaları giriş olmadan açılıyordu.
