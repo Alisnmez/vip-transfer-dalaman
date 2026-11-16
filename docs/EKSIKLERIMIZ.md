@@ -73,6 +73,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Yeni rezervasyon varsayılan yolcu sayısı 4 yerine 1 (`58a21c26`); eski taslakta seçilmiş yolcu sayısı korunur. Yeni CI ve canlı tarayıcı testi bekleniyor.
 - Kullanıcı isteğiyle geçici telefon numarası korundu; admin paneli kapsam dışı.
 
+## 2026-11-16 — CI derleme hatası düzeltildi
+- `4686d979` için CI `43929270545` başarısız: frontend TypeScript TS18048 (opsiyonel `passengerCount` karşılaştırması); backend PostgreSQL testleri başarılı. Nullish fallback ile düzeltildi (`e9512c07`); yeni CI sonucunu beklemeden başarılı denmeyecek.
+- Gerçek tarayıcı rezervasyon E2E, fiyat onayı ve canlı yayın öncesi gerçek telefon numarası değişimi açık. Admin kapsam dışı.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
