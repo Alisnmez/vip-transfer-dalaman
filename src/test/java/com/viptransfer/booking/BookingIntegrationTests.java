@@ -112,23 +112,33 @@ class BookingIntegrationTests {
                 "email", "luggage@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way",
-                "luggageCount", 3
+                "luggageCount", 8
         ));
-        request.put("babySeatCount", 1);
+        request.put("babySeatCount", 2);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.luggageCount").value(3))
-                .andExpect(jsonPath("$.babySeatCount").value(1));
+                .andExpect(jsonPath("$.luggageCount").value(8))
+                .andExpect(jsonPath("$.babySeatCount").value(2));
 
+        request.put("babySeatCount", 0);
+        request.put("luggageCount", 0);
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(0))
+                .andExpect(jsonPath("$.babySeatCount").value(0));
+
+        request.put("luggageCount", 8);
         request.put("babySeatCount", -1);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
 
-        request.put("babySeatCount", 6);
+        request.put("babySeatCount", 3);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -141,7 +151,7 @@ class BookingIntegrationTests {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isBadRequest());
 
-        request.put("luggageCount", 21);
+        request.put("luggageCount", 9);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
