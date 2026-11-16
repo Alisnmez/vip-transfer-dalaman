@@ -37,6 +37,11 @@ public class BookingController {
         return bookingService.updateBooking(id, dto);
     }
 
+    @PatchMapping("/{id}/status")
+    public Booking updateStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> payload) {
+        return bookingService.updateStatus(id, payload.get("status"));
+    }
+
     @DeleteMapping("/{id}")
     public String deleteBooking(@PathVariable Long id) {
         return bookingService.deleteBooking(id);
