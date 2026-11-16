@@ -147,6 +147,12 @@ export function BookingConfirmationPage() {
         setError('Please review the passenger count and email address before confirming.')
         return
       }
+      if (passengerData.customerName.trim().length > 161 || passengerData.phoneNumber.trim().length > 16 ||
+          passengerData.email.trim().length > 254 || passengerData.transferAddress.trim().length > 250 ||
+          (passengerData.hotelName?.length ?? 0) > 120 || (passengerData.specialRequests?.length ?? 0) > 1000) {
+        setError('Some saved passenger details are too long. Please return to the passenger step and review them.')
+        return
+      }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
           !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
           !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
