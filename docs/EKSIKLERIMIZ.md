@@ -54,7 +54,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 | No | Alt iş | Durum | Kanıt | Sonraki adım |
 |---|---|---|---|---|
-| 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
+| 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Gerçek `getBookings()` verisi ve müşteri/rota/referans araması (`2d0a180a`); manuel yenileme eklendi (`fd14367`). | Yetkili admin oturumunda yeni kayıtların yenilemeyle geldiğini doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
 | 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı (`86b2d9b8`); iptal edilenler planlanan taleplerden çıkarıldı (`278d4be`), PENDING dahil onaylanmamış talepler açık etiketlendi (`cc54ea6`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
 | 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`, `a497030a`). React ve PostgreSQL CI `43952884744` başarılı. | Canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
@@ -62,6 +62,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ### 5–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
+
+## 2026-11-17 — Admin rezervasyon listesini elle yenileme
+- **Aktif madde:** 4.1 — işletme rezervasyon listesi.
+- **Sorun ve kanıt:** `BookingListPage.tsx` listeyi yalnızca ilk açılışta yüklediği için sayfa açıkken gelen yeni rezervasyonlar görünmüyordu; v1.0'da otomatik e-posta/bildirim yok.
+- **Düzeltme:** `Refresh bookings` butonu eklendi; bekleme ve hata durumları gösteriliyor, yenileme sırasında çift tıklama engelleniyor (`fd14367`). Mevcut arama filtresi korunuyor.
+- **Test:** Kod commit edildi; CI ve gerçek admin verisiyle yenileme testi henüz yapılmadı. **Durum: TEST BEKLİYOR.**
+- **Kaldığımız yer:** CI sonucunu kontrol et; yetkili admin oturumunda liste, detay, durum değiştirme ve manuel yenilemeyi gerçek kayıtla doğrula.
 
 ## 2026-11-16 — Admin dashboard talepler ile onaylı transferlerin ayrılması
 - **Aktif madde:** 4.4.
