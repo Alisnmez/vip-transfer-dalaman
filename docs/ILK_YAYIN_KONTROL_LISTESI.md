@@ -19,11 +19,24 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **İşletme bilgileri ve yasal metinler:** İptal, ödeme, KVKK/gizlilik ve işletme kimliği doğrulanmış; bilinmeyen şartlar vaat edilmiyor.
 - [ ] **Mobil smoke:** Ana sayfa → rezervasyon 1/2/3 → başarı, iPhone/Android dar ekran ve masaüstü; kritik linkler çalışıyor.
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
-- [ ] **Operasyon:** Rezervasyonları kimin/ne sıklıkla takip edeceği belirlenmiş; otomatik e-posta henüz yoksa manuel kontrol süreci hazır.
+- [ ] **Operasyon:** Rezervasyonları kimin/ne sıklıkla takip edeceği belirlenmiş; otomatik e-posta henüz yoksa aşağıdaki manuel takip prosedürü gerçek kayıtla denenmiş.
+
+## v1.0 — Minimum rezervasyon operasyon prosedürü
+
+**Amaç:** İlk müşteri talebi kaybolmadan işletme tarafından ele alınsın. Otomatik e-posta ve gelişmiş admin paneli şart değil, ancak güvenli ve gerçekten çalışan bir takip kanalı şart.
+
+1. **Talep alma:** Müşteri rezervasyon formunu gönderir, sistem rezervasyon referansı ve **PENDING / onay bekliyor** durumu gösterir. Talep alındı ifadesi kesin transfer onayı değildir.
+2. **Güvenli takip:** İşletme, yalnızca yetkili erişimle yeni rezervasyonları listeler veya sorgular. Mevcut backend `GET /bookings` uç noktası var; bunun işletmeci tarafından gerçekten kullanılabildiği henüz doğrulanmadı. Veritabanını herkese açık yapma, yönetici şifresini tarayıcıya gömme.
+3. **Kontrol sıklığı:** Sorumlu kişi ve kontrol aralığı ilk yayından önce belirlenecek. Bildirim otomasyonu yoksa düzenli manuel kontrol zorunlu.
+4. **Müşteriye dönüş:** İşletme, formdaki iletişim bilgileriyle müşteriye ulaşıp güzergâh, tarih, uçuş, araç, fiyat ve ödeme koşullarını teyit eder. İletişim yöntemi ve yanıt süresi doğrulanmadan garanti verilmez.
+5. **Durum ve kayıt:** Talebin işleme alındığı ve müşteriye dönüş yapıldığı işletme tarafında takip edilir; yanlışlıkla tekrar transfer atanmaz. Mevcut sistemde güvenli durum güncelleme arayüzü varsa doğrulanır, yoksa ilk yayın için kontrollü manuel kayıt yöntemi belirlenir.
+6. **Yayın provası:** Yetkili işletmeci gerçek bir test rezervasyonunu bulur, bilgilerini okur ve müşteriyle iletişim akışını prova eder. Bu adım doğrulanmadan operasyon hazır sayılmaz.
+
+**Şu anki engel:** Rezervasyon oluşturma kullanıcı tarafından başarılı olarak bildirildi; ancak işletmenin rezervasyonu güvenli şekilde görüp takip edebildiğine ilişkin bağımsız doğrulama yok. Önce bu kanal test edilecek.
 
 ## Yayın sonrası geliştirmeler (v1.0 için zorunlu değil; ayrı yol haritasında izlenir)
 
-- [ ] Admin paneli: yetkilendirme, rezervasyon listeleme/detay/durum ve iletişim ayarları.
+- [ ] Gelişmiş admin paneli: rezervasyon listeleme/detay/durum ve iletişim ayarları. **Not:** v1.0 için güvenli temel rezervasyon erişimi ve takibi zorunludur; yalnızca gelişmiş arayüz ertelenebilir.
 - [ ] E-posta doğrulama yaklaşımı ve otomatik müşteri alındı + işletme bildirimleri; hata/tekrar gönderim/çift e-posta koruması.
 - [ ] WhatsApp iletişim bağlantısı; gerçek numara ve doğru mesaj akışı.
 - [ ] Özgün logo, favicon ve tutarlı marka uygulaması.
@@ -42,6 +55,13 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - Kapsamlı tarayıcı E2E otomasyonu; ancak yukarıdaki manuel gerçek rezervasyon testi atlanamaz.
 
 **Durum:** Bu belge bir kontrol listesidir, testlerin yapıldığına dair kanıt değildir. İşaretlenmemiş maddeler doğrulanmamıştır.
+
+## 2026-11-16 — Operasyonel yayın denetimi
+- **Sorun:** Başarılı rezervasyon POST'u, işletmenin yeni talebi görüp işleyebildiğini tek başına kanıtlamıyor.
+- **Kanıt:** `BookingController` içinde `GET /bookings` mevcut. Ancak işletme arayüzünün ve günlük takip iş akışının çalıştığı bu incelemede doğrulanmadı.
+- **Çözüm:** Minimum 6 adımlı manuel operasyon prosedürü ve gerçek kayıtla yayın provası kontrol listesine eklendi.
+- **Test:** GitHub kaynak kodu incelendi; canlı yönetici oturumu/rezervasyon listeleme testi yapılmadı. **GO** işaretlenmedi.
+- **Sonraki işlem:** İşletmeci erişimini ve rezervasyonların güvenli görüntülenmesini doğrula; sonra iletişim ve fiyat/yasal bilgiler için yayın kapılarını kapat.
 
 ## 2026-11-16 — Hızlı yayın kapsamı kararı
 - **Problem:** Genişletilmiş kapsam, rezervasyon alabilen ilk sürümün yayınını geciktiriyordu.
