@@ -130,6 +130,33 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void savesHotelNameAndRejectsOverlongAccommodationName() throws Exception {
+        java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
+                "customerName", "Hotel Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "hotel@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way",
+                "hotelName", "Marina Hotel"
+        ));
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.hotelName").value("Marina Hotel"));
+
+        request.put("hotelName", "H".repeat(121));
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void blocksAnonymousBookingReadsAndChanges() throws Exception {
         mockMvc.perform(get("/bookings"))
                 .andExpect(status().isUnauthorized());
