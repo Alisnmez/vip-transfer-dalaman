@@ -49,7 +49,24 @@ type TransferDraft = {
 function readTransferDraft(): TransferDraft {
   try {
     const value: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
-    return value !== null && typeof value === 'object' ? value as TransferDraft : {}
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+    const raw = value as Record<string, unknown>
+    const readString = (key: string) => typeof raw[key] === 'string' ? raw[key] as string : undefined
+    const readCount = (key: string) => typeof raw[key] === 'number' && Number.isInteger(raw[key]) ? raw[key] as number : undefined
+    return {
+      tripType: raw.tripType === 'round-trip' ? 'round-trip' : 'one-way',
+      vehicleId: readString('vehicleId'),
+      pickUpLocation: readString('pickUpLocation'),
+      dropOffLocation: readString('dropOffLocation'),
+      pickUpDate: readString('pickUpDate'),
+      pickUpTime: readString('pickUpTime'),
+      flightNumber: readString('flightNumber'),
+      returnDate: readString('returnDate'),
+      returnTime: readString('returnTime'),
+      passengerCount: readCount('passengerCount'),
+      luggageCount: readCount('luggageCount'),
+      babySeatCount: readCount('babySeatCount'),
+    }
   } catch {
     return {}
   }
