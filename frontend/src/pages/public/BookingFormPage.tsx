@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { parseTurkeyDateTime, turkeyToday } from '../../features/booking/turkeyTime'
+import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
 // Generic icons avoid implying that an unverified vehicle photograph is the exact booked car.
 function vehicleIcon(vehicleId: string): string {
@@ -123,9 +124,13 @@ export function BookingFormPage() {
       setFormError('This route or vehicle has no published price. Please choose Dalaman Airport as one endpoint and a vehicle with a listed price.')
       return
     }
-    if (!Number.isInteger(passengers) || passengers < 1 || passengers > maxAllowedPassengers || !Number.isInteger(luggages) || luggages < 0 || luggages > maxAllowedLuggage || !Number.isInteger(babySeats) || babySeats < 0 || babySeats > 2) {
+    const selectionError = validateTransferSelection({
+      pickUpLocation, dropOffLocation, vehicleId: effectiveVehicleId, tripType,
+      passengerCount: passengers, luggageCount: luggages, babySeatCount: babySeats,
+    })
+    if (selectionError) {
       event.preventDefault()
-      setFormError('Please check the passenger count, luggage (maximum 8), and baby seats (maximum 2) against the vehicle capacity.')
+      setFormError(selectionError)
       return
     }
     if (flightNumber.trim() && !/^[A-Za-z0-9 -]{1,20}$/.test(flightNumber.trim())) {
