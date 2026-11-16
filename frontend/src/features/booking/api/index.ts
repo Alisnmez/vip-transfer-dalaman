@@ -82,6 +82,10 @@ export type BookingPage = {
   number: number
 }
 
+export function getCalendarBookings(month: string) {
+  return request<Booking[]>(`${BOOKING_URL}/calendar?month=${encodeURIComponent(month)}`, undefined, true)
+}
+
 export function getBookingPage(page: number, size = 25) {
   return request<BookingPage>(`${BOOKING_URL}/page?page=${page}&size=${size}`, undefined, true)
 }
