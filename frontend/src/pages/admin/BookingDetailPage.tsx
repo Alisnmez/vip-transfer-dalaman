@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { getBooking } from '../../features/booking/api'
+import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 import type { Booking } from '../../features/booking/types'
 
 export function BookingDetailPage() {
@@ -33,9 +34,16 @@ export function BookingDetailPage() {
             ['Passengers', booking.passengerCount],
             ['Pickup', booking.pickUpLocation],
             ['Destination', booking.dropOffLocation],
-            ['Pickup time', booking.transferDateTime],
-            ['Return time', booking.returnDateTime || 'One-way'],
+            ['Pickup time (Turkey)', formatTransferDateTime(booking.transferDateTime)],
+            ['Return time (Turkey)', booking.returnDateTime ? formatTransferDateTime(booking.returnDateTime) : 'One-way'],
             ['Flight', booking.flightNumber || 'Not provided'],
+            ['Status', bookingStatus(booking.status)],
+            ['Email', booking.email || 'Not provided'],
+            ['Phone', booking.phoneNumber || 'Not provided'],
+            ['Hotel', booking.hotelName || 'Not provided'],
+            ['Transfer address', booking.transferAddress || 'Not provided'],
+            ['Special requests', booking.specialRequests || 'None'],
+            ['Vehicle category', booking.vehicleId || 'Not provided'],
             ['Luggage', booking.luggageCount ?? 'Not provided'],
             ['Baby seats', booking.babySeatCount ?? 'Not provided'],
             ['Published fare (GBP)', `£${Number(booking.price).toFixed(2)}`],
