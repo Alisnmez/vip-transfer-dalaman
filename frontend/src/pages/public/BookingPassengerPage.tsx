@@ -16,8 +16,19 @@ type SavedPassenger = {
 
 function readPassengerDraft(): SavedPassenger {
   try {
-    const saved = JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}')
-    return saved && typeof saved === 'object' ? saved as SavedPassenger : {}
+    const value: unknown = JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}')
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
+    const raw = value as Record<string, unknown>
+    const readString = (key: string) => typeof raw[key] === 'string' ? raw[key] as string : undefined
+    return {
+      customerName: readString('customerName'),
+      phoneNumber: readString('phoneNumber'),
+      email: readString('email'),
+      countryOfResidence: readString('countryOfResidence'),
+      transferAddress: readString('transferAddress'),
+      hotelName: readString('hotelName'),
+      specialRequests: readString('specialRequests'),
+    }
   } catch {
     return {}
   }
