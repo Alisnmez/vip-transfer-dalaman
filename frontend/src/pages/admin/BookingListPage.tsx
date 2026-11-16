@@ -8,41 +8,32 @@ import type { Booking } from '../../features/booking/types'
 
 export function BookingListPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
+  const [loadedPage, setLoadedPage] = useState<number | null>(null)
+  const [revision, setRevision] = useState(0)
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [totalElements, setTotalElements] = useState(0)
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [refreshing, setRefreshing] = useState(false)
+  const loading = loadedPage !== page
 
-  async function refresh() {
+  function refresh() {
     if (refreshing || loading) return
     setRefreshing(true)
-    setError('')
-    try {
-      const result = await getBookingPage(page)
-      setBookings(result.content)
-      setTotalPages(result.totalPages)
-      setTotalElements(result.totalElements)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to load bookings')
-    } finally {
-      setRefreshing(false)
-    }
+    setRevision(value => value + 1)
   }
 
   useEffect(() => {
     let active = true
     getBookingPage(page)
-      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements) } })
-      .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
-      .finally(() => { if (active) setLoading(false) })
+      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements); setLoadedPage(page); setError(''); setRefreshing(false) } })
+      .catch(err => { if (active) { setError(err instanceof Error ? err.message : 'Unable to load bookings'); setLoadedPage(page); setRefreshing(false) } })
     return () => { active = false }
-  }, [page])
+  }, [page, revision])
 
   const query = search.trim().toLowerCase()
-  const visibleBookings = bookings
+  const visibleBookings = (loading || error ? [] : bookings)
     .filter(booking =>
       `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
         .toLowerCase().includes(query),
@@ -116,9 +107,9 @@ export function BookingListPage() {
         )}
       </section>
       <nav aria-label="Booking pages" className="flex items-center justify-between gap-4 border-t border-outline-variant bg-white p-4">
-        <button type="button" disabled={loading || page === 0} onClick={() => { setLoading(true); setPage(value => value - 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button>
+        <button type="button" disabled={loading || refreshing || page === 0} onClick={() => { setError(''); setPage(value => value - 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button>
         <span className="text-sm">Page {page + 1} of {Math.max(1, totalPages)}</span>
-        <button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => { setLoading(true); setPage(value => value + 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
+        <button type="button" disabled={loading || refreshing || page + 1 >= totalPages} onClick={() => { setError(''); setPage(value => value + 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
       </nav>
     </main>
   )
