@@ -4,17 +4,50 @@ import { Link, useNavigate } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
 
 
+type SavedPassenger = {
+  customerName?: string
+  phoneNumber?: string
+  email?: string
+  countryOfResidence?: string
+  transferAddress?: string
+  hotelName?: string
+  specialRequests?: string
+}
+
+function readPassengerDraft(): SavedPassenger {
+  try {
+    const saved = JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}')
+    return saved && typeof saved === 'object' ? saved as SavedPassenger : {}
+  } catch {
+    return {}
+  }
+}
+
+function isAirportPickup(): boolean {
+  try {
+    const saved = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+    return saved?.pickUpLocation === 'Dalaman Airport'
+  } catch {
+    return true
+  }
+}
+
 export function BookingPassengerPage() {
   const navigate = useNavigate()
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [countryCode, setCountryCode] = useState('+90')
-  const [email, setEmail] = useState('')
-  const [countryOfResidence, setCountryOfResidence] = useState('')
-  const [transferAddress, setTransferAddress] = useState('')
-  const [hotelName, setHotelName] = useState('')
-  const [specialRequests, setSpecialRequests] = useState('')
+  const [draft] = useState(readPassengerDraft)
+  const [firstName, setFirstName] = useState(() => draft.customerName?.trim().split(/\s+/)[0] ?? '')
+  const [lastName, setLastName] = useState(() => draft.customerName?.trim().split(/\s+/).slice(1).join(' ') ?? '')
+  const [phoneNumber, setPhoneNumber] = useState(() => {
+    const number = draft.phoneNumber ?? ''
+    const code = ['+370', '+90', '+44', '+49', '+33', '+1'].find((item) => number.startsWith(item))
+    return code ? number.slice(code.length) : ''
+  })
+  const [countryCode, setCountryCode] = useState(() => ['+370', '+90', '+44', '+49', '+33', '+1'].find((code) => draft.phoneNumber?.startsWith(code)) ?? '+90')
+  const [email, setEmail] = useState(draft.email ?? '')
+  const [countryOfResidence, setCountryOfResidence] = useState(draft.countryOfResidence ?? '')
+  const [transferAddress, setTransferAddress] = useState(draft.transferAddress ?? '')
+  const [hotelName, setHotelName] = useState(draft.hotelName ?? '')
+  const [specialRequests, setSpecialRequests] = useState(draft.specialRequests ?? '')
   const [error, setError] = useState('')
 
   function handleSubmit() {
@@ -174,7 +207,7 @@ export function BookingPassengerPage() {
 
                 <div className="flex flex-col gap-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant">
-                    {JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}').pickUpLocation === 'Dalaman Airport' ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'} *
+                    {isAirportPickup() ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'} *
                   </label>
                   <p className="text-sm text-on-surface-variant">
                     Enter the hotel, villa, apartment or exact street address where the driver should meet you or drop you off. Not your home address abroad.
