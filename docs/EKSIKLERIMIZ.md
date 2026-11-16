@@ -31,9 +31,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 | No | Alt iş | Durum | Kanıt | Sonraki adım |
 |---|---|---|---|---|
 | 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO/entity/service/test (`388a448`) CI başarılı (`43847834472`); React form → localStorage → confirmation → POST bağlandı (`f9b9df8`, `ab8129c`) | Yeni frontend build ve staging E2E doğrula |
-| 2.2 | Otel bilgisi | BEKLİYOR | Mevcut transferAddress alanı var | Ayrı alan ihtiyacını ve akışı belirle |
-| 2.3 | Bagaj bilgisi | BEKLİYOR | — | Kapasite/validasyon |
-| 2.4 | Çocuk koltuğu | BEKLİYOR | — | Sayı ve yaş aralığı |
+| 2.2 | Otel bilgisi | TEST BEKLİYOR | Opsiyonel hotelName (120 karakter) frontend/backend ve entegrasyon testinde mevcut; CI 43850774232 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
+| 2.3 | Bagaj bilgisi | TEST BEKLİYOR | luggageCount DTO/entity/frontend payload'da mevcut; CI 43848683903 başarılı. | Gerçek tarayıcı E2E, kapasite ve DB kaydını doğrula |
+| 2.4 | Çocuk koltuğu | TEST BEKLİYOR | babySeatCount DTO/entity/frontend payload'da mevcut; 0–5 validasyonu, CI 43848683903 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
 
 ### 3–12. Diğer ana maddeler
 
@@ -298,3 +298,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test:** `savesHotelNameAndRejectsOverlongAccommodationName` entegrasyon testi eklendi; geçerli otel adının yanıtta dönmesi ve 121 karakterin 400 dönmesi bekleniyor. GitHub Actions run `43850774232` ilk kontrolde queued; sonuç doğrulanmadı.
 - **Eğitim notu:** Kullanıcı daha sonra `idempotency_key` ve `request_fingerprint` DB sütunlarının amaçlarını ve kod akışını örneklerle satır satır öğrenmek istiyor. Bu eğitim mutlaka ayrıca yapılacak.
 - **Risk:** Yeni sütun staging DB'de Hibernate `ddl-auto=update` ile otomatik oluşturulabilir; migration ve backup güvenliği hâlâ tamamlanmadı.
+
+
+## 2026-11-16 — Yeni sohbet devralma, CI doğrulama ve eğlence modu geri alma
+- **Aktif maddeler:** 1.3, 1.5 ve 2.1–2.4. Ana panodaki 2.2–2.4 durumları son kod ve CI ile eşitlendi.
+- **Kanıt:** GitHub Actions otel adı testi 43850774232 success; son ortak CI 43850821468 success. Render frontend/backend aynı c0311668 commit'i için live doğrulandı. Bunlar otomatik browser E2E değildir.
+- **Eğlence modu:** Ana sayfa Book Now geçici olarak eşşek yapıldı (52c2afa); Render frontend deploy live ve CI 43856521564 success. Ardından normal metin Book Now olarak geri alındı (48fc460). Geri alma deploy ve CI ayrıca kontrol edilecek.
+- **Veritabanı sınırı:** Render PostgreSQL salt-okunur MCP sorgusu SSL/TLS/harici bağlantı kısıtıyla başarısız. Şema/unique constraint veya backup doğrulanmış sayılmaz. POSTGRES_MIGRATION_PLAN.md Phase 0 için yetkili DBeaver erişimi gerekir; canlı veride ALTER/DROP yapılmayacak.
+- **Eğitim standardı:** Sorun → kanıt → neden → düzeltme → test → sonuç; gerektiğinde idempotency_key ve request_fingerprint satır satır öğretilecek.
+- **Kaldığımız yer:** Geri alma deploy/CI kontrolü, ardından güvenli Phase 0 şema envanteri ve browser E2E planı. 1.3/1.5/2.1–2.4 TEST BEKLİYOR.
