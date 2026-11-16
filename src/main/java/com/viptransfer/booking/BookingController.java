@@ -34,6 +34,15 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
+    @GetMapping("/calendar")
+    public List<Booking> getCalendarBookings(@RequestParam String month) {
+        if (!month.matches("[0-9]{4}-(0[1-9]|1[0-2])")) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.BAD_REQUEST, "Invalid calendar month.");
+        }
+        return bookingService.getCalendarBookings(java.time.YearMonth.parse(month));
+    }
+
     @GetMapping("/dashboard")
     public java.util.Map<String, Object> getDashboardSummary() {
         return bookingService.getDashboardSummary();
