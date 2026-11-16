@@ -140,10 +140,8 @@ export function BookingConfirmationPage() {
         setError('Your transfer date is no longer valid. Please return to the first step and select a future date in Turkey local time.')
         return
       }
-      if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
-          transferData.passengerCount > 16 ||
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passengerData.email || '')) {
-        setError('Please review the passenger count and email address before confirming.')
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passengerData.email || '')) {
+        setError('Please review the email address before confirming.')
         return
       }
       const normalizedPhone = passengerData.phoneNumber.replace(/\D/g, '')
