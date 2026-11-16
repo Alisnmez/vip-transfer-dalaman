@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
@@ -43,6 +43,7 @@ function readSavedDetails<T>(key: string): T {
 
 
 export function BookingConfirmationPage() {
+  const submittingRef = useRef(false)
   const [confirmed, setConfirmed] = useState(false)
   const [processing, setProcessing] = useState(false)
   const [completed, setCompleted] = useState(false)
@@ -58,12 +59,14 @@ export function BookingConfirmationPage() {
   const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
   async function handleConfirm() {
-    if (!confirmed || processing || completed) return
+    if (!confirmed || submittingRef.current || processing || completed) return
+    submittingRef.current = true
     setError('')
     const savedTransfer = localStorage.getItem('bookingTransferInfo')
     const savedPassenger = localStorage.getItem('bookingPassengerInfo')
     if (!savedTransfer || !savedPassenger) {
       setError('Your booking information is missing. Please start the booking again.')
+      submittingRef.current = false
       return
     }
 
@@ -75,6 +78,7 @@ export function BookingConfirmationPage() {
           !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType ||
           (transfer.tripType === 'round-trip' && (!transfer.returnDate || !transfer.returnTime)) || !passenger.transferAddress) {
         setError('Please complete all required booking details.')
+        submittingRef.current = false
         return
       }
       setProcessing(true)
@@ -104,6 +108,7 @@ export function BookingConfirmationPage() {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
+      submittingRef.current = false
       setProcessing(false)
     }
   }
