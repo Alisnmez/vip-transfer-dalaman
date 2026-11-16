@@ -172,10 +172,26 @@ class BookingAdminUpdateTest {
     }
 
     @Test
-    void completedBookingCannotBeReopened() {
+    void completedBookingCanBeReopenedAsPending() {
+        booking.setStatus("COMPLETED");
+        Booking updated = service.updateStatus(10L, "PENDING");
+        assertEquals("PENDING", updated.getStatus());
+        verify(repository).save(booking);
+    }
+
+    @Test
+    void completedBookingCanBeReopenedAsConfirmed() {
+        booking.setStatus("COMPLETED");
+        Booking updated = service.updateStatus(10L, "CONFIRMED");
+        assertEquals("CONFIRMED", updated.getStatus());
+        verify(repository).save(booking);
+    }
+
+    @Test
+    void completedBookingCannotBeCancelledDirectly() {
         booking.setStatus("COMPLETED");
         ResponseStatusException error = assertThrows(ResponseStatusException.class,
-                () -> service.updateStatus(10L, "PENDING"));
+                () -> service.updateStatus(10L, "CANCELLED"));
         assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
         assertEquals("COMPLETED", booking.getStatus());
         verify(repository, never()).save(any());
