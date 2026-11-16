@@ -147,6 +147,14 @@ export function BookingConfirmationPage() {
         setError('Please review the passenger count and email address before confirming.')
         return
       }
+      const normalizedPhone = passengerData.phoneNumber.replace(/\D/g, '')
+      if (!/^\\+\\d{8,15}$/.test(passengerData.phoneNumber) ||
+          normalizedPhone.length < 8 ||
+          !passengerData.customerName.trim() || !passengerData.transferAddress.trim() ||
+          !passengerData.countryOfResidence?.trim()) {
+        setError('Saved passenger contact or pickup details are invalid. Please return to the passenger step.')
+        return
+      }
       if (passengerData.customerName.trim().length > 161 || passengerData.phoneNumber.trim().length > 16 ||
           passengerData.email.trim().length > 254 || passengerData.transferAddress.trim().length > 250 ||
           (passengerData.hotelName?.length ?? 0) > 120 || (passengerData.specialRequests?.length ?? 0) > 1000) {
