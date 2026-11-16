@@ -496,6 +496,31 @@ class BookingIntegrationTests {
 
 
     @Test
+    void invalidIdempotencyKeysNeverCreateBookings() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Invalid Retry Key",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul")).plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "invalid-key@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        long before = bookingRepository.count();
+        for (String key : new String[]{"short", "bad key with spaces", "a".repeat(65)}) {
+            mockMvc.perform(post("/bookings")
+                            .header("Idempotency-Key", key)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(request))
+                    .andExpect(status().isBadRequest());
+        }
+        org.junit.jupiter.api.Assertions.assertEquals(before, bookingRepository.count(),
+                "Invalid retry keys must not persist a booking");
+    }
+
+    @Test
     void concurrentRetriesWithSameKeyCreateOnlyOneBooking() throws Exception {
         String request = objectMapper.writeValueAsString(Map.of(
                 "customerName", "Concurrent Retry Test",
