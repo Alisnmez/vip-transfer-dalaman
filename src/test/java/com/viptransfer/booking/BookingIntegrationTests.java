@@ -307,7 +307,7 @@ class BookingIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(request))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.returnDateTime").value(returning.toString()))
+                .andExpect(jsonPath("$.returnDateTime").value(returning.format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"))))
                 .andExpect(jsonPath("$.tripType").value("round-trip"));
     }
 
