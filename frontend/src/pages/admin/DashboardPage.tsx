@@ -33,8 +33,10 @@ export function DashboardPage() {
 
   const now = turkeyNowLocal()
   const today = now.slice(0, 10)
-  const todayBookings = bookings.filter(booking => booking.transferDateTime?.startsWith(today))
-  const upcoming = [...bookings]
+  // Cancelled requests remain in total history, but are not scheduled transfers.
+  const activeBookings = bookings.filter(booking => booking.status !== 'CANCELLED')
+  const todayBookings = activeBookings.filter(booking => booking.transferDateTime?.startsWith(today))
+  const upcoming = activeBookings
     .filter(booking => booking.transferDateTime && booking.transferDateTime >= now)
     .sort((a, b) => a.transferDateTime.localeCompare(b.transferDateTime))
     .slice(0, 8)
