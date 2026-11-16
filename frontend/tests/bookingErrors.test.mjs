@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { BookingApiError, bookingHttpError, classifyBookingFailure } from '../src/features/booking/api/errors.ts'
+import { BookingApiError, bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from '../src/features/booking/api/errors.ts'
 
 test('HTTP errors retain status and are not mistaken for uncertain transport errors', () => {
   const conflict = bookingHttpError(409, 'Booking already exists')
@@ -25,4 +25,12 @@ test('ordinary errors are not classified as uncertain network outcomes', () => {
   assert.equal(error.uncertain, false)
   assert.equal(error.message, 'Invalid JSON')
   assert.ok(error instanceof BookingApiError)
+})
+
+test('unreadable successful response keeps the booking outcome uncertain', () => {
+  const error = bookingInvalidSuccessResponse(new SyntaxError('bad JSON'))
+  assert.equal(error.uncertain, true)
+  assert.equal(error.status, null)
+  assert.match(error.message, /may have been saved/)
+  assert.equal(classifyBookingFailure(error), error)
 })
