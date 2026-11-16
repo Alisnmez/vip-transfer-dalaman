@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -40,8 +41,6 @@ function readSavedDetails<T>(key: string): T {
   }
 }
 
-const informationLinks = ['Insurance Coverage', 'Trust & Safety']
-const legalLinks = ['Terms of Service', 'Privacy Policy']
 
 export function BookingConfirmationPage() {
   const [confirmed, setConfirmed] = useState(false)
@@ -132,7 +131,7 @@ export function BookingConfirmationPage() {
               <p><strong>Baby seats:</strong> {display(transfer.babySeatCount)}</p>
               <p><strong>Price:</strong> {price}</p>
             </div>
-            <a href="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</a>
+            <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</Link>
           </section>
         ) : (
           <>
@@ -217,13 +216,13 @@ export function BookingConfirmationPage() {
                 <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
-                All taxes, parking, and tolls included.
+                The final fare and any additional charges will be confirmed before your transfer.
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
               <span translate="no" className="material-symbols-outlined text-sm">info</span>
               <span className="font-label-sm text-label-sm">
-                Final price may vary by luggage volume.
+                Please check your luggage count and special requests before submitting.
               </span>
             </div>
           </aside>
@@ -251,42 +250,17 @@ export function BookingConfirmationPage() {
               <span translate="no" className="material-symbols-outlined text-secondary">
                 payments
               </span>
-              <h2 className="font-title-md text-title-md">Payment Policy</h2>
+              <h2 className="font-title-md text-title-md">Payment Information</h2>
             </div>
             <div className="flex-grow space-y-4">
-              <div className="p-4 bg-secondary-container/20 rounded-lg border border-secondary-container">
-                <p className="font-body-md text-on-secondary-container">
-                  Payment is made on the day of your transfer directly to your
-                  driver. We accept cash payments in EUR, GBP, USD and TRY.
-                </p>
-              </div>
-              <div>
-                <p className="font-label-sm text-on-surface-variant mb-2">
-                  Accepted Currencies:
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['€ EUR', '$ USD', '£ GBP', '₺ TRY'].map((currency) => (
-                    <span
-                      className="px-3 py-1 rounded bg-slate-100 text-on-surface-variant font-bold"
-                      key={currency}
-                    >
-                      {currency}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-2 text-admin-primary font-semibold">
-                <span translate="no"
-                  className="material-symbols-outlined"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  verified_user
-                </span>
-                <span className="font-label-sm">
-                  Secure Booking: Your reservation is safely stored and
-                  submitted for confirmation.
-                </span>
-              </div>
+              <p className="font-body-md text-on-surface-variant">
+                Your request does not collect a payment online. Payment method,
+                accepted currencies and any additional charges must be agreed
+                with the transfer provider before the journey.
+              </p>
+              <p className="font-label-sm text-on-surface-variant">
+                Submitting a booking request does not mean the transfer has been confirmed.
+              </p>
             </div>
           </section>
         </div>
@@ -319,8 +293,7 @@ export function BookingConfirmationPage() {
                   : 'CONFIRM BOOKING'}
             </button>
             <p className="font-label-xs text-label-xs text-outline">
-              By clicking confirm, you agree to our Terms of Service and Privacy
-              Policy.
+              By submitting, you confirm the details above are accurate and request a transfer.
             </p>
           </div>
         </section>
@@ -416,53 +389,16 @@ function DetailRow({ label, value }: { label: string; value: string }) {
 
 function ConfirmationFooter() {
   return (
-    <footer className="w-full py-12 bg-slate-200 border-t border-outline-variant">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter-grid px-margin-page max-w-7xl mx-auto">
-        <div className="flex flex-col gap-4">
-          <span className="font-title-md text-title-md font-bold text-admin-primary">
-            VIP Transfer Dalaman
-          </span>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Professional airport transfer services specialized in Dalaman routes.
-          </p>
-        </div>
-        <FooterColumn title="Information" items={informationLinks} />
-        <FooterColumn title="Legal" items={legalLinks} />
-        <div className="flex flex-col gap-2">
-          <p className="font-label-sm font-bold text-on-surface">Support</p>
-          <a
-            className="font-body-md text-body-md text-on-surface-variant hover:text-admin-primary"
-            href="#"
-          >
-            Contact Support
-          </a>
-          <p className="font-label-sm text-on-surface-variant mt-2">
-            Available 24/7 via WhatsApp
-          </p>
-        </div>
-      </div>
-      <div className="mt-12 px-margin-page text-center border-t border-outline-variant/30 pt-8">
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          © 2024 VIP Transfer Dalaman. All rights reserved.
+    <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+        <p className="text-sm text-on-surface-variant">
+          © {new Date().getFullYear()} VIP Transfer Dalaman
         </p>
+        <div className="flex gap-5 text-sm">
+          <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
+          <Link className="text-admin-primary hover:underline" to="/services">Services</Link>
+        </div>
       </div>
     </footer>
-  )
-}
-
-function FooterColumn({ items, title }: { items: string[]; title: string }) {
-  return (
-    <div className="flex flex-col gap-2">
-      <p className="font-label-sm font-bold text-on-surface">{title}</p>
-      {items.map((item) => (
-        <a
-          className="font-body-md text-body-md text-on-surface-variant hover:text-admin-primary"
-          href="#"
-          key={item}
-        >
-          {item}
-        </a>
-      ))}
-    </div>
   )
 }
