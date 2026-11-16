@@ -74,7 +74,8 @@ function readReceipt(): BookingReceipt | null {
 
 function readSavedDetails<T>(key: string): T {
   try {
-    return JSON.parse(localStorage.getItem(key) || '{}') as T
+    const value: unknown = JSON.parse(localStorage.getItem(key) || '{}')
+    return value && typeof value === 'object' && !Array.isArray(value) ? value as T : {} as T
   } catch {
     return {} as T
   }
@@ -111,35 +112,42 @@ export function BookingConfirmationPage() {
     }
 
     try {
-      const transfer = JSON.parse(savedTransfer)
-      const passenger = JSON.parse(savedPassenger)
-      if (!passenger.customerName || !passenger.phoneNumber || !passenger.email ||
-          !transfer.passengerCount || !transfer.pickUpLocation || !transfer.dropOffLocation ||
-          !transfer.pickUpDate || !transfer.pickUpTime || !transfer.vehicleId || !transfer.tripType ||
-          (transfer.tripType === 'round-trip' && (!transfer.returnDate || !transfer.returnTime)) || !passenger.transferAddress) {
+      const transfer: unknown = JSON.parse(savedTransfer)
+      const passenger: unknown = JSON.parse(savedPassenger)
+      if (!transfer || typeof transfer !== 'object' || Array.isArray(transfer) ||
+          !passenger || typeof passenger !== 'object' || Array.isArray(passenger)) {
+        setError('Saved booking details are invalid. Please return to the previous steps.')
+        return
+      }
+      const transferData = transfer as TransferDetails
+      const passengerData = passenger as PassengerDetails
+      if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
+          !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
+          !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
+          (transferData.tripType === 'round-trip' && (!transferData.returnDate || !transferData.returnTime)) || !passengerData.transferAddress) {
         setError('Please complete all required booking details.')
         submittingRef.current = false
         return
       }
       setProcessing(true)
       const booking = await createBooking({
-        customerName: passenger.customerName,
-        passengerCount: transfer.passengerCount,
-        pickUpLocation: transfer.pickUpLocation,
-        dropOffLocation: transfer.dropOffLocation,
-        transferDateTime: `${transfer.pickUpDate}T${transfer.pickUpTime}:00`,
-        ...(transfer.tripType === 'round-trip' ? { returnDateTime: `${transfer.returnDate}T${transfer.returnTime}:00` } : {}),
-        phoneNumber: passenger.phoneNumber,
-        email: passenger.email,
-        vehicleId: transfer.vehicleId,
-        ...(transfer.flightNumber ? { flightNumber: transfer.flightNumber } : {}),
-        ...(typeof transfer.luggageCount === 'number' ? { luggageCount: transfer.luggageCount } : {}),
-        ...(typeof transfer.babySeatCount === 'number' ? { babySeatCount: transfer.babySeatCount } : {}),
-        countryOfResidence: passenger.countryOfResidence || '',
-        transferAddress: passenger.transferAddress || '',
-        hotelName: passenger.hotelName || '',
-        specialRequests: passenger.specialRequests || '',
-        tripType: transfer.tripType,
+        customerName: passengerData.customerName,
+        passengerCount: transferData.passengerCount,
+        pickUpLocation: transferData.pickUpLocation,
+        dropOffLocation: transferData.dropOffLocation,
+        transferDateTime: `${transferData.pickUpDate}T${transferData.pickUpTime}:00`,
+        ...(transferData.tripType === 'round-trip' ? { returnDateTime: `${transferData.returnDate}T${transferData.returnTime}:00` } : {}),
+        phoneNumber: passengerData.phoneNumber,
+        email: passengerData.email,
+        vehicleId: transferData.vehicleId,
+        ...(transferData.flightNumber ? { flightNumber: transferData.flightNumber } : {}),
+        ...(typeof transferData.luggageCount === 'number' ? { luggageCount: transferData.luggageCount } : {}),
+        ...(typeof transferData.babySeatCount === 'number' ? { babySeatCount: transferData.babySeatCount } : {}),
+        countryOfResidence: passengerData.countryOfResidence || '',
+        transferAddress: passengerData.transferAddress || '',
+        hotelName: passengerData.hotelName || '',
+        specialRequests: passengerData.specialRequests || '',
+        tripType: transferData.tripType,
       })
       const savedReceipt: BookingReceipt = {
         id: booking.id,
