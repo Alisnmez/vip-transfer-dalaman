@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,7 +20,7 @@ class BookingCalendarTest {
         BookingRepository repository = mock(BookingRepository.class);
         BookingService service = new BookingService(repository, mock(TransferPricingService.class),
                 new ObjectMapper(), mock(PlatformTransactionManager.class));
-        LocalDate month = LocalDate.of(2027, 1, 1);
+        YearMonth month = YearMonth.of(2027, 1);
         when(repository.findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
                 LocalDateTime.of(2027, 1, 1, 0, 0),
                 LocalDateTime.of(2027, 2, 1, 0, 0))).thenReturn(List.of(new Booking()));
@@ -32,12 +32,12 @@ class BookingCalendarTest {
     }
 
     @Test
-    void calendarRejectsNonFirstDayOfMonth() {
+    void calendarRejectsMonthOutsideAllowedRange() {
         BookingRepository repository = mock(BookingRepository.class);
         BookingService service = new BookingService(repository, mock(TransferPricingService.class),
                 new ObjectMapper(), mock(PlatformTransactionManager.class));
         ResponseStatusException error = assertThrows(ResponseStatusException.class,
-                () -> service.getCalendarBookings(LocalDate.of(2027, 1, 15)));
+                () -> service.getCalendarBookings(YearMonth.of(2035, 1)));
         assertEquals(HttpStatus.BAD_REQUEST, error.getStatusCode());
         verifyNoInteractions(repository);
     }
