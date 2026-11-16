@@ -59,6 +59,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Son CI `43924136949` başarılı. Backend HTTP 2xx döndürse bile yanıt JSON'u bozuksa veya geçerli rezervasyon ID yoksa rezervasyon kaydedilmiş olabilir; frontend artık bunu `uncertain` olarak işaretliyor ve kullanıcıyı yeni kayıt açmadan önce destekle görüşmeye yönlendiriyor (`08f24e5e`, `b3c8cb66`).
 - Otomatik regresyon testi eklendi (`3b2f59c0`). Gerçek ağ kesintisi / canlı DB E2E hâlâ açık. Telefon numarası kullanıcı talebiyle geçici olarak korunuyor; canlı yayından önce değiştirilecek. Admin'e dokunulmadı.
 
+## 2026-11-16 — MVP: sunucu hata yanıtları ve bozuk taslak ayrımı
+- Confirmation sayfasında yerel taslak JSON ayrıştırma hatası ayrı ele alındı; API hatası artık yanlışlıkla taslak bozuk diye gösterilmiyor (`2dfd93c9`).
+- HTTP 5xx sunucu cevabında veritabanı işlemi tamamlanmış olabilir; `uncertain=true` ile aynı idempotency key korunuyor. HTTP 4xx kesin ret olarak kalıyor (`68ee62da`, `91943e6b`).
+- Canlı E2E ve fiyat doğrulama açık. Geçici telefon numarası kullanıcı kararıyla korunuyor; admin kapsam dışı.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
