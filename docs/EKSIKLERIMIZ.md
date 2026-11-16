@@ -45,7 +45,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 3.1 | Fiyatın sunucuda hesaplanması | TAMAMLANDI | `BookingService` fiyatı `TransferPricingService.calculatePrice` ile sunucudaki `transfer-prices.json` dosyasından hesaplıyor; istemci fiyatına güvenilmiyor. Önceki fiyat testleri CI'da geçti. | Ticari fiyat onayı ayrı 3.2'de |
 | 3.2 | Gerçek tarife ve rakip karşılaştırması | BLOKE | Fiyat kataloğu mevcut, fakat işletme maliyetleri ve güncel Petunia Travel fiyatları doğrulanmış değil. | Kaynak fiyatlar, tarih, rota, araç sınıfı, para birimi ve minimum kârı doğrula; ardından tek yön -£2,50 / gidiş-dönüş -£5 hedefini değerlendir |
-| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Kullanıcı 2026-11-16 tarihinde ilk sürümde online ödeme olmayacağını belirledi. Rezervasyon yalnızca talep oluşturur; online ödeme entegrasyonu yapılmayacak. | Araçta/nakit/kart veya başka tahsilat yöntemini kullanıcıyla netleştir; onaylanan koşulu müşteriye göster |
+| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Kullanıcı 2026-11-16 tarihinde ilk sürümde online ödeme olmayacağını ve yalnızca nakit kabul edileceğini onayladı; kart tahsilatı olmayacak. | Nakit ödemenin tam olarak ne zaman alınacağını teyit et; ardından rezervasyon ve bilgilendirme ekranlarında doğru metni göster ve test et |
 | 3.4 | İptal ve iade koşulları | BEKLİYOR | İşletme tarafından onaylanmış iptal/iade süresi ve koşulu belgelenmedi. | İşletme politikasını netleştir, sonra sayfaya ekle |
 
 ### 4–12. Diğer ana maddeler
@@ -63,6 +63,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 3.3 yalnızca nakit kararı
+- **Karar:** Kullanıcı ilk sürümde yalnızca nakit ödeme kabul edileceğini belirtti. Online ödeme ve kart tahsilatı sunulmayacak.
+- **Sınır:** Ödemenin transfer öncesi, araçta veya transfer sonunda alınacağı ayrıca teyit edilmeli; zamanlama henüz varsayılmıyor.
+- **Sonraki adım:** Ödeme zamanını netleştirip müşteriye gösterilen metni güncelle ve test et. İptal koşulları hâlâ açık.
 
 ## 2026-11-16 — Görev 3.3 ödeme kapsamı kararı
 - **Karar:** Kullanıcı başlangıç sürümünde online ödeme istemiyor. Ödeme sağlayıcısı, ödeme sayfası veya kart tahsilatı kodu eklenmeyecek.
