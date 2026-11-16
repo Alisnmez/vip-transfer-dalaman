@@ -90,7 +90,8 @@ export function BookingPassengerPage() {
       setError('Please enter the exact hotel, accommodation or transfer address in Turkey.')
       return
     }
-    localStorage.setItem('bookingPassengerInfo', JSON.stringify({
+    try {
+      localStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim().toLowerCase(),
@@ -98,7 +99,11 @@ export function BookingPassengerPage() {
       transferAddress: transferAddress.trim(),
       hotelName: hotelName.trim(),
       specialRequests: specialRequests.trim(),
-    }))
+      }))
+    } catch {
+      setError('Your browser could not save the passenger details. Please enable site storage and try again.')
+      return
+    }
     navigate('/booking/confirmation')
   }
 
