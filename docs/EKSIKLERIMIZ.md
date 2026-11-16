@@ -503,3 +503,8 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingLookupPage: önceki commit'te JSX metninde yanlışlıkla düz yazı olarak görünen `\\n` karakterleri gerçek satır sonlarıyla değiştirildi (2a948588).
 - BookingConfirmationPage: final POST öncesinde yolcu sayısı 1–16 ve e-posta biçimi kontrolü eklendi (2ca6d8e2); bagaj sınırı araç bazlı kontrol ile çakışmaması için genel yolcu+2 kontrolü kaldırıldı (99924633).
 - Yeni CI ve gerçek tarayıcı E2E bekleniyor. Admin kapsam dışı.
+
+
+## 2026-11-16 — Kritik confirmation e-posta regex düzeltmesi
+- BookingConfirmationPage final e-posta regex'inde `\\\\s` ve `\\\\.` çift escape nedeniyle geçerli adresler reddedilebiliyordu; JavaScript regex literal içinde doğru `\\s` ve `\\.` kullanıldı (a7e12833).
+- Önceki altı CI run'ı success olsa da CI yalnızca lint/build çalıştırdığı için davranışsal regresyonu yakalamadı. E2E / birim testleri kritik açık olarak sürüyor. Yeni CI bekleniyor. Admin kapsam dışı.
