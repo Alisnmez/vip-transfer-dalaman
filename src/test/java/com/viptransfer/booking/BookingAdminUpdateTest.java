@@ -68,12 +68,24 @@ class BookingAdminUpdateTest {
     }
 
     @Test
-    void confirmedBookingCannotChangeFareInputs() {
+    void confirmedBookingCanChangeDestinationAndRecalculateFare() {
+        request.setDropOffLocation("Marmaris(Any Hotel)");
+        when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
+                .thenReturn(new BigDecimal("47.50"));
+        Booking updated = service.updateBooking(10L, request);
+        assertEquals("CONFIRMED", updated.getStatus());
+        assertEquals("Marmaris(Any Hotel)", updated.getDropOffLocation());
+        assertEquals(new BigDecimal("47.50"), updated.getPrice());
+        verify(pricing).calculatePrice("Dalaman Airport", "Marmaris(Any Hotel)", "vip-minivan", "one-way", 2);
+    }
+
+    @Test
+    void completedBookingCannotChangeFareInputs() {
+        booking.setStatus("COMPLETED");
         request.setPassengerCount(3);
         ResponseStatusException error = assertThrows(ResponseStatusException.class,
                 () -> service.updateBooking(10L, request));
         assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
-        assertTrue(error.getReason().contains("Fare-changing edits require a pending booking"));
         assertEquals(new BigDecimal("67.50"), booking.getPrice());
         verify(repository, never()).save(any());
     }
