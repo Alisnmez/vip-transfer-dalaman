@@ -8,7 +8,7 @@ import type { Booking } from '../../features/booking/types'
 
 export function BookingListPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
-  const [loadedPage, setLoadedPage] = useState<number | null>(null)
+  const [loadedKey, setLoadedKey] = useState('')
   const [revision, setRevision] = useState(0)
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
@@ -16,18 +16,19 @@ export function BookingListPage() {
   const [error, setError] = useState('')
   const [search, setSearch] = useState('')
   const [refreshing, setRefreshing] = useState(false)
-  const loading = loadedPage !== page
+  const loading = loadedKey !== `${page}:${revision}`
 
   function refresh() {
     if (refreshing || loading) return
     setRefreshing(true)
+    setError('')
     setRevision(value => value + 1)
   }
 
   useEffect(() => {
     let active = true
     getBookingPage(page)
-      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements); setLoadedPage(page); setError(''); setRefreshing(false) } })
+      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements); setLoadedKey(`${page}:${revision}`); setError(''); setRefreshing(false) } })
       .catch(err => { if (active) { setError(err instanceof Error ? err.message : 'Unable to load bookings'); setLoadedPage(page); setRefreshing(false) } })
     return () => { active = false }
   }, [page, revision])
@@ -66,7 +67,7 @@ export function BookingListPage() {
       </section>
       <section className="min-w-0 flex-1 p-4 sm:overflow-auto sm:p-6">
         {loading && <p>Loading booking requests...</p>}
-        {error && <p role="alert" className="text-error">Unable to load bookings: {error}</p>}
+        {error && <div role="alert" className="space-y-3 text-error"><p>Unable to load bookings: {error}</p><button type="button" onClick={refresh} disabled={refreshing} className="rounded-lg border px-4 py-2 font-semibold disabled:opacity-50">Try again</button></div>}
         {!loading && !error && visibleBookings.length === 0 && <p>No booking requests found.</p>}
         {!loading && !error && visibleBookings.length > 0 && (
           <><div className="space-y-3 md:hidden">{visibleBookings.map(booking => (
