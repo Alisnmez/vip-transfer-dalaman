@@ -624,14 +624,7 @@ function BookingSummary({
                 {priceLabel}
               </span>
             </div>
-            <div className="flex justify-between items-center mb-6">
-              <span className="font-body-md text-body-md text-on-surface-variant">
-                Meet & Greet Service
-              </span>
-              <span className="font-label-sm text-label-sm text-secondary">
-                FREE
-              </span>
-            </div>
+
             <div className="flex justify-between items-end bg-slate-100 p-4 rounded-lg">
               <div>
                 <span className="font-label-xs text-label-xs text-on-surface-variant uppercase">
@@ -642,7 +635,7 @@ function BookingSummary({
                 </div>
               </div>
               <div className="text-[10px] text-on-surface-variant text-right">
-                Includes taxes & gratuity
+                Final terms will be confirmed by the operator
               </div>
             </div>
           </div>
@@ -655,7 +648,7 @@ function BookingSummary({
               verified_user
             </span>
             <span className="text-[12px] text-secondary font-medium leading-tight">
-              All-inclusive pricing. No hidden fees. 24h free cancellation.
+              This is a booking request. Cancellation and payment terms will be confirmed by the operator.
             </span>
           </div>
         </div>
@@ -707,69 +700,19 @@ function SummaryRow({
 
 function BookingFooter() {
   return (
-    <footer className="w-full py-12 bg-slate-200 border-t border-outline-variant mt-12">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter-grid px-margin-page max-w-7xl mx-auto">
-        <div>
-          <div className="font-title-md text-title-md font-bold text-admin-primary mb-4">
-            VIP Transfer Dalaman
-          </div>
-          <p className="font-body-md text-body-md text-on-surface-variant mb-4">
-            Private airport transfers and chauffeur services across Dalaman,
-            Fethiye, Gocek, Marmaris and nearby routes.
-          </p>
-        </div>
-        <FooterColumn title="Support" items={['Contact Support', 'Trust & Safety', 'FAQ']} />
-        <FooterColumn
-          title="Company"
-          items={['Terms of Service', 'Privacy Policy', 'Insurance Coverage']}
-        />
-        <div>
-          <h4 className="font-label-sm text-label-sm text-admin-primary mb-4">
-            Contact
-          </h4>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Emergency Hotline: +90 252 000 0000
-          </p>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Email: booking@viptransferdalaman.com
-          </p>
-        </div>
-      </div>
-      <div className="max-w-7xl mx-auto px-margin-page mt-12 pt-8 border-t border-outline-variant flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          © 2024 VIP Transfer Dalaman. All rights reserved.
+    <footer className="w-full py-8 bg-slate-200 border-t border-outline-variant mt-12">
+      <div className="max-w-7xl mx-auto px-margin-page flex flex-col gap-2">
+        <p className="font-title-md text-label-md font-bold text-admin-primary">VIP Transfer Dalaman</p>
+        <p className="font-body-md text-body-sm text-on-surface-variant">
+          Private airport transfer booking requests for Dalaman and nearby destinations.
         </p>
-        <div className="flex gap-4">
-          <span translate="no" className="material-symbols-outlined text-on-surface-variant hover:text-admin-primary cursor-pointer">
-            language
-          </span>
-          <span className="font-label-sm text-label-sm text-on-surface-variant">
-            English - EUR €
-          </span>
-        </div>
+        <p className="font-body-md text-body-sm text-on-surface-variant">
+          Prices are shown in GBP. Your request is subject to operator confirmation.
+        </p>
+        <p className="font-body-md text-body-sm text-on-surface-variant">
+          © {new Date().getFullYear()} VIP Transfer Dalaman.
+        </p>
       </div>
     </footer>
-  )
-}
-
-function FooterColumn({ items, title }: { items: string[]; title: string }) {
-  return (
-    <div>
-      <h4 className="font-label-sm text-label-sm text-admin-primary mb-4">
-        {title}
-      </h4>
-      <ul className="space-y-2">
-        {items.map((item) => (
-          <li key={item}>
-            <a
-              className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors underline-offset-4 hover:underline"
-              href="#"
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   )
 }
