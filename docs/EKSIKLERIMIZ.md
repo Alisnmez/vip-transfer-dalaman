@@ -444,3 +444,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingConfirmationPage: başarı makbuzu sessionStorage ve localStorage'a kaydediliyor, okuma sırasında iki depo sırayla deneniyor. Makbuz 24 saat sonra geçersiz; başarı ekranı korunurken yeniden POST gönderilmiyor (7a2c117e).
 - BookingFormPage: yeni geçerli rezervasyon başlatılırken her iki makbuz deposu bağımsız temizleniyor (258605ec, 16fefd3c).
 - Dikkat: Bu değişiklik yalnızca yeni sürümle başarıyla tamamlanan rezervasyonları korur; eski sürümde hiç kaydedilmeyen sonuç geri getirilemez. Canlı Render deployment ve gerçek tarayıcı yenileme senaryosu henüz doğrulanmadı. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Rezervasyon yenileme ve araç kapasitesi savunması
+- Önceki CI: ab825871 run 43863771536, 16fefd3c run 43863727907, 258605ec run 43863706584, 7a2c117e run 43863682110 completed/success.
+- BookingConfirmationPage: sessionStorage/localStorage property erişimi dahi SecurityError verebildiği için storage erişimi try içine alındı; blocked storage durumunda sayfa render'ı korunur (440c3d2e).
+- BookingFormPage: yeni rezervasyon sırasında receipt temizleme storage erişimi bağımsız try bloklarında (5c28dd48).
+- BookingFormPage: geri yüklenmiş veya bozuk yolcu/bagaj/çocuk koltuğu sayıları tam sayı ve araç kapasitesine uygun olmalı; validasyonla UI sınırları aynı maxAllowedPassengers/maxAllowedLuggage değerlerini kullanır (0958d19c).
+- Bu üç commit CI sonucu bekleniyor. Gerçek browser E2E, migration güvenliği ve canlı rezervasyon kontrolü açık. Admin paneli değiştirilmedi.
