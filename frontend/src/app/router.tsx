@@ -5,12 +5,7 @@ import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
 import { BookingDetailPage } from '../pages/admin/BookingDetailPage'
 import { BookingListPage } from '../pages/admin/BookingListPage'
-import { CalendarPage } from '../pages/admin/CalendarPage'
 import { DashboardPage } from '../pages/admin/DashboardPage'
-import { AnalyticsPage } from '../pages/admin/AnalyticsPage'
-import { DispatchHubPage } from '../pages/admin/DispatchHubPage'
-import { FleetManagementPage } from '../pages/admin/FleetManagementPage'
-import { RoutePricePage } from '../pages/admin/RoutePricePage'
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
@@ -61,13 +56,13 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <DashboardPage /> },
-      { path: 'calendar', element: <CalendarPage /> },
+      { path: 'calendar', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'bookings', element: <BookingListPage /> },
       { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
-      { path: 'fleet-management', element: <FleetManagementPage /> },
-      { path: 'route-prices', element: <RoutePricePage /> },
-      { path: 'dispatch-hub', element: <DispatchHubPage /> },
-      { path: 'analytics', element: <AnalyticsPage /> },
+      { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
+      { path: 'route-prices', element: <Navigate to="/admin/bookings" replace /> },
+      { path: 'dispatch-hub', element: <Navigate to="/admin/bookings" replace /> },
+      { path: 'analytics', element: <Navigate to="/admin/bookings" replace /> },
     ],
   },
   {
