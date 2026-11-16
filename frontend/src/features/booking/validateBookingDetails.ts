@@ -1,4 +1,4 @@
-import { parseTurkeyDateTime } from './turkeyTime.ts'
+import { validateTransferSchedule } from './validateTransferSchedule.ts'
 import { validateTransferSelection } from './validateTransferSelection.ts'
 
 export type TransferDetails = {
@@ -53,14 +53,8 @@ export function validateBookingDetails(transfer: TransferDetails, passenger: Pas
     return 'Saved booking details contain invalid values. Please return to the previous steps.'
   }
 
-  const pickup = parseTurkeyDateTime(transfer.pickUpDate, transfer.pickUpTime)
-  const returning = transfer.tripType === 'round-trip'
-    ? parseTurkeyDateTime(transfer.returnDate || '', transfer.returnTime || '')
-    : null
-  if (pickup === null || pickup <= now ||
-      (transfer.tripType === 'round-trip' && (returning === null || returning <= pickup))) {
-    return 'Your transfer date is no longer valid. Please return to the first step and select a future date in Turkey local time.'
-  }
+  const scheduleError = validateTransferSchedule(transfer, now)
+  if (scheduleError) return scheduleError
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passenger.email)) {
     return 'Please review the email address before confirming.'
