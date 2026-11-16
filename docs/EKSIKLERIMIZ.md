@@ -63,6 +63,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-17 — Fiyat politikası açıklaması ve sayfalama
+- **Fiyat politikası:** Müşteriye gösterilen ilk rezervasyon fiyatı iletişim bilgisi düzenlemelerinde korunur. Fiyatı etkileyen rota/araç/tip/yolcu sayısı değişiklikleri yalnızca PENDING durumunda yeniden fiyatlanabilir; müşteriyle yeni fiyatı manuel teyit etme operasyonu devam ediyor. `window.confirm` müşteri onayı değildir. Yeni otomatik onay özelliği v1.0 kapsamına eklenmedi.
+- **Kod:** Bilinmeyen araç ID'si bagaj sayısı boş olsa da reddedilir (`7543d5d`). Admin için `GET /bookings/page?page=0&size=25` eklendi; 1–100 boyut sınırı ve ID azalan sıralama (`360ad76`, `fa79228`). Frontend liste 25 kayıt/sayfa yükler, ileri/geri sayfa kontrolü ve sayfa içi arama gösterir (`cc50832`, `088521f`).
+- **Test:** Sayfalama boyutu ve sıralama için regresyon testleri eklendi (`b45dbeb`). Son commit workflow sonucu henüz yok; Render deploy ve canlı test bekliyor.
+- **Açık:** Dashboard hâlâ tüm kayıtları indiriyor; global arama/filtreleme, minimal liste DTO, kalıcı audit trail, doğrulanmış kombine araç kapasitesi ve kontrollü DB migration. Eski `createdAt=null` kayıtları uydurma tarih ile doldurulmayacak.
+
 ## 2026-11-17 — Durum geçişleri ve test sayfası güvenliği
 - **Düzeltildi (kod):** Durum geçişleri yalnızca PENDING -> CONFIRMED/CANCELLED ve CONFIRMED -> COMPLETED/CANCELLED; COMPLETED/CANCELLED terminal, aynı durum isteği idempotent. Geçersiz geçiş 409 (`c78c361`). Admin selector yalnızca mevcut ve geçerli sonraki durumları gösterir (`e4c0bea`).
 - **Düzeltildi (kod):** Herkese açık `/test/db-check` frontend route'u kaldırıldı (`08abe84`). Dosyanın kendisi henüz repoda olabilir; bu route artık erişilebilir değil.
