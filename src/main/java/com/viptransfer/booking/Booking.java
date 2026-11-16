@@ -24,6 +24,7 @@ public class Booking {
     private String phoneNumber;
     private String email;
     private String countryOfResidence;
+    @jakarta.persistence.Column(length = 500)
     private String transferAddress;
     @jakarta.persistence.Column(length = 120)
     private String hotelName;
