@@ -565,3 +565,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Booking API tekrar deneme anahtarı için ortak modülü kullanıyor (`9b85d9e7`).
 - `tests/retryKeys.test.mjs` ile anahtarın yeniden kullanımı, sayfa yenileme simülasyonu ve storage erişimi engeli test edildi (`caf47f75`).
 - Gerçek browser E2E, timeout sonrası backend kaydını doğrulama ve güvenli yeniden deneme UI testleri açık; admin kapsam dışı.
+
+
+## 2026-11-16 — Belirsiz gönderim ve makbuz kopyalama mesajları
+- Son onay ekranında bağlantı hatası sonrası kullanıcıya aynı düğmeyle retry yapılabileceği ve aynı idempotency anahtarının yeniden kullanılacağı daha açık anlatılıyor (`1a9d28ec`).
+- Başarılı rezervasyon ekranındaki kopyalama hatası `role=alert` ile görünür kılındı; önceki durumda hata state'e yazılıyor ancak success UI'da gösterilmiyordu.
+- E2E browser, ağ kesintisi ve gerçek rezervasyon senaryoları hâlâ açık. Admin kapsam dışı.
