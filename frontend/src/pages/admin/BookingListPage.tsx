@@ -10,6 +10,20 @@ export function BookingListPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [refreshing, setRefreshing] = useState(false)
+
+  async function refresh() {
+    if (refreshing || loading) return
+    setRefreshing(true)
+    setError('')
+    try {
+      setBookings(await getBookings())
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to load bookings')
+    } finally {
+      setRefreshing(false)
+    }
+  }
 
   useEffect(() => {
     let active = true
@@ -29,8 +43,16 @@ export function BookingListPage() {
   return (
     <main className="flex min-h-0 flex-1 flex-col bg-surface">
       <header className="border-b border-outline-variant bg-white p-4 sm:p-6">
-        <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
-        <p className="text-on-surface-variant">{visibleBookings.length} of {bookings.length} requests</p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
+            <p className="text-on-surface-variant">{visibleBookings.length} of {bookings.length} requests</p>
+          </div>
+          <button type="button" onClick={() => { void refresh() }} disabled={loading || refreshing}
+            className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
+            {refreshing ? 'Refreshing...' : 'Refresh bookings'}
+          </button>
+        </div>
       </header>
       <section className="border-b border-outline-variant bg-white p-6">
         <label className="block max-w-lg text-sm font-semibold">
