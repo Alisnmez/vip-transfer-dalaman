@@ -32,8 +32,8 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO/entity/service/test (`388a448`) CI başarılı (`43847834472`); React form → localStorage → confirmation → POST bağlandı (`f9b9df8`, `ab8129c`) | Yeni frontend build ve staging E2E doğrula |
 | 2.2 | Otel bilgisi | TEST BEKLİYOR | Opsiyonel hotelName (120 karakter) frontend/backend ve entegrasyon testinde mevcut; CI 43850774232 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
-| 2.3 | Bagaj bilgisi | TEST BEKLİYOR | luggageCount DTO/entity/frontend payload'da mevcut; CI 43848683903 başarılı. | Gerçek tarayıcı E2E, kapasite ve DB kaydını doğrula |
-| 2.4 | Çocuk koltuğu | TEST BEKLİYOR | babySeatCount DTO/entity/frontend payload'da mevcut; 0–5 validasyonu, CI 43848683903 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
+| 2.3 | Bagaj bilgisi | TEST BEKLİYOR | Genel sınır 0–8; araç bazlı kapasite API create/update tarafında uygulanıyor, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
+| 2.4 | Çocuk koltuğu | TEST BEKLİYOR | babySeatCount DTO/entity/frontend payload'da mevcut; güncel sınır 0–2, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
 
 ### 3–12. Diğer ana maddeler
 
@@ -375,3 +375,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Backend kapasite tutarlılığı:** TransferPricingService.validateLuggageCapacity; taxi=3, vip-minivan/premium=6, maybach*=4, minibus*=8 (genel API sınırı). BookingService.createNewBooking ve updateBooking çağırıyor (ab93010, 7a7da3). Frontend zaten bu araçlara göre sınırlandırıyordu; API bypass kapatıldı.
 - **Regresyon:** VIP minivan 6 bagaj kabul/7 bagaj ret, minibus 8 kabul/9 ret, çocuk koltuğu 0–2, negatif yolcu 0/-1 ret ve veritabanında insert olmaması testleri (2541a03). Son run 43860943209 ilk kontrolde in_progress; yeşil sonuç gelmeden tamamlandı olarak işaretlenmeyecek.
 - **Uyarı:** Araç kapasitesi rakamları mevcut frontend kataloğundan alınmıştır; fiziksel araç filosuyla doğrulanması ayrıca gereklidir. Live DB E2E ayrı açık görevdir.
+
+
+## 2026-11-16 — Sonraki işler ve admin kataloğu kararı
+- **Kullanıcı kararı:** Araçların yolcu ve bagaj kapasiteleri ile güzergâh/araç fiyatları ileride **admin panelinden değiştirilebilir** olacak. Şu an fiyatlar ve araç özellikleri statik kataloglarda. Admin paneli eklenene kadar bunlar değiştirilemez kabul edilmeli; API doğrulaması istemcinin sunduğu değere güvenmemeli.
+- **Plan (ayrı iş):** PostgreSQL'de araç (id, isim, maxPassengers, maxLuggage, aktif) ve fiyat (güzergâh, araç, tek yön/gidiş-dönüş, para birimi) kayıtları; kontrollü Flyway migration ve seed; yalnızca admin yetkili CRUD; değer aralıkları ve negatif fiyat kontrolleri; frontend'in katalog API'sinden veri alması; rezervasyon anındaki fiyatın booking üzerinde snapshot olarak saklanması. Admin değişikliği geçmiş rezervasyonun fiyatını değiştirmemeli.
+- **Bu tur:** Araç kapasitesini aşan PUT isteğinin 400 döndürmesini ve kaydedilmiş rezervasyonu değiştirmemesini doğrulayan PostgreSQL entegrasyon testi eklendi (cb5436c). CI sonucu bekleniyor.
+- **Doğrulanan önceki CI:** 2541a03 için 43860943209 ve e8b49f5 için 43860993068 completed/success. Daha önceki ara commit 7a7da3ee CI başarısızlığı son sürümün başarısız olduğu anlamına gelmez.
+- **Sıra:** (1) yeni test CI, (2) güvenli DB migration/şema envanteri, (3) gerçek browser E2E, (4) gerçek fiyat/iptal kuralları, (5) admin katalog yönetimi. Sahte iletişim bilgileri ve placeholder'lar canlıya taşınmadan değiştirilmelidir.
