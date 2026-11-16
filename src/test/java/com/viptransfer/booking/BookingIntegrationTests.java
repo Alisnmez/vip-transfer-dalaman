@@ -253,6 +253,44 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void rejectsVehicleLuggageOverflowOnUpdateWithoutChangingSavedBooking() throws Exception {
+        java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
+                "customerName", "Capacity Update Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "capacity-update@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way",
+                "luggageCount", 6
+        ));
+        String created = mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(6))
+                .andReturn().getResponse().getContentAsString();
+        Long id = objectMapper.readTree(created).get("id").asLong();
+        String adminAuthorization = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+
+        request.put("luggageCount", 7);
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
+                        .header("Authorization", adminAuthorization)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Luggage count exceeds the selected vehicle capacity."));
+
+        mockMvc.perform(get("/bookings/{id}", id)
+                        .header("Authorization", adminAuthorization))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(6));
+    }
+
+    @Test
     void rejectsZeroAndNegativePassengersWithoutCreatingBookings() throws Exception {
         java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
                 "customerName", "Invalid Passenger Test",
