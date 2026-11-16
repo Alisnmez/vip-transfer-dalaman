@@ -100,6 +100,7 @@ export function BookingDetailPage() {
       {booking && !editing && (
         <dl className="grid min-w-0 grid-cols-1 gap-5 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
           {[
+            ['Received at (Turkey)', booking.createdAt ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Istanbul', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(booking.createdAt)) : 'Not recorded for this older booking'],
             ['Customer', booking.customerName],
             ['Passengers', booking.passengerCount],
             ['Pickup', booking.pickUpLocation],
