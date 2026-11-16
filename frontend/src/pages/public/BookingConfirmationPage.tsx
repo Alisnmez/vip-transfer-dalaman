@@ -299,7 +299,7 @@ export function BookingConfirmationPage() {
               type="button"
             >
               {completed
-                ? 'BOOKING CONFIRMED'
+                ? 'REQUEST RECEIVED'
                 : processing
                   ? 'PROCESSING...'
                   : 'CONFIRM BOOKING'}
