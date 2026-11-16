@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
+import { BookingApiError } from '../../features/booking/api/errors'
 import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
 import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
 import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
@@ -176,7 +177,7 @@ export function BookingConfirmationPage() {
         // Booking succeeded; failure to clean up local drafts must not show an error.
       }
     } catch (err) {
-      setSubmissionUncertain(err instanceof Error && (err.name === 'TypeError' || /did not respond|Unable to reach|network|fetch/i.test(err.message)))
+      setSubmissionUncertain(err instanceof BookingApiError && err.uncertain)
       setError(err instanceof SyntaxError ? 'Saved booking details are invalid. Please return to the previous steps and enter them again.' : err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
       submittingRef.current = false
