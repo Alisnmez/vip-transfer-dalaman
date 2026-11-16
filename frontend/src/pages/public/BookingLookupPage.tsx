@@ -12,13 +12,21 @@ export function BookingLookupPage() {
         </h1>
         <p className="mb-5 text-on-surface-variant">
           Online booking lookup is not available yet. Please save the booking
-          reference shown after submitting your transfer request.
+          reference shown after submitting your transfer request. If you need help\n          with an existing request, contact us using the details below and quote\n          your booking reference.
         </p>
         <p className="mb-8 rounded-lg border border-outline bg-white p-5 text-on-surface-variant">
           For your privacy, a booking reference alone cannot be used to display
           passenger names, contact details or journey information. A secure
           verification process is required before online lookup is enabled.
         </p>
+        <section aria-label="Booking support" className="mb-8 rounded-lg border border-outline bg-white p-5">
+          <h2 className="mb-3 text-lg font-semibold text-admin-primary">Booking support</h2>
+          <p className="mb-3 text-on-surface-variant">For changes or questions about your request, contact us directly. Do not share payment card information by email.</p>
+          <div className="flex flex-col gap-3">
+            <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com?subject=Booking%20request%20support">Email: ali_sonmez35@hotmail.com</a>
+            <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">Phone: 0555 555 55 55</a>
+          </div>
+        </section>
         <div className="flex flex-wrap gap-3">
           <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to="/booking">
             New Booking Request
