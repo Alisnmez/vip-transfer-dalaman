@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
@@ -37,6 +37,10 @@ export function BookingConfirmationPage() {
   const [confirmed, setConfirmed] = useState(false)
   const { processing, run } = useAsyncAction()
   const [receipt, setReceipt] = useState<BookingReceipt | null>(readReceipt)
+
+  useLayoutEffect(() => {
+    if (receipt !== null) window.scrollTo(0, 0)
+  }, [receipt])
 
   const [error, setError] = useState('')
   const [submissionUncertain, setSubmissionUncertain] = useState(false)
