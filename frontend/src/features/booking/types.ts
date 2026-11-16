@@ -18,6 +18,7 @@ export type Booking = {
   specialRequests?: string | null
   vehicleId?: string | null
   tripType?: string | null
+  countryOfResidence?: string | null
 }
 
 export type BookingRequest = {
