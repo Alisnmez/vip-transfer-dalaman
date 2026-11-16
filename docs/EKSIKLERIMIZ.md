@@ -532,3 +532,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - `frontend/src/features/booking/turkeyTime.ts` oluşturuldu: `parseTurkeyDateTime` ve `turkeyToday` ortak fonksiyonları (`b5de4eda`). `turkeyToday`, tarayıcı locale formatına güvenmeden `formatToParts` ile ISO günü oluşturuyor.
 - BookingFormPage aynı modülü kullanıyor (`4b031074`), BookingConfirmationPage aynı parser'ı kullanıyor (`8d069896`). Böylece tarih doğrulama kodu tek yerde tutuluyor.
 - Otomatik tarih/saat birim testleri ve farklı timezone E2E testleri henüz yazılmadı; ilgili 1.5 ve 12. madde açık. Admin kapsam dışı.
+
+
+## 2026-11-16 — Ortak fonksiyon ve otomatik test standardı
+- Çok yerde kullanılan iş kuralları sayfalarda kopyalanmayacak; `features/booking` gibi ilgili özellik modüllerinde tek kaynak olarak tutulacak. Tüm kodu tek global dosyaya toplamak yerine alan bazlı modüller kullanılacak.
+- `frontend/tests/turkeyTime.test.mjs` ile UTC+03:00 dönüşümü, hatalı takvim günleri/saatler, artık yıl ve Türkiye gece yarısı senaryoları eklendi (`4ee4f7bd`).
+- Node 22 yerleşik test çalıştırıcısı `npm test` ile çağrılıyor (`ab29a1c9`), CI frontend job'u lint ile build arasında testleri çalıştırıyor (`fb5d151b`).
+- Bu testler saf fonksiyon davranışını doğrular; gerçek tarayıcı rezervasyon POST, çift tıklama ve receipt kalıcılığı E2E testleri hâlâ açık.
