@@ -64,11 +64,17 @@ export function BookingDetailPage() {
     const destination = draft.pickUpLocation === airport ? draft.dropOffLocation : draft.pickUpLocation
     const validRoute = (draft.pickUpLocation === airport) !== (draft.dropOffLocation === airport)
     const priced = transferPrices.some(price => price.destination === destination && price.vehicleId === draft.vehicleId)
-    if (!validRoute || !priced) {
+    const fareChanged = draft.pickUpLocation !== booking.pickUpLocation
+      || draft.dropOffLocation !== booking.dropOffLocation
+      || draft.vehicleId !== booking.vehicleId
+      || draft.tripType !== booking.tripType
+      || draft.passengerCount !== booking.passengerCount
+    if (fareChanged && (!validRoute || !priced)) {
       setError('Choose an airport route and a vehicle from the price list before saving.')
       setErrorAction('saving details')
       return
     }
+    if (fareChanged && !window.confirm('Changing the route, vehicle, trip type or passenger count will recalculate the fare. Confirm the new price with the customer before saving. Continue?')) return
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
     catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
@@ -119,7 +125,7 @@ export function BookingDetailPage() {
         </label>
         <label className="text-sm font-semibold">Trip type<select value={draft.tripType} onChange={event => setDraft(current => current ? { ...current, tripType: event.target.value as BookingRequest['tripType'], returnDateTime: event.target.value === 'one-way' ? undefined : current.returnDateTime } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900"><option value="one-way">One-way</option><option value="round-trip">Round-trip</option></select></label>
         <label className="sm:col-span-2 text-sm font-semibold">Special requests<textarea value={draft.specialRequests} onChange={event => setDraft(current => current ? { ...current, specialRequests: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900" /></label>
-        <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Saving details recalculates the fare and requires a future pickup time.</p><button type="submit" disabled={saving} className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{saving ? 'Saving...' : 'Save booking details'}</button></div>
+        <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Contact and flight edits keep the original fare. Changing route, vehicle, trip type or passenger count recalculates the fare; changing dates requires a future pickup.</p><button type="submit" disabled={saving} className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{saving ? 'Saving...' : 'Save booking details'}</button></div>
       </form>}
       {booking && !editing && (
         <dl className="grid min-w-0 grid-cols-1 gap-5 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
