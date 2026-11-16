@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { clearAdminCredentials, setAdminCredentials } from '../features/booking/adminCredentials'
 import { checkAdminAccess } from '../features/booking/api'
+import { BookingApiError } from '../features/booking/api/errors'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -27,9 +28,13 @@ export function AdminLayout() {
       await checkAdminAccess()
       setAuthenticated(true)
       setPassword('')
-    } catch {
+    } catch (error) {
       clearAdminCredentials()
-      setLoginError('Login failed. Check your admin credentials and API connection.')
+      if (error instanceof BookingApiError && (error.status === 401 || error.status === 403)) {
+        setLoginError('Invalid admin username or password.')
+      } else {
+        setLoginError('Unable to contact the admin service. Check your connection and try again.')
+      }
     } finally {
       setChecking(false)
     }
