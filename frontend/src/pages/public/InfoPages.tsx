@@ -24,6 +24,7 @@ const pageContent = {
       ['Hotel Transfer', 'Provide your hotel or accommodation address in the booking request.'],
       ['Return Transfer', 'Schedule your return journey in advance.'],
       ['Flight Details', 'Add your flight number when submitting a booking request.'],
+      ['Changes and Cancellations', 'Contact the operator with your booking reference to request a change or cancellation. Terms will be confirmed by the operator.'],
     ],
   },
   contact: {
@@ -34,6 +35,7 @@ const pageContent = {
     items: [
       ['Service Area', 'Dalaman, Fethiye, Gocek, Marmaris, Oludeniz'],
       ['Booking Requests', 'Use the online booking form to submit your transfer details.'],
+      ['Existing Booking', 'For changes or cancellations, contact us with your booking reference. Do not submit a duplicate request.'],
     ],
   },
 }
