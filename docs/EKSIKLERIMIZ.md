@@ -77,3 +77,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Güvenlik ve tasarım:** Sadece Java `synchronized` veya `existsBy...` kontrolü yeterli değildir (çoklu Render instance ve yarış durumu). PostgreSQL'de benzersiz kısıt, transaction ve kalıcı istek özeti gerekir. PII içeren ham request verisi idempotency alanında tutulmamalı; aynı anahtarın başka müşterilerce tahmin edilmesi durumunda veri sızıntısı engellenmeli. Anahtar rastgele, yeterince uzun ve tahmin edilemez olmalı.
 - **Düzeltme durumu:** Bu adımda üretim kodu değiştirilmedi. Önce test ve DB migration stratejisi netleştirilip küçük, tek amaçlı commitler halinde uygulanacak.
 - **Doğrulama:** Mevcut kod ve test dosyaları GitHub üzerinden incelendi. Yeni test, Maven çalışması, Render deploy ve tarayıcıdan uçtan uca doğrulama henüz yapılmadı. Görev 1 **açık**.
+
+## 2026-11-16 — Görev 1: mükerrer rezervasyon testleri eklendi
+- **Değişiklik:** `BookingIntegrationTests.java` içine iki regresyon testi eklendi: aynı `Idempotency-Key` ve aynı içerikle yinelenen POST'un aynı booking ID döndürmesi; aynı anahtarla değişen müşteri verisinin HTTP 409 Conflict üretmesi.
+- **Commit:** `c50d19a7e38cda869de930e8e954ee77bb895575`.
+- **Mevcut durum:** Testler GitHub'a kaydedildi fakat henüz CI/Maven ile çalıştırılmadı. Mevcut Controller anahtarı işlemediğinden testlerin şu an geçmesi beklenmiyor. Üretim kodunda idempotency çözümü henüz uygulanmadı.
+- **Sıradaki adım:** PostgreSQL benzersiz kısıtı, sunucu tarafı request fingerprint, güvenli 409 yanıtı ve eşzamanlı istek testini uygulamak. Anahtarı frontend'in tekrar denemelerde koruması da gerekli.
