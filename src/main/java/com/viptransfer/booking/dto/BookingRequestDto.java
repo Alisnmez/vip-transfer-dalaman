@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public class BookingRequestDto {
 
+    @jakarta.validation.constraints.Size(max = 120, message = "Customer name must be at most 120 characters.")
     @NotBlank(message = "Customer name is required.")
     private String customerName;
 
@@ -37,9 +38,11 @@ public class BookingRequestDto {
     @jakarta.validation.constraints.Email(message = "Email must be valid.")
     private String email;
     private String countryOfResidence;
+    @jakarta.validation.constraints.Size(max = 500, message = "Transfer address must be at most 500 characters.")
     private String transferAddress;
     @jakarta.validation.constraints.Size(max = 120, message = "Hotel name must be at most 120 characters.")
     private String hotelName;
+    @jakarta.validation.constraints.Size(max = 2000, message = "Special requests must be at most 2000 characters.")
     private String specialRequests;
 
     @jakarta.validation.constraints.Size(max = 20, message = "Flight number must be at most 20 characters.")
