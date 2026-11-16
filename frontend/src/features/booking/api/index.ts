@@ -3,8 +3,38 @@ import type { Booking, BookingRequest } from '../types'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
 
-// Keep a retry key for an uncertain network outcome; never reuse it for changed details.
+// Retry keys survive a page refresh in the same tab without storing customer details.
 const pendingBookingKeys = new Map<string, string>()
+
+async function retryStorageKey(payload: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload))
+  const hex = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('')
+  return `booking-retry:${hex}`
+}
+
+function readRetryKey(storageKey: string): string | null {
+  try {
+    return sessionStorage.getItem(storageKey)
+  } catch {
+    return null
+  }
+}
+
+function saveRetryKey(storageKey: string, key: string): void {
+  try {
+    sessionStorage.setItem(storageKey, key)
+  } catch {
+    // In-memory retry protection still works when browser storage is unavailable.
+  }
+}
+
+function clearRetryKey(storageKey: string): void {
+  try {
+    sessionStorage.removeItem(storageKey)
+  } catch {
+    // Browser storage may be disabled.
+  }
+}
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const controller = new AbortController()
@@ -50,18 +80,21 @@ export function getBooking(id: number) {
 
 export async function createBooking(data: BookingRequest) {
   const payload = JSON.stringify(data)
-  let key = pendingBookingKeys.get(payload)
+  const storageKey = await retryStorageKey(payload)
+  let key = pendingBookingKeys.get(storageKey) ?? readRetryKey(storageKey)
   if (!key) {
     key = crypto.randomUUID()
-    pendingBookingKeys.set(payload, key)
   }
+  pendingBookingKeys.set(storageKey, key)
+  saveRetryKey(storageKey, key)
 
   const booking = await request<Booking>(BOOKING_URL, {
     method: 'POST',
     headers: { 'Idempotency-Key': key },
     body: payload,
   })
-  pendingBookingKeys.delete(payload)
+  pendingBookingKeys.delete(storageKey)
+  clearRetryKey(storageKey)
   return booking
 }
 
