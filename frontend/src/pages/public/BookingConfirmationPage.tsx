@@ -103,15 +103,13 @@ export function BookingConfirmationPage() {
     submittingRef.current = true
     setError('')
     setSubmissionUncertain(false)
-    const savedTransfer = localStorage.getItem('bookingTransferInfo')
-    const savedPassenger = localStorage.getItem('bookingPassengerInfo')
-    if (!savedTransfer || !savedPassenger) {
-      setError('Your booking information is missing. Please start the booking again.')
-      submittingRef.current = false
-      return
-    }
-
     try {
+      const savedTransfer = localStorage.getItem('bookingTransferInfo')
+      const savedPassenger = localStorage.getItem('bookingPassengerInfo')
+      if (!savedTransfer || !savedPassenger) {
+        setError('Your booking information is missing. Please start the booking again.')
+        return
+      }
       const transfer: unknown = JSON.parse(savedTransfer)
       const passenger: unknown = JSON.parse(savedPassenger)
       if (!transfer || typeof transfer !== 'object' || Array.isArray(transfer) ||
@@ -167,8 +165,12 @@ export function BookingConfirmationPage() {
         }
       }
       setReceipt(savedReceipt)
-      localStorage.removeItem('bookingTransferInfo')
-      localStorage.removeItem('bookingPassengerInfo')
+      try {
+        localStorage.removeItem('bookingTransferInfo')
+        localStorage.removeItem('bookingPassengerInfo')
+      } catch {
+        // Booking succeeded; failure to clean up local drafts must not show an error.
+      }
     } catch (err) {
       setSubmissionUncertain(err instanceof Error && (err.name === 'TypeError' || /did not respond|Unable to reach|network|fetch/i.test(err.message)))
       setError(err instanceof SyntaxError ? 'Saved booking details are invalid. Please return to the previous steps and enter them again.' : err instanceof Error ? err.message : 'Booking could not be created.')
