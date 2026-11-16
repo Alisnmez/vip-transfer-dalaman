@@ -294,7 +294,7 @@ export function BookingFormPage() {
                   <p className="font-semibold">Return journey: {dropOffLocation || 'Destination'} → {pickUpLocation}</p>
                   <p className="text-sm text-slate-600">Choose when you want to travel back. Your return does not have to be on the same day or at the same time.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate || new Date().toISOString().slice(0, 10)} value={returnDate} onChange={setReturnDate} />
+                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate || today} value={returnDate} onChange={setReturnDate} />
                     <TextField icon="schedule" label="Return Time" type="time" value={returnTime} onChange={setReturnTime} />
                   </div>
                 </div>
