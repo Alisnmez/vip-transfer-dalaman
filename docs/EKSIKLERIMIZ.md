@@ -121,3 +121,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Commit:** `c50d19a7e38cda869de930e8e954ee77bb895575`.
 - **Mevcut durum:** Testler GitHub'a kaydedildi fakat henüz CI/Maven ile çalıştırılmadı. Mevcut Controller anahtarı işlemediğinden testlerin şu an geçmesi beklenmiyor. Üretim kodunda idempotency çözümü henüz uygulanmadı.
 - **Sıradaki adım:** PostgreSQL benzersiz kısıtı, sunucu tarafı request fingerprint, güvenli 409 yanıtı ve eşzamanlı istek testini uygulamak. Anahtarı frontend'in tekrar denemelerde koruması da gerekli.
+
+## 2026-11-16 — 1.3 kod uygulaması (güncel kayıt)
+- **Durum:** TEST BEKLİYOR. Üstteki görev panosunda 1.3 için yazan önceki durum tarihsel kalmıştır; bu kayıt daha günceldir.
+- **Sorun:** Aynı rezervasyon POST isteği tekrarlandığında mükerrer kayıt oluşabilir.
+- **Yapılan:** Booking entity içine benzersiz idempotency anahtarı ve JSON'dan gizlenen istek özeti eklendi. Repository araması, Controller'da isteğe bağlı Idempotency-Key başlığı, Service'te SHA-256 özeti ve aynı anahtarla farklı içerik için HTTP 409, transaction ve benzersiz kayıt yarışında yeniden okuma eklendi. CORS başlığa izin veriyor.
+- **Commitler:** f26b269 (entity), bd977ec (repository), 383b4bb (controller), 6f11a99 (CORS), 59a85ed (service); regresyon testleri c50d19a.
+- **Test durumu:** Son commit için CI/Maven sonucu henüz doğrulanmadı. Eşzamanlılık testi, frontend anahtar gönderimi ve uçtan uca tarayıcı testi henüz yok.
+- **Risk:** Mevcut spring.jpa.hibernate.ddl-auto=update üretim için kontrollü migration yerine geçmez; Flyway ve şema değişikliği planlanmalı. Header gönderilmeyen istekler eski davranışı sürdürür.
+- **Kaldığımız yer / sonraki adım:** Son commit CI sonucunu kontrol et, başarısız test varsa düzelt; frontend retry anahtarı ve yarış testlerini ekle. 1.3 tamamlandı denmeyecek.
