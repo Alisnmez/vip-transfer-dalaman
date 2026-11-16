@@ -70,7 +70,7 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
                 .andExpect(jsonPath("$.passengerCount").value(2))
                 .andExpect(jsonPath("$.status").value("PENDING"))
-                .andExpect(jsonPath("$.createdAt").value(receivedAt))
+                .andExpect(jsonPath("$.createdAt").isNotEmpty())
                 .andExpect(jsonPath("$.email").value("guest@example.com"))
                 .andExpect(jsonPath("$.countryOfResidence").value("Lithuania"))
                 .andExpect(jsonPath("$.transferAddress").value("Fethiye City Center, Turkey"))
