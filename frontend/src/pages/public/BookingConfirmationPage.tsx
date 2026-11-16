@@ -143,11 +143,11 @@ export function BookingConfirmationPage() {
       const returnDateTime = transferData.tripType === 'round-trip'
         ? new Date(`${transferData.returnDate}T${transferData.returnTime}`)
         : null
-      if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(transferData.pickUpDate) ||
-          !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(transferData.pickUpTime) ||
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(transferData.pickUpDate) ||
+          !/^([01]\d|2[0-3]):[0-5]\d$/.test(transferData.pickUpTime) ||
           (transferData.tripType === 'round-trip' &&
-            (!/^\\d{4}-\\d{2}-\\d{2}$/.test(transferData.returnDate || '') ||
-             !/^([01]\\d|2[0-3]):[0-5]\\d$/.test(transferData.returnTime || ''))) ||
+            (!/^\d{4}-\d{2}-\d{2}$/.test(transferData.returnDate || '') ||
+             !/^([01]\d|2[0-3]):[0-5]\d$/.test(transferData.returnTime || ''))) ||
           !Number.isFinite(pickupDateTime.getTime()) || pickupDateTime.getTime() <= Date.now() ||
           (returnDateTime !== null && (!Number.isFinite(returnDateTime.getTime()) || returnDateTime <= pickupDateTime))) {
         setError('Your transfer date is no longer valid. Please return to the first step and select a future date.')
