@@ -51,6 +51,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 ---
 
+## İlk yayın odağı (2026-11-16)
+- Kullanıcı isteğiyle MVP yayın önceliğine geçildi: `docs/ILK_YAYIN_KONTROL_LISTESI.md` GO/NO-GO kontrol listesi. 1.5 canlı rezervasyon smoke, doğrulanmış fiyat/iletişim/yasal metinler ve CI yayın blokajı; 5–12 ileri özellikler uygun oldukça ilk yayın sonrasına ertelenebilir. Otomatik e-posta olmadığı açıkça belirtilir.
+- Hata sınıfının Node test runner uyumsuzluğu `84e01a95` ile giderildi; yanlış kesin fiyat ifadesi `28bfddbd` ile düzeltildi. CI sonucu bekleniyor.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
