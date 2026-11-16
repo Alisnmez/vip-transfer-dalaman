@@ -227,3 +227,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Güvenlik:** `VITE_` değişkenleri frontend JS içine gömülür; gizli bilgi içeremez. Gerçek Render environment değerleri okunmadı veya değiştirilmedi.
 - **Test:** Belge commit'i oluşturuldu; Render'ın yeni frontend build'inin sonucu ve gerçek browser E2E henüz doğrulanmadı. Bu dosya tek başına Render env ayarlarını değiştirmez.
 - **Durum:** 1.4 **DEVAM EDİYOR**. **Kaldığımız yer:** Render panelinde iki env değerini kontrol et; sonra yeni build, CORS preflight ve izole DB E2E testini doğrula.
+
+## 2026-11-16 — 1.4 Render staging API/CORS yapılandırması uygulandı
+- **Sorun:** Vite statik dağıtımında yerel `/bookings` proxy'si bulunmadığından `VITE_API_BASE_URL` boşsa istek yanlış origin'e gider; backend `FRONTEND_ORIGIN` yanlışsa CORS engeller.
+- **Çözüm:** Kullanıcının onayladığı `Ali's workspace` içindeki yalnızca `-test` servislerine Render environment merge (replace=false) uygulandı: frontend `VITE_API_BASE_URL=https://vip-transfer-dalaman-api-test.onrender.com`, backend `FRONTEND_ORIGIN=https://vip-transfer-dalaman-test.onrender.com`. Var olan diğer environment değişkenleri korunmuştur. Bunlar sır değildir; gerçek müşteri verisi veya DB ayarı değiştirilmedi.
+- **Kanıt:** Render frontend environment update başarılı ve `dep-dbtdb9rm8hqs73aj7q10` deploy tetiklendi; ilk sorguda **build_in_progress**. Backend update başarılı, `dep-dbtdambji66s73agmbo0` deploy **queued**. İki servis için henüz yeni sürüm `live` doğrulanmadı.
+- **Test:** Render API env güncellemeleri kabul etti. Tarayıcıdan CORS preflight, POST ve PostgreSQL kayıt doğrulaması **yapılmadı**; bu adım henüz tamamlanmış sayılmaz.
+- **Durum:** 1.4 **DEVAM EDİYOR**.
+- **Kaldığımız yer:** İki yeni deploy `live` olana kadar kontrol et; ardından tarayıcı Network sekmesinde OPTIONS/POST ve test DB kaydını doğrula. Test rezervasyonunun gerçek bildirim/dispatch yaratmadığını önceden kontrol et.
