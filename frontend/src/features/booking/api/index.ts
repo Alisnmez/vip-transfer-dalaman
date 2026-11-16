@@ -64,6 +64,17 @@ export function getBookings() {
   return request<Booking[]>(BOOKING_URL, undefined, true)
 }
 
+export type BookingPage = {
+  content: Booking[]
+  totalElements: number
+  totalPages: number
+  number: number
+}
+
+export function getBookingPage(page: number, size = 25) {
+  return request<BookingPage>(`${BOOKING_URL}/page?page=${page}&size=${size}`, undefined, true)
+}
+
 export function getBooking(id: number) {
   return request<Booking>(`${BOOKING_URL}/${id}`, undefined, true)
 }
