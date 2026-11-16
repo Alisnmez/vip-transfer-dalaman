@@ -45,8 +45,8 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 3.1 | Fiyatın sunucuda hesaplanması | TAMAMLANDI | `BookingService` fiyatı `TransferPricingService.calculatePrice` ile sunucudaki `transfer-prices.json` dosyasından hesaplıyor; istemci fiyatına güvenilmiyor. Önceki fiyat testleri CI'da geçti. | Ticari fiyat onayı ayrı 3.2'de |
 | 3.2 | Gerçek tarife ve rakip karşılaştırması | BLOKE | Fiyat kataloğu mevcut, fakat işletme maliyetleri ve güncel Petunia Travel fiyatları doğrulanmış değil. | Kaynak fiyatlar, tarih, rota, araç sınıfı, para birimi ve minimum kârı doğrula; ardından tek yön -£2,50 / gidiş-dönüş -£5 hedefini değerlendir |
-| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Kullanıcı 2026-11-16 tarihinde ilk sürümde online ödeme olmayacağını ve yalnızca nakit kabul edileceğini onayladı; kart tahsilatı olmayacak. | Nakit ödemenin tam olarak ne zaman alınacağını teyit et; ardından rezervasyon ve bilgilendirme ekranlarında doğru metni göster ve test et |
-| 3.4 | İptal ve iade koşulları | BEKLİYOR | İşletme tarafından onaylanmış iptal/iade süresi ve koşulu belgelenmedi. | İşletme politikasını netleştir, sonra sayfaya ekle |
+| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Yalnızca nakit kararı alındı; son onay ekranı güncellendi (`6f990011`). | Tahsilat zamanı ve kabul edilen nakit para birimi **logo/metin/son rötuşlar aşamasında** kullanıcıdan alınacak; şimdi sorulmayacak |
+| 3.4 | İptal ve iade koşulları | DEVAM EDİYOR | Hizmet ve iletişim sayfalarında rezervasyon referansıyla iptal/değişiklik talebi için iletişim yönlendirmesi eklendi (`efe66482`); hiçbir iade garantisi veya süre uydurulmadı. | İptal/iade koşullarının nihai metni **son rötuşlar** aşamasında işletme onayıyla eklenecek |
 
 ### 4–12. Diğer ana maddeler
 
@@ -63,6 +63,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 3.3/3.4 yayın öncesi son rötuş ayrımı
+- **Karar:** Ödeme tahsilat zamanı ve iptal/iade politikasının nihai ayrıntıları kullanıcı tarafından logo ve metinlerin son kez düzenleneceği aşamada verilecek; şimdi tekrar sorulmayacak.
+- **Kod:** Onay ekranında yalnızca nakit olduğu açıklandı (`6f990011`); hizmet ve iletişim sayfalarında iptal/değişiklik talebi için rezervasyon referansıyla iletişim yönlendirmesi eklendi (`efe66482`).
+- **Sınır:** Süre, ücret, iade garantisi veya ödeme zamanı uydurulmadı. Canlı yayın öncesinde gerçek şartlar mutlaka onaylanacak.
+- **Test:** Değişiklikler GitHub'a kaydedildi; yeni CI sonucu henüz doğrulanmadı.
 
 ## 2026-11-16 — Görev 3.3 yalnızca nakit kararı
 - **Karar:** Kullanıcı ilk sürümde yalnızca nakit ödeme kabul edileceğini belirtti. Online ödeme ve kart tahsilatı sunulmayacak.
