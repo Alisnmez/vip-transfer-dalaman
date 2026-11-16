@@ -65,7 +65,13 @@ export function BookingPassengerPage() {
 
   function handleSubmit() {
     setError('')
-    const savedTransferInfo = localStorage.getItem('bookingTransferInfo')
+    let savedTransferInfo: string | null
+    try {
+      savedTransferInfo = localStorage.getItem('bookingTransferInfo')
+    } catch {
+      setError('Browser storage is unavailable. Please enable site storage and retry.')
+      return
+    }
     if (!savedTransferInfo) {
       setError('Please fill transfer information first.')
       return
