@@ -21,6 +21,9 @@ public class TransferPricingService {
     }
 
     public void validateLuggageCapacity(String vehicleId, Integer luggageCount) {
+        if (vehicleId == null) {
+            throw new IllegalArgumentException("Invalid vehicle.");
+        }
         int maximum = switch (vehicleId) {
             case "taxi" -> 3;
             case "vip-minivan", "premium-vip-minivan" -> 6;
@@ -35,6 +38,9 @@ public class TransferPricingService {
     }
 
     public BigDecimal calculatePrice(String pickup, String destination, String vehicleId, String tripType, int passengerCount) {
+        if (vehicleId == null) {
+            throw new IllegalArgumentException("Invalid vehicle.");
+        }
         int capacity = switch (vehicleId) {
             case "taxi" -> 3;
             case "vip-minivan", "premium-vip-minivan", "maybach", "maybach-plus" -> 5;
