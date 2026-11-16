@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
+import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
 
 type TransferDetails = {
   pickUpLocation?: string
@@ -138,22 +139,6 @@ export function BookingConfirmationPage() {
           (passengerData.specialRequests !== undefined && typeof passengerData.specialRequests !== 'string')) {
         setError('Saved booking details contain invalid values. Please return to the previous steps.')
         return
-      }
-      // Transfer schedules are entered in Turkey local time (UTC+03:00), not the browser timezone.
-      const parseTurkeyDateTime = (date: string, time: string): number | null => {
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
-          return null
-        }
-        const [year, month, day] = date.split('-').map(Number)
-        const [hour, minute] = time.split(':').map(Number)
-        const utc = Date.UTC(year, month - 1, day, hour - 3, minute)
-        const calendar = new Date(Date.UTC(year, month - 1, day))
-        if (calendar.getUTCFullYear() !== year ||
-            calendar.getUTCMonth() + 1 !== month ||
-            calendar.getUTCDate() !== day) {
-          return null
-        }
-        return utc
       }
       const pickupTimestamp = parseTurkeyDateTime(transferData.pickUpDate, transferData.pickUpTime)
       const returnTimestamp = transferData.tripType === 'round-trip'
