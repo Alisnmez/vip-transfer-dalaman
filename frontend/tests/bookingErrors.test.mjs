@@ -2,13 +2,15 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { BookingApiError, bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from '../src/features/booking/api/errors.ts'
 
-test('HTTP errors retain status and are not mistaken for uncertain transport errors', () => {
+test('HTTP errors retain status and distinguish definite rejection from server uncertainty', () => {
   const conflict = bookingHttpError(409, 'Booking already exists')
   assert.equal(conflict.status, 409)
   assert.equal(conflict.uncertain, false)
   assert.equal(conflict.message, 'Booking already exists')
   assert.equal(classifyBookingFailure(conflict), conflict)
   assert.match(bookingHttpError(503).message, /HTTP 503/)
+  assert.equal(bookingHttpError(503).uncertain, true)
+  assert.equal(bookingHttpError(422).uncertain, false)
 })
 
 test('network and timeout failures indicate uncertain submission outcome', () => {
