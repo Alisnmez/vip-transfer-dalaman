@@ -1,4 +1,8 @@
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
+import { clearAdminCredentials, setAdminCredentials } from '../features/booking/adminCredentials'
+import { getBookings } from '../features/booking/api'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -16,6 +20,48 @@ const utilityItems = [
 ]
 
 export function AdminLayout() {
+  const [authenticated, setAuthenticated] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loginError, setLoginError] = useState('')
+  const [checking, setChecking] = useState(false)
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setLoginError('')
+    setChecking(true)
+    setAdminCredentials(username, password)
+    try {
+      await getBookings()
+      setAuthenticated(true)
+      setPassword('')
+    } catch {
+      clearAdminCredentials()
+      setLoginError('Login failed. Check your admin credentials and API connection.')
+    } finally {
+      setChecking(false)
+    }
+  }
+
+  if (!authenticated) {
+    return (
+      <main className="min-h-screen bg-surface flex items-center justify-center p-6">
+        <form onSubmit={(event) => { void handleLogin(event) }} className="w-full max-w-sm space-y-5 rounded-xl bg-white p-8 border border-outline-variant shadow-lg">
+          <h1 className="text-2xl font-bold text-admin-primary">Admin sign in</h1>
+          <p className="text-sm text-on-surface-variant">Sign in to view private booking requests. Credentials are not saved in browser storage.</p>
+          <label className="block text-sm font-semibold">Username
+            <input autoComplete="username" required value={username} onChange={(event) => setUsername(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
+          </label>
+          <label className="block text-sm font-semibold">Password
+            <input autoComplete="current-password" type="password" required value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
+          </label>
+          {loginError && <p role="alert" className="text-error text-sm">{loginError}</p>}
+          <button disabled={checking} type="submit" className="w-full rounded-lg bg-admin-primary p-3 font-semibold text-white disabled:opacity-50">{checking ? 'Checking...' : 'Sign in'}</button>
+        </form>
+      </main>
+    )
+  }
+
   const location = useLocation()
   const usesCustomPageChrome = ['/admin/bookings', '/admin/calendar'].includes(
     location.pathname,
@@ -55,6 +101,7 @@ export function AdminLayout() {
         </nav>
 
         <div className="mt-auto border-t border-primary-container/30 pt-6 space-y-1">
+          <button type="button" className="w-full rounded-lg border border-primary-container/50 px-4 py-2 text-on-primary-container" onClick={() => { clearAdminCredentials(); setAuthenticated(false); setPassword('') }}>Sign out</button>
           <button className="w-full bg-secondary-fixed text-on-secondary-fixed py-2 px-4 rounded-lg font-label-sm text-label-sm mb-4 hover:opacity-90 transition-opacity">
             New Booking
           </button>
