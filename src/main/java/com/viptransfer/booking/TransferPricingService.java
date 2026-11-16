@@ -21,10 +21,6 @@ public class TransferPricingService {
     }
 
     public void validateLuggageCapacity(String vehicleId, Integer luggageCount) {
-        if (luggageCount == null) {
-            return;
-        }
-
         int maximum = switch (vehicleId) {
             case "taxi" -> 3;
             case "vip-minivan", "premium-vip-minivan" -> 6;
@@ -33,7 +29,7 @@ public class TransferPricingService {
             default -> throw new IllegalArgumentException("Invalid vehicle.");
         };
 
-        if (luggageCount < 0 || luggageCount > maximum) {
+        if (luggageCount != null && (luggageCount < 0 || luggageCount > maximum)) {
             throw new IllegalArgumentException("Luggage count exceeds the selected vehicle capacity.");
         }
     }
