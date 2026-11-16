@@ -63,6 +63,14 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-16 — Admin dashboard iptal edilen transferleri saymama
+- **Aktif madde:** 4.4 — dashboard gerçek veri doğruluğu.
+- **Sorun ve kanıt:** `DashboardPage.tsx` bugünkü/yaklaşan transferleri tüm rezervasyonlardan hesapladığı için `CANCELLED` kayıtlar operasyon listesine giriyordu.
+- **Yapılan değişiklik:** `activeBookings` filtresi eklendi; iptal edilenler planlanan transferlerden çıkarıldı, toplam rezervasyon talebi sayısı tarihçe olarak korundu (`278d4be`).
+- **Test ve sonuç:** Kaynak kodu kontrol edildi; CI ve canlı admin verisi doğrulaması bekleniyor. Bu yüzden 4.4 durumu **TEST BEKLİYOR** olarak kalır.
+- **Kaldığımız yer:** GitHub Actions sonucunu kontrol et; yetkili admin girişinde gerçek kayıtların listesi, detay ve durum değişikliklerini doğrula.
+- **Yeni risk / karar:** `PENDING` kayıtları planlanan talepler olarak listelenmeye devam eder; kesin onaylı transfer olarak sunulmamalıdır.
+
 ### Her çalışma sonunda zorunlu kayıt şablonu
 
 - **Aktif madde:** ör. 1.3
