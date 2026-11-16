@@ -1,3 +1,9 @@
+## 2026-11-17 — 1.3 / 1.5 / 3.1 yeniden kanıt kontrolü
+- **1.3 Çift rezervasyon koruması — TEST BEKLİYOR (yalnızca son E2E/migration):** `06c4cfa` eşzamanlı PostgreSQL idempotency testi ve `89240d1` sayfa yenileme testi daha önce GitHub Actions `43843124407` ve `43843263719` ile başarılıydı. Kullanıcı gerçek rezervasyon oluşturmayı doğruladı. Aynı idempotency anahtarının güncel Render ortamında tekrar gönderimi, farklı tarayıcı yaşam döngüsü ve migration provası ayrı doğrulanmadı; kodu yeniden yazmaya gerek yok.
+- **1.5 Dağıtım ve üretim güvenliği — TEST BEKLİYOR:** Frontend son `a32b2676` deploy `live` (Render `dep-dbtoij1evqrc73f7u0vg`). Backend `a32b2676` deploy `update_in_progress` (Render `dep-dbtohoavtthc73emfan0`) olarak görüldü; aynı build logunda `BUILD SUCCESS` var, fakat Docker build testleri atlıyor. Son CI ve gerçek canlı smoke/DB migration/yedekleme doğrulanmadan tamamlandı denemez.
+- **3.1 Sunucu tarafı fiyat doğrulaması — KOD TAMAM, TEST BEKLİYOR:** `BookingService` fiyatı backend'deki `transfer-prices.json` kataloğundan hesaplıyor; istemciden fiyat kabul edilmiyor. Eksik araç için `switch` öncesi null koruması `564668ab`; dört regresyon testi `9dd55e40`. Render backend derlemesi başarılı, ancak testlerin çalıştığına dair güncel CI kanıtı henüz yok. **Ticari fiyatların doğruluğu ayrı 3.2 maddesidir.**
+- **Sonuç:** Bu üç başlıkta mevcut kodu tekrar geliştirmek yerine kalan bağımsız doğrulamaları kapat; kanıtlanmayan kısmı TAMAMLANDI olarak işaretleme.
+
 ## 2026-11-17 — Eksiklerimiz: fiyat doğrulamasında null araç hatası
 - **Problem:** `TransferPricingService.validateLuggageCapacity` ve `calculatePrice` araç ID'si `null` iken `switch` çalıştırıyordu; istemciden eksik araç gelirse beklenmeyen 500 riski vardı.
 - **Düzeltme:** Her iki metotta `switch` öncesi açık `null` kontrolü ve `IllegalArgumentException("Invalid vehicle.")` eklendi (`564668ab`). Veritabanı şeması değişmedi.
