@@ -203,6 +203,57 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void browserCanPreflightAndAdminCanUpdateBookingStatus() throws Exception {
+        String origin = "https://vip-transfer-dalaman-test.onrender.com";
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options("/bookings/123/status")
+                        .header("Origin", origin)
+                        .header("Access-Control-Request-Method", "PATCH")
+                        .header("Access-Control-Request-Headers", "authorization,content-type"))
+                .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header()
+                        .string("Access-Control-Allow-Origin", origin))
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header()
+                        .string("Access-Control-Allow-Methods", org.hamcrest.Matchers.containsString("PATCH")));
+
+        String valid = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Status Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "status@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        String response = mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        long id = objectMapper.readTree(response).get("id").asLong();
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                .andExpect(status().isUnauthorized());
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+                        .header("Authorization", valid)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CONFIRMED"));
+        mockMvc.perform(get("/bookings/{id}", id).header("Authorization", valid))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CONFIRMED"));
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+                        .header("Authorization", valid)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"INVALID\\"}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     void blocksAnonymousBookingReadsAndChanges() throws Exception {
         mockMvc.perform(get("/bookings"))
                 .andExpect(status().isUnauthorized());
