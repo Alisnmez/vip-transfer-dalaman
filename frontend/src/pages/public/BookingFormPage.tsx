@@ -96,6 +96,8 @@ export function BookingFormPage() {
   const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
   const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
   const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
+  const maxAllowedPassengers = selectedVehicle.maxPassengers
+  const maxAllowedLuggage = Math.min(8, selectedVehicle.maxLuggage ?? 8)
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
@@ -127,7 +129,7 @@ export function BookingFormPage() {
       setFormError('This route or vehicle has no published price. Please choose Dalaman Airport as one endpoint and a vehicle with a listed price.')
       return
     }
-    if (passengers < 1 || passengers > selectedVehicle.maxPassengers || luggages < 0 || luggages > 8 || (selectedVehicle.maxLuggage !== null && luggages > selectedVehicle.maxLuggage) || babySeats < 0 || babySeats > 2) {
+    if (!Number.isInteger(passengers) || passengers < 1 || passengers > maxAllowedPassengers || !Number.isInteger(luggages) || luggages < 0 || luggages > maxAllowedLuggage || !Number.isInteger(babySeats) || babySeats < 0 || babySeats > 2) {
       event.preventDefault()
       setFormError('Please check the passenger count, luggage (maximum 8), and baby seats (maximum 2) against the vehicle capacity.')
       return
@@ -344,14 +346,14 @@ export function BookingFormPage() {
                 <CounterField
                   label="Passengers"
                   min={1}
-                  max={selectedVehicle.maxPassengers}
+                  max={maxAllowedPassengers}
                   value={passengers}
                   onChange={setPassengers}
                 />
                 <CounterField
                   label="Luggages"
                   min={0}
-                  max={Math.min(8, selectedVehicle.maxLuggage ?? 8)}
+                  max={maxAllowedLuggage}
                   value={luggages}
                   onChange={setLuggages}
                 />
