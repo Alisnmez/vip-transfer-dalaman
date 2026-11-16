@@ -10,7 +10,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.HexFormat;
-import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -183,12 +182,25 @@ public class BookingService {
         return bookingRepository.save(existingBooking);
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public Booking updateStatus(Long id, String status) {
         if (status == null || !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status.");
         }
         Booking booking = getBooking(id);
+        String current = booking.getStatus() == null ? "PENDING" : booking.getStatus();
+        if (current.equals(status)) {
+            return booking;
+        }
+        boolean allowed = switch (current) {
+            case "PENDING" -> "CONFIRMED".equals(status) || "CANCELLED".equals(status);
+            case "CONFIRMED" -> "COMPLETED".equals(status) || "CANCELLED".equals(status);
+            default -> false;
+        };
+        if (!allowed) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Invalid booking status transition from " + current + " to " + status + ".");
+        }
         booking.setStatus(status);
         return bookingRepository.save(booking);
     }
