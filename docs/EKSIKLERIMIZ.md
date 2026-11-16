@@ -1,3 +1,9 @@
+## 2026-11-17 — 4.1 / 1.5 CI kanıtı ve takvim görünürlüğü
+- **Doğrulandı:** `05de81ed` GitHub Actions run `43978287258` **success**; TypeScript setter hatası giderildi. `4c705386` run `43978483558` **success**; frontend lint/unit/build ve backend PostgreSQL testleri başarılı. Frontend `4c705386` Render `live` görüldü; backend aynı commit en son kontrol sırasında `update_in_progress` idi.
+- **Regresyon testi:** `frontend/tests/bookingFormatters.test.mjs` ile rezervasyon durumu, Türkiye yerel transfer saati ve eski/bozuk `createdAt` durumları test edildi (`4c705386`).
+- **Takvim hatası:** Varsayılan `ACTIVE` filtresi COMPLETED/CANCELLED rezervasyonları saklıyordu. Adminin tüm rezervasyonları ilk açılışta görmesi için varsayılan `ALL` yapıldı (`4df888bf`); ACTIVE filtresi isteğe bağlı kalır.
+- **Durum:** `4df888bf` için yeni CI/Render doğrulaması bekleniyor. Gerçek admin oturumuyla rezervasyon oluşturma→takvim→detay→durum güncelleme E2E, fiyat/iletişim/yasal onaylar ve mobil smoke hâlâ yayın engeli.
+
 ## 2026-11-17 — Son CI kontrolü ve TypeScript build düzeltmesi
 - `1fca23f7` CI run `43977964255` **failure**: frontend 33/33 test ve lint başarılı, backend PostgreSQL testleri başarılı, ancak TypeScript `BookingListPage.tsx:32` içinde silinmiş `setLoadedPage` referansı nedeniyle `TS2552` verdi; Render frontend `build_failed`.
 - **Düzeltildi:** eski setter `setLoadedKey(\`\${page}:\${revision}\`)` ile değiştirildi (`8686b8ed`); başarısız sayfa sorgusunda eski bookings ve sayılar temizleniyor (`15b6db14`).
