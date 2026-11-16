@@ -23,14 +23,14 @@ export function BookingDetailPage() {
   }, [id])
 
   return (
-    <section className="p-8 max-w-4xl">
+    <section className="min-w-0 max-w-4xl p-4 sm:p-8">
       <Link className="text-admin-primary underline" to="/admin/bookings">Back to bookings</Link>
       <h1 className="mt-6 mb-5 text-2xl font-bold">Booking request #{bookingId}</h1>
       {(!Number.isSafeInteger(id) || id < 1) && <p role="alert">Invalid booking reference.</p>}
       {loading && Number.isSafeInteger(id) && id > 0 && <p>Loading booking...</p>}
       {error && <p role="alert" className="text-error">Could not load booking: {error}</p>}
       {booking && (
-        <dl className="grid grid-cols-1 sm:grid-cols-2 gap-5 rounded-xl bg-white p-6 border border-outline-variant">
+        <dl className="grid min-w-0 grid-cols-1 gap-5 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
           {[
             ['Customer', booking.customerName],
             ['Passengers', booking.passengerCount],
