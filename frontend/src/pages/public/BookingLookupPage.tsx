@@ -1,12 +1,34 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { verifyBookingSupport } from '../../features/booking/api'
 import { bookingSupportLink, whatsappSupportEnabled } from '../../features/booking/support'
 
 import { PublicNavbar } from './PublicNavbar'
 
 export function BookingLookupPage() {
   const [reference, setReference] = useState('')
+  const [email, setEmail] = useState('')
+  const [verified, setVerified] = useState(false)
+  const [checking, setChecking] = useState(false)
+  const [message, setMessage] = useState('')
   const validReference = /^[1-9][0-9]{0,15}$/.test(reference.trim())
+  async function checkBooking(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!validReference || !email.trim() || checking) return
+    setChecking(true)
+    setVerified(false)
+    setMessage('')
+    try {
+      const result = await verifyBookingSupport(reference.trim(), email.trim())
+      setVerified(result.matched)
+      if (!result.matched) setMessage('We could not verify these details. Check your reference and email, or contact support.')
+    } catch {
+      setMessage('Verification is temporarily unavailable. Please try again later.')
+    } finally {
+      setChecking(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background text-on-surface">
       <PublicNavbar />
@@ -23,19 +45,28 @@ export function BookingLookupPage() {
         </p>
         <section className="mb-8 rounded-lg border border-outline bg-white p-5" aria-label="Change or cancel booking">
           <h2 className="mb-3 text-lg font-semibold text-admin-primary">Request a change or cancellation</h2>
-          <p className="mb-4 text-on-surface-variant">Enter your booking reference to prepare a support message. This does not look up or change your booking.</p>
-          <label className="block text-sm font-semibold">Booking reference
-            <input type="text" inputMode="numeric" value={reference} onChange={event => setReference(event.target.value)}
-              placeholder="e.g. 1042" className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
-          </label>
-          <div className="mt-4 flex flex-wrap gap-3">
-            {validReference ? (
-              <>
-                <a className="rounded-lg bg-admin-primary px-4 py-3 font-semibold text-white" href={bookingSupportLink(reference, 'change')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request change {whatsappSupportEnabled() ? 'on WhatsApp' : 'by email'}</a>
-                <a className="rounded-lg border border-outline px-4 py-3 font-semibold" href={bookingSupportLink(reference, 'cancel')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request cancellation {whatsappSupportEnabled() ? 'on WhatsApp' : 'by email'}</a>
-              </>
-            ) : <p className="text-sm text-on-surface-variant">Enter a valid numeric reference to continue.</p>}
-          </div>
+          <p className="mb-4 text-on-surface-variant">Enter your booking reference and the email used when booking. This is a basic match, not proof of email ownership.</p>
+          <form onSubmit={event => { void checkBooking(event) }} className="space-y-4">
+            <label className="block text-sm font-semibold">Booking reference
+              <input type="text" inputMode="numeric" value={reference} onChange={event => { setReference(event.target.value); setVerified(false); setMessage('') }}
+                placeholder="e.g. 1042" className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" required />
+            </label>
+            <label className="block text-sm font-semibold">Email used for this booking
+              <input type="email" value={email} onChange={event => { setEmail(event.target.value); setVerified(false); setMessage('') }}
+                autoComplete="email" className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" required />
+            </label>
+            <button type="submit" disabled={!validReference || !email.trim() || checking}
+              className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">
+              {checking ? 'Checking...' : 'Verify booking details'}
+            </button>
+          </form>
+          {message && <p role="alert" className="mt-4 text-sm text-error">{message}</p>}
+          {verified && (
+            <div className="mt-5 flex flex-wrap gap-3">
+              <a className="rounded-lg bg-admin-primary px-4 py-3 font-semibold text-white" href={bookingSupportLink(reference, 'change')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request change {whatsappSupportEnabled() ? 'on WhatsApp' : 'by email'}</a>
+              <a className="rounded-lg border border-outline px-4 py-3 font-semibold" href={bookingSupportLink(reference, 'cancel')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request cancellation {whatsappSupportEnabled() ? 'on WhatsApp' : 'by email'}</a>
+            </div>
+          )}
           <p className="mt-4 text-sm text-on-surface-variant">Sending a message does not cancel or modify a booking. Wait for confirmation from our team.</p>
         </section>
         <section aria-label="Booking support" className="mb-8 rounded-lg border border-outline bg-white p-5">
