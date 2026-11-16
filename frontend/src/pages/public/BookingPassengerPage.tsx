@@ -206,7 +206,7 @@ export function BookingPassengerPage() {
                       </select>
                       <input
                         className="min-w-0 flex-1 border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                        onChange={(event) => { setPhoneNumber(event.target.value.replace(/\D/g, '').slice(0, countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length)); setPhoneError('') }}
+                        onChange={(event) => { const raw = event.target.value.replace(/\D/g, ''); const national = countryCode === '+90' && raw.length === 11 && raw.startsWith('0') ? raw.slice(1) : raw; setPhoneNumber(national.slice(0, countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length)); setPhoneError('') }}
                         placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
                         autoComplete="tel-national"
                         inputMode="numeric"
