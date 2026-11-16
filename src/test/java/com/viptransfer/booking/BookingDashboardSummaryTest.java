@@ -1,0 +1,54 @@
+package com.viptransfer.booking;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
+class BookingDashboardSummaryTest {
+
+    @Test
+    void summaryUsesDatabaseCountsAndLimitsUpcomingResults() {
+        BookingRepository repository = mock(BookingRepository.class);
+        BookingService service = new BookingService(repository, mock(TransferPricingService.class),
+                new ObjectMapper(), mock(PlatformTransactionManager.class));
+        Booking upcoming = new Booking();
+        upcoming.setId(42L);
+        upcoming.setStatus("CONFIRMED");
+        when(repository.count()).thenReturn(120L);
+        when(repository.countByStatus("PENDING")).thenReturn(7L);
+        when(repository.countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
+                anyCollection(), any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(3L);
+        when(repository.findTop8ByStatusInAndTransferDateTimeGreaterThanEqualOrderByTransferDateTimeAsc(
+                anyCollection(), any(LocalDateTime.class))).thenReturn(List.of(upcoming));
+
+        Map<String, Object> result = service.getDashboardSummary();
+
+        assertEquals(120L, result.get("total"));
+        assertEquals(7L, result.get("pending"));
+        assertEquals(3L, result.get("today"));
+        assertEquals(List.of(upcoming), result.get("upcoming"));
+
+        @SuppressWarnings("unchecked")
+        ArgumentCaptor<Collection<String>> statuses = ArgumentCaptor.forClass(Collection.class);
+        ArgumentCaptor<LocalDateTime> start = ArgumentCaptor.forClass(LocalDateTime.class);
+        ArgumentCaptor<LocalDateTime> end = ArgumentCaptor.forClass(LocalDateTime.class);
+        verify(repository).countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
+                statuses.capture(), start.capture(), end.capture());
+        assertTrue(statuses.getValue().containsAll(List.of("PENDING", "CONFIRMED")));
+        assertEquals(2, statuses.getValue().size());
+        assertEquals(start.getValue().plusDays(1), end.getValue());
+        assertEquals(0, start.getValue().getHour());
+        assertEquals(0, start.getValue().getMinute());
+        verify(repository, never()).findAll();
+    }
+}
