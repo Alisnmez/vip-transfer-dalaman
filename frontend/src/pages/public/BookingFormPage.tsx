@@ -87,11 +87,14 @@ export function BookingFormPage() {
   const [luggages, setLuggages] = useState(draft.luggageCount ?? 3)
   const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 1)
   const [formError, setFormError] = useState('')
-  const [today] = useState(() => {
-    const now = new Date()
-    const localToday = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-    return localToday.toISOString().slice(0, 10)
-  })
+  const [today] = useState(() =>
+    new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Istanbul',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date())
+  )
 
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
