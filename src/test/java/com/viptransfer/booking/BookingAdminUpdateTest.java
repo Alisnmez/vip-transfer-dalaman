@@ -5,6 +5,7 @@ import com.viptransfer.booking.dto.BookingRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.server.ResponseStatusException;
@@ -140,6 +141,20 @@ class BookingAdminUpdateTest {
         Booking updated = service.updateStatus(10L, "CONFIRMED");
         assertEquals("CONFIRMED", updated.getStatus());
         verify(repository, never()).save(any());
+    }
+
+    @Test
+    void paginationRejectsUnboundedRequests() {
+        ResponseStatusException error = assertThrows(ResponseStatusException.class,
+                () -> service.getBookingPage(0, 101));
+        assertEquals(HttpStatus.BAD_REQUEST, error.getStatusCode());
+        verify(repository, never()).findAll(any(PageRequest.class));
+    }
+
+    @Test
+    void paginationUsesNewestFirstSort() {
+        service.getBookingPage(1, 25);
+        verify(repository).findAll(PageRequest.of(1, 25, Sort.by(Sort.Direction.DESC, "id")));
     }
 
     @Test
