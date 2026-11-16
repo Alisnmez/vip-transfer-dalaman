@@ -62,3 +62,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Sınır:** Görsel Porsche spor otomobilinin temsili fotoğrafıdır, Cayenne GTX modeli olarak doğrulanmadı. Gerçek rezervasyon ve fiyat kataloğu değiştirilmedi; buton devre dışı.
 - **Doğrulama:** GitHub değişikliği kaydedildi; frontend build ve canlı dağıtım henüz doğrulanmadı.
 - **Geri alma:** HomePage.tsx içindeki Temporary fun-mode demo kartı kaldırılabilir.
+
+## 2026-11-16 — Eğlence modu geri alındı
+- **İstek:** Geçici Porsche Cayenne GTX (£500) kartlarının kaldırılması ve normal geliştirmeye dönülmesi.
+- **Değişiklik:** Ana sayfadaki `Our Vehicles` kartı ve `/vehicles` sayfasındaki demo kartı kaldırıldı. Diğer araçlar, rezervasyon ve fiyatlandırma kodları korundu.
+- **Commitler:** `4ec127f9f835746b941345138baf240016061c55` (HomePage), `ee7534d259f9b67668a8156a1555bd2cd05cddc3` (InfoPages).
+- **Doğrulama:** GitHub kaynak kodu kontrol edildi; canlı Render dağıtımı ve frontend build sonucu henüz doğrulanmadı.
