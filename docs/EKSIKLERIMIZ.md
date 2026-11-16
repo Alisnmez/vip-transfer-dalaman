@@ -75,6 +75,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 ---
 
+## 2026-11-16 — Kod standardı ve global yardımcılar denetimi
+- **Bulgu:** Dashboard ve rezervasyon listesi tarihleri farklı biçimde hesaplıyordu; `new Date(LocalDateTime)` kullanımı tarayıcı saat dilimine göre yanlış gösterim yapabilirdi. Listede gerçek status yerine sabit Pending, detayda eksik müşteri iletişimi vardı.
+- **Düzeltme:** Ortak `features/booking/formatters.ts` içindeki `turkeyNowLocal`, `formatTransferDateTime`, `bookingStatus` yardımcıları kullanıldı (`516ce1be`, `b7830671`, `3809573d`, `73740beb`). Backend alanlarına göre Booking tipi genişletildi (`195e86e7`).
+- **CI bulgusu:** Dashboard ilk sürümünde React `react-hooks/set-state-in-effect` hatası (run `43953350971`); asenkron effect ile düzeltildi (`9aca93d3`). Son CI bekleniyor.
+- **Açık teknik borç:** Admin layout içinde örnek/işlevsiz kontroller ve diğer admin sayfalarında sahte içerik olabilir; bütün sayfalar ayrıca denetlenmeli. Güvenlik ve E2E testi henüz tamamlanmadı.
+
 ## 2026-11-16 — Admin dashboard gerçek veriye geçiş
 - **Sorun:** Dashboard gerçek veri yerine sahte müşteri isimleri, sürücüler, EUR ciro ve rezervasyon sayıları gösteriyordu. Operasyonel kararları yanıltıyordu.
 - **Düzeltme:** Gerçek `getBookings()` üzerinden toplam talepler, Türkiye saatine göre bugünkü transferler, yaklaşan transferler ve detay bağlantıları eklendi (`86b2d9b8`). Uydurma ciro ve atama bilgileri kaldırıldı.
