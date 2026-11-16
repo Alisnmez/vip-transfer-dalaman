@@ -42,7 +42,8 @@ class BookingIntegrationTests {
                 Map.entry("countryOfResidence", "Lithuania"),
                 Map.entry("specialRequests", "Two child seats"),
                 Map.entry("vehicleId", "vip-minivan"),
-                Map.entry("tripType", "one-way"),        ));
+                Map.entry("tripType", "one-way")
+        ));
 
         String response = mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
