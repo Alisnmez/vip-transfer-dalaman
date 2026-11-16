@@ -1,6 +1,8 @@
 # İlk yayın — MVP kontrol listesi
 
-Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebilsin, kullanıcıya doğrulanmamış vaat sunulmasın. Admin paneli bu aşamanın dışında.
+Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebilsin, kullanıcıya doğrulanmamış vaat sunulmasın.
+
+**Kapsam kararı (2026-11-16):** Kullanıcı ilk yayın hedefini genişletti: admin paneli, otomatik müşteri/işletme e-postaları ve e-posta doğrulaması, WhatsApp, logo, güvenli rezervasyon sorgulama, SEO, FAQ, gerçek müşteri yorumları ve gerçek araç görselleri de hedef kapsamda. Aşağıdaki eski MVP listesi teknik yayın kapılarını korur; bu yeni ürün gereksinimleri de bitmeden genişletilmiş kapsam tamamlandı sayılmaz.
 
 ## Yayın öncesi zorunlu (GO / NO-GO)
 
@@ -17,11 +19,24 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
 - [ ] **Operasyon:** Rezervasyonları kimin/ne sıklıkla takip edeceği belirlenmiş; otomatik e-posta henüz yoksa manuel kontrol süreci hazır.
 
-## İlk yayından sonraya bırakılabilir
+## Genişletilmiş ilk yayın kapsamı (yeni ürün işleri)
 
-- Otomatik müşteri/işletme e-postaları (backlog 5); **yoksa sitede varmış gibi gösterilmez**.
-- Güvenli self-servis rezervasyon sorgulama/değişiklik (6).
-- Uçuş gecikmesi/karşılama otomasyonu (7), ileri SEO (9), çoklu dil (10), yorumlar (11), analitik (12).
+- [ ] Admin paneli: yetkilendirme, rezervasyon listeleme/detay/durum ve iletişim ayarları.
+- [ ] E-posta doğrulama yaklaşımı ve otomatik müşteri alındı + işletme bildirimleri; hata/tekrar gönderim/çift e-posta koruması.
+- [ ] WhatsApp iletişim bağlantısı; gerçek numara ve doğru mesaj akışı.
+- [ ] Özgün logo, favicon ve tutarlı marka uygulaması.
+- [ ] Müşteri rezervasyon sorgulama: yalnızca referans numarasıyla kişisel veri gösterme; e-posta sahipliği doğrulaması veya tek kullanımlık erişim bağlantısı.
+- [ ] SEO: indeksleme, metadata, canonical, sitemap, robots, rota sayfaları, schema ve performans.
+- [ ] FAQ: gerçek işletme kurallarıyla uyumlu yanıtlar.
+- [ ] Yalnızca gerçek/doğrulanabilir müşteri yorumları; uydurma yorumlar gerçek müşteri yorumu gibi yayımlanmaz.
+- [ ] Gerçek filo/araç kategorisiyle eşleşen, kullanım izni bulunan araç fotoğrafları.
+- [ ] Rakip Petunia Travel fiyatlarıyla hedef karşılaştırması: tek yön -£2,50 ve gidiş-dönüş -£5 yalnızca işletme maliyeti ve güncel kaynak fiyatı doğrulanırsa uygulanır.
+
+## Eski MVP için ertelenebilir olarak işaretlenen işler (yeni kapsam kararıyla güncellendi)
+
+- Otomatik müşteri/işletme e-postaları (backlog 5) artık genişletilmiş kapsamda; **çalışmadan sitede varmış gibi gösterilmez**.
+- Güvenli self-servis rezervasyon sorgulama (6) artık genişletilmiş kapsamda; rezervasyon değişiklik talepleri daha sonraya bırakılabilir.
+- Uçuş gecikmesi/karşılama otomasyonu (7), çoklu dil (10) ve analitik (12) sonraya bırakılabilir; temel SEO ve gerçek yorumlar artık genişletilmiş kapsamda.
 - Kapsamlı tarayıcı E2E otomasyonu; ancak yukarıdaki manuel gerçek rezervasyon testi atlanamaz.
 
 **Durum:** Bu belge bir kontrol listesidir, testlerin yapıldığına dair kanıt değildir. İşaretlenmemiş maddeler doğrulanmamıştır.
