@@ -9,6 +9,12 @@ import { transferPrices, transferVehicles } from '../../features/booking/pricing
 
 const pricedDestinations = [...new Set(transferPrices.map(price => price.destination))]
 const airport = 'Dalaman Airport'
+const nextStatuses: Record<string, string[]> = {
+  PENDING: ['CONFIRMED', 'CANCELLED'],
+  CONFIRMED: ['COMPLETED', 'CANCELLED'],
+  COMPLETED: [],
+  CANCELLED: [],
+}
 
 export function BookingDetailPage() {
   const { bookingId } = useParams()
@@ -92,7 +98,7 @@ export function BookingDetailPage() {
       {booking && <div className="mb-5 flex flex-wrap items-end gap-3 rounded-xl border border-outline-variant bg-white p-4">
         <label className="text-sm font-semibold">Booking status
           <select aria-label="Booking status" disabled={saving} value={bookingStatus(booking.status)} onChange={event => { void changeStatus(event.target.value) }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-4 py-3 text-gray-900">
-            {['PENDING', 'CONFIRMED', 'COMPLETED', 'CANCELLED'].map(status => <option key={status} value={status}>{status}</option>)}
+            {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{status}</option>)}
           </select>
         </label>
         <button type="button" disabled={saving} onClick={editing ? () => setEditing(false) : beginEdit} className="rounded-lg border border-outline-variant bg-white px-4 py-3 font-semibold text-gray-900">{editing ? 'Cancel editing' : 'Edit booking details'}</button>
@@ -156,7 +162,7 @@ export function BookingDetailPage() {
           ))}
         </dl>
       )}
-      <p className="mt-6 text-sm text-on-surface-variant">Status changes and customer detail edits are separate. Editing details may recalculate the fare. Confirm only after verification.</p>
+      <p className="mt-6 text-sm text-on-surface-variant">Status changes and customer detail edits are separate. Editing details only recalculates the fare when pricing inputs change. Verify the new fare with the customer before confirming.</p>
     </section>
   )
 }
