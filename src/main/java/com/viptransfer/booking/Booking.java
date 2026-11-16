@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 public class Booking {
@@ -36,6 +37,16 @@ public class Booking {
     private String vehicleId;
     private String tripType;
     private String status = "PENDING";
+
+    @jakarta.persistence.Column(name = "created_at", updatable = false)
+    private Instant createdAt;
+
+    @jakarta.persistence.PrePersist
+    void setCreationTimestamp() {
+        if (createdAt == null) createdAt = Instant.now();
+    }
+
+    public Instant getCreatedAt() { return createdAt; }
 
     @jakarta.persistence.Column(unique = true, length = 64)
     @com.fasterxml.jackson.annotation.JsonIgnore
