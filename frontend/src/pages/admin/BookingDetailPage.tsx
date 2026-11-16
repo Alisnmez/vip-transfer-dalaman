@@ -5,6 +5,10 @@ import { getBooking, updateBooking, updateBookingStatus } from '../../features/b
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingApiError } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
+import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+
+const pricedDestinations = [...new Set(transferPrices.map(price => price.destination))]
+const airport = 'Dalaman Airport'
 
 export function BookingDetailPage() {
   const { bookingId } = useParams()
@@ -57,6 +61,14 @@ export function BookingDetailPage() {
   async function saveDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!draft || !booking) return
+    const destination = draft.pickUpLocation === airport ? draft.dropOffLocation : draft.pickUpLocation
+    const validRoute = (draft.pickUpLocation === airport) !== (draft.dropOffLocation === airport)
+    const priced = transferPrices.some(price => price.destination === destination && price.vehicleId === draft.vehicleId)
+    if (!validRoute || !priced) {
+      setError('Choose an airport route and a vehicle from the price list before saving.')
+      setErrorAction('saving details')
+      return
+    }
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
     catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
@@ -82,7 +94,6 @@ export function BookingDetailPage() {
       {editing && draft && <form onSubmit={event => { void saveDetails(event) }} className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
         {([
           ['customerName', 'Customer name', 'text'], ['countryOfResidence', 'Country of residence', 'text'], ['phoneNumber', 'Phone', 'tel'], ['email', 'Email', 'email'],
-          ['pickUpLocation', 'Pickup', 'text'], ['dropOffLocation', 'Destination', 'text'],
           ['transferDateTime', 'Pickup time (Turkey)', 'datetime-local'], ['returnDateTime', 'Return time (Turkey)', 'datetime-local'],
           ['passengerCount', 'Passengers', 'number'], ['luggageCount', 'Luggage', 'number'], ['babySeatCount', 'Baby seats', 'number'],
           ['flightNumber', 'Flight number', 'text'], ['hotelName', 'Hotel', 'text'],
@@ -92,8 +103,21 @@ export function BookingDetailPage() {
             value={draft[key] ?? ''} onChange={event => setDraft(current => current ? { ...current, [key]: type === 'number' ? Number(event.target.value) : event.target.value } : current)}
             className="mt-2 block w-full min-w-0 rounded-lg border border-outline-variant bg-white px-3 py-3 text-gray-900" />
         </label>)}
+        {(['pickUpLocation', 'dropOffLocation'] as const).map(key => (
+          <label key={key} className="text-sm font-semibold">{key === 'pickUpLocation' ? 'Pickup' : 'Destination'}
+            <select required value={draft[key]} onChange={event => setDraft(current => current ? { ...current, [key]: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900">
+              <option value="">Select location</option>
+              {[airport, ...pricedDestinations].map(location => <option key={location} value={location}>{location}</option>)}
+            </select>
+          </label>
+        ))}
+        <label className="text-sm font-semibold">Vehicle
+          <select required value={draft.vehicleId} onChange={event => setDraft(current => current ? { ...current, vehicleId: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900">
+            <option value="">Select vehicle</option>
+            {transferVehicles.map(vehicle => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
+          </select>
+        </label>
         <label className="text-sm font-semibold">Trip type<select value={draft.tripType} onChange={event => setDraft(current => current ? { ...current, tripType: event.target.value as BookingRequest['tripType'], returnDateTime: event.target.value === 'one-way' ? undefined : current.returnDateTime } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900"><option value="one-way">One-way</option><option value="round-trip">Round-trip</option></select></label>
-        <label className="text-sm font-semibold">Vehicle ID<input required value={draft.vehicleId} onChange={event => setDraft(current => current ? { ...current, vehicleId: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900" /></label>
         <label className="sm:col-span-2 text-sm font-semibold">Special requests<textarea value={draft.specialRequests} onChange={event => setDraft(current => current ? { ...current, specialRequests: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900" /></label>
         <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Saving details recalculates the fare and requires a future pickup time.</p><button type="submit" disabled={saving} className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{saving ? 'Saving...' : 'Save booking details'}</button></div>
       </form>}
