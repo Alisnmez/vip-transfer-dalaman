@@ -10,6 +10,14 @@ export type Booking = {
   luggageCount?: number | null
   babySeatCount?: number | null
   price: number
+  status?: string | null
+  phoneNumber?: string | null
+  email?: string | null
+  hotelName?: string | null
+  transferAddress?: string | null
+  specialRequests?: string | null
+  vehicleId?: string | null
+  tripType?: string | null
 }
 
 export type BookingRequest = {
