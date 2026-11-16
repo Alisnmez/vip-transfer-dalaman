@@ -24,6 +24,8 @@ import {
   VehiclesPage,
 } from '../pages/public/InfoPages'
 
+// Router-local layout helpers are not exported; keeping them here avoids unnecessary files.
+// eslint-disable-next-line react-refresh/only-export-components
 function ScrollToTop() {
   const { pathname } = useLocation()
   useLayoutEffect(() => {
@@ -32,6 +34,7 @@ function ScrollToTop() {
   return null
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 function PublicPageLayout() {
   return <><ScrollToTop /><PublicLayout /></>
 }
