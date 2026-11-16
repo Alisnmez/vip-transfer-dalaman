@@ -317,3 +317,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **SEO uygulama sırası:** (1) Domain/marka ve hedef rota/arama niyeti kararı; (2) özgün rota sayfaları ve iç linkler; (3) indekslenebilir public sayfalar için build-time prerender/SSG ve ilk HTML'de title/description/canonical/robots; (4) aynı route registry'den sitemap.xml ve robots.txt; (5) doğrulanmış Schema.org ve Search Console/Lighthouse/JS kapalı test; (6) rezervasyon E2E regresyonu.
 - **Önemli teknik risk:** Şu anki usePageSeo.ts meta etiketleri React mount sonrası oluşturuyor; build HTML içeriğini ve ilk yanıtın indexability'sini kanıtlamaz. Prerender çözümü seçilmeden preview indexable yapılmayacak.
 - **Kaldığımız yer:** Önce 1.3 Phase 0 salt-okunur PostgreSQL şema envanteri ve 1.5 smoke/E2E; ardından SEO 9 için bağımsız uygulama commitleri. Eğitim günlüğü problem/kanıt/neden/düzeltme/test biçiminde tutulacak.
+
+
+## 2026-11-16 — 1.3 farklı payload 409 DB satır sayısı regresyonu
+- **Sorun:** Aynı Idempotency-Key ile farklı müşteri verisi gönderilince HTTP 409 testi vardı; ancak hatalı retry sonrasında DB'de yeni kayıt oluşmadığı ayrı assertion ile doğrulanmıyordu.
+- **Düzeltme:** BookingIntegrationTests.reusedKeyWithDifferentBookingDataReturnsConflict içinde ilk POST öncesi bookingRepository.count() alındı, ilk POST sonrası +1 ve farklı payload 409 sonrası yine +1 beklendi. Commit 4b0c951.
+- **Test durumu:** GitHub Actions run 43858026331 ilk kontrolde in_progress; başarı henüz doğrulanmadı. Test CI izole PostgreSQL üzerinde çalışır, Render staging DB üzerinde işlem yapılmadı.
+- **SEO durumu:** 9. madde planı ve mevcut kod denetimi önceki günlükte kayıtlı; indekslenebilir HTML/SSG, sitemap ve destinasyon sayfaları hâlâ açık.
+- **Kaldığımız yer:** CI sonucunu doğrula; ardından 1.3 Phase 0 gerçek şema envanteri ve 1.5 browser E2E. PostgreSQL erişim kısıtı nedeniyle canlı migration yapılmadı.
