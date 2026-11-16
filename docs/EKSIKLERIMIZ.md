@@ -45,7 +45,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 3.1 | Fiyatın sunucuda hesaplanması | TAMAMLANDI | `BookingService` fiyatı `TransferPricingService.calculatePrice` ile sunucudaki `transfer-prices.json` dosyasından hesaplıyor; istemci fiyatına güvenilmiyor. Önceki fiyat testleri CI'da geçti. | Ticari fiyat onayı ayrı 3.2'de |
 | 3.2 | Gerçek tarife ve rakip karşılaştırması | BLOKE | Fiyat kataloğu mevcut, fakat işletme maliyetleri ve güncel Petunia Travel fiyatları doğrulanmış değil. | Kaynak fiyatlar, tarih, rota, araç sınıfı, para birimi ve minimum kârı doğrula; ardından tek yön -£2,50 / gidiş-dönüş -£5 hedefini değerlendir |
-| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | BEKLİYOR | Rezervasyon POST'u talep oluşturuyor; ödeme sağlayıcısı veya tahsilat koşulu doğrulanmadı. | İşletmenin kabul ettiği ödeme yöntemini ve ödeme zamanını kararlaştır; doğrulanmamış ödeme vaadi yazma |
+| 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Kullanıcı 2026-11-16 tarihinde ilk sürümde online ödeme olmayacağını belirledi. Rezervasyon yalnızca talep oluşturur; online ödeme entegrasyonu yapılmayacak. | Araçta/nakit/kart veya başka tahsilat yöntemini kullanıcıyla netleştir; onaylanan koşulu müşteriye göster |
 | 3.4 | İptal ve iade koşulları | BEKLİYOR | İşletme tarafından onaylanmış iptal/iade süresi ve koşulu belgelenmedi. | İşletme politikasını netleştir, sonra sayfaya ekle |
 
 ### 4–12. Diğer ana maddeler
@@ -63,6 +63,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 3.3 ödeme kapsamı kararı
+- **Karar:** Kullanıcı başlangıç sürümünde online ödeme istemiyor. Ödeme sağlayıcısı, ödeme sayfası veya kart tahsilatı kodu eklenmeyecek.
+- **Kanıt:** Kullanıcının 2026-11-16 tarihli açık kararı; mevcut rezervasyon akışı talep kaydediyor.
+- **Açık nokta:** Tahsilatın araçta mı yapılacağı ve nakit/kart kabulü henüz belirtilmedi. Bu netleşmeden sitede ödeme yöntemi vaadi gösterilmeyecek.
+- **Test:** Belge güncellemesi; kod veya ödeme entegrasyonu değiştirilmedi.
 
 ## 2026-11-16 — Görev 2 kullanıcı kabul testi
 - **Problem:** 2.1–2.4 alanlarının gerçek rezervasyonda çalıştığının teyidi bekleniyordu.
