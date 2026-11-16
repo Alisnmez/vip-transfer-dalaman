@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { ProcessingButton } from '../../components/ProcessingButton'
+import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 
@@ -47,6 +49,7 @@ function isAirportPickup(): boolean {
 
 export function BookingPassengerPage() {
   const navigate = useNavigate()
+  const { processing, run } = useAsyncAction()
   const [draft] = useState(readPassengerDraft)
   const [firstName, setFirstName] = useState(() => draft.customerName?.trim().split(/\s+/)[0] ?? '')
   const [lastName, setLastName] = useState(() => draft.customerName?.trim().split(/\s+/).slice(1).join(' ') ?? '')
@@ -174,7 +177,14 @@ export function BookingPassengerPage() {
                 experience.
               </p>
 
-              <form className="space-y-stack-md" onSubmit={(event) => { event.preventDefault(); handleSubmit() }}>
+              <form className="space-y-stack-md" onSubmit={(event) => {
+                event.preventDefault()
+                void run(async () => {
+                  // Let React paint the shared processing state before client-side navigation.
+                  await new Promise<void>(resolve => window.requestAnimationFrame(() => resolve()))
+                  handleSubmit()
+                })
+              }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <FormField
                     label="First Name"
@@ -313,15 +323,17 @@ export function BookingPassengerPage() {
                   </span>
                   Back
                 </Link>
-                <button
-                  className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all active:scale-95"
+                <ProcessingButton
+                  className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all disabled:opacity-60"
                   type="submit"
+                  processing={processing}
+                  processingLabel="Continuing..."
                 >
                   Continue to Confirmation
                   <span translate="no" className="material-symbols-outlined text-base">
                     arrow_forward
                   </span>
-                </button>
+                </ProcessingButton>
               </div>
             </div>
           </div>
