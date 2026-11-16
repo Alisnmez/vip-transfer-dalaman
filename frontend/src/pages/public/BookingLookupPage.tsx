@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { verifyBookingSupport } from '../../features/booking/api'
 import { bookingSupportLink, whatsappSupportEnabled } from '../../features/booking/support'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -19,9 +18,7 @@ export function BookingLookupPage() {
     setVerified(false)
     setMessage('')
     try {
-      const result = await verifyBookingSupport(reference.trim(), email.trim())
-      setVerified(result.matched)
-      if (!result.matched) setMessage('We could not verify these details. Check your reference and email, or contact support.')
+      setMessage('Online ownership verification is not available yet. Please contact our team using the contact details below. We will verify your booking before making any changes.')
     } catch {
       setMessage('Verification is temporarily unavailable. Please try again later.')
     } finally {
@@ -57,7 +54,7 @@ export function BookingLookupPage() {
             </label>
             <button type="submit" disabled={!validReference || !email.trim() || checking}
               className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">
-              {checking ? 'Checking...' : 'Verify booking details'}
+              {checking ? 'Checking...' : 'Request verification instructions'}
             </button>
           </form>
           {message && <p role="alert" className="mt-4 text-sm text-error">{message}</p>}
