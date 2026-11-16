@@ -485,3 +485,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ## 2026-11-16 — Geçici iletişim bilgileri
 - Kullanıcı talebiyle BookingFormPage footer'ına geçici iletişim bilgileri eklendi: 05555555555 (tel:+905555555555) ve ali_sonmez35@hotmail.com (mailto:). Commit 1f8ec017.
 - Bu bilgiler kullanıcının talebiyle geçicidir; ileride güncellenecek. Diğer sayfalarda iletişim bilgileri tutarlılığı ayrıca kontrol edilmeli. Admin kapsam dışı.
+
+
+## 2026-11-16 — Geçici iletişim bilgileri site genelinde
+- Contact Us sayfasına 05555555555 ve ali_sonmez35@hotmail.com tıklanabilir bağlantıları eklendi (ffe19e0c).
+- Ana sayfa footer'ına aynı geçici iletişim bağlantıları eklendi (433f00bc).
+- Booking form footer'ında önceki commit 1f8ec017 ile zaten mevcut. Kullanıcı istediğinde gerçek işletme iletişim bilgileriyle değiştirilecek. Admin kapsam dışı; CI ve canlı görünüm doğrulaması bekleniyor.
