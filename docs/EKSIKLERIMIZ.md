@@ -552,3 +552,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Frontend API `createBooking`, aynı JSON payload için eşzamanlı çağrıları `inFlightBookings` Promise haritasında birleştiriyor (`b432843f`). İki çağrı aynı backend POST'unun sonucunu bekliyor; başarısız istekte map temizleniyor ve sessionStorage'daki idempotency key tekrar denemeye kalıyor.
 - Backend `Idempotency-Key` ve PostgreSQL benzersizlik koruması ayrı güvenlik katmanı olarak korunuyor.
 - Gerçek browser çift tıklama testi, ağ kopması ve backend eşzamanlı DB testi CI ile birlikte yeniden doğrulanmalı. Admin kapsam dışı.
+
+
+## 2026-11-16 — Çift gönderim koruması için otomatik test
+- `features/booking/singleFlight.ts` ortak modülü eşzamanlı aynı anahtarlı Promise'leri birleştiriyor; başarı veya hatadan sonra kilidi kaldırıyor (`4ecf9688`).
+- `api/index.ts` `createBooking` bu modülü kullanıyor; backend idempotency anahtarı ve başarısız ağ isteğinden sonra retry davranışı korunuyor (`566f62be`).
+- `tests/singleFlight.test.mjs`: aynı rezervasyonun tek çağrı olması, farklı rezervasyonların bağımsızlığı ve başarısız istekten sonra tekrar deneme (`4544cf73`). CI sonucu ayrıca doğrulanmalı; browser E2E ve gerçek ağ kopması senaryoları açık.
