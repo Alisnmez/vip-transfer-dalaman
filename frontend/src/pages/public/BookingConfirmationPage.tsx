@@ -139,6 +139,15 @@ export function BookingConfirmationPage() {
         setError('Saved booking details contain invalid values. Please return to the previous steps.')
         return
       }
+      const pickupDateTime = new Date(`${transferData.pickUpDate}T${transferData.pickUpTime}`)
+      const returnDateTime = transferData.tripType === 'round-trip'
+        ? new Date(`${transferData.returnDate}T${transferData.returnTime}`)
+        : null
+      if (!Number.isFinite(pickupDateTime.getTime()) || pickupDateTime.getTime() <= Date.now() ||
+          (returnDateTime !== null && (!Number.isFinite(returnDateTime.getTime()) || returnDateTime <= pickupDateTime))) {
+        setError('Your transfer date is no longer valid. Please return to the first step and select a future date.')
+        return
+      }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
           !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
           !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
