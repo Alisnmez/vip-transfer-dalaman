@@ -56,12 +56,19 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
-| 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma gelir, sürücü ve rezervasyon istatistikleri kaldırıldı; API'den gerçek toplam, bugün ve yaklaşan rezervasyonlar gösteriliyor (`86b2d9b8`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
+| 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı (`86b2d9b8`); iptal edilenler planlanan taleplerden çıkarıldı (`278d4be`), PENDING dahil onaylanmamış talepler açık etiketlendi (`cc54ea6`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
 | 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`, `a497030a`). React ve PostgreSQL CI `43952884744` başarılı. | Canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
+
+## 2026-11-16 — Admin dashboard talepler ile onaylı transferlerin ayrılması
+- **Aktif madde:** 4.4.
+- **Sorun ve kanıt:** `PENDING` taleplerin 'scheduled transfers' olarak sunulması onaylanmış transfer izlenimi veriyordu.
+- **Düzeltme:** Başlıklar 'booking requests' olarak netleştirildi, her yaklaşan talebin gerçek durumu ve bekleyen talep sayısı gösterildi (`cc54ea6`). İptal edilenler hariç tutuluyor; toplam geçmiş talep sayısı korunuyor.
+- **Test:** GitHub'a commit edildi; CI ve gerçek admin verisi doğrulaması henüz bekleniyor. **Durum: TEST BEKLİYOR.**
+- **Sonraki adım:** CI sonucunu kontrol et, canlı admin giriş/liste/detay/durum değişikliği testini yap.
 
 ## 2026-11-16 — Admin dashboard iptal edilen transferleri saymama
 - **Aktif madde:** 4.4 — dashboard gerçek veri doğruluğu.
