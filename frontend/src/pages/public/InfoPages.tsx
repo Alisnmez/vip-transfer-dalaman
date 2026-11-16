@@ -80,6 +80,24 @@ function InfoPage({
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-gutter-grid">
+          {content === pageContent.vehicles && (
+            <article className="bg-white border border-outline-variant rounded-xl overflow-hidden card-soft-shadow">
+              <img
+                className="w-full h-56 object-cover"
+                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85"
+                alt="Porsche sports car — illustrative demo image"
+                loading="lazy"
+              />
+              <div className="p-6">
+                <p className="text-xs uppercase tracking-wide text-secondary font-bold mb-2">Demo vehicle — not available to book</p>
+                <h2 className="font-title-md text-title-md text-admin-primary mb-2">Porsche Cayenne GTX</h2>
+                <p className="font-body-md text-body-md text-on-surface-variant mb-4">
+                  Just for fun — temporary concept listing, not a real transfer offer.
+                </p>
+                <p className="text-2xl font-bold text-admin-primary">£500 <span className="text-sm font-normal">demo price</span></p>
+              </div>
+            </article>
+          )}
           {content.items.map(([title, description]) => (
             <article
               className="bg-white border border-outline-variant rounded-xl p-6 card-soft-shadow"
