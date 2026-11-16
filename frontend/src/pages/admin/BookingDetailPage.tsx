@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { Link, useParams } from 'react-router-dom'
 import { ProcessingButton } from '../../components/ProcessingButton'
 
@@ -25,7 +26,7 @@ export function BookingDetailPage() {
   const [error, setError] = useState('')
   const [errorAction, setErrorAction] = useState('loading booking')
   const [notice, setNotice] = useState('')
-  const [saving, setSaving] = useState(false)
+  const { processing: saving, run: runSaving } = useAsyncAction()
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState<BookingRequest | null>(null)
   const [loading, setLoading] = useState(Number.isSafeInteger(id) && id > 0)
@@ -43,10 +44,11 @@ export function BookingDetailPage() {
   async function changeStatus(status: string) {
     if (!booking || status === bookingStatus(booking.status)) return
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
-    setSaving(true); setError(''); setNotice('')
-    try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
-    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Status may have changed; reload to verify before retrying.' : err instanceof Error ? err.message : 'Status update failed'); setErrorAction('updating status') }
-    finally { setSaving(false) }
+    await runSaving(async () => {
+      setError(''); setNotice('')
+      try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
+      catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Status may have changed; reload to verify before retrying.' : err instanceof Error ? err.message : 'Status update failed'); setErrorAction('updating status') }
+    })
   }
 
   function beginEdit() {
@@ -87,8 +89,8 @@ export function BookingDetailPage() {
       || draft.vehicleId !== booking.vehicleId
       || draft.tripType !== booking.tripType
       || draft.passengerCount !== booking.passengerCount
-    if (fareChanged && !['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status))) {
-      setError('This booking is already ' + bookingStatus(booking.status) + '. Fare-changing edits are only allowed for pending or confirmed bookings.')
+    if (fareChanged && !['PENDING', 'CONFIRMED', 'COMPLETED'].includes(bookingStatus(booking.status))) {
+      setError('This booking is already ' + bookingStatus(booking.status) + '. Fare-changing edits are not allowed for cancelled bookings.')
       setErrorAction('saving details')
       return
     }
@@ -98,11 +100,12 @@ export function BookingDetailPage() {
       return
     }
     if (fareChanged && (previewFare === null || !capacityValid)) { setError('Select a valid route, vehicle and passenger/luggage capacity to calculate the new fare.'); setErrorAction('saving details'); return }
-    if (fareChanged && !window.confirm(`Update booking fare from £${Number(booking.price).toFixed(2)} to £${previewFare?.toFixed(2)}? Confirm the new price with the customer before saving.`)) return
-    setSaving(true); setError(''); setNotice('')
-    try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
-    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof BookingApiError && err.status === 409 ? 'The booking was changed or the requested edit conflicts with its current status. Reload the booking and check its status before editing again.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
-    finally { setSaving(false) }
+    if (fareChanged && !window.confirm(`Update booking fare from £${Number(booking.price).toFixed(2)} to £${previewFare?.toFixed(2)}?${bookingStatus(booking.status) === 'COMPLETED' ? ' This trip is already completed; this will correct its historical fare.' : ' Confirm the new price with the customer before saving.'}`)) return
+    await runSaving(async () => {
+      setError(''); setNotice('')
+      try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
+      catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof BookingApiError && err.status === 409 ? 'The booking was changed or the requested edit conflicts with its current status. Reload the booking and check its status before editing again.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
+    })
   }
 
   return (
