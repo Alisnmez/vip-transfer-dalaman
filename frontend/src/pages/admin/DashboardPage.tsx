@@ -23,7 +23,12 @@ export function DashboardPage() {
   }
 
   useEffect(() => {
-    void refresh()
+    let active = true
+    getBookings()
+      .then(data => { if (active) setBookings(data) })
+      .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
   }, [])
 
   const now = turkeyNowLocal()
