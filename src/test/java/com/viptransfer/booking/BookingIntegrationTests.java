@@ -521,6 +521,7 @@ class BookingIntegrationTests {
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
+        long countBefore = bookingRepository.count();
         String first = mockMvc.perform(post("/bookings")
                         .header("Idempotency-Key", java.util.UUID.randomUUID().toString())
                         .contentType(MediaType.APPLICATION_JSON).content(request))
@@ -537,6 +538,8 @@ class BookingIntegrationTests {
                 objectMapper.readTree(first).get("id").asLong(),
                 objectMapper.readTree(second).get("id").asLong(),
                 "Independent booking keys must create separate records");
+        org.junit.jupiter.api.Assertions.assertEquals(countBefore + 2, bookingRepository.count(),
+                "Two deliberate booking attempts must insert two separate rows");
     }
 
 
