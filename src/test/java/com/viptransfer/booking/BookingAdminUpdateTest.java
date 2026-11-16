@@ -84,7 +84,29 @@ class BookingAdminUpdateTest {
                 .thenReturn(new BigDecimal("75.50"));
         Booking updated = service.updateBooking(10L, request);
         assertEquals(new BigDecimal("75.50"), updated.getPrice());
-        verify(pricing, times(2)).calculatePrice(any(), any(), any(), any(), any());
+        verify(pricing, times(1)).calculatePrice(any(), any(), any(), any(), any());
+    }
+
+    @Test
+    void invalidLuggageDoesNotMutateBooking() {
+        doThrow(new IllegalArgumentException("Luggage count exceeds capacity."))
+                .when(pricing).validateLuggageCapacity("vip-minivan", 8);
+        request.setLuggageCount(8);
+        assertThrows(IllegalArgumentException.class, () -> service.updateBooking(10L, request));
+        assertEquals("Customer", booking.getCustomerName());
+        assertEquals(new BigDecimal("67.50"), booking.getPrice());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void missingTariffDoesNotMutateBooking() {
+        booking.setStatus("PENDING");
+        request.setPassengerCount(3);
+        when(pricing.calculatePrice(any(), any(), any(), any(), any()))
+                .thenThrow(new IllegalArgumentException("No price found."));
+        assertThrows(IllegalArgumentException.class, () -> service.updateBooking(10L, request));
+        assertEquals("Customer", booking.getCustomerName());
+        verify(repository, never()).save(any());
     }
 
     @Test
