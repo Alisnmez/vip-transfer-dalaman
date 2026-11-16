@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
@@ -32,9 +33,8 @@ function readSavedDetails<T>(key: string): T {
 
 
 export function BookingConfirmationPage() {
-  const submittingRef = useRef(false)
   const [confirmed, setConfirmed] = useState(false)
-  const [processing, setProcessing] = useState(false)
+  const { processing, run } = useAsyncAction()
   const [receipt, setReceipt] = useState<BookingReceipt | null>(readReceipt)
 
   const [error, setError] = useState('')
@@ -49,9 +49,9 @@ export function BookingConfirmationPage() {
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
   const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
-  async function handleConfirm() {
-    if (!confirmed || submittingRef.current || processing || receipt !== null) return
-    submittingRef.current = true
+  function handleConfirm() {
+    if (!confirmed || receipt !== null) return
+    void run(async () => {
     setError('')
     setSubmissionUncertain(false)
     try {
@@ -90,7 +90,6 @@ export function BookingConfirmationPage() {
         setError('Required booking information is missing. Please return to the previous steps.')
         return
       }
-      setProcessing(true)
       const booking = await createBooking({
         customerName: passengerData.customerName,
         passengerCount: transferData.passengerCount,
@@ -130,10 +129,8 @@ export function BookingConfirmationPage() {
     } catch (err) {
       setSubmissionUncertain(err instanceof BookingApiError && err.uncertain)
       setError(err instanceof Error ? err.message : 'Booking could not be created.')
-    } finally {
-      submittingRef.current = false
-      setProcessing(false)
     }
+    })
   }
 
   return (
