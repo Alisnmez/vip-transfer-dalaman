@@ -124,6 +124,8 @@ export function BookingFormPage() {
         currency: 'GBP',
         vehicleId: effectiveVehicleId,
         flightNumber: flightNumber.trim() || undefined,
+        luggageCount: luggages,
+        babySeatCount: babySeats,
       }),
     )
   }
