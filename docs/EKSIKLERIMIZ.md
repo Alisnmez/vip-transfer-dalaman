@@ -56,6 +56,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
+| 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma gelir, sürücü ve rezervasyon istatistikleri kaldırıldı; API'den gerçek toplam, bugün ve yaklaşan rezervasyonlar gösteriliyor (`86b2d9b8`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
 | 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`, `a497030a`). React ve PostgreSQL CI `43952884744` başarılı. | Canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
@@ -73,6 +74,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Admin dashboard gerçek veriye geçiş
+- **Sorun:** Dashboard gerçek veri yerine sahte müşteri isimleri, sürücüler, EUR ciro ve rezervasyon sayıları gösteriyordu. Operasyonel kararları yanıltıyordu.
+- **Düzeltme:** Gerçek `getBookings()` üzerinden toplam talepler, Türkiye saatine göre bugünkü transferler, yaklaşan transferler ve detay bağlantıları eklendi (`86b2d9b8`). Uydurma ciro ve atama bilgileri kaldırıldı.
+- **Test:** Commit sonrası CI ve canlı veri testi bekleniyor. API erişimi doğrulanmadan tamamlandı sayılmaz.
 
 ## 2026-11-16 — Admin CI düzeltmesi ve ilk yayın değerlendirmesi
 - **Sorun:** `AdminLayout` içindeki `useLocation` koşullu çağrıldığı için React lint kırıldı (run `43952560910`).
