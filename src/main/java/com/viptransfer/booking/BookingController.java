@@ -28,8 +28,16 @@ public class BookingController {
 
     @PostMapping("/support/verify-code")
     public java.util.Map<String, Boolean> verifySupportCode(@RequestBody java.util.Map<String, String> payload) {
-        return java.util.Map.of("verified", bookingSupportService.verifyCode(
-                payload.get("reference"), payload.get("email"), payload.get("code")));
+        String token = bookingSupportService.verifyCode(
+                payload.get("reference"), payload.get("email"), payload.get("code"));
+        return token == null ? java.util.Map.of("verified", false) :
+                java.util.Map.of("verified", true, "token", token);
+    }
+
+    @PostMapping("/support/request")
+    public java.util.Map<String, String> submitSupportRequest(@RequestBody java.util.Map<String, String> payload) {
+        bookingSupportService.submitRequest(payload.get("token"), payload.get("type"));
+        return java.util.Map.of("message", "Your verified request has been sent to our team.");
     }
 
     @PostMapping("/support/verify")
