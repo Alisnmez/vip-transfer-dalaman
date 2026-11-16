@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getBookingPage } from '../../features/booking/api'
+import { ProcessingButton } from '../../components/ProcessingButton'
 import { formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingStatusBadge } from '../../features/booking/components/BookingStatusBadge'
 import type { Booking } from '../../features/booking/types'
@@ -50,10 +51,10 @@ export function BookingListPage() {
             <p className="text-on-surface-variant">{visibleBookings.length} shown · {totalElements} total requests</p>
           </div>
           <Link to="/admin/calendar" className="rounded-lg bg-admin-primary px-4 py-2 font-semibold text-white">Calendar</Link>
-          <button type="button" onClick={() => { void refresh() }} disabled={loading || refreshing}
+          <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading || refreshing} processingLabel="Refreshing..."
             className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
-            {refreshing ? 'Refreshing...' : 'Refresh bookings'}
-          </button>
+            Refresh bookings
+          </ProcessingButton>
         </div>
       </header>
 
@@ -67,7 +68,7 @@ export function BookingListPage() {
       </section>
       <section className="min-w-0 flex-1 p-4 sm:overflow-auto sm:p-6">
         {loading && <p>Loading booking requests...</p>}
-        {error && <div role="alert" className="space-y-3 text-error"><p>Unable to load bookings: {error}</p><button type="button" onClick={refresh} disabled={refreshing} className="rounded-lg border px-4 py-2 font-semibold disabled:opacity-50">Try again</button></div>}
+        {error && <div role="alert" className="space-y-3 text-error"><p>Unable to load bookings: {error}</p><ProcessingButton type="button" onClick={refresh} processing={loading || refreshing} processingLabel="Retrying..." className="rounded-lg border px-4 py-2 font-semibold disabled:opacity-50">Try again</ProcessingButton></div>}
         {!loading && !error && visibleBookings.length === 0 && <p>No booking requests found.</p>}
         {!loading && !error && visibleBookings.length > 0 && (
           <><div className="space-y-3 md:hidden">{visibleBookings.map(booking => (
