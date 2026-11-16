@@ -349,6 +349,10 @@ export function HomePage() {
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">Contact Us</Link>
             </div>
           </div>
+          <div className="flex flex-col sm:flex-row gap-4 pb-stack-md">
+            <a className="text-white/80 hover:text-white underline underline-offset-4" href="tel:+905555555555">0555 555 55 55</a>
+            <a className="text-white/80 hover:text-white underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com">ali_sonmez35@hotmail.com</a>
+          </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
             <p className="text-white/40 font-body-md">
               © {new Date().getFullYear()} VIP Transfer Dalaman. All rights reserved.
