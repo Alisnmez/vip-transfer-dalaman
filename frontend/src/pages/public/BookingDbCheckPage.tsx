@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { encodeBasicAuthorization } from '../../features/booking/adminCredentials'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
@@ -17,12 +18,12 @@ export function BookingDbCheckPage() {
     window.location.hostname === 'localhost'
 
   async function check() {
-    if (busy || !/^\\d+$/.test(id) || !password || !username) return
+    if (busy || !/^[0-9]+$/.test(id) || !password || !username) return
     setBusy(true)
     setResult('Checking database through the authenticated API...')
     try {
       const response = await fetch(`${API_BASE_URL}/bookings/${encodeURIComponent(id)}`, {
-        headers: { Authorization: `Basic ${btoa(username + ':' + password)}` },
+        headers: { Authorization: encodeBasicAuthorization(username, password) },
         cache: 'no-store',
       })
       if (response.status === 401 || response.status === 403) {
@@ -64,7 +65,7 @@ export function BookingDbCheckPage() {
         <label className="block">Admin password (not saved)
           <input className="mt-1 block w-full rounded border p-3" type="password" value={password} onChange={event => setPassword(event.target.value)} autoComplete="off" required />
         </label>
-        <button className="rounded bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50" type="submit" disabled={busy || !/^\\d+$/.test(id) || !password}>{busy ? 'Checking...' : 'Verify database record'}</button>
+        <button className="rounded bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50" type="submit" disabled={busy || !/^[0-9]+$/.test(id) || !password}>{busy ? 'Checking...' : 'Verify database record'}</button>
       </form>
       {result && <p role="status" className="rounded border p-4">{result}</p>}
       <p className="text-sm">Temporary diagnostic for staging only. Remove before public launch.</p>
