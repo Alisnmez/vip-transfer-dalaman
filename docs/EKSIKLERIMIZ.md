@@ -322,6 +322,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ## 2026-11-16 — 1.3 farklı payload 409 DB satır sayısı regresyonu
 - **Sorun:** Aynı Idempotency-Key ile farklı müşteri verisi gönderilince HTTP 409 testi vardı; ancak hatalı retry sonrasında DB'de yeni kayıt oluşmadığı ayrı assertion ile doğrulanmıyordu.
 - **Düzeltme:** BookingIntegrationTests.reusedKeyWithDifferentBookingDataReturnsConflict içinde ilk POST öncesi bookingRepository.count() alındı, ilk POST sonrası +1 ve farklı payload 409 sonrası yine +1 beklendi. Commit 4b0c951.
-- **Test durumu:** GitHub Actions run 43858026331 ilk kontrolde in_progress; başarı henüz doğrulanmadı. Test CI izole PostgreSQL üzerinde çalışır, Render staging DB üzerinde işlem yapılmadı.
+- **Test durumu:** GitHub Actions run 43858026331 completed/success (commit 4b0c951). CI'da PostgreSQL regresyonu başarılı; gerçek Render DB veya browser E2E testi değildir. Test CI izole PostgreSQL üzerinde çalışır, Render staging DB üzerinde işlem yapılmadı.
 - **SEO durumu:** 9. madde planı ve mevcut kod denetimi önceki günlükte kayıtlı; indekslenebilir HTML/SSG, sitemap ve destinasyon sayfaları hâlâ açık.
 - **Kaldığımız yer:** CI sonucunu doğrula; ardından 1.3 Phase 0 gerçek şema envanteri ve 1.5 browser E2E. PostgreSQL erişim kısıtı nedeniyle canlı migration yapılmadı.
+
+
+## 2026-11-16 — 1.3 çakışan retry regresyon CI sonucu doğrulandı
+- **Kanıt:** GitHub Actions run 43858026331, commit 4b0c95179b1b64d0552a5672ad7cce8ffde3f6fa için completed/success.
+- **Sonuç:** Aynı Idempotency-Key farklı rezervasyon içeriğiyle tekrar kullanıldığında HTTP 409 ve tek yeni DB kaydı beklentisini içeren CI başarılı. Bu sadece test ortamındaki doğrulamadır.
+- **Durum:** 1.3 TEST BEKLİYOR; migration, staging browser E2E ve gerçek DB şema envanteri tamamlanmadı.
+- **Kaldığımız yer:** Phase 0 salt-okunur PostgreSQL envanterine erişim sağlanana kadar 1.5 için güvenli otomatik E2E test altyapısını incele.
