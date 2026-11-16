@@ -174,7 +174,7 @@ export function BookingPassengerPage() {
                 experience.
               </p>
 
-              <form className="space-y-stack-md" onSubmit={(event) => event.preventDefault()}>
+              <form className="space-y-stack-md" onSubmit={(event) => { event.preventDefault(); handleSubmit() }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <FormField
                     label="First Name"
@@ -315,8 +315,7 @@ export function BookingPassengerPage() {
                 </Link>
                 <button
                   className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all active:scale-95"
-                  onClick={handleSubmit}
-                  type="button"
+                  type="submit"
                 >
                   Continue to Confirmation
                   <span translate="no" className="material-symbols-outlined text-base">
