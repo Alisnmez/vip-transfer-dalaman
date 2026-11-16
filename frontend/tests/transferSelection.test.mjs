@@ -52,3 +52,33 @@ test('passenger, luggage and baby-seat capacity is checked before booking submis
   assert.ok(validateTransferSelection({ ...valid, passengerCount: 2.5 }))
   assert.equal(validateTransferSelection({ ...valid, passengerCount: 4, luggageCount: 5, babySeatCount: 2 }), null)
 })
+
+test('every published vehicle accepts its exact passenger limit and rejects one extra', () => {
+  for (const vehicle of transferVehicles) {
+    const route = transferPrices.find(entry => entry.vehicleId === vehicle.id)
+    assert.ok(route, 'missing route for ' + vehicle.id)
+    const luggage = Math.min(8, vehicle.maxLuggage ?? 8)
+    const selection = {
+      ...valid,
+      dropOffLocation: route.destination,
+      vehicleId: vehicle.id,
+      passengerCount: vehicle.maxPassengers,
+      luggageCount: luggage,
+    }
+    assert.equal(validateTransferSelection(selection), null, vehicle.id + ' should accept published capacity')
+    assert.ok(validateTransferSelection({ ...selection, passengerCount: vehicle.maxPassengers + 1 }),
+      vehicle.id + ' must reject overcapacity')
+    assert.ok(validateTransferSelection({ ...selection, luggageCount: luggage + 1 }),
+      vehicle.id + ' must reject excess luggage')
+  }
+})
+
+test('fractional, missing and non-finite counts are rejected', () => {
+  for (const count of [undefined, -1, 1.5, NaN, Infinity]) {
+    assert.ok(validateTransferSelection({ ...valid, luggageCount: count }))
+    assert.ok(validateTransferSelection({ ...valid, babySeatCount: count }))
+  }
+  for (const count of [undefined, 0, -1, 1.5, NaN, Infinity]) {
+    assert.ok(validateTransferSelection({ ...valid, passengerCount: count }))
+  }
+})
