@@ -150,8 +150,8 @@ export function BookingConfirmationPage() {
       }
       if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
           transferData.passengerCount > 16 ||
-          !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(passengerData.email || '')) {
-        setError('Please review the passenger count, luggage and email address before confirming.')
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passengerData.email || '')) {
+        setError('Please review the passenger count and email address before confirming.')
         return
       }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
