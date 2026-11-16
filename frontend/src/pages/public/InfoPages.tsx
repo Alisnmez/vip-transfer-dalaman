@@ -97,7 +97,7 @@ function InfoPage({
           <section aria-label="Contact details" className="mt-8 rounded-xl border border-outline-variant bg-white p-6">
             <h2 className="font-title-md text-title-md text-admin-primary mb-4">Contact us</h2>
             <div className="flex flex-col gap-3">
-              <span className="text-on-surface-variant">Phone support: number to be confirmed</span>
+              <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">Phone: 0555 555 55 55</a>
               <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com">Email: ali_sonmez35@hotmail.com</a>
             </div>
           </section>
