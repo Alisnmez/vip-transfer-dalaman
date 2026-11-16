@@ -63,10 +63,12 @@ export function BookingPassengerPage() {
   const [specialRequests, setSpecialRequests] = useState(draft.specialRequests ?? '')
   const [error, setError] = useState('')
   const [emailError, setEmailError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
 
   function handleSubmit() {
     setError('')
     setEmailError('')
+    setPhoneError('')
     let savedTransferInfo: string | null
     try {
       savedTransferInfo = localStorage.getItem('bookingTransferInfo')
@@ -84,8 +86,8 @@ export function BookingPassengerPage() {
     }
     const digits = phoneNumber.replace(/\D/g, '')
     const countryDigits = countryCode.replace(/\D/g, '').length
-    if ((countryCode === '+90' && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15) {
-      setError('Please enter a valid phone number (7–15 digits internationally; 10 digits for Turkey).')
+    if (((countryCode === '+90' || countryCode === '+1') && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
+      setPhoneError('Enter a valid national number: 10 digits starting with 5 for Turkish mobiles, or 10 digits for US numbers.')
       return
     }
     if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
@@ -194,7 +196,7 @@ export function BookingPassengerPage() {
                       Phone Number
                     </label>
                     <div className="flex min-w-0">
-                      <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber('') }}>
+                      <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber(''); setPhoneError('') }}>
                         <option value="+90">🇹🇷 +90</option>
                         <option value="+44">🇬🇧 +44</option>
                         <option value="+49">🇩🇪 +49</option>
@@ -204,15 +206,16 @@ export function BookingPassengerPage() {
                       </select>
                       <input
                         className="min-w-0 flex-1 border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                        onChange={(event) => setPhoneNumber(event.target.value.replace(/\D/g, '').slice(0, countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length))}
+                        onChange={(event) => { setPhoneNumber(event.target.value.replace(/\D/g, '').slice(0, countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length)); setPhoneError('') }}
                         placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
                         autoComplete="tel-national"
                         inputMode="numeric"
-                        maxLength={countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length}
+                        maxLength={countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length}
                         type="tel"
                         value={phoneNumber}
                       />
                     </div>
+                    {phoneError && <p role="alert" className="text-sm text-error">{phoneError}</p>}
                   </div>
                   <FormField
                     label="Email Address"
