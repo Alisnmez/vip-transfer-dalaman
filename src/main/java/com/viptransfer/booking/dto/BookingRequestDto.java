@@ -45,7 +45,7 @@ public class BookingRequestDto {
     private String email;
     @jakarta.validation.constraints.Size(max = 255)
     private String countryOfResidence;
-    @jakarta.validation.constraints.Size(max = 500, message = "Transfer address must be at most 500 characters.")
+    @jakarta.validation.constraints.Size(max = 255, message = "Transfer address must be at most 255 characters.")
     private String transferAddress;
     @jakarta.validation.constraints.Size(max = 120, message = "Hotel name must be at most 120 characters.")
     private String hotelName;
