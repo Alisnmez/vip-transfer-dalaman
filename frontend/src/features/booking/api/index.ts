@@ -1,4 +1,5 @@
 import type { Booking, BookingRequest } from '../types'
+import { getAdminAuthorization } from '../adminCredentials'
 import { createSingleFlight } from '../singleFlight'
 import { createRetryKeyStore } from '../retryKeys'
 import { bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from './errors'
@@ -19,7 +20,7 @@ async function retryStorageKey(payload: string): Promise<string> {
   return `booking-retry:${hex}`
 }
 
-async function request<T>(url: string, options?: RequestInit): Promise<T> {
+async function request<T>(url: string, options?: RequestInit, admin = false): Promise<T> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 60000)
 
@@ -28,6 +29,7 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
       ...options,
       headers: {
         'Content-Type': 'application/json',
+        ...(admin && getAdminAuthorization() ? { Authorization: getAdminAuthorization()! } : {}),
         ...options?.headers,
       },
       signal: controller.signal,
@@ -52,11 +54,11 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 }
 
 export function getBookings() {
-  return request<Booking[]>(BOOKING_URL)
+  return request<Booking[]>(BOOKING_URL, undefined, true)
 }
 
 export function getBooking(id: number) {
-  return request<Booking>(`${BOOKING_URL}/${id}`)
+  return request<Booking>(`${BOOKING_URL}/${id}`, undefined, true)
 }
 
 export async function createBooking(data: BookingRequest) {
@@ -82,11 +84,11 @@ export function updateBooking(id: number, data: BookingRequest) {
   return request<Booking>(`${BOOKING_URL}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
-  })
+  }, true)
 }
 
 export function deleteBooking(id: number) {
   return request<void>(`${BOOKING_URL}/${id}`, {
     method: 'DELETE',
-  })
+  }, true)
 }
