@@ -235,3 +235,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test:** Render API env güncellemeleri kabul etti. Tarayıcıdan CORS preflight, POST ve PostgreSQL kayıt doğrulaması **yapılmadı**; bu adım henüz tamamlanmış sayılmaz.
 - **Durum:** 1.4 **DEVAM EDİYOR**.
 - **Kaldığımız yer:** İki yeni deploy `live` olana kadar kontrol et; ardından tarayıcı Network sekmesinde OPTIONS/POST ve test DB kaydını doğrula. Test rezervasyonunun gerçek bildirim/dispatch yaratmadığını önceden kontrol et.
+
+## 2026-11-16 — 1.4 kullanıcı onaylı DB görünürlük testi: erişim engeli
+- **İstek:** Kullanıcı DBeaver ile yerel bilgisayarından Render PostgreSQL'i izleyecek; test rezervasyonu gönderilip yeni kaydın görülmesini istiyor.
+- **Dağıtım:** Backend environment güncellemesi `dep-dbtdambji66s73agmbo0` **live**; takip eden otomatik commit dağıtımı `dep-dbtdbesr5hns73bqpia0` **update_in_progress**. Frontend önceki kontrolde **live**.
+- **Test girişimleri:** Bu çalışma ortamından `https://vip-transfer-dalaman-api-test.onrender.com` HTTP erişimi DNS `NameResolutionError` nedeniyle başarısız; web erişimi de başarısız. Render PostgreSQL read-only `SELECT NOW(), COUNT(*) FROM booking` sorgusu SSL/TLS/harici erişim kısıtıyla başarısız. Render PostgreSQL aracı yalnızca read-only sorgu destekliyor, kayıt oluşturamaz.
+- **Sonuç:** Gerçek POST gönderilemedi; **yeni rezervasyon oluşturulmadı**, DBeaver'da yeni kayıt görünmesi beklenmemeli. DB veya ağ güvenlik ayarları değiştirilmedi. Başarı iddiası yok.
+- **Kaldığımız yer:** Kullanıcı test frontend'inde gerçek rezervasyon isteğini kendisi gönderebilir; DBeaver'da `SELECT id, status, created_at FROM booking ORDER BY id DESC LIMIT 10;` sorgusunu mevcut tablo/kolon adlarıyla uyumluysa çalıştırıp sonucu paylaşmalı. Gerçek POST yanıtı ve DB kaydı eşleştirilince 1.4 doğrulanacak. Müşteriye bildirim/dispatch yan etkileri kontrol edilmeden sahte veri gönderilmemeli.
