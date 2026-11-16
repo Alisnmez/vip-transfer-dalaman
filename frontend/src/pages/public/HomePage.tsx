@@ -23,7 +23,7 @@ export function HomePage() {
               className="bg-secondary text-on-secondary px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:opacity-90 transition-opacity"
               to="/booking"
             >
-              eşşek
+              Book Now
             </Link>
             <Link
               className="bg-white/10 border border-white/30 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/15 transition-colors"
