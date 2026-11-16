@@ -34,6 +34,11 @@ public class BookingController {
         return bookingService.getAllBookings();
     }
 
+    @GetMapping("/dashboard")
+    public java.util.Map<String, Object> getDashboardSummary() {
+        return bookingService.getDashboardSummary();
+    }
+
     @GetMapping("/page")
     public Page<Booking> getBookingPage(
             @org.springframework.web.bind.annotation.RequestParam(defaultValue = "0") int page,
