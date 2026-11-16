@@ -12,7 +12,9 @@ export function BookingLookupPage() {
         </h1>
         <p className="mb-5 text-on-surface-variant">
           Online booking lookup is not available yet. Please save the booking
-          reference shown after submitting your transfer request. If you need help\n          with an existing request, contact us using the details below and quote\n          your booking reference.
+          reference shown after submitting your transfer request. If you need help
+          with an existing request, contact us using the details below and quote
+          your booking reference.
         </p>
         <p className="mb-8 rounded-lg border border-outline bg-white p-5 text-on-surface-variant">
           For your privacy, a booking reference alone cannot be used to display
