@@ -11,14 +11,14 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ### 1. Backend, PostgreSQL ve rezervasyon güvenilirliği
 
 **Genel durum:** DEVAM EDİYOR  
-**Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme**  
+**Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme (TEST BEKLİYOR)**  
 **Bir sonraki somut işlem:** Kalıcı idempotency anahtarı + PostgreSQL unique constraint + çakışma ve eşzamanlılık testlerini uygulamak; ardından CI sonucu doğrulamak.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
 | 1.1 | Backend derleme hatası | TAMAMLANDI | Fazladan virgül düzeltildi; Render backend canlı doğrulandı. `590f582` | Regresyon halinde yeniden aç |
 | 1.2 | PostgreSQL bağlantısı ve mevcut test altyapısı | TAMAMLANDI | Render PostgreSQL bağlantısı ve izole CI PostgreSQL ile 14 başarılı test doğrulandı. `bf60c97`, CI run `43839886864` | Yeni testleri CI'ya ekle |
-| 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | DEVAM EDİYOR | Controller/Service/Entity incelendi; tekrar ve 409 senaryosu için iki test yazıldı. `c50d19a`; **henüz çalıştırılmadı** | Backend + DB koruması, eşzamanlı test, CI |
+| 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | TEST BEKLİYOR | Backend retry koruması CI başarıyla geçti (`59a85ed`, run `43842759471`); frontend anahtarı eklendi (`906d60d`), henüz CI doğrulanmadı | Son CI, yarış testi, tarayıcı E2E ve migration |
 | 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | BEKLİYOR | İzole backend POST/GET testi mevcut; tarayıcı uçtan uca doğrulama yok | Ayrı test ortamında E2E |
 | 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | BEKLİYOR | Önceki backend deploy doğrulandı; yeni idempotency sürümü henüz yok | CI, deploy, log ve güvenli smoke test |
 
@@ -130,3 +130,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test durumu:** Son commit için CI/Maven sonucu henüz doğrulanmadı. Eşzamanlılık testi, frontend anahtar gönderimi ve uçtan uca tarayıcı testi henüz yok.
 - **Risk:** Mevcut spring.jpa.hibernate.ddl-auto=update üretim için kontrollü migration yerine geçmez; Flyway ve şema değişikliği planlanmalı. Header gönderilmeyen istekler eski davranışı sürdürür.
 - **Kaldığımız yer / sonraki adım:** Son commit CI sonucunu kontrol et, başarısız test varsa düzelt; frontend retry anahtarı ve yarış testlerini ekle. 1.3 tamamlandı denmeyecek.
+
+## 2026-11-16 — 1.3 CI ve frontend retry ilerlemesi
+- **Doğrulama:** GitHub Actions `43842759471` commit `59a85ed` için **success** sonucu verdi; bu sonuç backend idempotency kodunun derleme/test aşamasını geçtiğini gösterir, eşzamanlı yarış testinin varlığını veya canlı tarayıcı doğrulamasını göstermez. Önceki ara commitlerin CI hataları son Service commit'inde giderildi.
+- **Frontend değişikliği:** `frontend/src/features/booking/api/index.ts` içinde `crypto.randomUUID()` ile Idempotency-Key üretildi. Aynı JSON payload için belirsiz ağ hatası sonrası anahtar bellekte tutulup yeniden kullanılır; başarılı yanıt sonrası silinir. Commit `906d60d`.
+- **Kalan risk:** Sayfa yenilenince bellek sıfırlanır; aynı detaylarla ikinci bağımsız rezervasyonun anahtarı önceki işlem sürüyorsa paylaşılabilir. Üretimde kontrollü DB migration, eşzamanlılık testi, son frontend CI ve E2E doğrulaması yapılmadı.
+- **Kaldığımız yer:** `906d60d` ve sonraki CI sonucunu kontrol et; yarış testini ekle ve frontend retry yaşam döngüsünü işlem bazlı hâle getir. **1.3 TEST BEKLİYOR.**
