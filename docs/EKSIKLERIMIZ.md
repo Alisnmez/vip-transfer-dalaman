@@ -24,9 +24,20 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Tamamlanma koşulu:** 1.1–1.5 doğrulanmış olmalı; CI yeşil, tekrarlı/eşzamanlı istekler tek kayıt oluşturmalı ve frontend rezervasyonu test ortamında uçtan uca çalışmalı.
 
-### 2–12. Diğer ana maddeler
+### 2. Uçuş, otel, bagaj ve çocuk koltuğu
 
-**Durum:** BEKLİYOR. Görev 1 bitmeden yeni ana maddeye geçilmeyecek; başlanınca aynı biçimde 2.1, 2.2… alt maddeleri açılacak.
+**Genel durum:** DEVAM EDİYOR (kullanıcı talebiyle başlandı; Görev 1 migration/production güvenlik açıkları ayrıca takip ediliyor).
+
+| No | Alt iş | Durum | Kanıt | Sonraki adım |
+|---|---|---|---|---|
+| 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO, entity, service, TypeScript tipi ve POST entegrasyon testi eklendi (`388a448`) | CI sonucunu doğrula, ardından rezervasyon formuna bağla |
+| 2.2 | Otel bilgisi | BEKLİYOR | Mevcut transferAddress alanı var | Ayrı alan ihtiyacını ve akışı belirle |
+| 2.3 | Bagaj bilgisi | BEKLİYOR | — | Kapasite/validasyon |
+| 2.4 | Çocuk koltuğu | BEKLİYOR | — | Sayı ve yaş aralığı |
+
+### 3–12. Diğer ana maddeler
+
+**Durum:** BEKLİYOR.
 
 ### Her çalışma sonunda zorunlu kayıt şablonu
 
@@ -268,3 +279,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni test:** `BookingIntegrationTests.java` staging test origin'i `https://vip-transfer-dalaman-test.onrender.com` ile yapılandırıldı; OPTIONS preflight `Access-Control-Allow-Origin` bu değere eşit olmalı. Commit `3fb750c`.
 - **Yeni run:** GitHub Actions `43847559002` ilk kontrolde **queued**; sonucu henüz doğrulanmadı.
 - **Kalan:** 1.3 migration/şema envanteri ve bağımsız canlı tekrar testi; 1.5 deployment smoke ve güvenlik kontrolleri. Üretim DB değiştirilmedi.
+
+## 2026-11-16 — Görev 2 başladı: uçuş numarası
+- **Kullanıcı kararı:** Sıradaki ana maddeye geçilmesi istendi. Görev 1'de migration ve üretim güvenliği hâlâ açık; tamamlandı olarak işaretlenmedi.
+- **Kod:** Booking entity'ye opsiyonel `flightNumber` (20 karakter), request DTO'ya uzunluk/karakter validasyonu, create/update service mapping ve frontend TypeScript tipine alan eklendi. Commitler `6c4519f`, `168c82f`, `ac5eb70`, `9bc2bfd`.
+- **Test:** `BookingIntegrationTests` içinde geçerli `TK 2552` için kayıt/yanıt, geçersiz `TK/2552` için 400 testi eklendi (`388a448`). CI sonucu henüz doğrulanmadı.
+- **Sınır:** React formuna henüz alan eklenmedi; dolayısıyla kullanıcıdan uçuş numarası toplanmıyor. Staging deploy otomatik tetiklenebilir; yeni DB sütunu Hibernate `ddl-auto=update` ile ekleneceğinden mevcut migration riski sürüyor. Herhangi bir verinin korunduğu ayrıca doğrulanmadı.
+- **Sonraki adım:** CI'yi doğrula, ardından React formuna opsiyonel uçuş numarası girişini ekle.
