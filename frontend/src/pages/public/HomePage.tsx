@@ -102,6 +102,38 @@ export function HomePage() {
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+            {/* Temporary fun-mode demo: remove this card when the experiment ends. */}
+            <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
+              <div className="h-48 mb-6 overflow-hidden rounded-lg">
+                <img
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  alt="Illustrative Porsche sports car photo; not a verified Cayenne GTX image"
+                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=85"
+                />
+              </div>
+              <h3 className="font-title-md text-on-surface mb-2">Porsche Cayenne GTX</h3>
+              <p className="text-xs text-on-surface-variant mb-3">Temporary demo vehicle · illustrative photo</p>
+              <div className="flex gap-4 mb-4 text-on-surface-variant">
+                <div className="flex items-center gap-1">
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 4
+                </div>
+                <div className="flex items-center gap-1">
+                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 3
+                </div>
+                <div className="flex items-center gap-1">
+                  <span translate="no" className="material-symbols-outlined text-sm">ac_unit</span> Climate
+                </div>
+              </div>
+              <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
+                <li>Premium SUV concept</li>
+                <li>Illustrative listing only</li>
+                <li>Not available for booking</li>
+              </ul>
+              <p className="text-2xl font-bold text-on-surface mb-4">£500 <span className="text-sm font-normal">demo price</span></p>
+              <button type="button" disabled className="w-full py-3 bg-primary text-white rounded-lg font-bold opacity-60 cursor-not-allowed">
+                Select Vehicle
+              </button>
+            </div>
             <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
               <div className="h-48 mb-6 overflow-hidden rounded-lg">
                 <img
