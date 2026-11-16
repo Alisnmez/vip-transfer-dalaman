@@ -60,6 +60,17 @@ export function checkAdminAccess() {
   return request<void>(ADMIN_AUTH_URL, undefined, true, 20000)
 }
 
+export type DashboardSummary = {
+  total: number
+  pending: number
+  today: number
+  upcoming: Booking[]
+}
+
+export function getDashboardSummary() {
+  return request<DashboardSummary>(`${BOOKING_URL}/dashboard`, undefined, true)
+}
+
 export function getBookings() {
   return request<Booking[]>(BOOKING_URL, undefined, true)
 }
