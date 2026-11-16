@@ -139,13 +139,9 @@ export function BookingFormPage() {
     }
     setFormError('')
     try {
-      sessionStorage.removeItem('lastBookingReceipt')
-    } catch {
-      // Booking remains possible when browser storage is unavailable.
-    }
-    localStorage.setItem(
-      'bookingTransferInfo',
-      JSON.stringify({
+      localStorage.setItem(
+        'bookingTransferInfo',
+        JSON.stringify({
         dropOffLocation: dropOffLocation.trim(),
         vehicleName: selectedVehicle.name,
         tripType,
@@ -161,8 +157,18 @@ export function BookingFormPage() {
         flightNumber: flightNumber.trim() || undefined,
         luggageCount: luggages,
         babySeatCount: babySeats,
-      }),
-    )
+        }),
+      )
+    } catch {
+      event.preventDefault()
+      setFormError('Your browser could not save the transfer details. Please enable site storage and try again.')
+      return
+    }
+    try {
+      sessionStorage.removeItem('lastBookingReceipt')
+    } catch {
+      // The previous receipt may remain available if session storage is disabled.
+    }
   }
 
   return (
