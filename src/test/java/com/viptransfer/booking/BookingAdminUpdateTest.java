@@ -73,6 +73,7 @@ class BookingAdminUpdateTest {
         ResponseStatusException error = assertThrows(ResponseStatusException.class,
                 () -> service.updateBooking(10L, request));
         assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
+        assertTrue(error.getReason().contains("Fare-changing edits require a pending booking"));
         assertEquals(new BigDecimal("67.50"), booking.getPrice());
         verify(repository, never()).save(any());
     }
