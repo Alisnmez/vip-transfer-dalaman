@@ -2,7 +2,7 @@
 
 Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebilsin, kullanıcıya doğrulanmamış vaat sunulmasın.
 
-**Güncel kapsam kararı (2026-11-16):** Kullanıcı hızlı bir **operasyona hazır v1.0** istiyor: gerçek rezervasyon alınabilsin ve işletme rezervasyonları güvenli biçimde takip edip müşteriye dönüş yapabilsin. Önceki genişletilmiş ilk yayın kapsamı artık zorunlu yayın kapsamı değildir; geliştirmeler `docs/CANLI_YAYIN_SONRASI_GELISTIRMELER.md` dosyasında izlenir. Ancak güvenlik, doğru fiyat/iletişim, yasal gereklilikler ve çalışır operasyon ertelenemez. Online ödeme v1.0'da yok.
+**Güncel kapsam kararı (2026-11-16):** Kullanıcı hızlı bir **operasyona hazır v1.0** istiyor: gerçek rezervasyon alınabilsin ve işletme rezervasyonları güvenli biçimde takip edip müşteriye dönüş yapabilsin. Önceki genişletilmiş ilk yayın kapsamı artık zorunlu yayın kapsamı değildir; geliştirmeler `docs/CANLI_YAYIN_SONRASI_GELISTIRMELER.md` dosyasında izlenir. Ancak güvenlik, doğru fiyat/iletişim, yasal gereklilikler ve çalışır operasyon ertelenemez. Online ödeme v1.0'da yok; yalnızca nakit kabul edilecek, kartla ödeme olmayacak. Tahsilat zamanı henüz netleşmedi.
 
 **Yayın kararı:** İlk yayın için rezervasyon talebi + referans, yetkili işletme erişimi (mevcut güvenli API veya uygulanmış panel), rezervasyonların günlük takip edilmesi, gerçek iletişim kanalı, doğru fiyat/koşullar, temel mobil akış ve üretim güvenliği yeterli. Otomatik e-posta ve gelişmiş panel gibi ek özellikler yoksa sitede varmış gibi sunulmaz. Yayın kararı ancak aşağıdaki kontroller doğrulanınca GO olabilir.
 
@@ -16,6 +16,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Hata akışı:** API erişilemezse veya geçersiz rezervasyon ID döndürürse kullanıcıya yanlışlıkla 'başarılı' denmiyor; belirsiz gönderimde destek iletişimi gösteriliyor. Kod koruması `f319d0e8`; canlı smoke bekliyor.
 - [ ] **Gerçek fiyat ve kapasite:** Fiyat kataloğu işletme tarafından doğrulanmış; geçersiz araç/rota ve aşırı kapasite reddediliyor.
 - [ ] **İletişim bilgileri:** Kullanıcı kararıyla `05555555555` geçici telefon numarası geliştirme/test ortamında korunuyor (`fce3c968`, `d3a2c0a6`, `4cd9a47a`). **Gerçek canlı yayından hemen önce mutlaka değiştirilecek.** İleride admin panelinden iletişim numarasını düzenleme alanı eklenecek; admin şu an kapsam dışı. `ali_sonmez35@hotmail.com` adresinin aktif takip edildiği doğrulanmalı.
+- [ ] **Nakit tahsilat bilgisi:** Kullanıcı yalnızca nakit kabulünü onayladı; ödeme zamanını teyit et ve rezervasyon ekranındaki açıklamayı test et. Kart/online ödeme seçeneği gösterme.
 - [ ] **İşletme bilgileri ve yasal metinler:** İptal, ödeme, KVKK/gizlilik ve işletme kimliği doğrulanmış; bilinmeyen şartlar vaat edilmiyor.
 - [ ] **Mobil smoke:** Ana sayfa → rezervasyon 1/2/3 → başarı, iPhone/Android dar ekran ve masaüstü; kritik linkler çalışıyor.
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
