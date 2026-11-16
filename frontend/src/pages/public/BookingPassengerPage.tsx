@@ -87,7 +87,7 @@ export function BookingPassengerPage() {
     const digits = phoneNumber.replace(/\D/g, '')
     const countryDigits = countryCode.replace(/\D/g, '').length
     if (((countryCode === '+90' || countryCode === '+1') && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
-      setPhoneError('Enter a valid national number: 10 digits starting with 5 for Turkish mobiles, or 10 digits for US numbers.')
+      setPhoneError(countryCode === '+90' ? 'Turkish mobile numbers must contain 10 digits and start with 5 (without +90).' : countryCode === '+1' ? 'US and Canadian numbers must contain 10 digits (without +1).' : 'Enter a valid national number: at least 7 digits and no more than 15 digits including the country code.')
       return
     }
     if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
