@@ -1,3 +1,11 @@
+## 2026-11-17 — E-posta OTP ile rezervasyon desteği (henüz canlıya hazır değil)
+- Spring Mail eklendi; `BookingSupportService` 6 haneli 10 dakikalık kod üretir, 5 deneme ve aynı referans/e-posta çifti için 2 dakika bekleme uygular. Kodlar bellekte saklanır; yeniden başlatmada kaybolur.
+- `POST /bookings/support/request-code` ve `POST /bookings/support/verify-code` açık, eski `/support/verify` kapalı. E-posta ve rezervasyon numarası eşleşse bile gerçek sahiplik için OTP gerekir.
+- Manage Booking sayfası iki aşamalı OTP arayüzü ve doğrulama sonrası WhatsApp/e-posta bağlantıları içerir.
+- **Yayın engeli:** `SUPPORT_EMAIL_ENABLED=false` varsayılan; gerçek SMTP_HOST/PORT/USERNAME/PASSWORD ve SUPPORT_EMAIL_FROM tanımlanıp teslimat test edilmeden açılmamalı.
+- **Güvenlik engeli:** Mevcut rate-limit bellek içi ve referans/e-posta çifti bazlı; dağıtık/IP tabanlı abuse koruması, kalıcı token yönetimi ve güvenli doğrulanmış destek talebi kaydı henüz yok. OTP doğrulaması sadece tarayıcıda bağlantı gösteriyor, sunucuda talep yetkilendirmesi yapmıyor. Bu haliyle üretimde güvenli talep yetkilendirmesi olarak kabul edilmemeli.
+- CI/frontend build ve Render dağıtımı henüz doğrulanmadı.
+
 ## 2026-11-17 — Müşteri değişiklik ve iptal talepleri
 - **Kodlandı:** Rezervasyon onay ekranında Change / Cancellation destek bağlantıları (`8925ed2`), /booking/lookup sayfasında referans girilerek aynı talepler (`7c380ee`). Sadece referansla kişisel veri gösterilmez; mesaj gönderimi rezervasyonu değiştirmez veya iptal etmez.
 - **Güvenli geçiş:** `VITE_WHATSAPP_NUMBER` geçerli gerçek işletme numarası olarak tanımlanırsa `wa.me` üzerinden hazır mesaj; tanımlanmazsa e-posta fallback (`26869ec`). Geçici `0555 555 55 55` WhatsApp hedefi olarak kullanılmaz. Örnek environment dosyası güncellendi (`035bd62`).
