@@ -56,7 +56,7 @@ export function validateBookingDetails(transfer: TransferDetails, passenger: Pas
   const scheduleError = validateTransferSchedule(transfer, now)
   if (scheduleError) return scheduleError
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passenger.email)) {
+  if (!/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(passenger.email.trim())) {
     return 'Please review the email address before confirming.'
   }
   if (!/^\+\d{8,15}$/.test(passenger.phoneNumber) ||
