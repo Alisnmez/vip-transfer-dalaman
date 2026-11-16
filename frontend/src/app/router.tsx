@@ -3,6 +3,7 @@ import { useLayoutEffect } from 'react'
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
+import { CalendarPage } from '../pages/admin/CalendarPage'
 import { BookingDetailPage } from '../pages/admin/BookingDetailPage'
 import { BookingListPage } from '../pages/admin/BookingListPage'
 import { DashboardPage } from '../pages/admin/DashboardPage'
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <DashboardPage /> },
-      { path: 'calendar', element: <Navigate to="/admin/bookings" replace /> },
+      { path: 'calendar', element: <CalendarPage /> },
       { path: 'bookings', element: <BookingListPage /> },
       { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
       { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
