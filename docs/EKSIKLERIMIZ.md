@@ -30,7 +30,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 | No | Alt iş | Durum | Kanıt | Sonraki adım |
 |---|---|---|---|---|
-| 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO, entity, service, TypeScript tipi ve POST entegrasyon testi eklendi (`388a448`) | CI sonucunu doğrula, ardından rezervasyon formuna bağla |
+| 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO/entity/service/test (`388a448`) CI başarılı (`43847834472`); React form → localStorage → confirmation → POST bağlandı (`f9b9df8`, `ab8129c`) | Yeni frontend build ve staging E2E doğrula |
 | 2.2 | Otel bilgisi | BEKLİYOR | Mevcut transferAddress alanı var | Ayrı alan ihtiyacını ve akışı belirle |
 | 2.3 | Bagaj bilgisi | BEKLİYOR | — | Kapasite/validasyon |
 | 2.4 | Çocuk koltuğu | BEKLİYOR | — | Sayı ve yaş aralığı |
@@ -286,3 +286,8 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test:** `BookingIntegrationTests` içinde geçerli `TK 2552` için kayıt/yanıt, geçersiz `TK/2552` için 400 testi eklendi (`388a448`). CI sonucu henüz doğrulanmadı.
 - **Sınır:** React formuna henüz alan eklenmedi; dolayısıyla kullanıcıdan uçuş numarası toplanmıyor. Staging deploy otomatik tetiklenebilir; yeni DB sütunu Hibernate `ddl-auto=update` ile ekleneceğinden mevcut migration riski sürüyor. Herhangi bir verinin korunduğu ayrıca doğrulanmadı.
 - **Sonraki adım:** CI'yi doğrula, ardından React formuna opsiyonel uçuş numarası girişini ekle.
+
+## 2026-11-16 — Görev 2.1 uçuş numarası frontend uçtan uca bağlandı
+- **Kod:** `BookingFormPage` flightNumber state, kullanıcı girdisi ve 20 karakter doğrulaması; `bookingTransferInfo` localStorage'a yazma; `BookingConfirmationPage` POST payload'ına ekleme, özet ve başarı ekranında gösterme; `BookingPassengerPage` özel istekler placeholder'ından uçuş numarası ifadesini kaldırma. Commitler `f9b9df8`, `ab8129c`, `0efdc99`.
+- **Backend testi:** `388a448` CI run `43847834472` başarılı. React değişikliklerinin son CI run'ı `43848189495` ilk kontrolde queued; sonuç bekleniyor.
+- **Risk:** Form alanı opsiyonel; canlı tarayıcı üzerinden uçuş numaralı gerçek rezervasyon henüz doğrulanmadı. Staging'de deploy sonrasında E2E gerekir.
