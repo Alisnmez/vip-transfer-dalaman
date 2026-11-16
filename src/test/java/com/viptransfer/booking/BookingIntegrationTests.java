@@ -319,17 +319,22 @@ class BookingIntegrationTests {
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way"
         ));
+        long countBefore = bookingRepository.count();
         mockMvc.perform(post("/bookings")
                         .header("Idempotency-Key", key)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk());
+        org.junit.jupiter.api.Assertions.assertEquals(countBefore + 1, bookingRepository.count(),
+                "The original idempotency key must create exactly one booking");
         request.put("customerName", "Changed Test");
         mockMvc.perform(post("/bookings")
                         .header("Idempotency-Key", key)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isConflict());
+        org.junit.jupiter.api.Assertions.assertEquals(countBefore + 1, bookingRepository.count(),
+                "A conflicting retry must not insert another booking");
     }
 
 
