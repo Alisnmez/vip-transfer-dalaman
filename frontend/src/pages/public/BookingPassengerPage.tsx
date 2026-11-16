@@ -60,7 +60,7 @@ export function BookingPassengerPage() {
     localStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
-      email: email.trim(),
+      email: email.trim().toLowerCase(),
       countryOfResidence,
       transferAddress: transferAddress.trim(),
       hotelName: hotelName.trim(),
@@ -108,7 +108,7 @@ export function BookingPassengerPage() {
                     <label className="font-label-sm text-label-sm text-on-surface-variant">
                       Phone Number
                     </label>
-                    <div className="flex">
+                    <div className="flex min-w-0">
                       <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber('') }}>
                         <option value="+90">🇹🇷 +90</option>
                         <option value="+44">🇬🇧 +44</option>
@@ -118,9 +118,10 @@ export function BookingPassengerPage() {
                         <option value="+370">🇱🇹 +370</option>
                       </select>
                       <input
-                        className="w-full border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
+                        className="min-w-0 flex-1 border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
                         onChange={(event) => setPhoneNumber(event.target.value.replace(/\D/g, '').slice(0, countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length))}
                         placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
+                        autoComplete="tel-national"
                         inputMode="numeric"
                         maxLength={countryCode === '+90' ? 10 : 15 - countryCode.replace(/\D/g, '').length}
                         type="tel"
@@ -224,7 +225,7 @@ export function BookingPassengerPage() {
                   Back
                 </Link>
                 <button
-                  className="flex items-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all active:scale-95"
+                  className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all active:scale-95"
                   onClick={handleSubmit}
                   type="button"
                 >
