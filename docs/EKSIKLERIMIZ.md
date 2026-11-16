@@ -414,3 +414,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingConfirmationPage: React state güncellemesi beklenmeden useRef ile senkron gönderim kilidi, hızlı çift tıklamada ikinci POST'un başlamasını engeller (b6799bfa). Backend Idempotency-Key kontrolü korunur.
 - Bağlantı kesintisi/zaman aşımı: Sonucun belirsiz olabileceğini açıklayan durum mesajı, aynı sayfadan tekrar deneme yönlendirmesi; mevcut idempotency anahtarı saklanır (4f2056aa). Sunucuya ulaşıp ulaşmadığı kanıtlanmadıkça rezervasyon başarısı iddia edilmez.
 - Bozuk localStorage JSON için kullanıcıya anlaşılır hata mesajı (8de11e34). Son üç commit CI sonucu bekleniyor; gerçek browser E2E ve live DB doğrulaması açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Rezervasyon sonucunun sayfa yenilemede korunması
+- Önceki CI doğrulaması: c59a48a9 run 43862457679, 8de11e34 run 43862423872, 4f2056aa run 43862393643 ve b6799bfa run 43862371697 completed/success.
+- BookingConfirmationPage: başarılı POST cevabından sonra yalnızca referans, müşteri adı, pickup/destination ve saatten oluşan kısa makbuz sessionStorage'a kaydediliyor; aynı sekmede yenilemede tekrar gösteriliyor, yeniden POST gönderilmiyor (18026d49). SessionStorage devre dışıysa makbuz yalnızca mevcut render'da gösterilir.
+- BookingFormPage: yeni geçerli transfer bilgileri kaydedilirken eski makbuz siliniyor, önceki rezervasyonun sonucu yeni rezervasyonla karışmıyor (67a80d73).
+- Confirmation receipt: yenileme sonrası transfer formu localStorage'dan silindiği için fiyat, bagaj ve çocuk koltuğu gibi kaydedilmemiş alanlar makbuzda artık gösterilmiyor; doğrulanmış kısa özet korunuyor (36f1ba0b).
+- Bu üç commit için CI sonucu bekleniyor. Tarayıcı E2E ve canlı DB kontrolü ayrı açık işler. Admin koduna dokunulmadı.
