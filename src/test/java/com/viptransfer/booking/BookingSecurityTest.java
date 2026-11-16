@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest(properties = {"app.admin.password=test-admin-password",
         "app.frontend.origin=https://vip-transfer-dalaman-test.onrender.com"})
@@ -56,6 +57,7 @@ class BookingSecurityTest {
     @Test
     void invalidCalendarMonthIsRejectedBeforeDatabaseLookup() throws Exception {
         mockMvc.perform(get("/bookings/calendar").param("month", "2035-99")
-                .header("Authorization", adminAuthorization())).andExpect(status().isBadRequest());
+                .header("Authorization", adminAuthorization())).andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Invalid calendar month."));
     }
 }
