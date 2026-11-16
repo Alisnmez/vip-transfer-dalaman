@@ -48,7 +48,17 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 | 3.3 | Ödeme yöntemi ve tahsilat açıklaması | DEVAM EDİYOR | Yalnızca nakit kararı alındı; son onay ekranı güncellendi (`6f990011`). | Tahsilat zamanı ve kabul edilen nakit para birimi **logo/metin/son rötuşlar aşamasında** kullanıcıdan alınacak; şimdi sorulmayacak |
 | 3.4 | İptal ve iade koşulları | DEVAM EDİYOR | Hizmet ve iletişim sayfalarında rezervasyon referansıyla iptal/değişiklik talebi için iletişim yönlendirmesi eklendi (`efe66482`); hiçbir iade garantisi veya süre uydurulmadı. | İptal/iade koşullarının nihai metni **son rötuşlar** aşamasında işletme onayıyla eklenecek |
 
-### 4–12. Diğer ana maddeler
+### 4. İşletme rezervasyon takibi ve admin erişimi
+
+**Genel durum:** DEVAM EDİYOR — API bağlantısı var, ancak erişim güvenliği ve canlı veri görünürlüğü henüz kanıtlanmadı.
+
+| No | Alt iş | Durum | Kanıt | Sonraki adım |
+|---|---|---|---|---|
+| 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
+| 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
+| 4.3 | Admin API erişim güvenliği | BLOKE | Admin frontend `getBookings/getBooking` çağrılarına kimlik doğrulama başlığı eklemiyor; backend güvenlik konfigürasyonu ve dağıtım erişimi henüz denetlenmedi. | Backend `GET /bookings` ve `GET /bookings/{id}` için gerçek auth/authorization denetimi; gizli anahtarları public Vite bundle içine koyma |
+
+### 5–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
 
@@ -63,6 +73,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 4 admin ilk bağlantı ve CI
+- **Sorun:** Admin rezervasyon ekranı sahte müşteri, EUR fiyat, işlevsiz buton ve uydurma sayfalama içeriyordu; detay sayfası boştu.
+- **Düzeltme:** Gerçek API listesi üzerinde arama, GBP fiyat ve detay sayfası (`2d0a180a`, `5698437a`).
+- **Test:** GitHub Actions `43951815776` React/TypeScript ve Spring Boot/PostgreSQL işlerinin ikisi de başarılı. Canlı admin giriş/doğrulama testi yapılmadı.
+- **Risk:** `getBookings` istemcisi kimlik doğrulama göndermiyor; backend koruması kontrol edilmeden admin hazır sayılmaz. Kişisel verileri halka açık GET ile göstermeyin.
+- **Sonraki adım:** Backend controller/security konfigürasyonu ve admin kimlik doğrulama akışını denetle; gerekirse güvenli sunucu tarafı oturum mimarisi kur.
 
 ## 2026-11-16 — Görev 3.3/3.4 yayın öncesi son rötuş ayrımı
 - **Karar:** Ödeme tahsilat zamanı ve iptal/iade politikasının nihai ayrıntıları kullanıcı tarafından logo ve metinlerin son kez düzenleneceği aşamada verilecek; şimdi tekrar sorulmayacak.
