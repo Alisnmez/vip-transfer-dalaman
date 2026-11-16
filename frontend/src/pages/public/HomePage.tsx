@@ -115,7 +115,7 @@ export function HomePage() {
               </h3>
               <div className="flex gap-4 mb-4 text-on-surface-variant">
                 <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 7
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 5
                 </div>
                 <div className="flex items-center gap-1">
                   <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 6
@@ -162,10 +162,10 @@ export function HomePage() {
               </h3>
               <div className="flex gap-4 mb-4 text-on-surface-variant">
                 <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 9
+                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 5
                 </div>
                 <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 10
+                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 6
                 </div>
                 <div className="flex items-center gap-1">
                   <span translate="no" className="material-symbols-outlined text-sm">tv</span> Media
@@ -269,7 +269,7 @@ export function HomePage() {
                 <p className="text-white/80 mb-4">
                   Daily private transfers to Fethiye Business Districts and Marina.
                 </p>
-                <div className="text-secondary font-bold text-2xl">See live prices when booking</div>
+                <div className="text-secondary font-bold text-2xl">View prices when booking</div>
               </div>
             </div>
 
@@ -284,7 +284,7 @@ export function HomePage() {
                 <h3 className="font-headline-lg text-2xl text-white mb-1">
                   Dalaman to Gocek
                 </h3>
-                <div className="text-secondary font-bold">See live prices when booking</div>
+                <div className="text-secondary font-bold">View prices when booking</div>
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">Marmaris</h3>
-                <div className="text-secondary font-bold">See live prices when booking</div>
+                <div className="text-secondary font-bold">View prices when booking</div>
               </div>
             </div>
 
@@ -310,7 +310,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">Oludeniz</h3>
-                <div className="text-secondary font-bold">See live prices when booking</div>
+                <div className="text-secondary font-bold">View prices when booking</div>
               </div>
             </div>
           </div>
