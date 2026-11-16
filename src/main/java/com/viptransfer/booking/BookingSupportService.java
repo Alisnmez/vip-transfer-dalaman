@@ -26,6 +26,8 @@ public class BookingSupportService {
     private final String from;
     private final SecureRandom random = new SecureRandom();
     private final Map<String, Challenge> challenges = new ConcurrentHashMap<>();
+    private final Map<String, AuthorizedRequest> authorizedRequests = new ConcurrentHashMap<>();
+    private record AuthorizedRequest(String reference, String email, Instant expiresAt) {}
 
     private static class Challenge {
         final String codeHash;
@@ -83,19 +85,44 @@ public class BookingSupportService {
         }
     }
 
-    public synchronized boolean verifyCode(String reference, String email, String code) {
+    public synchronized String verifyCode(String reference, String email, String code) {
         requireEnabled();
         String key = normalizedKey(reference, email);
         Challenge challenge = challenges.get(key);
         if (challenge == null || Instant.now().isAfter(challenge.expiresAt) ||
-                challenge.attempts >= MAX_ATTEMPTS || code == null || !code.matches("[0-9]{6}")) {
-            return false;
-        }
+                challenge.attempts >= MAX_ATTEMPTS || code == null || !code.matches("[0-9]{6}")) return null;
         challenge.attempts++;
         if (!MessageDigest.isEqual(hash(code).getBytes(java.nio.charset.StandardCharsets.UTF_8),
-                challenge.codeHash.getBytes(java.nio.charset.StandardCharsets.UTF_8))) return false;
+                challenge.codeHash.getBytes(java.nio.charset.StandardCharsets.UTF_8))) return null;
         challenges.remove(key);
-        return true;
+        byte[] bytes = new byte[32];
+        random.nextBytes(bytes);
+        String token = HexFormat.of().formatHex(bytes);
+        authorizedRequests.put(token, new AuthorizedRequest(reference, email.trim(), Instant.now().plus(Duration.ofMinutes(10))));
+        return token;
+    }
+
+    public synchronized void submitRequest(String token, String type) {
+        requireEnabled();
+        if (!"change".equals(type) && !"cancel".equals(type)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid request type.");
+        }
+        AuthorizedRequest request = token == null ? null : authorizedRequests.remove(token);
+        if (request == null || Instant.now().isAfter(request.expiresAt())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Please verify your email again.");
+        }
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo(from);
+        message.setSubject("VIP Transfer Dalaman - Verified " + type + " request #" + request.reference());
+        message.setText("Verified " + type + " request for booking #" + request.reference() +
+                "\\nBooking email: " + request.email() +
+                "\\nContact the customer. No booking has been changed.");
+        try {
+            mailSender.send(message);
+        } catch (RuntimeException error) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Support request could not be delivered.");
+        }
     }
 
     private boolean matchesBooking(String reference, String email) {
