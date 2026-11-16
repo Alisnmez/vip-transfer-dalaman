@@ -42,8 +42,4 @@ public class BookingController {
         return bookingService.updateStatus(id, payload.get("status"));
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteBooking(@PathVariable Long id) {
-        return bookingService.deleteBooking(id);
-    }
 }
