@@ -14,6 +14,7 @@ import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage
 import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
+import { BookingDbCheckPage } from '../pages/public/BookingDbCheckPage'
 import { HomePage } from '../pages/public/HomePage'
 import { RoutesPage } from '../pages/public/RoutesPage'
 import {
@@ -36,6 +37,7 @@ export const router = createBrowserRouter([
       { path: 'booking/passenger', element: <BookingPassengerPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
       { path: 'booking/lookup', element: <BookingLookupPage /> },
+      { path: 'test/db-check', element: <BookingDbCheckPage /> },
     ],
   },
   {
