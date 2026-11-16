@@ -18,3 +18,13 @@ export function formatTransferDateTime(value: string): string {
 export function bookingStatus(value?: string | null): string {
   return value || 'PENDING'
 }
+
+const receivedTime = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Istanbul', dateStyle: 'medium', timeStyle: 'short',
+})
+
+export function formatBookingReceivedAt(value?: string | null): string {
+  if (!value) return 'Not recorded'
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? 'Not recorded' : receivedTime.format(date)
+}
