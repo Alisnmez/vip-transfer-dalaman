@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BookingCalendar } from './BookingCalendar'
 
 import { getBookingPage } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
@@ -14,6 +15,7 @@ export function BookingListPage() {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [refreshing, setRefreshing] = useState(false)
+  const [view, setView] = useState<'calendar' | 'list'>('calendar')
 
   async function refresh() {
     if (refreshing || loading) return
@@ -56,12 +58,17 @@ export function BookingListPage() {
             <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
             <p className="text-on-surface-variant">{visibleBookings.length} shown · {totalElements} total requests</p>
           </div>
-          <button type="button" onClick={() => { void refresh() }} disabled={loading || refreshing}
+          <div className="flex gap-2" role="group" aria-label="Booking view">
+            <button type="button" aria-pressed={view === 'calendar'} onClick={() => setView('calendar')} className={`rounded-lg border px-4 py-2 font-semibold ${view === 'calendar' ? 'bg-admin-primary text-white' : 'bg-white'}`}>Calendar</button>
+            <button type="button" aria-pressed={view === 'list'} onClick={() => setView('list')} className={`rounded-lg border px-4 py-2 font-semibold ${view === 'list' ? 'bg-admin-primary text-white' : 'bg-white'}`}>List</button>
+          </div>
+          {view === 'list' && <button type="button" onClick={() => { void refresh() }} disabled={loading || refreshing}
             className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
             {refreshing ? 'Refreshing...' : 'Refresh bookings'}
-          </button>
+          </button>}
         </div>
       </header>
+      {view === 'calendar' ? <div className="p-4 sm:p-6"><BookingCalendar /></div> : <>
       <section className="border-b border-outline-variant bg-white p-6">
         <label className="block max-w-lg text-sm font-semibold">
           Search current page
@@ -117,6 +124,7 @@ export function BookingListPage() {
         <span className="text-sm">Page {page + 1} of {Math.max(1, totalPages)}</span>
         <button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => { setLoading(true); setPage(value => value + 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
       </nav>
+      </>}
     </main>
   )
 }
