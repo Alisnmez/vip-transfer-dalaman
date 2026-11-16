@@ -45,7 +45,7 @@ export function BookingDetailPage() {
       flightNumber: booking.flightNumber || '', luggageCount: booking.luggageCount ?? 0,
       babySeatCount: booking.babySeatCount ?? 0, phoneNumber: booking.phoneNumber || '',
       email: booking.email || '', vehicleId: booking.vehicleId || '',
-      countryOfResidence: '', transferAddress: booking.transferAddress || '',
+      countryOfResidence: booking.countryOfResidence || '', transferAddress: booking.transferAddress || '',
       hotelName: booking.hotelName || '', specialRequests: booking.specialRequests || '',
       tripType: booking.tripType === 'round-trip' ? 'round-trip' : 'one-way',
     })
@@ -79,7 +79,7 @@ export function BookingDetailPage() {
       </div>}
       {editing && draft && <form onSubmit={event => { void saveDetails(event) }} className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
         {([
-          ['customerName', 'Customer name', 'text'], ['phoneNumber', 'Phone', 'tel'], ['email', 'Email', 'email'],
+          ['customerName', 'Customer name', 'text'], ['countryOfResidence', 'Country of residence', 'text'], ['phoneNumber', 'Phone', 'tel'], ['email', 'Email', 'email'],
           ['pickUpLocation', 'Pickup', 'text'], ['dropOffLocation', 'Destination', 'text'],
           ['transferDateTime', 'Pickup time (Turkey)', 'datetime-local'], ['returnDateTime', 'Return time (Turkey)', 'datetime-local'],
           ['passengerCount', 'Passengers', 'number'], ['luggageCount', 'Luggage', 'number'], ['babySeatCount', 'Baby seats', 'number'],
