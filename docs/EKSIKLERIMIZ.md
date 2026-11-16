@@ -1,3 +1,10 @@
+## 2026-11-17 — 4.4 Admin dashboard performans düzeltmesi
+- **Problem:** Dashboard `GET /bookings` ile bütün müşteri kayıtlarını tarayıcıya indirip sayıları hesaplıyordu. Veri büyüdükçe gereksiz kişisel veri aktarımı ve yavaşlama riski vardı.
+- **Kod:** `BookingRepository` durum/tarih filtreli count ve en yakın 8 kayıt sorguları (`a2ff715c`); `BookingService.getDashboardSummary()` ve admin korumalı `GET /bookings/dashboard` (`e64669f1`, `f3510fc5`); frontend typed API ve dashboard geçişi (`771599f1`, `7c925e8f`).
+- **Davranış:** Toplam rezervasyon sayısı ve bekleyen talep sayısı SQL'den; bugünkü PENDING/CONFIRMED transferler İstanbul yerel gününe göre; yaklaşan en yakın 8 transfer sunucuda sıralanır. Mevcut admin auth korunur.
+- **Durum:** TEST BEKLİYOR. Render son backend deploy `queued`, frontend `build_in_progress`; Spring Data repository sorgularının startup doğrulaması, frontend build ve gerçek admin dashboard kontrolü bekliyor.
+- **Not:** Dashboard tüm rezervasyonları indirmez; `GET /bookings` eski API olarak kalır, sayfalı admin liste `GET /bookings/page` kullanır. Otomatik CI kanıtı olmadan TAMAMLANDI denmez.
+
 ## 2026-11-17 — 1.3 / 1.5 / 3.1 yeniden kanıt kontrolü
 - **1.3 Çift rezervasyon koruması — TEST BEKLİYOR (yalnızca son E2E/migration):** `06c4cfa` eşzamanlı PostgreSQL idempotency testi ve `89240d1` sayfa yenileme testi daha önce GitHub Actions `43843124407` ve `43843263719` ile başarılıydı. Kullanıcı gerçek rezervasyon oluşturmayı doğruladı. Aynı idempotency anahtarının güncel Render ortamında tekrar gönderimi, farklı tarayıcı yaşam döngüsü ve migration provası ayrı doğrulanmadı; kodu yeniden yazmaya gerek yok.
 - **1.5 Dağıtım ve üretim güvenliği — TEST BEKLİYOR:** Frontend son `a32b2676` deploy `live` (Render `dep-dbtoij1evqrc73f7u0vg`). Backend `a32b2676` deploy `update_in_progress` (Render `dep-dbtohoavtthc73emfan0`) olarak görüldü; aynı build logunda `BUILD SUCCESS` var, fakat Docker build testleri atlıyor. Son CI ve gerçek canlı smoke/DB migration/yedekleme doğrulanmadan tamamlandı denemez.
@@ -90,7 +97,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Gerçek `getBookings()` verisi ve müşteri/rota/referans araması (`2d0a180a`); manuel yenileme eklendi (`fd14367`). | Yetkili admin oturumunda yeni kayıtların yenilemeyle geldiğini doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | Detay ve düzenleme mevcut; serbest metin rota/araç alanları katalog seçimine çevrildi, fiyatı olmayan kombinasyon kayıttan önce engelleniyor (`c551bb5`). | CI ve canlı admin düzenleme senaryosunda doğrula |
-| 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı (`86b2d9b8`); iptal edilenler planlanan taleplerden çıkarıldı (`278d4be`), PENDING dahil onaylanmamış talepler açık etiketlendi (`cc54ea6`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
+| 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı; dashboard artık tüm rezervasyonları indirmek yerine sunucu tarafında toplam/bekleyen/bugün sayıları ve ilk 8 yaklaşan kaydı sorguluyor (`a2ff715c`, `7c925e8f`). | CI, Spring Data sorgu başlangıcı ve gerçek admin dashboard'u doğrula; İstanbul gün sınırını test et |
 | 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin girişi artık müşteri listesini indirmeden korumalı `GET /admin/auth-check` (204 boş yanıt) çağırıyor (`739de66`, `f3b202e`, `d1dfa17`, `9714160`); parolayı yalnızca bellekte tutuyor. Önceki CI `43952884744` başarılı, yeni değişiklikler için CI bekleniyor. | Canlı HTTPS, Render ADMIN_PASSWORD ve auth-check için yetkisiz 401 / yetkili 204 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
