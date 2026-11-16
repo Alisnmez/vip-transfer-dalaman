@@ -139,6 +139,14 @@ public class BookingService {
                 month.atDay(1).atStartOfDay(), month.plusMonths(1).atDay(1).atStartOfDay());
     }
 
+    public List<Booking> getCalendarBookings(java.time.LocalDate month) {
+        if (month == null || month.getDayOfMonth() != 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Month must be the first day of a month.");
+        }
+        return bookingRepository.findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
+                month.atStartOfDay(), month.plusMonths(1).atStartOfDay());
+    }
+
     public java.util.Map<String, Object> getDashboardSummary() {
         java.time.LocalDateTime now = java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul"));
         java.time.LocalDate today = now.toLocalDate();
