@@ -101,8 +101,3 @@ export function updateBookingStatus(id: number, status: string) {
   }, true)
 }
 
-export function deleteBooking(id: number) {
-  return request<void>(`${BOOKING_URL}/${id}`, {
-    method: 'DELETE',
-  }, true)
-}
