@@ -63,6 +63,15 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-17 — Durum geçişleri ve test sayfası güvenliği
+- **Düzeltildi (kod):** Durum geçişleri yalnızca PENDING -> CONFIRMED/CANCELLED ve CONFIRMED -> COMPLETED/CANCELLED; COMPLETED/CANCELLED terminal, aynı durum isteği idempotent. Geçersiz geçiş 409 (`c78c361`). Admin selector yalnızca mevcut ve geçerli sonraki durumları gösterir (`e4c0bea`).
+- **Düzeltildi (kod):** Herkese açık `/test/db-check` frontend route'u kaldırıldı (`08abe84`). Dosyanın kendisi henüz repoda olabilir; bu route artık erişilebilir değil.
+- **Test eklendi:** Geçerli onay, tamamlananı yeniden açamama, iptal edileni onaylayamama ve aynı durumun tekrarı (`c591131`). Test çalıştırma sonucu bekleniyor.
+- **Açık / yayın engeli:** Ücret değişikliğinde müşteri onayı için gerçek kanıt ve backend audit log **yok**. Tek başına `window.confirm` müşteri onayı değildir; onay kanıtı tasarlanmadan otomatik müşteri onayı iddiası yapılamaz.
+- **Açık:** Sunucu tarafı pagination + filtreleme; geçmiş `createdAt=null` kayıtlarını uydurma tarih olmadan ele alma; araç yolcu/bagaj birlikte kapasite kuralı için doğrulanmış filo verileri; güvenli şema migration ve yedekleme.
+- **CI:** Dockerfile `-DskipTests` kullanır; Render BUILD SUCCESS testlerin geçtiği anlamına gelmez. Yeni commit'in CI sonucu ve Render live durumu henüz doğrulanmadı.
+- **Not:** Sıradaki değişiklikleri mevcut gerçek veriyi riske atmadan, küçük ve testli commit'lerle yap.
+
 ## 2026-11-17 — Admin düzenleme atomik doğrulama ve ek regresyon testleri
 - **Yeni hata:** `updateBooking` JPA managed entity üzerinde alanları değiştirdikten sonra bagaj kapasitesini doğruluyordu; validasyon hatası transaction rollback dışı bir çağrıda kısmi mutation riski doğuruyordu. Fiyat iki kez hesaplanıyordu.
 - **Düzeltme:** Bagaj kapasitesi ve yeni fiyat tüm alanlar güncellenmeden önce doğrulanıyor; ücret yalnızca bir kez hesaplanıyor (`af7f892`).
