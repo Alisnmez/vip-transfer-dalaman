@@ -43,6 +43,11 @@ public class BookingController {
         return bookingService.getCalendarBookings(java.time.YearMonth.parse(month));
     }
 
+    @GetMapping("/calendar")
+    public List<Booking> getCalendarBookings(@RequestParam java.time.LocalDate month) {
+        return bookingService.getCalendarBookings(month);
+    }
+
     @GetMapping("/dashboard")
     public java.util.Map<String, Object> getDashboardSummary() {
         return bookingService.getDashboardSummary();
