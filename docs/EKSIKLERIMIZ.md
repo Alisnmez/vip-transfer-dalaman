@@ -407,3 +407,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Mobil: telefon input min-w-0/flex-1, adım devam butonları wrap; e-posta lower-case normalize; telefon autoComplete eklendi (74751397).
 - Yolcu sayfasındaki işlevsiz newsletter, legal/support # linkleri, 24/7 ve doğrulanmamış ücretsiz Meet & Greet ve tüm vergiler dahil ifadeleri kaldırıldı. Yalnızca gerçek Contact/Services rotaları gösteriliyor (263ac895).
 - Son iki commit için CI sonucu henüz doğrulanmadı. Browser E2E, güvenli rezervasyon sorgulama, e-posta bildirimleri ve gerçek ödeme/iptal politikası açık. Admin geliştirmesi yapılmadı.
+
+
+## 2026-11-16 — Çift gönderim ve belirsiz bağlantı sonucu
+- CI: ef999dc5 run 43862248176, 74751397 run 43862212511 ve 263ac895 run 43862162411 completed/success; yolcu formu doğrulama/mobil değişiklikleri geçti.
+- BookingConfirmationPage: React state güncellemesi beklenmeden useRef ile senkron gönderim kilidi, hızlı çift tıklamada ikinci POST'un başlamasını engeller (b6799bfa). Backend Idempotency-Key kontrolü korunur.
+- Bağlantı kesintisi/zaman aşımı: Sonucun belirsiz olabileceğini açıklayan durum mesajı, aynı sayfadan tekrar deneme yönlendirmesi; mevcut idempotency anahtarı saklanır (4f2056aa). Sunucuya ulaşıp ulaşmadığı kanıtlanmadıkça rezervasyon başarısı iddia edilmez.
+- Bozuk localStorage JSON için kullanıcıya anlaşılır hata mesajı (8de11e34). Son üç commit CI sonucu bekleniyor; gerçek browser E2E ve live DB doğrulaması açık. Admin koduna dokunulmadı.
