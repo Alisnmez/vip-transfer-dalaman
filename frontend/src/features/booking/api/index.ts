@@ -66,6 +66,9 @@ export async function createBooking(data: BookingRequest) {
       headers: { 'Idempotency-Key': key },
       body: payload,
     })
+    if (!booking || !Number.isSafeInteger(booking.id) || booking.id < 1) {
+      throw new Error('The booking service returned an invalid booking reference. Please contact support before submitting again.')
+    }
     retryKeys.clear(storageKey)
     return booking
   })
