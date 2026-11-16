@@ -67,7 +67,7 @@ export function CalendarPage() {
   }, [monthsKey, refreshKey])
 
   const loading = loadedKey !== `${monthsKey}:${refreshKey}`
-  const filtered = bookings.filter(booking => filter === 'ALL' ||
+  const filtered = (loading ? [] : bookings).filter(booking => filter === 'ALL' ||
     (filter === 'ACTIVE' ? ['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status)) : bookingStatus(booking.status) === filter))
   const byDay = new Map<string, Booking[]>()
   for (const booking of filtered) {
