@@ -124,6 +124,10 @@ export function BookingPassengerPage() {
       setError('Please enter the exact hotel, accommodation or transfer address in Turkey.')
       return
     }
+    if (firstName.trim().length > 80 || lastName.trim().length > 80 || transferAddress.trim().length > 250 || hotelName.trim().length > 120 || specialRequests.trim().length > 1000) {
+      setError('Please shorten the name, transfer address or special requests before continuing.')
+      return
+    }
     try {
       localStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
