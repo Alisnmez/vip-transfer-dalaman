@@ -437,3 +437,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingFormPage: kayıtlı transfer bilgileri (tripType, vehicleId, pickup/dropoff, tarih/saat, flightNumber, return, passenger/luggage/baby seats) geri dönüldüğünde veya yenilemede geri yükleniyor; bozuk JSON için güvenli varsayılanlar var (c93e1c48).
 - BookingFormPage: localStorage.setItem başarısızsa Link navigasyonu iptal edilip kullanıcıya hata gösteriliyor. Eski receipt ancak yeni transfer verileri başarıyla kaydedildikten sonra temizleniyor (2f26452c).
 - Yeni commit CI sonuçları bekleniyor. Gerçek browser E2E, canlı API kontrolü ve e-posta bildirimleri hâlâ açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Confirm Booking sonrası yenilemede 3. adıma dönüş
+- Kullanıcı bildirimi: Confirm Booking başarı ekranından sonra sayfa yenilemede 3. adım yeniden görünüyor.
+- BookingConfirmationPage: başarı makbuzu sessionStorage ve localStorage'a kaydediliyor, okuma sırasında iki depo sırayla deneniyor. Makbuz 24 saat sonra geçersiz; başarı ekranı korunurken yeniden POST gönderilmiyor (7a2c117e).
+- BookingFormPage: yeni geçerli rezervasyon başlatılırken her iki makbuz deposu bağımsız temizleniyor (258605ec, 16fefd3c).
+- Dikkat: Bu değişiklik yalnızca yeni sürümle başarıyla tamamlanan rezervasyonları korur; eski sürümde hiç kaydedilmeyen sonuç geri getirilemez. Canlı Render deployment ve gerçek tarayıcı yenileme senaryosu henüz doğrulanmadı. Admin koduna dokunulmadı.
