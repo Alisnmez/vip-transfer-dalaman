@@ -124,7 +124,7 @@ export function CalendarPage() {
       {loading && <p role="status" className="border-b p-3 text-sm text-on-surface-variant">Loading transfer calendar...</p>}
 
       <div className="min-h-0 flex-1 overflow-auto">
-        <div className={`grid min-w-[720px] ${selectedView === 'Day' ? 'grid-cols-1' : 'grid-cols-7'} border-b bg-white`}>
+        <div className={`grid min-w-[1050px] ${selectedView === 'Day' ? 'grid-cols-1' : 'grid-cols-7'} border-b bg-white`}>
           {(selectedView === 'Day' ? [selectedDay] : weekdays).map((day, index) => (
             <div key={day} className="border-r p-3 text-center text-sm font-semibold text-on-surface-variant">
               {selectedView === 'Day' ? selectedDay : day}
@@ -132,7 +132,7 @@ export function CalendarPage() {
             </div>
           ))}
         </div>
-        <div className={`grid min-w-[720px] ${selectedView === 'Day' ? 'grid-cols-1' : 'grid-cols-7'}`}>
+        <div className={`grid min-w-[1050px] ${selectedView === 'Day' ? 'grid-cols-1' : 'grid-cols-7'}`}>
           {visibleDays.map(day => {
             const items = byDay.get(day) ?? []
             const isOutside = selectedView === 'Month' && monthOf(day) !== monthOf(anchor)
