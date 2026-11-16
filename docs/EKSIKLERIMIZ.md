@@ -1,3 +1,10 @@
+## 2026-11-17 — Admin eski CalendarPage tasarımını gerçek rezervasyonlara bağlama
+- **Kullanıcı geri bildirimi:** Yeni takvim dar ve günlerin içinde rezervasyon kartları görünmüyor; eski tasarlanmış takvim ve kartlar kullanılmalı.
+- **Bulgu:** `frontend/src/pages/admin/CalendarPage.tsx` zaten Month/Week/Day, event-card ve Daily Agenda görsel tasarımına sahipti ama tamamen sahte `calendarCells` / `agendaItems` verileri içeriyordu. `/admin/calendar` yönlendirmesi de gerçek sayfaya gitmiyordu.
+- **Düzeltme:** Orijinal `CalendarPage.tsx` canlı `getCalendarBookings(YYYY-MM)` ile bağlandı (`8f93ce70`); aylık/haftalık/günlük gezinti, durum filtresi, gün hücresinde saat/müşteri/rota/durum/rezervasyon ID kartları, gün seçince gerçek günlük ajanda ve rezervasyon detay bağlantısı var. Hafta ay sınırını geçiyorsa iki ay sorgulanıyor; uydurma şoför/araç ataması ve sahte operasyon göstergeleri kaldırıldı.
+- **Navigasyon:** `/admin/calendar` orijinal CalendarPage'e bağlandı (`0197044d`), admin menüsüne Calendar eklendi (`9fc662bc`), Bookings listesi tekrar bağımsız liste olarak bırakıldı (`06caf2db`). Önceki gereksiz `BookingCalendar.tsx` silindi (`0026a683`). Gün kartları için yatay kaydırılabilir minimum genişlik artırıldı (`97ddf5a1`).
+- **Durum:** TEST BEKLİYOR — frontend build ve Render live, gerçek admin hesabıyla görsel ve API kontrolü yapılmalı. Mevcut backend aylık API'sinin live olması gerekiyor. Mobilde dar hücre yerine yatay kaydırma uygulanır; ileride mobil özel günlük görünüm ayrıca değerlendirilebilir.
+
 ## 2026-11-17 — Acil: admin yüklenemiyor / takvim deploy hatası
 - **Belirti:** Admin dashboard `Loading bookings...` sonrası `Unable to reach the booking service. Your request may have been received` gösteriyor.
 - **Render kanıtı:** Son backend `57eaef99` deploy `build_failed`; `BookingRepository` aynı aylık sorgu iki kez tanımlı. Son frontend `57eaef99` deploy `build_failed`; `getCalendarBookings` iki kez tanımlı. Önceki backend `48ce1866` ve frontend `56493d6b` deployları `live` olmuştu. Yani son takvim sürümü henüz yayınlanmamıştı.
