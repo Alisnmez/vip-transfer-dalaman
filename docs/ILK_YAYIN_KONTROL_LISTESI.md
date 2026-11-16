@@ -11,7 +11,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Çift gönderim:** Aynı talep iki kez tıklandığında yalnızca tek kayıt oluşuyor; backend idempotency kontrolü doğrulanıyor.
 - [ ] **Hata akışı:** API erişilemezse veya geçersiz rezervasyon ID döndürürse kullanıcıya yanlışlıkla 'başarılı' denmiyor; belirsiz gönderimde destek iletişimi gösteriliyor. Kod koruması `f319d0e8`; canlı smoke bekliyor.
 - [ ] **Gerçek fiyat ve kapasite:** Fiyat kataloğu işletme tarafından doğrulanmış; geçersiz araç/rota ve aşırı kapasite reddediliyor.
-- [ ] **İletişim bilgileri:** Doğrulanmamış `05555555555` numarası üç müşteri sayfasından kaldırıldı (`abff520d`, `6516964e`, `66918653`); gerçek numara eklenene kadar 'to be confirmed' gösteriliyor. `ali_sonmez35@hotmail.com` adresinin işletme tarafından aktif takip edildiği doğrulanmalı.
+- [ ] **İletişim bilgileri:** Kullanıcı kararıyla `05555555555` geçici telefon numarası geliştirme/test ortamında korunuyor (`fce3c968`, `d3a2c0a6`, `4cd9a47a`). **Gerçek canlı yayından hemen önce mutlaka değiştirilecek.** İleride admin panelinden iletişim numarasını düzenleme alanı eklenecek; admin şu an kapsam dışı. `ali_sonmez35@hotmail.com` adresinin aktif takip edildiği doğrulanmalı.
 - [ ] **İşletme bilgileri ve yasal metinler:** İptal, ödeme, KVKK/gizlilik ve işletme kimliği doğrulanmış; bilinmeyen şartlar vaat edilmiyor.
 - [ ] **Mobil smoke:** Ana sayfa → rezervasyon 1/2/3 → başarı, iPhone/Android dar ekran ve masaüstü; kritik linkler çalışıyor.
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
