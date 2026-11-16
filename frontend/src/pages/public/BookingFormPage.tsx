@@ -166,8 +166,9 @@ export function BookingFormPage() {
     }
     try {
       sessionStorage.removeItem('lastBookingReceipt')
+      localStorage.removeItem('lastBookingReceipt')
     } catch {
-      // The previous receipt may remain available if session storage is disabled.
+      // The previous receipt may remain available if browser storage is disabled.
     }
   }
 
