@@ -288,6 +288,19 @@ class BookingIntegrationTests {
                         .header("Authorization", adminAuthorization))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.luggageCount").value(6));
+
+        request.put("luggageCount", 5);
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
+                        .header("Authorization", adminAuthorization)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(5));
+
+        mockMvc.perform(get("/bookings/{id}", id)
+                        .header("Authorization", adminAuthorization))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.luggageCount").value(5));
     }
 
     @Test
