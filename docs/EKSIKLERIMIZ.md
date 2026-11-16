@@ -11,16 +11,16 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ### 1. Backend, PostgreSQL ve rezervasyon güvenilirliği
 
 **Genel durum:** DEVAM EDİYOR  
-**Şu an üzerinde çalışılan:** **1.4 — Staging frontend/backend bağlantısı ve gerçek E2E (DEVAM EDİYOR)**  
-**Bir sonraki somut işlem:** Vite `server.proxy` üretimde çalışmadığından Render'da frontend build-time `VITE_API_BASE_URL` ve backend runtime `FRONTEND_ORIGIN` değerlerini doğrula; sonra staging tarayıcı E2E. 1.3 migration açık.
+**Şu an üzerinde çalışılan:** **1.3 ve 1.5 — idempotency yaşam döngüsü/migration ve dağıtım güvenliği (TEST BEKLİYOR)**  
+**Bir sonraki somut işlem:** Kullanıcının çalıştığını doğruladığı gerçek rezervasyonun aynı anahtarla tekrarı ve DB migration/production güvenliğini doğrula; ardından 1.5'i kapat. Render env ayarları uygulandı ve her iki deploy `live`.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
 | 1.1 | Backend derleme hatası | TAMAMLANDI | Fazladan virgül düzeltildi; Render backend canlı doğrulandı. `590f582` | Regresyon halinde yeniden aç |
 | 1.2 | PostgreSQL bağlantısı ve mevcut test altyapısı | TAMAMLANDI | Render PostgreSQL bağlantısı ve izole CI PostgreSQL ile 14 başarılı test doğrulandı. `bf60c97`, CI run `43839886864` | Yeni testleri CI'ya ekle |
 | 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | TEST BEKLİYOR | Eşzamanlı PostgreSQL testi ve React build **başarılı** (`06c4cfa`, run `43843124407`); sayfa yenileme düzeltmesi **başarılı** (`89240d1`, run `43843263719`) | Gerçek tarayıcı E2E, migration ve bağımsız işlem yaşam döngüsü |
-| 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | DEVAM EDİYOR | Render frontend `190990d` live; backend `190990d` live. Ortam değişkenleri ve tarayıcı E2E henüz doğrulanmadı | Env doğrulaması, ardından güvenli browser E2E |
-| 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | BEKLİYOR | Önceki backend deploy doğrulandı; yeni idempotency sürümü henüz yok | CI, deploy, log ve güvenli smoke test |
+| 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | TAMAMLANDI | Kullanıcı 2026-11-16 tarihinde testin çalıştığını bildirdi; Render frontend/backend `69a0576` deployları `live`; API/CORS env değerleri staging'e uygulandı. Bağımsız otomatik E2E kanıtı henüz yok. | Otomatik browser E2E regresyonunu 1.5'e ekle |
+| 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | TEST BEKLİYOR | Frontend `dep-dbtdcue417fc738g6mu0` ve backend `dep-dbtdcub0pb7s73aiqpt0` `live`; kullanıcı rezervasyonun çalıştığını doğruladı. | CI, smoke, migration, güvenlik ve otomatik E2E regresyonu |
 
 **Tamamlanma koşulu:** 1.1–1.5 doğrulanmış olmalı; CI yeşil, tekrarlı/eşzamanlı istekler tek kayıt oluşturmalı ve frontend rezervasyonu test ortamında uçtan uca çalışmalı.
 
@@ -242,3 +242,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test girişimleri:** Bu çalışma ortamından `https://vip-transfer-dalaman-api-test.onrender.com` HTTP erişimi DNS `NameResolutionError` nedeniyle başarısız; web erişimi de başarısız. Render PostgreSQL read-only `SELECT NOW(), COUNT(*) FROM booking` sorgusu SSL/TLS/harici erişim kısıtıyla başarısız. Render PostgreSQL aracı yalnızca read-only sorgu destekliyor, kayıt oluşturamaz.
 - **Sonuç:** Gerçek POST gönderilemedi; **yeni rezervasyon oluşturulmadı**, DBeaver'da yeni kayıt görünmesi beklenmemeli. DB veya ağ güvenlik ayarları değiştirilmedi. Başarı iddiası yok.
 - **Kaldığımız yer:** Kullanıcı test frontend'inde gerçek rezervasyon isteğini kendisi gönderebilir; DBeaver'da `SELECT id, status, created_at FROM booking ORDER BY id DESC LIMIT 10;` sorgusunu mevcut tablo/kolon adlarıyla uyumluysa çalıştırıp sonucu paylaşmalı. Gerçek POST yanıtı ve DB kaydı eşleştirilince 1.4 doğrulanacak. Müşteriye bildirim/dispatch yan etkileri kontrol edilmeden sahte veri gönderilmemeli.
+
+## 2026-11-16 — Görev 1 kapanış kontrolü (kullanıcı testi)
+- **Kullanıcı geri bildirimi:** Test rezervasyon akışı için 'tamam çalışıyor' dedi. Bu, kullanıcı tarafından gerçekleştirilen staging testinin olumlu sonucudur; ekran görüntüsü, booking ID veya otomatik test logu sunulmadı.
+- **Render doğrulaması:** Frontend `dep-dbtdcue417fc738g6mu0` **live** (commit `69a0576`), backend `dep-dbtdcub0pb7s73aiqpt0` **live** (aynı commit).
+- **Durum kararı:** 1.4 kullanıcı kabul testi temelinde **TAMAMLANDI**; otomatik browser E2E ayrı regresyon olarak 1.5'e eklendi. Görev 1 **henüz bitmedi**: 1.3 idempotency yaşam döngüsü ve kontrollü şema migration testi, 1.5 üretim güvenliği ve smoke test açık.
+- **Sonraki işlem:** İdempotency tekrarında tek DB kaydı ve farklı payload 409 doğrulaması, Flyway/Liquibase migration planı ve dağıtım sonrası regresyon kontrolleri.
