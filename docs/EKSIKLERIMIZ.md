@@ -1,3 +1,10 @@
+## 2026-11-17 — İLK YAYIN KARARI: WhatsApp ile manuel rezervasyon desteği
+- **Güncel karar (önceki OTP notlarının yerine geçer):** Müşteri `Manage Booking` ekranında yalnızca rezervasyon numarasını girer; `Request Change` veya `Request Cancellation` ile hazır WhatsApp mesajı açar. `VITE_WHATSAPP_NUMBER` gerçek numarayla ayarlanmadıysa e-posta bağlantısı açılır.
+- OTP servisi, OTP endpointleri, Spring Mail bağımlılığı, SMTP ayarları ve frontend OTP arayüzü kaldırıldı. Müşteriye rezervasyon detayları açılmaz, destek mesajı rezervasyon üzerinde işlem yapmaz.
+- **Zorunlu işletme kuralı:** WhatsApp mesajındaki referans tek başına kimlik doğrulaması değildir. Admin, değişiklik/iptal yapmadan önce kayıtlı telefon/e-posta üzerinden müşteriyle doğrulama yapmalı ve son kararı yazılı teyit etmelidir.
+- **Yayın öncesi:** Gerçek işletme WhatsApp numarasını `VITE_WHATSAPP_NUMBER` olarak frontend build environment'ına girip deploy et; WhatsApp mesajının doğru numaraya gittiğini telefonda test et. Geçici telefon numarasını ayrıca değiştir. CI/build ve Render deploy sonucunu doğrula.
+- Önceki e-posta OTP geliştirme notları tarihsel kayıttır; artık ilk yayın kapsamı değildir.
+
 ## 2026-11-17 — E-posta OTP ile rezervasyon desteği (henüz canlıya hazır değil)
 - Spring Mail eklendi; `BookingSupportService` 6 haneli 10 dakikalık kod üretir, 5 deneme ve aynı referans/e-posta çifti için 2 dakika bekleme uygular. Kodlar bellekte saklanır; yeniden başlatmada kaybolur.
 - `POST /bookings/support/request-code` ve `POST /bookings/support/verify-code` açık, eski `/support/verify` kapalı. E-posta ve rezervasyon numarası eşleşse bile gerçek sahiplik için OTP gerekir.
