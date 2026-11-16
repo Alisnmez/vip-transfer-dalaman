@@ -360,3 +360,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Önceki CI kanıtı:** 5ac89cb sınır değer testleri, 1de2cbb frontend build ve 3a1b016 backend limitleri GitHub Actions completed/success. Son değişiklikleri içeren run 43859706766 ilk kontrolde queued; sonucun ayrıca kontrolü gerekli.
 - **Bağımlılık riski:** npm ci çıktısında 19 güvenlik uyarısı (10 moderate, 9 high) bildirildi; paket/etki analizi yapılmadan `npm audit fix --force` uygulanmadı.
 - **Açık işler:** ESLint+build+PostgreSQL CI yeşil olmadan tamamlandı sayma. Browser E2E, araç bazlı bagaj kapasitesinin backend doğrulaması, PostgreSQL migration envanteri, SEO SSG ve gerçek marka/iletişim verileri açık.
+
+
+## 2026-11-16 — Kullanıcı rezervasyon akışının çalıştığını bildirdi; negatif yolcu regresyonu
+- **Kullanıcı doğrulaması:** Rezervasyonun çalıştığı bildirildi. Bu, asistan tarafından bağımsız tarayıcı E2E ve canlı DB sorgusuyla doğrulanmadığı için bu iki kontrol kapatılmadı.
+- **Yeni otomatik test:** BookingIntegrationTests.rejectsZeroAndNegativePassengersWithoutCreatingBookings: passengerCount 0 ve -1 için HTTP 400, tutarlı hata mesajı ve bookingRepository.count() değişmemesi. Commit e274509.
+- **Önceki CI:** Kod standardı audit günlüğü commit 498d534 için run 43859747390 completed/success; lint, build ve izole PostgreSQL testleri başarılı.
+- **Yeni test CI:** e274509 için GitHub Actions sonucu henüz doğrulanmadı; başarı onaylanana kadar TEST BEKLİYOR.
+- **Açık tutarsızlık:** Frontend seçili aracın maxLuggage kapasitesini denetliyor; backend yalnızca genel 0–8 sınırını denetliyor. Özellikle vip-minivan için frontend maxLuggage=6 iken API 8'i kabul ediyor. Bu iş kuralı API seviyesinde eşitlenmeden kapatılmamalı; mevcut testte vip-minivan + 8 bagaj kabul ediliyor.
