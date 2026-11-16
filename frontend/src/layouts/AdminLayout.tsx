@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { clearAdminCredentials, setAdminCredentials } from '../features/booking/adminCredentials'
-import { getBookings } from '../features/booking/api'
+import { checkAdminAccess } from '../features/booking/api'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -24,7 +24,7 @@ export function AdminLayout() {
     setChecking(true)
     setAdminCredentials(username, password)
     try {
-      await getBookings()
+      await checkAdminAccess()
       setAuthenticated(true)
       setPassword('')
     } catch {
