@@ -83,9 +83,16 @@ export function requestBookingSupportCode(reference: string, email: string) {
 }
 
 export function verifyBookingSupportCode(reference: string, email: string, code: string) {
-  return request<{ verified: boolean }>(`${BOOKING_URL}/support/verify-code`, {
+  return request<{ verified: boolean; token?: string }>(`${BOOKING_URL}/support/verify-code`, {
     method: 'POST',
     body: JSON.stringify({ reference, email, code }),
+  }, false, 20000)
+}
+
+export function submitBookingSupportRequest(token: string, type: 'change' | 'cancel') {
+  return request<{ message: string }>(`${BOOKING_URL}/support/request`, {
+    method: 'POST',
+    body: JSON.stringify({ token, type }),
   }, false, 20000)
 }
 
