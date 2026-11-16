@@ -94,6 +94,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - İlk transfer adımı da yolcu ve son onay ekranlarının kullandığı `validateTransferSelection` fonksiyonuna bağlandı (`4aacb9a7`); kapasite ve güzergâh kuralları tek yerden yönetiliyor.
 - Yeni CI ve gerçek tarayıcı uçtan uca rezervasyon doğrulaması açık; admin kapsam dışı, geçici telefon numarası korunuyor.
 
+## 2026-11-16 — Görev 1.3/1.5 ve 2: ortak Türkiye saati doğrulaması
+- Önceki booking validation regresyon testleri ve PostgreSQL CI **başarılı** (run `43933399460`).
+- `validateTransferSchedule.ts` ortak tarih kontrolü eklendi (`7ef5f077`); transfer, yolcu ve son onay ekranları aynı kurala bağlandı (`043dd258`, `cc1c5871`, `3d6b0c81`).
+- Geçersiz takvim tarihi, geçmiş transfer, eşit/erken dönüş ve geçerli dönüş için otomatik testler eklendi (`3837f6e5`). Yeni CI sonuçları bekleniyor; gerçek canlı tarayıcı/DB uçtan uca test hâlâ açık.
+- Admin kapsam dışı; geçici iletişim numarası kullanıcı isteğiyle korundu.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
