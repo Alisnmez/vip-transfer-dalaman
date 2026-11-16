@@ -158,3 +158,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Sayfa yenileme düzeltmesi:** `89240d1` için run `43843263719` **success**. Son günlük commit'i `442838d` için run `43843288232` **success**.
 - **Durum:** 1.3 **TEST BEKLİYOR** (CI aşaması geçti, uçtan uca doğrulama ve DB migration eksik). 1.4 ve 1.5 bekliyor.
 - **Kaldığımız yer:** Gerçek tarayıcı üzerinden rezervasyon oluşturma, aynı anahtarla retry, sayfa yenileme, sunucuya kayıt ve üretim dışı ortamda migration doğrulamasını çalıştır. Sadece CI başarılarıyla 1.3 veya 1. madde kapatılmayacak.
+
+## 2026-11-16 — 1.4 gerçek rezervasyon akışı kod denetimi
+- **Denetlenen:** `frontend/src/pages/public/BookingPassengerPage.tsx`, `BookingConfirmationPage.tsx`, `features/booking/api/index.ts`.
+- **Bulgular:** Yolcu formu `bookingPassengerInfo` ve transfer formu `bookingTransferInfo` olarak localStorage'a yazıyor. Onay sayfası bunlardan DTO oluşturup `createBooking` üzerinden POST `/bookings` çağırıyor; başarılı sonuçta sunucunun döndürdüğü `booking.id` referansını gösterip taslakları siliyor. Bu **kod incelemesi**, gerçek tarayıcı ve canlı DB testi değildir.
+- **Sorun ve düzeltme:** Onay sayfasında kayıt yalnızca `PENDING` iken buton metni `BOOKING CONFIRMED` diyordu; kullanıcıyı yanıltmamak için `REQUEST RECEIVED` yapıldı. Commit `b88a76c`. CI sonucu henüz doğrulanmadı.
+- **Kanıtlanan test:** `06c4cfa` için GitHub Actions `43843124407` backend PostgreSQL integration test ve React build **success**; `89240d1` için `43843263719` **success**.
+- **Kaldığımız yer:** 1.4 gerçek browser E2E hâlâ bekliyor; test ortamında tarayıcıdan POST/response/DB kaydı doğrulanmalı. Üretimde deneme rezervasyonu oluşturmadan önce test ortamı ve veri temizleme prosedürü kullanılmalı. 1.3 E2E ve migration yönünden açık.
