@@ -15,7 +15,7 @@ export function classifyBookingFailure(error: unknown): BookingApiError {
   if (error instanceof BookingApiError) return error
   if (error instanceof Error && error.name === 'AbortError') {
     return new BookingApiError(
-      'The booking service did not respond within 60 seconds. Your request may have been received. Please contact support if you are unsure.',
+      'The booking service did not respond before the timeout. Your request may have been received. Please contact support if you are unsure.',
       null, true, { cause: error },
     )
   }
