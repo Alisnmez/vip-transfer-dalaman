@@ -110,6 +110,39 @@ class BookingAdminUpdateTest {
     }
 
     @Test
+    void pendingBookingCanBeConfirmed() {
+        booking.setStatus("PENDING");
+        Booking updated = service.updateStatus(10L, "CONFIRMED");
+        assertEquals("CONFIRMED", updated.getStatus());
+        verify(repository).save(booking);
+    }
+
+    @Test
+    void completedBookingCannotBeReopened() {
+        booking.setStatus("COMPLETED");
+        ResponseStatusException error = assertThrows(ResponseStatusException.class,
+                () -> service.updateStatus(10L, "PENDING"));
+        assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
+        assertEquals("COMPLETED", booking.getStatus());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void cancelledBookingCannotBeConfirmed() {
+        booking.setStatus("CANCELLED");
+        assertThrows(ResponseStatusException.class,
+                () -> service.updateStatus(10L, "CONFIRMED"));
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void sameStatusIsIdempotent() {
+        Booking updated = service.updateStatus(10L, "CONFIRMED");
+        assertEquals("CONFIRMED", updated.getStatus());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
     void listRequestsNewestFirst() {
         when(repository.findAll(any(Sort.class))).thenReturn(List.of(booking));
         assertEquals(1, service.getAllBookings().size());
