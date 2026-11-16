@@ -22,8 +22,9 @@ public class BookingController {
     }
 
     @PostMapping
-    public Booking createBooking(@Valid @RequestBody BookingRequestDto dto) {
-        return bookingService.createBooking(dto);
+    public Booking createBooking(@Valid @RequestBody BookingRequestDto dto,
+                                 @RequestHeader(value = "Idempotency-Key", required = false) String key) {
+        return bookingService.createBooking(dto, key);
     }
 
     @GetMapping
