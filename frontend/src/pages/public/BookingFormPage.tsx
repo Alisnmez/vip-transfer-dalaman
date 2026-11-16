@@ -125,15 +125,23 @@ export function BookingFormPage() {
       setFormError('Please enter pickup, destination, date and time before continuing.')
       return
     }
-    const selectedDateTime = new Date(pickUpDate + 'T' + pickUpTime)
-    if (Number.isNaN(selectedDateTime.getTime()) || selectedDateTime.getTime() <= Date.now()) {
+    const parseTurkeyDateTime = (date: string, time: string): number | null => {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) return null
+      const [year, month, day] = date.split('-').map(Number)
+      const [hour, minute] = time.split(':').map(Number)
+      const calendar = new Date(Date.UTC(year, month - 1, day))
+      if (calendar.getUTCFullYear() !== year || calendar.getUTCMonth() + 1 !== month || calendar.getUTCDate() !== day) return null
+      return Date.UTC(year, month - 1, day, hour - 3, minute)
+    }
+    const selectedDateTime = parseTurkeyDateTime(pickUpDate, pickUpTime)
+    if (selectedDateTime === null || selectedDateTime <= Date.now()) {
       event.preventDefault()
-      setFormError('Please choose a future pickup date and time.')
+      setFormError('Please choose a future pickup date and time in Turkey local time.')
       return
     }
     if (tripType === 'round-trip') {
-      const returnDateTime = new Date(returnDate + 'T' + returnTime)
-      if (!returnDate || !returnTime || Number.isNaN(returnDateTime.getTime()) || returnDateTime <= selectedDateTime) {
+      const returnDateTime = parseTurkeyDateTime(returnDate, returnTime)
+      if (returnDateTime === null || returnDateTime <= selectedDateTime) {
         event.preventDefault()
         setFormError('Please choose a return date and time after your outbound pickup.')
         return
