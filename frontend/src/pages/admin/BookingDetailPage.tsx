@@ -7,6 +7,7 @@ import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '
 import { BookingApiError } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
 const pricedDestinations = [...new Set(transferPrices.map(price => price.destination))]
 const airport = 'Dalaman Airport'
@@ -70,12 +71,7 @@ export function BookingDetailPage() {
   const selectedPrice = draft && routeValid
     ? transferPrices.find(price => price.destination === destination && price.vehicleId === draft.vehicleId)
     : undefined
-  const vehicle = draft ? transferVehicles.find(item => item.id === draft.vehicleId) : undefined
-  const capacityValid = !!draft && !!vehicle && draft.passengerCount >= 1
-    && draft.passengerCount <= vehicle.maxPassengers
-    && (draft.babySeatCount ?? 0) >= 0 && (draft.babySeatCount ?? 0) <= 2
-    && (draft.luggageCount ?? 0) >= 0
-    && (draft.luggageCount ?? 0) <= (vehicle.maxLuggage ?? 8)
+  const capacityValid = !!draft && validateTransferSelection(draft) === null
   const previewFare = selectedPrice && draft && capacityValid
     ? (draft.tripType === 'round-trip' ? selectedPrice.roundTrip : selectedPrice.oneWay)
     : null
