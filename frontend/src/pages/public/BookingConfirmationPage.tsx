@@ -4,40 +4,11 @@ import { useRef, useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
-import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
-import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
+import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
+import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
 import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
 import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
-
-type TransferDetails = {
-  pickUpLocation?: string
-  dropOffLocation?: string
-  pickUpDate?: string
-  pickUpTime?: string
-  returnDate?: string
-  returnTime?: string
-  passengerCount?: number
-  flightNumber?: string
-  luggageCount?: number
-  babySeatCount?: number
-  vehicleId?: string
-  vehicleName?: string
-  vehicleType?: string
-  vehicleClass?: string
-  tripType?: 'one-way' | 'round-trip'
-  price?: number
-}
-
-type PassengerDetails = {
-  customerName?: string
-  phoneNumber?: string
-  email?: string
-  hotelName?: string
-  countryOfResidence?: string
-  transferAddress?: string
-  specialRequests?: string
-}
 
 function availableReceiptStorages(): ReceiptStorage[] {
   const storages: ReceiptStorage[] = []
@@ -106,64 +77,9 @@ export function BookingConfirmationPage() {
       }
       const transferData = transfer as TransferDetails
       const passengerData = passenger as PassengerDetails
-      if (typeof passengerData.customerName !== 'string' || typeof passengerData.phoneNumber !== 'string' ||
-          typeof passengerData.email !== 'string' || typeof passengerData.transferAddress !== 'string' ||
-          typeof transferData.pickUpLocation !== 'string' || typeof transferData.dropOffLocation !== 'string' ||
-          typeof transferData.pickUpDate !== 'string' || typeof transferData.pickUpTime !== 'string' ||
-          typeof transferData.vehicleId !== 'string' || !Number.isInteger(transferData.passengerCount) ||
-          (transferData.tripType !== 'one-way' && transferData.tripType !== 'round-trip') ||
-          (transferData.tripType === 'round-trip' &&
-            (typeof transferData.returnDate !== 'string' || typeof transferData.returnTime !== 'string'))) {
-        setError('Saved booking details are invalid. Please return to the previous steps.')
-        return
-      }
-      const selectionError = validateTransferSelection(transferData)
-      if (selectionError) {
-        setError(selectionError)
-        return
-      }
-      if ((transferData.flightNumber !== undefined &&
-           (typeof transferData.flightNumber !== 'string' || !/^[A-Za-z0-9 -]{1,20}$/.test(transferData.flightNumber))) ||
-          (passengerData.hotelName !== undefined && typeof passengerData.hotelName !== 'string') ||
-          (passengerData.countryOfResidence !== undefined && typeof passengerData.countryOfResidence !== 'string') ||
-          (passengerData.specialRequests !== undefined && typeof passengerData.specialRequests !== 'string')) {
-        setError('Saved booking details contain invalid values. Please return to the previous steps.')
-        return
-      }
-      const pickupTimestamp = parseTurkeyDateTime(transferData.pickUpDate, transferData.pickUpTime)
-      const returnTimestamp = transferData.tripType === 'round-trip'
-        ? parseTurkeyDateTime(transferData.returnDate || '', transferData.returnTime || '')
-        : null
-      if (pickupTimestamp === null || pickupTimestamp <= Date.now() ||
-          (transferData.tripType === 'round-trip' &&
-            (returnTimestamp === null || returnTimestamp <= pickupTimestamp))) {
-        setError('Your transfer date is no longer valid. Please return to the first step and select a future date in Turkey local time.')
-        return
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passengerData.email || '')) {
-        setError('Please review the email address before confirming.')
-        return
-      }
-      const normalizedPhone = passengerData.phoneNumber.replace(/\D/g, '')
-      if (!/^\+\d{8,15}$/.test(passengerData.phoneNumber) ||
-          normalizedPhone.length < 8 ||
-          !passengerData.customerName.trim() || !passengerData.transferAddress.trim() ||
-          !passengerData.countryOfResidence?.trim()) {
-        setError('Saved passenger contact or pickup details are invalid. Please return to the passenger step.')
-        return
-      }
-      if (passengerData.customerName.trim().length > 161 || passengerData.phoneNumber.trim().length > 16 ||
-          passengerData.email.trim().length > 254 || passengerData.transferAddress.trim().length > 250 ||
-          (passengerData.hotelName?.length ?? 0) > 120 || (passengerData.specialRequests?.length ?? 0) > 1000) {
-        setError('Some saved passenger details are too long. Please return to the passenger step and review them.')
-        return
-      }
-      if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
-          !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
-          !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
-          (transferData.tripType === 'round-trip' && (!transferData.returnDate || !transferData.returnTime)) || !passengerData.transferAddress) {
-        setError('Please complete all required booking details.')
-        submittingRef.current = false
+      const validationError = validateBookingDetails(transferData, passengerData)
+      if (validationError) {
+        setError(validationError)
         return
       }
       setProcessing(true)
