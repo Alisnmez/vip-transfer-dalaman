@@ -129,6 +129,16 @@ public class BookingService {
                 .orElseThrow(() -> new BookingNotFoundException(id));
     }
 
+    public List<Booking> getCalendarBookings(java.time.YearMonth month) {
+        java.time.YearMonth earliest = java.time.YearMonth.now(java.time.ZoneId.of("Europe/Istanbul")).minusYears(2);
+        java.time.YearMonth latest = java.time.YearMonth.now(java.time.ZoneId.of("Europe/Istanbul")).plusYears(2);
+        if (month.isBefore(earliest) || month.isAfter(latest)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Calendar month is out of range.");
+        }
+        return bookingRepository.findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
+                month.atDay(1).atStartOfDay(), month.plusMonths(1).atDay(1).atStartOfDay());
+    }
+
     public java.util.Map<String, Object> getDashboardSummary() {
         java.time.LocalDateTime now = java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul"));
         java.time.LocalDate today = now.toLocalDate();
