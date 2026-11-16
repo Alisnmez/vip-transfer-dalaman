@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { ProcessingButton } from '../../components/ProcessingButton'
 
 import { getBooking, updateBooking, updateBookingStatus } from '../../features/booking/api'
 import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
@@ -72,9 +73,9 @@ export function BookingDetailPage() {
   const vehicle = draft ? transferVehicles.find(item => item.id === draft.vehicleId) : undefined
   const capacityValid = !!draft && !!vehicle && draft.passengerCount >= 1
     && draft.passengerCount <= vehicle.maxPassengers
-    && draft.babySeatCount >= 0 && draft.babySeatCount <= 2
-    && draft.luggageCount >= 0
-    && draft.luggageCount <= (vehicle.maxLuggage ?? 8)
+    && (draft.babySeatCount ?? 0) >= 0 && (draft.babySeatCount ?? 0) <= 2
+    && (draft.luggageCount ?? 0) >= 0
+    && (draft.luggageCount ?? 0) <= (vehicle.maxLuggage ?? 8)
   const previewFare = selectedPrice && draft && capacityValid
     ? (draft.tripType === 'round-trip' ? selectedPrice.roundTrip : selectedPrice.oneWay)
     : null
@@ -159,7 +160,7 @@ export function BookingDetailPage() {
           <p className="text-xl font-bold">{previewFare === null ? 'Unavailable — check route and capacity' : `£${previewFare.toFixed(2)}`}</p>
           <p className="mt-1 text-xs text-on-surface-variant">Preview from the published price list; the server recalculates the final amount on save.</p>
         </div>
-        <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Contact and flight edits keep the original fare. Changing route, vehicle, trip type or passenger count recalculates the fare; changing dates requires a future pickup.</p><button type="submit" disabled={saving} className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{saving ? 'Saving...' : 'Save booking details'}</button></div>
+        <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Contact and flight edits keep the original fare. Changing route, vehicle, trip type or passenger count recalculates the fare; changing dates requires a future pickup.</p><ProcessingButton type="submit" processing={saving} processingLabel="Saving booking..." className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">Save booking details</ProcessingButton></div>
       </form>}
       {booking && !editing && (
         <dl className="grid min-w-0 grid-cols-1 gap-5 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
