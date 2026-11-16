@@ -7,7 +7,8 @@ import { BookingApiError } from '../features/booking/api/errors'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
-  { to: '/admin/bookings', label: 'Bookings', icon: 'calendar_month' },
+  { to: '/admin/calendar', label: 'Calendar', icon: 'calendar_month' },
+  { to: '/admin/bookings', label: 'Bookings', icon: 'list_alt' }
 ]
 
 export function AdminLayout() {
