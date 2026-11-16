@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 import { getBookingPage } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
-import { BookingStatusBadge } from '../../features/booking/components/BookingStatusBadge'
-import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
+import { BookingStatusIndicators } from '../../features/booking/components/BookingStatusIndicators'
 import type { Booking } from '../../features/booking/types'
 
 export function BookingListPage() {
@@ -80,7 +79,7 @@ export function BookingListPage() {
         {!loading && !error && visibleBookings.length > 0 && (
           <><div className="space-y-3 md:hidden">{visibleBookings.map(booking => (
             <article key={booking.id} className="min-w-0 rounded-xl border border-outline-variant bg-white p-4 shadow-sm">
-              <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-xs text-on-surface-variant">Booking #{booking.id}</p><h2 className="break-words font-bold">{booking.customerName}</h2></div><div className="flex flex-wrap items-center justify-end gap-2"><LiveBookingBadge status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /><BookingStatusBadge status={booking.status} /></div></div>
+              <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-xs text-on-surface-variant">Booking #{booking.id}</p><h2 className="break-words font-bold">{booking.customerName}</h2></div><BookingStatusIndicators status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /></div>
               <p className="mt-3 break-words text-sm">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
               <p className="mt-2 text-sm text-on-surface-variant">{formatTransferDateTime(booking.transferDateTime)} · {booking.passengerCount} passengers</p>
               <p className="mt-1 text-xs text-on-surface-variant">Received: {formatBookingReceivedAt(booking.createdAt)}</p>
@@ -105,7 +104,7 @@ export function BookingListPage() {
                   <td className="p-4">{booking.pickUpLocation} → {booking.dropOffLocation}</td>
                   <td className="p-4">{formatTransferDateTime(booking.transferDateTime)}</td>
                   <td className="p-4 font-semibold">£{Number(booking.price).toFixed(2)}</td>
-                  <td className="p-4"><div className="flex flex-wrap items-center gap-2"><LiveBookingBadge status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /><BookingStatusBadge status={booking.status} /></div></td>
+                  <td className="p-4"><BookingStatusIndicators status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /></td>
                   <td className="p-4">
                     <Link className="text-admin-primary underline" to={`/admin/bookings/${booking.id}`}>View details</Link>
                   </td>
