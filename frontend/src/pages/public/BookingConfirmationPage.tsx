@@ -148,7 +148,7 @@ export function BookingConfirmationPage() {
         return
       }
       const normalizedPhone = passengerData.phoneNumber.replace(/\D/g, '')
-      if (!/^\\+\\d{8,15}$/.test(passengerData.phoneNumber) ||
+      if (!/^\+\d{8,15}$/.test(passengerData.phoneNumber) ||
           normalizedPhone.length < 8 ||
           !passengerData.customerName.trim() || !passengerData.transferAddress.trim() ||
           !passengerData.countryOfResidence?.trim()) {
