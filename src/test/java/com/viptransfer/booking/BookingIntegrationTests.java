@@ -238,6 +238,35 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void rejectsZeroAndNegativePassengersWithoutCreatingBookings() throws Exception {
+        java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
+                "customerName", "Invalid Passenger Test",
+                "passengerCount", 1,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "invalid-passenger@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        long countBefore = bookingRepository.count();
+
+        for (int invalidCount : new int[]{0, -1}) {
+            request.put("passengerCount", invalidCount);
+            mockMvc.perform(post("/bookings")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(request)))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(jsonPath("$.status").value(400))
+                    .andExpect(jsonPath("$.message").value("Passenger count must be at least 1."));
+        }
+
+        org.junit.jupiter.api.Assertions.assertEquals(countBefore, bookingRepository.count(),
+                "Invalid passenger counts must never create a booking");
+    }
+
+    @Test
     void createsReverseAirportTransferAtCatalogPrice() throws Exception {
         String request = objectMapper.writeValueAsString(Map.of(
                 "customerName", "Return Passenger",
