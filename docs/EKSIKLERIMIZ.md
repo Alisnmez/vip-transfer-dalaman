@@ -368,3 +368,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Önceki CI:** Kod standardı audit günlüğü commit 498d534 için run 43859747390 completed/success; lint, build ve izole PostgreSQL testleri başarılı.
 - **Yeni test CI:** e274509 için GitHub Actions sonucu henüz doğrulanmadı; başarı onaylanana kadar TEST BEKLİYOR.
 - **Açık tutarsızlık:** Frontend seçili aracın maxLuggage kapasitesini denetliyor; backend yalnızca genel 0–8 sınırını denetliyor. Özellikle vip-minivan için frontend maxLuggage=6 iken API 8'i kabul ediyor. Bu iş kuralı API seviyesinde eşitlenmeden kapatılmamalı; mevcut testte vip-minivan + 8 bagaj kabul ediliyor.
+
+
+## 2026-11-16 — Birleşik iyileştirme: kararsız test + araç kapasitesi + regresyon
+- **CI kök neden:** e274509 run 43860523383 PostgreSQL testlerinde tek hata `savesIndependentReturnDateAndTime`: beklenen LocalDateTime.toString() saniyeyi atlıyor, JSON saniyeyi `:00` olarak yazıyor. Sabit `yyyy-MM-dd'T'HH:mm:ss` assertion ile düzeltildi (20867017). Uygulamanın tarih davranışı değiştirilmedi.
+- **Backend kapasite tutarlılığı:** TransferPricingService.validateLuggageCapacity; taxi=3, vip-minivan/premium=6, maybach*=4, minibus*=8 (genel API sınırı). BookingService.createNewBooking ve updateBooking çağırıyor (ab93010, 7a7da3). Frontend zaten bu araçlara göre sınırlandırıyordu; API bypass kapatıldı.
+- **Regresyon:** VIP minivan 6 bagaj kabul/7 bagaj ret, minibus 8 kabul/9 ret, çocuk koltuğu 0–2, negatif yolcu 0/-1 ret ve veritabanında insert olmaması testleri (2541a03). Son run 43860943209 ilk kontrolde in_progress; yeşil sonuç gelmeden tamamlandı olarak işaretlenmeyecek.
+- **Uyarı:** Araç kapasitesi rakamları mevcut frontend kataloğundan alınmıştır; fiziksel araç filosuyla doğrulanması ayrıca gereklidir. Live DB E2E ayrı açık görevdir.
