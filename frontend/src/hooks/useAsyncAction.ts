@@ -1,21 +1,24 @@
 import { useCallback, useRef, useState } from 'react'
 
-/** A shared synchronous click guard for async actions. The ref locks immediately,
- * before React can render the disabled/loading button. */
+import { createActionLock } from './createActionLock'
+
+/** Shared processing state and immediate click protection for async buttons. */
 export function useAsyncAction() {
-  const locked = useRef(false)
+  const lock = useRef<ReturnType<typeof createActionLock> | null>(null)
+  if (lock.current === null) lock.current = createActionLock()
   const [processing, setProcessing] = useState(false)
 
   const run = useCallback(async (action: () => Promise<void>) => {
-    if (locked.current) return
-    locked.current = true
-    setProcessing(true)
-    try {
-      await action()
-    } finally {
-      locked.current = false
-      setProcessing(false)
-    }
+    const currentLock = lock.current!
+    if (currentLock.locked) return
+    await currentLock.run(async () => {
+      setProcessing(true)
+      try {
+        await action()
+      } finally {
+        setProcessing(false)
+      }
+    })
   }, [])
 
   return { processing, run }
