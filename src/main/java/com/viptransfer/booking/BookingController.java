@@ -13,12 +13,10 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    public BookingController(BookingService bookingService, BookingSupportService bookingSupportService) {
+    public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
-        this.bookingSupportService = bookingSupportService;
     }
 
-    private final BookingSupportService bookingSupportService;
 
     @GetMapping("/{id}")
     public Booking getBooking(@PathVariable Long id) {
