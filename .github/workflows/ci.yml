@@ -7,6 +7,12 @@ on:
   pull_request:
   workflow_dispatch:
 
+# When commits arrive quickly, keep only the newest run for the same branch.
+# The newest commit still receives the full frontend and backend checks.
+concurrency:
+  group: build-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   frontend:
     name: React and TypeScript build
