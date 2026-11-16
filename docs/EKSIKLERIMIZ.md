@@ -48,3 +48,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Frontend:** `npm ci` ve `npm run build` GitHub Actions üzerinde başarılı.
 - **Kapsam sınırı:** Testler GitHub Actions'ın izole PostgreSQL veritabanında çalıştı, Render üretim veritabanında değil. Tarayıcı üzerinden uçtan uca rezervasyon, aynı isteğin tekrarında çift kayıt oluşmaması, e-posta bildirimi ve üretim ödeme akışı henüz doğrulanmadı.
 - **Sonuç:** Otomatik derleme ve mevcut 14 test **doğrulandı**; görev 1'in idempotency ve uçtan uca test alt işleri **açık**.
+
+## 2026-11-16 — Geçici eğlence modu: araç kartı
+- **İstek:** Our Vehicles sayfasına Porsche Cayenne GTX, £500 fiyatlı geçici demo kartı eklenmesi; sonradan geri alınacak.
+- **Değişiklik:** `frontend/src/pages/public/InfoPages.tsx` içinde sadece araçlar sayfasında gösterilen demo kartı eklendi. Commit: `d127a0505b8373ea17555dc82a42d49a6d382242`.
+- **Koruma:** Kart gerçek rezervasyona bağlanmadı, backend fiyat kataloğu değiştirilmedi. Açıkça demo ve rezervasyona kapalı olarak etiketlendi.
+- **Kontrol sınırı:** Görsel temsili Porsche fotoğrafıdır; Cayenne modelinin doğru görseli henüz doğrulanmadı. Derleme ve canlı görünüm henüz test edilmedi.
+- **Geri alma:** İlgili commit geri alınarak demo kartı kaldırılabilir; diğer geliştirmeler korunmalı.
