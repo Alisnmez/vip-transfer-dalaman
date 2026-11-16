@@ -14,8 +14,7 @@ export function HomePage() {
             Professional Airport Transfers from Dalaman
           </h1>
           <p className="font-body-lg text-body-lg text-white/80 mb-stack-lg max-w-2xl mx-auto">
-            Experience reliable, high-performance chauffeur services across the
-            Turquoise Coast.
+            Request a private airport transfer across the Turquoise Coast. Review your route and vehicle options before submitting.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-stack-md">
@@ -58,9 +57,9 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">Fixed Prices</h3>
+                <h3 className="font-title-md text-on-surface">Route Price Estimates</h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Transparent pricing with no hidden fees.
+                  Review the published route estimate before sending your request.
                 </p>
               </div>
             </div>
@@ -102,146 +101,22 @@ export function HomePage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
-            <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
-              <div className="h-48 mb-6 overflow-hidden rounded-lg">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  data-alt="Black Mercedes Vito VIP"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv2p8bkO-_AX12JvvsBkxiP_AI8kMYN3CNIcP5D6gR8G8WRTG-PtIQzzdmoLxpMkqX5r6xQ9ARsYFZfMPXgBaUkybXXnwcybZR79Tw5cYctdR4VhGnJ4kKLFwHZ26hzfT2ChEO3b-XI2P_w9awItJ4oIvncn34UqtwH-0LRn7uXaoZEksFZ-zYpPluxOvKclxhYQgBJaDsa0xwCRTrTllrTdrHxxCGEOCijYUacTqc3NJ7NFdlmT4WXVfrBArPpoG6pD3g8_jKiXA"
-                />
-              </div>
-              <h3 className="font-title-md text-on-surface mb-2">
-                Mercedes Vito Executive
-              </h3>
-              <div className="flex gap-4 mb-4 text-on-surface-variant">
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 5
+            {[
+              { title: 'Private Car', icon: 'local_taxi', detail: 'Choose a private car category for your transfer request.' },
+              { title: 'Private Minivan', icon: 'directions_car', detail: 'Select a minivan category and enter your passenger and luggage needs.' },
+              { title: 'Group Transfer', icon: 'airport_shuttle', detail: 'Check available group vehicle categories in the booking form.' },
+            ].map((vehicle) => (
+              <article key={vehicle.title} className="professional-card accent-border-left p-6 rounded-xl">
+                <div className="h-32 mb-6 rounded-lg bg-primary/5 flex items-center justify-center">
+                  <span translate="no" className="material-symbols-outlined text-primary text-6xl">{vehicle.icon}</span>
                 </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 6
-                </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">ac_unit</span> Climate
-                </div>
-              </div>
-              <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Complimentary Refreshments
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  High Speed Wi-Fi
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Professional Chauffeur
-                </li>
-              </ul>
-              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Book This Transfer
-              </Link>
-            </div>
-
-            <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
-              <div className="h-48 mb-6 overflow-hidden rounded-lg">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  data-alt="VIP Minivan Pro"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsVW7MPfi8TokzykrBOlOa83IL9dMqnkU_VjOTz2LiBhSAX4yWbZNtlmHeYo1IMKiwXsFr6H9SpO5bUZF1KqOGy1dvfOAzduwRcuLneG2QcxGf0fS9K6_iK2X1EWC7M5r-cVlsQ9HYnhQ7vLf6J3XcU0yQOQJ0ZVgZ2One-wMrAE78j96s-F44Oqdg7hP8wwIHM1aLW5toOnex9fH1s11NhKa7X4efDsUaZZzSE22hVqE7F0hCINy-YvMU5Pxg_BWMvPlft6gL27g"
-                />
-              </div>
-              <h3 className="font-title-md text-on-surface mb-2">
-                Corporate Minivan Pro
-              </h3>
-              <div className="flex gap-4 mb-4 text-on-surface-variant">
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 5
-                </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 6
-                </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">tv</span> Media
-                </div>
-              </div>
-              <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Premium Leather Seating
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  On-board Workstation
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Privacy Partition
-                </li>
-              </ul>
-              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Book This Transfer
-              </Link>
-            </div>
-
-            <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
-              <div className="h-48 mb-6 overflow-hidden rounded-lg">
-                <img
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  data-alt="Luxury Executive Sedan"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQNRpwgcupfrZXHII2tiBKFGPwsQaMEy4bDaGTyuSW5oJ2tvlAzWy9g7HFZn9snTInkHZnAPeEXcXiP2UdLMJjGlFOx9AQb77RkqsgwcDq98lwiSSujxth2UMRrL39J1BQLICgrDulP_9wNUdnS3NlZ3WJNjNGVkdrpL03boQESWXy69IX9EOdWOTPO1SioIrrOsqov560Mj8b0z6h0kkD5Cs3Nb__0z8r1WOeZvJV4vNLYJDFcRyp6p3kb9t1Jn0BTUpPKbf0ck0"
-                />
-              </div>
-              <h3 className="font-title-md text-on-surface mb-2">
-                Executive Sedan
-              </h3>
-              <div className="flex gap-4 mb-4 text-on-surface-variant">
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">person</span> 3
-                </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">luggage</span> 3
-                </div>
-                <div className="flex items-center gap-1">
-                  <span translate="no" className="material-symbols-outlined text-sm">chair</span> Comfort
-                </div>
-              </div>
-              <ul className="text-label-sm text-on-surface-variant space-y-2 mb-6">
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Discreet Service
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Perfect for Solo Travelers
-                </li>
-                <li className="flex items-center gap-2">
-                  <span translate="no" className="material-symbols-outlined text-secondary text-xs">
-                    check_circle
-                  </span>
-                  Modern Fleet Models
-                </li>
-              </ul>
-              <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                Book This Transfer
-              </Link>
-            </div>
+                <h3 className="font-title-md text-on-surface mb-2">{vehicle.title}</h3>
+                <p className="text-on-surface-variant mb-6">{vehicle.detail}</p>
+                <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+                  View Options &amp; Prices
+                </Link>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -261,13 +136,13 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-lg">
                 <span className="bg-secondary text-white px-3 py-1 rounded-full text-label-sm font-bold mb-2 inline-block">
-                  FREQUENT SERVICE
+                  DALAMAN ROUTE
                 </span>
                 <h3 className="font-display-lg text-3xl text-white mb-2">
                   Dalaman to Fethiye
                 </h3>
                 <p className="text-white/80 mb-4">
-                  Daily private transfers to Fethiye Business Districts and Marina.
+                  Request a private transfer to Fethiye and review your route price.
                 </p>
                 <div className="text-secondary font-bold text-2xl">View prices when booking</div>
               </div>
@@ -327,7 +202,7 @@ export function HomePage() {
           </p>
           <div className="flex flex-col md:flex-row gap-stack-md justify-center">
             <Link to="/booking" className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
-              Book Online Now
+              Request a Transfer
             </Link>
             <Link to="/contact" className="bg-white border border-outline text-on-surface px-12 py-4 rounded-lg font-bold text-lg hover:border-secondary transition-all flex items-center justify-center gap-2">
               <span translate="no" className="material-symbols-outlined text-secondary">chat</span>
