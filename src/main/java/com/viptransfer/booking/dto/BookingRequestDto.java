@@ -44,6 +44,19 @@ public class BookingRequestDto {
     @jakarta.validation.constraints.Pattern(regexp = "[A-Za-z0-9 -]*", message = "Flight number contains invalid characters.")
     private String flightNumber;
 
+    @jakarta.validation.constraints.Min(value = 0, message = "Luggage count cannot be negative.")
+    @jakarta.validation.constraints.Max(value = 20, message = "Luggage count exceeds the allowed maximum.")
+    private Integer luggageCount;
+
+    @jakarta.validation.constraints.Min(value = 0, message = "Baby seat count cannot be negative.")
+    @jakarta.validation.constraints.Max(value = 5, message = "Baby seat count exceeds the allowed maximum.")
+    private Integer babySeatCount;
+
+    public Integer getLuggageCount() { return luggageCount; }
+    public void setLuggageCount(Integer value) { this.luggageCount = value; }
+    public Integer getBabySeatCount() { return babySeatCount; }
+    public void setBabySeatCount(Integer value) { this.babySeatCount = value; }
+
     public String getFlightNumber() { return flightNumber; }
     public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
 
