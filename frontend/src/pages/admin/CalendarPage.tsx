@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getCalendarBookings } from '../../features/booking/api'
+import { ProcessingButton } from '../../components/ProcessingButton'
 import { bookingStatus } from '../../features/booking/formatters'
 import { turkeyToday } from '../../features/booking/turkeyTime'
 import type { Booking } from '../../features/booking/types'
@@ -120,7 +121,7 @@ export function CalendarPage() {
             <option value="PENDING">Pending</option><option value="CONFIRMED">Confirmed</option>
             <option value="COMPLETED">Completed</option><option value="CANCELLED">Cancelled</option>
           </select>
-          <button type="button" onClick={() => setRefreshKey(value => value + 1)} className="rounded-lg border px-3 py-2 text-sm">Refresh</button>
+          <ProcessingButton type="button" processing={loading} processingLabel="Refreshing..." onClick={() => setRefreshKey(value => value + 1)} className="rounded-lg border px-3 py-2 text-sm">Refresh</ProcessingButton>
           <Link to="/admin/bookings" className="rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white">Booking list</Link>
         </div>
       </header>
