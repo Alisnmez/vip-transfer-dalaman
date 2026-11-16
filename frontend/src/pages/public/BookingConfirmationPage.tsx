@@ -86,8 +86,15 @@ export function BookingConfirmationPage() {
         setError('Your booking information is missing. Please start the booking again.')
         return
       }
-      const transfer: unknown = JSON.parse(savedTransfer)
-      const passenger: unknown = JSON.parse(savedPassenger)
+      let transfer: unknown
+      let passenger: unknown
+      try {
+        transfer = JSON.parse(savedTransfer)
+        passenger = JSON.parse(savedPassenger)
+      } catch {
+        setError('Saved booking details are invalid. Please return to the previous steps and enter them again.')
+        return
+      }
       if (!transfer || typeof transfer !== 'object' || Array.isArray(transfer) ||
           !passenger || typeof passenger !== 'object' || Array.isArray(passenger)) {
         setError('Saved booking details are invalid. Please return to the previous steps.')
@@ -178,7 +185,7 @@ export function BookingConfirmationPage() {
       }
     } catch (err) {
       setSubmissionUncertain(err instanceof BookingApiError && err.uncertain)
-      setError(err instanceof SyntaxError ? 'Saved booking details are invalid. Please return to the previous steps and enter them again.' : err instanceof Error ? err.message : 'Booking could not be created.')
+      setError(err instanceof Error ? err.message : 'Booking could not be created.')
     } finally {
       submittingRef.current = false
       setProcessing(false)
