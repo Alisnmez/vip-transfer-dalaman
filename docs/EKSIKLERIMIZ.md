@@ -26,14 +26,16 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 ### 2. Uçuş, otel, bagaj ve çocuk koltuğu
 
-**Genel durum:** DEVAM EDİYOR (kullanıcı talebiyle başlandı; Görev 1 migration/production güvenlik açıkları ayrıca takip ediliyor).
+**Genel durum:** TAMAMLANDI — kullanıcı 2026-11-16 tarihinde dört alanı içeren gerçek rezervasyonu oluşturduğunu ve başarılı olduğunu doğruladı. Görev 1 migration/production güvenlik kontrolleri ayrı takip ediliyor.
 
 | No | Alt iş | Durum | Kanıt | Sonraki adım |
 |---|---|---|---|---|
-| 2.1 | Uçuş numarası | TEST BEKLİYOR | DTO/entity/service/test (`388a448`) CI başarılı (`43847834472`); React form → localStorage → confirmation → POST bağlandı (`f9b9df8`, `ab8129c`) | Yeni frontend build ve staging E2E doğrula |
-| 2.2 | Otel bilgisi | TEST BEKLİYOR | Opsiyonel hotelName (120 karakter) frontend/backend ve entegrasyon testinde mevcut; CI 43850774232 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
-| 2.3 | Bagaj bilgisi | TEST BEKLİYOR | Genel sınır 0–8; araç bazlı kapasite API create/update tarafında uygulanıyor, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
-| 2.4 | Çocuk koltuğu | TEST BEKLİYOR | babySeatCount DTO/entity/frontend payload'da mevcut; güncel sınır 0–2, CI 43860943209 başarılı. | Gerçek tarayıcı E2E ve DB kaydını doğrula |
+| 2.1 | Uçuş numarası | TAMAMLANDI | DTO/entity/service/test (`388a448`) CI başarılı (`43847834472`); React form → localStorage → confirmation → POST bağlandı (`f9b9df8`, `ab8129c`) | Kullanıcının 2026-11-16 canlı rezervasyon doğrulaması alındı; ileride regresyonda yeniden kontrol et |
+| 2.2 | Otel bilgisi | TAMAMLANDI | Opsiyonel hotelName (120 karakter) frontend/backend ve entegrasyon testinde mevcut; CI 43850774232 başarılı. | Kullanıcı 2026-11-16 gerçek rezervasyonun başarılı olduğunu bildirdi; bağımsız DB sorgusu yapılmadı |
+| 2.3 | Bagaj bilgisi | TAMAMLANDI | Genel sınır 0–8; araç bazlı kapasite API create/update tarafında uygulanıyor, CI 43860943209 başarılı. | Kullanıcı 2026-11-16 gerçek rezervasyonun başarılı olduğunu bildirdi; bağımsız DB sorgusu yapılmadı |
+| 2.4 | Çocuk koltuğu | TAMAMLANDI | babySeatCount DTO/entity/frontend payload'da mevcut; güncel sınır 0–2, CI 43860943209 başarılı. | Kullanıcı 2026-11-16 gerçek rezervasyonun başarılı olduğunu bildirdi; bağımsız DB sorgusu yapılmadı |
+
+**Doğrulama sınırı:** Başarı bilgisi kullanıcının gerçek rezervasyon denemesine dayanır. Bağımsız veritabanı sorgusu veya otomatik E2E çalıştırıldığı iddia edilmez.
 
 ### 3. Gerçek fiyat, ödeme ve iptal kuralları
 
@@ -61,6 +63,15 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 2 kullanıcı kabul testi
+- **Problem:** 2.1–2.4 alanlarının gerçek rezervasyonda çalıştığının teyidi bekleniyordu.
+- **Kanıt:** Kullanıcı 2026-11-16 tarihinde bu alanlarla gerçek rezervasyonu az önce oluşturduğunu ve başarılı olduğunu açıkça bildirdi.
+- **Neden:** Önceki otomatik testler canlı kullanıcı akışını tek başına kanıtlamıyordu.
+- **Düzeltme:** 2.1–2.4 kullanıcı kabulüne dayanarak TAMAMLANDI olarak işaretlendi; kod değiştirilmedi.
+- **Test:** Kullanıcı tarafından canlı rezervasyon akışı denendi; bağımsız DB sorgusu ve yeni otomatik test bu adımda yapılmadı.
+- **Yeni risk:** Gelecekteki sürümlerde regresyon ve Görev 1 üretim güvenliği kontrolleri ayrı izlenecek.
+- **Sonuç:** Görev 2 kapatıldı, Görev 3 fiyat/ödeme/iptal işleri açık.
 
 ## 2026-11-16 — Görev 3'e geçiş ve kod denetimi
 - **Problem:** 1 ve 2'deki mevcut kodu tekrar yazmadan 3. maddeye geçmek; fiyat, ödeme ve iptal alanlarının gerçekten uygulanıp uygulanmadığını ayırmak.
