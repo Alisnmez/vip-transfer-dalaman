@@ -467,3 +467,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingConfirmationPage: localStorage.getItem işlemleri try içine alındı; başarılı POST sonrası localStorage.removeItem hata verirse başarılı rezervasyon yanlışlıkla hata olarak gösterilmiyor (a0aaa3f3).
 - BookingConfirmationPage: API çağrısından önce zorunlu alanların string/tam sayı ve tripType tipleri doğrulanıyor (982354af).
 - Yeni CI sonucu bekleniyor. Gerçek tarayıcı E2E ve canlı Render smoke test açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Final confirmation validasyonları
+- Önceki CI: 08e659b5 run 43906868643, 982354af run 43906821792 ve a0aaa3f3 run 43906791499 completed/success.
+- BookingConfirmationPage: isteğe bağlı flightNumber, luggageCount, babySeatCount, hotelName, countryOfResidence, specialRequests alanlarının tip/sınırları API POST öncesi doğrulanıyor (4d099cf5).
+- BookingConfirmationPage: ilk form doldurulduktan sonra zaman geçmiş olabileceği için pickup tarihinin hâlâ gelecekte olduğu ve dönüşün gidişten sonra olduğu final confirmation sırasında yeniden doğrulanıyor (74274c55).
+- Yeni CI testleri bekleniyor. Gerçek tarayıcı E2E, Render canlı smoke, migration güvenliği, bildirimler açık. Admin koduna dokunulmadı.
