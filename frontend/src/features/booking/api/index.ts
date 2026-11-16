@@ -96,13 +96,6 @@ export function submitBookingSupportRequest(token: string, type: 'change' | 'can
   }, false, 20000)
 }
 
-export function verifyBookingSupport(reference: string, email: string) {
-  return request<{ matched: boolean }>(`${BOOKING_URL}/support/verify`, {
-    method: 'POST',
-    body: JSON.stringify({ reference, email }),
-  }, false, 20000)
-}
-
 export function getBooking(id: number) {
   return request<Booking>(`${BOOKING_URL}/${id}`, undefined, true)
 }
