@@ -177,7 +177,7 @@ export function BookingPassengerPage() {
                 experience.
               </p>
 
-              <form className="space-y-stack-md" onSubmit={(event) => {
+              <form id="passenger-details-form" noValidate className="space-y-stack-md" onSubmit={(event) => {
                 event.preventDefault()
                 void run(async () => {
                   // Let React paint the shared processing state before client-side navigation.
@@ -326,6 +326,7 @@ export function BookingPassengerPage() {
                 <ProcessingButton
                   className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all disabled:opacity-60"
                   type="submit"
+                  form="passenger-details-form"
                   processing={processing}
                   processingLabel="Continuing..."
                 >
