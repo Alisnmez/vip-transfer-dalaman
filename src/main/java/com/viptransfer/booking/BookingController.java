@@ -40,13 +40,6 @@ public class BookingController {
         return java.util.Map.of("message", "Your verified request has been sent to our team.");
     }
 
-    @PostMapping("/support/verify")
-    public java.util.Map<String, Boolean> verifySupport(
-            @RequestBody java.util.Map<String, String> payload) {
-        boolean matched = bookingService.matchesSupportReference(payload.get("reference"), payload.get("email"));
-        return java.util.Map.of("matched", matched);
-    }
-
     @GetMapping("/{id}")
     public Booking getBooking(@PathVariable Long id) {
         return bookingService.getBooking(id);
