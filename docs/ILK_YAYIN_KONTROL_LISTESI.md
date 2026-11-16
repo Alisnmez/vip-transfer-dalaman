@@ -6,6 +6,19 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 
 **Yayın kararı:** İlk yayın için rezervasyon talebi + referans, yetkili işletme erişimi (mevcut güvenli API veya uygulanmış panel), rezervasyonların günlük takip edilmesi, gerçek iletişim kanalı, doğru fiyat/koşullar, temel mobil akış ve üretim güvenliği yeterli. Otomatik e-posta ve gelişmiş panel gibi ek özellikler yoksa sitede varmış gibi sunulmaz. Yayın kararı ancak aşağıdaki kontroller doğrulanınca GO olabilir.
 
+## Yayın öncesi son rötuşlar — logo, metinler ve işletme detayları
+
+**Zamanlama:** Teknik rezervasyon ve güvenli işletme takibi çalıştıktan sonra, **canlıya almadan hemen önce** birlikte yapılacak son içerik/marka kontrolü. Kullanıcı bu bilgileri o aşamada verecek; şimdi tekrar sorulmayacak.
+
+- [ ] Logo, favicon ve marka görsellerini son haliyle ekle.
+- [ ] Ana sayfa, rezervasyon, onay, iletişim ve SSS metinlerini son kez gözden geçir; doğrulanmamış vaatleri çıkar.
+- [ ] Geçici `05555555555` numarasını kullanıcının vereceği gerçek numarayla değiştir; e-posta ve iletişim bağlantılarını doğrula.
+- [ ] **Ödeme metni:** İlk sürüm yalnızca nakit, online/kart ödeme yok. **Nakit tahsilatın tam zamanı** kullanıcıdan yalnızca bu son rötuş aşamasında alınacak; o zamana kadar ödeme zamanı varsayılmayacak.
+- [ ] İşletmenin onayladığı iptal/değişiklik şartlarını ve gerekli yasal metinleri doğru yerlere yerleştir.
+- [ ] Son mobil/masaüstü görünüm, yazım, bağlantılar ve gerçek rezervasyon akışı kontrolünü tamamla.
+
+**Yayın engeli:** Yukarıdaki maddeler onaylanmadan ve doğrulanmadan canlıya çıkış GO olarak işaretlenmez.
+
 ## Yayın öncesi zorunlu (GO / NO-GO)
 
 - [ ] Güncel GitHub Actions frontend lint + unit tests + build ve backend PostgreSQL testleri **yeşil**.
@@ -16,7 +29,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Hata akışı:** API erişilemezse veya geçersiz rezervasyon ID döndürürse kullanıcıya yanlışlıkla 'başarılı' denmiyor; belirsiz gönderimde destek iletişimi gösteriliyor. Kod koruması `f319d0e8`; canlı smoke bekliyor.
 - [ ] **Gerçek fiyat ve kapasite:** Fiyat kataloğu işletme tarafından doğrulanmış; geçersiz araç/rota ve aşırı kapasite reddediliyor.
 - [ ] **İletişim bilgileri:** Kullanıcı kararıyla `05555555555` geçici telefon numarası geliştirme/test ortamında korunuyor (`fce3c968`, `d3a2c0a6`, `4cd9a47a`). **Gerçek canlı yayından hemen önce mutlaka değiştirilecek.** İleride admin panelinden iletişim numarasını düzenleme alanı eklenecek; admin şu an kapsam dışı. `ali_sonmez35@hotmail.com` adresinin aktif takip edildiği doğrulanmalı.
-- [ ] **Nakit tahsilat bilgisi:** Kullanıcı yalnızca nakit kabulünü onayladı; ödeme zamanını teyit et ve rezervasyon ekranındaki açıklamayı test et. Kart/online ödeme seçeneği gösterme.
+- [ ] **Nakit tahsilat bilgisi:** Kullanıcı yalnızca nakit kabulünü onayladı; tahsilat zamanını yukarıdaki **son rötuşlar** aşamasında teyit et ve rezervasyon ekranındaki açıklamayı test et. Kart/online ödeme seçeneği gösterme.
 - [ ] **İşletme bilgileri ve yasal metinler:** İptal, ödeme, KVKK/gizlilik ve işletme kimliği doğrulanmış; bilinmeyen şartlar vaat edilmiyor.
 - [ ] **Mobil smoke:** Ana sayfa → rezervasyon 1/2/3 → başarı, iPhone/Android dar ekran ve masaüstü; kritik linkler çalışıyor.
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
