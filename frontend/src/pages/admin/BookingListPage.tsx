@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getBookings } from '../../features/booking/api'
+import { getBookingPage } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 import type { Booking } from '../../features/booking/types'
 
 export function BookingListPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
+  const [page, setPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const [totalElements, setTotalElements] = useState(0)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -17,7 +20,10 @@ export function BookingListPage() {
     setRefreshing(true)
     setError('')
     try {
-      setBookings(await getBookings())
+      const result = await getBookingPage(page)
+      setBookings(result.content)
+      setTotalPages(result.totalPages)
+      setTotalElements(result.totalElements)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to load bookings')
     } finally {
@@ -27,12 +33,12 @@ export function BookingListPage() {
 
   useEffect(() => {
     let active = true
-    getBookings()
-      .then(data => { if (active) setBookings(data) })
+    getBookingPage(page)
+      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements) } })
       .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
-  }, [])
+  }, [page])
 
   const query = search.trim().toLowerCase()
   const visibleBookings = bookings
@@ -48,7 +54,7 @@ export function BookingListPage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
-            <p className="text-on-surface-variant">{visibleBookings.length} of {bookings.length} requests</p>
+            <p className="text-on-surface-variant">{visibleBookings.length} shown · {totalElements} total requests</p>
           </div>
           <button type="button" onClick={() => { void refresh() }} disabled={loading || refreshing}
             className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
@@ -58,7 +64,7 @@ export function BookingListPage() {
       </header>
       <section className="border-b border-outline-variant bg-white p-6">
         <label className="block max-w-lg text-sm font-semibold">
-          Search bookings
+          Search current page
           <input type="search" value={search} onChange={event => setSearch(event.target.value)}
             placeholder="Customer, route or booking ID"
             className="mt-2 w-full rounded-lg border border-outline-variant px-4 py-3" />
@@ -106,6 +112,11 @@ export function BookingListPage() {
           </table></div></>
         )}
       </section>
+      <nav aria-label="Booking pages" className="flex items-center justify-between gap-4 border-t border-outline-variant bg-white p-4">
+        <button type="button" disabled={loading || page === 0} onClick={() => { setLoading(true); setPage(value => value - 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button>
+        <span className="text-sm">Page {page + 1} of {Math.max(1, totalPages)}</span>
+        <button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => { setLoading(true); setPage(value => value + 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
+      </nav>
     </main>
   )
 }
