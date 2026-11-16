@@ -178,3 +178,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Kapsam:** Aynı payload + farklı UUID için farklı booking ID, API'de retry metadata gizliliği, PostgreSQL testleri ve frontend derleme CI içinde geçti. Bu gerçek browser E2E değildir.
 - **1.4 ortam engeli:** Render servislerini sorgulama girişimi workspace seçimi gerektiği için sonuç vermedi. Hesapta birden fazla workspace olabileceğinden kullanıcı onayı olmadan workspace seçilmeyecek. **Hiçbir Render servisine/deployment'a müdahale edilmedi; canlı veya staging test çalıştırılmadı.**
 - **Kaldığımız yer:** Kullanıcının Render workspace seçimini al, uygun staging servisini ve ayrı PostgreSQL DB'yi doğrula; üretim verisine dokunmadan browser E2E çalıştır. 1.3 CI tamam, staging E2E/migration açık; 1.4 BEKLİYOR.
+
+## 2026-11-16 — 1.4 Render workspace onayı ve staging keşfi
+- **Kullanıcı onayı:** `Ali's workspace` (`tea-dbt0muvf3r2c73bjjde0`) seçildi.
+- **Bulunan servisler:** Statik frontend `vip-transfer-dalaman-test` (`https://vip-transfer-dalaman-test.onrender.com`); backend `vip-transfer-dalaman-api-test` (`https://vip-transfer-dalaman-api-test.onrender.com`). Her ikisi de `feature/booking-integration` branch'ini otomatik deploy ediyor.
+- **Veritabanı:** `vip-transfer-dalaman-test-db` (`dpg-dbt0p3l6e07s73b40okg-a`), PostgreSQL 16, `available`, ücretsiz plan; bitiş tarihi 2026-12-15 olarak bildirildi. Bu bir **test** DB'si; başka üretim DB'si olmadığı sonucu çıkarılamaz.
+- **Deploy durumu (sorgu anında):** Frontend commit `1c00f65` **live**. Backend aynı commit için **build_in_progress**; bir önceki `62007cf` deploy **live**.
+- **Okuma testi engeli:** DB'de `booking` tablo kolonlarını read-only sorgulama girişimi SSL/TLS/harici IP allowlist bağlantı hatasıyla başarısız oldu. Bu, şema hakkında sonuç vermez; DB'ye yazma yapılmadı. IP allowlist'i genişletilmedi.
+- **Kaldığımız yer:** API'nin son deploy'unu doğrula, frontend/backend URL ve CORS uyumunu kontrol et. Güvenli staging test rezervasyonu için yetkili erişim ve DB gözlemi yöntemini belirle; gerçek tarayıcı E2E henüz tamamlanmadı. 1.3 ve 1.4 açık.
