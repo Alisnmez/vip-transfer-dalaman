@@ -218,6 +218,7 @@ export function BookingConfirmationPage() {
                 Contact About This Booking
               </a>
             </div>
+            {error && <p role="alert" className="mb-4 text-sm text-error">{error}</p>}
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
               <p><strong>Passenger:</strong> {display(receipt.customerName)}</p>
               <p><strong>Pickup:</strong> {display(receipt.pickUpLocation)}</p>
@@ -374,7 +375,7 @@ export function BookingConfirmationPage() {
               </span>
             </label>
             {error && <p role="alert" className="text-error">{error}</p>}
-            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open and use the same confirmation button to retry safely; do not start a new booking unless you know the first request was not received.</p>}
+            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.</p>}
             <button
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!confirmed || processing || receipt !== null}
