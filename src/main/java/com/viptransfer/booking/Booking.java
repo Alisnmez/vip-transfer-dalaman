@@ -31,6 +31,18 @@ public class Booking {
     private String tripType;
     private String status = "PENDING";
 
+    @jakarta.persistence.Column(unique = true, length = 64)
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private String idempotencyKey;
+
+    @com.fasterxml.jackson.annotation.JsonIgnore
+    private String requestFingerprint;
+
+    public String getIdempotencyKey() { return idempotencyKey; }
+    public void setIdempotencyKey(String value) { this.idempotencyKey = value; }
+    public String getRequestFingerprint() { return requestFingerprint; }
+    public void setRequestFingerprint(String value) { this.requestFingerprint = value; }
+
     public Booking() {
     }
 
