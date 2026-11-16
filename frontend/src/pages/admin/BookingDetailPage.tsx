@@ -75,6 +75,11 @@ export function BookingDetailPage() {
       || draft.vehicleId !== booking.vehicleId
       || draft.tripType !== booking.tripType
       || draft.passengerCount !== booking.passengerCount
+    if (fareChanged && bookingStatus(booking.status) !== 'PENDING') {
+      setError('This booking is already ' + bookingStatus(booking.status) + '. Route, vehicle, trip type and passenger count cannot be changed because they affect the agreed fare. Contact, flight and schedule details can still be edited.')
+      setErrorAction('saving details')
+      return
+    }
     if (fareChanged && (!validRoute || !priced)) {
       setError('Choose an airport route and a vehicle from the price list before saving.')
       setErrorAction('saving details')
@@ -83,7 +88,7 @@ export function BookingDetailPage() {
     if (fareChanged && !window.confirm('Changing the route, vehicle, trip type or passenger count will recalculate the fare. Confirm the new price with the customer before saving. Continue?')) return
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
-    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
+    catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof BookingApiError && err.status === 409 ? 'The booking was changed or the requested edit conflicts with its current status. Reload the booking and check its status before editing again.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
     finally { setSaving(false) }
   }
 
