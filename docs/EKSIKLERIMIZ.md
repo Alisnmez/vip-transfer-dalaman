@@ -350,3 +350,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Test:** BookingIntegrationTests sınır 0, bagaj 8, çocuk koltuğu 2 kabul; -1, bagaj 9, çocuk koltuğu 3 için HTTP 400 beklentisi. Commit 5ac89cb. CI sonucu henüz doğrulanmadı.
 - **Not:** API'de bagaj/koltuk opsiyonel (null) olabilir; bu kural mevcut kayıtlar ve eski istemciler için geriye dönük uyumluluğu koruyor. Fiyat/araç bazlı bagaj kapasitesi iş kuralları ayrıca incelenecek.
 - **Kaldığımız yer:** 5ac89cb GitHub Actions sonuçlarını doğrula; başarılıysa 1.5 E2E ve 1.3 güvenli migration envanterine devam et.
+
+
+## 2026-11-16 — Kod standardı ve regresyon denetimi
+- **Kapsam:** React/TypeScript ESLint ve build, Spring Boot PostgreSQL entegrasyon testleri, hata sözleşmesi, 0–8 bagaj / 0–2 çocuk koltuğu değişiklikleri. Tüm proje mimarisinin eksiksiz denetlendiği iddia edilmez.
+- **Tespit 1:** BookingValidationExceptionHandler ve GlobalExceptionHandler aynı IllegalArgumentException için farklı JSON cevapları üretiyordu. Tek GlobalExceptionHandler bırakıldı (commit 4490d7e). HTTP 400 status/message sözleşmesi için entegrasyon assertion'ı eklendi (9ddf1d5). Önceki handler silme commit'i CI success; yeni assertion'ın CI sonucu ayrı doğrulanmalı.
+- **Tespit 2:** CI sadece TypeScript build çalıştırıyordu; `npm run lint` eklendi (14d9d7f). İlk lint çalışması 3 hatayı buldu: API'de iki adet preserve-caught-error ve BookingFormPage render sırasında Date.now() (react-hooks/purity).
+- **Düzeltme:** Hata nesnelerine `{ cause: error }` eklendi (709029d). Bugünün yerel tarihi render yerine useState lazy initializer'da hesaplanıyor (853e88b). İş mantığı ve kullanıcıya gösterilen hata mesajları korunuyor.
+- **Önceki CI kanıtı:** 5ac89cb sınır değer testleri, 1de2cbb frontend build ve 3a1b016 backend limitleri GitHub Actions completed/success. Son değişiklikleri içeren run 43859706766 ilk kontrolde queued; sonucun ayrıca kontrolü gerekli.
+- **Bağımlılık riski:** npm ci çıktısında 19 güvenlik uyarısı (10 moderate, 9 high) bildirildi; paket/etki analizi yapılmadan `npm audit fix --force` uygulanmadı.
+- **Açık işler:** ESLint+build+PostgreSQL CI yeşil olmadan tamamlandı sayma. Browser E2E, araç bazlı bagaj kapasitesinin backend doğrulaması, PostgreSQL migration envanteri, SEO SSG ve gerçek marka/iletişim verileri açık.
