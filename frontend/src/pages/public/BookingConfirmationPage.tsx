@@ -94,6 +94,7 @@ export function BookingConfirmationPage() {
         ...(typeof transfer.babySeatCount === 'number' ? { babySeatCount: transfer.babySeatCount } : {}),
         countryOfResidence: passenger.countryOfResidence || '',
         transferAddress: passenger.transferAddress || '',
+        hotelName: passenger.hotelName || '',
         specialRequests: passenger.specialRequests || '',
         tripType: transfer.tripType,
       })
@@ -239,6 +240,7 @@ export function BookingConfirmationPage() {
               <DetailRow label="Phone" value={display(passenger.phoneNumber)} />
               <DetailRow label="Email" value={display(passenger.email)} />
               <DetailRow label="Country of Residence" value={display(passenger.countryOfResidence)} />
+              {passenger.hotelName && <DetailRow label="Hotel / Accommodation" value={passenger.hotelName} />}
               <DetailRow label="Transfer Address in Turkey" value={display(passenger.transferAddress)} />
               {passenger.specialRequests && <DetailRow label="Special Requests" value={passenger.specialRequests} />}
             </div>
