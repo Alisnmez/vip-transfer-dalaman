@@ -184,4 +184,63 @@ class BookingIntegrationTests {
                 .andExpect(status().isBadRequest());
     }
 
+
+    @Test
+    void repeatedBookingRequestWithSameKeyReturnsSameBooking() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Retry Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "retry@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        String key = java.util.UUID.randomUUID().toString();
+        String first = mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", key)
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        String second = mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", key)
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        org.junit.jupiter.api.Assertions.assertEquals(
+                objectMapper.readTree(first).get("id").asLong(),
+                objectMapper.readTree(second).get("id").asLong(),
+                "A retry must not create a second booking");
+    }
+
+    @Test
+    void reusedKeyWithDifferentBookingDataReturnsConflict() throws Exception {
+        String key = java.util.UUID.randomUUID().toString();
+        java.util.Map<String, Object> request = new java.util.HashMap<>(Map.of(
+                "customerName", "Original Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "retry@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", key)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk());
+        request.put("customerName", "Changed Test");
+        mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", key)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isConflict());
+    }
+
+
 }
