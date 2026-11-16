@@ -75,6 +75,20 @@ export function getBookingPage(page: number, size = 25) {
   return request<BookingPage>(`${BOOKING_URL}/page?page=${page}&size=${size}`, undefined, true)
 }
 
+export function requestBookingSupportCode(reference: string, email: string) {
+  return request<{ message: string }>(`${BOOKING_URL}/support/request-code`, {
+    method: 'POST',
+    body: JSON.stringify({ reference, email }),
+  }, false, 20000)
+}
+
+export function verifyBookingSupportCode(reference: string, email: string, code: string) {
+  return request<{ verified: boolean }>(`${BOOKING_URL}/support/verify-code`, {
+    method: 'POST',
+    body: JSON.stringify({ reference, email, code }),
+  }, false, 20000)
+}
+
 export function verifyBookingSupport(reference: string, email: string) {
   return request<{ matched: boolean }>(`${BOOKING_URL}/support/verify`, {
     method: 'POST',
