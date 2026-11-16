@@ -28,6 +28,9 @@ class BookingIntegrationTests {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private BookingRepository bookingRepository;
+
     @Test
     void createsBookingAndReadsItBackFromPostgres() throws Exception {
         String request = objectMapper.writeValueAsString(Map.ofEntries(
@@ -199,6 +202,7 @@ class BookingIntegrationTests {
                 "tripType", "one-way"
         ));
         String key = java.util.UUID.randomUUID().toString();
+        long countBefore = bookingRepository.count();
         String first = mockMvc.perform(post("/bookings")
                         .header("Idempotency-Key", key)
                         .contentType(MediaType.APPLICATION_JSON).content(request))
@@ -213,6 +217,8 @@ class BookingIntegrationTests {
                 objectMapper.readTree(first).get("id").asLong(),
                 objectMapper.readTree(second).get("id").asLong(),
                 "A retry must not create a second booking");
+        org.junit.jupiter.api.Assertions.assertEquals(countBefore + 1, bookingRepository.count(),
+                "Retrying one request must insert exactly one row");
     }
 
     @Test
@@ -260,6 +266,7 @@ class BookingIntegrationTests {
         String key = java.util.UUID.randomUUID().toString();
         java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(2);
         java.util.concurrent.CountDownLatch start = new java.util.concurrent.CountDownLatch(1);
+        long countBefore = bookingRepository.count();
         try {
             java.util.concurrent.Callable<Long> submit = () -> {
                 start.await();
@@ -278,6 +285,8 @@ class BookingIntegrationTests {
                     first.get(20, java.util.concurrent.TimeUnit.SECONDS),
                     second.get(20, java.util.concurrent.TimeUnit.SECONDS),
                     "Concurrent retries must resolve to the same booking");
+            org.junit.jupiter.api.Assertions.assertEquals(countBefore + 1, bookingRepository.count(),
+                    "Concurrent retries must insert exactly one row");
         } finally {
             executor.shutdownNow();
         }
