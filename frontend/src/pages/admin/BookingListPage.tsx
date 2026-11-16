@@ -50,6 +50,7 @@ export function BookingListPage() {
               <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-xs text-on-surface-variant">Booking #{booking.id}</p><h2 className="break-words font-bold">{booking.customerName}</h2></div><span className="shrink-0 rounded-full bg-amber-100 px-2 py-1 text-xs font-bold text-amber-950">{bookingStatus(booking.status)}</span></div>
               <p className="mt-3 break-words text-sm">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
               <p className="mt-2 text-sm text-on-surface-variant">{formatTransferDateTime(booking.transferDateTime)} · {booking.passengerCount} passengers</p>
+              <p className="mt-1 text-xs text-on-surface-variant">Received: {booking.createdAt ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Istanbul', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(booking.createdAt)) : 'Not recorded'}</p>
               <div className="mt-4 flex items-center justify-between gap-3 border-t border-outline-variant pt-3"><strong>£{Number(booking.price).toFixed(2)}</strong><Link className="rounded-lg bg-admin-primary px-4 py-2 text-sm font-semibold text-white" to={`/admin/bookings/${booking.id}`}>View details</Link></div>
             </article>
           ))}</div><div className="hidden max-w-full overflow-x-auto md:block"><table className="w-full min-w-[760px] border-collapse bg-white text-left">
