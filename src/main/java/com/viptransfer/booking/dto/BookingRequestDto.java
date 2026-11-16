@@ -38,6 +38,8 @@ public class BookingRequestDto {
     private String email;
     private String countryOfResidence;
     private String transferAddress;
+    @jakarta.validation.constraints.Size(max = 120, message = "Hotel name must be at most 120 characters.")
+    private String hotelName;
     private String specialRequests;
 
     @jakarta.validation.constraints.Size(max = 20, message = "Flight number must be at most 20 characters.")
@@ -59,6 +61,9 @@ public class BookingRequestDto {
 
     public String getFlightNumber() { return flightNumber; }
     public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
+
+    public String getHotelName() { return hotelName; }
+    public void setHotelName(String hotelName) { this.hotelName = hotelName; }
 
     public BookingRequestDto() {
     }
