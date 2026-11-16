@@ -5,20 +5,80 @@ import com.viptransfer.exception.BookingNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.HexFormat;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class BookingService {
 
     private final BookingRepository bookingRepository;
     private final TransferPricingService transferPricingService;
+    private final ObjectMapper objectMapper;
+    private final TransactionTemplate transactionTemplate;
 
-    public BookingService(BookingRepository bookingRepository, TransferPricingService transferPricingService) {
+    public BookingService(BookingRepository bookingRepository, TransferPricingService transferPricingService,
+                          ObjectMapper objectMapper, PlatformTransactionManager transactionManager) {
         this.bookingRepository = bookingRepository;
         this.transferPricingService = transferPricingService;
+        this.objectMapper = objectMapper;
+        this.transactionTemplate = new TransactionTemplate(transactionManager);
     }
 
     public Booking createBooking(BookingRequestDto dto) {
+        return createBooking(dto, null);
+    }
+
+    public Booking createBooking(BookingRequestDto dto, String key) {
+        if (key == null) {
+            return createNewBooking(dto, null, null);
+        }
+        if (!key.matches("[A-Za-z0-9_-]{16,64}")) {
+            throw new IllegalArgumentException("Invalid Idempotency-Key.");
+        }
+        String fingerprint = fingerprint(dto);
+        var existing = bookingRepository.findByIdempotencyKey(key);
+        if (existing.isPresent()) {
+            return verifySameRequest(existing.get(), fingerprint);
+        }
+        try {
+            // Commit before returning; a competing request can safely read the winner.
+            return transactionTemplate.execute(status -> createNewBooking(dto, key, fingerprint));
+        } catch (DataIntegrityViolationException collision) {
+            // PostgreSQL unique constraint arbitrates concurrent requests across instances.
+            return bookingRepository.findByIdempotencyKey(key)
+                    .map(booking -> verifySameRequest(booking, fingerprint))
+                    .orElseThrow(() -> collision);
+        }
+    }
+
+    private Booking verifySameRequest(Booking booking, String fingerprint) {
+        if (!fingerprint.equals(booking.getRequestFingerprint())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Idempotency-Key already belongs to another booking request.");
+        }
+        return booking;
+    }
+
+    private String fingerprint(BookingRequestDto dto) {
+        try {
+            byte[] bytes = objectMapper.writeValueAsBytes(dto);
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+        } catch (Exception error) {
+            throw new IllegalStateException("Could not fingerprint booking request.", error);
+        }
+    }
+
+    private Booking createNewBooking(BookingRequestDto dto, String key, String fingerprint) {
         Booking booking = new Booking();
+        booking.setIdempotencyKey(key);
+        booking.setRequestFingerprint(fingerprint);
         booking.setCustomerName(dto.getCustomerName());
         booking.setPassengerCount(dto.getPassengerCount());
         booking.setPickUpLocation(dto.getPickUpLocation());
@@ -35,7 +95,7 @@ public class BookingService {
         booking.setTripType(dto.getTripType());
         booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
-        return bookingRepository.save(booking);
+        return bookingRepository.saveAndFlush(booking);
     }
 
     private void validateSchedule(BookingRequestDto dto) {
