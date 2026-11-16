@@ -84,7 +84,7 @@ export function BookingFormPage() {
   const [flightNumber, setFlightNumber] = useState(draft.flightNumber ?? '')
   const [returnDate, setReturnDate] = useState(draft.returnDate ?? '')
   const [returnTime, setReturnTime] = useState(draft.returnTime ?? '')
-  const [passengers, setPassengers] = useState(draft.passengerCount ?? 4)
+  const [passengers, setPassengers] = useState(draft.passengerCount ?? 1)
   const [luggages, setLuggages] = useState(draft.luggageCount ?? 0)
   const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 0)
   const [formError, setFormError] = useState('')
