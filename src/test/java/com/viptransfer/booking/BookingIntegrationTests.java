@@ -399,6 +399,26 @@ class BookingIntegrationTests {
 
 
     @Test
+    void rejectsPastPickupTimeOnServer() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Past Date Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul")).minusHours(1).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "past@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        long before = bookingRepository.count();
+        mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isBadRequest());
+        org.junit.jupiter.api.Assertions.assertEquals(before, bookingRepository.count());
+    }
+
+    @Test
     void repeatedBookingRequestWithSameKeyReturnsSameBooking() throws Exception {
         String request = objectMapper.writeValueAsString(Map.of(
                 "customerName", "Retry Test",
