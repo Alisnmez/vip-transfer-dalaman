@@ -153,6 +153,16 @@ export function BookingConfirmationPage() {
         setError('Your transfer date is no longer valid. Please return to the first step and select a future date.')
         return
       }
+      if (pickupDateTime.getFullYear() !== Number(transferData.pickUpDate.slice(0, 4)) ||
+          pickupDateTime.getMonth() + 1 !== Number(transferData.pickUpDate.slice(5, 7)) ||
+          pickupDateTime.getDate() !== Number(transferData.pickUpDate.slice(8, 10)) ||
+          (returnDateTime !== null &&
+            (returnDateTime.getFullYear() !== Number(transferData.returnDate?.slice(0, 4)) ||
+             returnDateTime.getMonth() + 1 !== Number(transferData.returnDate?.slice(5, 7)) ||
+             returnDateTime.getDate() !== Number(transferData.returnDate?.slice(8, 10))))) {
+        setError('The saved transfer date is invalid. Please choose a valid date before confirming.')
+        return
+      }
       if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
           transferData.passengerCount > 16 ||
           !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(passengerData.email || '')) {
