@@ -491,3 +491,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Contact Us sayfasına 05555555555 ve ali_sonmez35@hotmail.com tıklanabilir bağlantıları eklendi (ffe19e0c).
 - Ana sayfa footer'ına aynı geçici iletişim bağlantıları eklendi (433f00bc).
 - Booking form footer'ında önceki commit 1f8ec017 ile zaten mevcut. Kullanıcı istediğinde gerçek işletme iletişim bilgileriyle değiştirilecek. Admin kapsam dışı; CI ve canlı görünüm doğrulaması bekleniyor.
+
+
+## 2026-11-16 — Rezervasyon sonrası müşteri desteği
+- BookingLookupPage: güvenli sorgulama henüz aktif olmadığı açıkça belirtilerek geçici telefon ve e-posta üzerinden destek bağlantıları eklendi (e8447993).
+- BookingConfirmationPage: başarılı rezervasyon ekranında referans kopyalama ve konu satırında referans içeren e-posta bağlantısı eklendi (83457aa4).
+- Bu özellikler otomatik e-posta gönderimi veya güvenli lookup değildir; ilgili 5 ve 6 numaralı işler açık. CI ve canlı tarayıcı doğrulaması bekleniyor. Admin kapsam dışı.
