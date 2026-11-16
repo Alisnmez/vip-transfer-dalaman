@@ -256,3 +256,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Güvenlik kararı:** Canlı/test DB'de `ALTER`, `DROP`, `TRUNCATE` yapılmadı; `ddl-auto` değeri değiştirilmedi. Gerçek şema envanteri olmadan Flyway baseline çalıştırılmayacak.
 - **Test:** Dokümantasyon kaydedildi; SQL sorguları bu ortamdan çalıştırılamadı (Render DB dış erişim SSL/TLS engeli). 1.3 **TEST BEKLİYOR**; 1.5 **TEST BEKLİYOR**.
 - **Kaldığımız yer:** DBeaver'da planın Phase 0 sorgularını çalıştırıp şema ve unique constraint sonuçlarını doğrula; sonra migration koduna geç.
+
+## 2026-11-16 — 1.3 gerçek PostgreSQL satır sayısı regresyon testleri
+- **Değişiklik:** `BookingIntegrationTests.java` içinde tekrar edilen aynı `Idempotency-Key` isteği ve iki eşzamanlı isteğin ardından `bookingRepository.count()` ile **tam olarak bir yeni satır** eklendiği assertion'ları eklendi. Commit `a1efdd4`.
+- **Amaç:** Sadece aynı rezervasyon ID'sinin dönmesini değil, PostgreSQL'e gerçekten tek kayıt yazılmasını sınamak.
+- **Test durumu:** GitHub Actions otomatik workflow yeni commit için henüz sorgu sonucunda görünmedi; önceki `5a46f61` workflow `43847200039` başarılı, fakat **yeni assertion'ları çalıştırdığı söylenemez**. Yeni run tamamlanmadan 1.3 kapanmayacak.
+- **Sıradaki işlem:** `a1efdd4` için GitHub Actions run ID ve test sonucunu doğrula; gerekirse düzelt, sonra migration güvenliğine geç.
