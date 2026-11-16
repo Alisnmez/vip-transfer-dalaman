@@ -49,7 +49,13 @@ async function request<T>(url: string, options?: RequestInit, admin = false, tim
       throw bookingInvalidSuccessResponse(error)
     }
   } catch (error) {
-    throw classifyBookingFailure(error)
+    const failure = classifyBookingFailure(error)
+    if (!options?.method || options.method === 'GET') {
+      if (failure.status === null && failure.uncertain) {
+        throw new Error('Could not connect to the booking service. It may be starting up. Please wait a moment and refresh.')
+      }
+    }
+    throw failure
   } finally {
     clearTimeout(timeout)
   }
