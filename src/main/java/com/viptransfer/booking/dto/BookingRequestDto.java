@@ -47,11 +47,11 @@ public class BookingRequestDto {
     private String flightNumber;
 
     @jakarta.validation.constraints.Min(value = 0, message = "Luggage count cannot be negative.")
-    @jakarta.validation.constraints.Max(value = 20, message = "Luggage count exceeds the allowed maximum.")
+    @jakarta.validation.constraints.Max(value = 8, message = "Luggage count cannot exceed 8.")
     private Integer luggageCount;
 
     @jakarta.validation.constraints.Min(value = 0, message = "Baby seat count cannot be negative.")
-    @jakarta.validation.constraints.Max(value = 5, message = "Baby seat count exceeds the allowed maximum.")
+    @jakarta.validation.constraints.Max(value = 2, message = "Baby seat count cannot exceed 2.")
     private Integer babySeatCount;
 
     public Integer getLuggageCount() { return luggageCount; }
