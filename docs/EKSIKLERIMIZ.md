@@ -56,7 +56,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
 3. Gerçek fiyat, ödeme ve iptal kuralları
 4. Gerçek iletişim ve işletme bilgileri
-5. Rezervasyon e-postası ve durum bildirimleri
+5. Rezervasyon e-postası ve durum bildirimleri — **BEKLİYOR:** Rezervasyon kaydedilince müşterinin verdiği e-posta adresine referans, güzergâh, tarih/saat ve *onay bekliyor* durumu içeren otomatik alındı e-postası gönder; aynı anda işletme adresi `ali_sonmez35@hotmail.com` adresine yeni rezervasyon bildirimi gönder. Güvenilir e-posta sağlayıcısı/SMTP yapılandırması, gönderim hatası ve tekrar deneme, çift mail önleme, gizli anahtar yönetimi ve teslimat testleri yapılmadan tamamlandı sayma.
 6. Güvenli rezervasyon sorgulama ve değişiklik talepleri
 7. Havalimanı karşılama ve uçuş gecikmesi iş akışı
 8. Mobil kullanıcı deneyimi, boş bağlantılar ve işlevsiz butonlar
