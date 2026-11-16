@@ -558,3 +558,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - `features/booking/singleFlight.ts` ortak modülü eşzamanlı aynı anahtarlı Promise'leri birleştiriyor; başarı veya hatadan sonra kilidi kaldırıyor (`4ecf9688`).
 - `api/index.ts` `createBooking` bu modülü kullanıyor; backend idempotency anahtarı ve başarısız ağ isteğinden sonra retry davranışı korunuyor (`566f62be`).
 - `tests/singleFlight.test.mjs`: aynı rezervasyonun tek çağrı olması, farklı rezervasyonların bağımsızlığı ve başarısız istekten sonra tekrar deneme (`4544cf73`). CI sonucu ayrıca doğrulanmalı; browser E2E ve gerçek ağ kopması senaryoları açık.
+
+
+## 2026-11-16 — Retry anahtarı ortak modülü ve testler
+- `features/booking/retryKeys.ts` aynı payload için idempotency anahtarını bellekte/sessionStorage'da koruyan, başarıda temizleyen ve engellenmiş storage'da çalışan ortak modül (`a6be9a1a`).
+- Booking API tekrar deneme anahtarı için ortak modülü kullanıyor (`9b85d9e7`).
+- `tests/retryKeys.test.mjs` ile anahtarın yeniden kullanımı, sayfa yenileme simülasyonu ve storage erişimi engeli test edildi (`caf47f75`).
+- Gerçek browser E2E, timeout sonrası backend kaydını doğrulama ve güvenli yeniden deneme UI testleri açık; admin kapsam dışı.
