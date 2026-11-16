@@ -34,6 +34,7 @@ type PassengerDetails = {
 }
 
 const RECEIPT_KEY = 'lastBookingReceipt'
+const RECEIPT_MAX_AGE_MS = 24 * 60 * 60 * 1000
 
 type BookingReceipt = {
   id: number
@@ -42,23 +43,32 @@ type BookingReceipt = {
   dropOffLocation: string
   schedule: string
   returnSchedule?: string
+  savedAt: number
 }
 
 function readReceipt(): BookingReceipt | null {
-  try {
-    const raw = sessionStorage.getItem(RECEIPT_KEY)
-    if (!raw) return null
-    const value: unknown = JSON.parse(raw)
-    if (typeof value !== 'object' || value === null || !('id' in value) ||
-        typeof value.id !== 'number' || !Number.isSafeInteger(value.id) || value.id < 1 ||
-        !('customerName' in value) || typeof value.customerName !== 'string' ||
-        !('pickUpLocation' in value) || typeof value.pickUpLocation !== 'string' ||
-        !('dropOffLocation' in value) || typeof value.dropOffLocation !== 'string' ||
-        !('schedule' in value) || typeof value.schedule !== 'string') return null
-    return value as BookingReceipt
-  } catch {
-    return null
+  for (const storage of [sessionStorage, localStorage]) {
+    try {
+      const raw = storage.getItem(RECEIPT_KEY)
+      if (!raw) continue
+      const value: unknown = JSON.parse(raw)
+      if (typeof value !== 'object' || value === null || !('id' in value) ||
+          typeof value.id !== 'number' || !Number.isSafeInteger(value.id) || value.id < 1 ||
+          !('savedAt' in value) || typeof value.savedAt !== 'number' ||
+          value.savedAt > Date.now() || Date.now() - value.savedAt > RECEIPT_MAX_AGE_MS ||
+          !('customerName' in value) || typeof value.customerName !== 'string' ||
+          !('pickUpLocation' in value) || typeof value.pickUpLocation !== 'string' ||
+          !('dropOffLocation' in value) || typeof value.dropOffLocation !== 'string' ||
+          !('schedule' in value) || typeof value.schedule !== 'string') {
+        storage.removeItem(RECEIPT_KEY)
+        continue
+      }
+      return value as BookingReceipt
+    } catch {
+      // Storage may be disabled; try the other available storage.
+    }
   }
+  return null
 }
 
 function readSavedDetails<T>(key: string): T {
@@ -132,16 +142,19 @@ export function BookingConfirmationPage() {
       })
       const savedReceipt: BookingReceipt = {
         id: booking.id,
+        savedAt: Date.now(),
         customerName: passenger.customerName,
         pickUpLocation: transfer.pickUpLocation,
         dropOffLocation: transfer.dropOffLocation,
         schedule: `${transfer.pickUpDate} ${transfer.pickUpTime}`,
         ...(transfer.tripType === 'round-trip' ? { returnSchedule: `${transfer.returnDate} ${transfer.returnTime}` } : {}),
       }
-      try {
-        sessionStorage.setItem(RECEIPT_KEY, JSON.stringify(savedReceipt))
-      } catch {
-        // The receipt still remains visible until this tab is refreshed.
+      for (const storage of [sessionStorage, localStorage]) {
+        try {
+          storage.setItem(RECEIPT_KEY, JSON.stringify(savedReceipt))
+        } catch {
+          // Continue even when one browser storage mechanism is unavailable.
+        }
       }
       setReceipt(savedReceipt)
       localStorage.removeItem('bookingTransferInfo')
