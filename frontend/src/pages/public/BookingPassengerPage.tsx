@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
-import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
+import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 
 
 type SavedPassenger = {
@@ -112,14 +112,15 @@ export function BookingPassengerPage() {
       setError(selectionError)
       return
     }
-    const pickup = typeof transferInfo.pickUpDate === 'string' && typeof transferInfo.pickUpTime === 'string'
-      ? parseTurkeyDateTime(transferInfo.pickUpDate, transferInfo.pickUpTime) : null
-    const returning = transferInfo.tripType === 'round-trip'
-      ? typeof transferInfo.returnDate === 'string' && typeof transferInfo.returnTime === 'string'
-        ? parseTurkeyDateTime(transferInfo.returnDate, transferInfo.returnTime) : null
-      : undefined
-    if (pickup === null || pickup <= Date.now() || (transferInfo.tripType === 'round-trip' && (returning === null || returning === undefined || returning <= pickup))) {
-      setError('Your transfer date is no longer valid. Please return to the transfer step and choose a future date in Turkey local time.')
+    const scheduleError = validateTransferSchedule({
+      pickUpDate: typeof transferInfo.pickUpDate === 'string' ? transferInfo.pickUpDate : undefined,
+      pickUpTime: typeof transferInfo.pickUpTime === 'string' ? transferInfo.pickUpTime : undefined,
+      tripType: transferInfo.tripType === 'round-trip' ? 'round-trip' : 'one-way',
+      returnDate: typeof transferInfo.returnDate === 'string' ? transferInfo.returnDate : undefined,
+      returnTime: typeof transferInfo.returnTime === 'string' ? transferInfo.returnTime : undefined,
+    })
+    if (scheduleError) {
+      setError(scheduleError)
       return
     }
     if (!countryOfResidence) {
