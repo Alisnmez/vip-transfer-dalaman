@@ -22,6 +22,8 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 | Ödeme durumunun rezervasyonda görünmesi | Tahsilat takibi | Orta | Ödeme türü ve durumu doğru, yetkili kişilerce görülebilir | FİKİR |
 | Daha açık fiyat dökümü | Sürpriz ücretleri azaltma | Orta | Gerçek onaylı fiyat ve koşullarla tutarlı | FİKİR |
 | Daha anlaşılır iptal/değişiklik talebi | Müşterinin destek alması | Orta | İşletme politikasıyla uyumlu ve güvenli kimlik doğrulamalı | FİKİR |
+| Rezervasyon sahibini e-posta koduyla doğrulama (OTP) | Başkasının rezervasyonuna ilişkin yetkisiz talep riskini azaltma | Orta | Rezervasyon kodu + kayıtlı e-posta eşleşmesi, tek kullanımlık ve süreli kod, deneme/istek sınırı, güvenli sunucu tarafı yetkilendirme, testler | ERTELENDİ — v1.1 |
+| Doğrulanmış değişiklik/iptal talebi kaydı | WhatsApp mesajından bağımsız, izlenebilir talep süreci | Orta | Doğrulanmış müşteri talebi, admin incelemesi, işlem geçmişi; müşteri onayı olmadan otomatik değişiklik/iptal yok | FİKİR |
 
 ## v1.2 — İşletme operasyonu
 | Fikir | Kullanıcıya fayda | Öncelik | Kabul kriteri | Durum |
@@ -38,6 +40,12 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 | Rezervasyon akışında A/B iyileştirmeleri | Daha kolay kullanım | Düşük | Ölçülebilir sonuç ve regresyon testi | FİKİR |
 
 ## Sürüm günlüğü
+### 2026-11-17 — Güvenli self-servis rezervasyon yönetimi ileri sürüme ertelendi
+- **İlk yayın kararı:** Müşteri yalnızca rezervasyon referansını girerek hazır WhatsApp mesajıyla değişiklik/iptal talep eder; gerçek WhatsApp numarası henüz ayarlanmadıysa e-posta bağlantısı kullanılır. Bu işlem rezervasyonu otomatik değiştirmez.
+- **Güvenlik:** WhatsApp'tan gelen referans rezervasyon sahibinin kanıtı değildir. Admin, işlem öncesinde rezervasyonda kayıtlı iletişim kanalı üzerinden müşteriyi doğrular.
+- **v1.1 kapsamı:** E-postaya tek kullanımlık kod (OTP), kötüye kullanım sınırları, sunucuda doğrulanmış destek talebi ve admin onay geçmişi değerlendirilecek. Daha önce denenen OTP kodu ilk sürümden kaldırıldı; yeniden uygulama yapılırken güvenlik ve testler sıfırdan doğrulanacak.
+- **Durum:** Planlama kaydı; uygulama kodu bu güncellemede değiştirilmedi.
+
 ### 2026-11-16 — Dosya oluşturuldu
 - **Neden:** Kullanıcı, ilk yayından sonraki küçük ve düzenli geliştirmeleri mevcut eksik listesinden ayrı bir Markdown dosyasında toplamak istedi.
 - **Karar:** İlk sürümde online ödeme olmayacak; ileride opsiyonel özellik olarak değerlendirilebilir.
