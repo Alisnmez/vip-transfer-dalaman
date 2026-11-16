@@ -91,15 +91,15 @@ export function AdminLayout() {
               onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
                 [
-                  'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
+                  'flex min-h-12 w-full items-center gap-3 rounded-lg px-4 py-3 font-semibold transition-colors',
                   isActive
-                    ? 'text-primary-fixed-dim font-bold bg-primary-container/30'
+                    ? 'text-primary-fixed-dim bg-primary-container/30'
                     : 'text-on-primary-container hover:text-primary-fixed-dim hover:bg-primary-container/20',
                 ].join(' ')
               }
             >
-              <span className="material-symbols-outlined">{item.icon}</span>
-              <span className="font-body-md text-body-md">{item.label}</span>
+              <span aria-hidden="true" className="material-symbols-outlined inline-flex w-6 shrink-0 items-center justify-center text-2xl leading-none">{item.icon}</span>
+              <span className="min-w-0 flex-1 whitespace-nowrap text-body-md">{item.label}</span>
             </NavLink>
           ))}
         </nav>
