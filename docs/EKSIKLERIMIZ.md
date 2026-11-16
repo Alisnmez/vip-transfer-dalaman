@@ -262,3 +262,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Amaç:** Sadece aynı rezervasyon ID'sinin dönmesini değil, PostgreSQL'e gerçekten tek kayıt yazılmasını sınamak.
 - **Test durumu:** GitHub Actions otomatik workflow yeni commit için henüz sorgu sonucunda görünmedi; önceki `5a46f61` workflow `43847200039` başarılı, fakat **yeni assertion'ları çalıştırdığı söylenemez**. Yeni run tamamlanmadan 1.3 kapanmayacak.
 - **Sıradaki işlem:** `a1efdd4` için GitHub Actions run ID ve test sonucunu doğrula; gerekirse düzelt, sonra migration güvenliğine geç.
+
+## 2026-11-16 — 1.3 PostgreSQL testleri başarıyla çalıştı; 1.5 staging CORS testi
+- **Doğrulanan:** `a1efdd4` commit'ine ait GitHub Actions run `43847342749` **success**. PostgreSQL üzerinde Spring Boot testleri: **19 test, 0 failure, 0 error, 0 skipped** (12 BookingIntegrationTests + 6 TransferPricingServiceTests + 1 ApplicationTests). Frontend React/TypeScript build **success**. Tekrarlı ve eşzamanlı isteklerin tek yeni DB satırı oluşturması assertion'ları bu run'da geçti.
+- **Yeni test:** `BookingIntegrationTests.java` staging test origin'i `https://vip-transfer-dalaman-test.onrender.com` ile yapılandırıldı; OPTIONS preflight `Access-Control-Allow-Origin` bu değere eşit olmalı. Commit `3fb750c`.
+- **Yeni run:** GitHub Actions `43847559002` ilk kontrolde **queued**; sonucu henüz doğrulanmadı.
+- **Kalan:** 1.3 migration/şema envanteri ve bağımsız canlı tekrar testi; 1.5 deployment smoke ve güvenlik kontrolleri. Üretim DB değiştirilmedi.
