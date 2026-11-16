@@ -23,9 +23,9 @@ export function BookingLookupPage() {
         </p>
         <section aria-label="Booking support" className="mb-8 rounded-lg border border-outline bg-white p-5">
           <h2 className="mb-3 text-lg font-semibold text-admin-primary">Booking support</h2>
-          <p className="mb-3 text-on-surface-variant">For changes or questions about your request, contact us directly. Do not share payment card information by email.</p>
+          <p className="mb-3 text-on-surface-variant">For changes or questions about your request, contact us directly and include your booking reference. Never send passwords or payment card details by email.</p>
           <div className="flex flex-col gap-3">
-            <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com?subject=Booking%20request%20support">Email: ali_sonmez35@hotmail.com</a>
+            <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com?subject=Booking%20request%20support&body=Hello%2C%20I%20need%20help%20with%20booking%20reference%20%23%5Benter%20reference%5D.%0A%0AThank%20you.">Email: ali_sonmez35@hotmail.com</a>
             <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">Phone: 0555 555 55 55</a>
           </div>
         </section>
