@@ -1,6 +1,7 @@
 import type { Booking, BookingRequest } from '../types'
 import { createSingleFlight } from '../singleFlight'
 import { createRetryKeyStore } from '../retryKeys'
+import { bookingHttpError, classifyBookingFailure } from './errors'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
@@ -34,19 +35,13 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
 
     if (!response.ok) {
       const error = await response.json().catch(() => null)
-      throw new Error(error?.message ?? `Booking service returned HTTP ${response.status}. Please contact support if this continues.`)
+      throw bookingHttpError(response.status, error?.message)
     }
 
     const responseText = await response.text()
     return (responseText ? JSON.parse(responseText) : undefined) as T
   } catch (error) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error('The booking service did not respond within 60 seconds. Please contact support before retrying, as your booking may have been received.', { cause: error })
-    }
-    if (error instanceof TypeError) {
-      throw new Error('Unable to reach the booking service. Please check your connection and contact support before retrying.', { cause: error })
-    }
-    throw error
+    throw classifyBookingFailure(error)
   } finally {
     clearTimeout(timeout)
   }
