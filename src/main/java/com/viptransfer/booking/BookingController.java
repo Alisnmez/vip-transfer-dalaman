@@ -17,6 +17,13 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
+    @PostMapping("/support/verify")
+    public java.util.Map<String, Boolean> verifySupport(
+            @RequestBody java.util.Map<String, String> payload) {
+        boolean matched = bookingService.matchesSupportReference(payload.get("reference"), payload.get("email"));
+        return java.util.Map.of("matched", matched);
+    }
+
     @GetMapping("/{id}")
     public Booking getBooking(@PathVariable Long id) {
         return bookingService.getBooking(id);
