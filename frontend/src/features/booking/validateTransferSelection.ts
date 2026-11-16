@@ -11,23 +11,31 @@ export type TransferSelection = {
 }
 
 export function validateTransferSelection(transfer: TransferSelection): string | null {
-  const destination = transfer.pickUpLocation === 'Dalaman Airport'
-    ? transfer.dropOffLocation
-    : transfer.dropOffLocation === 'Dalaman Airport'
-      ? transfer.pickUpLocation
-      : null
+  const airport = 'Dalaman Airport'
+  let destination: string | undefined
+  if (transfer.pickUpLocation === airport) {
+    destination = transfer.dropOffLocation
+  } else if (transfer.dropOffLocation === airport) {
+    destination = transfer.pickUpLocation
+  }
+
   if (!destination || !transfer.vehicleId ||
       (transfer.tripType !== 'one-way' && transfer.tripType !== 'round-trip') ||
       findTransferPrice(destination, transfer.vehicleId, transfer.tripType) === null) {
     return 'Your route or vehicle is no longer available. Please return to the transfer step.'
   }
+
   const vehicle = transferVehicles.find(item => item.id === transfer.vehicleId)
-  if (!vehicle || !Number.isInteger(transfer.passengerCount) ||
-      (transfer.passengerCount ?? 0) < 1 || (transfer.passengerCount ?? 0) > vehicle.maxPassengers ||
-      !Number.isInteger(transfer.luggageCount) || (transfer.luggageCount ?? -1) < 0 ||
-      (transfer.luggageCount ?? 0) > Math.min(8, vehicle.maxLuggage ?? 8) ||
-      !Number.isInteger(transfer.babySeatCount) || (transfer.babySeatCount ?? -1) < 0 ||
-      (transfer.babySeatCount ?? 0) > 2) {
+  const passengers = transfer.passengerCount
+  const luggage = transfer.luggageCount
+  const babySeats = transfer.babySeatCount
+
+  if (!vehicle || !Number.isInteger(passengers) || passengers === undefined ||
+      passengers < 1 || passengers > vehicle.maxPassengers ||
+      !Number.isInteger(luggage) || luggage === undefined ||
+      luggage < 0 || luggage > Math.min(8, vehicle.maxLuggage ?? 8) ||
+      !Number.isInteger(babySeats) || babySeats === undefined ||
+      babySeats < 0 || babySeats > 2) {
     return 'Passenger, luggage or baby seat count is invalid for the selected vehicle. Please review your transfer.'
   }
   return null
