@@ -1,3 +1,8 @@
+## 2026-11-17 — CI doğrulandı, admin standardizasyonu devam
+- **Doğrulandı:** `4be6074e` commit'i için GitHub Actions run `43977303557` **success**: frontend `npm run lint`, `npm test`, `npm run build`; backend PostgreSQL `mvn -B test` başarılı. Render frontend aynı commit `live`. Backend eski `2a745cda` `live`, yeni deploy en son kontrol sırasında `update_in_progress` idi.
+- **Kod standardizasyonu:** Tekrarlanan admin durum rozetleri tek `BookingStatusBadge` bileşenine taşındı; PENDING/CONFIRMED/COMPLETED/CANCELLED durumları doğru renkte gösteriliyor (`06069ca2`, `ea857438`). Rezervasyon oluşturulma zamanı `formatBookingReceivedAt` ile tek merkezde biçimlendirildi (`221d7f2a`, `ea857438`, `9ae77c11`); eksik veya geçersiz eski zamanlar güvenli gösteriliyor.
+- **Durum:** Yeni refactor için CI ve Render tekrar doğrulanmalı. Kullanıcının admin takvim tasarımı korunuyor. E2E giriş, gerçek rezervasyon ve veri akışı hâlâ canlı smoke test bekliyor.
+
 ## 2026-11-17 — Admin eski CalendarPage tasarımını gerçek rezervasyonlara bağlama
 - **Kullanıcı geri bildirimi:** Yeni takvim dar ve günlerin içinde rezervasyon kartları görünmüyor; eski tasarlanmış takvim ve kartlar kullanılmalı.
 - **Bulgu:** `frontend/src/pages/admin/CalendarPage.tsx` zaten Month/Week/Day, event-card ve Daily Agenda görsel tasarımına sahipti ama tamamen sahte `calendarCells` / `agendaItems` verileri içeriyordu. `/admin/calendar` yönlendirmesi de gerçek sayfaya gitmiyordu.
