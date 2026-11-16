@@ -56,7 +56,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Sahte rezervasyonlar ve çalışmayan butonlar kaldırıldı; gerçek `getBookings()` verisi ve müşteri/rota/referans araması kullanılıyor (`2d0a180a`). | Yetkili admin oturumunda gerçek kayıtları doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
-| 4.3 | Admin API erişim güvenliği | BLOKE | Admin frontend `getBookings/getBooking` çağrılarına kimlik doğrulama başlığı eklemiyor; backend güvenlik konfigürasyonu ve dağıtım erişimi henüz denetlenmedi. | Backend `GET /bookings` ve `GET /bookings/{id}` için gerçek auth/authorization denetimi; gizli anahtarları public Vite bundle içine koyma |
+| 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`). | CI sonucu, canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
 
@@ -73,6 +73,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Yeni risk / karar:** varsa ve gerekçesi
 
 ---
+
+## 2026-11-16 — Görev 4 admin kimlik doğrulama
+- **Sorun:** Backend ADMIN rolü gerektirse de admin React API çağrılarında Authorization yoktu; admin sayfaları giriş olmadan açılıyordu.
+- **Düzeltme:** Sadece admin çağrılarında HTTP Basic Authorization, bellek içi kimlik bilgileri, korumalı GET ile giriş doğrulaması, çıkış (`987b0c3e`, `0d020a72`, `4815e434`). Public POST anonim kaldı.
+- **Güvenlik:** Kullanıcı/parola Vite env, bundle, localStorage veya sessionStorage içine kaydedilmiyor. TLS zorunlu. Bu ilk sürüm çözümü, tam sunucu oturum altyapısının yerine geçmez.
+- **Test:** CI ve gerçek yetkisiz/yetkili API denemeleri bekleniyor; tamamlandı sayılmaz.
 
 ## 2026-11-16 — Görev 4 admin ilk bağlantı ve CI
 - **Sorun:** Admin rezervasyon ekranı sahte müşteri, EUR fiyat, işlevsiz buton ve uydurma sayfalama içeriyordu; detay sayfası boştu.
