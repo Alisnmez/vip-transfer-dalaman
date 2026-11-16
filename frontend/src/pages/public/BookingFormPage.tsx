@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { turkeyToday } from '../../features/booking/turkeyTime'
+import { destinationGroups } from '../../features/booking/destinationGroups'
 import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
@@ -74,14 +75,6 @@ export function BookingFormPage() {
   const refreshToday = () => setToday(turkeyToday())
 
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
-  const destinationGroups = [
-    { label: 'MARMARIS DESTINATIONS', names: ['Marmaris(Any Hotel)', 'Icmeler(Any Hotel)', 'Netsel Marina', 'Albatros Marina', 'Yacht Marina', "Cook's Club Adakoy&Adakoy Marina", 'Turunc', 'D Maris Bay', 'Bozburun / Sogut', 'Selimiye', 'Angels Marmaris Hotel'] },
-    { label: 'FETHIYE DESTINATIONS', names: ['Fethiye City Center(Any Hotel)', 'Fethiye Liberty Fabay , Liberty Signa', 'Fethiye Sensatori Barut Akra, XO Arnna', 'Oludeniz(Any Hotel)', 'Fethiye Kayakoy', 'Kabak', 'Faralya'] },
-    { label: 'DALAMAN & ORTACA DESTINATIONS', names: ['Sarigerme', 'Dalyan'] },
-    { label: 'GOCEK DESTINATIONS', names: ['Gocek'] },
-    { label: 'KAS & KALKAN DESTINATIONS', names: ['Kalkan', 'Kas'] },
-    { label: 'MUGLA & DATCA DESTINATIONS', names: ['Akyaka', 'Datça'] },
-  ]
   const groupedDestinationOptions = destinationGroups.map((group) => ({
     ...group,
     names: group.names.filter((name) => destinations.includes(name)),
