@@ -55,3 +55,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Koruma:** Kart gerçek rezervasyona bağlanmadı, backend fiyat kataloğu değiştirilmedi. Açıkça demo ve rezervasyona kapalı olarak etiketlendi.
 - **Kontrol sınırı:** Görsel temsili Porsche fotoğrafıdır; Cayenne modelinin doğru görseli henüz doğrulanmadı. Derleme ve canlı görünüm henüz test edilmedi.
 - **Geri alma:** İlgili commit geri alınarak demo kartı kaldırılabilir; diğer geliştirmeler korunmalı.
+
+## 2026-11-16 — Eğlence modu, ana sayfa araç kartı
+- **İstek:** Ana sayfa Our Vehicles bölümünde Mercedes Vito Executive kartından önce Porsche Cayenne GTX, £500, Select Vehicle görünümü.
+- **Değişiklik:** İlk sıraya mevcut araç kartı stiliyle geçici demo eklendi. Commit: 7c68327059d2a32784282bed85bdfc7c70dfc85f.
+- **Sınır:** Görsel Porsche spor otomobilinin temsili fotoğrafıdır, Cayenne GTX modeli olarak doğrulanmadı. Gerçek rezervasyon ve fiyat kataloğu değiştirilmedi; buton devre dışı.
+- **Doğrulama:** GitHub değişikliği kaydedildi; frontend build ve canlı dağıtım henüz doğrulanmadı.
+- **Geri alma:** HomePage.tsx içindeki Temporary fun-mode demo kartı kaldırılabilir.
