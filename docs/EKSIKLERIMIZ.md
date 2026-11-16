@@ -57,11 +57,18 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Gerçek `getBookings()` verisi ve müşteri/rota/referans araması (`2d0a180a`); manuel yenileme eklendi (`fd14367`). | Yetkili admin oturumunda yeni kayıtların yenilemeyle geldiğini doğrula |
 | 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
 | 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı (`86b2d9b8`); iptal edilenler planlanan taleplerden çıkarıldı (`278d4be`), PENDING dahil onaylanmamış talepler açık etiketlendi (`cc54ea6`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
-| 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin giriş ekranı doğrulama için korumalı GET çağırıyor, parolayı sadece bellek içinde tutuyor (`987b0c3e`, `0d020a72`, `4815e434`, `a497030a`). React ve PostgreSQL CI `43952884744` başarılı. | Canlı HTTPS, Render ADMIN_PASSWORD ve yetkisiz 401 / yetkili 200 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
+| 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin girişi artık müşteri listesini indirmeden korumalı `GET /admin/auth-check` (204 boş yanıt) çağırıyor (`739de66`, `f3b202e`, `d1dfa17`, `9714160`); parolayı yalnızca bellekte tutuyor. Önceki CI `43952884744` başarılı, yeni değişiklikler için CI bekleniyor. | Canlı HTTPS, Render ADMIN_PASSWORD ve auth-check için yetkisiz 401 / yetkili 204 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
+
+## 2026-11-17 — Admin girişinde kişisel veri indirmeyi kaldırma
+- **Aktif madde:** 4.3 — admin erişim güvenliği.
+- **Sorun ve kanıt:** Admin giriş formu `getBookings()` ile tüm müşteri ad/telefon/e-posta/adres bilgilerini indiriyordu. Kullanıcı DevTools Network Response'da bunu gösterdi. Yetkili adminin Network verisini görmesi tek başına yetkisiz sızıntı değildir.
+- **Düzeltme:** Spring Security `ADMIN` korumalı `GET /admin/auth-check` endpoint'i (204 No Content), ilgili CORS kaydı ve frontend `checkAdminAccess()` eklendi. Giriş bu endpoint'i kullanıyor; giriş kontrolü 20 saniye timeout'a sahip (`739de66`, `f3b202e`, `d1dfa17`, `9714160`).
+- **Test ve sonuç:** GitHub'a commit edildi. Yeni CI, Render deploy ve canlı yetkisiz 401 / yetkili 204 doğrulaması bekleniyor; **TEST BEKLİYOR**.
+- **Sonraki adım:** CI/Render kontrolü; girişte artık kişisel veri response'u olmadığını, girişten sonra rezervasyonların yetkili erişimde yüklendiğini doğrula.
 
 ## 2026-11-17 — Admin rezervasyon listesini elle yenileme
 - **Aktif madde:** 4.1 — işletme rezervasyon listesi.
