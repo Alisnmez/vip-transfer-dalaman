@@ -136,3 +136,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Frontend değişikliği:** `frontend/src/features/booking/api/index.ts` içinde `crypto.randomUUID()` ile Idempotency-Key üretildi. Aynı JSON payload için belirsiz ağ hatası sonrası anahtar bellekte tutulup yeniden kullanılır; başarılı yanıt sonrası silinir. Commit `906d60d`.
 - **Kalan risk:** Sayfa yenilenince bellek sıfırlanır; aynı detaylarla ikinci bağımsız rezervasyonun anahtarı önceki işlem sürüyorsa paylaşılabilir. Üretimde kontrollü DB migration, eşzamanlılık testi, son frontend CI ve E2E doğrulaması yapılmadı.
 - **Kaldığımız yer:** `906d60d` ve sonraki CI sonucunu kontrol et; yarış testini ekle ve frontend retry yaşam döngüsünü işlem bazlı hâle getir. **1.3 TEST BEKLİYOR.**
+
+## 2026-11-16 — 1.3 eşzamanlı istek regresyon testi
+- **Problem:** İki HTTP POST aynı anda aynı `Idempotency-Key` ile geldiğinde yalnızca sırayla tekrar testi yeterli değil; DB unique constraint ve transaction yarış koşulunda da doğrulanmalı.
+- **Değişiklik:** `BookingIntegrationTests.concurrentRetriesWithSameKeyCreateOnlyOneBooking` eklendi. İki worker ortak latch ile eşzamanlı başlatılır, aynı key ve payload ile POST gönderir; iki HTTP 200 yanıtındaki rezervasyon ID'sinin eşit olması beklenir. Executor 20 saniye sınırıyla kapanır.
+- **Commit:** `06c4cfa`.
+- **Doğrulama:** Önceki `37179414` commit'i için GitHub Actions run `43842818375` **success**. Frontend `906d60d` ve günlük `5209c3d` için görülen CI çalışmaları sorgulama anında **in_progress** idi; yeni yarış testi henüz doğrulanmadı.
+- **Kaldığımız yer:** `06c4cfa` CI sonucunu incele; yarış testi başarısızsa transaction/unique constraint hata yönetimini düzelt. Frontend anahtarının sayfa yenileme/bağımsız rezervasyon yaşam döngüsü ve gerçek tarayıcı E2E hâlâ açık. 1.3 **TEST BEKLİYOR**.
