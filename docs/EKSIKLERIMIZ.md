@@ -1,3 +1,8 @@
+## 2026-11-17 — Son CI kontrolü ve TypeScript build düzeltmesi
+- `1fca23f7` CI run `43977964255` **failure**: frontend 33/33 test ve lint başarılı, backend PostgreSQL testleri başarılı, ancak TypeScript `BookingListPage.tsx:32` içinde silinmiş `setLoadedPage` referansı nedeniyle `TS2552` verdi; Render frontend `build_failed`.
+- **Düzeltildi:** eski setter `setLoadedKey(\`\${page}:\${revision}\`)` ile değiştirildi (`8686b8ed`); başarısız sayfa sorgusunda eski bookings ve sayılar temizleniyor (`15b6db14`).
+- **Durum:** SON CI / Render kontrolü bekleniyor. Başarılı sonucu görmeden TAMAMLANDI işaretleme. Admin gerçek hesapla E2E kontrolü hâlâ gerekli.
+
 ## 2026-11-17 — Admin rezervasyon listesi yükleme / yenileme tutarlılığı
 - **Kontrol:** `9cb1b111` GitHub Actions `43977650970` **success**; frontend lint/test/build ve backend PostgreSQL testleri geçti. Render frontend aynı commit `live` idi; backend yeni deploy sıradaydı.
 - **Düzeltme:** BookingListPage'deki iki ayrı `getBookingPage` çağrısı (ilk yükleme + refresh) tek `useEffect` veri yoluna indirildi. Sayfa ve yenileme revizyonu anahtarı ile eski sayfa/yenileme verileri gösterilmiyor, başarısız istek sonrası eski liste/sayaçlar temizleniyor, `Try again` eklendi; eski in-flight isteklerin sonucu `active` kontrolüyle görmezden geliniyor (`44dff378`, `982e37d1`).
