@@ -63,7 +63,7 @@ class BookingAdminUpdateTest {
         Booking updated = service.updateBooking(10L, request);
         assertEquals(new BigDecimal("67.50"), updated.getPrice());
         assertEquals("Updated customer", updated.getCustomerName());
-        verify(pricing, never()).calculatePrice(any(), any(), any(), any(), any());
+        verify(pricing, never()).calculatePrice(any(), any(), any(), any(), anyInt());
     }
 
     @Test
@@ -80,11 +80,11 @@ class BookingAdminUpdateTest {
     void pendingBookingRecalculatesOnlyWhenFareInputsChange() {
         booking.setStatus("PENDING");
         request.setPassengerCount(3);
-        when(pricing.calculatePrice(any(), any(), any(), any(), any()))
+        when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
                 .thenReturn(new BigDecimal("75.50"));
         Booking updated = service.updateBooking(10L, request);
         assertEquals(new BigDecimal("75.50"), updated.getPrice());
-        verify(pricing, times(1)).calculatePrice(any(), any(), any(), any(), any());
+        verify(pricing, times(1)).calculatePrice(any(), any(), any(), any(), anyInt());
     }
 
     @Test
@@ -102,7 +102,7 @@ class BookingAdminUpdateTest {
     void missingTariffDoesNotMutateBooking() {
         booking.setStatus("PENDING");
         request.setPassengerCount(3);
-        when(pricing.calculatePrice(any(), any(), any(), any(), any()))
+        when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
                 .thenThrow(new IllegalArgumentException("No price found."));
         assertThrows(IllegalArgumentException.class, () -> service.updateBooking(10L, request));
         assertEquals("Customer", booking.getCustomerName());
