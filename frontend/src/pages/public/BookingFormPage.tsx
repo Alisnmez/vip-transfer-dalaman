@@ -70,7 +70,8 @@ export function BookingFormPage() {
   const [luggages, setLuggages] = useState(draft.luggageCount ?? 0)
   const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 0)
   const [formError, setFormError] = useState('')
-  const [today] = useState(turkeyToday)
+  const [today, setToday] = useState(turkeyToday)
+  const refreshToday = () => setToday(turkeyToday())
 
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
@@ -257,7 +258,8 @@ export function BookingFormPage() {
                   type="date"
                   min={today}
                   value={pickUpDate}
-                  onChange={setPickUpDate}
+                  onFocus={refreshToday}
+                  onChange={(value) => { refreshToday(); if (value >= turkeyToday()) { setPickUpDate(value); setFormError('') } else { setFormError('Please select today or a future date in Turkey.') } }}
                 />
                 <TextField
                   icon="schedule"
@@ -274,7 +276,7 @@ export function BookingFormPage() {
                   <p className="font-semibold">Return journey: {dropOffLocation || 'Destination'} → {pickUpLocation}</p>
                   <p className="text-sm text-slate-600">Choose when you want to travel back. Your return does not have to be on the same day or at the same time.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate || today} value={returnDate} onChange={setReturnDate} />
+                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate && pickUpDate > today ? pickUpDate : today} value={returnDate} onFocus={refreshToday} onChange={(value) => { refreshToday(); if (value >= turkeyToday() && (!pickUpDate || value >= pickUpDate)) { setReturnDate(value); setFormError('') } else { setFormError('Return date cannot be before pickup date or today.') } }} />
                     <TextField icon="schedule" label="Return Time" type="time" value={returnTime} onChange={setReturnTime} />
                   </div>
                 </div>
@@ -442,6 +444,7 @@ function TextField({
   placeholder,
   type = 'text',
   min,
+  onFocus,
   value,
 }: {
   icon: string
@@ -450,6 +453,7 @@ function TextField({
   placeholder?: string
   type?: string
   min?: string
+  onFocus?: () => void
   value?: string
 }) {
   return (
@@ -467,6 +471,7 @@ function TextField({
           placeholder={placeholder}
           type={type}
           min={min}
+          onFocus={onFocus}
           value={value}
         />
       </div>
