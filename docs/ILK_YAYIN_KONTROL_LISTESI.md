@@ -2,7 +2,9 @@
 
 Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebilsin, kullanıcıya doğrulanmamış vaat sunulmasın.
 
-**Kapsam kararı (2026-11-16):** Kullanıcı ilk yayın hedefini genişletti: admin paneli, otomatik müşteri/işletme e-postaları ve e-posta doğrulaması, WhatsApp, logo, güvenli rezervasyon sorgulama, SEO, FAQ, gerçek müşteri yorumları ve gerçek araç görselleri de hedef kapsamda. Aşağıdaki eski MVP listesi teknik yayın kapılarını korur; bu yeni ürün gereksinimleri de bitmeden genişletilmiş kapsam tamamlandı sayılmaz.
+**Güncel kapsam kararı (2026-11-16):** Kullanıcı hızlı bir **operasyona hazır v1.0** istiyor: gerçek rezervasyon alınabilsin ve işletme rezervasyonları güvenli biçimde takip edip müşteriye dönüş yapabilsin. Önceki genişletilmiş ilk yayın kapsamı artık zorunlu yayın kapsamı değildir; geliştirmeler `docs/CANLI_YAYIN_SONRASI_GELISTIRMELER.md` dosyasında izlenir. Ancak güvenlik, doğru fiyat/iletişim, yasal gereklilikler ve çalışır operasyon ertelenemez. Online ödeme v1.0'da yok.
+
+**Yayın kararı:** İlk yayın için rezervasyon talebi + referans, yetkili işletme erişimi (mevcut güvenli API veya uygulanmış panel), rezervasyonların günlük takip edilmesi, gerçek iletişim kanalı, doğru fiyat/koşullar, temel mobil akış ve üretim güvenliği yeterli. Otomatik e-posta ve gelişmiş panel gibi ek özellikler yoksa sitede varmış gibi sunulmaz. Yayın kararı ancak aşağıdaki kontroller doğrulanınca GO olabilir.
 
 ## Yayın öncesi zorunlu (GO / NO-GO)
 
@@ -19,7 +21,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Gizli anahtarlar:** Render env secrets GitHub'a yazılmamış; DB erişimi kısıtlı; gerçek kullanıcı verileri testlerde kullanılmıyor.
 - [ ] **Operasyon:** Rezervasyonları kimin/ne sıklıkla takip edeceği belirlenmiş; otomatik e-posta henüz yoksa manuel kontrol süreci hazır.
 
-## Genişletilmiş ilk yayın kapsamı (yeni ürün işleri)
+## Yayın sonrası geliştirmeler (v1.0 için zorunlu değil; ayrı yol haritasında izlenir)
 
 - [ ] Admin paneli: yetkilendirme, rezervasyon listeleme/detay/durum ve iletişim ayarları.
 - [ ] E-posta doğrulama yaklaşımı ve otomatik müşteri alındı + işletme bildirimleri; hata/tekrar gönderim/çift e-posta koruması.
@@ -32,14 +34,20 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] Gerçek filo/araç kategorisiyle eşleşen, kullanım izni bulunan araç fotoğrafları.
 - [ ] Rakip Petunia Travel fiyatlarıyla hedef karşılaştırması: tek yön -£2,50 ve gidiş-dönüş -£5 yalnızca işletme maliyeti ve güncel kaynak fiyatı doğrulanırsa uygulanır.
 
-## Eski MVP için ertelenebilir olarak işaretlenen işler (yeni kapsam kararıyla güncellendi)
+## Kapsam notu — önceki kararların yerine geçer
 
-- Otomatik müşteri/işletme e-postaları (backlog 5) artık genişletilmiş kapsamda; **çalışmadan sitede varmış gibi gösterilmez**.
-- Güvenli self-servis rezervasyon sorgulama (6) artık genişletilmiş kapsamda; rezervasyon değişiklik talepleri daha sonraya bırakılabilir.
-- Uçuş gecikmesi/karşılama otomasyonu (7), çoklu dil (10) ve analitik (12) sonraya bırakılabilir; temel SEO ve gerçek yorumlar artık genişletilmiş kapsamda.
+- Otomatik müşteri/işletme e-postaları (backlog 5) yayın sonrasına alınabilir; **çalışmadan sitede varmış gibi gösterilmez**.
+- Güvenli self-servis rezervasyon sorgulama (6) yayın sonrasına alınabilir; rezervasyon değişiklik talepleri daha sonraya bırakılabilir.
+- Uçuş gecikmesi/karşılama otomasyonu (7), çoklu dil (10) ve analitik (12) sonraya bırakılabilir; temel indeksleme ve doğru içerik kontrolü korunur; gelişmiş SEO ve gerçek yorum modülleri yayın sonrasına alınabilir.
 - Kapsamlı tarayıcı E2E otomasyonu; ancak yukarıdaki manuel gerçek rezervasyon testi atlanamaz.
 
 **Durum:** Bu belge bir kontrol listesidir, testlerin yapıldığına dair kanıt değildir. İşaretlenmemiş maddeler doğrulanmamıştır.
+
+## 2026-11-16 — Hızlı yayın kapsamı kararı
+- **Problem:** Genişletilmiş kapsam, rezervasyon alabilen ilk sürümün yayınını geciktiriyordu.
+- **Karar:** Operasyonel rezervasyon alma ve takip için zorunlu kontroller korunacak; online ödeme, otomatik bildirimler, gelişmiş panel/SEO/analitik ve diğer geliştirmeler sürüm yol haritasına alınacak.
+- **Sınır:** Canlı müşteri verisi, doğrulanmamış fiyat, geçici telefon, eksik işletme/yasal bilgiler ve güvenlik sorunları ertelenemez.
+- **Test:** Bu değişiklik yalnızca dokümantasyon/kapsam güncellemesidir; canlı yayın testi değildir.
 
 ## 2026-11-16 durum kontrolü
 - GitHub Actions `43923429251` **success** (önceki değişiklikler).
