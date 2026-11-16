@@ -1,3 +1,8 @@
+## 2026-11-17 — Admin rezervasyon listesi yükleme / yenileme tutarlılığı
+- **Kontrol:** `9cb1b111` GitHub Actions `43977650970` **success**; frontend lint/test/build ve backend PostgreSQL testleri geçti. Render frontend aynı commit `live` idi; backend yeni deploy sıradaydı.
+- **Düzeltme:** BookingListPage'deki iki ayrı `getBookingPage` çağrısı (ilk yükleme + refresh) tek `useEffect` veri yoluna indirildi. Sayfa ve yenileme revizyonu anahtarı ile eski sayfa/yenileme verileri gösterilmiyor, başarısız istek sonrası eski liste/sayaçlar temizleniyor, `Try again` eklendi; eski in-flight isteklerin sonucu `active` kontrolüyle görmezden geliniyor (`44dff378`, `982e37d1`).
+- **Durum:** TEST BEKLİYOR — son kodun CI ve Render dağıtımı henüz tamamlanmadı. Gerçek admin login ve uçtan uca test hâlâ gerekli.
+
 ## 2026-11-17 — CI doğrulandı, admin standardizasyonu devam
 - **Doğrulandı:** `4be6074e` commit'i için GitHub Actions run `43977303557` **success**: frontend `npm run lint`, `npm test`, `npm run build`; backend PostgreSQL `mvn -B test` başarılı. Render frontend aynı commit `live`. Backend eski `2a745cda` `live`, yeni deploy en son kontrol sırasında `update_in_progress` idi.
 - **Kod standardizasyonu:** Tekrarlanan admin durum rozetleri tek `BookingStatusBadge` bileşenine taşındı; PENDING/CONFIRMED/COMPLETED/CANCELLED durumları doğru renkte gösteriliyor (`06069ca2`, `ea857438`). Rezervasyon oluşturulma zamanı `formatBookingReceivedAt` ile tek merkezde biçimlendirildi (`221d7f2a`, `ea857438`, `9ae77c11`); eksik veya geçersiz eski zamanlar güvenli gösteriliyor.
