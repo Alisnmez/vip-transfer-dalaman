@@ -104,6 +104,9 @@ public class BookingService {
     }
 
     private void validateSchedule(BookingRequestDto dto) {
+        if (dto.getTransferDateTime() == null || !dto.getTransferDateTime().isAfter(java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul")))) {
+            throw new IllegalArgumentException("Pickup date and time must be in the future in Turkey local time.");
+        }
         if (!"one-way".equals(dto.getTripType()) && !"round-trip".equals(dto.getTripType())) {
             throw new IllegalArgumentException("Invalid trip type.");
         }
