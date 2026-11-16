@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
+import java.math.BigDecimal;
 import java.util.HexFormat;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -130,7 +132,7 @@ public class BookingService {
         return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public Booking updateBooking(Long id, BookingRequestDto dto) {
         Booking existingBooking = bookingRepository.findById(id)
                 .orElseThrow(() -> new BookingNotFoundException(id));
@@ -150,8 +152,11 @@ public class BookingService {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Fare-changing edits require a pending booking. Confirm any new fare with the customer first.");
         }
+        // Validate before mutating the managed entity. A failed request must not leave partial changes.
+        transferPricingService.validateLuggageCapacity(dto.getVehicleId(), dto.getLuggageCount());
+        BigDecimal updatedFare = null;
         if (fareChanged) {
-            transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(),
+            updatedFare = transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(),
                     dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount());
         }
         existingBooking.setCustomerName(dto.getCustomerName());
@@ -167,13 +172,12 @@ public class BookingService {
         existingBooking.setHotelName(dto.getHotelName());
         existingBooking.setSpecialRequests(dto.getSpecialRequests());
         existingBooking.setFlightNumber(dto.getFlightNumber());
-        transferPricingService.validateLuggageCapacity(dto.getVehicleId(), dto.getLuggageCount());
         existingBooking.setLuggageCount(dto.getLuggageCount());
         existingBooking.setBabySeatCount(dto.getBabySeatCount());
         existingBooking.setVehicleId(dto.getVehicleId());
         existingBooking.setTripType(dto.getTripType());
         if (fareChanged) {
-            existingBooking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
+            existingBooking.setPrice(updatedFare);
         }
 
         return bookingRepository.save(existingBooking);
