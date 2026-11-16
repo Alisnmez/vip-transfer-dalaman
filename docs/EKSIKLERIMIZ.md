@@ -332,3 +332,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Sonuç:** Aynı Idempotency-Key farklı rezervasyon içeriğiyle tekrar kullanıldığında HTTP 409 ve tek yeni DB kaydı beklentisini içeren CI başarılı. Bu sadece test ortamındaki doğrulamadır.
 - **Durum:** 1.3 TEST BEKLİYOR; migration, staging browser E2E ve gerçek DB şema envanteri tamamlanmadı.
 - **Kaldığımız yer:** Phase 0 salt-okunur PostgreSQL envanterine erişim sağlanana kadar 1.5 için güvenli otomatik E2E test altyapısını incele.
+
+
+## 2026-11-16 — 2.3/2.4 bagaj ve çocuk koltuğu sınır testleri
+- **Sorun:** DTO'da luggageCount 0–20 ve babySeatCount 0–5 sınırları mevcut; entegrasyon testi negatif çocuk koltuğunu kontrol ediyor ancak üst sınırları ve negatif bagajı kapsamıyordu.
+- **Düzeltme:** BookingIntegrationTests.persistsLuggageAndBabySeatCountsAndRejectsNegativeValues testine babySeatCount=6, luggageCount=-1 ve luggageCount=21 için HTTP 400 assertion'ları eklendi. Commit f5b1b3a.
+- **Test:** Yeni commit'in GitHub Actions CI sonucu henüz doğrulanmadı; izole PostgreSQL üzerinde çalışacak. Staging/production DB'ye yazma yapılmadı.
+- **Risk:** 0–20 bagaj sınırı araç bazlı gerçek kapasite kuralı değildir; operasyonel kapasite/koltuk tipi ve yaş gereksinimleri ayrıca kararlaştırılmalı.
+- **Durum:** 2.3/2.4 TEST BEKLİYOR; browser E2E ve iş kuralları açık.
+- **Kaldığımız yer:** f5b1b3a CI sonucunu doğrula; ardından 1.5 güvenli E2E altyapısını ve 1.3 PostgreSQL Phase 0 envanterini ilerlet.
