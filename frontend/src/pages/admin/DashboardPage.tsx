@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getBookings } from '../../features/booking/api'
+import { formatTransferDateTime, turkeyNowLocal } from '../../features/booking/formatters'
 import type { Booking } from '../../features/booking/types'
 
 export function DashboardPage() {
@@ -25,10 +26,11 @@ export function DashboardPage() {
     void refresh()
   }, [])
 
-  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Istanbul' })
+  const now = turkeyNowLocal()
+  const today = now.slice(0, 10)
   const todayBookings = bookings.filter(booking => booking.transferDateTime?.startsWith(today))
   const upcoming = [...bookings]
-    .filter(booking => booking.transferDateTime && booking.transferDateTime >= new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Istanbul' }).replace(' ', 'T'))
+    .filter(booking => booking.transferDateTime && booking.transferDateTime >= now)
     .sort((a, b) => a.transferDateTime.localeCompare(b.transferDateTime))
     .slice(0, 8)
 
@@ -66,7 +68,7 @@ export function DashboardPage() {
                   <Link key={booking.id} to={`/admin/bookings/${booking.id}`} className="block rounded-lg border border-outline-variant p-4 hover:bg-surface-container-low">
                     <div className="flex flex-wrap justify-between gap-2">
                       <span className="font-semibold">#{booking.id} · {booking.customerName}</span>
-                      <span>{booking.transferDateTime.replace('T', ' ').slice(0, 16)}</span>
+                      <span>{formatTransferDateTime(booking.transferDateTime)}</span>
                     </div>
                     <p className="text-sm text-on-surface-variant">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
                   </Link>
