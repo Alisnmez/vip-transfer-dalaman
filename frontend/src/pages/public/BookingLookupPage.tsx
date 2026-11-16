@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { requestBookingSupportCode, verifyBookingSupportCode } from '../../features/booking/api'
-import { bookingSupportLink, whatsappSupportEnabled } from '../../features/booking/support'
+import { requestBookingSupportCode, verifyBookingSupportCode, submitBookingSupportRequest } from '../../features/booking/api'
 
 import { PublicNavbar } from './PublicNavbar'
 
@@ -10,7 +9,7 @@ export function BookingLookupPage() {
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [sent, setSent] = useState(false)
-  const [verified, setVerified] = useState(false)
+  const [token, setToken] = useState('')
   const [busy, setBusy] = useState(false)
   const [notice, setNotice] = useState('')
   const validReference = /^[1-9][0-9]{0,15}$/.test(reference.trim())
@@ -37,10 +36,25 @@ export function BookingLookupPage() {
     setBusy(true)
     try {
       const response = await verifyBookingSupportCode(reference.trim(), email.trim(), code)
-      setVerified(response.verified)
+      setToken(response.token || '')
       setNotice(response.verified ? 'Email verified. You can now contact our team.' : 'Invalid or expired code. Please check and try again.')
     } catch {
       setNotice('Could not verify the code. Please try again later.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function submitRequest(type: 'change' | 'cancel') {
+    if (!token || busy) return
+    setBusy(true)
+    try {
+      const response = await submitBookingSupportRequest(token, type)
+      setToken('')
+      setNotice(response.message)
+    } catch {
+      setToken('')
+      setNotice('Request could not be delivered. Please verify again or contact support.')
     } finally {
       setBusy(false)
     }
@@ -79,7 +93,7 @@ export function BookingLookupPage() {
               {busy ? 'Sending...' : 'Send verification code'}
             </button>}
           </form>
-          {sent && !verified && <form className="mt-5 space-y-3" onSubmit={event => { void verifyCode(event) }}>
+          {sent && !token && <form className="mt-5 space-y-3" onSubmit={event => { void verifyCode(event) }}>
             <label className="block text-sm font-semibold">6-digit email code
               <input type="text" inputMode="numeric" maxLength={6} value={code}
                 onChange={event => setCode(event.target.value.replace(/[^0-9]/g, ''))}
@@ -89,13 +103,13 @@ export function BookingLookupPage() {
               className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">Verify code</button>
           </form>}
           {notice && <p role="status" className="mt-4 text-sm text-on-surface-variant">{notice}</p>}
-          {verified && <div className="mt-5 flex flex-wrap gap-3">
-            <a className="rounded-lg bg-admin-primary px-4 py-3 font-semibold text-white"
-              href={bookingSupportLink(reference, 'change')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request change</a>
-            <a className="rounded-lg border border-outline px-4 py-3 font-semibold"
-              href={bookingSupportLink(reference, 'cancel')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">Request cancellation</a>
+          {token && <div className="mt-5 flex flex-wrap gap-3">
+            <button type="button" disabled={busy} onClick={() => { void submitRequest('change') }}
+              className="rounded-lg bg-admin-primary px-4 py-3 font-semibold text-white disabled:opacity-50">Request change</button>
+            <button type="button" disabled={busy} onClick={() => { void submitRequest('cancel') }}
+              className="rounded-lg border border-outline px-4 py-3 font-semibold disabled:opacity-50">Request cancellation</button>
           </div>}
-          <p className="mt-4 text-sm text-on-surface-variant">A message does not automatically change or cancel your booking. Our team will review your request.</p>
+          <p className="mt-4 text-sm text-on-surface-variant">A verified request is sent to our team by email. It does not automatically change or cancel your booking.</p>
         </section>
         <section aria-label="Booking support" className="mb-8 rounded-lg border border-outline bg-white p-5">
           <h2 className="mb-3 text-lg font-semibold text-admin-primary">Booking support</h2>
