@@ -18,7 +18,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(properties = "app.admin.password=test-admin-password")
+@SpringBootTest(properties = {"app.admin.password=test-admin-password",
+        "app.frontend.origin=https://vip-transfer-dalaman-test.onrender.com"})
 @AutoConfigureMockMvc
 class BookingIntegrationTests {
 
@@ -328,12 +329,12 @@ class BookingIntegrationTests {
     @Test
     void allowsStagingFrontendBookingPreflightWithIdempotencyHeader() throws Exception {
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options("/bookings")
-                        .header("Origin", "http://localhost:5173")
+                        .header("Origin", "https://vip-transfer-dalaman-test.onrender.com")
                         .header("Access-Control-Request-Method", "POST")
                         .header("Access-Control-Request-Headers", "content-type,idempotency-key"))
                 .andExpect(status().isOk())
                 .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header()
-                        .string("Access-Control-Allow-Origin", "http://localhost:5173"));
+                        .string("Access-Control-Allow-Origin", "https://vip-transfer-dalaman-test.onrender.com"));
     }
 
 }
