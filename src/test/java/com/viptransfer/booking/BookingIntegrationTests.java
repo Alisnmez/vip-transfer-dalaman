@@ -243,4 +243,44 @@ class BookingIntegrationTests {
     }
 
 
+
+    @Test
+    void concurrentRetriesWithSameKeyCreateOnlyOneBooking() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Concurrent Retry Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "concurrent@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        String key = java.util.UUID.randomUUID().toString();
+        java.util.concurrent.ExecutorService executor = java.util.concurrent.Executors.newFixedThreadPool(2);
+        java.util.concurrent.CountDownLatch start = new java.util.concurrent.CountDownLatch(1);
+        try {
+            java.util.concurrent.Callable<Long> submit = () -> {
+                start.await();
+                String body = mockMvc.perform(post("/bookings")
+                                .header("Idempotency-Key", key)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(request))
+                        .andExpect(status().isOk())
+                        .andReturn().getResponse().getContentAsString();
+                return objectMapper.readTree(body).get("id").asLong();
+            };
+            var first = executor.submit(submit);
+            var second = executor.submit(submit);
+            start.countDown();
+            org.junit.jupiter.api.Assertions.assertEquals(
+                    first.get(20, java.util.concurrent.TimeUnit.SECONDS),
+                    second.get(20, java.util.concurrent.TimeUnit.SECONDS),
+                    "Concurrent retries must resolve to the same booking");
+        } finally {
+            executor.shutdownNow();
+        }
+    }
+
 }
