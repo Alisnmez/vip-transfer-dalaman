@@ -86,7 +86,7 @@ export function BookingFormPage() {
   const [returnTime, setReturnTime] = useState(draft.returnTime ?? '')
   const [passengers, setPassengers] = useState(draft.passengerCount ?? 4)
   const [luggages, setLuggages] = useState(draft.luggageCount ?? 3)
-  const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 1)
+  const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 0)
   const [formError, setFormError] = useState('')
   const [today] = useState(turkeyToday)
 
