@@ -18,7 +18,7 @@ public class BookingController {
     }
 
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id:[0-9]+}")
     public Booking getBooking(@PathVariable Long id) {
         return bookingService.getBooking(id);
     }
@@ -55,12 +55,12 @@ public class BookingController {
         return bookingService.getBookingPage(page, size);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id:[0-9]+}")
     public Booking updateBooking(@PathVariable Long id, @Valid @RequestBody BookingRequestDto dto) {
         return bookingService.updateBooking(id, dto);
     }
 
-    @PatchMapping("/{id}/status")
+    @PatchMapping("/{id:[0-9]+}/status")
     public Booking updateStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> payload) {
         return bookingService.updateStatus(id, payload.get("status"));
     }
