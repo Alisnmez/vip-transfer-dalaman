@@ -40,6 +40,13 @@ public class BookingRequestDto {
     private String transferAddress;
     private String specialRequests;
 
+    @jakarta.validation.constraints.Size(max = 20, message = "Flight number must be at most 20 characters.")
+    @jakarta.validation.constraints.Pattern(regexp = "[A-Za-z0-9 -]*", message = "Flight number contains invalid characters.")
+    private String flightNumber;
+
+    public String getFlightNumber() { return flightNumber; }
+    public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
+
     public BookingRequestDto() {
     }
 
