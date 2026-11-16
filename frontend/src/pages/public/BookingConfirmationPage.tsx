@@ -150,7 +150,6 @@ export function BookingConfirmationPage() {
       }
       if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
           transferData.passengerCount > 16 ||
-          (transferData.luggageCount !== undefined && transferData.luggageCount > transferData.passengerCount + 2) ||
           !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(passengerData.email || '')) {
         setError('Please review the passenger count, luggage and email address before confirming.')
         return
