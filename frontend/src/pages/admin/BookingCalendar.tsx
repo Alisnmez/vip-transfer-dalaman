@@ -4,9 +4,13 @@ import { getCalendarBookings } from '../../features/booking/api'
 import { bookingStatus } from '../../features/booking/formatters'
 import type { Booking } from '../../features/booking/types'
 
-const turkeyDate = () => new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit',
-}).format(new Date())
+const turkeyDate = () => {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date())
+  const value = (type: string) => parts.find(part => part.type === type)?.value ?? ''
+  return `${value('year')}-${value('month')}-${value('day')}`
+}
 
 function monthKey(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-01`
