@@ -224,7 +224,8 @@ export function BookingConfirmationPage() {
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
             <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking Request Was Received!</h1>
-            <p className="mb-6 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
+            <p className="mb-3 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
+            <p className="mb-6 text-sm text-on-surface-variant">Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.</p>
             <p className="text-sm uppercase tracking-wide">Booking Reference</p>
             <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
             <div className="mb-6 flex flex-wrap justify-center gap-3">
