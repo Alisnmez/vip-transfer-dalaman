@@ -122,9 +122,8 @@ export function BookingConfirmationPage() {
         setError(selectionError)
         return
       }
-      if ((transferData.luggageCount !== undefined && (!Number.isInteger(transferData.luggageCount) || transferData.luggageCount < 0 || transferData.luggageCount > 8)) ||
-          (transferData.babySeatCount !== undefined && (!Number.isInteger(transferData.babySeatCount) || transferData.babySeatCount < 0 || transferData.babySeatCount > 2)) ||
-          (transferData.flightNumber !== undefined && (typeof transferData.flightNumber !== 'string' || !/^[A-Za-z0-9 -]{1,20}$/.test(transferData.flightNumber))) ||
+      if ((transferData.flightNumber !== undefined &&
+           (typeof transferData.flightNumber !== 'string' || !/^[A-Za-z0-9 -]{1,20}$/.test(transferData.flightNumber))) ||
           (passengerData.hotelName !== undefined && typeof passengerData.hotelName !== 'string') ||
           (passengerData.countryOfResidence !== undefined && typeof passengerData.countryOfResidence !== 'string') ||
           (passengerData.specialRequests !== undefined && typeof passengerData.specialRequests !== 'string')) {
