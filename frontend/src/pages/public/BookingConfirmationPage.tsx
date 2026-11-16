@@ -167,7 +167,7 @@ export function BookingConfirmationPage() {
               </button>
               <a
                 className="rounded-lg bg-admin-primary px-5 py-2 font-semibold text-white"
-                href={`mailto:ali_sonmez35@hotmail.com?subject=${encodeURIComponent(`Booking request #${receipt.id}`)}`}
+                href={`mailto:ali_sonmez35@hotmail.com?subject=${encodeURIComponent(`Booking request #${receipt.id}`)}&body=${encodeURIComponent(`Hello, I am contacting you about booking request #${receipt.id}.\n\nPlease let me know the status of my request.\n\nThank you.`)}`}
               >
                 Contact About This Booking
               </a>
