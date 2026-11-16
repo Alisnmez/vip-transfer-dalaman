@@ -460,3 +460,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingPassengerPage: kayıtlı yolcu taslağının alan tipleri doğrulanıyor; beklenmeyen türler formu bozamıyor (7c4747a7).
 - BookingConfirmationPage: kaydedilen JSON'un nesne olduğu kontrol ediliyor, geçersiz taslakla POST yapılmıyor; makbuz validasyondan geçen değerlerden üretiliyor (ced7bf06, 16fd0c37).
 - Yeni CI henüz tamamlanmadı; gerçek tarayıcı E2E, canlı veri doğrulaması ve migration güvenliği açık. Admin paneline dokunulmadı.
+
+
+## 2026-11-16 — Confirmation başarı sonrası cleanup ve POST alan tipleri
+- Önceki CI: 60d78767 run 43906375587 ve 16fd0c37 run 43906307457 completed/success. Ara commit ced7bf06 run 43906267421 failure; sonraki commit düzeltmesi başarılı.
+- BookingConfirmationPage: localStorage.getItem işlemleri try içine alındı; başarılı POST sonrası localStorage.removeItem hata verirse başarılı rezervasyon yanlışlıkla hata olarak gösterilmiyor (a0aaa3f3).
+- BookingConfirmationPage: API çağrısından önce zorunlu alanların string/tam sayı ve tripType tipleri doğrulanıyor (982354af).
+- Yeni CI sonucu bekleniyor. Gerçek tarayıcı E2E ve canlı Render smoke test açık. Admin koduna dokunulmadı.
