@@ -93,6 +93,16 @@ function InfoPage({
           ))}
         </section>
 
+        {content === pageContent.contact && (
+          <section aria-label="Contact details" className="mt-8 rounded-xl border border-outline-variant bg-white p-6">
+            <h2 className="font-title-md text-title-md text-admin-primary mb-4">Contact us</h2>
+            <div className="flex flex-col gap-3">
+              <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">Phone: 0555 555 55 55</a>
+              <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com">Email: ali_sonmez35@hotmail.com</a>
+            </div>
+          </section>
+        )}
+
         <div className="mt-12 flex flex-col sm:flex-row gap-stack-md">
           <Link
             className="inline-flex justify-center bg-admin-primary text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity"
