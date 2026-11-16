@@ -1,4 +1,5 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
+import { useLayoutEffect } from 'react'
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
@@ -23,10 +24,22 @@ import {
   VehiclesPage,
 } from '../pages/public/InfoPages'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
+}
+
+function PublicPageLayout() {
+  return <><ScrollToTop /><PublicLayout /></>
+}
+
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <PublicLayout />,
+    element: <PublicPageLayout />,
     children: [
       { index: true, element: <HomePage /> },
       { path: 'routes', element: <RoutesPage /> },
