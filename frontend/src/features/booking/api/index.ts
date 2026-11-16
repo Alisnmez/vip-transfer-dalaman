@@ -1,42 +1,21 @@
 import type { Booking, BookingRequest } from '../types'
 import { createSingleFlight } from '../singleFlight'
+import { createRetryKeyStore } from '../retryKeys'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
 
-// Retry keys survive a page refresh in the same tab without storing customer details.
-const pendingBookingKeys = new Map<string, string>()
-// Share the same POST promise when a user submits an identical booking twice at once.
+// Retry keys survive refreshes within the same tab, with an in-memory fallback.
+const retryKeys = createRetryKeyStore(
+  (() => { try { return sessionStorage } catch { return null } })(),
+  () => crypto.randomUUID(),
+)
 const runBookingOnce = createSingleFlight<Booking>()
 
 async function retryStorageKey(payload: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload))
   const hex = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('')
   return `booking-retry:${hex}`
-}
-
-function readRetryKey(storageKey: string): string | null {
-  try {
-    return sessionStorage.getItem(storageKey)
-  } catch {
-    return null
-  }
-}
-
-function saveRetryKey(storageKey: string, key: string): void {
-  try {
-    sessionStorage.setItem(storageKey, key)
-  } catch {
-    // In-memory retry protection still works when browser storage is unavailable.
-  }
-}
-
-function clearRetryKey(storageKey: string): void {
-  try {
-    sessionStorage.removeItem(storageKey)
-  } catch {
-    // Browser storage may be disabled.
-  }
 }
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
@@ -85,18 +64,14 @@ export async function createBooking(data: BookingRequest) {
   const payload = JSON.stringify(data)
   const storageKey = await retryStorageKey(payload)
   return runBookingOnce(storageKey, async () => {
-    let key = pendingBookingKeys.get(storageKey) ?? readRetryKey(storageKey)
-    if (!key) key = crypto.randomUUID()
-    pendingBookingKeys.set(storageKey, key)
-    saveRetryKey(storageKey, key)
+    const key = retryKeys.getOrCreate(storageKey)
 
     const booking = await request<Booking>(BOOKING_URL, {
       method: 'POST',
       headers: { 'Idempotency-Key': key },
       body: payload,
     })
-    pendingBookingKeys.delete(storageKey)
-    clearRetryKey(storageKey)
+    retryKeys.clear(storageKey)
     return booking
   })
 }
