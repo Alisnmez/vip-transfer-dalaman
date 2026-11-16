@@ -12,7 +12,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Genel durum:** DEVAM EDİYOR  
 **Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme (TEST BEKLİYOR)**  
-**Bir sonraki somut işlem:** Gerçek tarayıcı E2E testi, frontend bağımsız rezervasyon yaşam döngüsü ve kontrollü PostgreSQL migration planı.
+**Bir sonraki somut işlem:** Ayrı Render test ortamı seçimi, gerçek tarayıcı E2E ve kontrollü PostgreSQL migration planı.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
@@ -172,3 +172,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Commit:** `8247300`. **Yeni testin CI sonucu henüz doğrulanmadı.**
 - **Sınır:** Bu test Spring MockMvc + gerçek PostgreSQL CI entegrasyonudur, browser E2E değildir. Gerçek tarayıcı, ayrı test ortamı, kontrollü migration ve üretim dağıtım doğrulaması bekliyor.
 - **Kaldığımız yer:** `8247300` CI sonuçlarını doğrula; ardından ayrı test ortamında browser E2E'yi çalıştır. 1.3 TEST BEKLİYOR, 1.4 BEKLİYOR.
+
+## 2026-11-16 — 1.3 bağımsız rezervasyon CI doğrulaması ve 1.4 ortam engeli
+- **Doğrulama:** `82473005` bağımsız rezervasyon ve JSON metadata testi için GitHub Actions `43843703562` **success**. Takip eden `4817a124` için `43843720214` **success**. `b88a76cf` buton düzeltmesi için `43843561565` **success**.
+- **Kapsam:** Aynı payload + farklı UUID için farklı booking ID, API'de retry metadata gizliliği, PostgreSQL testleri ve frontend derleme CI içinde geçti. Bu gerçek browser E2E değildir.
+- **1.4 ortam engeli:** Render servislerini sorgulama girişimi workspace seçimi gerektiği için sonuç vermedi. Hesapta birden fazla workspace olabileceğinden kullanıcı onayı olmadan workspace seçilmeyecek. **Hiçbir Render servisine/deployment'a müdahale edilmedi; canlı veya staging test çalıştırılmadı.**
+- **Kaldığımız yer:** Kullanıcının Render workspace seçimini al, uygun staging servisini ve ayrı PostgreSQL DB'yi doğrula; üretim verisine dokunmadan browser E2E çalıştır. 1.3 CI tamam, staging E2E/migration açık; 1.4 BEKLİYOR.
