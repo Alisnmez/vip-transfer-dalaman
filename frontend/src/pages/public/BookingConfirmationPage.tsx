@@ -6,6 +6,7 @@ import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
 import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
+import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
 import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
 
@@ -116,12 +117,9 @@ export function BookingConfirmationPage() {
         setError('Saved booking details are invalid. Please return to the previous steps.')
         return
       }
-      const confirmedDestination = transferData.pickUpLocation === 'Dalaman Airport' ? transferData.dropOffLocation : transferData.dropOffLocation === 'Dalaman Airport' ? transferData.pickUpLocation : ''
-      const confirmedVehicle = transferVehicles.find(vehicle => vehicle.id === transferData.vehicleId)
-      if (!confirmedDestination || !confirmedVehicle || findTransferPrice(confirmedDestination, transferData.vehicleId, transferData.tripType) === null ||
-          (transferData.passengerCount ?? 0) > confirmedVehicle.maxPassengers ||
-          (transferData.luggageCount ?? 0) > Math.min(8, confirmedVehicle.maxLuggage ?? 8)) {
-        setError('Your route, vehicle or capacity is no longer valid. Please return to the transfer step and review your selection.')
+      const selectionError = validateTransferSelection(transferData)
+      if (selectionError) {
+        setError(selectionError)
         return
       }
       if ((transferData.luggageCount !== undefined && (!Number.isInteger(transferData.luggageCount) || transferData.luggageCount < 0 || transferData.luggageCount > 8)) ||
