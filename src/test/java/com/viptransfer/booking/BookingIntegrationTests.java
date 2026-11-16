@@ -315,4 +315,16 @@ class BookingIntegrationTests {
                 "Independent booking keys must create separate records");
     }
 
+
+    @Test
+    void allowsStagingFrontendBookingPreflightWithIdempotencyHeader() throws Exception {
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options("/bookings")
+                        .header("Origin", "http://localhost:5173")
+                        .header("Access-Control-Request-Method", "POST")
+                        .header("Access-Control-Request-Headers", "content-type,idempotency-key"))
+                .andExpect(status().isOk())
+                .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.header()
+                        .string("Access-Control-Allow-Origin", "http://localhost:5173"));
+    }
+
 }
