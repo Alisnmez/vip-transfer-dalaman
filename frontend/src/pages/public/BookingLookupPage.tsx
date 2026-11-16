@@ -12,21 +12,17 @@ export function BookingLookupPage() {
       <PublicNavbar />
       <main className="mx-auto max-w-2xl px-5 pb-24 pt-32">
         <h1 className="mb-4 text-3xl font-bold text-admin-primary">
-          Check Your Booking
+          Manage My Booking
         </h1>
         <p className="mb-5 text-on-surface-variant">
-          Online booking lookup is not available yet. Please save the booking
-          reference shown after submitting your transfer request. If you need help
-          with an existing request, contact us using the details below and quote
-          your booking reference.
+          Need to change your pickup time, route or vehicle, or request cancellation?
+          Enter the booking reference from your confirmation screen below.
         </p>
         <p className="mb-8 rounded-lg border border-outline bg-white p-5 text-on-surface-variant">
-          For your privacy, a booking reference alone cannot be used to display
-          passenger names, contact details or journey information. A secure
-          verification process is required before online lookup is enabled.
+          This page prepares a message for our team. It does not verify your booking or display private journey details.
         </p>
         <section className="mb-8 rounded-lg border border-outline bg-white p-5" aria-label="Change or cancel booking">
-          <h2 className="mb-3 text-lg font-semibold text-admin-primary">Change or cancel a booking</h2>
+          <h2 className="mb-3 text-lg font-semibold text-admin-primary">Request a change or cancellation</h2>
           <p className="mb-4 text-on-surface-variant">Enter your booking reference to prepare a support message. This does not look up or change your booking.</p>
           <label className="block text-sm font-semibold">Booking reference
             <input type="text" inputMode="numeric" value={reference} onChange={event => setReference(event.target.value)}
