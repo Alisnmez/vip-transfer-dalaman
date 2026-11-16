@@ -130,6 +130,15 @@ export function BookingConfirmationPage() {
         setError('Saved booking details are invalid. Please return to the previous steps.')
         return
       }
+      if ((transferData.luggageCount !== undefined && (!Number.isInteger(transferData.luggageCount) || transferData.luggageCount < 0 || transferData.luggageCount > 8)) ||
+          (transferData.babySeatCount !== undefined && (!Number.isInteger(transferData.babySeatCount) || transferData.babySeatCount < 0 || transferData.babySeatCount > 2)) ||
+          (transferData.flightNumber !== undefined && (typeof transferData.flightNumber !== 'string' || !/^[A-Za-z0-9 -]{1,20}$/.test(transferData.flightNumber))) ||
+          (passengerData.hotelName !== undefined && typeof passengerData.hotelName !== 'string') ||
+          (passengerData.countryOfResidence !== undefined && typeof passengerData.countryOfResidence !== 'string') ||
+          (passengerData.specialRequests !== undefined && typeof passengerData.specialRequests !== 'string')) {
+        setError('Saved booking details contain invalid values. Please return to the previous steps.')
+        return
+      }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
           !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
           !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
