@@ -5,32 +5,12 @@ import { PublicNavbar } from './PublicNavbar'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { parseTurkeyDateTime, turkeyToday } from '../../features/booking/turkeyTime'
 
-const vehicleImages = [
-  {
-    id: 'sedan',
-    name: 'Business Sedan',
-    description: 'E-Class or similar. Max 3 Pax.',
-    price: '€65',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuDxdwvuDznRqtCRtw7PnxBCSj6wxhGEaoI2q1xzAqO7u0YCqXgrJ5Fqo72ptVpUO56WWChjXX50u5FP0aPpcKPVukidko2nERfCvWZOIbEuBxJ9WN4LTwe970rDmxkDy-XXZ6qpDKhp1wfShh7cw5yG13y4sLgDzXjuvxgVh_9JADbVkalt2XvrPOb6R8Th8IzZ8eVyxeFUDuB_vubmBcJKbqavJsh4Z53cRXrtX08cA8laOcxhSSlOfl6MzAI01sCP2zFfUk-_a94',
-  },
-  {
-    id: 'van',
-    name: 'Business Van',
-    description: 'Mercedes Vito. Max 7 Pax.',
-    price: '€75',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuCYXKoqUQ1kNy1hY4TySwI-5d-8m7fS7I2kq9_-8X6xAnCGX7eevr1Z5GzsCbW_hvk63fzE5i6XZpSHO-p7LjLSf_9SsCxS_lYL_gOcdMRWB-pLBESwApdM2Tla3dVAu1KFTnk8MiuggzjcrNDEXrReMjcndBgtB04D3578lyXrdV_gt4woen569dgjgtvAfMrvZMOMVs5UdeZE-Yq1Vzv5RpLizyp--6vWCfz3oNElBpy_x43WvQ5A3BKwZhtVKy6bhFhN0mx2EVE',
-  },
-  {
-    id: 'first-class',
-    name: 'First Class',
-    description: 'S-Class or similar. Max 2 Pax.',
-    price: '€120',
-    image:
-      'https://lh3.googleusercontent.com/aida-public/AB6AXuBumobqgqIXAccWyTYOxr5huM77gHb6bndj58G2jZKu0lnMaPd0ybC-wf7nixisyc2JzKj6kQPXZ3hbAAMm9kcuFdrEqu_zpNVKDI6Gyisrpwz05WCjjiYMfwkPkdeViz2ubhkayez4QA5Sjqy0gEDQ_gk9mFEiaPtQYKm-cAqKYDmfAhpi7vZA06SQCNL3K5Xd8Lj83PmVhHLBl3L-sNIZPsGQ7jXiYPH7Hoevllvd8yPu0KXjbT1zO2aVuqLOO0yzptW-9SFv5gs',
-  },
-]
+// Generic icons avoid implying that an unverified vehicle photograph is the exact booked car.
+function vehicleIcon(vehicleId: string): string {
+  if (vehicleId === 'taxi') return 'local_taxi'
+  if (vehicleId.includes('minibus')) return 'airport_shuttle'
+  return 'directions_car'
+}
 
 type TransferDraft = {
   tripType?: 'one-way' | 'round-trip'
@@ -306,7 +286,6 @@ export function BookingFormPage() {
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
-                    const index = transferVehicles.findIndex((item) => item.id === vehicle.id)
                     const isSelected = effectiveVehicleId === vehicle.id
 
                     return (
@@ -320,12 +299,9 @@ export function BookingFormPage() {
                         onClick={() => setSelectedVehicleId(vehicle.id)}
                         type="button"
                       >
-                        <div className="h-32 mb-4 bg-white rounded-lg overflow-hidden flex items-center justify-center">
-                          <img
-                            alt=""
-                            className="object-contain w-4/5 h-4/5"
-                            src={vehicleImages[index === 0 ? 0 : index >= 5 ? 2 : 1].image}
-                          />
+                        <div className="h-32 mb-4 bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
+                          <span translate="no" className="material-symbols-outlined text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
+                          <span className="text-xs text-slate-500">Vehicle category</span>
                         </div>
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
