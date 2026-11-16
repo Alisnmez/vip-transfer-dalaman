@@ -291,3 +291,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Kod:** `BookingFormPage` flightNumber state, kullanıcı girdisi ve 20 karakter doğrulaması; `bookingTransferInfo` localStorage'a yazma; `BookingConfirmationPage` POST payload'ına ekleme, özet ve başarı ekranında gösterme; `BookingPassengerPage` özel istekler placeholder'ından uçuş numarası ifadesini kaldırma. Commitler `f9b9df8`, `ab8129c`, `0efdc99`.
 - **Backend testi:** `388a448` CI run `43847834472` başarılı. React değişikliklerinin son CI run'ı `43848189495` ilk kontrolde queued; sonuç bekleniyor.
 - **Risk:** Form alanı opsiyonel; canlı tarayıcı üzerinden uçuş numaralı gerçek rezervasyon henüz doğrulanmadı. Staging'de deploy sonrasında E2E gerekir.
+
+## 2026-11-16 — Görev 2.2 otel adı eklendi ve test yazıldı
+- **2.3/2.4 CI doğrulandı:** `d7bfc8a6` run `43848683903` **success** (Spring Boot PostgreSQL integration ve React/TypeScript build job'ları başarılı).
+- **2.2 Kod:** `BookingPassengerPage` opsiyonel otel/konaklama adı input'u (120 karakter), `BookingConfirmationPage` API payload ve özet, frontend booking type, backend DTO `@Size(max=120)`, Booking entity ve create/update mapping eklendi. Son test commit `351e3ae`.
+- **Test:** `savesHotelNameAndRejectsOverlongAccommodationName` entegrasyon testi eklendi; geçerli otel adının yanıtta dönmesi ve 121 karakterin 400 dönmesi bekleniyor. GitHub Actions run `43850774232` ilk kontrolde queued; sonuç doğrulanmadı.
+- **Eğitim notu:** Kullanıcı daha sonra `idempotency_key` ve `request_fingerprint` DB sütunlarının amaçlarını ve kod akışını örneklerle satır satır öğrenmek istiyor. Bu eğitim mutlaka ayrıca yapılacak.
+- **Risk:** Yeni sütun staging DB'de Hibernate `ddl-auto=update` ile otomatik oluşturulabilir; migration ve backup güvenliği hâlâ tamamlanmadı.
