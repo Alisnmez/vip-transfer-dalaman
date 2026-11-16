@@ -3,6 +3,9 @@ import type { Booking, BookingRequest } from '../types'
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
 
+// Keep a retry key for an uncertain network outcome; never reuse it for changed details.
+const pendingBookingKeys = new Map<string, string>()
+
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 60000)
@@ -45,11 +48,21 @@ export function getBooking(id: number) {
   return request<Booking>(`${BOOKING_URL}/${id}`)
 }
 
-export function createBooking(data: BookingRequest) {
-  return request<Booking>(BOOKING_URL, {
+export async function createBooking(data: BookingRequest) {
+  const payload = JSON.stringify(data)
+  let key = pendingBookingKeys.get(payload)
+  if (!key) {
+    key = crypto.randomUUID()
+    pendingBookingKeys.set(payload, key)
+  }
+
+  const booking = await request<Booking>(BOOKING_URL, {
     method: 'POST',
-    body: JSON.stringify(data),
+    headers: { 'Idempotency-Key': key },
+    body: payload,
   })
+  pendingBookingKeys.delete(payload)
+  return booking
 }
 
 export function updateBooking(id: number, data: BookingRequest) {
