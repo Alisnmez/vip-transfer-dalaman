@@ -1,4 +1,4 @@
-import { findTransferPrice, transferVehicles } from './pricing'
+import { findTransferPrice, transferVehicles } from './pricing.ts'
 
 export type TransferSelection = {
   pickUpLocation?: string
