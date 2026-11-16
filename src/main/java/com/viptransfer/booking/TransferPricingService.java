@@ -20,6 +20,24 @@ public class TransferPricingService {
         }
     }
 
+    public void validateLuggageCapacity(String vehicleId, Integer luggageCount) {
+        if (luggageCount == null) {
+            return;
+        }
+
+        int maximum = switch (vehicleId) {
+            case "taxi" -> 3;
+            case "vip-minivan", "premium-vip-minivan" -> 6;
+            case "maybach", "maybach-plus" -> 4;
+            case "minibus", "vip-minibus", "vip-minibus-long", "minibus-long" -> 8;
+            default -> throw new IllegalArgumentException("Invalid vehicle.");
+        };
+
+        if (luggageCount < 0 || luggageCount > maximum) {
+            throw new IllegalArgumentException("Luggage count exceeds the selected vehicle capacity.");
+        }
+    }
+
     public BigDecimal calculatePrice(String pickup, String destination, String vehicleId, String tripType, int passengerCount) {
         int capacity = switch (vehicleId) {
             case "taxi" -> 3;
