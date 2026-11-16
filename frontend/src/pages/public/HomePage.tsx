@@ -350,7 +350,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 pb-stack-md">
-            <a className="text-white/80 hover:text-white underline underline-offset-4" href="tel:+905555555555">0555 555 55 55</a>
+            <span className="text-white/80">Phone number to be confirmed</span>
             <a className="text-white/80 hover:text-white underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com">ali_sonmez35@hotmail.com</a>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
