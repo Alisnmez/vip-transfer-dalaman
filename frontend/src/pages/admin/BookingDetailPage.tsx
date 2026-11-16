@@ -74,7 +74,7 @@ export function BookingDetailPage() {
     && draft.passengerCount <= vehicle.maxPassengers
     && draft.babySeatCount >= 0 && draft.babySeatCount <= 2
     && draft.luggageCount >= 0
-    && (vehicle.maxLuggage === null || draft.luggageCount <= vehicle.maxLuggage)
+    && draft.luggageCount <= (vehicle.maxLuggage ?? 8)
   const previewFare = selectedPrice && draft && capacityValid
     ? (draft.tripType === 'round-trip' ? selectedPrice.roundTrip : selectedPrice.oneWay)
     : null
