@@ -64,6 +64,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - HTTP 5xx sunucu cevabında veritabanı işlemi tamamlanmış olabilir; `uncertain=true` ile aynı idempotency key korunuyor. HTTP 4xx kesin ret olarak kalıyor (`68ee62da`, `91943e6b`).
 - Canlı E2E ve fiyat doğrulama açık. Geçici telefon numarası kullanıcı kararıyla korunuyor; admin kapsam dışı.
 
+## 2026-11-16 — MVP: yanlış varsayılan bagaj/çocuk koltuğu
+- Önceki CI `43924685605` başarılı. Yeni rezervasyon açıldığında form kullanıcı seçimi olmadan 1 çocuk koltuğu ve 3 bagaj atıyordu. Yeni form varsayılanları 0/0 yapıldı (`9a642c5b`, `4a991a68`); mevcut taslakta kullanıcının daha önce seçtiği sayılar korunur.
+- Canlı tarayıcı smoke testi ve fiyatların işletme tarafından doğrulanması bekliyor. Geçici telefon numarası kullanıcı isteğiyle korundu; admin'e dokunulmadı.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
