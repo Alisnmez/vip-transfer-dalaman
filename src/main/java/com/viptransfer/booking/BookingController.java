@@ -13,8 +13,23 @@ public class BookingController {
 
     private final BookingService bookingService;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, BookingSupportService bookingSupportService) {
         this.bookingService = bookingService;
+        this.bookingSupportService = bookingSupportService;
+    }
+
+    private final BookingSupportService bookingSupportService;
+
+    @PostMapping("/support/request-code")
+    public java.util.Map<String, String> requestSupportCode(@RequestBody java.util.Map<String, String> payload) {
+        bookingSupportService.requestCode(payload.get("reference"), payload.get("email"));
+        return java.util.Map.of("message", "If the details match a booking, a verification code has been sent.");
+    }
+
+    @PostMapping("/support/verify-code")
+    public java.util.Map<String, Boolean> verifySupportCode(@RequestBody java.util.Map<String, String> payload) {
+        return java.util.Map.of("verified", bookingSupportService.verifyCode(
+                payload.get("reference"), payload.get("email"), payload.get("code")));
     }
 
     @PostMapping("/support/verify")
