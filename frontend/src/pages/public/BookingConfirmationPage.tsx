@@ -119,6 +119,17 @@ export function BookingConfirmationPage() {
       }
       const transferData = transfer as TransferDetails
       const passengerData = passenger as PassengerDetails
+      if (typeof passengerData.customerName !== 'string' || typeof passengerData.phoneNumber !== 'string' ||
+          typeof passengerData.email !== 'string' || typeof passengerData.transferAddress !== 'string' ||
+          typeof transferData.pickUpLocation !== 'string' || typeof transferData.dropOffLocation !== 'string' ||
+          typeof transferData.pickUpDate !== 'string' || typeof transferData.pickUpTime !== 'string' ||
+          typeof transferData.vehicleId !== 'string' || !Number.isInteger(transferData.passengerCount) ||
+          (transferData.tripType !== 'one-way' && transferData.tripType !== 'round-trip') ||
+          (transferData.tripType === 'round-trip' &&
+            (typeof transferData.returnDate !== 'string' || typeof transferData.returnTime !== 'string'))) {
+        setError('Saved booking details are invalid. Please return to the previous steps.')
+        return
+      }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
           !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
           !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
