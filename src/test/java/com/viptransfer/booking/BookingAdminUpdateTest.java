@@ -1,0 +1,96 @@
+package com.viptransfer.booking;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.viptransfer.booking.dto.BookingRequestDto;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
+
+class BookingAdminUpdateTest {
+
+    private BookingRepository repository;
+    private TransferPricingService pricing;
+    private BookingService service;
+    private Booking booking;
+    private BookingRequestDto request;
+
+    @BeforeEach
+    void setUp() {
+        repository = mock(BookingRepository.class);
+        pricing = mock(TransferPricingService.class);
+        service = new BookingService(repository, pricing, new ObjectMapper(),
+                mock(PlatformTransactionManager.class));
+        booking = new Booking();
+        booking.setId(10L);
+        booking.setStatus("CONFIRMED");
+        booking.setPrice(new BigDecimal("67.50"));
+        booking.setCustomerName("Customer");
+        booking.setPassengerCount(2);
+        booking.setPickUpLocation("Dalaman Airport");
+        booking.setDropOffLocation("Turunc");
+        booking.setVehicleId("vip-minivan");
+        booking.setTripType("one-way");
+        booking.setTransferDateTime(LocalDateTime.of(2025, 1, 1, 12, 0));
+
+        request = new BookingRequestDto();
+        request.setCustomerName("Updated customer");
+        request.setPassengerCount(2);
+        request.setPickUpLocation("Dalaman Airport");
+        request.setDropOffLocation("Turunc");
+        request.setVehicleId("vip-minivan");
+        request.setTripType("one-way");
+        request.setTransferDateTime(booking.getTransferDateTime());
+        request.setPhoneNumber("+905551234567");
+        request.setEmail("test@example.com");
+        when(repository.findById(10L)).thenReturn(Optional.of(booking));
+        when(repository.save(any(Booking.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    }
+
+    @Test
+    void contactEditOnHistoricalBookingKeepsOriginalPrice() {
+        Booking updated = service.updateBooking(10L, request);
+        assertEquals(new BigDecimal("67.50"), updated.getPrice());
+        assertEquals("Updated customer", updated.getCustomerName());
+        verify(pricing, never()).calculatePrice(any(), any(), any(), any(), any());
+    }
+
+    @Test
+    void confirmedBookingCannotChangeFareInputs() {
+        request.setPassengerCount(3);
+        ResponseStatusException error = assertThrows(ResponseStatusException.class,
+                () -> service.updateBooking(10L, request));
+        assertEquals(HttpStatus.CONFLICT, error.getStatusCode());
+        assertEquals(new BigDecimal("67.50"), booking.getPrice());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void pendingBookingRecalculatesOnlyWhenFareInputsChange() {
+        booking.setStatus("PENDING");
+        request.setPassengerCount(3);
+        when(pricing.calculatePrice(any(), any(), any(), any(), any()))
+                .thenReturn(new BigDecimal("75.50"));
+        Booking updated = service.updateBooking(10L, request);
+        assertEquals(new BigDecimal("75.50"), updated.getPrice());
+        verify(pricing, times(2)).calculatePrice(any(), any(), any(), any(), any());
+    }
+
+    @Test
+    void listRequestsNewestFirst() {
+        when(repository.findAll(any(Sort.class))).thenReturn(List.of(booking));
+        assertEquals(1, service.getAllBookings().size());
+        verify(repository).findAll(Sort.by(Sort.Direction.DESC, "id"));
+    }
+}
