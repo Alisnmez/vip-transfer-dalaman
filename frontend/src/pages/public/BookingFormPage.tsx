@@ -164,11 +164,12 @@ export function BookingFormPage() {
       setFormError('Your browser could not save the transfer details. Please enable site storage and try again.')
       return
     }
-    try {
-      sessionStorage.removeItem('lastBookingReceipt')
-      localStorage.removeItem('lastBookingReceipt')
-    } catch {
-      // The previous receipt may remain available if browser storage is disabled.
+    for (const storage of [sessionStorage, localStorage]) {
+      try {
+        storage.removeItem('lastBookingReceipt')
+      } catch {
+        // Continue when a browser storage mechanism is unavailable.
+      }
     }
   }
 
