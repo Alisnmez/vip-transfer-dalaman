@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { getBooking, updateBooking, updateBookingStatus } from '../../features/booking/api'
-import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
+import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingApiError } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices, transferVehicles } from '../../features/booking/pricing'
@@ -136,7 +136,7 @@ export function BookingDetailPage() {
       {booking && !editing && (
         <dl className="grid min-w-0 grid-cols-1 gap-5 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
           {[
-            ['Received at (Turkey)', booking.createdAt ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Istanbul', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(booking.createdAt)) : 'Not recorded for this older booking'],
+            ['Received at (Turkey)', formatBookingReceivedAt(booking.createdAt)],
             ['Customer', booking.customerName],
             ['Passengers', booking.passengerCount],
             ['Pickup', booking.pickUpLocation],
