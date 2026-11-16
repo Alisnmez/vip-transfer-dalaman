@@ -156,6 +156,16 @@ public class BookingService {
         return bookingRepository.save(existingBooking);
     }
 
+    @org.springframework.transaction.annotation.Transactional
+    public Booking updateStatus(Long id, String status) {
+        if (status == null || !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status.");
+        }
+        Booking booking = getBooking(id);
+        booking.setStatus(status);
+        return bookingRepository.save(booking);
+    }
+
     public String deleteBooking(Long id) {
         if (!bookingRepository.existsById(id)) {
             throw new BookingNotFoundException(id);
