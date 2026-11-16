@@ -520,3 +520,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Son onay tarih/saat regex'lerindeki yanlış çift escape düzeltildi; önceki CI lint/build bu davranış hatasını yakalayamamıştı (`ce14a1b8`).
 - Final rezervasyon POST öncesi pickup ve return saatleri artık tarayıcının yerel saat dilimi yerine Türkiye yerel saati (UTC+03:00) olarak doğrulanıyor; takvim günü ve gidiş-dönüş sıralaması korunuyor (`63329b28`).
 - Frontend ilk adımın `today` ve tarih kontrolleri ayrıca Türkiye saatine göre hizalanmalı; gerçek tarayıcı E2E ve farklı saat dilimi testleri açık. Admin kapsam dışı.
+
+
+## 2026-11-16 — Booking form Türkiye saat dilimi uyumu
+- BookingFormPage tarih seçicisinin minimum günü artık ziyaretçinin bilgisayarındaki gün değil `Europe/Istanbul` yerel günü (`f23c5485`).
+- İlk adımda pickup ve return zamanları Türkiye UTC+03:00 üzerinden doğrulanıyor, geçersiz takvim tarihleri reddediliyor (`77f0d6e7`). Confirmation ile aynı zaman yorumu hedefleniyor.
+- Otomatik birim/E2E testleri, tarayıcı saat dilimi varyasyonları ve canlı UI kontrolü hâlâ açık. Admin kapsam dışı.
