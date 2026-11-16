@@ -391,3 +391,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Görev 3/4, yanıltıcı bilgi:** Ana sayfadaki EUR fiyat etiketleri gerçek GBP rezervasyon kataloğuyla tutarsız olduğundan kaldırıldı, kullanıcı rezervasyon fiyatına yönlendiriliyor. Doğrulanmamış 24/7 destek, sürücü vetting, peşin ödeme ve WhatsApp vaadi azaltıldı. Contact sayfasındaki sahte +90 555 000 00 00 ve doğrulanmamış e-posta kaldırıldı; flight tracking vaadi uçuş bilgisi toplama açıklamasına dönüştürüldü. Commit 92643659.
 - **Görev 8, araç kartları:** Ana sayfa görünen 7/9 yolcu ve 10 bagaj iddiaları rezervasyon kataloğundaki 5/5 yolcu ve 6 bagaj ile uyumlu hale getirildi (086418ba). Araç kartı model adları ve özellikleri ayrıca gerçek filoyla doğrulanmalı.
 - **Kalan:** Gerçek iletişim kanalı kullanıcıdan onaylı bilgi gelene kadar açık; privacy/terms/insurance için doğrulanmış metin/sayfa; SEO prerender; otomatik browser E2E; rezervasyon e-postaları; migration; fiyat/iptal politikası. Bu tur admin koduna dokunulmadı. Son frontend CI sonucu henüz kontrol edilmeli.
+
+
+## 2026-11-16 — Admin dışı: ödeme iddiaları ve güvenli sorgulama
+- CI kontrolü: 6bd4e1ec için GitHub Actions run 43861627066 completed/success; önceki public-site lint/build/PostgreSQL CI işleri geçti.
+- Görev 3: BookingConfirmationPage üzerindeki doğrulanmamış sürücüye nakit ödeme, dört para birimi kabulü, vergiler/otopark/otoyol dahil ve bagaja göre fiyat değişimi iddiaları kaldırıldı. Ödeme online alınmadığı, ödeme yönteminin sağlayıcıyla doğrulanması gerektiği yazıldı. Gerçek ödeme ve iptal politikası hâlâ BEKLİYOR. Commit 8265a2b.
+- Görev 8: ConfirmationFooter içindeki işlevsiz # legal/sigorta/WhatsApp bağlantıları ve doğrulanmamış 24/7 vaadi kaldırıldı, gerçek Contact/Services rotaları bağlandı. Commit 8265a2b.
+- Görev 6: BookingLookupPage placeholder yerine İngilizce güvenli erişim açıklaması ve çalışan yönlendirmeler içeriyor. Referans ID tek başına PII göstermeyecek; doğrulama olmadan public lookup endpoint açılmayacak. Gerçek sorgulama hâlâ BEKLİYOR. Commit 98e8bf2.
+- Son iki commit CI sonucu bekleniyor; gerçek tarayıcı E2E hâlâ açık. Admin koduna dokunulmadı.
