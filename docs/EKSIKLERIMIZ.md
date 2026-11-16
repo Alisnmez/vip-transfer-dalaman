@@ -63,6 +63,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-17 — Admin düzenleme atomik doğrulama ve ek regresyon testleri
+- **Yeni hata:** `updateBooking` JPA managed entity üzerinde alanları değiştirdikten sonra bagaj kapasitesini doğruluyordu; validasyon hatası transaction rollback dışı bir çağrıda kısmi mutation riski doğuruyordu. Fiyat iki kez hesaplanıyordu.
+- **Düzeltme:** Bagaj kapasitesi ve yeni fiyat tüm alanlar güncellenmeden önce doğrulanıyor; ücret yalnızca bir kez hesaplanıyor (`af7f892`).
+- **Testler:** `BookingAdminUpdateTest` içine hatalı bagaj ve eksik tarife senaryolarında mevcut kaydın değişmeden kalması eklendi (`212eba3`). Primitive `int` parametresi için Mockito `anyInt()` kullanıldı (`b542926`); beklenen fiyat hesaplama çağrısı 1'e indirildi.
+- **Doğrulama:** Render frontend/backend son commit için dağıtım kuyruğunda; önceki `2ef608d` frontend live ve `d799a7b` backend live görüldü. Yeni commit için CI test sonucu henüz doğrulanmadı. **TEST BEKLİYOR.**
+- **Açık:** GitHub Actions sonuçlarını ve canlı fiyat koruma / yetki kontrollerini doğrula; pagination, audit log ve migration hâlâ açık.
+
 ## 2026-11-17 — Bağımsız denetim düzeltmeleri ve test ekleme
 - **Tamamlanan kod değişiklikleri:** Admin düzenlemede geçmiş rezervasyonların yalnızca iletişim/operasyon bilgileri değiştiğinde tarih ve fiyat yeniden doğrulanmıyor; ücret etkileyen rota/araç/tip/yolcu sayısı değişirse fiyat yeniden hesaplanıyor, `CONFIRMED` vb. kayıtlarda bu değişiklik 409 ile reddediliyor (`b4baf19`). `BookingService.updateBooking` transaction altında.
 - **Veri güvenliği:** Kalıcı DELETE endpoint'i kaldırıldı ve Spring Security'de DELETE açıkça engellendi (`d799a7b`, `f5ed7b4`); frontend kullanılmayan DELETE istemcisi kaldırıldı (`d5cbdbc`). Operasyonel iptal `CANCELLED` üzerinden yapılır.
