@@ -20,6 +20,7 @@ const utilityItems = [
 ]
 
 export function AdminLayout() {
+  const location = useLocation()
   const [authenticated, setAuthenticated] = useState(false)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -62,7 +63,6 @@ export function AdminLayout() {
     )
   }
 
-  const location = useLocation()
   const usesCustomPageChrome = ['/admin/bookings', '/admin/calendar'].includes(
     location.pathname,
   )
