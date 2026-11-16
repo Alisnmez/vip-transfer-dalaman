@@ -1,3 +1,10 @@
+## 2026-11-17 — Acil: admin yüklenemiyor / takvim deploy hatası
+- **Belirti:** Admin dashboard `Loading bookings...` sonrası `Unable to reach the booking service. Your request may have been received` gösteriyor.
+- **Render kanıtı:** Son backend `57eaef99` deploy `build_failed`; `BookingRepository` aynı aylık sorgu iki kez tanımlı. Son frontend `57eaef99` deploy `build_failed`; `getCalendarBookings` iki kez tanımlı. Önceki backend `48ce1866` ve frontend `56493d6b` deployları `live` olmuştu. Yani son takvim sürümü henüz yayınlanmamıştı.
+- **Düzeltildi (kod):** Çift repository metodu (`5c72667b`), çift controller mapping (`4af3ed8e`), gereksiz service overload (`defb8759`), çift frontend API fonksiyonu (`0161b6e6`) kaldırıldı. Takvim API parametresi `YYYY-MM` olarak eşlendi ve hata durumunda eski takvim verisi temizlendi (`e54e5805`); test `YearMonth` ile uyumlu hale getirildi (`05be7e8a`).
+- **Kullanıcıya gösterilen hata:** GET isteği için 'rezervasyonunuz alınmış olabilir' mesajı yanlış ve korkutucuydu; sadece okuma bağlantı hatası olarak düzeltildi (`a1882ca6`). POST rezervasyon oluşturma belirsizlik mesajı korunuyor.
+- **Durum:** TEST BEKLİYOR — yeni Render backend/frontend deployları `queued`; son CI, servis açılışı ve gerçek admin giriş testi henüz doğrulanmadı. Yüklenme gecikmesi ayrıca ücretsiz Render uyku/soğuk başlangıç veya API/DB erişimiyle ilişkili olabilir; bu kısım loglarla kesinleştirilmedi.
+
 ## 2026-11-17 — Admin rezervasyon takvimi (4.1 / 4.2)
 - **İstek:** Eski arayüzdeki gibi takvimden rezervasyon yönetimi; mevcut liste ve detay düzenleme korunmalı.
 - **Kodlandı:** Admin `Booking management` sayfasına Calendar / List geçişi (`16bb042e`), aylık takvim, önceki/sonraki ay, Today, Refresh, durum filtreleri, günlük rezervasyon sayısı ve güne tıklayınca saat/rota/müşteri/durum kartları (`a47ee21c`). Kartlar mevcut rezervasyon detay/düzenleme ekranına gider.
