@@ -38,6 +38,7 @@ export function BookingFormPage() {
   const [dropOffLocation, setDropOffLocation] = useState('')
   const [pickUpDate, setPickUpDate] = useState('')
   const [pickUpTime, setPickUpTime] = useState('')
+  const [flightNumber, setFlightNumber] = useState('')
   const [returnDate, setReturnDate] = useState('')
   const [returnTime, setReturnTime] = useState('')
   const [passengers, setPassengers] = useState(4)
@@ -101,6 +102,11 @@ export function BookingFormPage() {
       setFormError('Passenger or luggage count exceeds the selected vehicle capacity.')
       return
     }
+    if (flightNumber.trim() && !/^[A-Za-z0-9 -]{1,20}$/.test(flightNumber.trim())) {
+      event.preventDefault()
+      setFormError('Please enter a valid flight number (up to 20 letters, digits, spaces or hyphens).')
+      return
+    }
     setFormError('')
     localStorage.setItem(
       'bookingTransferInfo',
@@ -117,6 +123,7 @@ export function BookingFormPage() {
         price,
         currency: 'GBP',
         vehicleId: effectiveVehicleId,
+        flightNumber: flightNumber.trim() || undefined,
       }),
     )
   }
@@ -217,7 +224,7 @@ export function BookingFormPage() {
                   value={pickUpTime}
                   onChange={setPickUpTime}
                 />
-                <TextField icon="flight_takeoff" label="Flight Number" placeholder="TK1234" />
+                <TextField icon="flight_takeoff" label="Flight Number (optional)" placeholder="TK1234" value={flightNumber} onChange={setFlightNumber} />
               </div>
 
               {tripType === 'round-trip' && (
