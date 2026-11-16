@@ -77,6 +77,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - `4686d979` için CI `43929270545` başarısız: frontend TypeScript TS18048 (opsiyonel `passengerCount` karşılaştırması); backend PostgreSQL testleri başarılı. Nullish fallback ile düzeltildi (`e9512c07`); yeni CI sonucunu beklemeden başarılı denmeyecek.
 - Gerçek tarayıcı rezervasyon E2E, fiyat onayı ve canlı yayın öncesi gerçek telefon numarası değişimi açık. Admin kapsam dışı.
 
+## 2026-11-16 — MVP kapsamlı doğrulama ve fiyat kataloğu testleri
+- Önceki CI `43929639328` başarılı. Rezervasyon onayında ortak `validateTransferSelection` doğrulayıcısı eklendi (`453df8fe`, `52bf2979`): Dalaman Havalimanı güzergâhı, yayınlanmış araç/fiyat, yolcu, bagaj ve çocuk koltuğu sınırları yeniden denetleniyor.
+- Fiyat kataloğunda yinelenen güzergâh/araç kombinasyonları, bilinmeyen araçlar, sıfır/negatif fiyatlar ve gidiş/dönüş fiyat bulma eşleşmeleri için otomatik testler; ters yön, geçersiz güzergâh ve kapasite senaryoları eklendi (`afec831e`). Node testlerinde TS uzantısı düzeltildi (`37748b11`).
+- **Not:** Otomatik test kataloğun iç tutarlılığını ölçer, gerçek ticari fiyatları doğrulamaz. CI ve canlı E2E sonuçları ayrıca izlenecek. Admin kapsam dışı, geçici telefon numarası korunuyor.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
