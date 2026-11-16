@@ -27,6 +27,8 @@ public class Booking {
     @jakarta.persistence.Column(length = 2000)
     private String specialRequests;
 
+    @jakarta.persistence.Column(length = 20)
+    private String flightNumber;
     private String vehicleId;
     private String tripType;
     private String status = "PENDING";
@@ -37,6 +39,9 @@ public class Booking {
 
     @com.fasterxml.jackson.annotation.JsonIgnore
     private String requestFingerprint;
+
+    public String getFlightNumber() { return flightNumber; }
+    public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
 
     public String getIdempotencyKey() { return idempotencyKey; }
     public void setIdempotencyKey(String value) { this.idempotencyKey = value; }
