@@ -90,6 +90,7 @@ public class BookingService {
         booking.setEmail(dto.getEmail());
         booking.setCountryOfResidence(dto.getCountryOfResidence());
         booking.setTransferAddress(dto.getTransferAddress());
+        booking.setHotelName(dto.getHotelName());
         booking.setSpecialRequests(dto.getSpecialRequests());
         booking.setFlightNumber(dto.getFlightNumber());
         booking.setLuggageCount(dto.getLuggageCount());
@@ -138,6 +139,7 @@ public class BookingService {
         existingBooking.setEmail(dto.getEmail());
         existingBooking.setCountryOfResidence(dto.getCountryOfResidence());
         existingBooking.setTransferAddress(dto.getTransferAddress());
+        existingBooking.setHotelName(dto.getHotelName());
         existingBooking.setSpecialRequests(dto.getSpecialRequests());
         existingBooking.setFlightNumber(dto.getFlightNumber());
         existingBooking.setLuggageCount(dto.getLuggageCount());
