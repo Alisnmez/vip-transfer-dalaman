@@ -80,6 +80,31 @@ class BookingAdminUpdateTest {
     }
 
     @Test
+    void confirmedBookingCanReverseAirportRouteAndRecalculateFare() {
+        request.setPickUpLocation("Turunc");
+        request.setDropOffLocation("Dalaman Airport");
+        when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
+                .thenReturn(new BigDecimal("67.50"));
+
+        Booking updated = service.updateBooking(10L, request);
+
+        assertEquals("Turunc", updated.getPickUpLocation());
+        assertEquals("Dalaman Airport", updated.getDropOffLocation());
+        assertEquals(new BigDecimal("67.50"), updated.getPrice());
+        verify(pricing).calculatePrice("Turunc", "Dalaman Airport", "vip-minivan", "one-way", 2);
+    }
+
+    @Test
+    void confirmedBookingCanChangeContactWithoutRepricing() {
+        request.setPhoneNumber("+905551112233");
+        Booking updated = service.updateBooking(10L, request);
+        assertEquals("CONFIRMED", updated.getStatus());
+        assertEquals("+905551112233", updated.getPhoneNumber());
+        assertEquals(new BigDecimal("67.50"), updated.getPrice());
+        verify(pricing, never()).calculatePrice(any(), any(), any(), any(), anyInt());
+    }
+
+    @Test
     void completedBookingCannotChangeFareInputs() {
         booking.setStatus("COMPLETED");
         request.setPassengerCount(3);
