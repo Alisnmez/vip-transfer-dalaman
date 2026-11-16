@@ -1,3 +1,9 @@
+## 2026-11-17 — 4.2 CONFIRMED rezervasyon yeniden fiyatlandırma
+- **Kullanıcı talebi:** CONFIRMED rezervasyonda destinasyon/araç/yolcu değişikliği yapılabilsin; admin edit formunda seçilen yeni destinasyonun fiyatı anında görünsün.
+- **Backend:** `BookingService.updateBooking` fiyatı etkileyen değişikliklere PENDING ve CONFIRMED durumlarında izin veriyor; COMPLETED/CANCELLED hâlâ 409. Sunucu fiyatı güvenilir katalogdan yeniden hesaplayıp kaydediyor (`ed3a6158`).
+- **Frontend:** Mevcut fiyat ve seçilen rota/araç/yolculuk tipinin yeni GBP fiyatı gösteriliyor; kapasite/rota geçersizse fiyat sunulmuyor; fiyat değişiminde eski/yeni tutarlı onay penceresi açılıyor (`376f8645`, `1ef1c5e0`). Minibüs bagaj limiti backend ile aynı 8 kabul ediliyor.
+- **Test:** CONFIRMED destinasyon değişimiyle yeni fiyat kaydı ve COMPLETED değişiklik reddi testleri eklendi (`8d00f973`). **SON CI ve Render live sonucu BEKLİYOR**. Katalogdaki GBP fiyatları hâlâ ticari doğrulama gerektiriyor; adminin müşteriye yeni fiyatı bildirmesi manuel.
+
 ## 2026-11-17 — 4.2 Admin rezervasyon düzenleme HTTP 409
 - **Kullanıcı hatası:** `Error while saving details: Booking service returned HTTP 409`.
 - **Kök neden:** `BookingService.updateBooking` fiyatı etkileyen güzergâh/araç/tur türü/yolcu sayısı değişikliklerini yalnızca `PENDING` rezervasyonda kabul ediyor; diğer statülerde 409 üretiyor. `ResponseStatusException` JSON mesajı global handler tarafından açıkça aktarılmadığından frontend genel HTTP 409 gösteriyordu.
