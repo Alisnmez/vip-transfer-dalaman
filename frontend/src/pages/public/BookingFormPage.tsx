@@ -45,6 +45,11 @@ export function BookingFormPage() {
   const [luggages, setLuggages] = useState(3)
   const [babySeats, setBabySeats] = useState(1)
   const [formError, setFormError] = useState('')
+  const [today] = useState(() => {
+    const now = new Date()
+    const localToday = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+    return localToday.toISOString().slice(0, 10)
+  })
 
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
@@ -215,7 +220,7 @@ export function BookingFormPage() {
                   icon="calendar_today"
                   label="Pickup Date"
                   type="date"
-                  min={new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10)}
+                  min={today}
                   value={pickUpDate}
                   onChange={setPickUpDate}
                 />
