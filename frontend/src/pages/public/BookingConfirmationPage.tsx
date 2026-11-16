@@ -304,9 +304,9 @@ export function BookingConfirmationPage() {
             </div>
             <div className="flex-grow space-y-4">
               <p className="font-body-md text-on-surface-variant">
-                Your request does not collect a payment online. Payment method,
-                accepted currencies and any additional charges must be agreed
-                with the transfer provider before the journey.
+                Payment is cash only. No online or card payment is collected.
+                The payment timing, accepted cash currency and any additional
+                charges will be confirmed by the operator before your transfer.
               </p>
               <p className="font-label-sm text-on-surface-variant">
                 Submitting a booking request does not mean the transfer has been confirmed.
