@@ -338,6 +338,15 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Sorun:** DTO'da luggageCount 0–20 ve babySeatCount 0–5 sınırları mevcut; entegrasyon testi negatif çocuk koltuğunu kontrol ediyor ancak üst sınırları ve negatif bagajı kapsamıyordu.
 - **Düzeltme:** BookingIntegrationTests.persistsLuggageAndBabySeatCountsAndRejectsNegativeValues testine babySeatCount=6, luggageCount=-1 ve luggageCount=21 için HTTP 400 assertion'ları eklendi. Commit f5b1b3a.
 - **Test:** Yeni commit'in GitHub Actions CI sonucu henüz doğrulanmadı; izole PostgreSQL üzerinde çalışacak. Staging/production DB'ye yazma yapılmadı.
-- **Risk:** 0–20 bagaj sınırı araç bazlı gerçek kapasite kuralı değildir; operasyonel kapasite/koltuk tipi ve yaş gereksinimleri ayrıca kararlaştırılmalı.
+- **Risk:** Önceki 0–20 bagaj sınırı daha sonra kullanıcı kararıyla 0–8 olarak daraltıldı; araç bazlı gerçek kapasite ayrıca kontrol edilir; operasyonel kapasite/koltuk tipi ve yaş gereksinimleri ayrıca kararlaştırılmalı.
 - **Durum:** 2.3/2.4 TEST BEKLİYOR; browser E2E ve iş kuralları açık.
 - **Kaldığımız yer:** f5b1b3a CI sonucunu doğrula; ardından 1.5 güvenli E2E altyapısını ve 1.3 PostgreSQL Phase 0 envanterini ilerlet.
+
+
+## 2026-11-16 — 2.3/2.4 kullanıcı kararı: bagaj 0–8, çocuk koltuğu 0–2
+- **İstenen kural:** Bagaj maksimum 8, çocuk koltuğu maksimum 2. Negatif sayılar geçersiz. Yolcu en az 1, üst sınır seçilen aracın kapasitesi.
+- **Backend:** BookingRequestDto üzerinde luggageCount @Min(0)/@Max(8), babySeatCount @Min(0)/@Max(2). Commit 3a1b016.
+- **Frontend:** BookingFormPage CounterField min/max destekli; artı/eksi butonları sınırda disabled, click clamped, continue validasyonu bagaj 0–8, çocuk koltuğu 0–2 ve seçilen araç kapasitesini kontrol ediyor. Commit 1de2cbb.
+- **Test:** BookingIntegrationTests sınır 0, bagaj 8, çocuk koltuğu 2 kabul; -1, bagaj 9, çocuk koltuğu 3 için HTTP 400 beklentisi. Commit 5ac89cb. CI sonucu henüz doğrulanmadı.
+- **Not:** API'de bagaj/koltuk opsiyonel (null) olabilir; bu kural mevcut kayıtlar ve eski istemciler için geriye dönük uyumluluğu koruyor. Fiyat/araç bazlı bagaj kapasitesi iş kuralları ayrıca incelenecek.
+- **Kaldığımız yer:** 5ac89cb GitHub Actions sonuçlarını doğrula; başarılıysa 1.5 E2E ve 1.3 güvenli migration envanterine devam et.
