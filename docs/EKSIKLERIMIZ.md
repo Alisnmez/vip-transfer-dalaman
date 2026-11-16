@@ -422,3 +422,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingFormPage: yeni geçerli transfer bilgileri kaydedilirken eski makbuz siliniyor, önceki rezervasyonun sonucu yeni rezervasyonla karışmıyor (67a80d73).
 - Confirmation receipt: yenileme sonrası transfer formu localStorage'dan silindiği için fiyat, bagaj ve çocuk koltuğu gibi kaydedilmemiş alanlar makbuzda artık gösterilmiyor; doğrulanmış kısa özet korunuyor (36f1ba0b).
 - Bu üç commit için CI sonucu bekleniyor. Tarayıcı E2E ve canlı DB kontrolü ayrı açık işler. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Yolcu formuna geri dönüş ve tarayıcı depolama
+- Önceki CI: 87cba80b run 43862599743, 36f1ba0b run 43862570262, 67a80d73 run 43862547221, 18026d49 run 43862530968 completed/success.
+- BookingPassengerPage: confirmation adımından geri dönüldüğünde daha önce kaydedilmiş ad/soyad, ülke kodu/telefon, e-posta, ikamet ülkesi, transfer adresi, otel ve özel istekler yeniden dolduruluyor (dfea5315). Telefon kodu bilinen seçenekler üzerinden ayrıştırılıyor.
+- BookingPassengerPage: render sırasında korumasız localStorage JSON.parse kaldırıldı; bozuk veride sayfa açılışında çökme önlendi (dfea5315).
+- BookingPassengerPage: localStorage yazma hatası kullanıcıya açıklanıyor, kayıt başarısızsa confirmation sayfasına yönlendirme yapılmıyor (ac198006).
+- Son iki commit CI sonucu henüz kontrol edilmeli. Browser E2E, backend e-posta bildirimleri ve güvenli sorgulama hâlâ açık. Admin koduna dokunulmadı.
