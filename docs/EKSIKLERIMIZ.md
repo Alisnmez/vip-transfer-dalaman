@@ -1,3 +1,10 @@
+## 2026-11-17 — Eksiklerimiz: fiyat doğrulamasında null araç hatası
+- **Problem:** `TransferPricingService.validateLuggageCapacity` ve `calculatePrice` araç ID'si `null` iken `switch` çalıştırıyordu; istemciden eksik araç gelirse beklenmeyen 500 riski vardı.
+- **Düzeltme:** Her iki metotta `switch` öncesi açık `null` kontrolü ve `IllegalArgumentException("Invalid vehicle.")` eklendi (`564668ab`). Veritabanı şeması değişmedi.
+- **Test eklendi:** `TransferPricingValidationTest` ile eksik araç + boş bagaj, eksik araç + fiyat, bilinmeyen araç ve fiyatı olmayan rota senaryoları (`9dd55e40`).
+- **Durum:** TEST BEKLİYOR. Render backend/frontend son deploylar `queued`; CI ve gerçek uçtan uca test henüz doğrulanmadı. Öncelik: CI ve canlı deploy sonuçlarını doğrulamak, sonra 1.5 dağıtım güvenliği ve 4.x admin operasyonunu kontrol etmek.
+- **Kapsam:** OTP ve gelişmiş self-servis destek ilk sürümden çıkarıldı; ileri sürüm fikirleri yalnızca `docs/CANLI_YAYIN_SONRASI_GELISTIRMELER.md` dosyasında takip edilir.
+
 ## 2026-11-17 — İLK YAYIN KARARI: WhatsApp ile manuel rezervasyon desteği
 - **Güncel karar (önceki OTP notlarının yerine geçer):** Müşteri `Manage Booking` ekranında yalnızca rezervasyon numarasını girer; `Request Change` veya `Request Cancellation` ile hazır WhatsApp mesajı açar. `VITE_WHATSAPP_NUMBER` gerçek numarayla ayarlanmadıysa e-posta bağlantısı açılır.
 - OTP servisi, OTP endpointleri, Spring Mail bağımlılığı, SMTP ayarları ve frontend OTP arayüzü kaldırıldı. Müşteriye rezervasyon detayları açılmaz, destek mesajı rezervasyon üzerinde işlem yapmaz.
