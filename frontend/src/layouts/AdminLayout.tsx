@@ -4,6 +4,7 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { clearAdminCredentials, setAdminCredentials } from '../features/booking/adminCredentials'
 import { checkAdminAccess } from '../features/booking/api'
 import { BookingApiError } from '../features/booking/api/errors'
+import { ProcessingButton } from '../components/ProcessingButton'
 
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
@@ -54,7 +55,7 @@ export function AdminLayout() {
             <input autoComplete="current-password" type="password" required value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
           </label>
           {loginError && <p role="alert" className="text-error text-sm">{loginError}</p>}
-          <button disabled={checking} type="submit" className="w-full rounded-lg bg-admin-primary p-3 font-semibold text-white disabled:opacity-50">{checking ? 'Checking...' : 'Sign in'}</button>
+          <ProcessingButton processing={checking} processingLabel="Signing in..." type="submit" className="w-full rounded-lg bg-admin-primary p-3 font-semibold text-white disabled:opacity-50">Sign in</ProcessingButton>
         </form>
       </main>
     )
