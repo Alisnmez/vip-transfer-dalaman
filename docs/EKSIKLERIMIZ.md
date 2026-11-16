@@ -82,6 +82,13 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Fiyat kataloğunda yinelenen güzergâh/araç kombinasyonları, bilinmeyen araçlar, sıfır/negatif fiyatlar ve gidiş/dönüş fiyat bulma eşleşmeleri için otomatik testler; ters yön, geçersiz güzergâh ve kapasite senaryoları eklendi (`afec831e`). Node testlerinde TS uzantısı düzeltildi (`37748b11`).
 - **Not:** Otomatik test kataloğun iç tutarlılığını ölçer, gerçek ticari fiyatları doğrulamaz. CI ve canlı E2E sonuçları ayrıca izlenecek. Admin kapsam dışı, geçici telefon numarası korunuyor.
 
+## 2026-11-16 — MVP: yolcu adımında erken kontrol ve son onay güvenliği
+- CI `43930076465` başarılı; ortak seçim ve fiyat kataloğu testleri geçiyor.
+- Yolcu bilgileri ekranında eski/bozuk transfer taslağı, geçersiz güzergâh, araç kapasitesi, geçmiş Türkiye saati ve hatalı dönüş tarihi artık son adıma geçmeden reddediliyor (`271722e4`).
+- Yolcu adı, konaklama adresi, otel adı ve özel istek alanlarına kaydetme öncesi uzunluk kontrolü eklendi (`2553a2d0`); son onayda kayıtlı metin uzunlukları yeniden denetleniyor (`269387df`).
+- Tarayıcı depolaması engellendiğinde yolcu ekranı anlaşılır hata gösteriyor (`f61b1582`). Yeni CI ve gerçek canlı E2E henüz doğrulanmadı.
+- Admin kapsam dışı; geçici telefon numarası kullanıcı isteğiyle korunuyor.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
