@@ -97,9 +97,9 @@ export function BookingFormPage() {
       setFormError('This route or vehicle has no published price. Please choose Dalaman Airport as one endpoint and a vehicle with a listed price.')
       return
     }
-    if (passengers < 1 || passengers > selectedVehicle.maxPassengers || (selectedVehicle.maxLuggage !== null && luggages > selectedVehicle.maxLuggage)) {
+    if (passengers < 1 || passengers > selectedVehicle.maxPassengers || luggages < 0 || luggages > 8 || (selectedVehicle.maxLuggage !== null && luggages > selectedVehicle.maxLuggage) || babySeats < 0 || babySeats > 2) {
       event.preventDefault()
-      setFormError('Passenger or luggage count exceeds the selected vehicle capacity.')
+      setFormError('Please check the passenger count, luggage (maximum 8), and baby seats (maximum 2) against the vehicle capacity.')
       return
     }
     if (flightNumber.trim() && !/^[A-Za-z0-9 -]{1,20}$/.test(flightNumber.trim())) {
@@ -299,16 +299,22 @@ export function BookingFormPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
                 <CounterField
                   label="Passengers"
+                  min={1}
+                  max={selectedVehicle.maxPassengers}
                   value={passengers}
                   onChange={setPassengers}
                 />
                 <CounterField
                   label="Luggages"
+                  min={0}
+                  max={Math.min(8, selectedVehicle.maxLuggage ?? 8)}
                   value={luggages}
                   onChange={setLuggages}
                 />
                 <CounterField
                   label="Baby Seats"
+                  min={0}
+                  max={2}
                   value={babySeats}
                   onChange={setBabySeats}
                 />
@@ -434,10 +440,14 @@ function TextField({
 
 function CounterField({
   label,
+  min,
+  max,
   onChange,
   value,
 }: {
   label: string
+  min: number
+  max: number
   onChange: (value: number) => void
   value: number
 }) {
@@ -449,7 +459,9 @@ function CounterField({
       <div className="flex items-center border border-outline-variant rounded-lg overflow-hidden">
         <button
           className="px-4 py-3 hover:bg-slate-100 text-admin-primary"
-          onClick={() => onChange(Math.max(0, value - 1))}
+          disabled={value <= min}
+          aria-label={`Decrease ${label}`}
+          onClick={() => onChange(Math.max(min, value - 1))}
           type="button"
         >
           <span translate="no" className="material-symbols-outlined">remove</span>
@@ -462,7 +474,9 @@ function CounterField({
         />
         <button
           className="px-4 py-3 hover:bg-slate-100 text-admin-primary"
-          onClick={() => onChange(value + 1)}
+          disabled={value >= max}
+          aria-label={`Increase ${label}`}
+          onClick={() => onChange(Math.min(max, value + 1))}
           type="button"
         >
           <span translate="no" className="material-symbols-outlined">add</span>
