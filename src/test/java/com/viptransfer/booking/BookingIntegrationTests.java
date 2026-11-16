@@ -59,6 +59,9 @@ class BookingIntegrationTests {
                 .andReturn().getResponse().getContentAsString();
 
         Long id = objectMapper.readTree(response).get("id").asLong();
+        String receivedAt = objectMapper.readTree(response).get("createdAt").asText();
+        org.junit.jupiter.api.Assertions.assertFalse(receivedAt.isBlank());
+        java.time.Instant.parse(receivedAt);
 
         mockMvc.perform(get("/bookings/{id}", id)
                         .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8))))
@@ -67,6 +70,7 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.dropOffLocation").value("Fethiye City Center(Any Hotel)"))
                 .andExpect(jsonPath("$.passengerCount").value(2))
                 .andExpect(jsonPath("$.status").value("PENDING"))
+                .andExpect(jsonPath("$.createdAt").value(receivedAt))
                 .andExpect(jsonPath("$.email").value("guest@example.com"))
                 .andExpect(jsonPath("$.countryOfResidence").value("Lithuania"))
                 .andExpect(jsonPath("$.transferAddress").value("Fethiye City Center, Turkey"))
