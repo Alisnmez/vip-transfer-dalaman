@@ -87,6 +87,13 @@ export function updateBooking(id: number, data: BookingRequest) {
   }, true)
 }
 
+export function updateBookingStatus(id: number, status: string) {
+  return request<Booking>(`${BOOKING_URL}/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  }, true)
+}
+
 export function deleteBooking(id: number) {
   return request<void>(`${BOOKING_URL}/${id}`, {
     method: 'DELETE',
