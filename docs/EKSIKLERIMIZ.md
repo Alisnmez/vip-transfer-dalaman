@@ -68,6 +68,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Önceki CI `43924685605` başarılı. Yeni rezervasyon açıldığında form kullanıcı seçimi olmadan 1 çocuk koltuğu ve 3 bagaj atıyordu. Yeni form varsayılanları 0/0 yapıldı (`9a642c5b`, `4a991a68`); mevcut taslakta kullanıcının daha önce seçtiği sayılar korunur.
 - Canlı tarayıcı smoke testi ve fiyatların işletme tarafından doğrulanması bekliyor. Geçici telefon numarası kullanıcı isteğiyle korundu; admin'e dokunulmadı.
 
+## 2026-11-16 — MVP: tarih ve yolcu varsayılanları
+- Önceki CI `43925874660` başarılı. Dönüş tarihinin minimumu UTC takvim tarihinden değil Türkiye yerel gününden hesaplanıyor (`e6d68f03`); özellikle Türkiye'de gece yarısına yakın yanlış tarih seçimini önler.
+- Yeni rezervasyon varsayılan yolcu sayısı 4 yerine 1 (`58a21c26`); eski taslakta seçilmiş yolcu sayısı korunur. Yeni CI ve canlı tarayıcı testi bekleniyor.
+- Kullanıcı isteğiyle geçici telefon numarası korundu; admin paneli kapsam dışı.
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
