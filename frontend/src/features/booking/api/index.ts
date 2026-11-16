@@ -1,4 +1,5 @@
 import type { Booking, BookingRequest } from '../types'
+import { createSingleFlight } from '../singleFlight'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
@@ -6,7 +7,7 @@ const BOOKING_URL = `${API_BASE_URL}/bookings`
 // Retry keys survive a page refresh in the same tab without storing customer details.
 const pendingBookingKeys = new Map<string, string>()
 // Share the same POST promise when a user submits an identical booking twice at once.
-const inFlightBookings = new Map<string, Promise<Booking>>()
+const runBookingOnce = createSingleFlight<Booking>()
 
 async function retryStorageKey(payload: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload))
@@ -83,10 +84,7 @@ export function getBooking(id: number) {
 export async function createBooking(data: BookingRequest) {
   const payload = JSON.stringify(data)
   const storageKey = await retryStorageKey(payload)
-  const existingRequest = inFlightBookings.get(storageKey)
-  if (existingRequest) return existingRequest
-
-  const submission = (async () => {
+  return runBookingOnce(storageKey, async () => {
     let key = pendingBookingKeys.get(storageKey) ?? readRetryKey(storageKey)
     if (!key) key = crypto.randomUUID()
     pendingBookingKeys.set(storageKey, key)
@@ -100,13 +98,7 @@ export async function createBooking(data: BookingRequest) {
     pendingBookingKeys.delete(storageKey)
     clearRetryKey(storageKey)
     return booking
-  })()
-  inFlightBookings.set(storageKey, submission)
-  try {
-    return await submission
-  } finally {
-    if (inFlightBookings.get(storageKey) === submission) inFlightBookings.delete(storageKey)
-  }
+  })
 }
 
 export function updateBooking(id: number, data: BookingRequest) {
