@@ -33,6 +33,34 @@ type PassengerDetails = {
   specialRequests?: string
 }
 
+const RECEIPT_KEY = 'lastBookingReceipt'
+
+type BookingReceipt = {
+  id: number
+  customerName: string
+  pickUpLocation: string
+  dropOffLocation: string
+  schedule: string
+  returnSchedule?: string
+}
+
+function readReceipt(): BookingReceipt | null {
+  try {
+    const raw = sessionStorage.getItem(RECEIPT_KEY)
+    if (!raw) return null
+    const value: unknown = JSON.parse(raw)
+    if (typeof value !== 'object' || value === null || !('id' in value) ||
+        typeof value.id !== 'number' || !Number.isSafeInteger(value.id) || value.id < 1 ||
+        !('customerName' in value) || typeof value.customerName !== 'string' ||
+        !('pickUpLocation' in value) || typeof value.pickUpLocation !== 'string' ||
+        !('dropOffLocation' in value) || typeof value.dropOffLocation !== 'string' ||
+        !('schedule' in value) || typeof value.schedule !== 'string') return null
+    return value as BookingReceipt
+  } catch {
+    return null
+  }
+}
+
 function readSavedDetails<T>(key: string): T {
   try {
     return JSON.parse(localStorage.getItem(key) || '{}') as T
@@ -46,10 +74,9 @@ export function BookingConfirmationPage() {
   const submittingRef = useRef(false)
   const [confirmed, setConfirmed] = useState(false)
   const [processing, setProcessing] = useState(false)
-  const [completed, setCompleted] = useState(false)
+  const [receipt, setReceipt] = useState<BookingReceipt | null>(readReceipt)
 
   const [error, setError] = useState('')
-  const [bookingId, setBookingId] = useState<number | null>(null)
   const [submissionUncertain, setSubmissionUncertain] = useState(false)
 
   const [transfer] = useState<TransferDetails>(() => readSavedDetails<TransferDetails>('bookingTransferInfo'))
@@ -60,7 +87,7 @@ export function BookingConfirmationPage() {
   const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
   async function handleConfirm() {
-    if (!confirmed || submittingRef.current || processing || completed) return
+    if (!confirmed || submittingRef.current || processing || receipt !== null) return
     submittingRef.current = true
     setError('')
     setSubmissionUncertain(false)
@@ -103,8 +130,20 @@ export function BookingConfirmationPage() {
         specialRequests: passenger.specialRequests || '',
         tripType: transfer.tripType,
       })
-      setBookingId(booking.id)
-      setCompleted(true)
+      const savedReceipt: BookingReceipt = {
+        id: booking.id,
+        customerName: passenger.customerName,
+        pickUpLocation: transfer.pickUpLocation,
+        dropOffLocation: transfer.dropOffLocation,
+        schedule: `${transfer.pickUpDate} ${transfer.pickUpTime}`,
+        ...(transfer.tripType === 'round-trip' ? { returnSchedule: `${transfer.returnDate} ${transfer.returnTime}` } : {}),
+      }
+      try {
+        sessionStorage.setItem(RECEIPT_KEY, JSON.stringify(savedReceipt))
+      } catch {
+        // The receipt still remains visible until this tab is refreshed.
+      }
+      setReceipt(savedReceipt)
       localStorage.removeItem('bookingTransferInfo')
       localStorage.removeItem('bookingPassengerInfo')
     } catch (err) {
@@ -121,19 +160,19 @@ export function BookingConfirmationPage() {
       <PublicNavbar />
 
       <main className="pt-32 pb-24 px-margin-page max-w-6xl mx-auto">
-        {completed && bookingId !== null ? (
+        {receipt !== null ? (
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
             <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking Request Was Received!</h1>
             <p className="mb-6 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
             <p className="text-sm uppercase tracking-wide">Booking Reference</p>
-            <p className="text-4xl font-bold text-admin-primary mb-8">#{bookingId}</p>
+            <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
-              <p><strong>Passenger:</strong> {display(passenger.customerName)}</p>
-              <p><strong>Pickup:</strong> {display(transfer.pickUpLocation)}</p>
-              <p><strong>Destination:</strong> {display(transfer.dropOffLocation)}</p>
-              {transfer.tripType === 'round-trip' && <p><strong>Return:</strong> {returnSchedule} ({display(transfer.dropOffLocation)} → {display(transfer.pickUpLocation)})</p>}
-              <p><strong>Schedule:</strong> {schedule}</p>
+              <p><strong>Passenger:</strong> {display(receipt.customerName)}</p>
+              <p><strong>Pickup:</strong> {display(receipt.pickUpLocation)}</p>
+              <p><strong>Destination:</strong> {display(receipt.dropOffLocation)}</p>
+              {receipt.returnSchedule && <p><strong>Return:</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
+              <p><strong>Schedule:</strong> {receipt.schedule}</p>
               {transfer.flightNumber && <p><strong>Flight:</strong> {transfer.flightNumber}</p>}
               <p><strong>Luggage:</strong> {display(transfer.luggageCount)}</p>
               <p><strong>Baby seats:</strong> {display(transfer.babySeatCount)}</p>
@@ -288,18 +327,13 @@ export function BookingConfirmationPage() {
             </label>
             {error && <p role="alert" className="text-error">{error}</p>}
             {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open and use the same confirmation button to retry safely; do not start a new booking unless you know the first request was not received.</p>}
-            {bookingId !== null && <p role="status">Booking reference: #{bookingId}</p>}
             <button
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!confirmed || processing || completed}
+              disabled={!confirmed || processing || receipt !== null}
               onClick={handleConfirm}
               type="button"
             >
-              {completed
-                ? 'REQUEST RECEIVED'
-                : processing
-                  ? 'PROCESSING...'
-                  : 'CONFIRM BOOKING'}
+              {processing ? 'PROCESSING...' : 'CONFIRM BOOKING'}
             </button>
             <p className="font-label-xs text-label-xs text-outline">
               By submitting, you confirm the details above are accurate and request a transfer.
