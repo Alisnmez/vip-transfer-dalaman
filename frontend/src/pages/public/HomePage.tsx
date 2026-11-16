@@ -11,7 +11,7 @@ export function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary" />
         <div className="relative z-10 max-w-container-max mx-auto px-gutter text-center">
           <h1 className="font-display-lg text-display-lg text-white mb-stack-md max-w-4xl mx-auto">
-            Avşar Karadut Soda İçmeye Hoşgeldiniz
+            Professional Airport Transfers from Dalaman
           </h1>
           <p className="font-body-lg text-body-lg text-white/80 mb-stack-lg max-w-2xl mx-auto">
             Experience reliable, high-performance chauffeur services across the
