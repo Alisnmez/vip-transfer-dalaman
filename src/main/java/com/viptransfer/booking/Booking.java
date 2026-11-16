@@ -24,6 +24,8 @@ public class Booking {
     private String email;
     private String countryOfResidence;
     private String transferAddress;
+    @jakarta.persistence.Column(length = 120)
+    private String hotelName;
     @jakarta.persistence.Column(length = 2000)
     private String specialRequests;
 
@@ -49,6 +51,9 @@ public class Booking {
 
     public String getFlightNumber() { return flightNumber; }
     public void setFlightNumber(String flightNumber) { this.flightNumber = flightNumber; }
+
+    public String getHotelName() { return hotelName; }
+    public void setHotelName(String hotelName) { this.hotelName = hotelName; }
 
     public String getIdempotencyKey() { return idempotencyKey; }
     public void setIdempotencyKey(String value) { this.idempotencyKey = value; }
