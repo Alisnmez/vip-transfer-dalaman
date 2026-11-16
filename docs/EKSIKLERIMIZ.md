@@ -12,7 +12,7 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Genel durum:** DEVAM EDİYOR  
 **Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme (TEST BEKLİYOR)**  
-**Bir sonraki somut işlem:** Kalıcı idempotency anahtarı + PostgreSQL unique constraint + çakışma ve eşzamanlılık testlerini uygulamak; ardından CI sonucu doğrulamak.
+**Bir sonraki somut işlem:** Eşzamanlılık testi CI sonucunu doğrula, gerekirse düzelt; ardından gerçek tarayıcı E2E ve migration planı.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
@@ -143,3 +143,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Commit:** `06c4cfa`.
 - **Doğrulama:** Önceki `37179414` commit'i için GitHub Actions run `43842818375` **success**. Frontend `906d60d` ve günlük `5209c3d` için görülen CI çalışmaları sorgulama anında **in_progress** idi; yeni yarış testi henüz doğrulanmadı.
 - **Kaldığımız yer:** `06c4cfa` CI sonucunu incele; yarış testi başarısızsa transaction/unique constraint hata yönetimini düzelt. Frontend anahtarının sayfa yenileme/bağımsız rezervasyon yaşam döngüsü ve gerçek tarayıcı E2E hâlâ açık. 1.3 **TEST BEKLİYOR**.
+
+## 2026-11-16 — 1.3 sayfa yenileme retry güvenilirliği
+- **Doğrulanan CI:** Frontend idempotency başlığını ekleyen `906d60d` commit'i GitHub Actions `43842980379` ile **success**; sonraki `5209c3d` commit'i `43843005244` ile **success**.
+- **Eşzamanlı test durumu:** `06c4cfa` için run `43843124407`, kontrol anında **in_progress**. Başarılı sayılmadı.
+- **Sorun:** Önceki frontend retry anahtarı yalnızca JS Map belleğinde tutulduğu için sayfa yenilenince kayboluyordu.
+- **Çözüm:** `frontend/src/features/booking/api/index.ts` içinde isteğin SHA-256 özetiyle ilişkilendirilmiş rastgele idempotency anahtarı sessionStorage'da saklanıyor. Aynı sekmede sayfa yenilendikten sonra aynı payload tekrar gönderilirse anahtar korunuyor; başarılı rezervasyondan sonra siliniyor. Storage kullanılamıyorsa belleğe düşüyor. Ham müşteri verisi sessionStorage anahtarında tutulmuyor.
+- **Commit:** `89240d1`. **Bu commit'in CI sonucu henüz doğrulanmadı.**
+- **Sınır:** Farklı sekme, gizli pencere veya tarayıcıda retry korunmaz. Aynı sekmede aynı payload ile bağımsız yeni rezervasyonun başarıdan önce gönderilmesi aynı işlem olarak değerlendirilir. Gerçek tarayıcı E2E, yarış testi sonucu ve kontrollü DB migration açık.
+- **Kaldığımız yer:** Son CI ve eşzamanlı test sonuçlarını incele, ardından E2E testlerini çalıştır. 1.3 **TEST BEKLİYOR**.
