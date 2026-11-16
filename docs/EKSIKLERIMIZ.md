@@ -248,3 +248,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Render doğrulaması:** Frontend `dep-dbtdcue417fc738g6mu0` **live** (commit `69a0576`), backend `dep-dbtdcub0pb7s73aiqpt0` **live** (aynı commit).
 - **Durum kararı:** 1.4 kullanıcı kabul testi temelinde **TAMAMLANDI**; otomatik browser E2E ayrı regresyon olarak 1.5'e eklendi. Görev 1 **henüz bitmedi**: 1.3 idempotency yaşam döngüsü ve kontrollü şema migration testi, 1.5 üretim güvenliği ve smoke test açık.
 - **Sonraki işlem:** İdempotency tekrarında tek DB kaydı ve farklı payload 409 doğrulaması, Flyway/Liquibase migration planı ve dağıtım sonrası regresyon kontrolleri.
+
+## 2026-11-16 — 1.3 kontrollü migration hazırlığı
+- **Sorun:** `spring.jpa.hibernate.ddl-auto=update` canlı şemayı otomatik değiştiriyor; mevcut booking verisi korunarak sürümlü migration'a geçiş için şema envanteri yok.
+- **İnceleme:** `Booking.java`, `BookingService.java`, `BookingIntegrationTests.java`, `pom.xml` kontrol edildi. Unique idempotency anahtarı Java entity'de mevcut; veritabanındaki constraint'in varlığı henüz SQL ile kanıtlanmadı. Tekrarlı istek ve farklı payload için mevcut entegrasyon testleri var.
+- **Değişiklik:** `docs/POSTGRES_MIGRATION_PLAN.md` eklendi (commit `86a8678`): DBeaver'da salt-okunur şema/constraint/index ve kayıt sayısı sorguları, yedek ve geri yükleme testi, sürümlü migration'a kontrollü geçiş, kabul kriterleri.
+- **Güvenlik kararı:** Canlı/test DB'de `ALTER`, `DROP`, `TRUNCATE` yapılmadı; `ddl-auto` değeri değiştirilmedi. Gerçek şema envanteri olmadan Flyway baseline çalıştırılmayacak.
+- **Test:** Dokümantasyon kaydedildi; SQL sorguları bu ortamdan çalıştırılamadı (Render DB dış erişim SSL/TLS engeli). 1.3 **TEST BEKLİYOR**; 1.5 **TEST BEKLİYOR**.
+- **Kaldığımız yer:** DBeaver'da planın Phase 0 sorgularını çalıştırıp şema ve unique constraint sonuçlarını doğrula; sonra migration koduna geç.
