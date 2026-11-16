@@ -33,8 +33,8 @@ export function DashboardPage() {
 
   const now = turkeyNowLocal()
   const today = now.slice(0, 10)
-  // Cancelled requests remain in total history, but are not scheduled transfers.
-  const activeBookings = bookings.filter(booking => booking.status !== 'CANCELLED')
+  // Completed and cancelled requests belong to history, not the upcoming workload.
+  const activeBookings = bookings.filter(booking => ['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status)))
   const todayBookings = activeBookings.filter(booking => booking.transferDateTime?.startsWith(today))
   const pendingCount = bookings.filter(booking => bookingStatus(booking.status) === 'PENDING').length
   const upcoming = activeBookings
@@ -61,7 +61,7 @@ export function DashboardPage() {
               <p className="text-3xl font-bold text-admin-primary">{bookings.length}</p>
             </div>
             <div className="rounded-xl border border-outline-variant bg-white p-6">
-              <p className="text-on-surface-variant">Non-cancelled requests for today</p>
+              <p className="text-on-surface-variant">Open requests for today</p>
               <p className="text-3xl font-bold text-admin-primary">{todayBookings.length}</p>
             </div>
           </div>
@@ -84,7 +84,7 @@ export function DashboardPage() {
               </div>
             )}
           </section>
-          <p className="text-sm text-on-surface-variant">{pendingCount} requests are pending confirmation. Today's and upcoming counts exclude cancellations but may include pending requests; they are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
+          <p className="text-sm text-on-surface-variant">{pendingCount} requests are pending confirmation. Today's and upcoming counts exclude completed and cancelled requests but may include pending requests; they are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
         </>
       )}
     </main>
