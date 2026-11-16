@@ -82,6 +82,14 @@ export function BookingConfirmationPage() {
         setError(validationError)
         return
       }
+      // TypeScript narrows optional draft fields before constructing the API request.
+      if (!transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId ||
+          !transferData.pickUpLocation || !transferData.dropOffLocation || !transferData.tripType ||
+          transferData.passengerCount === undefined || !passengerData.customerName ||
+          !passengerData.phoneNumber || !passengerData.email) {
+        setError('Required booking information is missing. Please return to the previous steps.')
+        return
+      }
       setProcessing(true)
       const booking = await createBooking({
         customerName: passengerData.customerName,
