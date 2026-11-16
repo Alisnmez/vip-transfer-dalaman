@@ -6,6 +6,7 @@ import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
+import { bookingSupportLink, whatsappSupportEnabled } from '../../features/booking/support'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
 import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
 import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
@@ -171,7 +172,16 @@ export function BookingConfirmationPage() {
               >
                 Contact About This Booking
               </a>
+              <a className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary"
+                href={bookingSupportLink(String(receipt.id), 'change')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">
+                Request a Change {whatsappSupportEnabled() ? 'via WhatsApp' : 'via Email'}
+              </a>
+              <a className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary"
+                href={bookingSupportLink(String(receipt.id), 'cancel')} target={whatsappSupportEnabled() ? '_blank' : undefined} rel="noopener noreferrer">
+                Request Cancellation {whatsappSupportEnabled() ? 'via WhatsApp' : 'via Email'}
+              </a>
             </div>
+            <p className="mb-5 text-sm text-on-surface-variant">Changes and cancellations are requests only. Your booking remains unchanged until the operator confirms.</p>
             {error && <p role="alert" className="mb-4 text-sm text-error">{error}</p>}
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
               <p><strong>Passenger:</strong> {display(receipt.customerName)}</p>
