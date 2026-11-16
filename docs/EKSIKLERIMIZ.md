@@ -2,6 +2,44 @@
 
 Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → neden → düzeltme → test → ortaya çıkan yeni sorun → sonuç yazılır. Doğrulanmadan "tamamlandı" denmez.
 
+## Canlı görev panosu — tek bakışta kaldığımız yer
+
+**Güncelleme kuralı:** Her geliştirme commit'inde önce ilgili alt maddenin durumu, kanıtı, sonraki adımı ve son commit'i güncellenir. Tarihli günlük aşağıda değişmeden korunur. Yalnızca test edilmiş ve doğrulanmış işler **TAMAMLANDI** olur.
+
+**Durum sözlüğü:** BEKLİYOR · DEVAM EDİYOR · TEST BEKLİYOR · BLOKE · TAMAMLANDI. Her alt maddede tek bir durum kullanılır.
+
+### 1. Backend, PostgreSQL ve rezervasyon güvenilirliği
+
+**Genel durum:** DEVAM EDİYOR  
+**Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme**  
+**Bir sonraki somut işlem:** Kalıcı idempotency anahtarı + PostgreSQL unique constraint + çakışma ve eşzamanlılık testlerini uygulamak; ardından CI sonucu doğrulamak.
+
+| No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
+|---|---|---|---|---|
+| 1.1 | Backend derleme hatası | TAMAMLANDI | Fazladan virgül düzeltildi; Render backend canlı doğrulandı. `590f582` | Regresyon halinde yeniden aç |
+| 1.2 | PostgreSQL bağlantısı ve mevcut test altyapısı | TAMAMLANDI | Render PostgreSQL bağlantısı ve izole CI PostgreSQL ile 14 başarılı test doğrulandı. `bf60c97`, CI run `43839886864` | Yeni testleri CI'ya ekle |
+| 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | DEVAM EDİYOR | Controller/Service/Entity incelendi; tekrar ve 409 senaryosu için iki test yazıldı. `c50d19a`; **henüz çalıştırılmadı** | Backend + DB koruması, eşzamanlı test, CI |
+| 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | BEKLİYOR | İzole backend POST/GET testi mevcut; tarayıcı uçtan uca doğrulama yok | Ayrı test ortamında E2E |
+| 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | BEKLİYOR | Önceki backend deploy doğrulandı; yeni idempotency sürümü henüz yok | CI, deploy, log ve güvenli smoke test |
+
+**Tamamlanma koşulu:** 1.1–1.5 doğrulanmış olmalı; CI yeşil, tekrarlı/eşzamanlı istekler tek kayıt oluşturmalı ve frontend rezervasyonu test ortamında uçtan uca çalışmalı.
+
+### 2–12. Diğer ana maddeler
+
+**Durum:** BEKLİYOR. Görev 1 bitmeden yeni ana maddeye geçilmeyecek; başlanınca aynı biçimde 2.1, 2.2… alt maddeleri açılacak.
+
+### Her çalışma sonunda zorunlu kayıt şablonu
+
+- **Aktif madde:** ör. 1.3
+- **Sorun ve kanıt:** hangi davranış/hata görüldü?
+- **Yapılan değişiklik:** dosyalar, gerekçe, commit/PR
+- **Test ve sonuç:** komut/CI bağlantısı, geçti/kaldı/çalıştırılmadı
+- **Durum:** BEKLİYOR / DEVAM EDİYOR / TEST BEKLİYOR / BLOKE / TAMAMLANDI
+- **Kaldığımız yer:** tek cümle, bir sonraki uygulanabilir adım
+- **Yeni risk / karar:** varsa ve gerekçesi
+
+---
+
 ## Sıra
 1. Backend derlemesi, PostgreSQL bağlantısı, rezervasyon güvenilirliği
 2. Uçuş numarası, otel, bagaj ve çocuk koltuğu alanları
