@@ -1,3 +1,9 @@
+## 2026-11-17 — 4.2 Admin rezervasyon düzenleme HTTP 409
+- **Kullanıcı hatası:** `Error while saving details: Booking service returned HTTP 409`.
+- **Kök neden:** `BookingService.updateBooking` fiyatı etkileyen güzergâh/araç/tur türü/yolcu sayısı değişikliklerini yalnızca `PENDING` rezervasyonda kabul ediyor; diğer statülerde 409 üretiyor. `ResponseStatusException` JSON mesajı global handler tarafından açıkça aktarılmadığından frontend genel HTTP 409 gösteriyordu.
+- **Düzeltildi:** Admin formu fiyat değişimini PENDING dışındaki durumlarda göndermeden açık uyarıyor (`e7cefaa2`); beklenmedik 409 için reload uyarısı var. Backend `ResponseStatusException` nedenini `{status,message}` JSON olarak döndürüyor (`291b8f9a`). İlgili regresyon testleri güncellendi (`ddf8e4a6`, `a2b30a1e`). Fiyat koruması kaldırılmadı; iletişim/uçuş/tarih alanları mevcut kurallarla değişebilir.
+- **Test:** Önceki güvenlik testleri `76035b8c` için GitHub Actions `43978950205` **success**. Bu 409 düzeltmelerinin CI ve Render live doğrulaması **BEKLİYOR**; gerçek rezervasyon ID'si ve değiştirilen alanlar bilinmediğinden kullanıcının yaşadığı spesifik 409'un nedeni henüz kesin kanıtlanmadı.
+
 ## 2026-11-17 — 4.1 / 1.5 CI kanıtı ve takvim görünürlüğü
 - **Doğrulandı:** `05de81ed` GitHub Actions run `43978287258` **success**; TypeScript setter hatası giderildi. `4c705386` run `43978483558` **success**; frontend lint/unit/build ve backend PostgreSQL testleri başarılı. Frontend `4c705386` Render `live` görüldü; backend aynı commit en son kontrol sırasında `update_in_progress` idi.
 - **Regresyon testi:** `frontend/tests/bookingFormatters.test.mjs` ile rezervasyon durumu, Türkiye yerel transfer saati ve eski/bozuk `createdAt` durumları test edildi (`4c705386`).
