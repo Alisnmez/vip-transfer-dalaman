@@ -1,7 +1,7 @@
 import type { Booking, BookingRequest } from '../types'
 import { createSingleFlight } from '../singleFlight'
 import { createRetryKeyStore } from '../retryKeys'
-import { bookingHttpError, classifyBookingFailure } from './errors'
+import { bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from './errors'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
@@ -39,7 +39,11 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
     }
 
     const responseText = await response.text()
-    return (responseText ? JSON.parse(responseText) : undefined) as T
+    try {
+      return (responseText ? JSON.parse(responseText) : undefined) as T
+    } catch (error) {
+      throw bookingInvalidSuccessResponse(error)
+    }
   } catch (error) {
     throw classifyBookingFailure(error)
   } finally {
@@ -67,7 +71,7 @@ export async function createBooking(data: BookingRequest) {
       body: payload,
     })
     if (!booking || !Number.isSafeInteger(booking.id) || booking.id < 1) {
-      throw new Error('The booking service returned an invalid booking reference. Please contact support before submitting again.')
+      throw bookingInvalidSuccessResponse()
     }
     retryKeys.clear(storageKey)
     return booking
