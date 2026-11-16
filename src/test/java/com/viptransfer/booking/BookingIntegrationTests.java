@@ -283,4 +283,36 @@ class BookingIntegrationTests {
         }
     }
 
+
+    @Test
+    void independentKeysCreateIndependentBookingsWithoutExposingRetryMetadata() throws Exception {
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Independent Booking Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(3).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "independent@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        String first = mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", java.util.UUID.randomUUID().toString())
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.idempotencyKey").doesNotExist())
+                .andExpect(jsonPath("$.requestFingerprint").doesNotExist())
+                .andReturn().getResponse().getContentAsString();
+        String second = mockMvc.perform(post("/bookings")
+                        .header("Idempotency-Key", java.util.UUID.randomUUID().toString())
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        org.junit.jupiter.api.Assertions.assertNotEquals(
+                objectMapper.readTree(first).get("id").asLong(),
+                objectMapper.readTree(second).get("id").asLong(),
+                "Independent booking keys must create separate records");
+    }
+
 }
