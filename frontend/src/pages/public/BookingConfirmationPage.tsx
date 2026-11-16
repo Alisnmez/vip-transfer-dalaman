@@ -173,10 +173,7 @@ export function BookingConfirmationPage() {
               <p><strong>Destination:</strong> {display(receipt.dropOffLocation)}</p>
               {receipt.returnSchedule && <p><strong>Return:</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
               <p><strong>Schedule:</strong> {receipt.schedule}</p>
-              {transfer.flightNumber && <p><strong>Flight:</strong> {transfer.flightNumber}</p>}
-              <p><strong>Luggage:</strong> {display(transfer.luggageCount)}</p>
-              <p><strong>Baby seats:</strong> {display(transfer.babySeatCount)}</p>
-              <p><strong>Price:</strong> {price}</p>
+              <p className="text-sm text-on-surface-variant">Keep this reference for your records. Your request is awaiting confirmation.</p>
             </div>
             <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</Link>
           </section>
