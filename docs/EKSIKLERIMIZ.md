@@ -399,3 +399,11 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Görev 8: ConfirmationFooter içindeki işlevsiz # legal/sigorta/WhatsApp bağlantıları ve doğrulanmamış 24/7 vaadi kaldırıldı, gerçek Contact/Services rotaları bağlandı. Commit 8265a2b.
 - Görev 6: BookingLookupPage placeholder yerine İngilizce güvenli erişim açıklaması ve çalışan yönlendirmeler içeriyor. Referans ID tek başına PII göstermeyecek; doğrulama olmadan public lookup endpoint açılmayacak. Gerçek sorgulama hâlâ BEKLİYOR. Commit 98e8bf2.
 - Son iki commit CI sonucu bekleniyor; gerçek tarayıcı E2E hâlâ açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Yolcu formu: giriş doğrulama ve mobil düzeltmeler
+- Önceki işler için CI: 1abe11f5 run 43861980274, 98e8bf2e run 43861935464 ve 8265a2be run 43861914595 completed/success.
+- Yolcu formu: TR telefon tam 10 hane; diğerleri en az 7 hane ve ülke kodu dahil E.164 en fazla 15 hane. Bozuk e-posta istemcide reddediliyor. localStorage transfer JSON hatasında kontrollü mesaj gösteriliyor (263ac895).
+- Mobil: telefon input min-w-0/flex-1, adım devam butonları wrap; e-posta lower-case normalize; telefon autoComplete eklendi (74751397).
+- Yolcu sayfasındaki işlevsiz newsletter, legal/support # linkleri, 24/7 ve doğrulanmamış ücretsiz Meet & Greet ve tüm vergiler dahil ifadeleri kaldırıldı. Yalnızca gerçek Contact/Services rotaları gösteriliyor (263ac895).
+- Son iki commit için CI sonucu henüz doğrulanmadı. Browser E2E, güvenli rezervasyon sorgulama, e-posta bildirimleri ve gerçek ödeme/iptal politikası açık. Admin geliştirmesi yapılmadı.
