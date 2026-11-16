@@ -64,6 +64,21 @@ export function BookingDetailPage() {
     setEditing(true); setError(''); setNotice('')
   }
 
+  const destination = draft ? (draft.pickUpLocation === airport ? draft.dropOffLocation : draft.pickUpLocation) : ''
+  const routeValid = !!draft && (draft.pickUpLocation === airport) !== (draft.dropOffLocation === airport)
+  const selectedPrice = draft && routeValid
+    ? transferPrices.find(price => price.destination === destination && price.vehicleId === draft.vehicleId)
+    : undefined
+  const vehicle = draft ? transferVehicles.find(item => item.id === draft.vehicleId) : undefined
+  const capacityValid = !!draft && !!vehicle && draft.passengerCount >= 1
+    && draft.passengerCount <= vehicle.maxPassengers
+    && draft.babySeatCount >= 0 && draft.babySeatCount <= 2
+    && draft.luggageCount >= 0
+    && (vehicle.maxLuggage === null || draft.luggageCount <= vehicle.maxLuggage)
+  const previewFare = selectedPrice && draft && capacityValid
+    ? (draft.tripType === 'round-trip' ? selectedPrice.roundTrip : selectedPrice.oneWay)
+    : null
+
   async function saveDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!draft || !booking) return
@@ -75,8 +90,8 @@ export function BookingDetailPage() {
       || draft.vehicleId !== booking.vehicleId
       || draft.tripType !== booking.tripType
       || draft.passengerCount !== booking.passengerCount
-    if (fareChanged && bookingStatus(booking.status) !== 'PENDING') {
-      setError('This booking is already ' + bookingStatus(booking.status) + '. Route, vehicle, trip type and passenger count cannot be changed because they affect the agreed fare. Contact, flight and schedule details can still be edited.')
+    if (fareChanged && !['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status))) {
+      setError('This booking is already ' + bookingStatus(booking.status) + '. Fare-changing edits are only allowed for pending or confirmed bookings.')
       setErrorAction('saving details')
       return
     }
@@ -85,7 +100,8 @@ export function BookingDetailPage() {
       setErrorAction('saving details')
       return
     }
-    if (fareChanged && !window.confirm('Changing the route, vehicle, trip type or passenger count will recalculate the fare. Confirm the new price with the customer before saving. Continue?')) return
+    if (fareChanged && (previewFare === null || !capacityValid)) { setError('Select a valid route, vehicle and passenger/luggage capacity to calculate the new fare.'); setErrorAction('saving details'); return }
+    if (fareChanged && !window.confirm(`Update booking fare from £${Number(booking.price).toFixed(2)} to £${previewFare?.toFixed(2)}? Confirm the new price with the customer before saving.`)) return
     setSaving(true); setError(''); setNotice('')
     try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
     catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof BookingApiError && err.status === 409 ? 'The booking was changed or the requested edit conflicts with its current status. Reload the booking and check its status before editing again.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
@@ -136,6 +152,13 @@ export function BookingDetailPage() {
         </label>
         <label className="text-sm font-semibold">Trip type<select value={draft.tripType} onChange={event => setDraft(current => current ? { ...current, tripType: event.target.value as BookingRequest['tripType'], returnDateTime: event.target.value === 'one-way' ? undefined : current.returnDateTime } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900"><option value="one-way">One-way</option><option value="round-trip">Round-trip</option></select></label>
         <label className="sm:col-span-2 text-sm font-semibold">Special requests<textarea value={draft.specialRequests} onChange={event => setDraft(current => current ? { ...current, specialRequests: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900" /></label>
+        <div className="sm:col-span-2 rounded-lg border border-outline-variant bg-gray-50 p-4" aria-live="polite">
+          <p className="text-sm text-on-surface-variant">Current saved fare</p>
+          <p className="text-lg font-bold">£{Number(booking?.price ?? 0).toFixed(2)}</p>
+          <p className="mt-2 text-sm text-on-surface-variant">New fare for selected destination, vehicle and trip type</p>
+          <p className="text-xl font-bold">{previewFare === null ? 'Unavailable — check route and capacity' : `£${previewFare.toFixed(2)}`}</p>
+          <p className="mt-1 text-xs text-on-surface-variant">Preview from the published price list; the server recalculates the final amount on save.</p>
+        </div>
         <div className="sm:col-span-2"><p className="mb-3 text-sm text-on-surface-variant">Contact and flight edits keep the original fare. Changing route, vehicle, trip type or passenger count recalculates the fare; changing dates requires a future pickup.</p><button type="submit" disabled={saving} className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{saving ? 'Saving...' : 'Save booking details'}</button></div>
       </form>}
       {booking && !editing && (
