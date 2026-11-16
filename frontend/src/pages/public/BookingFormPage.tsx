@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { parseTurkeyDateTime, turkeyToday } from '../../features/booking/turkeyTime'
 
 const vehicleImages = [
   {
@@ -87,14 +88,7 @@ export function BookingFormPage() {
   const [luggages, setLuggages] = useState(draft.luggageCount ?? 3)
   const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 1)
   const [formError, setFormError] = useState('')
-  const [today] = useState(() =>
-    new Intl.DateTimeFormat('en-CA', {
-      timeZone: 'Europe/Istanbul',
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    }).format(new Date())
-  )
+  const [today] = useState(turkeyToday)
 
   const destinations = [...new Set(transferPrices.map((price) => price.destination))]
   const destinationGroups = [
@@ -124,14 +118,6 @@ export function BookingFormPage() {
       event.preventDefault()
       setFormError('Please enter pickup, destination, date and time before continuing.')
       return
-    }
-    const parseTurkeyDateTime = (date: string, time: string): number | null => {
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) return null
-      const [year, month, day] = date.split('-').map(Number)
-      const [hour, minute] = time.split(':').map(Number)
-      const calendar = new Date(Date.UTC(year, month - 1, day))
-      if (calendar.getUTCFullYear() !== year || calendar.getUTCMonth() + 1 !== month || calendar.getUTCDate() !== day) return null
-      return Date.UTC(year, month - 1, day, hour - 3, minute)
     }
     const selectedDateTime = parseTurkeyDateTime(pickUpDate, pickUpTime)
     if (selectedDateTime === null || selectedDateTime <= Date.now()) {
