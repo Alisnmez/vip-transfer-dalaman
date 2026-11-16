@@ -571,3 +571,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Son onay ekranında bağlantı hatası sonrası kullanıcıya aynı düğmeyle retry yapılabileceği ve aynı idempotency anahtarının yeniden kullanılacağı daha açık anlatılıyor (`1a9d28ec`).
 - Başarılı rezervasyon ekranındaki kopyalama hatası `role=alert` ile görünür kılındı; önceki durumda hata state'e yazılıyor ancak success UI'da gösterilmiyordu.
 - E2E browser, ağ kesintisi ve gerçek rezervasyon senaryoları hâlâ açık. Admin kapsam dışı.
+
+
+## 2026-11-16 — API hata sınıflandırması
+- `features/booking/api/errors.ts`: HTTP durum kodu, ağ/timeout belirsizliği ve normal hata durumlarını `BookingApiError` ile ayıran ortak fonksiyonlar (`7339e9b0`).
+- API istekleri ortak sınıflandırmayı kullanıyor (`b34ee91c`); confirmation ekranı kırılgan hata metni regex'i yerine `uncertain` alanına bakıyor (`664bb121`).
+- `tests/bookingErrors.test.mjs`: 409/503 HTTP, ağ TypeError, timeout AbortError ve normal SyntaxError senaryoları (`258f95e5`). Gerçek browser/ağ kopması E2E testleri hâlâ açık. Admin kapsam dışı.
