@@ -142,7 +142,9 @@ class BookingIntegrationTests {
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.message").value("Baby seat count cannot exceed 2."));
 
         request.put("babySeatCount", 1);
         request.put("luggageCount", -1);
