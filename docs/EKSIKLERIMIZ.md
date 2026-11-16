@@ -11,15 +11,15 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 ### 1. Backend, PostgreSQL ve rezervasyon güvenilirliği
 
 **Genel durum:** DEVAM EDİYOR  
-**Şu an üzerinde çalışılan:** **1.3 — Mükerrer rezervasyonları önleme (TEST BEKLİYOR)**  
-**Bir sonraki somut işlem:** Ayrı Render test ortamı seçimi, gerçek tarayıcı E2E ve kontrollü PostgreSQL migration planı.
+**Şu an üzerinde çalışılan:** **1.4 — Staging frontend/backend bağlantısı ve gerçek E2E (DEVAM EDİYOR)**  
+**Bir sonraki somut işlem:** Render frontend `VITE_API_BASE_URL` ve backend `FRONTEND_ORIGIN` değerlerini güvenli biçimde doğrula; ardından staging tarayıcı E2E. 1.3 migration ve yaşam döngüsü testi açık.
 
 | No | Alt iş / sorun | Durum | Kanıt / yapılan işlem | Sıradaki işlem |
 |---|---|---|---|---|
 | 1.1 | Backend derleme hatası | TAMAMLANDI | Fazladan virgül düzeltildi; Render backend canlı doğrulandı. `590f582` | Regresyon halinde yeniden aç |
 | 1.2 | PostgreSQL bağlantısı ve mevcut test altyapısı | TAMAMLANDI | Render PostgreSQL bağlantısı ve izole CI PostgreSQL ile 14 başarılı test doğrulandı. `bf60c97`, CI run `43839886864` | Yeni testleri CI'ya ekle |
 | 1.3 | Aynı POST'un iki kayıt oluşturabilmesi | TEST BEKLİYOR | Eşzamanlı PostgreSQL testi ve React build **başarılı** (`06c4cfa`, run `43843124407`); sayfa yenileme düzeltmesi **başarılı** (`89240d1`, run `43843263719`) | Gerçek tarayıcı E2E, migration ve bağımsız işlem yaşam döngüsü |
-| 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | BEKLİYOR | İzole backend POST/GET testi mevcut; tarayıcı uçtan uca doğrulama yok | Ayrı test ortamında E2E |
+| 1.4 | Frontend → backend → DB gerçek rezervasyon akışı | DEVAM EDİYOR | Render frontend `190990d` live; backend `190990d` live. Ortam değişkenleri ve tarayıcı E2E henüz doğrulanmadı | Env doğrulaması, ardından güvenli browser E2E |
 | 1.5 | Dağıtım sonrası doğrulama ve üretim güvenliği | BEKLİYOR | Önceki backend deploy doğrulandı; yeni idempotency sürümü henüz yok | CI, deploy, log ve güvenli smoke test |
 
 **Tamamlanma koşulu:** 1.1–1.5 doğrulanmış olmalı; CI yeşil, tekrarlı/eşzamanlı istekler tek kayıt oluşturmalı ve frontend rezervasyonu test ortamında uçtan uca çalışmalı.
@@ -193,3 +193,12 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Backend CORS:** `SecurityConfig` yalnızca `FRONTEND_ORIGIN` ile verilen tek origin'e izin veriyor, varsayılan localhost:5173. Render API ortamında `FRONTEND_ORIGIN=https://vip-transfer-dalaman-test.onrender.com` bulunması gerekir. Header listesinde `Idempotency-Key` var. Değerler henüz doğrulanmadı.
 - **Yeni otomatik test:** `BookingIntegrationTests.allowsStagingFrontendBookingPreflightWithIdempotencyHeader` testinde localhost development origin için OPTIONS /bookings preflight ve idempotency header kabulü kontrol ediliyor. Commit `89d58c4`, CI henüz doğrulanmadı. Bu test staging origin'in gerçekten ayarlandığını kanıtlamaz.
 - **Açık:** Backend son deploy live kontrolü, iki Render env değerinin doğrulanması, gerçek browser E2E, DB migration. Üretim DB veya Render güvenlik ayarlarına müdahale edilmedi.
+
+## 2026-11-16 — 1.4 staging dağıtımı yeniden doğrulandı
+- **Sorun:** Backend son dağıtımının hâlâ güncelleniyor olması; frontend ile aynı commit'te çalıştığı kanıtlanmamıştı.
+- **Kanıt:** Render `list_deploys` sorgusunda frontend `dep-dbtd69r2o0lc73eih340` commit `190990d` **live**; backend `dep-dbtd5np9aqoc73alumj0` commit `190990d` **live** (bitiş 09:58:45 UTC). İki servis aynı commit'i çalıştırıyor.
+- **Düzeltme:** Kod veya altyapı değiştirilmedi; dağıtım durumu doğrulandı ve görev panosu güncellendi.
+- **Test:** Render deploy durumları doğrulandı. Canlı HTTP kontrolü bu çalışma ortamında DNS çözümleme hatası nedeniyle yapılamadı; bu hata sitenin erişilemez olduğunu kanıtlamaz. Gerçek tarayıcı E2E **çalıştırılmadı**.
+- **Yeni risk:** Render ortam değişkenlerinin gerçek değerleri hâlâ doğrulanmadı (`VITE_API_BASE_URL`, `FRONTEND_ORIGIN`); build başarılı olsa da tarayıcıdan POST'un doğru API'ye gittiği kanıtlanmadı.
+- **Durum:** 1.4 **DEVAM EDİYOR**; 1.3 **TEST BEKLİYOR**.
+- **Kaldığımız yer:** Render frontend/backend ortam değişkenlerini güvenli biçimde kontrol et, staging origin için preflight ve API bağlantısını doğrula, sonra izole DB üzerinde kontrollü E2E rezervasyon testi yap.
