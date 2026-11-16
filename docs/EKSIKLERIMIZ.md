@@ -41,3 +41,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Doğrulama durumu:** Test dosyası GitHub'a kaydedildi; testlerin çalıştırıldığına dair henüz sonuç yok. Testler PostgreSQL gerektirmeden çalışacak şekilde yazıldı.
 - **Sonraki adım:** Testleri Maven ile gerçekten çalıştırıp sonucu kaydetmek; ardından güvenli test ortamında rezervasyon POST/GET akışını ve mükerrer istekleri doğrulamak.
 - **Kullanıcı tercihi:** Şimdilik ders veya soru sorulmayacak; geliştirmeye odaklanılacak. Kullanıcı istediğinde kodlar başlangıç seviyesinden ayrıntılı anlatılacak.
+
+## 2026-11-16 — Görev 1, CI testleri çalıştırıldı ve doğrulandı
+- **Kaynak:** GitHub Actions run https://github.com/Alisnmez/vip-transfer-dalaman/actions/runs/43839886864 ; commit `b0de1d37aa7a4bf54f633b68ef1ca0aa3dcf249a`.
+- **Backend:** `mvn -B test`, GitHub Actions PostgreSQL 16 servis konteyneri ile çalıştı; **14 test geçti, 0 hata, 0 başarısız, 0 atlanan**. Dağılım: `VipTransferDalamanApplicationTests` 1, `BookingIntegrationTests` 7, `TransferPricingServiceTests` 6. Maven sonucu: `BUILD SUCCESS`.
+- **Frontend:** `npm ci` ve `npm run build` GitHub Actions üzerinde başarılı.
+- **Kapsam sınırı:** Testler GitHub Actions'ın izole PostgreSQL veritabanında çalıştı, Render üretim veritabanında değil. Tarayıcı üzerinden uçtan uca rezervasyon, aynı isteğin tekrarında çift kayıt oluşmaması, e-posta bildirimi ve üretim ödeme akışı henüz doğrulanmadı.
+- **Sonuç:** Otomatik derleme ve mevcut 14 test **doğrulandı**; görev 1'in idempotency ve uçtan uca test alt işleri **açık**.
