@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
+import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
@@ -325,14 +326,16 @@ export function BookingConfirmationPage() {
             </label>
             {error && <p role="alert" className="text-error">{error}</p>}
             {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.</p>}
-            <button
+            <ProcessingButton
+              processing={processing}
+              processingLabel="PROCESSING..."
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!confirmed || processing || receipt !== null}
               onClick={handleConfirm}
               type="button"
             >
-              {processing ? 'PROCESSING...' : 'CONFIRM BOOKING'}
-            </button>
+              CONFIRM BOOKING
+            </ProcessingButton>
             <p className="font-label-xs text-label-xs text-outline">
               By submitting, you confirm the details above are accurate and request a transfer.
             </p>
