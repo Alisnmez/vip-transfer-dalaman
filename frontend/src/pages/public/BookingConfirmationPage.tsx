@@ -304,7 +304,7 @@ export function BookingConfirmationPage() {
                 Price Details
               </h3>
               <p className="font-label-xs text-label-xs opacity-70 mb-4 uppercase">
-                Fixed Airport Rate
+                Published Route Estimate
               </p>
             </div>
             <div className="py-6 border-y border-on-primary-container/20">
