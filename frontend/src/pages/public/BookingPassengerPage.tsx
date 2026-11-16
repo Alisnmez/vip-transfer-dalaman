@@ -3,8 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
 
-const quickLinks = ['Terms of Service', 'Privacy Policy', 'Insurance Coverage']
-const supportLinks = ['Trust & Safety', 'Contact Support', 'Corporate Accounts']
 
 export function BookingPassengerPage() {
   const navigate = useNavigate()
@@ -30,11 +28,23 @@ export function BookingPassengerPage() {
       setError('Please complete your name, phone number and email address.')
       return
     }
-    if (phoneNumber.replace(/\D/g, '').length !== (countryCode === '+90' ? 10 : phoneNumber.replace(/\D/g, '').length) || phoneNumber.replace(/\D/g, '').length < 7 || phoneNumber.replace(/\D/g, '').length > 15 - countryCode.length + 1) {
+    const digits = phoneNumber.replace(/\D/g, '')
+    const countryDigits = countryCode.replace(/\D/g, '').length
+    if ((countryCode === '+90' && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15) {
       setError('Please enter a valid phone number (7–15 digits internationally; 10 digits for Turkey).')
       return
     }
-    const transferInfo = JSON.parse(savedTransferInfo)
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError('Please enter a valid email address.')
+      return
+    }
+    let transferInfo: { pickUpDate?: string; pickUpTime?: string; pickUpLocation?: string; dropOffLocation?: string }
+    try {
+      transferInfo = JSON.parse(savedTransferInfo)
+    } catch {
+      setError('Transfer details could not be read. Please return to the previous step.')
+      return
+    }
     if (!transferInfo.pickUpDate || !transferInfo.pickUpTime || !transferInfo.pickUpLocation || !transferInfo.dropOffLocation) {
       setError('Please complete the transfer details first.')
       return
@@ -370,7 +380,7 @@ function PassengerSummary() {
             </div>
             <div className="bg-white/5 rounded-lg p-4 space-y-2">
               <PriceLine label="Base Fare" value={price} />
-              <PriceLine label="Meet & Greet" value="FREE" />
+              
               <div className="flex justify-between items-center pt-2 border-t border-white/10">
                 <span className="font-title-md text-title-md">Total</span>
                 <span className="font-title-md text-title-md text-secondary-fixed">
@@ -386,7 +396,7 @@ function PassengerSummary() {
                 verified_user
               </span>
               <span className="font-label-sm text-label-sm">
-                All-inclusive price. Taxes and fees included.
+                Review the price before submitting your request.
               </span>
             </div>
           </div>
@@ -401,7 +411,7 @@ function PassengerSummary() {
               Need Assistance?
             </p>
             <p className="font-label-xs text-label-xs text-on-surface-variant">
-              Our support team is available 24/7
+              Use the contact page for transfer questions.
             </p>
           </div>
         </div>
@@ -448,64 +458,16 @@ function PriceLine({ label, value }: { label: string; value: string }) {
 
 function PassengerFooter() {
   return (
-    <footer className="w-full py-12 bg-slate-200 border-t border-outline-variant">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter-grid px-margin-page max-w-7xl mx-auto">
-        <div>
-          <div className="font-title-md text-title-md font-bold text-admin-primary mb-4">
-            VIP Transfer Dalaman
-          </div>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Reliable airport transfers and professional chauffeur services.
-          </p>
-        </div>
-        <FooterColumn title="Quick Links" items={quickLinks} />
-        <FooterColumn title="Support" items={supportLinks} />
-        <div>
-          <h4 className="font-label-sm text-label-sm font-bold text-on-surface mb-4">
-            Newsletter
-          </h4>
-          <p className="font-label-xs text-label-xs text-on-surface-variant mb-4">
-            Get route updates and service announcements.
-          </p>
-          <div className="flex gap-2">
-            <input
-              className="bg-white border-outline-variant rounded px-3 py-2 text-sm w-full"
-              placeholder="Email"
-              type="email"
-            />
-            <button className="bg-admin-primary text-white p-2 rounded">
-              <span translate="no" className="material-symbols-outlined text-sm">send</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="mt-12 border-t border-outline-variant pt-8 px-margin-page text-center">
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          © 2024 VIP Transfer Dalaman. All rights reserved.
+    <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
+        <p className="text-sm text-on-surface-variant">
+          © {new Date().getFullYear()} VIP Transfer Dalaman
         </p>
+        <div className="flex gap-5 text-sm">
+          <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
+          <Link className="text-admin-primary hover:underline" to="/services">Services</Link>
+        </div>
       </div>
     </footer>
-  )
-}
-
-function FooterColumn({ items, title }: { items: string[]; title: string }) {
-  return (
-    <div>
-      <h4 className="font-label-sm text-label-sm font-bold text-on-surface mb-4">
-        {title}
-      </h4>
-      <ul className="space-y-2">
-        {items.map((item) => (
-          <li key={item}>
-            <a
-              className="font-body-md text-body-md text-on-surface-variant hover:text-secondary transition-colors"
-              href="#"
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   )
 }
