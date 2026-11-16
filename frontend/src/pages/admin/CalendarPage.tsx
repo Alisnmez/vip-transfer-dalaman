@@ -26,7 +26,7 @@ export function CalendarPage() {
   const [selectedDay, setSelectedDay] = useState(today)
   const [anchor, setAnchor] = useState(today)
   const [agendaOpen, setAgendaOpen] = useState(false)
-  const [filter, setFilter] = useState('ACTIVE')
+  const [filter, setFilter] = useState('ALL')
   const [bookings, setBookings] = useState<Booking[]>([])
   const [loadedKey, setLoadedKey] = useState('')
   const [error, setError] = useState('')
@@ -116,7 +116,7 @@ export function CalendarPage() {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <select aria-label="Booking status" value={filter} onChange={event => setFilter(event.target.value)} className="rounded-lg border bg-white px-3 py-2 text-sm">
-            <option value="ACTIVE">Active transfers</option><option value="ALL">All statuses</option>
+            <option value="ALL">All statuses</option><option value="ACTIVE">Active transfers</option>
             <option value="PENDING">Pending</option><option value="CONFIRMED">Confirmed</option>
             <option value="COMPLETED">Completed</option><option value="CANCELLED">Cancelled</option>
           </select>
