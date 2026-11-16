@@ -29,7 +29,7 @@ export function BookingListPage() {
     let active = true
     getBookingPage(page)
       .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements); setLoadedKey(`${page}:${revision}`); setError(''); setRefreshing(false) } })
-      .catch(err => { if (active) { setError(err instanceof Error ? err.message : 'Unable to load bookings'); setLoadedKey(`${page}:${revision}`); setRefreshing(false) } })
+      .catch(err => { if (active) { setBookings([]); setTotalPages(0); setTotalElements(0); setError(err instanceof Error ? err.message : 'Unable to load bookings'); setLoadedKey(`${page}:${revision}`); setRefreshing(false) } })
     return () => { active = false }
   }, [page, revision])
 
