@@ -5,16 +5,6 @@ import { getBookings } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 import type { Booking } from '../../features/booking/types'
 
-const tableHeaders = [
-  'ID',
-  'Customer Name',
-  'Route',
-  'Date/Time',
-  'Price',
-  'Status',
-  'Actions',
-]
-
 export function BookingListPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [error, setError] = useState('')
@@ -22,223 +12,68 @@ export function BookingListPage() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
+    let active = true
     getBookings()
-      .then(setBookings)
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false))
+      .then(data => { if (active) setBookings(data) })
+      .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
   }, [])
 
-  const visibleBookings = bookings.filter((booking) =>
+  const query = search.trim().toLowerCase()
+  const visibleBookings = bookings.filter(booking =>
     `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
-      .toLowerCase().includes(search.trim().toLowerCase()),
+      .toLowerCase().includes(query),
   )
 
   return (
-    <div className="h-full flex flex-col overflow-hidden bg-surface">
-      <header className="h-20 flex items-center justify-between px-gutter border-b border-outline-variant bg-white">
-        <div className="flex flex-col">
-          <h2 className="font-title-md text-title-md text-on-surface">
-            Booking Management
-          </h2>
-          <p className="text-on-surface-variant text-[12px]">
-            Showing {visibleBookings.length} booking requests
-          </p>
-        </div>
-
+    <main className="flex h-full flex-col overflow-hidden bg-surface">
+      <header className="border-b border-outline-variant bg-white p-6">
+        <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
+        <p className="text-on-surface-variant">{visibleBookings.length} of {bookings.length} requests</p>
       </header>
-
-      <section className="p-gutter flex flex-col gap-stack-md bg-white border-b border-outline-variant">
-        <div className="max-w-lg">
-          <div className="relative">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">
-              search
-            </span>
-            <input
-              className="w-full bg-white border border-outline-variant rounded-lg pl-10 pr-4 py-2.5 text-on-surface placeholder:text-outline focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md"
-              placeholder="Search ID, Customer, Route..."
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              type="text"
-            />
-          </div>
-
-        </div>
-
-        <p className="text-label-sm text-on-surface-variant">{visibleBookings.length} requests found</p>
+      <section className="border-b border-outline-variant bg-white p-6">
+        <label className="block max-w-lg text-sm font-semibold">
+          Search bookings
+          <input type="search" value={search} onChange={event => setSearch(event.target.value)}
+            placeholder="Customer, route or booking ID"
+            className="mt-2 w-full rounded-lg border border-outline-variant px-4 py-3" />
+        </label>
       </section>
-
-      <section className="flex-1 overflow-auto custom-scrollbar">
-        {loading && (
-          <div className="p-gutter text-on-surface-variant">Bookings loading...</div>
-        )}
-        {error && (
-          <div className="p-gutter text-error">
-            Backend error: {error}
-          </div>
-        )}
-        {!loading && !error && visibleBookings.length === 0 && (
-          <div className="p-gutter text-on-surface-variant">
-            No bookings found.
-          </div>
-        )}
-        <table className="w-full text-left border-collapse min-w-[1000px]">
-          <thead className="sticky top-0 bg-[#F1F5F9] z-10">
-            <tr>
-              {tableHeaders.map((header) => (
-                <th
-                  className={`p-stack-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant ${
-                    header === 'Actions' ? 'text-right' : ''
-                  }`}
-                  key={header}
-                >
-                  {header}
-                </th>
+      <section className="flex-1 overflow-auto p-6">
+        {loading && <p>Loading booking requests...</p>}
+        {error && <p role="alert" className="text-error">Unable to load bookings: {error}</p>}
+        {!loading && !error && visibleBookings.length === 0 && <p>No booking requests found.</p>}
+        {!loading && !error && visibleBookings.length > 0 && (
+          <table className="w-full min-w-[760px] border-collapse bg-white text-left">
+            <thead>
+              <tr className="border-b border-outline-variant">
+                {['ID', 'Customer', 'Route', 'Transfer time (Turkey)', 'Price (GBP)', 'Status', 'Details'].map(header =>
+                  <th key={header} scope="col" className="p-4 text-sm font-semibold">{header}</th>,
+                )}
+              </tr>
+            </thead>
+            <tbody>
+              {visibleBookings.map(booking => (
+                <tr key={booking.id} className="border-b border-outline-variant">
+                  <td className="p-4 font-semibold">#{booking.id}</td>
+                  <td className="p-4">
+                    <span className="block font-semibold">{booking.customerName}</span>
+                    <span className="text-sm text-on-surface-variant">{booking.passengerCount} passengers</span>
+                  </td>
+                  <td className="p-4">{booking.pickUpLocation} → {booking.dropOffLocation}</td>
+                  <td className="p-4">{formatTransferDateTime(booking.transferDateTime)}</td>
+                  <td className="p-4 font-semibold">£{Number(booking.price).toFixed(2)}</td>
+                  <td className="p-4">{bookingStatus(booking.status)}</td>
+                  <td className="p-4">
+                    <Link className="text-admin-primary underline" to={`/admin/bookings/${booking.id}`}>View details</Link>
+                  </td>
+                </tr>
               ))}
-            </tr>
-          </thead>
-          <tbody className="text-[#1F2937]">
-            {visibleBookings.map((booking) => (
-              <tr
-                className="zebra-row hover:bg-blue-50 transition-colors group border-b border-outline-variant/30"
-                key={booking.id}
-              >
-                <td className="p-stack-md font-data-tabular text-data-tabular text-primary font-bold">
-                  #{booking.id}
-                </td>
-                <td className="p-stack-md">
-                  <div className="flex flex-col">
-                    <span className="font-bold text-on-surface">
-                      {booking.customerName}
-                    </span>
-                    <span className="text-[11px] text-on-surface-variant">
-                      {booking.passengerCount} passenger
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <div className="flex items-center gap-2">
-                    <span className="text-on-surface font-medium">
-                      {booking.pickUpLocation}
-                    </span>
-                    <span className="material-symbols-outlined text-[16px] text-on-surface-variant">
-                      east
-                    </span>
-                    <span className="text-on-surface font-medium">
-                      {booking.dropOffLocation}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <div className="flex flex-col">
-                    <span className="text-on-surface">
-                      {new Date(booking.transferDateTime).toLocaleDateString()}
-                    </span>
-                    <span className="text-on-surface font-bold">
-                      {new Date(booking.transferDateTime).toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <span className="text-on-surface">VIP Transfer</span>
-                </td>
-                <td className="p-stack-md">
-                  <span className="font-data-tabular text-on-surface font-bold">
-                    £{Number(booking.price).toFixed(2)}
-                  </span>
-                </td>
-                <td className="p-stack-md">
-                  <span className="text-on-surface-variant">Not assigned</span>
-                </td>
-                <td className="p-stack-md">
-                  <div>
-                    <span className="status-pill bg-amber-100 text-amber-700">
-                      {bookingStatus(booking.status)}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md text-right">
-                  <Link className="text-admin-primary underline underline-offset-4" to={`/admin/bookings/${booking.id}`}>View details</Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        )}
       </section>
-
-      <footer className="border-t border-outline-variant bg-white px-gutter py-4 text-sm text-on-surface-variant">
-        Showing {visibleBookings.length} of {bookings.length} booking requests. Transfer times are shown in Turkey local time.
-      </footer>
-    </div>
+    </main>
   )
-}                    <span className="text-on-surface">{formatTransferDateTime(booking.transferDateTime)}</span>                <td className="p-stack-md">
-                  <div className="flex flex-col">
-                    <span className="font-bold text-on-surface">
-                      {booking.customerName}
-                    </span>
-                    <span className="text-[11px] text-on-surface-variant">
-                      {booking.passengerCount} passenger
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <div className="flex items-center gap-2">
-                    <span className="text-on-surface font-medium">
-                      {booking.pickUpLocation}
-                    </span>
-                    <span className="material-symbols-outlined text-[16px] text-on-surface-variant">
-                      east
-                    </span>
-                    <span className="text-on-surface font-medium">
-                      {booking.dropOffLocation}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <div className="flex flex-col">
-                    <span className="text-on-surface">
-                      {new Date(booking.transferDateTime).toLocaleDateString()}
-                    </span>
-                    <span className="text-on-surface font-bold">
-                      {new Date(booking.transferDateTime).toLocaleTimeString([], {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md">
-                  <span className="text-on-surface">VIP Transfer</span>
-                </td>
-                <td className="p-stack-md">
-                  <span className="font-data-tabular text-on-surface font-bold">
-                    £{Number(booking.price).toFixed(2)}
-                  </span>
-                </td>
-                <td className="p-stack-md">
-                  <span className="text-on-surface-variant">Not assigned</span>
-                </td>
-                <td className="p-stack-md">
-                  <div>
-                    <span className="status-pill bg-amber-100 text-amber-700">
-                      Pending
-                    </span>
-                  </div>
-                </td>
-                <td className="p-stack-md text-right">
-                  <Link className="text-admin-primary underline underline-offset-4" to={`/admin/bookings/${booking.id}`}>View details</Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-
-      <footer className="border-t border-outline-variant bg-white px-gutter py-4 text-sm text-on-surface-variant">
-        Showing {visibleBookings.length} of {bookings.length} booking requests. Times are shown in your browser's timezone.
-      </footer>
-    </div>
-  )
-}                    <span className="text-on-surface">{formatTransferDateTime(booking.transferDateTime)}</span>
+}
