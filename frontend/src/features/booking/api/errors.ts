@@ -38,3 +38,11 @@ export function bookingHttpError(status: number, serverMessage?: unknown): Booki
   // HTTP response confirms that the server answered; transport outcome is not unknown.
   return new BookingApiError(message, status, false)
 }
+
+/** A successful HTTP response with unreadable booking data may still represent a committed booking. */
+export function bookingInvalidSuccessResponse(cause?: unknown): BookingApiError {
+  return new BookingApiError(
+    'The booking service responded, but its booking reference could not be verified. Your request may have been saved. Please contact support before starting a new booking.',
+    null, true, { cause },
+  )
+}
