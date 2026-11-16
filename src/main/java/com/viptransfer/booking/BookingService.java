@@ -124,21 +124,6 @@ public class BookingService {
         }
     }
 
-    public boolean matchesSupportReference(String reference, String email) {
-        if (reference == null || !reference.matches("[1-9][0-9]{0,15}") ||
-                email == null || email.isBlank() || email.length() > 254) {
-            return false;
-        }
-        try {
-            return bookingRepository.findById(Long.parseLong(reference))
-                    .map(booking -> booking.getEmail() != null &&
-                            booking.getEmail().trim().equalsIgnoreCase(email.trim()))
-                    .orElse(false);
-        } catch (NumberFormatException exception) {
-            return false;
-        }
-    }
-
     public Booking getBooking(Long id) {
         return bookingRepository.findById(id)
                 .orElseThrow(() -> new BookingNotFoundException(id));
