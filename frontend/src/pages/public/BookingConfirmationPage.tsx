@@ -5,6 +5,7 @@ import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError } from '../../features/booking/api/errors'
 import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
+import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
 import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
 import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
 
@@ -70,7 +71,9 @@ export function BookingConfirmationPage() {
   const [transfer] = useState<TransferDetails>(() => readSavedDetails<TransferDetails>('bookingTransferInfo'))
   const [passenger] = useState<PassengerDetails>(() => readSavedDetails<PassengerDetails>('bookingPassengerInfo'))
   const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
-  const price = Number.isFinite(Number(transfer.price)) && transfer.price != null ? '£' + Number(transfer.price).toFixed(2) : 'Price to be confirmed'
+  const routeDestination = transfer.pickUpLocation === 'Dalaman Airport' ? transfer.dropOffLocation : transfer.dropOffLocation === 'Dalaman Airport' ? transfer.pickUpLocation : ''
+  const catalogPrice = routeDestination && transfer.vehicleId && transfer.tripType ? findTransferPrice(routeDestination, transfer.vehicleId, transfer.tripType) : null
+  const price = catalogPrice === null ? 'Price to be confirmed' : `£${catalogPrice.toFixed(2)}`
   const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
   const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
@@ -111,6 +114,14 @@ export function BookingConfirmationPage() {
           (transferData.tripType === 'round-trip' &&
             (typeof transferData.returnDate !== 'string' || typeof transferData.returnTime !== 'string'))) {
         setError('Saved booking details are invalid. Please return to the previous steps.')
+        return
+      }
+      const confirmedDestination = transferData.pickUpLocation === 'Dalaman Airport' ? transferData.dropOffLocation : transferData.dropOffLocation === 'Dalaman Airport' ? transferData.pickUpLocation : ''
+      const confirmedVehicle = transferVehicles.find(vehicle => vehicle.id === transferData.vehicleId)
+      if (!confirmedDestination || !confirmedVehicle || findTransferPrice(confirmedDestination, transferData.vehicleId, transferData.tripType) === null ||
+          transferData.passengerCount > confirmedVehicle.maxPassengers ||
+          (transferData.luggageCount ?? 0) > Math.min(8, confirmedVehicle.maxLuggage ?? 8)) {
+        setError('Your route, vehicle or capacity is no longer valid. Please return to the transfer step and review your selection.')
         return
       }
       if ((transferData.luggageCount !== undefined && (!Number.isInteger(transferData.luggageCount) || transferData.luggageCount < 0 || transferData.luggageCount > 8)) ||
@@ -299,7 +310,7 @@ export function BookingConfirmationPage() {
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
-                  value={display(transfer.vehicleName ?? transfer.vehicleType ?? transfer.vehicleClass)}
+                  value={display(transferVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name)}
                 />
               </div>
             </div>
