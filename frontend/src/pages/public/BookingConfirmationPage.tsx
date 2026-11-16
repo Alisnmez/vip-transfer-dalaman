@@ -119,7 +119,7 @@ export function BookingConfirmationPage() {
       const confirmedDestination = transferData.pickUpLocation === 'Dalaman Airport' ? transferData.dropOffLocation : transferData.dropOffLocation === 'Dalaman Airport' ? transferData.pickUpLocation : ''
       const confirmedVehicle = transferVehicles.find(vehicle => vehicle.id === transferData.vehicleId)
       if (!confirmedDestination || !confirmedVehicle || findTransferPrice(confirmedDestination, transferData.vehicleId, transferData.tripType) === null ||
-          transferData.passengerCount > confirmedVehicle.maxPassengers ||
+          (transferData.passengerCount ?? 0) > confirmedVehicle.maxPassengers ||
           (transferData.luggageCount ?? 0) > Math.min(8, confirmedVehicle.maxLuggage ?? 8)) {
         setError('Your route, vehicle or capacity is no longer valid. Please return to the transfer step and review your selection.')
         return
