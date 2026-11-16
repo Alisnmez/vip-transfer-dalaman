@@ -7,22 +7,21 @@ const pageContent = {
     eyebrow: 'Vehicles',
     title: 'Professional Transfer Vehicles',
     description:
-      'Clean, air-conditioned vehicles selected for airport transfers, families, and private groups.',
+      'Choose a vehicle category for your airport transfer request. Vehicle details will be confirmed before travel.',
     items: [
-      ['Business Sedan', 'Comfortable option for up to 3 passengers.'],
-      ['VIP Minivan', 'Most popular choice for families and small groups.'],
-      ['Premium Van', 'Extra room for luggage and longer coastal routes.'],
-      ['First Class Sedan', 'Quiet executive option for private travel.'],
+      ['Vehicle Selection', 'See the available vehicle categories and passenger limits in the booking form.'],
+      ['Luggage and Baby Seats', 'Enter your luggage and baby-seat needs when requesting a transfer.'],
+      ['Vehicle Confirmation', 'The operator will confirm the vehicle category and trip details.'],
     ],
   },
   services: {
     eyebrow: 'Services',
     title: 'Reliable Airport Transfer Services',
     description:
-      'Straightforward private transfer services with clear communication and fixed route pricing.',
+      'Request a private airport transfer and review the published route estimate before submitting.',
     items: [
-      ['Airport Pickup', 'Meet your driver at Dalaman Airport arrivals.'],
-      ['Hotel Transfer', 'Door-to-door pickup and drop-off for hotels and villas.'],
+      ['Airport Pickup', 'Request a pickup from Dalaman Airport and provide your flight details.'],
+      ['Hotel Transfer', 'Provide your hotel or accommodation address in the booking request.'],
       ['Return Transfer', 'Schedule your return journey in advance.'],
       ['Flight Details', 'Add your flight number when submitting a booking request.'],
     ],
