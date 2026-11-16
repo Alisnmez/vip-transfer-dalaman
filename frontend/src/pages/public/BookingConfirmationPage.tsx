@@ -4,6 +4,8 @@ import { useRef, useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { createBooking } from '../../features/booking/api'
 import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
+import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
+import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
 
 type TransferDetails = {
   pickUpLocation?: string
@@ -34,43 +36,15 @@ type PassengerDetails = {
   specialRequests?: string
 }
 
-const RECEIPT_KEY = 'lastBookingReceipt'
-const RECEIPT_MAX_AGE_MS = 24 * 60 * 60 * 1000
-
-type BookingReceipt = {
-  id: number
-  customerName: string
-  pickUpLocation: string
-  dropOffLocation: string
-  schedule: string
-  returnSchedule?: string
-  savedAt: number
+function availableReceiptStorages(): ReceiptStorage[] {
+  const storages: ReceiptStorage[] = []
+  try { storages.push(sessionStorage) } catch { /* Storage may be disabled. */ }
+  try { storages.push(localStorage) } catch { /* Storage may be disabled. */ }
+  return storages
 }
 
 function readReceipt(): BookingReceipt | null {
-  for (const kind of ['session', 'local'] as const) {
-    try {
-      const storage = kind === 'session' ? sessionStorage : localStorage
-      const raw = storage.getItem(RECEIPT_KEY)
-      if (!raw) continue
-      const value: unknown = JSON.parse(raw)
-      if (typeof value !== 'object' || value === null || !('id' in value) ||
-          typeof value.id !== 'number' || !Number.isSafeInteger(value.id) || value.id < 1 ||
-          !('savedAt' in value) || typeof value.savedAt !== 'number' ||
-          value.savedAt > Date.now() || Date.now() - value.savedAt > RECEIPT_MAX_AGE_MS ||
-          !('customerName' in value) || typeof value.customerName !== 'string' ||
-          !('pickUpLocation' in value) || typeof value.pickUpLocation !== 'string' ||
-          !('dropOffLocation' in value) || typeof value.dropOffLocation !== 'string' ||
-          !('schedule' in value) || typeof value.schedule !== 'string') {
-        storage.removeItem(RECEIPT_KEY)
-        continue
-      }
-      return value as BookingReceipt
-    } catch {
-      // Storage may be disabled; try the other available storage.
-    }
-  }
-  return null
+  return readReceiptFromStorages(availableReceiptStorages())
 }
 
 function readSavedDetails<T>(key: string): T {
@@ -193,14 +167,7 @@ export function BookingConfirmationPage() {
         schedule: `${transferData.pickUpDate} ${transferData.pickUpTime}`,
         ...(transferData.tripType === 'round-trip' ? { returnSchedule: `${transferData.returnDate} ${transferData.returnTime}` } : {}),
       }
-      for (const kind of ['session', 'local'] as const) {
-        try {
-          const storage = kind === 'session' ? sessionStorage : localStorage
-          storage.setItem(RECEIPT_KEY, JSON.stringify(savedReceipt))
-        } catch {
-          // Continue even when one browser storage mechanism is unavailable.
-        }
-      }
+      saveReceiptToStorages(savedReceipt, availableReceiptStorages())
       setReceipt(savedReceipt)
       try {
         localStorage.removeItem('bookingTransferInfo')
