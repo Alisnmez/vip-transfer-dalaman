@@ -24,19 +24,17 @@ const pageContent = {
       ['Airport Pickup', 'Meet your driver at Dalaman Airport arrivals.'],
       ['Hotel Transfer', 'Door-to-door pickup and drop-off for hotels and villas.'],
       ['Return Transfer', 'Schedule your return journey in advance.'],
-      ['Flight Tracking', 'Pickup timing can be adjusted around flight changes.'],
+      ['Flight Details', 'Add your flight number when submitting a booking request.'],
     ],
   },
   contact: {
     eyebrow: 'Contact',
     title: 'Contact VIP Transfer Dalaman',
     description:
-      'Send your route, date, passenger count, and flight number for quick transfer support.',
+      'Share your route, travel date, passenger count, and flight number through the booking request form.',
     items: [
-      ['WhatsApp', '+90 555 000 00 00'],
-      ['Email', 'info@viptransferdalaman.com'],
       ['Service Area', 'Dalaman, Fethiye, Gocek, Marmaris, Oludeniz'],
-      ['Support Hours', 'Available every day for transfer requests.'],
+      ['Booking Requests', 'Use the online booking form to submit your transfer details.'],
     ],
   },
 }
