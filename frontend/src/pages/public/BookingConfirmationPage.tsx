@@ -329,7 +329,7 @@ export function BookingConfirmationPage() {
               </span>
             </label>
             {error && <p role="alert" className="text-error">{error}</p>}
-            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">Your request may already have reached us, but we could not confirm the result. To avoid a duplicate booking, please contact support before submitting again. Keep your journey details handy.</p>}
+            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.</p>}
             <ProcessingButton
               processing={processing}
               processingLabel="PROCESSING..."
