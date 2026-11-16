@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/bookings")
@@ -30,6 +31,13 @@ public class BookingController {
     @GetMapping
     public List<Booking> getAllBookings() {
         return bookingService.getAllBookings();
+    }
+
+    @GetMapping("/page")
+    public Page<Booking> getBookingPage(
+            @org.springframework.web.bind.annotation.RequestParam(defaultValue = "0") int page,
+            @org.springframework.web.bind.annotation.RequestParam(defaultValue = "25") int size) {
+        return bookingService.getBookingPage(page, size);
     }
 
     @PutMapping("/{id}")
