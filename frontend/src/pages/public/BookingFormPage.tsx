@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
-import { parseTurkeyDateTime, turkeyToday } from '../../features/booking/turkeyTime'
+import { turkeyToday } from '../../features/booking/turkeyTime'
+import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
 // Generic icons avoid implying that an unverified vehicle photograph is the exact booked car.
@@ -100,19 +101,13 @@ export function BookingFormPage() {
       setFormError('Please enter pickup, destination, date and time before continuing.')
       return
     }
-    const selectedDateTime = parseTurkeyDateTime(pickUpDate, pickUpTime)
-    if (selectedDateTime === null || selectedDateTime <= Date.now()) {
+    const scheduleError = validateTransferSchedule({
+      pickUpDate, pickUpTime, tripType, returnDate, returnTime,
+    })
+    if (scheduleError) {
       event.preventDefault()
-      setFormError('Please choose a future pickup date and time in Turkey local time.')
+      setFormError(scheduleError)
       return
-    }
-    if (tripType === 'round-trip') {
-      const returnDateTime = parseTurkeyDateTime(returnDate, returnTime)
-      if (returnDateTime === null || returnDateTime <= selectedDateTime) {
-        event.preventDefault()
-        setFormError('Please choose a return date and time after your outbound pickup.')
-        return
-      }
     }
     if (pickUpLocation === dropOffLocation) {
       event.preventDefault()
