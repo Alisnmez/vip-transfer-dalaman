@@ -63,6 +63,21 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 
 **Durum:** BEKLİYOR.
 
+## 2026-11-17 — Bağımsız kod denetimi (admin + backend)
+- **Kapsam:** `BookingService`, `BookingController`, `Booking`, `BookingRequestDto`, `SecurityConfig`, `DashboardPage`, `BookingListPage`, `BookingDetailPage`, `AdminLayout`, frontend API, router, application.properties ve CI yapılandırması. Kullanıcının önceden bildirdiği giriş/rota-fiyat hataları bu denetimde yeni bulgu sayılmadı.
+- **Düzeltildi (kod commit `c138359`):** `COMPLETED` rezervasyonlar yaklaşan ve bugünkü açık işlerden çıkarıldı; sadece `PENDING` ve `CONFIRMED` gösteriliyor. CI/canlı doğrulama bekliyor.
+- **Yüksek öncelik / açık:** `BookingService.updateBooking` tüm alanları tekrar yazar, `validateSchedule` geçmiş tarihlerde salt iletişim bilgisi düzenlemeyi engeller, tüm alanları yeniden fiyatlandırır; fiyat değişikliği ve eski kayıt tutarlılığı riski. İletişim/detay ile fiyatı etkileyen alanları ayrı güncelleme akışına ayır; ücret değişiminde açık onay/iz kaydı.
+- **Yüksek öncelik / açık:** `deleteBooking` kalıcı silme yapar, operasyonel geçmiş ve audit izi kaybolabilir. V1.0 admin API'sinde silme erişimini kapatma veya iptal/soft-delete yaklaşımı değerlendirilmelidir.
+- **Yüksek öncelik / açık:** `getAllBookings` tüm kayıtları sınırsız döndürür ve tüm kişisel verileri taşır; sunucu tarafı sayfalama, tarih/durum filtresi ve liste için minimal DTO gerekli.
+- **Orta öncelik / açık:** `BookingRequestDto` telefon/e-posta/rota/araç metinlerinde uzunluk sınırları tutarlı değil; JPA varsayılan sütun sınırlarıyla çakışıp 500 hata yaratabilir. API validasyonu ile DB sınırları eşitlenmeli.
+- **Orta öncelik / açık:** `BookingListPage` listeyi API sırasıyla sunuyor, yeni taleplerin üste geleceği garanti değil; yeni rezervasyonların gözden kaçma riski. Durum rozetleri her durumda amber.
+- **Orta öncelik / açık:** `AdminLayout` girişte tüm hata türlerini aynı mesaja indirger; 401 ile ağ/timeout ayrımı yok. Basic auth ve bellek içi saklama v1.0 için geçici çözüm; üretim güvenliği ayrıca doğrulanmalı.
+- **Orta öncelik / açık:** `BookingDetailPage` düzenleme formu geçmiş kayıtlar için güncel katalogdan seçim yapar; sadece fiyatı etkilemeyen alanlar düzenlenirken bile fiyat güncellenebilir. `round-trip` seçilince dönüş zamanı eksikse backend reddeder; ön kontrol gerekli.
+- **Yayın engeli / açık:** `spring.jpa.hibernate.ddl-auto=update` üretim şema değişiklikleri için risk; yedek, gerçek şema envanteri ve migration planı olmadan değiştirilmemeli. `/test/db-check` router'da mevcut, yayın öncesi kaldırılmalı.
+- **Kod standardı:** Java constructor injection ve TS feature ayrımı genel olarak korunmuş; fakat bazı React JSX blokları sıkıştırılmış, Java'da tam nitelikli annotation/inline import düzeni karışık. Davranışı koruyan küçük refactor ve testler yapılmalı; gereksiz global utility/soyutlama eklenmemeli.
+- **Test:** Kaynak kod denetimi ve tek düzeltme commit'i yapıldı; CI ve canlı E2E sonuçları henüz doğrulanmadı. Bulgu listesi doğrulanmış kod davranışı ile üretimde olası riskleri ayrı belirtir.
+- **Öncelik sırası:** 1) Düzenlemede fiyat ve geçmiş kayıt bütünlüğü, 2) silme/audit güvenliği, 3) liste sıralama ve status görünümü, 4) DTO doğrulaması, 5) pagination ve üretim migration.
+
 ## 2026-11-17 — Admin rezervasyon düzenlemede fiyat bulunamaması
 - **Aktif madde:** 4.2 — admin rezervasyon detaylarını düzenleme.
 - **Hata:** Kullanıcı `Error while saving details: No price found for the selected destination and vehicle.` bildirdi. Backend `TransferPricingService` katalogdaki `destination` ve `vehicleId` değerleriyle birebir eşleşme istiyor; admin formu bunları serbest metin olarak alıyordu.
