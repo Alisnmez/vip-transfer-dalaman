@@ -16,6 +16,7 @@ export function AdminLayout() {
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [checking, setChecking] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -58,8 +59,13 @@ export function AdminLayout() {
   )
 
   return (
-    <div className="bg-admin-background text-admin-on-surface min-h-screen">
-      <aside className="h-full w-64 fixed left-0 top-0 bg-admin-primary flex flex-col py-6 px-4 shadow-md z-50">
+    <div className="min-h-screen min-w-0 bg-admin-background text-admin-on-surface">
+      <div className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-outline-variant bg-admin-primary px-4 text-white md:hidden">
+        <span className="font-bold">VIP Transfer Admin</span>
+        <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="admin-navigation" onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-white/40 px-3 py-2 text-sm font-semibold">{menuOpen ? "Close" : "Menu"}</button>
+      </div>
+      {menuOpen && <button type="button" aria-label="Close navigation" className="fixed inset-0 z-40 bg-black/50 md:hidden" onClick={() => setMenuOpen(false)} /> }
+      <aside id="admin-navigation" className={`${menuOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-admin-primary px-4 py-6 shadow-md transition-transform md:translate-x-0` }>
         <div className="mb-10 px-2">
           <h1 className="text-title-lg font-title-lg text-primary-fixed">
             VIP Transfer
@@ -75,6 +81,7 @@ export function AdminLayout() {
               key={`${item.to}-${item.label}`}
               to={item.to}
               end={item.end}
+              onClick={() => setMenuOpen(false)}
               className={({ isActive }) =>
                 [
                   'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
@@ -98,12 +105,12 @@ export function AdminLayout() {
       <main
         className={
           usesCustomPageChrome
-            ? 'ml-64 h-screen flex flex-col overflow-hidden'
-            : 'ml-64 min-h-screen flex flex-col'
+            ? 'min-w-0 md:ml-64 flex min-h-[calc(100dvh-4rem)] flex-col md:h-screen md:min-h-0 md:overflow-hidden'
+            : 'min-w-0 md:ml-64 min-h-[calc(100dvh-4rem)] md:min-h-screen flex flex-col'
         }
       >
         {!usesCustomPageChrome && (
-          <header className="h-16 w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-8">
+          <header className="h-16 w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-4 sm:px-8">
           <div className="flex items-center gap-4 flex-1">
             <span className="font-title-lg text-title-lg text-admin-primary">
               Operations Hub
@@ -118,7 +125,7 @@ export function AdminLayout() {
         <Outlet />
 
         {!usesCustomPageChrome && (
-          <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-8">
+          <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-4 sm:px-8">
           <div className="text-label-sm text-on-surface-variant">
             © {new Date().getFullYear()} VIP Transfer. Internal administration.
           </div>
