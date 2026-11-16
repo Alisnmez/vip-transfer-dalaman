@@ -10,6 +10,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     java.util.List<Booking> findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
             java.time.LocalDateTime start, java.time.LocalDateTime end);
 
+    java.util.List<Booking> findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
+            java.time.LocalDateTime start, java.time.LocalDateTime end);
+
     long countByStatus(String status);
 
     long countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
