@@ -6,6 +6,7 @@ import { bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
+const ADMIN_AUTH_URL = `${API_BASE_URL}/admin/auth-check`
 
 // Retry keys survive refreshes within the same tab, with an in-memory fallback.
 const retryKeys = createRetryKeyStore(
@@ -20,16 +21,17 @@ async function retryStorageKey(payload: string): Promise<string> {
   return `booking-retry:${hex}`
 }
 
-async function request<T>(url: string, options?: RequestInit, admin = false): Promise<T> {
+async function request<T>(url: string, options?: RequestInit, admin = false, timeoutMs = 60000): Promise<T> {
   const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 60000)
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
 
   try {
+    const authorization = admin ? getAdminAuthorization() : null
     const response = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        ...(admin && getAdminAuthorization() ? { Authorization: getAdminAuthorization()! } : {}),
+        ...(authorization ? { Authorization: authorization } : {}),
         ...options?.headers,
       },
       signal: controller.signal,
@@ -51,6 +53,11 @@ async function request<T>(url: string, options?: RequestInit, admin = false): Pr
   } finally {
     clearTimeout(timeout)
   }
+}
+
+export function checkAdminAccess() {
+  // Authentication does not need to download private booking details.
+  return request<void>(ADMIN_AUTH_URL, undefined, true, 20000)
 }
 
 export function getBookings() {
