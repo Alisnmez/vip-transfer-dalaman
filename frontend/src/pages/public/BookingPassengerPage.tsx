@@ -62,9 +62,11 @@ export function BookingPassengerPage() {
   const [hotelName, setHotelName] = useState(draft.hotelName ?? '')
   const [specialRequests, setSpecialRequests] = useState(draft.specialRequests ?? '')
   const [error, setError] = useState('')
+  const [emailError, setEmailError] = useState('')
 
   function handleSubmit() {
     setError('')
+    setEmailError('')
     let savedTransferInfo: string | null
     try {
       savedTransferInfo = localStorage.getItem('bookingTransferInfo')
@@ -214,11 +216,12 @@ export function BookingPassengerPage() {
                   </div>
                   <FormField
                     label="Email Address"
-                    onChange={setEmail}
+                    onChange={(value) => { setEmail(value); setEmailError('') }}
                     placeholder="name@example.com"
                     type="email"
                     value={email}
                   />
+                  {emailError && <p role="alert" className="text-sm text-error">{emailError}</p>}
                 </div>
 
                 <div className="flex flex-col gap-2">
