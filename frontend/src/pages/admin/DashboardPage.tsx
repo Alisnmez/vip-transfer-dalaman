@@ -40,7 +40,7 @@ export function DashboardPage() {
     .slice(0, 8)
 
   return (
-    <main className="p-8 space-y-6">
+    <main className="min-w-0 space-y-6 p-4 sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-admin-primary">Booking overview</h1>
@@ -53,7 +53,7 @@ export function DashboardPage() {
       {!loading && !error && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="rounded-xl border border-outline-variant bg-white p-6">
+            <div className="rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
               <p className="text-on-surface-variant">Total booking requests</p>
               <p className="text-3xl font-bold text-admin-primary">{bookings.length}</p>
             </div>
