@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getCalendarBookings } from '../../features/booking/api'
-import { bookingStatus, turkeyNowLocal } from '../../features/booking/formatters'
+import { bookingStatus } from '../../features/booking/formatters'
+import { turkeyToday } from '../../features/booking/turkeyTime'
 import type { Booking } from '../../features/booking/types'
 
 type View = 'Month' | 'Week' | 'Day'
@@ -20,7 +21,7 @@ const statusColors: Record<string, string> = {
 }
 
 export function CalendarPage() {
-  const today = turkeyNowLocal().slice(0, 10)
+  const today = turkeyToday()
   const [selectedView, setSelectedView] = useState<View>('Week')
   const [selectedDay, setSelectedDay] = useState(today)
   const [anchor, setAnchor] = useState(today)
@@ -37,9 +38,10 @@ export function CalendarPage() {
   const visibleDays = selectedView === 'Month'
     ? (() => {
       const first = mondayOf(start)
-      const next = addDays(`${monthOf(anchor)}-01`, new Date(Number(anchor.slice(0, 4)), Number(anchor.slice(5, 7)), 0).getDate())
-      const last = addDays(next, -1)
-      return Array.from({ length: Math.floor((parseDay(last).getTime() - parseDay(first).getTime()) / 86400000 / 7 + 1) * 7 }, (_, i) => addDays(first, i))
+      const daysInMonth = new Date(Number(anchor.slice(0, 4)), Number(anchor.slice(5, 7)), 0).getDate()
+      const last = addDays(start, daysInMonth - 1)
+      const dayCount = Math.round((Date.UTC(Number(last.slice(0, 4)), Number(last.slice(5, 7)) - 1, Number(last.slice(8, 10))) - Date.UTC(Number(first.slice(0, 4)), Number(first.slice(5, 7)) - 1, Number(first.slice(8, 10)))) / 86400000) + 1
+      return Array.from({ length: Math.ceil(dayCount / 7) * 7 }, (_, i) => addDays(first, i))
     })()
     : Array.from({ length: selectedView === 'Week' ? 7 : 1 }, (_, i) => addDays(start, i))
 
@@ -73,6 +75,8 @@ export function CalendarPage() {
   }
   for (const entries of byDay.values()) entries.sort((a, b) => a.transferDateTime.localeCompare(b.transferDateTime))
   const selectedBookings = byDay.get(selectedDay) ?? []
+  const visibleDaySet = new Set(visibleDays)
+  const visibleCount = filtered.filter(booking => visibleDaySet.has(booking.transferDateTime?.slice(0, 10))).length
 
   function navigate(direction: number) {
     const current = parseDay(anchor)
@@ -166,7 +170,7 @@ export function CalendarPage() {
 
       <footer className="flex flex-wrap items-center justify-between gap-3 border-t bg-white px-4 py-3 text-xs text-on-surface-variant">
         <div className="flex flex-wrap gap-4"><span>🟠 Pending</span><span>🟢 Confirmed</span><span>⚪ Completed</span><span>🔴 Cancelled</span></div>
-        <span>Turkey time (UTC+3) · {filtered.length} transfers in loaded period</span>
+        <span>Turkey time (UTC+3) · {visibleCount} transfers in selected period</span>
       </footer>
 
       {agendaOpen && <>
