@@ -474,3 +474,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - BookingConfirmationPage: isteğe bağlı flightNumber, luggageCount, babySeatCount, hotelName, countryOfResidence, specialRequests alanlarının tip/sınırları API POST öncesi doğrulanıyor (4d099cf5).
 - BookingConfirmationPage: ilk form doldurulduktan sonra zaman geçmiş olabileceği için pickup tarihinin hâlâ gelecekte olduğu ve dönüşün gidişten sonra olduğu final confirmation sırasında yeniden doğrulanıyor (74274c55).
 - Yeni CI testleri bekleniyor. Gerçek tarayıcı E2E, Render canlı smoke, migration güvenliği, bildirimler açık. Admin koduna dokunulmadı.
+
+
+## 2026-11-16 — Booking form ticari vaat ve iletişim temizliği
+- BookingFormPage rezervasyon özeti: doğrulanmamış ücretsiz meet-and-greet, vergi/bahşiş dahil, gizli ücret yok ve 24 saat ücretsiz iptal vaatleri kaldırıldı; fiyat ve koşulların işletme onayına tabi olduğu açıklandı (8d2703d2).
+- Aynı sayfanın footer'ında sahte acil telefon, doğrulanmamış e-posta, href=# boş politika bağlantıları, 2024 tarihi ve GBP fiyatlarıyla çelişen EUR etiketi kaldırıldı.
+- Bu, gerçek ödeme/iptal/iletişim kurallarının tanımlanması görevlerini tamamlamaz. Yeni CI ve canlı UI testi bekleniyor. Admin kapsam dışı.
