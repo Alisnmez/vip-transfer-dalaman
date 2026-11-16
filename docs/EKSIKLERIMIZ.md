@@ -220,3 +220,10 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - **Önemli ayrım:** Render metadata API mevcut ortam değişkenlerinin değerlerini sunmuyor. `update_environment_variables` yazma işlemidir; mevcut değerleri öğrenmek için kullanılmamalı. Mevcut servisi tahmine dayanarak değiştirmedik.
 - **Test durumu:** Kaynak kodu doğrulandı; gerçek browser preflight/POST ve DB kayıt kontrolü henüz çalıştırılmadı. 1.4 **DEVAM EDİYOR**.
 - **Kaldığımız yer:** Render panelinde frontend build env `VITE_API_BASE_URL=https://vip-transfer-dalaman-api-test.onrender.com` ve backend env `FRONTEND_ORIGIN=https://vip-transfer-dalaman-test.onrender.com` değerlerini doğrula; frontend env değiştiyse yeniden build gerekir. Sonra gerçek tarayıcı E2E'ye geç.
+
+## 2026-11-16 — 1.4 ortam değişkenleri standardı dosyası
+- **Problem:** Local Vite proxy ile Render static-site API adresi farklı davranır; örnek ortam yapılandırması yoktu.
+- **Değişiklik:** `frontend/.env.example` oluşturuldu; local `VITE_API_BASE_URL` boş olabilir, Render staging build için tam HTTPS API origin gerekir. `VITE_SITE_NAME`/`VITE_SITE_URL` marka ve domain kararı verilene kadar boş bırakılır. Commit `162d52e`.
+- **Güvenlik:** `VITE_` değişkenleri frontend JS içine gömülür; gizli bilgi içeremez. Gerçek Render environment değerleri okunmadı veya değiştirilmedi.
+- **Test:** Belge commit'i oluşturuldu; Render'ın yeni frontend build'inin sonucu ve gerçek browser E2E henüz doğrulanmadı. Bu dosya tek başına Render env ayarlarını değiştirmez.
+- **Durum:** 1.4 **DEVAM EDİYOR**. **Kaldığımız yer:** Render panelinde iki env değerini kontrol et; sonra yeni build, CORS preflight ve izole DB E2E testini doğrula.
