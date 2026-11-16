@@ -1,3 +1,9 @@
+## 2026-11-17 — Müşteri değişiklik ve iptal talepleri
+- **Kodlandı:** Rezervasyon onay ekranında Change / Cancellation destek bağlantıları (`8925ed2`), /booking/lookup sayfasında referans girilerek aynı talepler (`7c380ee`). Sadece referansla kişisel veri gösterilmez; mesaj gönderimi rezervasyonu değiştirmez veya iptal etmez.
+- **Güvenli geçiş:** `VITE_WHATSAPP_NUMBER` geçerli gerçek işletme numarası olarak tanımlanırsa `wa.me` üzerinden hazır mesaj; tanımlanmazsa e-posta fallback (`26869ec`). Geçici `0555 555 55 55` WhatsApp hedefi olarak kullanılmaz. Örnek environment dosyası güncellendi (`035bd62`).
+- **Yayın öncesi:** Gerçek işletme WhatsApp numarasını Render frontend build environment'ına ekle, yeniden build/deploy yap, gerçek cihazda bağlantıyı ve mesajı test et. Telefon numarası admin panelinden düzenlenebilir hâle getirme işi henüz açık.
+- **Açık:** Rezervasyon doğrulamalı görüntüleme, kalıcı destek talebi/audit geçmişi ve otomatik müşteri bildirimi bu MVP akışına dahil değildir. CI ve Render son commit sonuçları ayrıca doğrulanmalıdır.
+
 # EKSİKLERİMİZ — Uygulama ve öğrenme günlüğü
 
 Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → neden → düzeltme → test → ortaya çıkan yeni sorun → sonuç yazılır. Doğrulanmadan "tamamlandı" denmez.
