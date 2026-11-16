@@ -9,7 +9,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Gerçek uçtan uca rezervasyon:** Dalaman → desteklenen destinasyon, tarih/saat Türkiye yerel saati, yolcu, bagaj, bebek koltuğu, uçuş ve otel alanları; POST sonucu referans numarası; backend/DB kaydı kontrolü.
 - [ ] **Yenileme:** Başarı ekranını yenileyince referans korunuyor; yeni rezervasyon başlatılınca eski referans temizleniyor.
 - [ ] **Çift gönderim:** Aynı talep iki kez tıklandığında yalnızca tek kayıt oluşuyor; backend idempotency kontrolü doğrulanıyor.
-- [ ] **Hata akışı:** API erişilemezse kullanıcıya yanlışlıkla 'başarılı' denmiyor; belirsiz gönderimde destek iletişimi gösteriliyor.
+- [ ] **Hata akışı:** API erişilemezse veya geçersiz rezervasyon ID döndürürse kullanıcıya yanlışlıkla 'başarılı' denmiyor; belirsiz gönderimde destek iletişimi gösteriliyor. Kod koruması `f319d0e8`; canlı smoke bekliyor.
 - [ ] **Gerçek fiyat ve kapasite:** Fiyat kataloğu işletme tarafından doğrulanmış; geçersiz araç/rota ve aşırı kapasite reddediliyor.
 - [ ] **İletişim bilgileri:** Geçici telefon `05555555555` ve `ali_sonmez35@hotmail.com` yayına çıkmadan işletme tarafından doğrulanmalı/değiştirilmeli; yanlış numarayla yayın yapılmamalı.
 - [ ] **İşletme bilgileri ve yasal metinler:** İptal, ödeme, KVKK/gizlilik ve işletme kimliği doğrulanmış; bilinmeyen şartlar vaat edilmiyor.
@@ -25,3 +25,8 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - Kapsamlı tarayıcı E2E otomasyonu; ancak yukarıdaki manuel gerçek rezervasyon testi atlanamaz.
 
 **Durum:** Bu belge bir kontrol listesidir, testlerin yapıldığına dair kanıt değildir. İşaretlenmemiş maddeler doğrulanmamıştır.
+
+## 2026-11-16 durum kontrolü
+- GitHub Actions `43923429251` **success** (önceki değişiklikler).
+- `f319d0e8`: API'den geçerli pozitif tam sayı rezervasyon ID gelmeden başarı makbuzu oluşturulması engellendi; yeni commit CI ve canlı smoke bekliyor.
+- Render servislerini bağımsız doğrulama henüz yapılmadı (workspace seçimi gerekli); deploy durumunu varsayma.
