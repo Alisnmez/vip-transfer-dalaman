@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getDashboardSummary } from '../../features/booking/api'
+import { ProcessingButton } from '../../components/ProcessingButton'
 import type { DashboardSummary } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 
@@ -40,7 +41,7 @@ export function DashboardPage() {
           <h1 className="text-2xl font-bold text-admin-primary">Booking overview</h1>
           <p className="text-on-surface-variant">Live booking requests from the database. Dates use Turkey time.</p>
         </div>
-        <button type="button" onClick={() => { void refresh() }} disabled={loading} className="rounded-lg border border-outline-variant bg-white px-4 py-2 disabled:opacity-50">Refresh</button>
+        <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 disabled:opacity-50">Refresh</ProcessingButton>
       </div>
       {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
       {loading && <p>Loading bookings...</p>}
