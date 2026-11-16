@@ -182,7 +182,7 @@ export function BookingPassengerPage() {
                   </label>
                   <textarea
                     className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all resize-none"
-                    placeholder="Flight number, child seat requirements, extra luggage details..."
+                    placeholder="Child seat requirements, extra luggage details, or other pickup instructions..."
                     rows={4}
                     value={specialRequests}
                     onChange={(event) => setSpecialRequests(event.target.value)}
