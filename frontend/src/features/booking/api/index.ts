@@ -59,10 +59,10 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
     return (responseText ? JSON.parse(responseText) : undefined) as T
   } catch (error) {
     if (error instanceof Error && error.name === 'AbortError') {
-      throw new Error('The booking service did not respond within 60 seconds. Please contact support before retrying, as your booking may have been received.')
+      throw new Error('The booking service did not respond within 60 seconds. Please contact support before retrying, as your booking may have been received.', { cause: error })
     }
     if (error instanceof TypeError) {
-      throw new Error('Unable to reach the booking service. Please check your connection and contact support before retrying.')
+      throw new Error('Unable to reach the booking service. Please check your connection and contact support before retrying.', { cause: error })
     }
     throw error
   } finally {
