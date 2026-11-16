@@ -221,6 +221,27 @@ export function BookingConfirmationPage() {
             <p className="mb-6 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
             <p className="text-sm uppercase tracking-wide">Booking Reference</p>
             <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
+            <div className="mb-6 flex flex-wrap justify-center gap-3">
+              <button
+                className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary hover:bg-slate-100"
+                onClick={() => {
+                  if (navigator.clipboard?.writeText) {
+                    void navigator.clipboard.writeText(String(receipt.id)).catch(() => setError('Unable to copy automatically. Please select the booking reference above.'))
+                  } else {
+                    setError('Automatic copy is unavailable. Please select the booking reference above.')
+                  }
+                }}
+                type="button"
+              >
+                Copy Booking Reference
+              </button>
+              <a
+                className="rounded-lg bg-admin-primary px-5 py-2 font-semibold text-white"
+                href={`mailto:ali_sonmez35@hotmail.com?subject=${encodeURIComponent(`Booking request #${receipt.id}`)}`}
+              >
+                Contact About This Booking
+              </a>
+            </div>
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
               <p><strong>Passenger:</strong> {display(receipt.customerName)}</p>
               <p><strong>Pickup:</strong> {display(receipt.pickUpLocation)}</p>
