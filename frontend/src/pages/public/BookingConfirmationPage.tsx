@@ -12,6 +12,8 @@ type TransferDetails = {
   returnTime?: string
   passengerCount?: number
   flightNumber?: string
+  luggageCount?: number
+  babySeatCount?: number
   vehicleId?: string
   vehicleName?: string
   vehicleType?: string
@@ -88,6 +90,8 @@ export function BookingConfirmationPage() {
         email: passenger.email,
         vehicleId: transfer.vehicleId,
         ...(transfer.flightNumber ? { flightNumber: transfer.flightNumber } : {}),
+        ...(typeof transfer.luggageCount === 'number' ? { luggageCount: transfer.luggageCount } : {}),
+        ...(typeof transfer.babySeatCount === 'number' ? { babySeatCount: transfer.babySeatCount } : {}),
         countryOfResidence: passenger.countryOfResidence || '',
         transferAddress: passenger.transferAddress || '',
         specialRequests: passenger.specialRequests || '',
@@ -123,6 +127,8 @@ export function BookingConfirmationPage() {
               {transfer.tripType === 'round-trip' && <p><strong>Return:</strong> {returnSchedule} ({display(transfer.dropOffLocation)} → {display(transfer.pickUpLocation)})</p>}
               <p><strong>Schedule:</strong> {schedule}</p>
               {transfer.flightNumber && <p><strong>Flight:</strong> {transfer.flightNumber}</p>}
+              <p><strong>Luggage:</strong> {display(transfer.luggageCount)}</p>
+              <p><strong>Baby seats:</strong> {display(transfer.babySeatCount)}</p>
               <p><strong>Price:</strong> {price}</p>
             </div>
             <a href="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</a>
@@ -184,6 +190,8 @@ export function BookingConfirmationPage() {
                   </>
                 )}
                 {transfer.flightNumber && <SummaryBlock icon="flight_takeoff" label="Flight Number" value={transfer.flightNumber} />}
+                <SummaryBlock icon="luggage" label="Luggage" value={display(transfer.luggageCount)} />
+                <SummaryBlock icon="child_care" label="Baby Seats" value={display(transfer.babySeatCount)} />
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
