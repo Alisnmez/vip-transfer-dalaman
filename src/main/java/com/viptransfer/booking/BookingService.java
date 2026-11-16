@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.HexFormat;
@@ -129,6 +131,13 @@ public class BookingService {
 
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+    }
+
+    public Page<Booking> getBookingPage(int page, int size) {
+        if (page < 0 || size < 1 || size > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");
+        }
+        return bookingRepository.findAll(PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
     }
 
     @Transactional
