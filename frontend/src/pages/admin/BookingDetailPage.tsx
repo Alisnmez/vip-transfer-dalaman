@@ -15,7 +15,7 @@ const airport = 'Dalaman Airport'
 const nextStatuses: Record<string, string[]> = {
   PENDING: ['CONFIRMED', 'CANCELLED'],
   CONFIRMED: ['COMPLETED', 'CANCELLED'],
-  COMPLETED: [],
+  COMPLETED: ['CONFIRMED', 'PENDING'],
   CANCELLED: [],
 }
 
@@ -44,6 +44,7 @@ export function BookingDetailPage() {
   async function changeStatus(status: string) {
     if (!booking || status === bookingStatus(booking.status)) return
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
+    if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${status}? Only do this to correct an incorrectly completed booking.`)) return
     await runSaving(async () => {
       setError(''); setNotice('')
       try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
