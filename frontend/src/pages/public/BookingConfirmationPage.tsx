@@ -189,10 +189,10 @@ export function BookingConfirmationPage() {
 
         <header className="text-center mb-12">
           <h1 className="font-title-lg text-title-lg text-admin-primary mb-2">
-            Final Confirmation
+            Review Your Booking Request
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Please review your booking details before confirming your transfer.
+            Please review your details before sending a transfer request. The operator will confirm availability.
           </p>
         </header>
 
@@ -338,7 +338,7 @@ export function BookingConfirmationPage() {
               onClick={handleConfirm}
               type="button"
             >
-              CONFIRM BOOKING
+              SUBMIT BOOKING REQUEST
             </ProcessingButton>
             <p className="font-label-xs text-label-xs text-outline">
               By submitting, you confirm the details above are accurate and request a transfer.
