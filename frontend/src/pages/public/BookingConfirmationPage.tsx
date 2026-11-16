@@ -148,6 +148,13 @@ export function BookingConfirmationPage() {
         setError('Your transfer date is no longer valid. Please return to the first step and select a future date.')
         return
       }
+      if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
+          transferData.passengerCount > 16 ||
+          (transferData.luggageCount !== undefined && transferData.luggageCount > transferData.passengerCount + 2) ||
+          !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(passengerData.email || '')) {
+        setError('Please review the passenger count, luggage and email address before confirming.')
+        return
+      }
       if (!passengerData.customerName || !passengerData.phoneNumber || !passengerData.email ||
           !transferData.passengerCount || !transferData.pickUpLocation || !transferData.dropOffLocation ||
           !transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId || !transferData.tripType ||
