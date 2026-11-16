@@ -15,6 +15,7 @@ export function BookingPassengerPage() {
   const [email, setEmail] = useState('')
   const [countryOfResidence, setCountryOfResidence] = useState('')
   const [transferAddress, setTransferAddress] = useState('')
+  const [hotelName, setHotelName] = useState('')
   const [specialRequests, setSpecialRequests] = useState('')
   const [error, setError] = useState('')
 
@@ -52,6 +53,7 @@ export function BookingPassengerPage() {
       email: email.trim(),
       countryOfResidence,
       transferAddress: transferAddress.trim(),
+      hotelName: hotelName.trim(),
       specialRequests: specialRequests.trim(),
     }))
     navigate('/booking/confirmation')
@@ -174,6 +176,11 @@ export function BookingPassengerPage() {
                     onChange={(event) => setTransferAddress(event.target.value)}
                     required
                   />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="hotel-name" className="font-label-sm text-label-sm text-on-surface-variant">Hotel or Accommodation Name (optional)</label>
+                  <input id="hotel-name" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md" placeholder="e.g. Green Nature Diamond Hotel" maxLength={120} value={hotelName} onChange={(event) => setHotelName(event.target.value)} />
                 </div>
 
                 <div className="flex flex-col gap-2">
