@@ -429,6 +429,16 @@ class BookingIntegrationTests {
                 "A retry must not create a second booking");
         org.junit.jupiter.api.Assertions.assertEquals(countBefore + 1, bookingRepository.count(),
                 "Retrying one request must insert exactly one row");
+        Long savedId = objectMapper.readTree(first).get("id").asLong();
+        String adminAuthorization = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+        mockMvc.perform(get("/bookings/{id}", savedId)
+                        .header("Authorization", adminAuthorization))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(savedId))
+                .andExpect(jsonPath("$.customerName").value("Retry Test"))
+                .andExpect(jsonPath("$.status").value("PENDING"));
+
     }
 
     @Test
