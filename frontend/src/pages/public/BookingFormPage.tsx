@@ -31,19 +31,44 @@ const vehicleImages = [
   },
 ]
 
+type TransferDraft = {
+  tripType?: 'one-way' | 'round-trip'
+  vehicleId?: string
+  pickUpLocation?: string
+  dropOffLocation?: string
+  pickUpDate?: string
+  pickUpTime?: string
+  flightNumber?: string
+  returnDate?: string
+  returnTime?: string
+  passengerCount?: number
+  luggageCount?: number
+  babySeatCount?: number
+}
+
+function readTransferDraft(): TransferDraft {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+    return value !== null && typeof value === 'object' ? value as TransferDraft : {}
+  } catch {
+    return {}
+  }
+}
+
 export function BookingFormPage() {
-  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
-  const [selectedVehicleId, setSelectedVehicleId] = useState('vip-minivan')
-  const [pickUpLocation, setPickUpLocation] = useState('Dalaman Airport')
-  const [dropOffLocation, setDropOffLocation] = useState('')
-  const [pickUpDate, setPickUpDate] = useState('')
-  const [pickUpTime, setPickUpTime] = useState('')
-  const [flightNumber, setFlightNumber] = useState('')
-  const [returnDate, setReturnDate] = useState('')
-  const [returnTime, setReturnTime] = useState('')
-  const [passengers, setPassengers] = useState(4)
-  const [luggages, setLuggages] = useState(3)
-  const [babySeats, setBabySeats] = useState(1)
+  const [draft] = useState(readTransferDraft)
+  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
+  const [selectedVehicleId, setSelectedVehicleId] = useState(transferVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
+  const [pickUpLocation, setPickUpLocation] = useState(draft.pickUpLocation || 'Dalaman Airport')
+  const [dropOffLocation, setDropOffLocation] = useState(draft.dropOffLocation ?? '')
+  const [pickUpDate, setPickUpDate] = useState(draft.pickUpDate ?? '')
+  const [pickUpTime, setPickUpTime] = useState(draft.pickUpTime ?? '')
+  const [flightNumber, setFlightNumber] = useState(draft.flightNumber ?? '')
+  const [returnDate, setReturnDate] = useState(draft.returnDate ?? '')
+  const [returnTime, setReturnTime] = useState(draft.returnTime ?? '')
+  const [passengers, setPassengers] = useState(draft.passengerCount ?? 4)
+  const [luggages, setLuggages] = useState(draft.luggageCount ?? 3)
+  const [babySeats, setBabySeats] = useState(draft.babySeatCount ?? 1)
   const [formError, setFormError] = useState('')
   const [today] = useState(() => {
     const now = new Date()
