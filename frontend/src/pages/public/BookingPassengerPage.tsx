@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
+import { parseTurkeyDateTime } from '../../features/booking/turkeyTime'
 
 
 type SavedPassenger = {
@@ -82,15 +84,36 @@ export function BookingPassengerPage() {
       setError('Please enter a valid email address.')
       return
     }
-    let transferInfo: { pickUpDate?: string; pickUpTime?: string; pickUpLocation?: string; dropOffLocation?: string }
+    let transferInfo: Record<string, unknown>
     try {
-      transferInfo = JSON.parse(savedTransferInfo)
+      const parsed: unknown = JSON.parse(savedTransferInfo)
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('Invalid transfer draft')
+      transferInfo = parsed as Record<string, unknown>
     } catch {
-      setError('Transfer details could not be read. Please return to the previous step.')
+      setError('Transfer details could not be read. Please return to the transfer step.')
       return
     }
-    if (!transferInfo.pickUpDate || !transferInfo.pickUpTime || !transferInfo.pickUpLocation || !transferInfo.dropOffLocation) {
-      setError('Please complete the transfer details first.')
+    const selectionError = validateTransferSelection({
+      pickUpLocation: typeof transferInfo.pickUpLocation === 'string' ? transferInfo.pickUpLocation : undefined,
+      dropOffLocation: typeof transferInfo.dropOffLocation === 'string' ? transferInfo.dropOffLocation : undefined,
+      vehicleId: typeof transferInfo.vehicleId === 'string' ? transferInfo.vehicleId : undefined,
+      tripType: transferInfo.tripType === 'round-trip' ? 'round-trip' : transferInfo.tripType === 'one-way' ? 'one-way' : undefined,
+      passengerCount: typeof transferInfo.passengerCount === 'number' ? transferInfo.passengerCount : undefined,
+      luggageCount: typeof transferInfo.luggageCount === 'number' ? transferInfo.luggageCount : undefined,
+      babySeatCount: typeof transferInfo.babySeatCount === 'number' ? transferInfo.babySeatCount : undefined,
+    })
+    if (selectionError) {
+      setError(selectionError)
+      return
+    }
+    const pickup = typeof transferInfo.pickUpDate === 'string' && typeof transferInfo.pickUpTime === 'string'
+      ? parseTurkeyDateTime(transferInfo.pickUpDate, transferInfo.pickUpTime) : null
+    const returning = transferInfo.tripType === 'round-trip'
+      ? typeof transferInfo.returnDate === 'string' && typeof transferInfo.returnTime === 'string'
+        ? parseTurkeyDateTime(transferInfo.returnDate, transferInfo.returnTime) : null
+      : undefined
+    if (pickup === null || pickup <= Date.now() || (transferInfo.tripType === 'round-trip' && (returning === null || returning === undefined || returning <= pickup))) {
+      setError('Your transfer date is no longer valid. Please return to the transfer step and choose a future date in Turkey local time.')
       return
     }
     if (!countryOfResidence) {
