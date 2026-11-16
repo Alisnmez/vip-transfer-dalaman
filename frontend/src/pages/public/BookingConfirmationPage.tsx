@@ -47,8 +47,9 @@ type BookingReceipt = {
 }
 
 function readReceipt(): BookingReceipt | null {
-  for (const storage of [sessionStorage, localStorage]) {
+  for (const kind of ['session', 'local'] as const) {
     try {
+      const storage = kind === 'session' ? sessionStorage : localStorage
       const raw = storage.getItem(RECEIPT_KEY)
       if (!raw) continue
       const value: unknown = JSON.parse(raw)
@@ -149,8 +150,9 @@ export function BookingConfirmationPage() {
         schedule: `${transfer.pickUpDate} ${transfer.pickUpTime}`,
         ...(transfer.tripType === 'round-trip' ? { returnSchedule: `${transfer.returnDate} ${transfer.returnTime}` } : {}),
       }
-      for (const storage of [sessionStorage, localStorage]) {
+      for (const kind of ['session', 'local'] as const) {
         try {
+          const storage = kind === 'session' ? sessionStorage : localStorage
           storage.setItem(RECEIPT_KEY, JSON.stringify(savedReceipt))
         } catch {
           // Continue even when one browser storage mechanism is unavailable.
