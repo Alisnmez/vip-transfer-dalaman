@@ -5,6 +5,8 @@ const BOOKING_URL = `${API_BASE_URL}/bookings`
 
 // Retry keys survive a page refresh in the same tab without storing customer details.
 const pendingBookingKeys = new Map<string, string>()
+// Share the same POST promise when a user submits an identical booking twice at once.
+const inFlightBookings = new Map<string, Promise<Booking>>()
 
 async function retryStorageKey(payload: string): Promise<string> {
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload))
@@ -81,21 +83,30 @@ export function getBooking(id: number) {
 export async function createBooking(data: BookingRequest) {
   const payload = JSON.stringify(data)
   const storageKey = await retryStorageKey(payload)
-  let key = pendingBookingKeys.get(storageKey) ?? readRetryKey(storageKey)
-  if (!key) {
-    key = crypto.randomUUID()
-  }
-  pendingBookingKeys.set(storageKey, key)
-  saveRetryKey(storageKey, key)
+  const existingRequest = inFlightBookings.get(storageKey)
+  if (existingRequest) return existingRequest
 
-  const booking = await request<Booking>(BOOKING_URL, {
-    method: 'POST',
-    headers: { 'Idempotency-Key': key },
-    body: payload,
-  })
-  pendingBookingKeys.delete(storageKey)
-  clearRetryKey(storageKey)
-  return booking
+  const submission = (async () => {
+    let key = pendingBookingKeys.get(storageKey) ?? readRetryKey(storageKey)
+    if (!key) key = crypto.randomUUID()
+    pendingBookingKeys.set(storageKey, key)
+    saveRetryKey(storageKey, key)
+
+    const booking = await request<Booking>(BOOKING_URL, {
+      method: 'POST',
+      headers: { 'Idempotency-Key': key },
+      body: payload,
+    })
+    pendingBookingKeys.delete(storageKey)
+    clearRetryKey(storageKey)
+    return booking
+  })()
+  inFlightBookings.set(storageKey, submission)
+  try {
+    return await submission
+  } finally {
+    if (inFlightBookings.get(storageKey) === submission) inFlightBookings.delete(storageKey)
+  }
 }
 
 export function updateBooking(id: number, data: BookingRequest) {
