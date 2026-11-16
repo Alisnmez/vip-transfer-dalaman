@@ -546,3 +546,9 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 - Confirmation sayfası bu ortak fonksiyonları kullanıyor (`443177df`).
 - `frontend/tests/receipt.test.mjs` ile yeniden yükleme simülasyonu, localStorage fallback, geçersiz/eski/gelecek zamanlı veri ve engellenmiş storage durumları test kapsamına alındı (`2c7e477b`).
 - Bu testler browser otomasyonu değildir; gerçek çift POST, ağ kopması ve tarayıcı E2E testi hâlâ açık. Admin kapsam dışı.
+
+
+## 2026-11-16 — Aynı anda iki rezervasyon POST'unu önleme
+- Frontend API `createBooking`, aynı JSON payload için eşzamanlı çağrıları `inFlightBookings` Promise haritasında birleştiriyor (`b432843f`). İki çağrı aynı backend POST'unun sonucunu bekliyor; başarısız istekte map temizleniyor ve sessionStorage'daki idempotency key tekrar denemeye kalıyor.
+- Backend `Idempotency-Key` ve PostgreSQL benzersizlik koruması ayrı güvenlik katmanı olarak korunuyor.
+- Gerçek browser çift tıklama testi, ağ kopması ve backend eşzamanlı DB testi CI ile birlikte yeniden doğrulanmalı. Admin kapsam dışı.
