@@ -20,26 +20,6 @@ public class BookingController {
 
     private final BookingSupportService bookingSupportService;
 
-    @PostMapping("/support/request-code")
-    public java.util.Map<String, String> requestSupportCode(@RequestBody java.util.Map<String, String> payload) {
-        bookingSupportService.requestCode(payload.get("reference"), payload.get("email"));
-        return java.util.Map.of("message", "If the details match a booking, a verification code has been sent.");
-    }
-
-    @PostMapping("/support/verify-code")
-    public java.util.Map<String, Boolean> verifySupportCode(@RequestBody java.util.Map<String, String> payload) {
-        String token = bookingSupportService.verifyCode(
-                payload.get("reference"), payload.get("email"), payload.get("code"));
-        return token == null ? java.util.Map.of("verified", false) :
-                java.util.Map.of("verified", true, "token", token);
-    }
-
-    @PostMapping("/support/request")
-    public java.util.Map<String, String> submitSupportRequest(@RequestBody java.util.Map<String, String> payload) {
-        bookingSupportService.submitRequest(payload.get("token"), payload.get("type"));
-        return java.util.Map.of("message", "Your verified request has been sent to our team.");
-    }
-
     @GetMapping("/{id}")
     public Booking getBooking(@PathVariable Long id) {
         return bookingService.getBooking(id);
