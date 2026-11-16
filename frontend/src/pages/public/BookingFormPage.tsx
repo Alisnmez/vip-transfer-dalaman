@@ -707,7 +707,7 @@ function BookingFooter() {
           Prices are shown in GBP. Your request is subject to operator confirmation.
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          Contact: <span>Phone number to be confirmed</span> · <a href="mailto:ali_sonmez35@hotmail.com" className="underline">ali_sonmez35@hotmail.com</a>
+          Contact: <a href="tel:+905555555555" className="underline">0555 555 55 55</a> · <a href="mailto:ali_sonmez35@hotmail.com" className="underline">ali_sonmez35@hotmail.com</a>
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
           © {new Date().getFullYear()} VIP Transfer Dalaman.
