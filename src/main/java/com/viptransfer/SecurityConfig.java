@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
-                        .requestMatchers("/bookings", "/bookings/**").hasRole("ADMIN")
+                        .requestMatchers("/bookings", "/bookings/**", "/admin/auth-check").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();
@@ -47,6 +47,7 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/bookings/**", config);
         source.registerCorsConfiguration("/bookings", config);
+        source.registerCorsConfiguration("/admin/auth-check", config);
         return source;
     }
 
