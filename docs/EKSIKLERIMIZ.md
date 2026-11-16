@@ -55,13 +55,20 @@ Bu dosya projenin tek ilerleme kaydıdır. Her görevde: problem → kanıt → 
 | No | Alt iş | Durum | Kanıt | Sonraki adım |
 |---|---|---|---|---|
 | 4.1 | Admin rezervasyon listesi | TEST BEKLİYOR | Gerçek `getBookings()` verisi ve müşteri/rota/referans araması (`2d0a180a`); manuel yenileme eklendi (`fd14367`). | Yetkili admin oturumunda yeni kayıtların yenilemeyle geldiğini doğrula |
-| 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | `getBooking(id)` ile read-only detay sayfası eklendi (`5698437a`); React ve PostgreSQL CI `43951815776` başarılı. | Yetkili kullanıcı ile detay görüntülemeyi doğrula |
+| 4.2 | Admin rezervasyon detayı | TEST BEKLİYOR | Detay ve düzenleme mevcut; serbest metin rota/araç alanları katalog seçimine çevrildi, fiyatı olmayan kombinasyon kayıttan önce engelleniyor (`c551bb5`). | CI ve canlı admin düzenleme senaryosunda doğrula |
 | 4.4 | Admin dashboard gerçek veriler | TEST BEKLİYOR | Uydurma istatistikler kaldırıldı (`86b2d9b8`); iptal edilenler planlanan taleplerden çıkarıldı (`278d4be`), PENDING dahil onaylanmamış talepler açık etiketlendi (`cc54ea6`). | CI ve gerçek DB ile doğrula; İstanbul saat dilimi ve tarihlerini test et |
 | 4.3 | Admin API erişim güvenliği | TEST BEKLİYOR | `SecurityConfig` POST dışında `/bookings/**` için ADMIN rolü ve HTTP Basic istiyor; boş ADMIN_PASSWORD admini kilitliyor. Admin girişi artık müşteri listesini indirmeden korumalı `GET /admin/auth-check` (204 boş yanıt) çağırıyor (`739de66`, `f3b202e`, `d1dfa17`, `9714160`); parolayı yalnızca bellekte tutuyor. Önceki CI `43952884744` başarılı, yeni değişiklikler için CI bekleniyor. | Canlı HTTPS, Render ADMIN_PASSWORD ve auth-check için yetkisiz 401 / yetkili 204 doğrulansın; uzun vadede sunucu tarafı oturum/CSRF koruması değerlendirilsin |
 
 ### 5–12. Diğer ana maddeler
 
 **Durum:** BEKLİYOR.
+
+## 2026-11-17 — Admin rezervasyon düzenlemede fiyat bulunamaması
+- **Aktif madde:** 4.2 — admin rezervasyon detaylarını düzenleme.
+- **Hata:** Kullanıcı `Error while saving details: No price found for the selected destination and vehicle.` bildirdi. Backend `TransferPricingService` katalogdaki `destination` ve `vehicleId` değerleriyle birebir eşleşme istiyor; admin formu bunları serbest metin olarak alıyordu.
+- **Düzeltme:** Pickup/destination ve araç alanları mevcut `transferPrices` / `transferVehicles` listesinden seçilir hale getirildi. Save öncesinde bir tarafın Dalaman Airport olması ve rota/araç fiyat kaydının bulunması kontrol ediliyor (`c551bb5`). Backend fiyat güvenliği gevşetilmedi.
+- **Test:** Commit edildi; yeni CI ve canlı düzenleme testi bekleniyor. **TEST BEKLİYOR.**
+- **Kaldığımız yer:** CI sonucu ve admin düzenleme formunda geçerli rota/araçla kayıt; geçmiş veya artık katalogda bulunmayan rotalar için ayrıca uyumluluk değerlendirmesi.
 
 ## 2026-11-17 — Admin girişinde kişisel veri indirmeyi kaldırma
 - **Aktif madde:** 4.3 — admin erişim güvenliği.
