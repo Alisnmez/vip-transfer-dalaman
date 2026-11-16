@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getBookings } from '../../features/booking/api'
-import { bookingStatus, formatTransferDateTime, turkeyNowLocal } from '../../features/booking/formatters'
-import type { Booking } from '../../features/booking/types'
+import { getDashboardSummary } from '../../features/booking/api'
+import type { DashboardSummary } from '../../features/booking/api'
+import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 
 export function DashboardPage() {
-  const [bookings, setBookings] = useState<Booking[]>([])
+  const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -14,7 +14,7 @@ export function DashboardPage() {
     setLoading(true)
     setError('')
     try {
-      setBookings(await getBookings())
+      setSummary(await getDashboardSummary())
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to load bookings')
     } finally {
@@ -24,23 +24,14 @@ export function DashboardPage() {
 
   useEffect(() => {
     let active = true
-    getBookings()
-      .then(data => { if (active) setBookings(data) })
+    getDashboardSummary()
+      .then(data => { if (active) setSummary(data) })
       .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [])
 
-  const now = turkeyNowLocal()
-  const today = now.slice(0, 10)
-  // Completed and cancelled requests belong to history, not the upcoming workload.
-  const activeBookings = bookings.filter(booking => ['PENDING', 'CONFIRMED'].includes(bookingStatus(booking.status)))
-  const todayBookings = activeBookings.filter(booking => booking.transferDateTime?.startsWith(today))
-  const pendingCount = bookings.filter(booking => bookingStatus(booking.status) === 'PENDING').length
-  const upcoming = activeBookings
-    .filter(booking => booking.transferDateTime && booking.transferDateTime >= now)
-    .sort((a, b) => a.transferDateTime.localeCompare(b.transferDateTime))
-    .slice(0, 8)
+  const upcoming = summary?.upcoming ?? []
 
   return (
     <main className="min-w-0 space-y-6 p-4 sm:p-8">
@@ -53,16 +44,16 @@ export function DashboardPage() {
       </div>
       {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
       {loading && <p>Loading bookings...</p>}
-      {!loading && !error && (
+      {!loading && !error && summary && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
               <p className="text-on-surface-variant">Total booking requests</p>
-              <p className="text-3xl font-bold text-admin-primary">{bookings.length}</p>
+              <p className="text-3xl font-bold text-admin-primary">{summary.total}</p>
             </div>
             <div className="rounded-xl border border-outline-variant bg-white p-6">
               <p className="text-on-surface-variant">Open requests for today</p>
-              <p className="text-3xl font-bold text-admin-primary">{todayBookings.length}</p>
+              <p className="text-3xl font-bold text-admin-primary">{summary.today}</p>
             </div>
           </div>
           <section className="rounded-xl border border-outline-variant bg-white p-6">
@@ -84,7 +75,7 @@ export function DashboardPage() {
               </div>
             )}
           </section>
-          <p className="text-sm text-on-surface-variant">{pendingCount} requests are pending confirmation. Today's and upcoming counts exclude completed and cancelled requests but may include pending requests; they are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
+          <p className="text-sm text-on-surface-variant">{summary.pending} requests are pending confirmation. Today's and upcoming counts exclude completed and cancelled requests but may include pending requests; they are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
         </>
       )}
     </main>
