@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { validateBookingDetails } from '../src/features/booking/validateBookingDetails.ts'
 
-const future = {
+const transfer = {
   pickUpLocation: 'Dalaman Airport',
   dropOffLocation: 'Marmaris(Any Hotel)',
   pickUpDate: '2035-06-10',
@@ -21,23 +21,48 @@ const passenger = {
   transferAddress: 'Example Hotel',
 }
 
-test('valid booking can proceed to final submission', () => {
-  assert.equal(validateBookingDetails(future, passenger, Date.UTC(2030, 0, 1)), null)
+const now = Date.UTC(2030, 0, 1)
+const check = (t = transfer, p = passenger) => validateBookingDetails(t, p, now)
+
+test('valid booking and reverse airport direction are accepted', () => {
+  assert.equal(check(), null)
+  assert.equal(check({ ...transfer, pickUpLocation: transfer.dropOffLocation, dropOffLocation: 'Dalaman Airport' }), null)
 })
 
-test('past dates and invalid return schedules are rejected', () => {
-  assert.ok(validateBookingDetails(future, passenger, Date.UTC(2036, 0, 1)))
-  assert.ok(validateBookingDetails({ ...future, tripType: 'round-trip', returnDate: '2035-06-09', returnTime: '12:00' }, passenger, Date.UTC(2030, 0, 1)))
+test('valid return journey and optional flight and hotel fields are accepted', () => {
+  assert.equal(check({
+    ...transfer, tripType: 'round-trip', returnDate: '2035-06-12',
+    returnTime: '10:30', flightNumber: 'TK 1234',
+  }, { ...passenger, hotelName: 'Example Hotel', specialRequests: 'Please call on arrival' }), null)
+})
+
+test('past, invalid and reversed transfer dates are rejected', () => {
+  assert.ok(validateBookingDetails(transfer, passenger, Date.UTC(2036, 0, 1)))
+  assert.ok(check({ ...transfer, pickUpDate: '2035-02-30' }))
+  assert.ok(check({ ...transfer, tripType: 'round-trip', returnDate: '2035-06-09', returnTime: '12:00' }))
+  assert.ok(check({ ...transfer, tripType: 'round-trip', returnDate: '2035-06-10', returnTime: '12:00' }))
+})
+
+test('invalid route, vehicle and capacity are rejected', () => {
+  assert.ok(check({ ...transfer, dropOffLocation: 'Unknown' }))
+  assert.ok(check({ ...transfer, vehicleId: 'unknown' }))
+  assert.ok(check({ ...transfer, passengerCount: 99 }))
+  assert.ok(check({ ...transfer, luggageCount: 99 }))
+  assert.ok(check({ ...transfer, babySeatCount: 3 }))
 })
 
 test('invalid contact details and missing residence are rejected', () => {
-  assert.ok(validateBookingDetails(future, { ...passenger, phoneNumber: '5551234567' }, Date.UTC(2030, 0, 1)))
-  assert.ok(validateBookingDetails(future, { ...passenger, email: 'invalid' }, Date.UTC(2030, 0, 1)))
-  assert.ok(validateBookingDetails(future, { ...passenger, countryOfResidence: '' }, Date.UTC(2030, 0, 1)))
+  assert.ok(check(transfer, { ...passenger, phoneNumber: '5551234567' }))
+  assert.ok(check(transfer, { ...passenger, phoneNumber: '+123' }))
+  assert.ok(check(transfer, { ...passenger, email: 'invalid' }))
+  assert.ok(check(transfer, { ...passenger, countryOfResidence: '' }))
+  assert.ok(check(transfer, { ...passenger, transferAddress: '  ' }))
 })
 
-test('invalid route, luggage and excessive passenger text are rejected', () => {
-  assert.ok(validateBookingDetails({ ...future, dropOffLocation: 'Unknown' }, passenger, Date.UTC(2030, 0, 1)))
-  assert.ok(validateBookingDetails({ ...future, luggageCount: 99 }, passenger, Date.UTC(2030, 0, 1)))
-  assert.ok(validateBookingDetails(future, { ...passenger, transferAddress: 'a'.repeat(251) }, Date.UTC(2030, 0, 1)))
+test('oversized text and malformed optional fields are rejected', () => {
+  assert.ok(check(transfer, { ...passenger, transferAddress: 'a'.repeat(251) }))
+  assert.ok(check(transfer, { ...passenger, hotelName: 'a'.repeat(121) }))
+  assert.ok(check(transfer, { ...passenger, specialRequests: 'a'.repeat(1001) }))
+  assert.ok(check({ ...transfer, flightNumber: 'INVALID!!!' }))
+  assert.ok(check(transfer, { ...passenger, hotelName: 7 }))
 })
