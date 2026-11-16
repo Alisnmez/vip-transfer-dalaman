@@ -1,3 +1,7 @@
+## 2026-11-17 — 4.4 Admin dashboard test genişletmesi
+- Dashboard özetine regresyon testi eklendi (`a27bd65`): toplam/bekleyen/bugün sayıları, aktif durum filtreleri, İstanbul gününün gece yarısı sınırları, yaklaşan transfer listesi ve `findAll()` ile tüm kayıtların indirilmemesi.
+- **Durum:** TEST BEKLİYOR. Test kodu commit edildi, ancak CI sonucu ve yeni backend dağıtımı henüz doğrulanmadı. Backend Render kuyruğu birikmiş; son sürümün `live` olmasını ve API'nin auth altında çalışmasını kontrol et.
+
 ## 2026-11-17 — 4.4 Admin dashboard performans düzeltmesi
 - **Problem:** Dashboard `GET /bookings` ile bütün müşteri kayıtlarını tarayıcıya indirip sayıları hesaplıyordu. Veri büyüdükçe gereksiz kişisel veri aktarımı ve yavaşlama riski vardı.
 - **Kod:** `BookingRepository` durum/tarih filtreli count ve en yakın 8 kayıt sorguları (`a2ff715c`); `BookingService.getDashboardSummary()` ve admin korumalı `GET /bookings/dashboard` (`e64669f1`, `f3510fc5`); frontend typed API ve dashboard geçişi (`771599f1`, `7c925e8f`).
