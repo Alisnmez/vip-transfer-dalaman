@@ -152,11 +152,11 @@ export function BookingConfirmationPage() {
       const savedReceipt: BookingReceipt = {
         id: booking.id,
         savedAt: Date.now(),
-        customerName: passenger.customerName,
-        pickUpLocation: transfer.pickUpLocation,
-        dropOffLocation: transfer.dropOffLocation,
-        schedule: `${transfer.pickUpDate} ${transfer.pickUpTime}`,
-        ...(transfer.tripType === 'round-trip' ? { returnSchedule: `${transfer.returnDate} ${transfer.returnTime}` } : {}),
+        customerName: passengerData.customerName,
+        pickUpLocation: transferData.pickUpLocation,
+        dropOffLocation: transferData.dropOffLocation,
+        schedule: `${transferData.pickUpDate} ${transferData.pickUpTime}`,
+        ...(transferData.tripType === 'round-trip' ? { returnSchedule: `${transferData.returnDate} ${transferData.returnTime}` } : {}),
       }
       for (const kind of ['session', 'local'] as const) {
         try {
