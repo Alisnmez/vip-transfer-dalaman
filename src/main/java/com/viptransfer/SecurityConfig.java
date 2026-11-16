@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
                         .requestMatchers("/bookings", "/bookings/**", "/admin/auth-check").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
