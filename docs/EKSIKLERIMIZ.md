@@ -1,3 +1,11 @@
+## 2026-11-17 — Admin rezervasyon takvimi (4.1 / 4.2)
+- **İstek:** Eski arayüzdeki gibi takvimden rezervasyon yönetimi; mevcut liste ve detay düzenleme korunmalı.
+- **Kodlandı:** Admin `Booking management` sayfasına Calendar / List geçişi (`16bb042e`), aylık takvim, önceki/sonraki ay, Today, Refresh, durum filtreleri, günlük rezervasyon sayısı ve güne tıklayınca saat/rota/müşteri/durum kartları (`a47ee21c`). Kartlar mevcut rezervasyon detay/düzenleme ekranına gider.
+- **Backend:** Admin korumalı `GET /bookings/calendar?month=YYYY-MM-01`; PostgreSQL'de yalnızca seçilen ayın transferlerini tarihe göre sıralar (`e131ef08`, `3e312ce8`, `2e6dd80b`). Ay sınırı `[ayın ilk günü, sonraki ayın ilk günü)`; tarih yerel Türkiye transfer saatiyle eşleşir.
+- **Test eklendi:** Ay başlangıcı/bitişi ve geçersiz gün için backend testleri (`f581dddd`). Türkiye bugününün tarayıcı locale formatından bağımsız hesaplanması (`d5f00c5f`).
+- **Durum:** TEST BEKLİYOR — GitHub CI, frontend build, Spring Data sorgu başlangıcı ve canlı admin ekranı henüz doğrulanmadı. Takvim değişiklikleri otomatik olarak rezervasyon düzenlemez; değişiklikler mevcut admin detay ekranında yapılır.
+- **İleri sürüm:** Sürükle-bırak takvim, haftalık/günlük zaman çizelgesi, şoför atama ve çakışma uyarıları ilk yayın kapsamında değil; değerlendirilecekse `docs/CANLI_YAYIN_SONRASI_GELISTIRMELER.md` dosyasına eklenir.
+
 ## 2026-11-17 — 4.4 Admin dashboard test genişletmesi
 - Dashboard özetine regresyon testi eklendi (`a27bd65`): toplam/bekleyen/bugün sayıları, aktif durum filtreleri, İstanbul gününün gece yarısı sınırları, yaklaşan transfer listesi ve `findAll()` ile tüm kayıtların indirilmemesi.
 - **Durum:** TEST BEKLİYOR. Test kodu commit edildi, ancak CI sonucu ve yeni backend dağıtımı henüz doğrulanmadı. Backend Render kuyruğu birikmiş; son sürümün `live` olmasını ve API'nin auth altında çalışmasını kontrol et.
