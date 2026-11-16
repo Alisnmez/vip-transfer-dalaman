@@ -139,28 +139,30 @@ export function BookingConfirmationPage() {
         setError('Saved booking details contain invalid values. Please return to the previous steps.')
         return
       }
-      const pickupDateTime = new Date(`${transferData.pickUpDate}T${transferData.pickUpTime}`)
-      const returnDateTime = transferData.tripType === 'round-trip'
-        ? new Date(`${transferData.returnDate}T${transferData.returnTime}`)
-        : null
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(transferData.pickUpDate) ||
-          !/^([01]\d|2[0-3]):[0-5]\d$/.test(transferData.pickUpTime) ||
-          (transferData.tripType === 'round-trip' &&
-            (!/^\d{4}-\d{2}-\d{2}$/.test(transferData.returnDate || '') ||
-             !/^([01]\d|2[0-3]):[0-5]\d$/.test(transferData.returnTime || ''))) ||
-          !Number.isFinite(pickupDateTime.getTime()) || pickupDateTime.getTime() <= Date.now() ||
-          (returnDateTime !== null && (!Number.isFinite(returnDateTime.getTime()) || returnDateTime <= pickupDateTime))) {
-        setError('Your transfer date is no longer valid. Please return to the first step and select a future date.')
-        return
+      // Transfer schedules are entered in Turkey local time (UTC+03:00), not the browser timezone.
+      const parseTurkeyDateTime = (date: string, time: string): number | null => {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) {
+          return null
+        }
+        const [year, month, day] = date.split('-').map(Number)
+        const [hour, minute] = time.split(':').map(Number)
+        const utc = Date.UTC(year, month - 1, day, hour - 3, minute)
+        const calendar = new Date(Date.UTC(year, month - 1, day))
+        if (calendar.getUTCFullYear() !== year ||
+            calendar.getUTCMonth() + 1 !== month ||
+            calendar.getUTCDate() !== day) {
+          return null
+        }
+        return utc
       }
-      if (pickupDateTime.getFullYear() !== Number(transferData.pickUpDate.slice(0, 4)) ||
-          pickupDateTime.getMonth() + 1 !== Number(transferData.pickUpDate.slice(5, 7)) ||
-          pickupDateTime.getDate() !== Number(transferData.pickUpDate.slice(8, 10)) ||
-          (returnDateTime !== null &&
-            (returnDateTime.getFullYear() !== Number(transferData.returnDate?.slice(0, 4)) ||
-             returnDateTime.getMonth() + 1 !== Number(transferData.returnDate?.slice(5, 7)) ||
-             returnDateTime.getDate() !== Number(transferData.returnDate?.slice(8, 10))))) {
-        setError('The saved transfer date is invalid. Please choose a valid date before confirming.')
+      const pickupTimestamp = parseTurkeyDateTime(transferData.pickUpDate, transferData.pickUpTime)
+      const returnTimestamp = transferData.tripType === 'round-trip'
+        ? parseTurkeyDateTime(transferData.returnDate || '', transferData.returnTime || '')
+        : null
+      if (pickupTimestamp === null || pickupTimestamp <= Date.now() ||
+          (transferData.tripType === 'round-trip' &&
+            (returnTimestamp === null || returnTimestamp <= pickupTimestamp))) {
+        setError('Your transfer date is no longer valid. Please return to the first step and select a future date in Turkey local time.')
         return
       }
       if (transferData.passengerCount === undefined || transferData.passengerCount < 1 ||
