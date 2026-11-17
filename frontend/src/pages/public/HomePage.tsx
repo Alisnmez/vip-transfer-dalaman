@@ -37,8 +37,8 @@ export function HomePage() {
       <section className="py-stack-lg bg-white border-b border-outline">
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
-            <div className="flex items-center gap-stack-md group">
-              <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center border border-outline group-hover:border-secondary transition-all">
+            <div className="flex min-w-0 items-center gap-stack-md group">
+              <div className="w-16 h-16 shrink-0 rounded-full bg-background flex items-center justify-center border border-outline group-hover:border-secondary transition-all">
                 <span translate="no" className="material-symbols-outlined text-primary text-3xl">
                   support_agent
                 </span>
@@ -84,7 +84,7 @@ export function HomePage() {
 
       <section className="py-24 bg-background">
         <div className="max-w-container-max mx-auto px-gutter">
-          <div className="flex justify-between items-end mb-stack-lg">
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end mb-stack-lg">
             <div>
               <h2 className="font-headline-lg text-headline-lg text-on-surface">
                 Our Vehicles
@@ -93,7 +93,7 @@ export function HomePage() {
                 Explore vehicle options for your transfer.
               </p>
             </div>
-            <Link className="text-secondary font-bold flex items-center gap-2 group" to="/vehicles">
+            <Link className="text-secondary font-bold flex items-center gap-2 group self-start shrink-0" to="/vehicles">
               View All Vehicles
               <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_forward
