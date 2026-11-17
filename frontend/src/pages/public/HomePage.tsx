@@ -29,7 +29,7 @@ export function HomePage() {
 
       <header className="relative min-h-[700px] flex items-center justify-center overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary" />
-        <div className="relative z-10 max-w-container-max mx-auto px-gutter text-center">
+        <div className="relative z-10 w-full min-w-0 max-w-container-max mx-auto px-gutter text-center">
           <h1 className="font-display-lg text-display-lg text-white mb-stack-md max-w-4xl mx-auto">
             Professional Airport Transfers from Dalaman
           </h1>
@@ -126,9 +126,9 @@ export function HomePage() {
               { title: 'Private Minivan', icon: 'directions_car', detail: 'Select a minivan category and enter your passenger and luggage needs.' },
               { title: 'Group Transfer', icon: 'airport_shuttle', detail: 'Check available group vehicle categories in the booking form.' },
             ].map((vehicle) => (
-              <article key={vehicle.title} className="professional-card accent-border-left p-6 rounded-xl">
-                <div className="h-32 mb-6 rounded-lg bg-primary/5 flex items-center justify-center">
-                  <span translate="no" className="material-symbols-outlined text-primary text-6xl">{vehicle.icon}</span>
+              <article key={vehicle.title} className="professional-card accent-border-left min-w-0 p-6 rounded-xl">
+                <div className="h-32 min-w-0 mb-6 rounded-lg bg-primary/5 flex items-center justify-center overflow-hidden">
+                  <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-primary text-6xl">{vehicle.icon}</span>
                 </div>
                 <h3 className="font-title-md text-on-surface mb-2">{vehicle.title}</h3>
                 <p className="text-on-surface-variant mb-6">{vehicle.detail}</p>
