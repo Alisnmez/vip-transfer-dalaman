@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 HTTP 5xx belirsiz yazma sonucu ve güvenli kullanıcı mesajları
+- **Sorun:** 5xx yanıtları `uncertain=true` olarak işaretleniyordu ancak ortak mesaj admin düzenleme/durum değişikliğinde yalnızca "try again later" diyordu; sunucunun değişikliği kaydetmiş olabileceği belirtilmiyordu.
+- **Kod:** `e51b8f1` ile 5xx için create/edit/status/read ayrıldı. Admin yazma işlemlerinde önce yenileyip sonucu doğrulama, create için aynı isteği tekrar deneme; salt-okunur işlemde yalnızca yükleme hatası anlatılıyor.
+- **Test:** `77c1a14` ile 503'te tüm dört eylem, belirsizlik ve ham sunucu hata metninin gizlenmesi için regresyon testi eklendi.
+- **Durum:** KOD VE TEST COMMIT EDİLDİ; yeni commit CI ve gerçek tarayıcı ağ kesintisi E2E kanıtı bekliyor. Mevcut üretim/staging DB, müşteri verisi veya deploy değiştirilmedi.
+
+
 ## 2026-11-17 — HTTP 408 admin yazma/okuma mesajları
 - Önceki HTTP 408 değişikliğinin son CI sonucu doğrulandı: `1e55eba` için GitHub Actions `44033026811` **success**.
 - **Sorun:** 408 belirsiz kabul edilmesine rağmen admin düzenleme/durum değişikliğinde ham `Request Timeout` gösteriliyor; okuma ve yazma ayrımı yapılmıyordu.
