@@ -91,3 +91,16 @@ test('HTTP 408 keeps booking outcome uncertain and gives a safe retry instructio
   assert.match(message, /retry the same request/i)
   assert.doesNotMatch(message, /HTTP|408/i)
 })
+
+test('HTTP 408 distinguishes read-only timeout from uncertain admin writes', () => {
+  const error = bookingHttpError(408, 'Request Timeout')
+  for (const action of ['edit', 'status']) {
+    const message = bookingErrorMessage(error, action)
+    assert.match(message, /changes may have been saved/i)
+    assert.match(message, /Refresh to verify/i)
+    assert.doesNotMatch(message, /408|HTTP|Request Timeout/i)
+  }
+  const readMessage = bookingErrorMessage(error, 'read')
+  assert.match(readMessage, /Loading bookings timed out/i)
+  assert.doesNotMatch(readMessage, /saved|changes|408|HTTP/i)
+})
