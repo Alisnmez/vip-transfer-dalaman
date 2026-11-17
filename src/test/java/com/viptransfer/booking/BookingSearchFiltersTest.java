@@ -29,7 +29,7 @@ class BookingSearchFiltersTest {
         service(repository).getBookingPage(2, 25, "CONFIRMED",
                 LocalDate.of(2026, 11, 1), LocalDate.of(2026, 11, 30), "Ali");
         verify(repository).findAll(any(Specification.class),
-                argThat(page -> page.getPageNumber() == 2 && page.getPageSize() == 25
+                org.mockito.ArgumentMatchers.<Pageable>argThat(page -> page.getPageNumber() == 2 && page.getPageSize() == 25
                         && page.getSort().getOrderFor("id").isDescending()));
     }
 
