@@ -1,0 +1,53 @@
+name: Booking browser smoke test
+
+on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/booking-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npx --yes playwright@1.58.2 install --with-deps chromium
+      - name: Start local frontend
+        run: npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/vite-preview.log 2>&1 & 
+      - name: Wait for frontend
+        run: |
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/vite-preview.log
+          exit 1
+      - name: Run browser smoke
+        run: npx --yes -p @playwright/test@1.58.2 playwright test e2e/booking-smoke.spec.mjs --reporter=line
+      - name: Upload browser diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: booking-browser-diagnostics
+          path: |
+            frontend/test-results/
+            frontend/playwright-report/
+          if-no-files-found: ignore
+          retention-days: 14
