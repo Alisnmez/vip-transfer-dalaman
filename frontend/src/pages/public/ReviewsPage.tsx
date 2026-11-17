@@ -16,7 +16,6 @@ export function ReviewsPage() {
   useEffect(() => {
     getPublishedReviews().then(setReviews).catch(() => {
       setFeedbackType('error')
-      setFeedbackType('error')
       setFeedback(reviewErrorMessage(undefined, 'load'))
     })
   }, [])
@@ -36,7 +35,6 @@ export function ReviewsPage() {
       setComment('')
       setPermission(false)
     } catch (error) {
-      setFeedbackType('error')
       setFeedbackType('error')
       setFeedback(reviewErrorMessage(error, 'submit'))
     } finally {
