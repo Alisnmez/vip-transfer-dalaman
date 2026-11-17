@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Rota landing page ilk uygulaması; yorumlar ve galeri son rötuşa alındı
+- **Durum:** ROTA KODLANDI — CI/Render, gerçek SEO indekslenebilirliği ve üretim alan adı doğrulaması bekliyor. Yorum/galeri içerikleri yayın öncesi son rötuşta yapılacak.
+- **Sorun:** `/routes` fiyat karşılaştırması sağlıyor fakat destinasyonlara özgü arama niyeti için ayrı sayfa ve iç bağlantılar bulunmuyordu.
+- **Çözüm / dosyalar:** `frontend/src/pages/public/RouteDetailPage.tsx` ile desteklenen destinasyon verisini kontrol eden Marmaris, Fethiye, Oludeniz, Gocek, Icmeler landing page bileşeni oluşturuldu (`b3e32158`); `frontend/src/app/router.tsx` rotası kaydedildi (`894de23f`); `RoutesPage.tsx` featured kartlarına iç bağlantı eklendi (`f97e125c`). Başlık ve description React 19 metadata bileşenleriyle sayfaya ekleniyor; hizmet/fiyat garantisi, sahte müşteri yorumu yok. **Önemli:** Test Render index.html halen `noindex,nofollow`; gerçek üretim domaini ve SSR/prerender, canonical/sitemap, Search Console/GA4 henüz kurulmadı. Bu sayfalar tek başına SEO tamamlandı anlamına gelmez.
+- **Yeni yayın kapsamı:** Gerçek/doğrulanabilir müşteri yorumları ve izinli müşteri/araç fotoğraflarıyla Gallery sayfası, kullanıcının talebiyle **P0 son yayın rötuşuna** eklendi (`5eb214ee`). İzin alınmadan tanınabilir müşteri fotoğrafı veya uydurma yorum yayımlanmayacak.
+- **Kabul kriteri:** CI yeşil; desteklenen rotalar açılır ve rezervasyona yönlendirir; üretimde doğru title/description/canonical, indekslenebilir HTML, sitemap ve analytics olayları doğrulanır; gerçek yorumlar ve galeri izinli içerikle yayın öncesi tamamlanır.
+
+
 ## 2026-11-17 — P0 CI kırılması: rezervasyon durum testi derleme hatası
 - **Durum:** DÜZELTME KODLANDI — yeni GitHub Actions ve Render backend sonucu bekleniyor.
 - **Sorun / kök neden:** GitHub Actions run `43988264580` **failure**: `BookingIntegrationTests.java` satır 90 ve devamında hatalı kaçışlı JSON string'leri Java derleyicisinde `illegal character: '\\'` ve `')' or ',' expected` hatası oluşturdu. Render backend aynı commit `4fdd2a4a` için **build_failed**, frontend **live**.
