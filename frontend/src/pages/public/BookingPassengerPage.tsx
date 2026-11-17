@@ -328,7 +328,7 @@ export function BookingPassengerPage() {
                   Back
                 </Link>
                 <ProcessingButton
-                  className="flex items-center justify-center gap-2 px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm hover:opacity-90 shadow-md transition-all disabled:opacity-60"
+                  className="flex min-w-0 max-w-full flex-wrap items-center justify-center gap-2 px-4 sm:px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm text-center hover:opacity-90 shadow-md transition-all disabled:opacity-60"
                   type="submit"
                   form="passenger-details-form"
                   processing={processing}
