@@ -57,6 +57,7 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
       return 'This booking request conflicts with an existing request. Please check your details or contact support.'
     }
     if (error.status === 401 || error.status === 403) return 'Your session is not authorized. Please sign in again.'
+    if (error.status === 429) return 'Too many requests. Please wait a moment before trying again.'
     if (error.status === null && action === 'read') return 'Could not load bookings. Check your connection and try again.'
     if (error.status === null && action !== 'create') return 'Connection failed. Your changes may have been saved. Refresh to verify before trying again.'
     if (error.status !== null && error.status >= 500) return 'The booking service is temporarily unavailable. Please try again later.'
