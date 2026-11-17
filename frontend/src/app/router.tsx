@@ -26,6 +26,24 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
+    const site = import.meta.env.VITE_PUBLIC_SITE_URL?.replace(/\\/$/, '') ?? ''
+    const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\\.com|localhost|127\\.0\\.0\\.1/i.test(site)
+    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact']
+    const indexable = publicPaths.includes(pathname) || /^\\/routes\\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)
+    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    if (!robots) {
+      robots = document.createElement('meta')
+      robots.name = 'robots'
+      document.head.appendChild(robots)
+    }
+    robots.content = production && indexable ? 'index,follow' : 'noindex,nofollow'
+    document.querySelector('link[rel="canonical"]')?.remove()
+    if (production && indexable) {
+      const canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      canonical.href = site + pathname
+      document.head.appendChild(canonical)
+    }
   }, [pathname])
   return null
 }
