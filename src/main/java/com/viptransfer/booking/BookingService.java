@@ -155,6 +155,42 @@ public class BookingService {
         return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
+    public Page<Booking> getBookingPage(int page, int size, String status, java.time.LocalDate from, java.time.LocalDate to, String search) {
+        if (status != null && !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status filter.");
+        }
+        if (from != null && to != null && from.isAfter(to)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid transfer date range.");
+        }
+        if (page < 0 || size < 1 || size > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");
+        }
+        String term = search == null ? "" : search.strip().toLowerCase(java.util.Locale.ROOT);
+        if (term.length() > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Search is too long.");
+        }
+        org.springframework.data.jpa.domain.Specification<Booking> filters = (root, query, cb) -> {
+            java.util.List<jakarta.persistence.criteria.Predicate> predicates = new java.util.ArrayList<>();
+            if (status != null) predicates.add(cb.equal(root.get("status"), status));
+            if (!term.isEmpty()) {
+                String pattern = "%" + term.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%";
+                java.util.List<jakarta.persistence.criteria.Predicate> matches = new java.util.ArrayList<>();
+                matches.add(cb.like(cb.lower(root.get("customerName")), pattern, '\\'));
+                matches.add(cb.like(cb.lower(root.get("pickUpLocation")), pattern, '\\'));
+                matches.add(cb.like(cb.lower(root.get("dropOffLocation")), pattern, '\\'));
+                if (term.matches("[0-9]{1,18}")) {
+                    try { matches.add(cb.equal(root.get("id"), Long.parseLong(term))); }
+                    catch (NumberFormatException ignored) { /* Text fields remain searchable. */ }
+                }
+                predicates.add(cb.or(matches.toArray(new jakarta.persistence.criteria.Predicate[0])));
+            }
+            if (from != null) predicates.add(cb.greaterThanOrEqualTo(root.get("transferDateTime"), from.atStartOfDay()));
+            if (to != null) predicates.add(cb.lessThan(root.get("transferDateTime"), to.plusDays(1).atStartOfDay()));
+            return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
+        return bookingRepository.findAll(filters, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
+    }
+
     public Page<Booking> getBookingPage(int page, int size) {
         if (page < 0 || size < 1 || size > 100) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");

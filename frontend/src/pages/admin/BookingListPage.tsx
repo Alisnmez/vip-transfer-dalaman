@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
@@ -10,16 +10,18 @@ import { useBookingPage } from '../../features/booking/useBookingPage'
 
 export function BookingListPage() {
   const nowMs = useBookingClock()
-  const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage } = useBookingPage()
   const [search, setSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setSearchTerm(search.trim()), 350)
+    return () => window.clearTimeout(timeout)
+  }, [search])
+  const [statusFilter, setStatusFilter] = useState('all')
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo] = useState('')
+  const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage, resetPage } = useBookingPage({ status: statusFilter === 'all' ? undefined : statusFilter, from: dateFrom, to: dateTo, search: searchTerm })
 
-  const query = search.trim().toLowerCase()
-  const visibleBookings = (loading || error ? [] : bookings)
-    .filter(booking =>
-      `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
-        .toLowerCase().includes(query),
-    )
-    .sort((a, b) => b.id - a.id)
+  const visibleBookings = loading || error ? [] : bookings
 
   return (
     <main className="flex min-h-0 flex-1 flex-col bg-surface">
@@ -40,11 +42,27 @@ export function BookingListPage() {
 
       <section className="border-b border-outline-variant bg-white p-6">
         <label className="block max-w-lg text-sm font-semibold">
-          Search current page
-          <input type="search" value={search} onChange={event => setSearch(event.target.value)}
+          Search all bookings
+          <input type="search" value={search} onChange={event => { setSearch(event.target.value); resetPage() }}
             placeholder="Customer, route or booking ID"
             className="mt-2 w-full rounded-lg border border-outline-variant px-4 py-3" />
         </label>
+        <div className="mt-4 flex flex-wrap items-end gap-4">
+          <label className="text-sm font-semibold">Status
+            <select value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
+              <option value="all">All statuses</option>
+              {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{status.replaceAll("_", " ")}</option>)}
+            </select>
+          </label>
+          <label className="text-sm font-semibold">Transfer date from (Turkey)
+            <input type="date" value={dateFrom} onChange={event => { setDateFrom(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant px-3 py-3" />
+          </label>
+          <label className="text-sm font-semibold">Transfer date to (Turkey)
+            <input type="date" value={dateTo} min={dateFrom || undefined} onChange={event => { setDateTo(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant px-3 py-3" />
+          </label>
+          <button type="button" onClick={() => { setSearch(""); setStatusFilter("all"); setDateFrom(""); setDateTo(""); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
+        </div>
+        <p className="mt-2 text-xs text-on-surface-variant">Search, status and transfer date filters apply across all bookings.</p>
       </section>
       <section className="min-w-0 flex-1 p-4 sm:overflow-auto sm:p-6">
         {loading && <p>Loading booking requests...</p>}
