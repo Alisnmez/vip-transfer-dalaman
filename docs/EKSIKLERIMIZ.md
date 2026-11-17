@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — HTTP 408 admin yazma/okuma mesajları
+- Önceki HTTP 408 değişikliğinin son CI sonucu doğrulandı: `1e55eba` için GitHub Actions `44033026811` **success**.
+- **Sorun:** 408 belirsiz kabul edilmesine rağmen admin düzenleme/durum değişikliğinde ham `Request Timeout` gösteriliyor; okuma ve yazma ayrımı yapılmıyordu.
+- **Kod:** `120ad12` ile 408 için `edit/status` işlemlerinde değişikliğin kaydedilmiş olabileceği ve önce yenileme gerektiği; `read` için yalnızca yükleme zaman aşımı mesajı eklendi.
+- **Test:** `58a6edf` ile üç admin eylemi ve teknik hata metninin gizlenmesi için regresyon testi eklendi.
+- **Durum:** Yeni commit CI doğrulaması bekliyor; gerçek tarayıcı ağ kesintisi E2E hâlâ açık. Üretim/müşteri verisi değiştirilmedi.
+
+
 ## 2026-11-17 — P0 HTTP 408 rezervasyon zaman aşımı güvenliği
 - **Sorun:** HTTP 408 (Request Timeout) kesin reddedilmiş sayılıyordu; sunucu kaydı tamamlamış olabilir. Bu durumda aynı rezervasyonun yeniden gönderilmesinde idempotency anahtarının korunması kritik.
 - **Kod:** `bookingHttpError` artık 408'i, 5xx gibi belirsiz sonuç sayıyor (`ffd5618`); oluşturma ekranında teknik 408 yerine güvenli aynı istekle tekrar deneme mesajı var (`79816b6`).
