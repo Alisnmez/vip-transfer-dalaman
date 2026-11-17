@@ -38,5 +38,7 @@ test('production sitemap includes public routes and excludes private booking/adm
   assert.match(robots, /Sitemap: https:\/\/example.com\/sitemap.xml/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/routes\/marmaris<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/routes\/fethiye<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/example.com\/faq<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/example.com\/reviews<\/loc>/)
   assert.doesNotMatch(sitemap, /<loc>[^<]*\/(booking|admin)/)
 })
