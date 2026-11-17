@@ -1,8 +1,28 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
 
 export function HomePage() {
+  useEffect(() => {
+    const previousTitle = document.title
+    const existingMeta = document.querySelector('meta[name="description"]')
+    const previousDescription = existingMeta?.getAttribute('content') ?? null
+    const meta = existingMeta ?? document.createElement('meta')
+    if (!existingMeta) {
+      meta.setAttribute('name', 'description')
+      document.head.appendChild(meta)
+    }
+    document.title = 'Dalaman Airport Private Transfers | VIP Transfer Dalaman'
+    meta.setAttribute('content', 'Book private transfers from Dalaman Airport to Fethiye, Gocek, Marmaris and Oludeniz. Explore routes and arrange your airport pickup.')
+    return () => {
+      document.title = previousTitle
+      if (!existingMeta) meta.remove()
+      else if (previousDescription === null) meta.removeAttribute('content')
+      else meta.setAttribute('content', previousDescription)
+    }
+  }, [])
+
   return (
     <>
       <PublicNavbar />
