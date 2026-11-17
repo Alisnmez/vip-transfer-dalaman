@@ -47,7 +47,7 @@ export function BookingListPage() {
       </section>
       <section className="min-w-0 flex-1 p-4 sm:overflow-auto sm:p-6">
         {loading && <p>Loading booking requests...</p>}
-        {error && <div role="alert" className="space-y-3 text-error"><p>Unable to load bookings: {error}</p><ProcessingButton type="button" onClick={refresh} processing={loading || refreshing} processingLabel="Retrying..." className="rounded-lg border px-4 py-2 font-semibold disabled:opacity-50">Try again</ProcessingButton></div>}
+        {error && <div role="alert" className="space-y-3 text-error"><p>Unable to load bookings: {error}</p><ProcessingButton type="button" onClick={refresh} processing={loading} processingLabel="Retrying..." className="rounded-lg border px-4 py-2 font-semibold disabled:opacity-50">Try again</ProcessingButton></div>}
         {!loading && !error && visibleBookings.length === 0 && <p>No booking requests found.</p>}
         {!loading && !error && visibleBookings.length > 0 && (
           <><div className="space-y-3 md:hidden">{visibleBookings.map(booking => (
