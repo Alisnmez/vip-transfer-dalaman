@@ -114,8 +114,8 @@ jobs:
           CONFIRM_DISPOSABLE_RESTORE: 'YES'
         run: |
           set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq postgresql-client-16
+          pg_dump --version
+          pg_restore --version
           PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE TABLE backup_restore_probe (id integer PRIMARY KEY, marker text NOT NULL);'
           PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c "INSERT INTO backup_restore_probe VALUES (1, 'verified-backup');"
           bash scripts/backup-postgres.sh
