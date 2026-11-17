@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Booking indeksleri için salt-okunur doğrulama
+- **Durum:** KODLANDI — staging SQL çalıştırma ve yedek geri yükleme testi bekliyor.
+- **Sorun / kök neden:** `Booking.java` içinde `idx_booking_status_transfer_time` ve `idx_booking_transfer_time` indeksleri tanımlı; ancak Hibernate annotation'ları gerçek PostgreSQL indeksinin varlığını ve geçerli olduğunu kanıtlamıyor.
+- **Çözüm:** `docs/sql/postgres_booking_readonly_audit.sql` içine `pg_index` kataloglarını kullanarak iki indeksin **varlık / indisvalid / indisready** durumunu raporlayan salt-okunur sorgu eklendi (`8a95ab7a`). Eksik indeksler otomatik oluşturulmaz; staging envanteri tamamlanmadan üretim DDL çalıştırılmaz.
+- **Doğrulama:** Gerçek staging DB sorgusu ve `EXPLAIN ANALYZE` **yapılmadı**; kod incelemesi `Booking.java` ve `application.properties` üzerinden yapıldı.
+- **Kabul kriteri:** Her iki indeks staging'de mevcut, valid ve ready olmalı; sorgu planları ölçülmeli; üretim migration'ı yalnızca yedek/restore ve test sonrası yapılmalı.
+
+
 ## 2026-11-17 — P0 PostgreSQL migration için güvenli şema envanteri hazırlandı
 - **Durum:** ARAÇ HAZIR — staging DB'de çalıştırma, yedek/restore ve migration henüz yapılmadı.
 - **Sorun:** Üretimde `ddl-auto=update` kullanılıyor; sürümlü migration'a geçmeden gerçek tablo, constraint, index ve sequence yapısı bilinmeli.
