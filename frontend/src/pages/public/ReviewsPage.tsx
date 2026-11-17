@@ -6,31 +6,36 @@ import type { PublicReview } from '../../features/reviews/api'
 
 export function ReviewsPage() {
   const [name, setName] = useState('')
-  const [rating, setRating] = useState('5')
+  const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
   const [permission, setPermission] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState('')
+  const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null)
   const [reviews, setReviews] = useState<PublicReview[]>([])
   useEffect(() => {
     getPublishedReviews().then(setReviews).catch(() => {
+      setFeedbackType('error')
       setFeedback(reviewErrorMessage(undefined, 'load'))
     })
   }, [])
 
   async function submitFeedback(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!permission || !name.trim() || comment.trim().length < 10 || submitting) return
+    if (!permission || !name.trim() || !rating || comment.trim().length < 10 || submitting) return
     setSubmitting(true)
     setFeedback('')
+    setFeedbackType(null)
     try {
-      await submitReview({ name: name.trim(), rating: Number(rating), comment: comment.trim(), publicationConsent: permission })
-      setFeedback('Thank you! Your review has been submitted and is awaiting approval.')
+      await submitReview({ name: name.trim(), rating, comment: comment.trim(), publicationConsent: permission })
+      setFeedbackType('success')
+      setFeedback('Thank you! Your review was received successfully and is awaiting approval before publication.')
       setName('')
-      setRating('5')
+      setRating(0)
       setComment('')
       setPermission(false)
     } catch (error) {
+      setFeedbackType('error')
       setFeedback(reviewErrorMessage(error, 'submit'))
     } finally {
       setSubmitting(false)
@@ -57,12 +62,21 @@ export function ReviewsPage() {
               Your name <span className="text-sm font-normal text-red-600">* required</span>
               <input className="rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-name" maxLength={80} onChange={(event) => setName(event.target.value)} required type="text" value={name} />
             </label>
-            <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-rating">
-              Your rating
-              <select className="rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-rating" onChange={(event) => setRating(event.target.value)} value={rating}>
-                {[5, 4, 3, 2, 1].map((value) => <option key={value} value={value}>{value} {value === 1 ? 'star' : 'stars'}</option>)}
-              </select>
-            </label>
+            <fieldset className="grid gap-2">
+              <legend className="font-semibold text-admin-primary">Your rating <span className="text-sm font-normal text-red-600">* required</span></legend>
+              <div className="flex items-center gap-1" aria-label="Choose a rating from 1 to 5 stars">
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <button key={value} type="button"
+                    aria-label={value + (value === 1 ? ' star' : ' stars')}
+                    aria-pressed={rating === value}
+                    className={'rounded-md p-2 text-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-admin-primary ' + (value <= rating ? 'text-amber-500' : 'text-slate-300 hover:text-amber-400')}
+                    onClick={() => setRating(value)}>
+                    <span aria-hidden="true">{value <= rating ? '★' : '☆'}</span>
+                  </button>
+                ))}
+              </div>
+              <p aria-live="polite" className="text-sm text-on-surface-variant">{rating ? rating + ' out of 5 stars selected' : 'Select a star rating'}</p>
+            </fieldset>
             <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-comment">
               Your review <span className="text-sm font-normal text-red-600">* required</span>
               <textarea className="min-h-32 rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-comment" maxLength={1500} minLength={10} onChange={(event) => setComment(event.target.value)} required value={comment} />
@@ -71,9 +85,9 @@ export function ReviewsPage() {
               <input checked={permission} className="mt-1" onChange={(event) => setPermission(event.target.checked)} required type="checkbox" />
               I agree that my name and review may be published on this website after moderation.
             </label>
-            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission || submitting} type="submit">{submitting ? "Submitting..." : "Submit Review"}</button>
+            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission || !rating || submitting} type="submit">{submitting ? "Submitting..." : "Submit Review"}</button>
           </form>
-          {feedback && <p role="status" className="mt-5 text-sm text-on-surface-variant">{feedback}</p>}
+          {feedback && <p role={feedbackType === 'error' ? 'alert' : 'status'} className={'mt-5 rounded-lg border p-4 text-sm font-medium ' + (feedbackType === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800')}>{feedback}</p>}
           <Link className="mt-5 inline-block text-admin-primary underline" to="/booking">Book Your Transfer</Link>
         </section>
       </main>
