@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Rezervasyon oluşturma → onay → iptal entegrasyon testi
+- **Durum:** TEST KODLANDI — CI ve gerçek Render/admin tarayıcı provası bekleniyor.
+- **Sorun / kök neden:** İlk yayın için kritik talep oluşturma, admin onayı ve iptal akışı tek bir PostgreSQL destekli HTTP entegrasyon testinde zincirleme doğrulanmıyordu.
+- **Çözüm:** `BookingIntegrationTests.java` içine `adminCanConfirmAndCancelBookingButCannotReopenCancelledBooking` eklendi (`1b992ff1`, JSON test verisi düzeltmesi `249b0d3b`). POST ile PENDING kayıt, anonim PATCH için 401, admin PATCH ile CONFIRMED ve CANCELLED, iptal edilen kaydı tekrar onaylama için 409 ve son GET ile kalıcı CANCELLED durumu kontrol ediliyor.
+- **Doğrulama:** Yeni commit'in CI sonucu henüz doğrulanmadı. Test gerçek canlı müşteri verisi yerine CI PostgreSQL ortamında sentetik rezervasyon kullanır. Gerçek admin tarayıcı smoke testi **ayrı yayın engeli** olarak açık.
+- **Kabul kriteri:** CI yeşil; gerçek admin test rezervasyonunu görür, onaylar, iptal eder ve durumu yenilemeden sonra doğru görür.
+
+
 ## 2026-11-17 — P1 Admin rezervasyon sayfalama API'si için güvenlik ve sınır testleri
 - **Durum:** TEST KODLANDI — CI sonucu ve gerçek admin E2E bekleniyor.
 - **Sorun:** `GET /bookings/page` için sayfalama kodu vardı ancak yetkisiz erişim, varsayılan sayfa biçimi ve geçersiz sayfa/boyut parametreleri tek bir entegrasyon testinde doğrulanmıyordu.
