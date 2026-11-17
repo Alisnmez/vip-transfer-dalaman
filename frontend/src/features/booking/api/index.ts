@@ -21,7 +21,7 @@ async function retryStorageKey(payload: string): Promise<string> {
   return `booking-retry:${hex}`
 }
 
-async function request<T>(url: string, options?: RequestInit, admin = false, timeoutMs = 60000): Promise<T> {
+export async function request<T>(url: string, options?: RequestInit, admin = false, timeoutMs = 60000): Promise<T> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), timeoutMs)
 
