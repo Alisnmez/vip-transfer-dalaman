@@ -137,3 +137,15 @@ test('other server failures keep write outcomes uncertain without exposing serve
     assert.doesNotMatch(readMessage, /saved|internal database|HTTP|500|502|504/i)
   }
 })
+
+test('client validation and missing booking errors never expose backend details', () => {
+  for (const status of [400, 422, 404]) {
+    const error = bookingHttpError(status, 'SQL query failed: internal customer record')
+    assert.equal(error.uncertain, false)
+    for (const action of ['create', 'edit', 'status', 'read']) {
+      const message = bookingErrorMessage(error, action)
+      assert.ok(message.length > 0)
+      assert.doesNotMatch(message, /SQL|internal customer record|HTTP|400|422|404/i)
+    }
+  }
+})
