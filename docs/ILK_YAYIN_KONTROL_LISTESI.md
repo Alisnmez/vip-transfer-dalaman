@@ -6,6 +6,16 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 
 **Yayın kararı:** İlk yayın için rezervasyon talebi + referans, yetkili işletme erişimi (mevcut güvenli API veya uygulanmış panel), rezervasyonların günlük takip edilmesi, gerçek iletişim kanalı, doğru fiyat/koşullar, temel mobil akış ve üretim güvenliği yeterli. Otomatik e-posta ve gelişmiş panel gibi ek özellikler yoksa sitede varmış gibi sunulmaz. Yayın kararı ancak aşağıdaki kontroller doğrulanınca GO olabilir.
 
+## P0 — Yayın öncesi organik müşteri kazanımı (2026-11-17 kapsam kararı)
+
+**Kullanıcı kararı:** SEO, dönüşüm analitiği ve özgün rota sayfaları v1.0 için **yayın engelidir**; önceki P2/v1.3 sınıflandırması bu üç başlık için geçersizdir.
+
+- [ ] **Teknik SEO:** Her herkese açık sayfada özgün title, meta description, canonical; üretim alan adına uygun robots.txt ve sitemap.xml; test/staging alan adları noindex; yönetici, rezervasyon onayı ve kişisel veri içeren sayfalar indekslenmez.
+- [ ] **Rota sayfaları:** Gerçekten hizmet verilen ve fiyat kataloğunda desteklenen Dalaman çıkışlı destinasyonlara özgün, yararlı içerik, iç bağlantılar ve doğrudan ilgili rezervasyon akışına geçiş; kopya/uydurma içerik yok. Rota sayfaları indekslenebilir ve sitemap'e dahil edilir.
+- [ ] **Yapılandırılmış veri:** Gerçek işletme ve hizmet bilgileriyle tutarlı, doğrulanabilir schema.org JSON-LD; sahte puan/yorum/fiyat garantisi yok.
+- [ ] **Analitik:** GA4 (veya onaylanan gizlilik uyumlu alternatif) ve Search Console; rezervasyon başlatma, form adımları ve başarılı rezervasyon olayları; kişisel veri, telefon, e-posta, rezervasyon referansı veya idempotency anahtarı analitiğe gönderilmez; rıza ve gizlilik metniyle uyumlu kurulum.
+- [ ] **Doğrulama:** Gerçek üretim alan adı ve analytics/Search Console sahipliği belirlendikten sonra canonical, sitemap, robots, noindex, ölçüm olayları ve mobil Core Web Vitals test edilir. Kimlikler/alan adı bilinmeden canlı entegrasyon tamamlandı sayılmaz.
+
 ## Yayın öncesi son rötuşlar — logo, metinler ve işletme detayları
 
 **Zamanlama:** Teknik rezervasyon ve güvenli işletme takibi çalıştıktan sonra, **canlıya almadan hemen önce** birlikte yapılacak son içerik/marka kontrolü. Kullanıcı bu bilgileri o aşamada verecek; şimdi tekrar sorulmayacak.
@@ -55,7 +65,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] WhatsApp iletişim bağlantısı; gerçek numara ve doğru mesaj akışı.
 - [ ] Özgün logo, favicon ve tutarlı marka uygulaması.
 - [ ] Müşteri rezervasyon sorgulama: yalnızca referans numarasıyla kişisel veri gösterme; e-posta sahipliği doğrulaması veya tek kullanımlık erişim bağlantısı.
-- [ ] SEO: indeksleme, metadata, canonical, sitemap, robots, rota sayfaları, schema ve performans.
+- [x] SEO, analitik ve rota sayfaları **P0 yayın öncesi** kapsamına taşındı; uygulama/doğrulama yukarıdaki kontrol listesinde **açık**.
 - [ ] FAQ: gerçek işletme kurallarıyla uyumlu yanıtlar.
 - [ ] Yalnızca gerçek/doğrulanabilir müşteri yorumları; uydurma yorumlar gerçek müşteri yorumu gibi yayımlanmaz.
 - [ ] Gerçek filo/araç kategorisiyle eşleşen, kullanım izni bulunan araç fotoğrafları.
@@ -65,7 +75,7 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 
 - Otomatik müşteri/işletme e-postaları (backlog 5) yayın sonrasına alınabilir; **çalışmadan sitede varmış gibi gösterilmez**.
 - Güvenli self-servis rezervasyon sorgulama (6) yayın sonrasına alınabilir; rezervasyon değişiklik talepleri daha sonraya bırakılabilir.
-- Uçuş gecikmesi/karşılama otomasyonu (7), çoklu dil (10) ve analitik (12) sonraya bırakılabilir; temel indeksleme ve doğru içerik kontrolü korunur; gelişmiş SEO ve gerçek yorum modülleri yayın sonrasına alınabilir.
+- Uçuş gecikmesi/karşılama otomasyonu (7), çoklu dil (10) sonraya bırakılabilir; SEO, analitik ve rota sayfaları ise 2026-11-17 kararıyla yayın öncesi zorunludur; gelişmiş SEO ve gerçek yorum modülleri yayın sonrasına alınabilir.
 - Kapsamlı tarayıcı E2E otomasyonu; ancak yukarıdaki manuel gerçek rezervasyon testi atlanamaz.
 
 **Durum:** Bu belge bir kontrol listesidir, testlerin yapıldığına dair kanıt değildir. İşaretlenmemiş maddeler doğrulanmamıştır.
