@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Analitik: kullanıcı rızası ve rezervasyon dönüşüm adımları
+- **Durum:** KODLANDI; son CI, gerçek tarayıcı testi ve GA4 kimliği bekliyor.
+- **Kod:** `frontend/src/features/analytics/analytics.ts` (GA4 yalnızca geçerli `VITE_GA_MEASUREMENT_ID` ve açık rıza ile; sabit olay allowlist'i), `AnalyticsConsent.tsx` (Accept/Reject ve Privacy choices), router public sayfa görüntülemeleri, booking başlangıç/yolcu adımı/API başarılı talep eventleri.
+- **Gizlilik:** İsim, telefon, e-posta, booking ID, idempotency key ve form değerleri olay payload'ına eklenmiyor. Admin/booking özel URL'leri page_view allowlist'inde değil.
+- **Kod kalitesi:** Analytics yan etkisi render esnasındaki state initializer'dan `useEffect`'e taşındı.
+- **Kritik kalan:** Rıza geri çekme sonrası GA çerezleri/Consent Mode v2 ve yerel hukuki metin tamamlanmadan GA kimliği üretime konmamalı; `VITE_GA_MEASUREMENT_ID` tanımlanmamışsa izleme pasif kalır. Eventlerin GA4 DebugView'da doğrulanması ve tarayıcı network/consent testleri bekliyor. Sayfa yenilemeden sonra değişen consent durumunun davranışı ayrıca test edilmeli.
+
+
 ## 2026-11-17 — SEO ilk HTML prerender: rota sayfaları
 - **Önceki doğrulama:** GitHub Actions `43990034226` (commit `f53e810f`) frontend lint/test/build ve backend PostgreSQL entegrasyon testleri **success**; frontend Render live. Backend Render o anda update_in_progress idi.
 - **Yeni kod:** `frontend/scripts/prerender-routes.mjs` build sonrası beş destinasyon için `dist/routes/{slug}/index.html` üretiyor; ilk HTML'de rota başlığı, description, H1, giriş ve bağlantılar var (`425079ec`). Üretim domaini tanımlıysa canonical/index, staging ise noindex. `frontend/package.json` build'e bağlandı (`77c20c9f`). `frontend/tests/prerender.test.mjs` ilk HTML ve staging güvenliğini sınayan testleri ekledi (`9f18a0c5`).
