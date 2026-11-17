@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
-import { getPublishedReviews, submitReview } from '../../features/reviews/api'
+import { getPublishedReviews, submitReview, reviewErrorMessage } from '../../features/reviews/api'
 import type { PublicReview } from '../../features/reviews/api'
 
 export function ReviewsPage() {
@@ -14,7 +14,7 @@ export function ReviewsPage() {
   const [reviews, setReviews] = useState<PublicReview[]>([])
   useEffect(() => {
     getPublishedReviews().then(setReviews).catch(() => {
-      setFeedback('Customer reviews are temporarily unavailable.')
+      setFeedback(reviewErrorMessage(undefined, 'load'))
     })
   }, [])
 
@@ -30,8 +30,8 @@ export function ReviewsPage() {
       setRating('5')
       setComment('')
       setPermission(false)
-    } catch {
-      setFeedback('Unable to submit your review. Please try again later.')
+    } catch (error) {
+      setFeedback(reviewErrorMessage(error, 'submit'))
     } finally {
       setSubmitting(false)
     }
