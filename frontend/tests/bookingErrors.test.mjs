@@ -161,3 +161,13 @@ test('unexpected HTTP statuses never expose internal backend messages', () => {
     }
   }
 })
+
+
+test('unexpected create failures never display technical details to customers', () => {
+  const failures = [new Error('SQL connection password leaked'), new SyntaxError('Unexpected token in response'), 'secret']
+  for (const failure of failures) {
+    const message = bookingErrorMessage(failure, 'create')
+    assert.match(message, /Could not submit the booking/i)
+    assert.doesNotMatch(message, /SQL|password|Unexpected token|secret/i)
+  }
+})
