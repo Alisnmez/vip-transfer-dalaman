@@ -1,5 +1,11 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — SEO ilk HTML prerender: rota sayfaları
+- **Önceki doğrulama:** GitHub Actions `43990034226` (commit `f53e810f`) frontend lint/test/build ve backend PostgreSQL entegrasyon testleri **success**; frontend Render live. Backend Render o anda update_in_progress idi.
+- **Yeni kod:** `frontend/scripts/prerender-routes.mjs` build sonrası beş destinasyon için `dist/routes/{slug}/index.html` üretiyor; ilk HTML'de rota başlığı, description, H1, giriş ve bağlantılar var (`425079ec`). Üretim domaini tanımlıysa canonical/index, staging ise noindex. `frontend/package.json` build'e bağlandı (`77c20c9f`). `frontend/tests/prerender.test.mjs` ilk HTML ve staging güvenliğini sınayan testleri ekledi (`9f18a0c5`).
+- **Kalan doğrulama:** Yeni CI ve Render deploy sonucunu gör; Render statik hosting'in `/routes/fethiye` isteğinde gerçekten `dist/routes/fethiye/index.html` servis ettiğini HTTP ile doğrula. React ilk render sonrası DOM uyumu, kaynak URL'leri ve Google tarama testi yapılmalı. Şu an yalnızca 5 rota HTML'i prerender edildi; ana sayfa, /routes ve diğer indekslenebilir sayfaların HTML SEO'su açık. Metinlerin iki yerde tutulması (React sayfası ve build script) bakım riski; tek veri kaynağına refactor edilmeli. Analytics/GA4, Search Console, npm audit ve mobil testler açık.
+
+
 ## 2026-11-17 — Kod incelemesi ve testler: SEO
 - **CI bulgusu:** GitHub Actions `43989754176`: backend PostgreSQL testleri **success**, frontend **failure**; `frontend/src/app/router.tsx:29` hatalı regex kaçışından ESLint parse error. Regex ve domain temizleme düzeltildi (`46298bb3`).
 - **Standartlaştırma:** `RoutesPage.tsx` içinde featured route slug'ının dizideki `index` ile eşlenmesi kırılgandı; unsupported Kalkan kartı fallback'i gereksizdi. Slug'ı rota nesnesine taşıyıp fallback kaldırıldı (`0b64f5c9`).
