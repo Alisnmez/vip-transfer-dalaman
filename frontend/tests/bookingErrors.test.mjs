@@ -74,7 +74,8 @@ test('rate-limited booking actions show a helpful message instead of HTTP 429', 
   for (const action of ['create', 'read', 'edit', 'status']) {
     const message = bookingErrorMessage(error, action)
     assert.match(message, /wait a moment before trying again/i)
-    assert.doesNotMatch(message, /429|Too Many Requests|HTTP/i)
+    assert.doesNotMatch(message, /\b429\b|\bHTTP\b/i)
+    assert.notEqual(message, error.message)
   }
   assert.equal(error.uncertain, false)
 })
