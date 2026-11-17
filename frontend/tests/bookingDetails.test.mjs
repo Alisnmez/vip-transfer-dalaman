@@ -66,3 +66,19 @@ test('oversized text and malformed optional fields are rejected', () => {
   assert.ok(check({ ...transfer, flightNumber: 'INVALID!!!' }))
   assert.ok(check(transfer, { ...passenger, hotelName: 7 }))
 })
+
+test('mobile form drafts reject blank fields and malformed saved values', () => {
+  assert.ok(check(transfer, { ...passenger, customerName: '   ' }))
+  assert.ok(check(transfer, { ...passenger, email: ' ' }))
+  assert.ok(check({ ...transfer, passengerCount: 1.5 }))
+  assert.ok(check({ ...transfer, pickUpTime: '' }))
+  assert.ok(check({ ...transfer, tripType: 'round-trip', returnDate: '', returnTime: '' }))
+  assert.ok(check(transfer, { ...passenger, phoneNumber: '+905551234567', transferAddress: '' }))
+})
+
+test('contact fields enforce maximum lengths and permit valid international numbers', () => {
+  assert.equal(check(transfer, { ...passenger, phoneNumber: '+37061234567' }), null)
+  assert.ok(check(transfer, { ...passenger, customerName: 'A'.repeat(162) }))
+  assert.ok(check(transfer, { ...passenger, email: 'a'.repeat(250) + '@example.com' }))
+  assert.ok(check(transfer, { ...passenger, phoneNumber: '+1234567890123456' }))
+})
