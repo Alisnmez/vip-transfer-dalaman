@@ -48,19 +48,22 @@ export function bookingInvalidSuccessResponse(cause?: unknown): BookingApiError 
 }
 
 /** Convert API failures into safe, actionable messages for booking screens. */
-export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 'create' = 'create'): string {
+export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 'create' | 'read' = 'create'): string {
   if (error instanceof BookingApiError) {
     if (error.status === 409) {
       if (action === 'status') return 'This booking status cannot be changed. Cancelled bookings cannot be reopened. Refresh to see the latest status.'
       if (action === 'edit') return 'This booking has changed or the edit is not allowed. Refresh the booking and try again.'
+      if (action === 'read') return 'Booking data has changed. Refresh to load the latest information.'
       return 'This booking request conflicts with an existing request. Please check your details or contact support.'
     }
     if (error.status === 401 || error.status === 403) return 'Your session is not authorized. Please sign in again.'
+    if (error.status === null && action === 'read') return 'Could not load bookings. Check your connection and try again.'
     if (error.status === null && action !== 'create') return 'Connection failed. Your changes may have been saved. Refresh to verify before trying again.'
     if (error.status !== null && error.status >= 500) return 'The booking service is temporarily unavailable. Please try again later.'
     return error.message
   }
   return action === 'status' ? 'Could not update booking status.'
     : action === 'edit' ? 'Could not save booking details.'
+    : action === 'read' ? 'Could not load bookings. Please try again.'
     : error instanceof Error ? error.message : 'Booking could not be created.'
 }
