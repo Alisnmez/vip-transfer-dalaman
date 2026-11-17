@@ -8,6 +8,7 @@ export type PublicReview = {
   name: string
   rating: number
   comment: string
+  createdAt?: string
 }
 
 export type PendingReview = {
