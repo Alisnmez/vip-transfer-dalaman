@@ -96,29 +96,4 @@ export function ReviewsPage() {
       </main>
     </div>
   )
-}            <fieldset className="grid gap-2">
-              <legend className="font-semibold text-admin-primary">Your rating <span className="text-sm font-normal text-red-600">* required</span></legend>
-              <div className="flex items-center gap-1" role="radiogroup" aria-label="Your rating">
-                {[1, 2, 3, 4, 5].map(value => (
-                  <button key={value} type="button" role="radio" aria-checked={rating === value} aria-label={`${value} ${value === 1 ? 'star' : 'stars'}`} onClick={() => setRating(value)} className={`rounded-lg p-2 text-3xl leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary ${value <= rating ? 'text-amber-500' : 'text-gray-300 hover:text-amber-400'}`}>★</button>
-                ))}
-              </div>
-              <p className="text-sm text-on-surface-variant" aria-live="polite">{rating ? `${rating} out of 5 stars selected` : 'Select 1 to 5 stars'}</p>
-            </fieldset>
-            <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-comment">
-              Your review <span className="text-sm font-normal text-red-600">* required</span>
-              <textarea className="min-h-32 rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-comment" maxLength={1500} minLength={10} onChange={(event) => setComment(event.target.value)} required value={comment} />
-            </label>
-            <label className="flex items-start gap-3 text-sm text-on-surface-variant">
-              <input checked={permission} className="mt-1" onChange={(event) => setPermission(event.target.checked)} required type="checkbox" />
-              I agree that my name and review may be published on this website after moderation.
-            </label>
-            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission || !rating || submitting} type="submit">{submitting ? "Submitting..." : "Submit Review"}</button>
-          </form>
-          {feedback && <p role={feedbackType === 'error' ? 'alert' : 'status'} className={'mt-5 rounded-lg border p-4 text-sm font-medium ' + (feedbackType === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800')}>{feedback}</p>}
-          <Link className="mt-5 inline-block text-admin-primary underline" to="/booking">Book Your Transfer</Link>
-        </section>
-      </main>
-    </div>
-  )
 }
