@@ -52,3 +52,17 @@ test('read-only admin failures never suggest that a booking was modified', () =>
   assert.doesNotMatch(message, /changes may have been saved/i)
   assert.match(bookingErrorMessage(bookingHttpError(403), 'read'), /sign in again/)
 })
+
+test('status conflict message covers all invalid transitions, not just cancellations', () => {
+  const message = bookingErrorMessage(bookingHttpError(409, 'Invalid booking status transition from PENDING to COMPLETED.'), 'status')
+  assert.match(message, /status change is not allowed/i)
+  assert.match(message, /Refresh the booking/)
+  assert.doesNotMatch(message, /409|HTTP|Conflict/)
+})
+
+test('shared messages handle edit conflicts, authorization and temporary service failures', () => {
+  assert.match(bookingErrorMessage(bookingHttpError(409), 'edit'), /Refresh/)
+  assert.match(bookingErrorMessage(bookingHttpError(401), 'read'), /sign in again/)
+  assert.match(bookingErrorMessage(bookingHttpError(503), 'status'), /temporarily unavailable/)
+  assert.match(bookingErrorMessage(new Error('unexpected'), 'read'), /Could not load bookings/)
+})
