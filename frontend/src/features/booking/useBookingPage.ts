@@ -11,6 +11,7 @@ export function useBookingPage() {
   const [loadedKey, setLoadedKey] = useState('')
   const [error, setError] = useState('')
   const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
 
   const requestKey = `${page}:${revision}`
   const loading = loadedKey !== requestKey
@@ -24,18 +25,22 @@ export function useBookingPage() {
         setLastUpdatedAt(Date.now())
         setError('')
         setLoadedKey(requestKey)
+        setRefreshing(false)
       })
       .catch(err => {
         if (!active) return
         setResult(null)
         setError(err instanceof Error ? err.message : 'Unable to load bookings')
         setLoadedKey(requestKey)
+        setRefreshing(false)
       })
     return () => { active = false }
   }, [page, requestKey])
 
   function refresh() {
-    if (!loading) setRevision(value => value + 1)
+    if (loading) return
+    setRefreshing(true)
+    setRevision(value => value + 1)
   }
 
   useEffect(() => {
@@ -60,6 +65,7 @@ export function useBookingPage() {
     loading,
     error,
     lastUpdatedAt,
+    refreshing,
     refresh,
     changePage,
   }
