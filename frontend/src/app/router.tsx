@@ -51,7 +51,21 @@ function ScrollToTop() {
       '/faq': { title: 'Dalaman Airport Transfer FAQ | VIP Transfer Dalaman', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
       '/reviews': { title: 'Customer Reviews | VIP Transfer Dalaman', description: 'Share your experience with VIP Transfer Dalaman and learn how customer feedback is reviewed.' },
     }
-    const metadata = pageMetadata[pathname]
+    const destinationNames: Record<string, string> = {
+      marmaris: 'Marmaris',
+      fethiye: 'Fethiye',
+      oludeniz: 'Oludeniz',
+      gocek: 'Gocek',
+      icmeler: 'Icmeler',
+    }
+    const destinationSlug = /^\/routes\/([a-z]+)$/.exec(pathname)?.[1]
+    const destination = destinationSlug ? destinationNames[destinationSlug] : undefined
+    const metadata = destination
+      ? {
+          title: `Dalaman Airport to ${destination} Private Transfer | VIP Transfer Dalaman`,
+          description: `Request a private transfer from Dalaman Airport to ${destination}. Compare available vehicle options and plan your journey.`,
+        }
+      : pageMetadata[pathname]
     document.title = metadata?.title ?? (indexable ? 'Dalaman Airport Private Transfer | VIP Transfer Dalaman' : 'VIP Transfer Dalaman')
     let description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (!description) {
