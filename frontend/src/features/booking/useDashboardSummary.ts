@@ -44,8 +44,27 @@ export function useDashboardSummary() {
   }, [])
 
   useEffect(() => {
-    // Initial fetch: the promise resolves outside the synchronous effect phase.
-    void fetchSummary()
+    // Initial fetch only updates React state after the network request settles.
+    const requestGeneration = generation.current
+    inFlight.current = true
+    void getDashboardSummary()
+      .then(data => {
+        if (requestGeneration !== generation.current) return
+        hasData.current = true
+        setSummary(data)
+        setError('')
+      })
+      .catch(err => {
+        if (requestGeneration === generation.current) {
+          setError(err instanceof Error ? err.message : 'Unable to load bookings')
+        }
+      })
+      .finally(() => {
+        if (requestGeneration === generation.current) {
+          inFlight.current = false
+          setLoading(false)
+        }
+      })
     const poll = () => {
       if (document.visibilityState === 'visible') void fetchSummary()
     }
