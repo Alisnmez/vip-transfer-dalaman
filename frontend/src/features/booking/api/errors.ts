@@ -80,5 +80,5 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
   return action === 'status' ? 'Could not update booking status.'
     : action === 'edit' ? 'Could not save booking details.'
     : action === 'read' ? 'Could not load bookings. Please try again.'
-    : error instanceof Error ? error.message : 'Booking could not be created.'
+    : 'Could not submit the booking. Please check your connection or contact support.'
 }
