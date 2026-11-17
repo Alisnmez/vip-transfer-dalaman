@@ -13,7 +13,7 @@ export function PublicNavbar() {
           VIP Transfer Dalaman
         </Link>
 
-        <nav aria-label="Main navigation" className="hidden min-w-0 items-center justify-center gap-3 2xl:gap-5 xl:flex">
+        <nav aria-label="Main navigation" className="hidden min-w-0 items-center justify-center gap-3 2xl:gap-5 2xl:flex">
           {publicNavItems.map((item) => (
             <NavLink
               className={({ isActive }) =>
@@ -40,7 +40,7 @@ export function PublicNavbar() {
             aria-controls="mobile-navigation"
             aria-expanded={menuOpen}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-admin-primary hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary xl:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 text-admin-primary hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary 2xl:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             type="button"
           >
@@ -50,7 +50,7 @@ export function PublicNavbar() {
       </div>
 
       {menuOpen && (
-        <nav aria-label="Mobile navigation" className="absolute left-0 right-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-slate-200 bg-white px-4 pb-5 pt-3 shadow-xl xl:hidden" id="mobile-navigation">
+        <nav aria-label="Mobile navigation" className="absolute left-0 right-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-slate-200 bg-white px-4 pb-5 pt-3 shadow-xl 2xl:hidden" id="mobile-navigation">
           <div className="mx-auto flex max-w-container-max flex-col gap-1">
             {publicNavItems.map((item) => (
               <NavLink
