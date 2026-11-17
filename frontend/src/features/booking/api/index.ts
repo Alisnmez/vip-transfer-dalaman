@@ -63,7 +63,7 @@ export async function request<T>(url: string, options?: RequestInit, admin = fal
 
 export function checkAdminAccess() {
   // Authentication does not need to download private booking details.
-  return request<void>(ADMIN_AUTH_URL, undefined, true, 20000)
+  return request<void>(ADMIN_AUTH_URL, undefined, true, 150000)
 }
 
 export type DashboardSummary = {

@@ -26,7 +26,7 @@ export function DashboardPage() {
       {loading && <p role="status">Loading bookings from the server. The first request may take longer while the service starts...</p>}
       {summary && (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
               <p className="text-on-surface-variant">Total booking requests</p>
               <p className="text-3xl font-bold text-admin-primary">{summary.total}</p>
@@ -34,6 +34,10 @@ export function DashboardPage() {
             <div className="rounded-xl border border-outline-variant bg-white p-6">
               <p className="text-on-surface-variant">Open requests for today</p>
               <p className="text-3xl font-bold text-admin-primary">{summary.today}</p>
+            </div>
+            <div className="rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
+              <p className="text-on-surface-variant">Pending confirmation</p>
+              <p className="text-3xl font-bold text-admin-primary">{summary.pending}</p>
             </div>
           </div>
           <section className="rounded-xl border border-outline-variant bg-white p-6">
@@ -55,7 +59,7 @@ export function DashboardPage() {
               </div>
             )}
           </section>
-          <p className="text-sm text-on-surface-variant">{summary.pending} requests are pending confirmation. Today's and upcoming counts exclude completed and cancelled requests but may include pending requests; they are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
+          <p className="text-sm text-on-surface-variant">Pending requests may also be included in today's open requests. These counts are not confirmed rides or collected revenue. Driver assignments and payment reporting are not available yet.</p>
         </>
       )}
     </main>
