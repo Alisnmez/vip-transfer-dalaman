@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -49,7 +49,7 @@ function isAirportPickup(): boolean {
 }
 
 export function BookingPassengerPage() {
-  useState(() => { trackAnalyticsEvent('booking_passenger_step'); return true })
+  useEffect(() => { trackAnalyticsEvent('booking_passenger_step') }, [])
   const navigate = useNavigate()
   const { processing, run } = useAsyncAction()
   const [draft] = useState(readPassengerDraft)
