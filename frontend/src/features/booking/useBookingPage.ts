@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 
 import { getBookingPage } from './api'
 import { bookingErrorMessage } from './api/errors'
-import type { BookingPage } from './api'
+import type { BookingFilters, BookingPage } from './api'
 
 /** Keep pagination and request lifecycle separate from the booking list UI. */
-export function useBookingPage() {
+export function useBookingPage(filters: BookingFilters = {}) {
   const [page, setPage] = useState(0)
   const [revision, setRevision] = useState(0)
   const [result, setResult] = useState<BookingPage | null>(null)
@@ -14,12 +14,14 @@ export function useBookingPage() {
   const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null)
   const [refreshing, setRefreshing] = useState(false)
 
-  const requestKey = `${page}:${revision}`
+  const { status = '', from = '', to = '' } = filters
+  const filterKey = `${status}:${from}:${to}`
+  const requestKey = `${page}:${revision}:${filterKey}`
   const loading = loadedKey !== requestKey
 
   useEffect(() => {
     let active = true
-    getBookingPage(page)
+    getBookingPage(page, 25, { status, from, to })
       .then(data => {
         if (!active) return
         setResult(data)
@@ -36,7 +38,7 @@ export function useBookingPage() {
         setRefreshing(false)
       })
     return () => { active = false }
-  }, [page, requestKey])
+  }, [page, requestKey, status, from, to])
 
   function refresh() {
     if (loading) return
@@ -51,6 +53,8 @@ export function useBookingPage() {
     document.addEventListener('visibilitychange', onVisible)
     return () => document.removeEventListener('visibilitychange', onVisible)
   }, [])
+
+  function resetPage() { setPage(0) }
 
   function changePage(nextPage: number) {
     if (loading || nextPage < 0 || (result && nextPage >= result.totalPages)) return
@@ -69,5 +73,6 @@ export function useBookingPage() {
     refreshing,
     refresh,
     changePage,
+    resetPage,
   }
 }
