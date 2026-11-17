@@ -36,6 +36,26 @@ class CustomerReviewControllerTest {
     }
 
     @Test
+    void rejectedReviewNeverAppearsPublicly() throws Exception {
+        mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON)
+                .content("{\\"name\\":\\"Rejected passenger\\",\\"rating\\":2,\\"comment\\":\\"The pickup was not on time.\\",\\"publicationConsent\\":true}"))
+            .andExpect(status().isAccepted());
+        CustomerReview review = repository.findByStatusOrderByCreatedAtDesc("PENDING").get(0);
+        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
+                .contentType(MediaType.APPLICATION_JSON).content("{\\"status\\":\\"REJECTED\\"}"))
+            .andExpect(status().isOk());
+        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(content().json("[]"));
+    }
+
+    @Test
+    void anonymousUserCannotModerateReviews() throws Exception {
+        mvc.perform(patch("/reviews/123/moderation").contentType(MediaType.APPLICATION_JSON)
+                .content("{\\"status\\":\\"APPROVED\\"}"))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @Test
     void rejectsReviewWithoutPublicationConsent() throws Exception {
         mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Passenger\",\"rating\":5,\"comment\":\"A valid length comment.\",\"publicationConsent\":false}"))
