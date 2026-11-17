@@ -1,5 +1,11 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 5xx regresyon kapsamı genişletildi
+- `2377af0`: 503 dışında 500, 502 ve 504 için create/edit/status/read mesajları, belirsiz yazma sonucu ve ham backend ayrıntısının gizlenmesi test edildi. Üretim kodu değiştirilmedi.
+- **CI engeli:** GitHub commit status sorgusu ve PR workflow-run sorgusu `642dd61` ve `2377af0` için boş döndü. Bu uç noktalar push-triggered GitHub Actions sonucunu kesin doğrulamıyor. Test dosyası commit edildi ancak CI **DOĞRULANMADI**; Actions arayüzünde ilgili SHA için frontend/backend job sonuçları ayrıca kontrol edilmeli.
+- **Açık:** Gerçek tarayıcı ağ kesintisi/idempotency E2E, mobil test ve ayrı staging veritabanı gereksinimleri. Müşteri verisi, deploy ve migration değiştirilmedi.
+
+
 ## 2026-11-17 — P0 HTTP 5xx belirsiz yazma sonucu ve güvenli kullanıcı mesajları
 - **Sorun:** 5xx yanıtları `uncertain=true` olarak işaretleniyordu ancak ortak mesaj admin düzenleme/durum değişikliğinde yalnızca "try again later" diyordu; sunucunun değişikliği kaydetmiş olabileceği belirtilmiyordu.
 - **Kod:** `e51b8f1` ile 5xx için create/edit/status/read ayrıldı. Admin yazma işlemlerinde önce yenileyip sonucu doğrulama, create için aynı isteği tekrar deneme; salt-okunur işlemde yalnızca yükleme hatası anlatılıyor.
