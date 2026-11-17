@@ -9,9 +9,10 @@
 2. **Booking:** customer can select transfer, enter required details, submit one booking and see confirmation; admin can sign in and view/manage it. Test with synthetic data on staging only.
 3. **SEO:** production domain/HTTPS; crawlable public pages; correct title and meta description, canonical URLs, sitemap.xml, robots.txt, mobile usability and Search Console verification/submission. Verify generated HTML and deployed domain; avoid claiming rankings.
 4. **Operations:** persistent production PostgreSQL separate from staging, private credentials, basic backup/restore path, working frontend-to-API URL/CORS, real contact details and clear cash-payment/cancellation wording.
-5. **Release:** deploy verified commit, perform short production smoke without altering real bookings, keep rollback/redeploy path.
+5. **Trust and content:** publish a short FAQ, clear company/contact details and authorized vehicle photos. Add a customer photo gallery only with permission; use placeholders or omit unavailable photos. Show only genuine, permissioned customer reviews; never fabricate customer identities, ratings or testimonials.
+6. **Release:** deploy verified commit, perform short production smoke without altering real bookings, keep rollback/redeploy path.
 
-**P1 — after launch:** extensive E2E scenarios, Flyway/Liquibase migration automation (until then no blind schema changes), advanced security hardening, analytics dashboards, competitor price research, extra features and visual refinements. Track them in `docs/EKSIKLERIMIZ.md`.
+**P1 — after launch:** collect and publish verified customer reviews (with consent), expand the authorized customer/vehicle photo gallery, improve FAQ content, and add extensive E2E scenarios, Flyway/Liquibase migration automation (until then no blind schema changes), advanced security hardening, analytics dashboards, competitor price research, extra features and visual refinements. Track them in `docs/EKSIKLERIMIZ.md`.
 
 **Do not mistake a committed change for a passed CI run or a live deployment.** No production deploy or database mutation is authorized by this document.
 
