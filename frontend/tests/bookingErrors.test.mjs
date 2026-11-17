@@ -82,3 +82,12 @@ test('rate-limited booking actions show a helpful message instead of HTTP 429', 
   }
   assert.equal(error.uncertain, false)
 })
+
+test('HTTP 408 keeps booking outcome uncertain and gives a safe retry instruction', () => {
+  const error = bookingHttpError(408, 'Request Timeout')
+  assert.equal(error.uncertain, true)
+  const message = bookingErrorMessage(error, 'create')
+  assert.match(message, /may have been saved/i)
+  assert.match(message, /retry the same request/i)
+  assert.doesNotMatch(message, /HTTP|408/i)
+})
