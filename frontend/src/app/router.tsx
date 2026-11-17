@@ -13,6 +13,7 @@ import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
 import { HomePage } from '../pages/public/HomePage'
 import { RoutesPage } from '../pages/public/RoutesPage'
+import { RouteDetailPage } from '../pages/public/RouteDetailPage'
 import {
   ContactPage,
   ServicesPage,
@@ -41,6 +42,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'routes', element: <RoutesPage /> },
+      { path: 'routes/:slug', element: <RouteDetailPage /> },
       { path: 'vehicles', element: <VehiclesPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'contact', element: <ContactPage /> },
