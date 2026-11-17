@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — Kod incelemesi ve testler: SEO
+- **CI bulgusu:** GitHub Actions `43989754176`: backend PostgreSQL testleri **success**, frontend **failure**; `frontend/src/app/router.tsx:29` hatalı regex kaçışından ESLint parse error. Regex ve domain temizleme düzeltildi (`46298bb3`).
+- **Standartlaştırma:** `RoutesPage.tsx` içinde featured route slug'ının dizideki `index` ile eşlenmesi kırılgandı; unsupported Kalkan kartı fallback'i gereksizdi. Slug'ı rota nesnesine taşıyıp fallback kaldırıldı (`0b64f5c9`).
+- **Yeni otomatik test:** `frontend/tests/seo.test.mjs` staging/boş domain için robots bloklama ve boş sitemap; üretim örneği için 2 rota ve admin/booking dışlama testleri (`8f81fe7f`).
+- **Kalan kritik:** Yeni CI sonucu bekleniyor. SPA ilk HTML'de `noindex`; SSR/prerender olmadan arama motoru indeksleme hazır değil. Sitemap script'i build sırasında `frontend/public` dosyalarını değiştiriyor: üretim domaini değişiminde tutarlılık ayrıca kontrol edilecek. npm ci raporunda **19 dependency vulnerability (10 moderate, 9 high)** görüldü; `npm audit` ile ayrıntılı inceleme ve güvenli yükseltme gerekiyor. Domain doğrulama, analitik ve SEO smoke eksik.
+
+
 ## 2026-11-17 — P0 Teknik SEO: üretim alan adına bağlı sitemap, robots ve canonical
 - **Durum:** KODLANDI — CI/Render ve Google taranabilirliği kontrolü bekleniyor.
 - **Sorun:** Test ortamı yanlışlıkla indekslenmemeli; üretim alan adı henüz bilinmiyor; rota sayfaları için sitemap/canonical altyapısı yoktu.
