@@ -31,6 +31,16 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - name: Upload frontend test and build diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-failure-diagnostics
+          path: |
+            frontend/dist/
+            frontend/coverage/
+          if-no-files-found: ignore
+          retention-days: 14
 
   backend:
     name: Spring Boot PostgreSQL integration tests
@@ -61,3 +71,11 @@ jobs:
           java-version: '21'
           cache: maven
       - run: mvn -B test
+      - name: Preserve backend test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-surefire-reports
+          path: target/surefire-reports/
+          if-no-files-found: warn
+          retention-days: 14
