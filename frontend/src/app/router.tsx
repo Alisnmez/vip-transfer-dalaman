@@ -5,10 +5,15 @@ import { AnalyticsConsent } from '../features/analytics/AnalyticsConsent'
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
+// eslint-disable-next-line react-refresh/only-export-components
 const CalendarPage = lazy(() => import('../pages/admin/CalendarPage').then((module) => ({ default: module.CalendarPage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const BookingDetailPage = lazy(() => import('../pages/admin/BookingDetailPage').then((module) => ({ default: module.BookingDetailPage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const BookingListPage = lazy(() => import('../pages/admin/BookingListPage').then((module) => ({ default: module.BookingListPage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const ReviewModerationPage = lazy(() => import('../pages/admin/ReviewModerationPage').then((module) => ({ default: module.ReviewModerationPage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const DashboardPage = lazy(() => import('../pages/admin/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
