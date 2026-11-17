@@ -6,7 +6,7 @@ import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
-import { BookingApiError } from '../../features/booking/api/errors'
+import { BookingApiError, bookingErrorMessage } from '../../features/booking/api/errors'
 import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
 import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
 import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
@@ -135,7 +135,7 @@ export function BookingConfirmationPage() {
       }
     } catch (err) {
       setSubmissionUncertain(err instanceof BookingApiError && err.uncertain)
-      setError(err instanceof Error ? err.message : 'Booking could not be created.')
+      setError(bookingErrorMessage(err, 'create'))
     }
     })
   }
