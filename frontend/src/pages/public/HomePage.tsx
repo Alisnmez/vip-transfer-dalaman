@@ -192,6 +192,30 @@ export function HomePage() {
         </div>
       </section>
 
+      <section aria-labelledby="guest-reviews-title" className="bg-white py-16">
+        <div className="mx-auto max-w-container-max px-gutter">
+          <div className="mb-8 max-w-2xl">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Guest experiences</p>
+            <h2 id="guest-reviews-title" className="font-display-lg text-display-lg text-admin-primary">Customer Reviews</h2>
+            <p className="mt-3 text-on-surface-variant">We are preparing this space for feedback from customers who have travelled with us.</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              ['Clear booking', 'Choose your route, travel time and vehicle category before submitting.'],
+              ['Travel details', 'Share your flight number and accommodation address for your transfer request.'],
+              ['Direct support', 'Contact us with your booking reference if your plans change.'],
+            ].map(([title, description]) => (
+              <article key={title} className="rounded-xl border border-outline-variant bg-background p-6">
+                <span aria-hidden="true" className="material-symbols-outlined mb-4 text-secondary">verified_user</span>
+                <h3 className="mb-2 font-semibold text-admin-primary">{title}</h3>
+                <p className="text-on-surface-variant">{description}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-5 text-sm text-on-surface-variant">Service information shown above, not customer testimonials. Verified customer reviews will appear here when available.</p>
+        </div>
+      </section>
+
       <section className="py-24 relative bg-background">
         <div className="max-w-container-max mx-auto px-gutter text-center relative z-10">
           <h2 className="font-display-lg text-display-lg text-on-surface mb-stack-md">
