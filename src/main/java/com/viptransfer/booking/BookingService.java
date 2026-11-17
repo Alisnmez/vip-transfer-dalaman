@@ -148,8 +148,7 @@ public class BookingService {
                 "pending", bookingRepository.countByStatus("PENDING"),
                 "today", bookingRepository.countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
                         activeStatuses, today.atStartOfDay(), today.plusDays(1).atStartOfDay()),
-                "upcoming", bookingRepository.findTop8ByStatusInAndTransferDateTimeGreaterThanEqualOrderByTransferDateTimeAsc(
-                        activeStatuses, now));
+                "upcoming", bookingRepository.findDashboardBookings(now, PageRequest.of(0, 8)));
     }
 
     public List<Booking> getAllBookings() {
