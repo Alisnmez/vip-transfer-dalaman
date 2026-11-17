@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
 
@@ -7,15 +7,37 @@ export function ReviewsPage() {
   const [rating, setRating] = useState('5')
   const [comment, setComment] = useState('')
   const [permission, setPermission] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [feedback, setFeedback] = useState('')
+  const [reviews, setReviews] = useState<Array<{ id: number; name: string; rating: number; comment: string }>>([])
+  const apiBase = import.meta.env.VITE_API_BASE_URL || ''
 
-  function prepareFeedback(event: React.FormEvent<HTMLFormElement>) {
+  useEffect(() => {
+    fetch(`${apiBase}/reviews`).then(response => response.ok ? response.json() : []).then(data => { if (Array.isArray(data)) setReviews(data) }).catch(() => {})
+  }, [apiBase])
+
+  async function submitFeedback(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!permission || !name.trim() || !comment.trim()) return
-    const subject = encodeURIComponent('Customer review for moderation')
-    const body = encodeURIComponent(
-      `Customer name: ${name.trim()}\nRating: ${rating}/5\nReview:\n${comment.trim()}\n\nPermission to publish after review: Yes`,
-    )
-    window.location.href = `mailto:ali_sonmez35@hotmail.com?subject=${subject}&body=${body}`
+    if (!permission || !name.trim() || comment.trim().length < 10 || submitting) return
+    setSubmitting(true)
+    setFeedback('')
+    try {
+      const response = await fetch(`${apiBase}/reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), rating: Number(rating), comment: comment.trim(), publicationConsent: permission }),
+      })
+      if (!response.ok) throw new Error('Unable to submit your review. Please try again.')
+      setFeedback('Thank you! Your review has been submitted and is awaiting approval.')
+      setName('')
+      setRating('5')
+      setComment('')
+      setPermission(false)
+    } catch {
+      setFeedback('Unable to submit your review. Please try again later.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -27,12 +49,13 @@ export function ReviewsPage() {
         <p className="mt-4 max-w-2xl text-on-surface-variant">
           We value feedback from our passengers. Genuine customer reviews will be published here as they become available.
         </p>
+        {reviews.length > 0 && <section aria-label="Published customer reviews" className="mt-8 grid gap-4 md:grid-cols-2">{reviews.map(review => <article key={review.id} className="rounded-xl border border-outline-variant bg-white p-6"><h2 className="font-semibold text-admin-primary">{review.name}</h2><p aria-label={`${review.rating} out of 5 stars`} className="text-amber-600">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p><p className="mt-3 whitespace-pre-wrap break-words text-on-surface-variant">{review.comment}</p></article>)}</section>}
         <section aria-label="Share a review" className="mt-10 rounded-xl border border-outline-variant bg-white p-8">
           <h2 className="mb-2 text-xl font-semibold text-admin-primary">Share your experience</h2>
           <p className="mb-6 text-on-surface-variant">
-            Tell us about your journey. For now, this form prepares an email in your email app; please send that email to submit your feedback. Reviews are not published automatically.
+            Tell us about your journey. Your review will be checked by our team before publication.
           </p>
-          <form className="grid max-w-xl gap-5" onSubmit={prepareFeedback}>
+          <form className="grid max-w-xl gap-5" onSubmit={submitFeedback}>
             <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-name">
               Your name <span className="text-sm font-normal text-red-600">* required</span>
               <input className="rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-name" maxLength={80} onChange={(event) => setName(event.target.value)} required type="text" value={name} />
@@ -51,9 +74,9 @@ export function ReviewsPage() {
               <input checked={permission} className="mt-1" onChange={(event) => setPermission(event.target.checked)} required type="checkbox" />
               I agree that my name and review may be published on this website after moderation.
             </label>
-            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission} type="submit">Prepare Review Email</button>
+            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission || submitting} type="submit">{submitting ? "Submitting..." : "Submit Review"}</button>
           </form>
-          <p className="mt-5 text-sm text-on-surface-variant">This does not send your review automatically. Please send the email that opens. Online submission and admin approval are planned for the next update.</p>
+          {feedback && <p role="status" className="mt-5 text-sm text-on-surface-variant">{feedback}</p>}
           <Link className="mt-5 inline-block text-admin-primary underline" to="/booking">Book Your Transfer</Link>
         </section>
       </main>
