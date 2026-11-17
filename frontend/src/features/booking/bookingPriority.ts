@@ -1,5 +1,5 @@
 import type { Booking } from './types'
-import { isBookingLive } from './liveBooking'
+import { isBookingLive } from './liveBooking.ts'
 import { parseTurkeyDateTime } from './turkeyTime.ts'
 
 export function bookingPickupMs(value: string | null | undefined): number {
