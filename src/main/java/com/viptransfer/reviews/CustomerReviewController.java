@@ -24,9 +24,9 @@ public class CustomerReviewController {
         @AssertTrue boolean publicationConsent
     ) {}
 
-    public record PublicReview(Long id, String name, int rating, String comment) {
+    public record PublicReview(Long id, String name, int rating, String comment, java.time.Instant createdAt) {
         static PublicReview from(CustomerReview review) {
-            return new PublicReview(review.id, review.customerName, review.rating, review.comment);
+            return new PublicReview(review.id, review.customerName, review.rating, review.comment, review.createdAt);
         }
     }
 
@@ -47,23 +47,34 @@ public class CustomerReviewController {
     }
 
     @GetMapping("/moderation")
-    public List<CustomerReview> pending() {
-        return repository.findByStatusOrderByCreatedAtDesc("PENDING");
+    public List<CustomerReview> pending(@RequestParam(defaultValue = "PENDING") String status) {
+        if (!List.of("PENDING", "APPROVED", "REJECTED", "ARCHIVED").contains(status)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid review status.");
+        }
+        return repository.findByStatusOrderByCreatedAtDesc(status);
     }
 
     @PatchMapping("/{id}/moderation")
     public Map<String, String> moderate(@PathVariable Long id, @RequestBody Map<String, String> request) {
         String status = request.get("status");
-        if (!"APPROVED".equals(status) && !"REJECTED".equals(status)) {
+        if (!List.of("APPROVED", "REJECTED", "ARCHIVED").contains(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid moderation status.");
         }
         CustomerReview review = repository.findById(id).orElseThrow(
             () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Review not found."));
-        if (!"PENDING".equals(review.status)) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Review already moderated.");
+        if (!isAllowedTransition(review.status, status)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Invalid review status transition.");
         }
         review.status = status;
         repository.save(review);
         return Map.of("status", status);
+    }
+    private boolean isAllowedTransition(String current, String next) {
+        return switch (current) {
+            case "PENDING" -> "APPROVED".equals(next) || "REJECTED".equals(next) || "ARCHIVED".equals(next);
+            case "APPROVED", "REJECTED" -> "ARCHIVED".equals(next);
+            case "ARCHIVED" -> "APPROVED".equals(next);
+            default -> false;
+        };
     }
 }
