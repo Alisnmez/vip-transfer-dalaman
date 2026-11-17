@@ -5,16 +5,13 @@ import { getBookingPage } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingStatusIndicators } from '../../features/booking/components/BookingStatusIndicators'
+import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
+import { useBookingClock } from '../../features/booking/useBookingClock'
 import type { Booking } from '../../features/booking/types'
 
 export function BookingListPage() {
   const [bookings, setBookings] = useState<Booking[]>([])
-  const [nowMs, setNowMs] = useState(() => Date.now())
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setNowMs(Date.now()), 15000)
-    return () => window.clearInterval(timer)
-  }, [])
+  const nowMs = useBookingClock()
   const [loadedKey, setLoadedKey] = useState('')
   const [revision, setRevision] = useState(0)
   const [page, setPage] = useState(0)
@@ -79,7 +76,7 @@ export function BookingListPage() {
         {!loading && !error && visibleBookings.length > 0 && (
           <><div className="space-y-3 md:hidden">{visibleBookings.map(booking => (
             <article key={booking.id} className="min-w-0 rounded-xl border border-outline-variant bg-white p-4 shadow-sm">
-              <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="text-xs text-on-surface-variant">Booking #{booking.id}</p><h2 className="break-words font-bold">{booking.customerName}</h2></div><BookingStatusIndicators status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /></div>
+              <div className="flex items-start justify-between gap-3"><div className="min-w-0"><LiveBookingBadge status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /><p className="text-xs text-on-surface-variant">Booking #{booking.id}</p><h2 className="break-words font-bold">{booking.customerName}</h2></div><BookingStatusIndicators status={booking.status} transferDateTime={undefined} nowMs={nowMs} /></div>
               <p className="mt-3 break-words text-sm">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
               <p className="mt-2 text-sm text-on-surface-variant">{formatTransferDateTime(booking.transferDateTime)} · {booking.passengerCount} passengers</p>
               <p className="mt-1 text-xs text-on-surface-variant">Received: {formatBookingReceivedAt(booking.createdAt)}</p>
@@ -96,7 +93,7 @@ export function BookingListPage() {
             <tbody>
               {visibleBookings.map(booking => (
                 <tr key={booking.id} className="border-b border-outline-variant">
-                  <td className="p-4 font-semibold">#{booking.id}</td>
+                  <td className="p-4 font-semibold"><div className="flex items-center gap-2"><LiveBookingBadge status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} />#{booking.id}</div></td>
                   <td className="p-4">
                     <span className="block font-semibold">{booking.customerName}</span>
                     <span className="text-sm text-on-surface-variant">{booking.passengerCount} passengers</span>
@@ -104,7 +101,7 @@ export function BookingListPage() {
                   <td className="p-4">{booking.pickUpLocation} → {booking.dropOffLocation}</td>
                   <td className="p-4">{formatTransferDateTime(booking.transferDateTime)}</td>
                   <td className="p-4 font-semibold">£{Number(booking.price).toFixed(2)}</td>
-                  <td className="p-4"><BookingStatusIndicators status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /></td>
+                  <td className="p-4"><BookingStatusIndicators status={booking.status} transferDateTime={undefined} nowMs={nowMs} /></td>
                   <td className="p-4">
                     <Link className="text-admin-primary underline" to={`/admin/bookings/${booking.id}`}>View details</Link>
                   </td>
