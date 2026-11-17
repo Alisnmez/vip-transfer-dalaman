@@ -22,3 +22,24 @@ for (const [slug, name, intro] of pages) {
   await writeFile(join(folder, 'index.html'), html)
 }
 console.log(`Generated ${pages.length} static route HTML pages (${production ? 'production' : 'noindex staging'})`)
+
+// Generate initial HTML for the two public landing pages as well.
+// These pages remain client-rendered after JavaScript loads.
+const landingPages = [
+  { path: '', title: 'Dalaman Airport Transfers | VIP Transfer Dalaman', description: 'Private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz, Gocek and Icmeler.', heading: 'Private Dalaman Airport Transfers', body: 'Explore private airport transfers and choose your destination.', links: '<a href="/routes">Explore transfer routes</a> <a href="/booking">Request a transfer</a>' },
+  { path: 'routes', title: 'Dalaman Airport Transfer Routes | VIP Transfer Dalaman', description: 'Explore private transfers from Dalaman Airport to Marmaris, Fethiye, Oludeniz, Gocek and Icmeler.', heading: 'Dalaman Airport Transfer Routes', body: 'Explore popular destinations from Dalaman Airport.', links: destinationRoutes.map(({ slug, name }) => `<a href="/routes/${slug}">${name}</a>`).join(' ') },
+]
+for (const page of landingPages) {
+  const canonical = production ? `<link rel="canonical" href="${site}/${page.path}" />` : ''
+  const robots = production ? 'index,follow' : 'noindex,nofollow'
+  const html = template
+    .replace(/<title>[^<]*<\\/title>/, `<title>${page.title}</title>`)
+    .replace(/<meta name="description" content="[^"]*"\\s*\\/>/, `<meta name="description" content="${page.description}" />`)
+    .replace(/<meta name="robots" content="[^"]*"\\s*\\/>/, `<meta name="robots" content="${robots}" />`)
+    .replace('</head>', `${canonical}</head>`)
+    .replace('<div id="root"></div>', `<div id="root"><main><h1>${page.heading}</h1><p>${page.body}</p>${page.links}</main></div>`)
+  const folder = join('dist', page.path)
+  await mkdir(folder, { recursive: true })
+  await writeFile(join(folder, 'index.html'), html)
+}
+console.log(`Generated ${landingPages.length} landing HTML pages`)
