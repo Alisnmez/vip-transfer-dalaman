@@ -16,7 +16,7 @@ export function DashboardPage() {
   const [error, setError] = useState('')
 
   async function refresh() {
-    setLoading(true)
+    if (!summary) setLoading(true)
     setError('')
     try {
       setSummary(await getDashboardSummary())
@@ -59,8 +59,8 @@ export function DashboardPage() {
         <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 disabled:opacity-50">Refresh</ProcessingButton>
       </div>
       {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
-      {loading && <p>Loading bookings...</p>}
-      {!loading && !error && summary && (
+      {loading && <p role="status">Loading bookings from the server. The first request may take longer while the service starts...</p>}
+      {summary && (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
