@@ -1,3 +1,28 @@
+# MVP yayın kapsamı — 2026-11-17 karar
+
+**Karar:** İlk sürümde yalnızca rezervasyon almayı, rezervasyonu yönetmeyi ve sistemi güvenle çalıştırmayı doğrudan etkileyen işler yayın engeli sayılır. Kozmetik ve ileri seviye iyileştirmeler V1.1'e ertelenir. Bu bölüm önceki tarihsel kayıtların yerini alan güncel önceliklendirmedir; geçmiş testlerin başarılı olduğu iddiası değildir.
+
+## V1 — Yayın öncesi zorunlu (P0)
+- Frontend production bağımlılıklarındaki yüksek/kritik güvenlik açıklarını kapat; npm audit, lint, test, build yeşil.
+- Gerçek sentetik rezervasyon oluşturma → PostgreSQL'de kalıcılık → admin listesi/detayı → onay/iptal → tekrar okuma akışını izole test ortamında doğrula. Mevcut müşteri kayıtlarını değiştirme.
+- PostgreSQL yedeğini ve boş/geçici veritabanına geri yüklemeyi otomatik testte doğrula; canlıya geçmeden önce gerçek ortamın yedekleme planını belirle.
+- Mevcut şemayı doğrula; Flyway baseline/migration ve Hibernate ddl-auto ayarını veri kaybı riski olmadan yayın öncesi kararlaştır. Flyway bağımlılığı eklenmiş olması geçişin tamamlandığı anlamına gelmez.
+- Canlı ortamın DB/secret/domain/HTTPS yapılandırması, rezervasyon ve admin erişim kontrolü, temel hata akışları, geri dönüş planı ve son smoke test.
+- Rezervasyonun işletmeye ulaştığı ve müşteriyle iletişim kurulabildiği **çalışır bir süreç** (otomatik e-posta zorunlu değil; güvenilir manuel operasyon kabul edilebilir).
+
+## V1.1 — İlk yayın sonrasına ertelenenler (P1/P2)
+- Otomatik müşteri/admin e-postaları, gelişmiş şablonlar ve yeniden gönderim sistemi (manuel bildirim süreci yeterliyse).
+- Yorum kartlarında ek görsel ayrıntılar, tarih/görünüm iyileştirmeleri; gelişmiş yorum arşivleme/silme deneyimi (mevcut temel moderasyon çalışıyorsa).
+- Admin rezervasyon filtrelerinde ek seçenekler, ileri arama ve raporlama (temel rezervasyon görüntüleme/yönetme çalışıyorsa).
+- GA4, gelişmiş dönüşüm analitiği, Consent Mode ayrıntıları; takip etkinleştirilmeden ilk sürüm yayınlanabilir.
+- Gelişmiş SEO/prerender kapsamı, sayfa performansının mikro optimizasyonları, görsel/animasyon iyileştirmeleri.
+- Kapsamlı gerçek cihaz matrisi, ileri erişilebilirlik ve nadir ağ hatası senaryoları; temel mobil rezervasyon kullanılabilirliği yine V1 koşuludur.
+- Gelişmiş branch koruma, otomatik release kapıları ve ek CI raporları; minimum güvenli yayın/onay akışı V1'de korunur.
+
+**Kural:** P1/P2 maddeleri için yeni kod/CI değişikliği açmadan önce P0 kapıları kapatılır. Bir P1/P2 maddesi rezervasyonun kaybolmasına, güvenlik açığına veya yasal zorunluluğa neden oluyorsa yeniden P0 olarak değerlendirilir.
+
+---
+
 ## 2026-11-17 — Dal karışıklığı denetimi ve güvenli düzeltme kararı
 - **Kök neden doğrulandı:** Görev listesi `docs/EKSIKLERIMIZ.md` yalnızca çalışma dalı `feature/booking-integration` üzerinden okunabildi; varsayılan `main` dosyayı içermiyor. `PROJECT_HANDOVER.md` da çalışma dalını doğruluyor.
 - **Karşılaştırma:** `main` üzerindeki `frontend/src/pages/public/HomePage.tsx` ve `InfoPages.tsx` çalışma dalındaki sürümlerden farklı. Çalışma dalında `HomePage` üzerindeki “View All Vehicles” bağlantısı **zaten** `/vehicles` hedefine gidiyor; `InfoPages` ise doğrulanmamış EUR fiyatlarını kullanmıyor ve kullanıcı tarafından belirlenen geçici iletişim bilgilerini koruyor. `main` sürümünü bu dosyaların üzerine kopyalamak regresyon oluşturabilir.
