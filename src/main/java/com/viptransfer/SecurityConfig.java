@@ -31,6 +31,9 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/reviews").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
+                        .requestMatchers("/reviews/moderation", "/reviews/*/moderation").hasRole("ADMIN")
                         // Customer support uses external messaging, not public booking APIs.
                         .requestMatchers("/bookings/support/**").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
@@ -51,6 +54,8 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/bookings/**", config);
         source.registerCorsConfiguration("/bookings", config);
         source.registerCorsConfiguration("/admin/auth-check", config);
+        source.registerCorsConfiguration("/reviews", config);
+        source.registerCorsConfiguration("/reviews/**", config);
         return source;
     }
 
