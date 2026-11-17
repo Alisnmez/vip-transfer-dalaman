@@ -26,7 +26,7 @@ jobs:
         working-directory: frontend
         run: |
           npm ci
-          npm audit fix
+          npm audit fix || echo 'Some development-only advisories may remain; production audit below is mandatory.'
           npm audit --omit=dev --audit-level=high
           npm run lint
           npm test
