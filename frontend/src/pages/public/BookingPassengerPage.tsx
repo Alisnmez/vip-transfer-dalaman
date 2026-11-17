@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
@@ -48,6 +49,7 @@ function isAirportPickup(): boolean {
 }
 
 export function BookingPassengerPage() {
+  useState(() => { trackAnalyticsEvent('booking_passenger_step'); return true })
   const navigate = useNavigate()
   const { processing, run } = useAsyncAction()
   const [draft] = useState(readPassengerDraft)
