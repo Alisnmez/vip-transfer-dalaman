@@ -37,9 +37,9 @@ test('unreadable successful response keeps the booking outcome uncertain', () =>
   assert.equal(classifyBookingFailure(error), error)
 })
 
-test('shared user messages explain cancelled booking conflicts without HTTP codes', () => {
+test('shared user messages explain booking status conflicts without HTTP codes', () => {
   const conflict = bookingHttpError(409, 'Invalid booking status transition from CANCELLED to CONFIRMED.')
-  assert.match(bookingErrorMessage(conflict, 'status'), /Cancelled bookings cannot be reopened/)
+  assert.match(bookingErrorMessage(conflict, 'status'), /current status/)
   assert.doesNotMatch(bookingErrorMessage(conflict, 'status'), /409|Conflict/)
   assert.match(bookingErrorMessage(conflict, 'edit'), /Refresh/)
   assert.match(bookingErrorMessage(bookingHttpError(401), 'status'), /sign in again/)
@@ -56,6 +56,8 @@ test('read-only admin failures never suggest that a booking was modified', () =>
 test('status conflict message covers all invalid transitions, not just cancellations', () => {
   const message = bookingErrorMessage(bookingHttpError(409, 'Invalid booking status transition from PENDING to COMPLETED.'), 'status')
   assert.match(message, /status change is not allowed/i)
+  assert.match(message, /current status/i)
+  assert.doesNotMatch(message, /Cancelled bookings cannot be reopened/i)
   assert.match(message, /Refresh the booking/)
   assert.doesNotMatch(message, /409|HTTP|Conflict/)
 })
