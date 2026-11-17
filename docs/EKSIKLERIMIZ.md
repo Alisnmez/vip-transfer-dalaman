@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 rezervasyon hata mesajlarında bilgi sızıntısı önlemi
+- **Sorun:** HTTP 400/422/404 cevaplarında backend'in ham hata metni doğrudan müşteri/admin ekranına aktarılabiliyordu. Bu metin iç sistem ayrıntıları içerebilir.
+- **Kod:** `738cae2` ile bu durumlar için eyleme uygun, teknik detay içermeyen genel mesajlar eklendi; 408/429/409/5xx ve belirsiz yazma sonucu davranışları değiştirilmedi.
+- **Test:** `53db7e8` ile 400, 422, 404 ve create/edit/status/read kombinasyonlarında iç hata metninin gösterilmemesi ve `uncertain=false` kontrolü eklendi.
+- **Durum:** GitHub CI sonucu kontrol edilecek; gerçek tarayıcı E2E, mobil, PostgreSQL backup/restore ve yayın altyapısı ayrı açık. Üretim ve müşteri verisine dokunulmadı.
+
+
 ## 2026-11-17 — P0 5xx regresyon kapsamı genişletildi
 - `2377af0`: 503 dışında 500, 502 ve 504 için create/edit/status/read mesajları, belirsiz yazma sonucu ve ham backend ayrıntısının gizlenmesi test edildi. Üretim kodu değiştirilmedi.
 - **CI engeli:** GitHub commit status sorgusu ve PR workflow-run sorgusu `642dd61` ve `2377af0` için boş döndü. Bu uç noktalar push-triggered GitHub Actions sonucunu kesin doğrulamıyor. Test dosyası commit edildi ancak CI **DOĞRULANMADI**; Actions arayüzünde ilgili SHA için frontend/backend job sonuçları ayrıca kontrol edilmeli.
