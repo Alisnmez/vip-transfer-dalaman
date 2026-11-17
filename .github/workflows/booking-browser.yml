@@ -6,6 +6,7 @@ on:
       - feature/booking-integration
     paths:
       - 'frontend/**'
+      - 'backend/**'
       - '.github/workflows/booking-browser.yml'
   workflow_dispatch:
 
