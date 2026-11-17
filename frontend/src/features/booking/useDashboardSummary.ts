@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { getDashboardSummary } from './api'
+import { bookingErrorMessage } from './api/errors'
 import type { DashboardSummary } from './api'
 
 const POLL_INTERVAL_MS = 30_000
@@ -32,7 +33,7 @@ export function useDashboardSummary() {
       setError('')
     } catch (err) {
       if (requestGeneration === generation.current && (manual || !hasData.current)) {
-        setError(err instanceof Error ? err.message : 'Unable to load bookings')
+        setError(bookingErrorMessage(err, 'read'))
       }
     } finally {
       if (requestGeneration === generation.current) {
@@ -56,7 +57,7 @@ export function useDashboardSummary() {
       })
       .catch(err => {
         if (requestGeneration === generation.current) {
-          setError(err instanceof Error ? err.message : 'Unable to load bookings')
+          setError(bookingErrorMessage(err, 'read'))
         }
       })
       .finally(() => {
