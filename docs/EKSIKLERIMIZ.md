@@ -1,3 +1,28 @@
+# Güncel eksikler ve çözüm kayıtları
+
+## 2026-11-17 — Standart iş takip formatı ve güncel yayın engelleri
+
+**Bundan sonraki her geliştirme bu dosyada aynı şablonla kaydedilir:**
+- **Madde / öncelik / durum:** P0 (yayın engeli), P1 (önemli), P2 (iyileştirme); AÇIK / KODLANDI-TEST BEKLİYOR / CI DOĞRULANDI / CANLI DOĞRULANDI.
+- **Sorun ve kök neden:** Hatanın nasıl oluştuğu; varsayım ile ölçüm ayrı tutulur.
+- **Çözüm ve dosyalar:** Neyi, neden ve hangi dosyada değiştirdik; ilgili commit.
+- **Doğrulama kanıtı:** GitHub Actions run + sonucu, Render frontend/backend durumu ve gerekiyorsa gerçek admin E2E.
+- **Kalan işlem / kabul kriteri:** Tamamlandı demek için hangi testlerin geçmesi gerektiği.
+
+**P0 — İlk yayın öncesi açık kontroller:** gerçek rezervasyonun admin üzerinden uçtan uca işlenmesi; geçici telefonun gerçek numarayla değiştirilmesi; gerçek GBP fiyat/katalog ve nakit tahsilat zamanının onayı; işletme kimliği, iptal ve gizlilik metinleri; mobil smoke; üretim sırları/yedekleme/operasyon takip sorumlusu. Bunlar `docs/ILK_YAYIN_KONTROL_LISTESI.md` içinde de izlenir. Kullanıcı bu bilgileri son yayın rötuşunda sağlayacak; doğrulanmadan GO verilmez.
+
+**P1 — Performans:** Dashboard'da bütün rezervasyonların indirilmesi kaldırıldı, sunucu tarafında özet ve en yakın 8 kayıt kullanılıyor; PostgreSQL indeksleri kodlandı. **Kalan:** canlı API süreleri, soğuk başlangıç, sorgu planı/indeks kullanımı ölçülecek. Ölçüm olmadan performans sorunu tamamen çözüldü denmez.
+
+**P2 — Yayın sonrası/karara bağlı:** otomatik müşteri/işletme e-postası ve tekrar gönderim güvenliği; admin iletişim ayarları (telefon/e-posta düzenleme); ileri SEO/analitik. Önceki kapsam kararına göre e-posta ve gelişmiş admin ayarları v1.0 yayın engeli değildir; uygulama tamamlanmadan müşteriye otomatik bildirim sözü verilmez.
+
+### Tamamlanan kod değişiklikleri ve kanıtlar
+- **Dashboard sorgu ve React yaşam döngüsü:** `useDashboardSummary.ts` ile tek uçuş, 30 sn görünür sekme polling, sayfadan ayrılınca eski yanıtı yok sayma; `DashboardPage.tsx` sadece görünüm ve manuel yenileme. `079de6f7` için GitHub Actions `43985941694` **success** ve Render frontend **live** doğrulandı. Sonraki yaşam döngüsü düzenlemesi `ed6c1b05` için son CI sonucu ayrıca kontrol edilmeli.
+- **Rezervasyon listesi standartlaştırması:** `useBookingPage.ts` sayfa, yükleme, hata ve yenilemeyi yönetiyor; `BookingListPage.tsx` görünüm/arama/sayfalama kontrollerini taşıyor. `0b846fb2` CI `43986355778` **failure**: silinmiş `refreshing` referansı TS2552. `e41752ee` ile düzeltildi; GitHub Actions `43986557018` **success** (frontend lint/test/build ve backend PostgreSQL testleri).
+- **Eski veriyi hata sonrası göstermeme:** Başarısız sayfa isteğinde `useBookingPage.ts` artık `result` verisini sıfırlıyor; eski rezervasyon satırları/toplam sayılar yanlışlıkla kalmıyor (`98340a09`). **Durum: KODLANDI — yeni CI/Render ve gerçek admin sayfalama testi bekleniyor.**
+- **Kabul kriterleri:** İlk yükleme, ileri/geri sayfa, Refresh, Try again, geçersiz API/timeout, sayfalar arası hızlı geçiş; listede eski sayfanın verisi görünmemeli. Dashboard'da sekme görünürlüğü ve 30 sn polling davranışı kontrol edilmeli.
+
+---
+
 ## 2026-11-17 — 4.2 CONFIRMED rezervasyon yeniden fiyatlandırma
 - **Kullanıcı talebi:** CONFIRMED rezervasyonda destinasyon/araç/yolcu değişikliği yapılabilsin; admin edit formunda seçilen yeni destinasyonun fiyatı anında görünsün.
 - **Backend:** `BookingService.updateBooking` fiyatı etkileyen değişikliklere PENDING ve CONFIRMED durumlarında izin veriyor; COMPLETED/CANCELLED hâlâ 409. Sunucu fiyatı güvenilir katalogdan yeniden hesaplayıp kaydediyor (`ed3a6158`).
