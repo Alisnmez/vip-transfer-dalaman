@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P1 Render performans metrikleri ve yayın kanıtı
+- **Durum:** ÖLÇÜM KISMEN YAPILDI — HTTP latency ve gerçek admin E2E bekleniyor.
+- **Sorun:** Dashboard/rezervasyon listesinin yavaş açıldığı bildirildi, ancak soğuk başlangıç veya SQL sorgusunun kök neden olduğuna dair zaman ölçümü yoktu.
+- **İnceleme yöntemi:** Render backend servisi `srv-dbt0pe7f3r2c73bjqfo0` için `http_latency`, `http_request_count`, `cpu_usage`, `memory_usage` metrikleri 300 sn çözünürlükle sorgulandı. HTTP gecikme ve istek sayısı dizileri **boş** döndü; CPU/bellek örnekleri mevcut. CPU ve bellek örnekleri tek başına istek gecikmesini veya DB darboğazını kanıtlamaz. Ölçüm eksikliğinden performans çözüldü sonucu çıkarılmadı.
+- **CI kanıtı:** `f3c5e43e` GitHub Actions run `43987220595` **success**; frontend lint/test/build ve backend PostgreSQL testleri geçti.
+- **Kalan işlem / kabul kriteri:** Yetkili admin oturumuyla dashboard ve booking page için gerçek istek süreleri (ilk istek, sıcak istek, p50/p95), Render request logları veya uygun APM üzerinden ölçülecek. PostgreSQL sorgu planı `EXPLAIN ANALYZE` ile kontrol edilecek. Ölçümden önce yeni indeks/önbellek veya servis planı değişikliği yapılmayacak.
+
+
 ## 2026-11-17 — P1 Rezervasyon listesinin güncelleme durumunu görünür kılma
 - **Durum:** KODLANDI — son CI/Render ve gerçek admin smoke testi bekleniyor.
 - **Sorun:** Admin yeni rezervasyonların ne zaman alındığını göremiyor; manuel Refresh sırasında işleniyor durumunun yönetimi liste sayfası ve hook arasında tutarsızdı.
