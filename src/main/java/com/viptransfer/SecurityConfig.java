@@ -34,6 +34,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/reviews").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
                         .requestMatchers("/reviews/moderation", "/reviews/*/moderation").hasRole("ADMIN")
+                        .requestMatchers("/reviews/**").denyAll()
                         // Customer support uses external messaging, not public booking APIs.
                         .requestMatchers("/bookings/support/**").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
