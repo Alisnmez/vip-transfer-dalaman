@@ -1,6 +1,13 @@
 name: Nightly isolated booking database tests
 
 on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - 'src/**'
+      - 'pom.xml'
+      - '.github/workflows/nightly-booking-db.yml'
   schedule:
     - cron: '20 2 * * *'
   workflow_dispatch:
