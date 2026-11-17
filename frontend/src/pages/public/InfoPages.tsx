@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -79,6 +80,28 @@ function InfoPage({
     title: string
   }
 }) {
+  useEffect(() => {
+    const previousTitle = document.title
+    const description = document.querySelector('meta[name="description"]')
+    const previousDescription = description?.getAttribute('content') ?? null
+    const meta = description ?? document.createElement('meta')
+    if (!description) {
+      meta.setAttribute('name', 'description')
+      document.head.appendChild(meta)
+    }
+    document.title = `${content.title} | VIP Transfer Dalaman`
+    meta.setAttribute('content', content.description)
+    return () => {
+      document.title = previousTitle
+      if (previousDescription === null) {
+        if (!description) meta.remove()
+        else meta.removeAttribute('content')
+      } else {
+        meta.setAttribute('content', previousDescription)
+      }
+    }
+  }, [content.title, content.description])
+
   return (
     <div className="min-h-screen bg-background text-on-surface">
       <PublicNavbar />
