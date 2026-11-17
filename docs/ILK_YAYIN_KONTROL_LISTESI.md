@@ -16,6 +16,14 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] **Analitik:** GA4 (veya onaylanan gizlilik uyumlu alternatif) ve Search Console; rezervasyon başlatma, form adımları ve başarılı rezervasyon olayları; kişisel veri, telefon, e-posta, rezervasyon referansı veya idempotency anahtarı analitiğe gönderilmez; rıza ve gizlilik metniyle uyumlu kurulum.
 - [ ] **Doğrulama:** Gerçek üretim alan adı ve analytics/Search Console sahipliği belirlendikten sonra canonical, sitemap, robots, noindex, ölçüm olayları ve mobil Core Web Vitals test edilir. Kimlikler/alan adı bilinmeden canlı entegrasyon tamamlandı sayılmaz.
 
+## P0 — Gerçek müşteri yorumları ve galeri (son yayın rötuşu)
+
+**Kullanıcı kararı (2026-11-17):** İlk yayında müşteri yorumları ve **Gallery** bölümü olacak. İçerik toplama, görsellerin seçimi ve son görünüm **yayın öncesi son rötuşta** yapılacak; mevcut teknik SEO/rezervasyon çalışmalarını geciktirmeyecek.
+- [ ] Müşteri yorumlarını gerçek ve doğrulanabilir kaynaklardan, yayın izniyle ekle; uydurma yorum, yıldız puanı veya sahte sosyal kanıt oluşturma.
+- [ ] Gallery sayfasına işletmenin kullanım izni bulunan **gerçek araç ve müşteri fotoğraflarını** ekle. Tanınabilir müşteriler için açık yayın izni ve kişisel veri/gizlilik değerlendirmesi gerekli.
+- [ ] Görsellerde alt metin, mobil uyumlu boyutlandırma, lazy loading ve performans; görseller onaylanmadan sahte filo/müşteri fotoğrafı yayımlama.
+- [ ] Navigasyon, mobil görünüm ve SEO meta kontrolü; yorum schema işaretlemesi yalnızca platform kurallarına uygun gerçek verilerle.
+
 ## Yayın öncesi son rötuşlar — logo, metinler ve işletme detayları
 
 **Zamanlama:** Teknik rezervasyon ve güvenli işletme takibi çalıştıktan sonra, **canlıya almadan hemen önce** birlikte yapılacak son içerik/marka kontrolü. Kullanıcı bu bilgileri o aşamada verecek; şimdi tekrar sorulmayacak.
@@ -67,8 +75,8 @@ Amaç: müşteri rezervasyon talebi gönderebilsin, işletme talebi takip edebil
 - [ ] Müşteri rezervasyon sorgulama: yalnızca referans numarasıyla kişisel veri gösterme; e-posta sahipliği doğrulaması veya tek kullanımlık erişim bağlantısı.
 - [x] SEO, analitik ve rota sayfaları **P0 yayın öncesi** kapsamına taşındı; uygulama/doğrulama yukarıdaki kontrol listesinde **açık**.
 - [ ] FAQ: gerçek işletme kurallarıyla uyumlu yanıtlar.
-- [ ] Yalnızca gerçek/doğrulanabilir müşteri yorumları; uydurma yorumlar gerçek müşteri yorumu gibi yayımlanmaz.
-- [ ] Gerçek filo/araç kategorisiyle eşleşen, kullanım izni bulunan araç fotoğrafları.
+- [x] Gerçek müşteri yorumları yayın öncesi P0 son rötuşuna taşındı; gerçek içerik ve izin kontrolü hâlâ açık.
+- [x] Gerçek araç ve müşteri görselleriyle Gallery bölümü yayın öncesi P0 son rötuşuna taşındı; görseller ve izinler hâlâ açık.
 - [ ] Rakip Petunia Travel fiyatlarıyla hedef karşılaştırması: tek yön -£2,50 ve gidiş-dönüş -£5 yalnızca işletme maliyeti ve güncel kaynak fiyatı doğrulanırsa uygulanır.
 
 ## Kapsam notu — önceki kararların yerine geçer
