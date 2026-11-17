@@ -25,6 +25,7 @@ export function useBookingPage() {
       })
       .catch(err => {
         if (!active) return
+        setResult(null)
         setError(err instanceof Error ? err.message : 'Unable to load bookings')
         setLoadedKey(requestKey)
       })
