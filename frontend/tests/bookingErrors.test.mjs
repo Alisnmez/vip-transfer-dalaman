@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { BookingApiError, bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from '../src/features/booking/api/errors.ts'
+import { BookingApiError, bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure, bookingErrorMessage } from '../src/features/booking/api/errors.ts'
 
 test('HTTP errors retain status and distinguish definite rejection from server uncertainty', () => {
   const conflict = bookingHttpError(409, 'Booking already exists')
@@ -35,4 +35,13 @@ test('unreadable successful response keeps the booking outcome uncertain', () =>
   assert.equal(error.status, null)
   assert.match(error.message, /may have been saved/)
   assert.equal(classifyBookingFailure(error), error)
+})
+
+test('shared user messages explain cancelled booking conflicts without HTTP codes', () => {
+  const conflict = bookingHttpError(409, 'Invalid booking status transition from CANCELLED to CONFIRMED.')
+  assert.match(bookingErrorMessage(conflict, 'status'), /Cancelled bookings cannot be reopened/)
+  assert.doesNotMatch(bookingErrorMessage(conflict, 'status'), /409|Conflict/)
+  assert.match(bookingErrorMessage(conflict, 'edit'), /Refresh/)
+  assert.match(bookingErrorMessage(bookingHttpError(401), 'status'), /sign in again/)
+  assert.match(bookingErrorMessage(classifyBookingFailure(new TypeError('offline')), 'status'), /may have been saved/)
 })
