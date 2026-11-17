@@ -15,6 +15,7 @@ import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
 import { HomePage } from '../pages/public/HomePage'
 import { RoutesPage } from '../pages/public/RoutesPage'
+import { ReviewsPage } from '../pages/public/ReviewsPage'
 import { RouteDetailPage } from '../pages/public/RouteDetailPage'
 import {
   ContactPage,
@@ -32,7 +33,7 @@ function ScrollToTop() {
     trackPublicPage(pathname)
     const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
     const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
-    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq']
+    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews']
     const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)
     let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
     if (!robots) {
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
       { path: 'services', element: <ServicesPage /> },
       { path: 'contact', element: <ContactPage /> },
       { path: 'faq', element: <FAQPage /> },
+      { path: 'reviews', element: <ReviewsPage /> },
       { path: 'booking', element: <BookingFormPage /> },
       { path: 'booking/passenger', element: <BookingPassengerPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
