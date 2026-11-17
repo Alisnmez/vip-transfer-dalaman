@@ -32,6 +32,35 @@ class BookingIntegrationTests {
     @Autowired
     private BookingRepository bookingRepository;
 
+
+    @Test
+    void bookingPageRequiresAdminAndRejectsInvalidPagination() throws Exception {
+        mockMvc.perform(get("/bookings/page"))
+                .andExpect(status().isUnauthorized());
+
+        String auth = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+
+        mockMvc.perform(get("/bookings/page")
+                        .header("Authorization", auth)
+                        .param("page", "0")
+                        .param("size", "25"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").isArray())
+                .andExpect(jsonPath("$.totalElements").isNumber())
+                .andExpect(jsonPath("$.number").value(0));
+
+        mockMvc.perform(get("/bookings/page").header("Authorization", auth)
+                        .param("page", "-1"))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/bookings/page").header("Authorization", auth)
+                        .param("size", "0"))
+                .andExpect(status().isBadRequest());
+        mockMvc.perform(get("/bookings/page").header("Authorization", auth)
+                        .param("size", "101"))
+                .andExpect(status().isBadRequest());
+    }
+
     @Test
     void createsBookingAndReadsItBackFromPostgres() throws Exception {
         String request = objectMapper.writeValueAsString(Map.ofEntries(
