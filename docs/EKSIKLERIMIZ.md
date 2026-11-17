@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 ortak API hata mesajı: HTTP 429
+- Önceki sözdizimi düzeltmesi `fa594ce` için GitHub Actions `44012436247` **success**; önceki CI kırılması kapandı.
+- **Kod:** Rezervasyon oluşturma, listeleme, düzenleme ve durum güncellemede HTTP 429 (çok sık istek) için ham sağlayıcı mesajı yerine bekleyip tekrar denemeyi öneren ortak mesaj eklendi (`dc2e047`).
+- **Test:** Dört işlem türünde mesajın HTTP kodu göstermediğini ve 429'un kesin reddedilmiş yanıt olarak sınıflandırıldığını kontrol eden test eklendi (`e79e6a5`). Yeni CI sonucu ayrıca doğrulanacak.
+- **Açık / bloke:** Gerçek tarayıcı E2E, mobil E2E, PostgreSQL envanter/yedek/restore ve migration üretim öncesi açık. E-posta sağlayıcısı/domain/anahtar kurulmadan gerçek gönderim yapılmaz; staging/production ayrımı onay ve erişim gerektirir.
+
+
 ## 2026-11-17 — CI kırılması: 409 durum mesajında sözdizimi hatası
 - **Kanıt:** `2e42dee` için GitHub Actions `44004824586`: Spring Boot PostgreSQL integration tests **success**, React/TypeScript işi **failure**. Frontend ESLint `errors.ts:54:89 Parsing error: ';' expected` raporladı.
 - **Neden:** Tek tırnaklı TypeScript metninde kaçırılmamış `booking's` kesme işareti. Bu yalnızca mesaj değişikliği olsa da JavaScript derlemesini kırıyordu.
