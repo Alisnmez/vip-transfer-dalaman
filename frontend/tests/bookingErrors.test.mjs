@@ -68,3 +68,13 @@ test('shared messages handle edit conflicts, authorization and temporary service
   assert.match(bookingErrorMessage(bookingHttpError(503), 'status'), /temporarily unavailable/)
   assert.match(bookingErrorMessage(new Error('unexpected'), 'read'), /Could not load bookings/)
 })
+
+test('rate-limited booking actions show a helpful message instead of HTTP 429', () => {
+  const error = bookingHttpError(429, 'Too Many Requests')
+  for (const action of ['create', 'read', 'edit', 'status']) {
+    const message = bookingErrorMessage(error, action)
+    assert.match(message, /wait a moment before trying again/i)
+    assert.doesNotMatch(message, /429|Too Many Requests|HTTP/i)
+  }
+  assert.equal(error.uncertain, false)
+})
