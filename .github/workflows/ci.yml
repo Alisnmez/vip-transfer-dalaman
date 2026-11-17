@@ -127,6 +127,18 @@ jobs:
           test "$marker" = 'verified-backup'
           echo 'Backup/restore round trip verified against disposable PostgreSQL database.'
       - run: mvn -B test
+      - name: Verify Flyway migration and Hibernate schema validation on clean database
+        shell: bash
+        run: |
+          set -euo pipefail
+          PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE DATABASE vip_flyway_test;'
+          SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/vip_flyway_test \
+          FLYWAY_ENABLED=true \
+          HIBERNATE_DDL_AUTO=validate \
+          mvn -B test
+          count="$(PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_flyway_test -Atqc "SELECT count(*) FROM flyway_schema_history WHERE success = true AND version = '1'")"
+          test "$count" = '1'
+          echo 'Flyway V1 migrated fresh database and Hibernate validated schema.'
       - name: Preserve backend test reports
         if: always()
         uses: actions/upload-artifact@v4
