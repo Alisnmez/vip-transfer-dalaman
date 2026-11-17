@@ -92,8 +92,14 @@ export function getCalendarBookings(month: string) {
   return request<Booking[]>(`${BOOKING_URL}/calendar?month=${encodeURIComponent(month)}`, undefined, true)
 }
 
-export function getBookingPage(page: number, size = 25) {
-  return request<BookingPage>(`${BOOKING_URL}/page?page=${page}&size=${size}`, undefined, true)
+export type BookingFilters = { status?: string; from?: string; to?: string }
+
+export function getBookingPage(page: number, size = 25, filters: BookingFilters = {}) {
+  const params = new URLSearchParams({ page: String(page), size: String(size) })
+  if (filters.status) params.set('status', filters.status)
+  if (filters.from) params.set('from', filters.from)
+  if (filters.to) params.set('to', filters.to)
+  return request<BookingPage>(`${BOOKING_URL}/page?${params.toString()}`, undefined, true)
 }
 
 export function getBooking(id: number) {
