@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
+import { getPublishedReviews, submitReview } from '../../features/reviews/api'
+import type { PublicReview } from '../../features/reviews/api'
 
 export function ReviewsPage() {
   const [name, setName] = useState('')
@@ -9,12 +11,12 @@ export function ReviewsPage() {
   const [permission, setPermission] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState('')
-  const [reviews, setReviews] = useState<Array<{ id: number; name: string; rating: number; comment: string }>>([])
-  const apiBase = import.meta.env.VITE_API_BASE_URL || ''
-
+  const [reviews, setReviews] = useState<PublicReview[]>([])
   useEffect(() => {
-    fetch(`${apiBase}/reviews`).then(response => response.ok ? response.json() : []).then(data => { if (Array.isArray(data)) setReviews(data) }).catch(() => {})
-  }, [apiBase])
+    getPublishedReviews().then(setReviews).catch(() => {
+      setFeedback('Customer reviews are temporarily unavailable.')
+    })
+  }, [])
 
   async function submitFeedback(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -22,12 +24,7 @@ export function ReviewsPage() {
     setSubmitting(true)
     setFeedback('')
     try {
-      const response = await fetch(`${apiBase}/reviews`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), rating: Number(rating), comment: comment.trim(), publicationConsent: permission }),
-      })
-      if (!response.ok) throw new Error('Unable to submit your review. Please try again.')
+      await submitReview({ name: name.trim(), rating: Number(rating), comment: comment.trim(), publicationConsent: permission })
       setFeedback('Thank you! Your review has been submitted and is awaiting approval.')
       setName('')
       setRating('5')
