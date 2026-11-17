@@ -1,0 +1,39 @@
+name: Prepare dependency security fixes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Apply compatible npm security fixes
+        working-directory: frontend
+        run: |
+          npm ci
+          npm audit fix
+          npm audit --omit=dev --audit-level=high
+          npm run lint
+          npm test
+          npm run build
+      - name: Save proposed changes for review
+        if: always()
+        run: |
+          git diff -- frontend/package.json frontend/package-lock.json > dependency-fixes.patch
+          git status --short
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-dependency-fixes
+          path: dependency-fixes.patch
+          retention-days: 14
