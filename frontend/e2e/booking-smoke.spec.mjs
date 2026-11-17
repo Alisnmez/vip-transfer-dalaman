@@ -50,6 +50,8 @@ test('mobile booking and admin routes render at common phone widths', async ({ p
     await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
     await expect(page.getByLabel('Username')).toBeVisible()
     await expect(page.getByLabel('Password')).toBeVisible()
+    const adminHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)
+    expect(adminHorizontalOverflow, `Unexpected horizontal overflow on admin sign-in at ${width}px`).toBe(false)
   }
   expect(errors, 'Uncaught mobile browser errors').toEqual([])
 })
