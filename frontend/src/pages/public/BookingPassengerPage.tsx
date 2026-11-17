@@ -2,6 +2,7 @@ import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
@@ -179,6 +180,7 @@ export function BookingPassengerPage() {
                 experience.
               </p>
 
+              <RequiredFieldNote />
               <form id="passenger-details-form" noValidate className="space-y-stack-md" onSubmit={(event) => {
                 event.preventDefault()
                 void run(async () => {
@@ -189,13 +191,13 @@ export function BookingPassengerPage() {
               }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <FormField
-                    label="First Name"
+                    label="First Name" required
                     placeholder="e.g. Alexander"
                     value={firstName}
                     onChange={setFirstName}
                   />
                   <FormField
-                    label="Last Name"
+                    label="Last Name" required
                     placeholder="e.g. Hamilton"
                     value={lastName}
                     onChange={setLastName}
@@ -205,7 +207,7 @@ export function BookingPassengerPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <div className="flex flex-col gap-2">
                     <label className="font-label-sm text-label-sm text-on-surface-variant">
-                      Phone Number
+                      Phone Number<RequiredMark />
                     </label>
                     <div className="flex min-w-0">
                       <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber(''); setPhoneError('') }}>
@@ -230,7 +232,7 @@ export function BookingPassengerPage() {
                     {phoneError && <p role="alert" className="text-sm text-error">{phoneError}</p>}
                   </div>
                   <FormField
-                    label="Email Address"
+                    label="Email Address" required
                     onChange={(value) => { setEmail(value); setEmailError('') }}
                     placeholder="name@example.com"
                     type="email"
@@ -240,7 +242,7 @@ export function BookingPassengerPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="country-of-residence" className="font-label-sm text-label-sm text-on-surface-variant">Country of Residence *</label>
+                  <label htmlFor="country-of-residence" className="font-label-sm text-label-sm text-on-surface-variant">Country of Residence<RequiredMark /></label>
                   <select id="country-of-residence" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md bg-white" value={countryOfResidence} onChange={(event) => setCountryOfResidence(event.target.value)} required>
                     <option value="">Select your country</option>
                     <option value="United Kingdom">United Kingdom</option>
@@ -275,7 +277,7 @@ export function BookingPassengerPage() {
 
                 <div className="flex flex-col gap-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant">
-                    {isAirportPickup() ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'} *
+                    {isAirportPickup() ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'}<RequiredMark />
                   </label>
                   <p className="text-sm text-on-surface-variant">
                     Enter the hotel, villa, apartment or exact street address where the driver should meet you or drop you off. Not your home address abroad.
@@ -412,8 +414,10 @@ function FormField({
   placeholder,
   type = 'text',
   value,
+  required = false,
 }: {
   label: string
+  required?: boolean
   onChange?: (value: string) => void
   placeholder: string
   type?: string
@@ -423,10 +427,11 @@ function FormField({
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
-        {label}
+        {label}{required && <RequiredMark />}
       </label>
       <input
         id={fieldId}
+        required={required}
         className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
         onChange={(event) => onChange?.(event.target.value)}
         placeholder={placeholder}
