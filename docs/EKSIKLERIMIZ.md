@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Teknik SEO: üretim alan adına bağlı sitemap, robots ve canonical
+- **Durum:** KODLANDI — CI/Render ve Google taranabilirliği kontrolü bekleniyor.
+- **Sorun:** Test ortamı yanlışlıkla indekslenmemeli; üretim alan adı henüz bilinmiyor; rota sayfaları için sitemap/canonical altyapısı yoktu.
+- **Çözüm:** `frontend/scripts/generate-seo.mjs` build sırasında `VITE_PUBLIC_SITE_URL` gerçek HTTPS üretim domaini olduğunda 10 genel sayfalık sitemap ve robots oluşturuyor; değişken boşsa veya onrender/localhost ise boş sitemap ve `Disallow: /` oluşturuyor. `frontend/package.json` build'e bağlandı. `frontend/src/app/router.tsx` yalnızca tanımlı genel sayfalara canonical ekliyor; rezervasyon adımları ve admin sayfaları için JS çalıştığında `noindex,nofollow` koruması uygulanıyor. İlk HTML varsayılan `noindex,nofollow` bırakıldı.
+- **Kritik açık:** React SPA'nın ilk sunucu HTML'i hâlâ `noindex`; Google'ın güvenilir indekslemesi için **prerender/SSR veya sunucu tarafı HTML metadata** ve ayrı admin/booking noindex HTTP politikası gerekir. Bu çözüm tek başına SEO yayına hazır değildir. Gerçek alan adı ve GA4/Search Console kimlikleri daha sonra girilecek.
+- **Kabul kriteri:** Üretim HTML ilk yanıtta indexlenebilir public sayfa metadata/canonical içerir, özel sayfalar noindex kalır; sitemap yalnızca 200 dönen özgün sayfaları içerir; GA4 gizlilik uyumlu olayları ve Search Console doğrulanır.
+
+
 ## 2026-11-17 — P0 Rota landing page ilk uygulaması; yorumlar ve galeri son rötuşa alındı
 - **Durum:** ROTA KODLANDI — CI/Render, gerçek SEO indekslenebilirliği ve üretim alan adı doğrulaması bekliyor. Yorum/galeri içerikleri yayın öncesi son rötuşta yapılacak.
 - **Sorun:** `/routes` fiyat karşılaştırması sağlıyor fakat destinasyonlara özgü arama niyeti için ayrı sayfa ve iç bağlantılar bulunmuyordu.
