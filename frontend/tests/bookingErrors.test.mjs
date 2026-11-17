@@ -122,3 +122,18 @@ test('HTTP 5xx does not encourage unsafe admin write retries', () => {
   assert.match(createMessage, /retry the same request/i)
   assert.doesNotMatch(createMessage, /Database unavailable|HTTP|503/i)
 })
+
+test('other server failures keep write outcomes uncertain without exposing server details', () => {
+  for (const status of [500, 502, 504]) {
+    const error = bookingHttpError(status, 'internal database connection failed')
+    assert.equal(error.uncertain, true)
+    for (const action of ['create', 'edit', 'status']) {
+      const message = bookingErrorMessage(error, action)
+      assert.match(message, /may have (?:saved|been saved)/i)
+      assert.doesNotMatch(message, /internal database|HTTP|500|502|504/i)
+    }
+    const readMessage = bookingErrorMessage(error, 'read')
+    assert.match(readMessage, /Could not load bookings/i)
+    assert.doesNotMatch(readMessage, /saved|internal database|HTTP|500|502|504/i)
+  }
+})
