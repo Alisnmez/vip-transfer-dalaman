@@ -17,7 +17,10 @@ export type PendingReview = {
   rating: number
   comment: string
   createdAt: string
+  status: ReviewStatus
 }
+
+export type ReviewStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'ARCHIVED'
 
 export type ReviewSubmission = {
   name: string
@@ -37,11 +40,11 @@ export function submitReview(review: ReviewSubmission) {
   })
 }
 
-export function getPendingReviews() {
-  return request<PendingReview[]>(`${REVIEW_URL}/moderation`, undefined, true)
+export function getPendingReviews(status: ReviewStatus = 'PENDING') {
+  return request<PendingReview[]>(`${REVIEW_URL}/moderation?status=${encodeURIComponent(status)}`, undefined, true)
 }
 
-export function moderateReview(id: number, status: 'APPROVED' | 'REJECTED') {
+export function moderateReview(id: number, status: 'APPROVED' | 'REJECTED' | 'ARCHIVED') {
   return request<{ status: string }>(`${REVIEW_URL}/${id}/moderation`, {
     method: 'PATCH',
     body: JSON.stringify({ status }),
@@ -51,7 +54,7 @@ export function moderateReview(id: number, status: 'APPROVED' | 'REJECTED') {
 export function reviewErrorMessage(error: unknown, action: 'load' | 'submit' | 'moderate'): string {
   if (error instanceof BookingApiError) {
     if (error.status === 401 || error.status === 403) return 'Your admin session is not authorized. Please sign in again.'
-    if (error.status === 409) return 'This review has already been moderated. Refresh to see the latest status.'
+    if (error.status === 409) return 'The review status changed. Refresh to see the latest status.'
     if (error.status === 429) return 'Too many requests. Please wait and try again.'
     if (error.status === 400 || error.status === 422) return 'Review details are invalid. Please check the form.'
   }
