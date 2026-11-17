@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/booking-integration
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -51,3 +52,4 @@ jobs:
             frontend/production-audit.txt
             frontend/development-audit.txt
           if-no-files-found: warn
+          retention-days: 14
