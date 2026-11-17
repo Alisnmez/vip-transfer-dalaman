@@ -1,6 +1,11 @@
 name: Prepare dependency security fixes
 
 on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - '.github/workflows/prepare-dependency-fixes.yml'
   workflow_dispatch:
 
 permissions:
