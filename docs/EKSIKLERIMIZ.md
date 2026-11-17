@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 CI kırılması: rezervasyon durum testi derleme hatası
+- **Durum:** DÜZELTME KODLANDI — yeni GitHub Actions ve Render backend sonucu bekleniyor.
+- **Sorun / kök neden:** GitHub Actions run `43988264580` **failure**: `BookingIntegrationTests.java` satır 90 ve devamında hatalı kaçışlı JSON string'leri Java derleyicisinde `illegal character: '\\'` ve `')' or ',' expected` hatası oluşturdu. Render backend aynı commit `4fdd2a4a` için **build_failed**, frontend **live**.
+- **Çözüm / dosyalar:** `src/test/java/com/viptransfer/booking/BookingIntegrationTests.java` içinde status JSON payload'ları manuel escape etmek yerine `objectMapper.writeValueAsString(Map.of("status", ...))` ile üretiliyor (`df34736a`); MockMvc `perform` çağrısının kapanış parantezleri tamamlandı (`1f79c79c`).
+- **Doğrulama:** İlk kırılma CI logları ve Render deploy durumuyla doğrulandı; son düzeltmenin CI'si **BEKLİYOR**. Frontend build önceki run'da başarılıydı.
+- **Kalan işlem / kabul kriteri:** Son SHA için backend PostgreSQL testleri ve frontend build yeşil, Render backend **live** olmalı. Ardından sentetik rezervasyon admin confirm/cancel tarayıcı provası yapılmalı.
+
+
 ## 2026-11-17 — P0 Rezervasyon oluşturma → onay → iptal entegrasyon testi
 - **Durum:** TEST KODLANDI — CI ve gerçek Render/admin tarayıcı provası bekleniyor.
 - **Sorun / kök neden:** İlk yayın için kritik talep oluşturma, admin onayı ve iptal akışı tek bir PostgreSQL destekli HTTP entegrasyon testinde zincirleme doğrulanmıyordu.
