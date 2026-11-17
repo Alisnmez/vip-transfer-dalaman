@@ -76,7 +76,7 @@ jobs:
     timeout-minutes: 25
     services:
       postgres:
-        image: postgres:16
+        image: postgres:18
         env:
           POSTGRES_DB: vip_transfer_dalaman
           POSTGRES_USER: vip_test
@@ -114,7 +114,6 @@ jobs:
           CONFIRM_DISPOSABLE_RESTORE: 'YES'
         run: |
           set -euo pipefail
-          export PATH="/usr/lib/postgresql/16/bin:$PATH"
           pg_dump --version
           pg_restore --version
           PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE TABLE backup_restore_probe (id integer PRIMARY KEY, marker text NOT NULL);'
