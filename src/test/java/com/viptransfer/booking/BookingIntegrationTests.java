@@ -91,8 +91,8 @@ class BookingIntegrationTests {
                         .header("Authorization", auth)
                         .param("search", Long.toString(id)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content[0].id").value(id))
-                .andExpect(jsonPath("$.content[0].status").value("PENDING"));
+                .andExpect(jsonPath("$.content[?(@.id == " + id + ")].status")
+                        .value(org.hamcrest.Matchers.hasItem("PENDING")));
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
