@@ -1,5 +1,14 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Üretim veritabanı şema yönetimi denetimi
+- **Durum:** AÇIK — yayın öncesi migration ve yedek geri yükleme provası gerekli.
+- **Sorun / kök neden:** `src/main/resources/application.properties` dosyasında `spring.jpa.hibernate.ddl-auto=update` kullanılıyor. Bu ayar uygulama açılırken şemayı otomatik değiştirebilir; sürümlenmiş ve denetlenebilir üretim migration'ının yerini tutmaz. Veri kaybı yaşandığına dair kanıt yok, ancak üretim dağıtımında kontrolsüz şema değişikliği riski bulunuyor.
+- **İnceleme:** Spring Boot datasource `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` ortam değişkenlerini kullanıyor; `ADMIN_PASSWORD` da ortamdan okunuyor. Bu incelemede gerçek gizli değerler okunmadı veya dokümana yazılmadı.
+- **Çözüm planı:** `docs/POSTGRES_MIGRATION_PLAN.md` ile uyumlu şekilde önce mevcut canlı PostgreSQL şemasını ve indeksleri doğrula; yedek alıp geri yükleme provasını yap; ardından sürümlü migration yaklaşımını test ortamında uygula. Güvenli geçiş doğrulanmadan `ddl-auto` ayarını canlıda rastgele değiştirme.
+- **Kabul kriteri:** Tekrarlanabilir şema migration'ı; geri yükleme provası; uygulama yeniden deploy sonrası rezervasyon verisinin korunması; yetkisiz DB erişiminin olmaması. Bu madde kapanmadan üretim GO verilmez.
+- **Kod değişikliği:** Bu denetimde uygulama koduna dokunulmadı; risk belgelendi.
+
+
 ## 2026-11-17 — P1 Render performans metrikleri ve yayın kanıtı
 - **Durum:** ÖLÇÜM KISMEN YAPILDI — HTTP latency ve gerçek admin E2E bekleniyor.
 - **Sorun:** Dashboard/rezervasyon listesinin yavaş açıldığı bildirildi, ancak soğuk başlangıç veya SQL sorgusunun kök neden olduğuna dair zaman ölçümü yoktu.
