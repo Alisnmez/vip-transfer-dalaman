@@ -43,6 +43,8 @@ test('mobile booking and admin routes render at common phone widths', async ({ p
       expect(response?.status(), `HTTP status for ${route} at ${width}px`).toBeLessThan(400)
       await expect(page.locator('body')).toBeVisible()
       await expect(page.locator('body')).not.toBeEmpty()
+      const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)
+      expect(horizontalOverflow, `Unexpected horizontal overflow on ${route} at ${width}px`).toBe(false)
     }
     await page.goto('http://127.0.0.1:4173/admin/bookings')
     await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
