@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getDashboardSummary } from '../../features/booking/api'
@@ -15,36 +15,41 @@ export function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  async function refresh() {
-    if (!summary) setLoading(true)
-    setError('')
+  const requestInFlight = useRef(false)
+
+  async function refresh(showError = true) {
+    if (requestInFlight.current) return
+    requestInFlight.current = true
+    if (showError) {
+      if (!summary) setLoading(true)
+      setError('')
+    }
     try {
       setSummary(await getDashboardSummary())
+      setError('')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to load bookings')
+      if (showError) setError(err instanceof Error ? err.message : 'Unable to load bookings')
     } finally {
+      requestInFlight.current = false
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    let active = true
-    getDashboardSummary()
-      .then(data => { if (active) setSummary(data) })
-      .catch(err => { if (active) setError(err instanceof Error ? err.message : 'Unable to load bookings') })
-      .finally(() => { if (active) setLoading(false) })
-    return () => { active = false }
-  }, [])
-
-  // Keep completed/cancelled changes in sync without requiring manual refresh.
-  useEffect(() => {
-    let active = true
+    void refresh()
     const timer = window.setInterval(() => {
-      void getDashboardSummary()
-        .then(data => { if (active) setSummary(data) })
-        .catch(() => { /* Keep the last successful snapshot on a transient failure. */ })
+      if (document.visibilityState === 'visible') void refresh(false)
     }, 30000)
-    return () => { active = false; window.clearInterval(timer) }
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') void refresh(false)
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.clearInterval(timer)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+    // Initial load and polling are managed by this effect, not by every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const upcoming = sortBookingsByPriority(summary?.upcoming ?? [], nowMs)
