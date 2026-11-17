@@ -58,6 +58,8 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
       return 'This booking request conflicts with an existing request. Please check your details or contact support.'
     }
     if (error.status === 401 || error.status === 403) return 'Your session is not authorized. Please sign in again.'
+    if (error.status === 400 || error.status === 422) return action === 'read' ? 'Could not load bookings. Please try again.' : 'Some booking details are invalid. Please review the form and try again.'
+    if (error.status === 404) return action === 'create' ? 'The booking service could not be found. Please contact support.' : 'Booking not found. Refresh the page to check the latest information.'
     if (error.status === 429) return 'Too many requests. Please wait a moment before trying again.'
     if (error.status === 408) {
       if (action === 'create') return 'The booking request timed out. It may have been saved. Please retry the same request or contact support before starting a new booking.'
