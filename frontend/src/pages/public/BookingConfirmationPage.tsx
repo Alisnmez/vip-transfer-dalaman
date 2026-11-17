@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
@@ -125,6 +126,7 @@ export function BookingConfirmationPage() {
       }
       saveReceiptToStorages(savedReceipt, availableReceiptStorages())
       setReceipt(savedReceipt)
+      trackAnalyticsEvent('booking_request_submitted')
       try {
         localStorage.removeItem('bookingTransferInfo')
         localStorage.removeItem('bookingPassengerInfo')
