@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P1 Rezervasyon listesinin güncelleme durumunu görünür kılma
+- **Durum:** KODLANDI — son CI/Render ve gerçek admin smoke testi bekleniyor.
+- **Sorun:** Admin yeni rezervasyonların ne zaman alındığını göremiyor; manuel Refresh sırasında işleniyor durumunun yönetimi liste sayfası ve hook arasında tutarsızdı.
+- **Çözüm:** `useBookingPage.ts` içinde `refreshing` ve son başarılı veri alma zamanı `lastUpdatedAt` merkezi yönetiliyor (`dd91965f`). `BookingListPage.tsx` son güncelleme saatini gösteriyor ve manuel Refresh butonunda yükleme durumunu kullanıyor (`54b8e692`). Hata durumunda son başarılı zaman korunur; bu zaman başarısız denemeyi başarılı gibi göstermez.
+- **Kabul kriteri:** İlk yükleme sonrasında saat görünmeli; başarılı manuel yenilemede güncellenmeli; başarısız yenileme zamanı değiştirmemeli; buton istek sırasında kilitlenmeli; sekmeye dönüşte liste yeniden sorgulanmalı.
+- **Doğrulama:** Önceki `56aa6e5e` CI run `43986887783` **success**; son değişiklikler için **CI/Render bekleniyor**. Gerçek admin E2E yapılmadı.
+
+
 ## 2026-11-17 — P1 Admin rezervasyon listesinin sekmeye dönüşte güncellenmesi
 - **Durum:** KODLANDI — CI, Render ve gerçek admin smoke testi bekleniyor.
 - **Sorun / kök neden:** Booking management ilk açılışta ve manuel Refresh ile veri çekiyordu. Admin başka sekmede çalışıp geri döndüğünde yeni rezervasyonlar otomatik görünmüyordu; dashboard'daki görünür sekme yaklaşımı listede yoktu.
