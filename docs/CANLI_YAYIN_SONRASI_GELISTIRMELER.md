@@ -9,6 +9,8 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 - Gerçek müşteri verileri, işletme fiyatları ve ödeme/iptal vaatleri doğrulanmadan yayınlanmaz.
 - Sürüm numaraları aşağıda **öneridir**, kesin yayın tarihi veya taahhüt değildir.
 
+**2026-11-17 kapsam değişikliği:** Teknik SEO, GA4/Search Console veya onaylı analitik ve özgün rota sayfaları **v1.0 P0 yayın öncesine** taşındı; bu dosyada yayın sonrası fikir olarak değerlendirilmez. Ayrıntılı kabul kriterleri `docs/ILK_YAYIN_KONTROL_LISTESI.md` içindedir. v1.3'te yalnızca ileri analitik/A-B optimizasyonları kalır.
+
 ## v1.0 — İlk yayın için alınan kararlar
 - [x] **Online ödeme yok.** Kullanıcı kararı: 2026-11-16. Rezervasyon talebi oluşturulur; Stripe/ödeme sağlayıcısı entegrasyonu ilk sürüme eklenmez.
 - [ ] **Ödeme şekli ayrıca netleştirilecek.** Araçta ödeme, nakit/kart kabulü ve tahsilat zamanı henüz kullanıcı tarafından onaylanmadı. Bu yüzden sitede doğrulanmamış ödeme vaadi verilmez.
@@ -36,7 +38,7 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 | Fikir | Kullanıcıya fayda | Öncelik | Kabul kriteri | Durum |
 |---|---|---|---|---|
 | Ek dil seçenekleri | Daha çok müşteri | Orta | Doğru çeviri, yerel tarih/para biçimi | FİKİR |
-| Dönüşüm ve performans analitiği | Sorunlu adımları tespit | Orta | Gizlilik uyumu, ölçümlerin doğrulanması | FİKİR |
+| İleri dönüşüm analizi ve A/B raporlama | İlk yayındaki temel analitiği geliştirme | Orta | Gizlilik uyumu, ölçümlerin doğrulanması | İLERİ SÜRÜM; temel analitik v1.0 P0 |
 | Rezervasyon akışında A/B iyileştirmeleri | Daha kolay kullanım | Düşük | Ölçülebilir sonuç ve regresyon testi | FİKİR |
 
 ## Sürüm günlüğü
