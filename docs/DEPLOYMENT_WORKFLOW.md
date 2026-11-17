@@ -12,7 +12,7 @@
 5. **Trust and content:** publish a short FAQ, clear company/contact details and authorized vehicle photos. Add a customer photo gallery only with permission; use placeholders or omit unavailable photos. Show only genuine, permissioned customer reviews; never fabricate customer identities, ratings or testimonials.
 6. **Release:** deploy verified commit, perform short production smoke without altering real bookings, keep rollback/redeploy path.
 
-**Review submission status (2026-11-17):** `/reviews` now has a name, 1–5 rating, review text and publication-consent form. It opens a prefilled email draft; **this is not an automatic submission, saved review, or admin approval queue**. Before claiming those features work, implement backend storage, a pending/approved status and admin moderation, plus a real submit endpoint. The temporary mailto address must be checked/replaced before launch. Keep review content out of public pages until approved.\n\n**P1 — after launch:** collect and publish verified customer reviews (with consent), expand the authorized customer/vehicle photo gallery, improve FAQ content, and add extensive E2E scenarios, Flyway/Liquibase migration automation (until then no blind schema changes), advanced security hardening, analytics dashboards, competitor price research, extra features and visual refinements. Track them in `docs/EKSIKLERIMIZ.md`.
+**Review status (2026-11-17):** The earlier mailto-only description below was superseded by review API, admin moderation, archive/restore and dated public-review changes on `feature/booking-integration`. The latest verified frontend/backend Render deployments both run commit `8fbbd3d6986a79c555f2fa7d00fcef5e03f9a29c`; GitHub CI passed. **Do not interpret this as completed live staging browser E2E**: real booking and review journeys still require synthetic-data verification, including persistence and admin authorization. Never publish fabricated reviews.
 
 **Do not mistake a committed change for a passed CI run or a live deployment.** No production deploy or database mutation is authorized by this document.
 
@@ -74,3 +74,14 @@ Current Render test URLs: `https://vip-transfer-dalaman-test.onrender.com` and `
 ## Known limitations
 
 GitHub Actions green is not proof of real-browser E2E. Existing Render test services and database do not mean a production environment exists. Managed backups and memory requirements must be confirmed against the selected paid Render plans before purchase.
+
+
+## Production budget and access decision — 2026-11-17
+
+- Owner's working target: **approximately USD 31/month for backend + database**; total spending target approximately EUR 25–30/month. **Not a purchase authorization.** Confirm official prices, currency conversion, taxes, domain, email mailbox and backup costs before ordering.
+- Candidate split to evaluate: Render paid Spring Boot backend with more RAM (indicative USD 25/month) + entry-level managed Render PostgreSQL (indicative USD 6/month). The small DB tier is **not approved for production** until storage, backup/restore, retention, connection and performance limits are checked. React static hosting and free-tier transactional email are separate assumptions, not guaranteed unlimited free services.
+- Alternative split: smaller backend + larger managed PostgreSQL; choose only after measuring Java memory/CPU and DB needs under realistic traffic. Avoid treating a 512 MB JVM as production-ready without tests.
+- Current confirmed access: GitHub repository and Render workspace `Ali's workspace` (workspace ID `tea-dbt0muvf3r2c73bjjde0`); existing staging frontend, API and test DB visible. Direct read-only SQL query from hosted Render connector **failed** because of database network allowlist/SSL restrictions. Do not weaken DB network rules or expose credentials to solve this.
+- Desired phone-driven workflow: requested change → GitHub commit/PR → CI → staging deploy → synthetic E2E → explicit owner production release approval → production deploy and health check. Tool availability and permissions must be verified each session; do not promise unconditional access.
+- Production release prerequisites: distinct staging/production secrets and DB, verified backup **and restore**, monitored email provider and reply-to, branch protection, least-privilege credentials, deployment/rollback checklist, and approved customer-facing content.
+- **No paid resource, production deployment or database mutation has been performed under this plan.**
