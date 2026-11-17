@@ -1,15 +1,18 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { mkdtemp, readFile, rm, cp } from 'node:fs/promises'
+import { mkdtemp, readFile, rm, cp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const source = resolve('scripts/generate-seo.mjs')
+const destinations = resolve('scripts/destination-routes.mjs')
 
 async function generate(domain) {
   const directory = await mkdtemp(join(tmpdir(), 'vip-seo-'))
   await cp(source, join(directory, 'generate-seo.mjs'))
+  await cp(destinations, join(directory, 'destination-routes.mjs'))
+  await writeFile(join(directory, 'package.json'), '{"type":"module"}')
   const result = spawnSync(process.execPath, ['generate-seo.mjs'], {
     cwd: directory,
     encoding: 'utf8',
