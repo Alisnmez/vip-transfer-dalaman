@@ -28,8 +28,7 @@ class BookingDashboardSummaryTest {
         when(repository.countByStatus("PENDING")).thenReturn(7L);
         when(repository.countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
                 anyCollection(), any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(3L);
-        when(repository.findTop8ByStatusInAndTransferDateTimeGreaterThanEqualOrderByTransferDateTimeAsc(
-                anyCollection(), any(LocalDateTime.class))).thenReturn(List.of(upcoming));
+        when(repository.findDashboardBookings(any(LocalDateTime.class), any(org.springframework.data.domain.Pageable.class))).thenReturn(List.of(upcoming));
 
         Map<String, Object> result = service.getDashboardSummary();
 
@@ -49,6 +48,7 @@ class BookingDashboardSummaryTest {
         assertEquals(start.getValue().plusDays(1), end.getValue());
         assertEquals(0, start.getValue().getHour());
         assertEquals(0, start.getValue().getMinute());
+        verify(repository).findDashboardBookings(any(LocalDateTime.class), argThat(page -> page.getPageSize() == 8));
         verify(repository, never()).findAll();
     }
 }
