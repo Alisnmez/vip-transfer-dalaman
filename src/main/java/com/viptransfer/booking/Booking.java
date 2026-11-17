@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 import java.time.Instant;
 
 @Entity
+@jakarta.persistence.Table(indexes = {
+    @jakarta.persistence.Index(name = "idx_booking_status_transfer_time", columnList = "status, transfer_date_time"),
+    @jakarta.persistence.Index(name = "idx_booking_transfer_time", columnList = "transfer_date_time")
+})
 public class Booking {
 
     @Id
