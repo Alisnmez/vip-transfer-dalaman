@@ -39,6 +39,7 @@ jobs:
             exit 1
           fi
       - name: Report development dependency risks (non-blocking)
+        if: always()
         shell: bash
         run: |
           npm audit --audit-level=high > development-audit.txt 2>&1 || true
