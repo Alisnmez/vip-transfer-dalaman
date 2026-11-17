@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P1 Admin rezervasyon sayfalama API'si için güvenlik ve sınır testleri
+- **Durum:** TEST KODLANDI — CI sonucu ve gerçek admin E2E bekleniyor.
+- **Sorun:** `GET /bookings/page` için sayfalama kodu vardı ancak yetkisiz erişim, varsayılan sayfa biçimi ve geçersiz sayfa/boyut parametreleri tek bir entegrasyon testinde doğrulanmıyordu.
+- **Çözüm:** `src/test/java/com/viptransfer/booking/BookingIntegrationTests.java` içine PostgreSQL test ortamında MockMvc ile çalışan `bookingPageRequiresAdminAndRejectsInvalidPagination` eklendi (`80a2d86b`). Yetkisiz istek 401, admin isteği 200 ve `content/totalElements/number` alanları, negatif page ve 0/101 size için 400 bekleniyor. Canlı DB verisine dokunulmadı.
+- **Doğrulama:** Test commit'i için GitHub Actions sonucu henüz doğrulanmadı; staging/Render'da gerçek admin oturumu testi ayrıca gerekli.
+- **Kabul kriteri:** CI PostgreSQL entegrasyon testi yeşil; canlıda admin olmayan erişim engellenir; admin listesi sayfalı açılır.
+
+
 ## 2026-11-17 — P0 Booking indeksleri için salt-okunur doğrulama
 - **Durum:** KODLANDI — staging SQL çalıştırma ve yedek geri yükleme testi bekliyor.
 - **Sorun / kök neden:** `Booking.java` içinde `idx_booking_status_transfer_time` ve `idx_booking_transfer_time` indeksleri tanımlı; ancak Hibernate annotation'ları gerçek PostgreSQL indeksinin varlığını ve geçerli olduğunu kanıtlamıyor.
