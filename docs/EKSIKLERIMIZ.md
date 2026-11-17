@@ -1,5 +1,10 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — Otomatik e-posta kurulum ve sorun giderme rehberi
+- İlk kez kurulacak transactional e-posta servisi için [EMAIL_SETUP_AND_TROUBLESHOOTING.md](EMAIL_SETUP_AND_TROUBLESHOOTING.md) oluşturuldu (`44c3c49`). DNS SPF/DKIM/DMARC, API key, Render env, müşteri/admin şablonları, tekrar gönderim önleme, retry, test ve sorun giderme açıklanıyor.
+- **Durum: BEKLİYOR.** Bu bir rehberdir; e-posta sağlayıcısı henüz bağlanmadı, gerçek e-posta gönderilmiyor. Sağlayıcı fiyatları/kotaları satın alma öncesi doğrulanacak.
+
+
 ## 2026-11-17 — Staging / Production yayın standardı
 - Yayın süreci belgelendi: [DEPLOYMENT_WORKFLOW.md](DEPLOYMENT_WORKFLOW.md) (`e65bc1b`). Development → Staging → Production, branch kuralları, CI/E2E kapıları, ayrı PostgreSQL, migration/backup, hotfix ve rollback.
 - **Durum: BEKLİYOR / KURULUM GEREKİYOR.** Doküman hedef süreçtir; `main`/`staging` korumaları, ayrı üretim Render servisleri ve otomatik yayın kapıları henüz kurulmuş kabul edilmiyor.
