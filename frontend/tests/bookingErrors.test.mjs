@@ -11,6 +11,9 @@ test('HTTP errors retain status and distinguish definite rejection from server u
   assert.match(bookingHttpError(503).message, /HTTP 503/)
   assert.equal(bookingHttpError(503).uncertain, true)
   assert.equal(bookingHttpError(422).uncertain, false)
+  assert.equal(bookingHttpError(408).uncertain, true)
+  assert.equal(bookingHttpError(504).uncertain, true)
+  assert.equal(bookingHttpError(429).uncertain, false)
 })
 
 test('network and timeout failures indicate uncertain submission outcome', () => {
