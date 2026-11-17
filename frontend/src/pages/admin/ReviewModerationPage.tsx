@@ -31,8 +31,6 @@ export function ReviewModerationPage() {
 
   useEffect(() => {
     let active = true
-    setLoading(true)
-    setError('')
     getPendingReviews(status).then(items => {
       if (active) setReviews(items)
     }).catch(error => {
@@ -66,7 +64,7 @@ export function ReviewModerationPage() {
         <button type="button" onClick={() => { void refresh() }} disabled={loading || busyId !== null} className="rounded-lg border bg-white px-4 py-2 font-semibold disabled:opacity-50">Refresh</button>
       </div>
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter reviews by status">
-        {tabs.map(tab => <button key={tab.status} type="button" aria-pressed={status === tab.status} disabled={busyId !== null} onClick={() => { setStatus(tab.status); setNotice('') }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${status === tab.status ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{tab.label}</button>)}
+        {tabs.map(tab => <button key={tab.status} type="button" aria-pressed={status === tab.status} disabled={busyId !== null} onClick={() => { if (tab.status !== status) { setLoading(true); setError(''); setReviews([]); setStatus(tab.status); setNotice('') } }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${status === tab.status ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{tab.label}</button>)}
       </div>
       {error && <p role="alert" className="mb-4 text-red-700">{error}</p>}
       {notice && <p role="status" className="mb-4 text-green-700">{notice}</p>}
