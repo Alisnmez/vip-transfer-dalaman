@@ -155,6 +155,26 @@ public class BookingService {
         return bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
+    public Page<Booking> getBookingPage(int page, int size, String status, java.time.LocalDate from, java.time.LocalDate to) {
+        if (status != null && !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status filter.");
+        }
+        if (from != null && to != null && from.isAfter(to)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid transfer date range.");
+        }
+        if (page < 0 || size < 1 || size > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");
+        }
+        org.springframework.data.jpa.domain.Specification<Booking> filters = (root, query, cb) -> {
+            java.util.List<jakarta.persistence.criteria.Predicate> predicates = new java.util.ArrayList<>();
+            if (status != null) predicates.add(cb.equal(root.get("status"), status));
+            if (from != null) predicates.add(cb.greaterThanOrEqualTo(root.get("transferDateTime"), from.atStartOfDay()));
+            if (to != null) predicates.add(cb.lessThan(root.get("transferDateTime"), to.plusDays(1).atStartOfDay()));
+            return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
+        };
+        return bookingRepository.findAll(filters, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
+    }
+
     public Page<Booking> getBookingPage(int page, int size) {
         if (page < 0 || size < 1 || size > 100) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");
