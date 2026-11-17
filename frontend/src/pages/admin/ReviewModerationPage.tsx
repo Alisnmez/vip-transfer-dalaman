@@ -20,7 +20,17 @@ export function ReviewModerationPage() {
     }
   }, [])
 
-  useEffect(() => { void refresh() }, [refresh])
+  useEffect(() => {
+    let active = true
+    getPendingReviews().then(items => {
+      if (active) setReviews(items)
+    }).catch(error => {
+      if (active) setError(reviewErrorMessage(error, 'load'))
+    }).finally(() => {
+      if (active) setLoading(false)
+    })
+    return () => { active = false }
+  }, [])
 
   async function moderate(id: number, status: 'APPROVED' | 'REJECTED') {
     if (busyId !== null) return
