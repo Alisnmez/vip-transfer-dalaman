@@ -12,9 +12,11 @@ export function ReviewsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null)
+  const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null)
   const [reviews, setReviews] = useState<PublicReview[]>([])
   useEffect(() => {
     getPublishedReviews().then(setReviews).catch(() => {
+      setFeedbackType('error')
       setFeedbackType('error')
       setFeedback(reviewErrorMessage(undefined, 'load'))
     })
@@ -36,6 +38,7 @@ export function ReviewsPage() {
       setPermission(false)
     } catch (error) {
       setFeedbackType('error')
+      setFeedbackType('error')
       setFeedback(reviewErrorMessage(error, 'submit'))
     } finally {
       setSubmitting(false)
@@ -51,7 +54,7 @@ export function ReviewsPage() {
         <p className="mt-4 max-w-2xl text-on-surface-variant">
           We value feedback from our passengers. Genuine customer reviews will be published here as they become available.
         </p>
-        {reviews.length > 0 && <section aria-label="Published customer reviews" className="mt-8 grid gap-4 md:grid-cols-2">{reviews.map(review => <article key={review.id} className="rounded-xl border border-outline-variant bg-white p-6"><h2 className="font-semibold text-admin-primary">{review.name}</h2><p aria-label={`${review.rating} out of 5 stars`} className="text-amber-600">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p><p className="mt-3 whitespace-pre-wrap break-words text-on-surface-variant">{review.comment}</p></article>)}</section>}
+        {reviews.length > 0 && <section aria-label="Published customer reviews" className="mt-8 grid gap-4 md:grid-cols-2">{reviews.map(review => <article key={review.id} className="rounded-2xl border border-outline-variant bg-white p-6 shadow-sm"><div className="flex items-center gap-3"><div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-100 font-bold text-amber-900">{review.name.trim().charAt(0).toUpperCase()}</div><div><h2 className="font-semibold text-admin-primary">{review.name}</h2>{review.createdAt && !Number.isNaN(Date.parse(review.createdAt)) && <time dateTime={review.createdAt} className="text-xs text-on-surface-variant">{new Date(review.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time>}</div></div><p aria-label={`${review.rating} out of 5 stars`} className="mt-4 text-lg tracking-wider text-amber-500">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p><p className="mt-3 whitespace-pre-wrap break-words leading-relaxed text-on-surface-variant">{review.comment}</p></article>)}</section>}
         <section aria-label="Share a review" className="mt-10 rounded-xl border border-outline-variant bg-white p-8">
           <h2 className="mb-2 text-xl font-semibold text-admin-primary">Share your experience</h2>
           <p className="mb-6 text-on-surface-variant">
@@ -76,6 +79,31 @@ export function ReviewsPage() {
                 ))}
               </div>
               <p aria-live="polite" className="text-sm text-on-surface-variant">{rating ? rating + ' out of 5 stars selected' : 'Select a star rating'}</p>
+            </fieldset>
+            <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-comment">
+              Your review <span className="text-sm font-normal text-red-600">* required</span>
+              <textarea className="min-h-32 rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-comment" maxLength={1500} minLength={10} onChange={(event) => setComment(event.target.value)} required value={comment} />
+            </label>
+            <label className="flex items-start gap-3 text-sm text-on-surface-variant">
+              <input checked={permission} className="mt-1" onChange={(event) => setPermission(event.target.checked)} required type="checkbox" />
+              I agree that my name and review may be published on this website after moderation.
+            </label>
+            <button className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white disabled:opacity-50" disabled={!permission || !rating || submitting} type="submit">{submitting ? "Submitting..." : "Submit Review"}</button>
+          </form>
+          {feedback && <p role={feedbackType === 'error' ? 'alert' : 'status'} className={'mt-5 rounded-lg border p-4 text-sm font-medium ' + (feedbackType === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800')}>{feedback}</p>}
+          <Link className="mt-5 inline-block text-admin-primary underline" to="/booking">Book Your Transfer</Link>
+        </section>
+      </main>
+    </div>
+  )
+}            <fieldset className="grid gap-2">
+              <legend className="font-semibold text-admin-primary">Your rating <span className="text-sm font-normal text-red-600">* required</span></legend>
+              <div className="flex items-center gap-1" role="radiogroup" aria-label="Your rating">
+                {[1, 2, 3, 4, 5].map(value => (
+                  <button key={value} type="button" role="radio" aria-checked={rating === value} aria-label={`${value} ${value === 1 ? 'star' : 'stars'}`} onClick={() => setRating(value)} className={`rounded-lg p-2 text-3xl leading-none transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary ${value <= rating ? 'text-amber-500' : 'text-gray-300 hover:text-amber-400'}`}>★</button>
+                ))}
+              </div>
+              <p className="text-sm text-on-surface-variant" aria-live="polite">{rating ? `${rating} out of 5 stars selected` : 'Select 1 to 5 stars'}</p>
             </fieldset>
             <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-comment">
               Your review <span className="text-sm font-normal text-red-600">* required</span>
