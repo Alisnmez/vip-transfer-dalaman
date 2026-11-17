@@ -9,7 +9,8 @@ import { ProcessingButton } from '../components/ProcessingButton'
 const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
   { to: '/admin/calendar', label: 'Calendar', icon: 'calendar_month' },
-  { to: '/admin/bookings', label: 'Bookings', icon: 'list_alt' }
+  { to: '/admin/bookings', label: 'Bookings', icon: 'list_alt' },
+  { to: '/admin/reviews', label: 'Customer Reviews', icon: 'rate_review' }
 ]
 
 export function AdminLayout() {
