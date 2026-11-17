@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
@@ -451,9 +451,10 @@ function TextField({
   onFocus?: () => void
   value?: string
 }) {
+  const fieldId = useId()
   return (
     <div className="space-y-2">
-      <label className="font-label-sm text-label-sm text-on-surface-variant">
+      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
         {label}
       </label>
       <div className="relative">
@@ -461,6 +462,7 @@ function TextField({
           {icon}
         </span>
         <input
+          id={fieldId}
           className="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-admin-primary focus:border-admin-primary font-body-md text-body-md outline-none"
           onChange={(event) => onChange?.(event.target.value)}
           placeholder={placeholder}
