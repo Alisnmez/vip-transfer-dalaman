@@ -35,8 +35,9 @@ export function bookingHttpError(status: number, serverMessage?: unknown): Booki
   const message = typeof serverMessage === 'string' && serverMessage.trim()
     ? serverMessage
     : `Booking service returned HTTP ${status}. Please contact support if this continues.`
-  // A server error may occur after the database commit; keep the retry key for 5xx.
-  return new BookingApiError(message, status, status >= 500)
+  // A timeout (408) or server failure (5xx) may happen after the booking was saved.
+  // Keep the idempotency key so a retry cannot create a second booking.
+  return new BookingApiError(message, status, status === 408 || status >= 500)
 }
 
 /** A successful HTTP response with unreadable booking data may still represent a committed booking. */
