@@ -66,3 +66,12 @@ If column names differ, **stop** and inspect actual names first. Never run `DROP
 - Schema drift causes startup/test failure instead of silent mutation.
 
 **Do not flip `ddl-auto` to `validate` or enable Flyway baseline automatically against the current live database before the inventory and backup are complete.**
+
+
+## 2026-11-17 — Render staging inventory attempt
+
+- Render resource: `vip-transfer-dalaman-test-db` (PostgreSQL 16, Frankfurt, Free plan); status `available` when checked.
+- Read-only SQL inventory was **attempted but not executed successfully**: remote connection reported SSL/TLS required and an IP allowlist restriction. No schema facts were obtained from the live database.
+- **Do not** disable TLS, open the database to `0.0.0.0/0`, or paste database credentials into chat to work around this.
+- Next: connect with an authorized TLS-enabled client from an allowlisted workstation or a secure internal connection, run `docs/sql/postgres_booking_readonly_audit.sql`, and record schema metadata only.
+- Before any migration or `ddl-auto` change: verify an actual backup and isolated restore. Free-plan database expiry/backup capabilities must be checked in Render, not assumed.
