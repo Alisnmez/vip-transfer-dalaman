@@ -171,3 +171,14 @@ test('unexpected create failures never display technical details to customers', 
     assert.doesNotMatch(message, /SQL|password|Unexpected token|secret/i)
   }
 })
+
+test('uncertain network submissions warn customers before starting a new booking', () => {
+  for (const failure of [new TypeError('Failed to fetch'), Object.assign(new Error('timeout'), { name: 'AbortError' })]) {
+    const error = classifyBookingFailure(failure)
+    assert.equal(error.uncertain, true)
+    const message = bookingErrorMessage(error, 'create')
+    assert.match(message, /may have been saved/i)
+    assert.match(message, /retry the same request/i)
+    assert.doesNotMatch(message, /Failed to fetch|timeout/i)
+  }
+})
