@@ -92,3 +92,14 @@ test('every public landing page stays noindex on staging', async () => {
     assert.match(html, /<h1>[^<]+<\/h1>/)
   }
 })
+
+test('all public landing pages have their own production canonical', async () => {
+  const pages = ['', 'vehicles', 'services', 'contact', 'faq', 'reviews', 'routes']
+  for (const page of pages) {
+    const html = await run('https://example.com', page)
+    const canonical = `https://example.com/${page}`
+    assert.ok(html.includes(`rel="canonical" href="${canonical}"`))
+    assert.match(html, /<meta name="robots" content="index,follow"/)
+    assert.match(html, /<title>[^<]+<\/title>/)
+  }
+})
