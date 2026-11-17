@@ -36,6 +36,17 @@ export function DashboardPage() {
     return () => { active = false }
   }, [])
 
+  // Keep completed/cancelled changes in sync without requiring manual refresh.
+  useEffect(() => {
+    let active = true
+    const timer = window.setInterval(() => {
+      void getDashboardSummary()
+        .then(data => { if (active) setSummary(data) })
+        .catch(() => { /* Keep the last successful snapshot on a transient failure. */ })
+    }, 30000)
+    return () => { active = false; window.clearInterval(timer) }
+  }, [])
+
   const upcoming = sortBookingsByPriority(summary?.upcoming ?? [], nowMs)
 
   return (
