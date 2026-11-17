@@ -61,4 +61,55 @@ class CustomerReviewControllerTest {
                 .content("{\"name\":\"Passenger\",\"rating\":5,\"comment\":\"A valid length comment.\",\"publicationConsent\":false}"))
             .andExpect(status().isBadRequest());
     }
+    @Test
+    void adminCanArchivePublishedReviewAndRestoreIt() throws Exception {
+        CustomerReview review = new CustomerReview();
+        review.customerName = "Archive passenger";
+        review.rating = 5;
+        review.comment = "The journey was comfortable and on time.";
+        review.status = "APPROVED";
+        repository.saveAndFlush(review);
+
+        mvc.perform(get("/reviews/moderation?status=APPROVED"))
+            .andExpect(status().isUnauthorized());
+        mvc.perform(get("/reviews/moderation?status=APPROVED")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].customerName").value("Archive passenger"));
+
+        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
+                .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"ARCHIVED\"}"))
+            .andExpect(status().isOk());
+        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(content().json("[]"));
+
+        mvc.perform(get("/reviews/moderation?status=ARCHIVED")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].customerName").value("Archive passenger"));
+
+        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
+                .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
+            .andExpect(status().isOk());
+        mvc.perform(get("/reviews")).andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].name").value("Archive passenger"))
+            .andExpect(jsonPath("$[0].createdAt").exists());
+    }
+
+    @Test
+    void cannotRestoreReviewThatWasNeverArchived() throws Exception {
+        CustomerReview review = new CustomerReview();
+        review.customerName = "Rejected passenger";
+        review.rating = 2;
+        review.comment = "A valid review that was rejected.";
+        review.status = "REJECTED";
+        repository.saveAndFlush(review);
+
+        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
+                .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
+            .andExpect(status().isConflict());
+    }
+
 }
