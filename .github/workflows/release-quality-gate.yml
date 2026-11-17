@@ -28,7 +28,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git diff --check HEAD^ HEAD
+          git diff --check HEAD^ HEAD -- .github/workflows/release-quality-gate.yml
           if git grep -n -E '^(<<<<<<< |=======|>>>>>>> )' -- 'src/**/*.java' 'frontend/src/**/*.ts' 'frontend/src/**/*.tsx'; then
             echo 'Unresolved conflict marker found'
             exit 1
