@@ -86,6 +86,14 @@ class BookingIntegrationTests {
         org.junit.jupiter.api.Assertions.assertEquals(
                 "PENDING", bookingRepository.findById(id).orElseThrow().getStatus());
 
+        // The same persisted booking must also be visible in the admin's paginated list.
+        mockMvc.perform(get("/bookings/page")
+                        .header("Authorization", auth)
+                        .param("search", Long.toString(id)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].id").value(id))
+                .andExpect(jsonPath("$.content[0].status").value("PENDING"));
+
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
                         .contentType(MediaType.APPLICATION_JSON)
