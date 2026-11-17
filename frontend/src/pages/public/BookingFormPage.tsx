@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
@@ -58,8 +58,7 @@ function readTransferDraft(): TransferDraft {
 }
 
 export function BookingFormPage() {
-  // Track the first booking step without recording the customer's selections.
-  useState(() => { trackAnalyticsEvent('booking_started'); return true })
+  useEffect(() => { trackAnalyticsEvent('booking_started') }, [])
   const [draft] = useState(readTransferDraft)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
   const [selectedVehicleId, setSelectedVehicleId] = useState(transferVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
