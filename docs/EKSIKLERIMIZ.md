@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 beklenmeyen HTTP durumlarında backend hata metni gizleme
+- **Sorun:** `bookingErrorMessage` tanınmayan HTTP kodlarında `error.message` döndürüyordu; sunucunun iç hata metni kullanıcıya sızabilirdi.
+- **Kod:** `3277e845` ile tanınmayan `BookingApiError` durumlarında eyleme göre güvenli genel mesaj gösteriliyor; bilinen 400/404/408/409/422/429/5xx davranışları korunuyor.
+- **Test:** `502f852` ile 418/451 için create/edit/status/read ve teknik metin sızıntısı regresyonu eklendi.
+- **Doğrulama:** CI sonucu henüz doğrulanmadı; gerçek tarayıcı E2E açık. Müşteri verisi, deploy ve migration değiştirilmedi.
+
+
 ## 2026-11-17 — P0 rezervasyon hata mesajlarında bilgi sızıntısı önlemi
 - **Sorun:** HTTP 400/422/404 cevaplarında backend'in ham hata metni doğrudan müşteri/admin ekranına aktarılabiliyordu. Bu metin iç sistem ayrıntıları içerebilir.
 - **Kod:** `738cae2` ile bu durumlar için eyleme uygun, teknik detay içermeyen genel mesajlar eklendi; 408/429/409/5xx ve belirsiz yazma sonucu davranışları değiştirilmedi.
