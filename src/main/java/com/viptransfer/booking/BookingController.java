@@ -53,9 +53,10 @@ public class BookingController {
             @org.springframework.web.bind.annotation.RequestParam(defaultValue = "0") int page,
             @org.springframework.web.bind.annotation.RequestParam(defaultValue = "25") int size,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) java.time.LocalDate from,
             @RequestParam(required = false) java.time.LocalDate to) {
-        return bookingService.getBookingPage(page, size, status, from, to);
+        return bookingService.getBookingPage(page, size, status, from, to, search);
     }
 
     @PutMapping("/{id:[0-9]+}")
