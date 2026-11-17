@@ -221,6 +221,8 @@ export function HomePage() {
             <div className="flex flex-wrap gap-stack-lg">
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">Services</Link>
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">Vehicles</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/faq">FAQ</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/reviews">Customer Reviews</Link>
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">Contact Us</Link>
             </div>
           </div>
