@@ -43,6 +43,12 @@ jobs:
       SPRING_DATASOURCE_USERNAME: vip_test
       SPRING_DATASOURCE_PASSWORD: vip_test_password
     steps:
+      - name: Verify isolated PostgreSQL target before running tests
+        run: |
+          test "$SPRING_DATASOURCE_URL" = 'jdbc:postgresql://localhost:5432/vip_transfer_dalaman'
+          test "$SPRING_DATASOURCE_USERNAME" = 'vip_test'
+          test "$SPRING_DATASOURCE_PASSWORD" = 'vip_test_password'
+
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
