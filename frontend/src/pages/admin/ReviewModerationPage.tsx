@@ -1,15 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getAdminAuthorization } from '../../features/booking/adminCredentials'
-
-type PendingReview = {
-  id: number
-  customerName: string
-  rating: number
-  comment: string
-  createdAt: string
-}
-
-const apiBase = import.meta.env.VITE_API_BASE_URL || ''
+import { getPendingReviews, moderateReview } from '../../features/reviews/api'
+import type { PendingReview } from '../../features/reviews/api'
 
 export function ReviewModerationPage() {
   const [reviews, setReviews] = useState<PendingReview[]>([])
@@ -21,14 +12,7 @@ export function ReviewModerationPage() {
     setLoading(true)
     setError('')
     try {
-      const authorization = getAdminAuthorization()
-      const response = await fetch(`${apiBase}/reviews/moderation`, {
-        headers: authorization ? { Authorization: authorization } : {},
-      })
-      if (!response.ok) throw new Error('Unable to load pending reviews.')
-      const data: unknown = await response.json()
-      if (!Array.isArray(data)) throw new Error('Unexpected review response.')
-      setReviews(data as PendingReview[])
+      setReviews(await getPendingReviews())
     } catch {
       setError('Unable to load pending reviews. Please retry.')
     } finally {
@@ -43,13 +27,7 @@ export function ReviewModerationPage() {
     setBusyId(id)
     setError('')
     try {
-      const authorization = getAdminAuthorization()
-      const response = await fetch(`${apiBase}/reviews/${id}/moderation`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json', ...(authorization ? { Authorization: authorization } : {}) },
-        body: JSON.stringify({ status }),
-      })
-      if (!response.ok) throw new Error('Unable to update review.')
+      await moderateReview(id, status)
       setReviews(current => current.filter(review => review.id !== id))
     } catch {
       setError('Unable to update review. Please retry.')
