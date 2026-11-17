@@ -82,3 +82,13 @@ test('unconfigured domain does not expose indexable landing pages', async () => 
     assert.doesNotMatch(html, /rel="canonical"/)
   }
 })
+
+test('every public landing page stays noindex on staging', async () => {
+  const pages = ['', 'vehicles', 'services', 'contact', 'faq', 'reviews', 'routes']
+  for (const page of pages) {
+    const html = await run('https://vip-transfer-dalaman-test.onrender.com', page)
+    assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
+    assert.doesNotMatch(html, /rel="canonical"/)
+    assert.match(html, /<h1>[^<]+<\/h1>/)
+  }
+})
