@@ -64,3 +64,21 @@ test('production landing pages have distinct initial HTML metadata', async () =>
   assert.match(routes, /content="index,follow"/)
   assert.notEqual(home, routes)
 })
+
+test('all supported route pages have unique production canonicals', async () => {
+  const slugs = ['marmaris', 'fethiye', 'oludeniz', 'gocek', 'icmeler']
+  for (const slug of slugs) {
+    const html = await run('https://example.com/', `routes/${slug}`)
+    assert.match(html, new RegExp(`rel="canonical" href="https://example.com/routes/${slug}"`))
+    assert.match(html, /<meta name="robots" content="index,follow"/)
+    assert.match(html, /<h1>[^<]+<\/h1>/)
+  }
+})
+
+test('unconfigured domain does not expose indexable landing pages', async () => {
+  for (const page of ['', 'routes', 'faq']) {
+    const html = await run('', page)
+    assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
+    assert.doesNotMatch(html, /rel="canonical"/)
+  }
+})
