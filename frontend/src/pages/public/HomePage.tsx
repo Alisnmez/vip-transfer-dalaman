@@ -1,8 +1,28 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
 
 export function HomePage() {
+  useEffect(() => {
+    const previousTitle = document.title
+    const existingMeta = document.querySelector('meta[name="description"]')
+    const previousDescription = existingMeta?.getAttribute('content') ?? null
+    const meta = existingMeta ?? document.createElement('meta')
+    if (!existingMeta) {
+      meta.setAttribute('name', 'description')
+      document.head.appendChild(meta)
+    }
+    document.title = 'Dalaman Airport Private Transfers | VIP Transfer Dalaman'
+    meta.setAttribute('content', 'Book private transfers from Dalaman Airport to Fethiye, Gocek, Marmaris and Oludeniz. Explore routes and arrange your airport pickup.')
+    return () => {
+      document.title = previousTitle
+      if (!existingMeta) meta.remove()
+      else if (previousDescription === null) meta.removeAttribute('content')
+      else meta.setAttribute('content', previousDescription)
+    }
+  }, [])
+
   return (
     <>
       <PublicNavbar />
@@ -94,12 +114,12 @@ export function HomePage() {
                 Pristine vehicles maintained to the highest safety standards.
               </p>
             </div>
-            <a className="text-secondary font-bold flex items-center gap-2 group" href="#">
+            <Link className="text-secondary font-bold flex items-center gap-2 group" to="/vehicles">
               View All Vehicles
               <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
             <div className="professional-card accent-border-left p-6 rounded-xl group transition-all hover:shadow-lg">
