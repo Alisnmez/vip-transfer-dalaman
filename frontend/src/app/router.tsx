@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
 import { useLayoutEffect } from 'react'
+import { trackPublicPage } from '../features/analytics/analytics'
+import { AnalyticsConsent } from '../features/analytics/AnalyticsConsent'
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
@@ -26,6 +28,7 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
+    trackPublicPage(pathname)
     const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
     const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
     const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact']
@@ -50,7 +53,7 @@ function ScrollToTop() {
 
 // eslint-disable-next-line react-refresh/only-export-components
 function PublicPageLayout() {
-  return <><ScrollToTop /><PublicLayout /></>
+  return <><ScrollToTop /><PublicLayout /><AnalyticsConsent /></>
 }
 
 export const router = createBrowserRouter([
