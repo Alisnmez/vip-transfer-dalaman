@@ -1,0 +1,41 @@
+name: Staging HTTP reachability (read-only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Verify staging frontend responds with HTTP 200
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://vip-transfer-dalaman-test.onrender.com/"
+          for attempt in {1..6}; do
+            code=$(curl --location --silent --output /dev/null --write-out '%{http_code}' --connect-timeout 15 --max-time 90 "$url" || true)
+            echo "Frontend attempt $attempt: HTTP $code"
+            if [[ "$code" == "200" ]]; then exit 0; fi
+            sleep 15
+          done
+          echo "::error::Staging frontend did not return HTTP 200"
+          exit 1
+
+      - name: Verify staging API is reachable without changing data
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Root may legitimately be 401, 403 or 404. This is NOT a booking test.
+          url="https://vip-transfer-dalaman-api-test.onrender.com/"
+          for attempt in {1..6}; do
+            code=$(curl --location --silent --output /dev/null --write-out '%{http_code}' --connect-timeout 15 --max-time 120 "$url" || true)
+            echo "API attempt $attempt: HTTP $code"
+            if [[ "$code" =~ ^[234][0-9][0-9]$ ]]; then exit 0; fi
+            sleep 15
+          done
+          echo "::error::Staging API did not respond with a non-5xx HTTP status"
+          exit 1
