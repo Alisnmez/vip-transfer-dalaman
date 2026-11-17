@@ -36,7 +36,12 @@ export function DashboardPage() {
   }
 
   useEffect(() => {
-    void refresh()
+    // Initial fetch updates state only after the network request settles.
+    requestInFlight.current = true
+    void getDashboardSummary()
+      .then(data => { setSummary(data); setError('') })
+      .catch(err => setError(err instanceof Error ? err.message : 'Unable to load bookings'))
+      .finally(() => { requestInFlight.current = false; setLoading(false) })
     const timer = window.setInterval(() => {
       if (document.visibilityState === 'visible') void refresh(false)
     }, 30000)
