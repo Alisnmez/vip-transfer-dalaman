@@ -61,6 +61,63 @@ class BookingIntegrationTests {
                 .andExpect(status().isBadRequest());
     }
 
+
+    @Test
+    void adminCanConfirmAndCancelBookingButCannotReopenCancelledBooking() throws Exception {
+        String auth = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+        String request = objectMapper.writeValueAsString(Map.of(
+                "customerName", "Status Flow Test",
+                "passengerCount", 2,
+                "pickUpLocation", "Dalaman Airport",
+                "dropOffLocation", "Fethiye City Center(Any Hotel)",
+                "transferDateTime", LocalDateTime.now().plusDays(4).toString(),
+                "phoneNumber", "+905551234567",
+                "email", "status-flow@example.com",
+                "vehicleId", "vip-minivan",
+                "tripType", "one-way"
+        ));
+        String created = mockMvc.perform(post("/bookings")
+                        .contentType(MediaType.APPLICATION_JSON).content(request))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("PENDING"))
+                .andReturn().getResponse().getContentAsString();
+        long id = objectMapper.readTree(created).get("id").asLong();
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                .andExpect(status().isUnauthorized());
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .header("Authorization", auth)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CONFIRMED"));
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .header("Authorization", auth)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CANCELLED\\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CANCELLED"));
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .header("Authorization", auth)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                .andExpect(status().isConflict());
+
+        mockMvc.perform(get("/bookings/{id}", id).header("Authorization", auth))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CANCELLED"));
+    }
+
     @Test
     void createsBookingAndReadsItBackFromPostgres() throws Exception {
         String request = objectMapper.writeValueAsString(Map.ofEntries(
