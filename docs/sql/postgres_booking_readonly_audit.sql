@@ -34,6 +34,24 @@ FROM information_schema.sequences
 WHERE sequence_schema = current_schema()
 ORDER BY sequence_name;
 
+-- Verify the named performance indexes and whether PostgreSQL reports them valid/ready.
+-- Missing rows are a finding, not permission to create indexes on production.
+SELECT expected.index_name,
+       actual.indexrelid IS NOT NULL AS exists_in_schema,
+       COALESCE(actual.indisvalid, false) AS valid,
+       COALESCE(actual.indisready, false) AS ready
+FROM (VALUES ('idx_booking_status_transfer_time'),
+             ('idx_booking_transfer_time')) AS expected(index_name)
+LEFT JOIN (
+    SELECT idx.relname AS index_name, i.indexrelid, i.indisvalid, i.indisready
+    FROM pg_index i
+    JOIN pg_class tbl ON tbl.oid = i.indrelid
+    JOIN pg_namespace ns ON ns.oid = tbl.relnamespace
+    JOIN pg_class idx ON idx.oid = i.indexrelid
+    WHERE ns.nspname = current_schema() AND tbl.relname = 'booking'
+) actual USING (index_name)
+ORDER BY expected.index_name;
+
 -- Only execute the next statement after confirming the physical column names above.
 -- If the table or columns differ, skip it and inspect the actual schema first.
 -- SELECT COUNT(*) AS total_rows,
