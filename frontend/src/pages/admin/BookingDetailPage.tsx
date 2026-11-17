@@ -5,7 +5,7 @@ import { ProcessingButton } from '../../components/ProcessingButton'
 
 import { getBooking, updateBooking, updateBookingStatus } from '../../features/booking/api'
 import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
-import { BookingApiError } from '../../features/booking/api/errors'
+import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
@@ -48,7 +48,7 @@ export function BookingDetailPage() {
     await runSaving(async () => {
       setError(''); setNotice('')
       try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
-      catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Status may have changed; reload to verify before retrying.' : err instanceof Error ? err.message : 'Status update failed'); setErrorAction('updating status') }
+      catch (err) { setError(bookingErrorMessage(err, 'status')); setErrorAction('updating status') }
     })
   }
 
@@ -105,7 +105,7 @@ export function BookingDetailPage() {
     await runSaving(async () => {
       setError(''); setNotice('')
       try { setBooking(await updateBooking(booking.id, draft)); setEditing(false); setNotice('Booking details saved.') }
-      catch (err) { setError(err instanceof BookingApiError && err.status === null ? 'Connection failed. Changes may have saved; reload to verify before retrying.' : err instanceof BookingApiError && err.status === 409 ? 'The booking was changed or the requested edit conflicts with its current status. Reload the booking and check its status before editing again.' : err instanceof Error ? err.message : 'Could not save details'); setErrorAction('saving details') }
+      catch (err) { setError(bookingErrorMessage(err, 'edit')); setErrorAction('saving details') }
     })
   }
 
