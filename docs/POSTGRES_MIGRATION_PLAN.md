@@ -8,6 +8,9 @@ Status: **PLAN ONLY — not applied to Render database**.
 
 ## Phase 0 — Read-only inventory in DBeaver
 
+**Reusable audit script:** `docs/sql/postgres_booking_readonly_audit.sql`. It uses a read-only transaction and rolls back. It returns schema metadata only. Its optional row-count query is commented out until the actual column names are confirmed. Run it on the intended staging database, not blindly against production.
+
+
 Run these on the **correct staging database** and save the output (do not paste customer data into issues):
 
 ```sql
