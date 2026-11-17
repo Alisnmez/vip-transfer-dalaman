@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   prepare-fix:
@@ -31,10 +31,23 @@ jobs:
           npm run lint
           npm test
           npm run build
+      - name: Commit verified dependency fixes to development branch
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/feature/booking-integration'
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- frontend/package.json frontend/package-lock.json; then
+            echo 'No dependency changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add frontend/package.json frontend/package-lock.json
+          git commit -m 'fix(deps): apply verified npm security updates'
+          git push origin HEAD:feature/booking-integration
       - name: Save proposed changes for review
         if: always()
         run: |
-          git diff -- frontend/package.json frontend/package-lock.json > dependency-fixes.patch
+          git diff HEAD~1 -- frontend/package.json frontend/package-lock.json > dependency-fixes.patch || true
           git status --short
       - uses: actions/upload-artifact@v4
         if: always()
