@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
@@ -11,20 +11,17 @@ import { useBookingPage } from '../../features/booking/useBookingPage'
 export function BookingListPage() {
   const nowMs = useBookingClock()
   const [search, setSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState('')
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setSearchTerm(search.trim()), 350)
+    return () => window.clearTimeout(timeout)
+  }, [search])
   const [statusFilter, setStatusFilter] = useState('all')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
-  const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage, resetPage } = useBookingPage({ status: statusFilter === 'all' ? undefined : statusFilter, from: dateFrom, to: dateTo })
+  const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage, resetPage } = useBookingPage({ status: statusFilter === 'all' ? undefined : statusFilter, from: dateFrom, to: dateTo, search: searchTerm })
 
-  const query = search.trim().toLowerCase()
-  const visibleBookings = (loading || error ? [] : bookings)
-    .filter(booking => {
-      const transferDate = booking.transferDateTime.slice(0, 10)
-      return `${booking.id} ${booking.customerName} ${booking.pickUpLocation} ${booking.dropOffLocation}`
-        .toLowerCase().includes(query)
-        && transferDate.length > 0
-    })
-    .sort((a, b) => b.id - a.id)
+  const visibleBookings = loading || error ? [] : bookings
 
   return (
     <main className="flex min-h-0 flex-1 flex-col bg-surface">
@@ -45,8 +42,8 @@ export function BookingListPage() {
 
       <section className="border-b border-outline-variant bg-white p-6">
         <label className="block max-w-lg text-sm font-semibold">
-          Search current page
-          <input type="search" value={search} onChange={event => setSearch(event.target.value)}
+          Search all bookings
+          <input type="search" value={search} onChange={event => { setSearch(event.target.value); resetPage() }}
             placeholder="Customer, route or booking ID"
             className="mt-2 w-full rounded-lg border border-outline-variant px-4 py-3" />
         </label>
@@ -65,7 +62,7 @@ export function BookingListPage() {
           </label>
           <button type="button" onClick={() => { setSearch(""); setStatusFilter("all"); setDateFrom(""); setDateTo(""); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
         </div>
-        <p className="mt-2 text-xs text-on-surface-variant">Status and transfer date filters search all bookings. Text search applies to the current page.</p>
+        <p className="mt-2 text-xs text-on-surface-variant">Search, status and transfer date filters apply across all bookings.</p>
       </section>
       <section className="min-w-0 flex-1 p-4 sm:overflow-auto sm:p-6">
         {loading && <p>Loading booking requests...</p>}
