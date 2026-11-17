@@ -4,5 +4,6 @@ export const publicNavItems = [
   { label: 'Vehicles', to: '/vehicles' },
   { label: 'Services', to: '/services' },
   { label: 'Manage Booking', to: '/booking/lookup' },
+  { label: 'FAQ', to: '/faq' },
   { label: 'Contact', to: '/contact' },
 ]
