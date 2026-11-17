@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 durum geçişi 409 mesajı düzeltmesi
+- **Sorun:** Ortak `bookingErrorMessage` her status 409 hatasında "Cancelled bookings cannot be reopened" diyordu; `PENDING → COMPLETED` gibi başka geçersiz geçişlerde yanıltıcıydı.
+- **Kod:** Durumun güncel haliyle uyumsuz geçişleri açıklayan genel mesaj yazıldı (`f5c253c`); mevcut iptal terminal kuralı değiştirilmedi.
+- **Test:** `frontend/tests/bookingErrors.test.mjs` iptal dışı geçişlerde yanlış iptal iddiası olmadığını kontrol ediyor (`f0896bc`). **CI sonucu henüz doğrulanmadı.**
+- **Açık:** Gerçek tarayıcı E2E, mobil test, PostgreSQL şema/yedek geri yükleme, Flyway ve üretim erişim/onay görevleri ayrı açık. E-posta rehberi incelendi; gerçek gönderim için sağlayıcı/domain/anahtar ve onay gerektiğinden aktif edilmedi.
+
+
 ## 2026-11-17 — Otomatik e-posta kurulum ve sorun giderme rehberi
 - İlk kez kurulacak transactional e-posta servisi için [EMAIL_SETUP_AND_TROUBLESHOOTING.md](EMAIL_SETUP_AND_TROUBLESHOOTING.md) oluşturuldu (`44c3c49`). DNS SPF/DKIM/DMARC, API key, Render env, müşteri/admin şablonları, tekrar gönderim önleme, retry, test ve sorun giderme açıklanıyor.
 - **Durum: BEKLİYOR.** Bu bir rehberdir; e-posta sağlayıcısı henüz bağlanmadı, gerçek e-posta gönderilmiyor. Sağlayıcı fiyatları/kotaları satın alma öncesi doğrulanacak.
