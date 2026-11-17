@@ -8,7 +8,17 @@ on:
       - 'frontend/**'
       - 'backend/**'
       - '.github/workflows/booking-browser.yml'
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - '.github/workflows/booking-browser.yml'
   workflow_dispatch:
+
+# Cancel superseded browser checks on the same branch or pull request.
+concurrency:
+  group: booking-browser-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
