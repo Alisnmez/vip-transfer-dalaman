@@ -1,0 +1,59 @@
+name: PostgreSQL backup and restore verification
+
+on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - '.github/workflows/postgres-backup-restore.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: vip_test
+          POSTGRES_PASSWORD: vip_test_password
+          POSTGRES_DB: vip_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U vip_test -d vip_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: localhost
+      PGPORT: '5432'
+      PGUSER: vip_test
+      PGPASSWORD: vip_test_password
+    steps:
+      - name: Install PostgreSQL 16 client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client-16
+      - name: Create synthetic records in disposable database
+        run: |
+          psql -v ON_ERROR_STOP=1 -d vip_test <<'SQL'
+          CREATE TABLE backup_probe (id INTEGER PRIMARY KEY, label TEXT NOT NULL);
+          INSERT INTO backup_probe VALUES (1, 'synthetic-test-record'), (2, 'restore-verification');
+          SQL
+      - name: Backup and restore into a separate disposable database
+        run: |
+          set -euo pipefail
+          pg_dump -Fc --no-owner --no-acl -d vip_test -f "$RUNNER_TEMP/test.dump"
+          test -s "$RUNNER_TEMP/test.dump"
+          createdb vip_restored
+          pg_restore --exit-on-error --no-owner --no-acl -d vip_restored "$RUNNER_TEMP/test.dump"
+          expected=$(psql -At -d vip_test -c 'SELECT string_agg(id::text || chr(58) || label, chr(124) ORDER BY id) FROM backup_probe')
+          actual=$(psql -At -d vip_restored -c 'SELECT string_agg(id::text || chr(58) || label, chr(124) ORDER BY id) FROM backup_probe')
+          test "$expected" = "$actual"
+          test "$actual" = '1:synthetic-test-record|2:restore-verification'
+          echo "Disposable PostgreSQL backup and restore integrity check passed." >> "$GITHUB_STEP_SUMMARY"
