@@ -26,10 +26,10 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-    const site = import.meta.env.VITE_PUBLIC_SITE_URL?.replace(/\\/$/, '') ?? ''
-    const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\\.com|localhost|127\\.0\\.0\\.1/i.test(site)
+    const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
+    const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
     const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact']
-    const indexable = publicPaths.includes(pathname) || /^\\/routes\\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)
+    const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)
     let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
     if (!robots) {
       robots = document.createElement('meta')
