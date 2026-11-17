@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — CI kırılması: 409 durum mesajında sözdizimi hatası
+- **Kanıt:** `2e42dee` için GitHub Actions `44004824586`: Spring Boot PostgreSQL integration tests **success**, React/TypeScript işi **failure**. Frontend ESLint `errors.ts:54:89 Parsing error: ';' expected` raporladı.
+- **Neden:** Tek tırnaklı TypeScript metninde kaçırılmamış `booking's` kesme işareti. Bu yalnızca mesaj değişikliği olsa da JavaScript derlemesini kırıyordu.
+- **Düzeltme:** Mesaj güvenli sözcüklerle yeniden yazıldı (`49b7524`), mevcut `/current status/` regresyon beklentisiyle hizalandı (`84bb5c4`). Backend durum geçişleri değiştirilmedi.
+- **Doğrulama sınırı:** Yeni commit'in CI sonucu kontrol edilmeli; yeşil sonuç alınmadan TAMAMLANDI sayılmayacak. Gerçek tarayıcı E2E ayrıca açık.
+
+
 ## 2026-11-17 — P0 durum geçişi 409 mesajı düzeltmesi
 - **Sorun:** Ortak `bookingErrorMessage` her status 409 hatasında "Cancelled bookings cannot be reopened" diyordu; `PENDING → COMPLETED` gibi başka geçersiz geçişlerde yanıltıcıydı.
 - **Kod:** Durumun güncel haliyle uyumsuz geçişleri açıklayan genel mesaj yazıldı (`f5c253c`); mevcut iptal terminal kuralı değiştirilmedi.
