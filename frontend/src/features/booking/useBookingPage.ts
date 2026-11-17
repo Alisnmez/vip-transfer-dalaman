@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { getBookingPage } from './api'
+import { bookingErrorMessage } from './api/errors'
 import type { BookingPage } from './api'
 
 /** Keep pagination and request lifecycle separate from the booking list UI. */
@@ -30,7 +31,7 @@ export function useBookingPage() {
       .catch(err => {
         if (!active) return
         setResult(null)
-        setError(err instanceof Error ? err.message : 'Unable to load bookings')
+        setError(bookingErrorMessage(err, 'read'))
         setLoadedKey(requestKey)
         setRefreshing(false)
       })
