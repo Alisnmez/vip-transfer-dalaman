@@ -83,6 +83,8 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.status").value("PENDING"))
                 .andReturn().getResponse().getContentAsString();
         long id = objectMapper.readTree(created).get("id").asLong();
+        org.junit.jupiter.api.Assertions.assertEquals(
+                "PENDING", bookingRepository.findById(id).orElseThrow().getStatus());
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
@@ -97,6 +99,8 @@ class BookingIntegrationTests {
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMED"));
+        org.junit.jupiter.api.Assertions.assertEquals(
+                "CONFIRMED", bookingRepository.findById(id).orElseThrow().getStatus());
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
