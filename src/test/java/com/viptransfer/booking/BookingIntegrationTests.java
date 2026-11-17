@@ -119,6 +119,35 @@ class BookingIntegrationTests {
     }
 
     @Test
+    void pendingBookingCanBeCancelledButNotReopened() throws Exception {
+        Booking booking = new Booking();
+        booking.setCustomerName("Cancellation Test");
+        booking.setStatus("PENDING");
+        long id = bookingRepository.saveAndFlush(booking).getId();
+        String auth = "Basic " + Base64.getEncoder()
+                .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
+        String cancelled = objectMapper.writeValueAsString(Map.of("status", "CANCELLED"));
+        String confirmed = objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"));
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .header("Authorization", auth)
+                        .contentType(MediaType.APPLICATION_JSON).content(cancelled))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CANCELLED"));
+
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+                        .patch("/bookings/{id}/status", id)
+                        .header("Authorization", auth)
+                        .contentType(MediaType.APPLICATION_JSON).content(confirmed))
+                .andExpect(status().isConflict());
+
+        mockMvc.perform(get("/bookings/{id}", id).header("Authorization", auth))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("CANCELLED"));
+    }
+
+    @Test
     void createsBookingAndReadsItBackFromPostgres() throws Exception {
         String request = objectMapper.writeValueAsString(Map.ofEntries(
                 Map.entry("customerName", "Integration Test"),
