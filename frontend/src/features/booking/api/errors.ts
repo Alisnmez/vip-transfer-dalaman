@@ -59,6 +59,7 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
     }
     if (error.status === 401 || error.status === 403) return 'Your session is not authorized. Please sign in again.'
     if (error.status === 429) return 'Too many requests. Please wait a moment before trying again.'
+    if (error.status === 408 && action === 'create') return 'The booking request timed out. It may have been saved. Please retry the same request or contact support before starting a new booking.'
     if (error.status === null && action === 'read') return 'Could not load bookings. Check your connection and try again.'
     if (error.status === null && action !== 'create') return 'Connection failed. Your changes may have been saved. Refresh to verify before trying again.'
     if (error.status !== null && error.status >= 500) return 'The booking service is temporarily unavailable. Please try again later.'
