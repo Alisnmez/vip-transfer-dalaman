@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getPendingReviews, moderateReview } from '../../features/reviews/api'
+import { getPendingReviews, moderateReview, reviewErrorMessage } from '../../features/reviews/api'
 import type { PendingReview } from '../../features/reviews/api'
 
 export function ReviewModerationPage() {
@@ -13,8 +13,8 @@ export function ReviewModerationPage() {
     setError('')
     try {
       setReviews(await getPendingReviews())
-    } catch {
-      setError('Unable to load pending reviews. Please retry.')
+    } catch (error) {
+      setError(reviewErrorMessage(error, 'load'))
     } finally {
       setLoading(false)
     }
@@ -29,8 +29,8 @@ export function ReviewModerationPage() {
     try {
       await moderateReview(id, status)
       setReviews(current => current.filter(review => review.id !== id))
-    } catch {
-      setError('Unable to update review. Please retry.')
+    } catch (error) {
+      setError(reviewErrorMessage(error, 'moderate'))
     } finally {
       setBusyId(null)
     }
