@@ -26,6 +26,7 @@ jobs:
         working-directory: frontend
         run: |
           npm ci
+          npm install react-router-dom@latest
           npm audit fix || echo 'Some development-only advisories may remain; production audit below is mandatory.'
           npm audit --omit=dev --audit-level=high
           npm run lint
