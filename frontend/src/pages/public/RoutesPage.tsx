@@ -10,6 +10,7 @@ const startingPrices = destinations.map((destination) => ({
   from: Math.min(...transferPrices.filter((price) => price.destination === destination).map((price) => price.oneWay)),
 }))
 
+const routeSlugs: Record<string, string> = { Marmaris: 'marmaris', Fethiye: 'fethiye', Oludeniz: 'oludeniz', Gocek: 'gocek', Icmeler: 'icmeler' }
 const featuredDestinations = ['Marmaris', 'Fethiye', 'Oludeniz', 'Gocek', 'Icmeler', 'Kalkan']
 const featuredRoutes = featuredDestinations
   .map((name) => startingPrices.find((route) => route.destination.toLowerCase().includes(name.toLowerCase())))
@@ -79,9 +80,9 @@ export function RoutesPage() {
                     <h3 className="text-lg font-bold text-admin-primary">{route.destination}</h3>
                     <p className="mt-1 text-xs text-on-surface-variant">Dalaman Airport · From {priceLabel(route.from)}</p>
                   </div>
-                  <a className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" href="#all-routes" aria-label={`Compare prices for ${route.destination}`}>
+                  <Link className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" to={routeSlugs[featuredDestinations[index]] ? `/routes/${routeSlugs[featuredDestinations[index]]}` : "/routes"} aria-label={`Compare prices for ${route.destination}`}>
                     <span translate="no" aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
-                  </a>
+                  </Link>
                 </div>
               </article>
             ))}
