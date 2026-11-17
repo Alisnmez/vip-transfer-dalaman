@@ -5,8 +5,12 @@ import { getDashboardSummary } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import type { DashboardSummary } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
+import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
+import { sortBookingsByPriority } from '../../features/booking/bookingPriority'
+import { useBookingClock } from '../../features/booking/useBookingClock'
 
 export function DashboardPage() {
+  const nowMs = useBookingClock()
   const [summary, setSummary] = useState<DashboardSummary | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -32,7 +36,7 @@ export function DashboardPage() {
     return () => { active = false }
   }, [])
 
-  const upcoming = summary?.upcoming ?? []
+  const upcoming = sortBookingsByPriority(summary?.upcoming ?? [], nowMs)
 
   return (
     <main className="min-w-0 space-y-6 p-4 sm:p-8">
@@ -66,8 +70,8 @@ export function DashboardPage() {
               <div className="space-y-3">
                 {upcoming.map(booking => (
                   <Link key={booking.id} to={`/admin/bookings/${booking.id}`} className="block rounded-lg border border-outline-variant p-4 hover:bg-surface-container-low">
-                    <div className="flex flex-wrap justify-between gap-2">
-                      <span className="font-semibold">#{booking.id} · {booking.customerName}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="flex flex-wrap items-center gap-2"><LiveBookingBadge status={booking.status} transferDateTime={booking.transferDateTime} nowMs={nowMs} /><span className="font-semibold">#{booking.id} · {booking.customerName}</span></span>
                       <span>{formatTransferDateTime(booking.transferDateTime)}</span>
                     </div>
                     <p className="text-sm text-on-surface-variant">{booking.pickUpLocation} → {booking.dropOffLocation} · {bookingStatus(booking.status)}</p>
