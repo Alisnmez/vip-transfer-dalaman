@@ -47,6 +47,15 @@ Bu dosyanın amacı projeyi sonradan **sıfırdan kendimiz yazabilecek şekilde*
 - **Öğrenme:** HTTP POST, `Idempotency-Key`, istek parmak izi, veritabanında unique constraint, transaction, 409 Conflict.
 - **Uygulama:** Aynı anahtarla aynı ve farklı gövde gönderilince beklenen yanıtları açıkla.
 
+### 6. Analitik olayları ve kullanıcı gizliliği
+- **İhtiyaç:** Rezervasyon başlangıcı, yolcu adımı ve başarıyla API'ye kaydedilen rezervasyon talebini ölçmek.
+- **Kod:** `frontend/src/features/analytics/analytics.ts`, `AnalyticsConsent.tsx`; React router ve üç rezervasyon sayfası.
+- **Karar:** Google Analytics ölçüm kimliği (`VITE_GA_MEASUREMENT_ID`) yoksa veya kullanıcı izin vermediyse script yüklenmez. Sadece sabit olay adları gönderilir; müşteri adı, telefon, e-posta, rezervasyon ID, form verisi gönderilmez. Sayfa yolu yalnızca genel sayfa allowlist'inden geçerse raporlanır.
+- **Kod standardı düzeltmesi:** İlk denemede analytics yan etkisi `useState` initializer içine kondu; React render saf olmalı. Bu nedenle `useEffect` içine taşındı (commit `05dd281d`, `f100e4e5`).
+- **Açık:** GA4 ölçüm kimliği ve gizlilik metni henüz onaylanmadı. Rıza geri çekildiğinde önceden oluşmuş Google Analytics çerezlerinin temizlenmesi/Consent Mode uygulaması doğrulanmalı; canlı izleme ve uçtan uca testler henüz yapılmadı.
+- **Öğrenme:** `useState` ve `useEffect` farkı, rıza, allowlist, neden analitik olaylarında PII yasak, `import.meta.env`.
+- **Uygulama:** İzin vermeyen kullanıcının hangi analitik çağrıları göndermemesi gerektiğini test et.
+
 ## Sonraki eğitim oturumu için kontrol soruları
 1. Controller, Service ve Repository neden ayrı katmanlar?
 2. Java'da iç içe metod çağrısındaki fazla parantezi nasıl bulursun?
