@@ -1,6 +1,11 @@
 name: Staging HTTP reachability (read-only)
 
 on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - '.github/workflows/staging-http-reachability.yml'
   workflow_dispatch:
 
 permissions:
