@@ -174,6 +174,15 @@ class BookingIntegrationTests {
                 .andReturn().getResponse().getContentAsString();
 
         Long id = objectMapper.readTree(response).get("id").asLong();
+        // Verify the booking was actually persisted, not merely returned by the API.
+        Booking persisted = bookingRepository.findById(id).orElseThrow();
+        org.junit.jupiter.api.Assertions.assertEquals("Integration Test", persisted.getCustomerName());
+        org.junit.jupiter.api.Assertions.assertEquals("PENDING", persisted.getStatus());
+
+        // Customer-created bookings must remain inaccessible without admin credentials.
+        mockMvc.perform(get("/bookings/{id}", id))
+                .andExpect(status().isUnauthorized());
+
         String receivedAt = objectMapper.readTree(response).get("createdAt").asText();
         org.junit.jupiter.api.Assertions.assertFalse(receivedAt.isBlank());
         java.time.Instant.parse(receivedAt);
