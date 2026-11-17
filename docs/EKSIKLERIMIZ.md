@@ -1,5 +1,11 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — Staging / Production yayın standardı
+- Yayın süreci belgelendi: [DEPLOYMENT_WORKFLOW.md](DEPLOYMENT_WORKFLOW.md) (`e65bc1b`). Development → Staging → Production, branch kuralları, CI/E2E kapıları, ayrı PostgreSQL, migration/backup, hotfix ve rollback.
+- **Durum: BEKLİYOR / KURULUM GEREKİYOR.** Doküman hedef süreçtir; `main`/`staging` korumaları, ayrı üretim Render servisleri ve otomatik yayın kapıları henüz kurulmuş kabul edilmiyor.
+- **Sıradaki iş:** Branch koruma ve PR kuralları; staging deploy kaynağını kontrollü ayırma; ayrı üretim kaynakları; yayın onayı ve gerçek tarayıcı E2E.
+
+
 ## 2026-11-17 — P0 Madde 2: mobil form ve hata erişilebilirliği
 - `b816810`: boş/bozuk taslak, hatalı yolcu sayısı, dönüş tarihi ve iletişim sınırları için otomatik testler eklendi. GitHub Actions `43993053892` **success**.
 - `a07d61f`: yolcu sayfası özeti bozuk veya engellenmiş `localStorage` yüzünden render sırasında çökmesin diye güvenli okuma ve tür kontrolleri eklendi. GitHub Actions `43993308784` **success**.
