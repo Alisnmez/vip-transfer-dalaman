@@ -116,6 +116,13 @@ class BookingIntegrationTests {
         mockMvc.perform(get("/bookings/{id}", id).header("Authorization", auth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CANCELLED"));
+        // A rejected reopening must not mutate the persisted booking.
+        org.junit.jupiter.api.Assertions.assertEquals(
+                "CANCELLED", bookingRepository.findById(id).orElseThrow().getStatus());
+
+        // Cancelled bookings must remain private.
+        mockMvc.perform(get("/bookings/{id}", id))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
