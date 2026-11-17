@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useId, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { turkeyToday } from '../../features/booking/turkeyTime'
@@ -184,6 +185,7 @@ export function BookingFormPage() {
               </p>
             </div>
 
+            <RequiredFieldNote />
             <form className="space-y-8" onSubmit={(event) => event.preventDefault()}>
               <div className="inline-flex p-1 bg-slate-100 rounded-lg border border-outline-variant">
                 <button
@@ -212,7 +214,7 @@ export function BookingFormPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location</label>
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location<RequiredMark /></label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
                     {groupedDestinationOptions.map((group) => (
@@ -223,7 +225,7 @@ export function BookingFormPage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination</label>
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination<RequiredMark /></label>
                   <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">Select destination</option>
                     {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">Dalaman Airport (DLM)</option>}
@@ -249,7 +251,7 @@ export function BookingFormPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
                 <TextField
                   icon="calendar_today"
-                  label="Pickup Date"
+                  label="Pickup Date" required
                   type="date"
                   min={today}
                   value={pickUpDate}
@@ -258,7 +260,7 @@ export function BookingFormPage() {
                 />
                 <TextField
                   icon="schedule"
-                  label="Pickup Time"
+                  label="Pickup Time" required
                   type="time"
                   value={pickUpTime}
                   onChange={setPickUpTime}
@@ -271,8 +273,8 @@ export function BookingFormPage() {
                   <p className="font-semibold">Return journey: {dropOffLocation || 'Destination'} → {pickUpLocation}</p>
                   <p className="text-sm text-slate-600">Choose when you want to travel back. Your return does not have to be on the same day or at the same time.</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                    <TextField icon="calendar_today" label="Return Date" type="date" min={pickUpDate && pickUpDate > today ? pickUpDate : today} value={returnDate} onFocus={refreshToday} onChange={(value) => { refreshToday(); if (!value || (value >= turkeyToday() && (!pickUpDate || value >= pickUpDate))) { setReturnDate(value); setFormError('') } else { setFormError('Return date cannot be before pickup date or today.') } }} />
-                    <TextField icon="schedule" label="Return Time" type="time" value={returnTime} onChange={setReturnTime} />
+                    <TextField icon="calendar_today" label="Return Date" required type="date" min={pickUpDate && pickUpDate > today ? pickUpDate : today} value={returnDate} onFocus={refreshToday} onChange={(value) => { refreshToday(); if (!value || (value >= turkeyToday() && (!pickUpDate || value >= pickUpDate))) { setReturnDate(value); setFormError('') } else { setFormError('Return date cannot be before pickup date or today.') } }} />
+                    <TextField icon="schedule" label="Return Time" required type="time" value={returnTime} onChange={setReturnTime} />
                   </div>
                 </div>
               )}
@@ -441,9 +443,11 @@ function TextField({
   min,
   onFocus,
   value,
+  required = false,
 }: {
   icon: string
   label: string
+  required?: boolean
   onChange?: (value: string) => void
   placeholder?: string
   type?: string
@@ -455,7 +459,7 @@ function TextField({
   return (
     <div className="space-y-2">
       <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
-        {label}
+        {label}{required && <RequiredMark />}
       </label>
       <div className="relative">
         <span translate="no" className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">
@@ -463,6 +467,7 @@ function TextField({
         </span>
         <input
           id={fieldId}
+          required={required}
           className="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-admin-primary focus:border-admin-primary font-body-md text-body-md outline-none"
           onChange={(event) => onChange?.(event.target.value)}
           placeholder={placeholder}
