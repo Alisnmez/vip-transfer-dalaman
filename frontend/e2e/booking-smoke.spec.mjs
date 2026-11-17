@@ -14,3 +14,20 @@ test('booking transfer and passenger routes render without browser errors', asyn
 
   expect(errors, 'Uncaught browser errors').toEqual([])
 })
+
+test('admin booking pages require sign-in before displaying private data', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+
+  for (const route of ['/admin', '/admin/bookings', '/admin/bookings/123']) {
+    const response = await page.goto(`http://127.0.0.1:4173${route}`)
+    expect(response?.status(), `HTTP status for ${route}`).toBeLessThan(400)
+    await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
+    await expect(page.getByLabel('Username')).toBeVisible()
+    await expect(page.getByLabel('Password')).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Sign out' })).toHaveCount(0)
+  }
+
+  expect(errors, 'Uncaught admin browser errors').toEqual([])
+})
