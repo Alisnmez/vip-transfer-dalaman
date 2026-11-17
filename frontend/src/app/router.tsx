@@ -1,15 +1,15 @@
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
-import { useLayoutEffect } from 'react'
+import { lazy, Suspense, useLayoutEffect } from 'react'
 import { trackPublicPage } from '../features/analytics/analytics'
 import { AnalyticsConsent } from '../features/analytics/AnalyticsConsent'
 
 import { AdminLayout } from '../layouts/AdminLayout'
 import { PublicLayout } from '../layouts/PublicLayout'
-import { CalendarPage } from '../pages/admin/CalendarPage'
-import { BookingDetailPage } from '../pages/admin/BookingDetailPage'
-import { BookingListPage } from '../pages/admin/BookingListPage'
-import { ReviewModerationPage } from '../pages/admin/ReviewModerationPage'
-import { DashboardPage } from '../pages/admin/DashboardPage'
+const CalendarPage = lazy(() => import('../pages/admin/CalendarPage').then((module) => ({ default: module.CalendarPage })))
+const BookingDetailPage = lazy(() => import('../pages/admin/BookingDetailPage').then((module) => ({ default: module.BookingDetailPage })))
+const BookingListPage = lazy(() => import('../pages/admin/BookingListPage').then((module) => ({ default: module.BookingListPage })))
+const ReviewModerationPage = lazy(() => import('../pages/admin/ReviewModerationPage').then((module) => ({ default: module.ReviewModerationPage })))
+const DashboardPage = lazy(() => import('../pages/admin/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
@@ -114,11 +114,11 @@ export const router = createBrowserRouter([
     path: '/admin',
     element: <AdminLayout />,
     children: [
-      { index: true, element: <DashboardPage /> },
-      { path: 'calendar', element: <CalendarPage /> },
-      { path: 'bookings', element: <BookingListPage /> },
-      { path: 'reviews', element: <ReviewModerationPage /> },
-      { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
+      { index: true, element: <Suspense fallback={<div role="status">Loading...</div>}><DashboardPage /></Suspense> },
+      { path: 'calendar', element: <Suspense fallback={<div role="status">Loading...</div>}><CalendarPage /></Suspense> },
+      { path: 'bookings', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingListPage /></Suspense> },
+      { path: 'reviews', element: <Suspense fallback={<div role="status">Loading...</div>}><ReviewModerationPage /></Suspense> },
+      { path: 'bookings/:bookingId', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingDetailPage /></Suspense> },
       { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'route-prices', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'dispatch-hub', element: <Navigate to="/admin/bookings" replace /> },
