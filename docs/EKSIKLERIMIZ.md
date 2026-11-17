@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 HTTP 408 rezervasyon zaman aşımı güvenliği
+- **Sorun:** HTTP 408 (Request Timeout) kesin reddedilmiş sayılıyordu; sunucu kaydı tamamlamış olabilir. Bu durumda aynı rezervasyonun yeniden gönderilmesinde idempotency anahtarının korunması kritik.
+- **Kod:** `bookingHttpError` artık 408'i, 5xx gibi belirsiz sonuç sayıyor (`ffd5618`); oluşturma ekranında teknik 408 yerine güvenli aynı istekle tekrar deneme mesajı var (`79816b6`).
+- **Test:** 408/504 belirsizliği, 429/422 kesin reddi ve 408 kullanıcı mesajı regresyonu eklendi (`297b8d4`, `9b3056c`).
+- **Durum:** Kod ve test commit edildi; GitHub Actions sonucu ayrıca doğrulanmalı. Gerçek tarayıcı ağ kesintisi ve aynı anahtarla yeniden gönderim E2E **AÇIK**. Müşteri verisi/üretim DB/deploy değiştirilmedi.
+
+
 ## 2026-11-17 — HTTP 429 regresyon testi yanlış negatif kontrolü
 - **Kanıt:** `4cd6b8b` için GitHub Actions run `44018518674` **failure**: backend PostgreSQL işi success, frontend 54 testten 53'ü geçti; tek hata `bookingErrors.test.mjs` içindeki HTTP 429 mesaj testiydi.
 - **Neden:** Test `/Too Many Requests/i` ifadesini yasaklıyordu, fakat kullanıcı dostu yeni mesaj `Too many requests. Please wait a moment before trying again.` diye başlıyor. Test, teknik HTTP kodunu engellemek yerine anlamlı metni yanlışlıkla reddetti.
