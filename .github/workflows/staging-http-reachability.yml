@@ -20,9 +20,9 @@ jobs:
           set -euo pipefail
           url="https://vip-transfer-dalaman-test.onrender.com/"
           for attempt in {1..12}; do
-            code=$(curl --location --silent --output /dev/null --write-out '%{http_code}' --connect-timeout 15 --max-time 90 "$url" || true)
+            code=$(curl --location --silent --show-error --output frontend-response.html --write-out '%{http_code}' --connect-timeout 15 --max-time 90 "$url" || true)
             echo "Frontend attempt $attempt: HTTP $code"
-            if [[ "$code" == "200" ]]; then exit 0; fi
+            if [[ "$code" == "200" ]] && grep -qi '<html' frontend-response.html && grep -qi '<div id="root"' frontend-response.html; then exit 0; fi
             sleep 20
           done
           echo "::error::Staging frontend did not return HTTP 200"
@@ -34,11 +34,11 @@ jobs:
           set -euo pipefail
           # Root may legitimately be 401, 403 or 404. This is NOT a booking test.
           url="https://vip-transfer-dalaman-api-test.onrender.com/"
-          for attempt in {1..6}; do
+          for attempt in {1..12}; do
             code=$(curl --location --silent --output /dev/null --write-out '%{http_code}' --connect-timeout 15 --max-time 120 "$url" || true)
             echo "API attempt $attempt: HTTP $code"
-            if [[ "$code" =~ ^[234][0-9][0-9]$ ]]; then exit 0; fi
+            if [[ "$code" =~ ^(200|401|403|404)$ ]]; then exit 0; fi
             sleep 20
           done
-          echo "::error::Staging API did not respond with a non-5xx HTTP status"
+          echo "::error::Staging API did not respond with an expected HTTP status"
           exit 1
