@@ -28,7 +28,8 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
       - run: npm run build
-      - run: npx --yes playwright@1.58.2 install --with-deps chromium
+      - run: npm install --no-save --package-lock=false @playwright/test@1.58.2
+      - run: npx playwright install --with-deps chromium
       - name: Start local frontend
         run: npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/vite-preview.log 2>&1 & 
       - name: Wait for frontend
@@ -40,7 +41,7 @@ jobs:
           cat /tmp/vite-preview.log
           exit 1
       - name: Run browser smoke
-        run: npx --yes -p @playwright/test@1.58.2 playwright test e2e/booking-smoke.spec.mjs --reporter=line
+        run: npx playwright test e2e/booking-smoke.spec.mjs --reporter=line
       - name: Upload browser diagnostics
         if: always()
         uses: actions/upload-artifact@v4
