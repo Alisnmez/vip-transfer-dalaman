@@ -66,6 +66,7 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
       if (action === 'read') return 'Loading bookings timed out. Please try again.'
       return 'The request timed out. Your changes may have been saved. Refresh to verify before trying again.'
     }
+    if (error.status === null && action === 'create' && error.uncertain) return 'The booking request may have been saved. Please retry the same request or contact support before starting a new booking.'
     if (error.status === null && action === 'read') return 'Could not load bookings. Check your connection and try again.'
     if (error.status === null && action !== 'create') return 'Connection failed. Your changes may have been saved. Refresh to verify before trying again.'
     if (error.status !== null && error.status >= 500) {
