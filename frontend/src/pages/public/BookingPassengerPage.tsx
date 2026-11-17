@@ -436,8 +436,17 @@ function FormField({
 }
 
 function PassengerSummary() {
-  const transfer = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
-  const price = typeof transfer.price === 'number' ? `£${transfer.price.toFixed(2)}` : 'Price to be confirmed'
+  // Browser storage may be disabled or contain an invalid draft.
+  const [transfer] = useState<Record<string, unknown>>(() => {
+    try {
+      const saved: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+      return saved && typeof saved === 'object' && !Array.isArray(saved)
+        ? saved as Record<string, unknown> : {}
+    } catch {
+      return {}
+    }
+  })
+  const price = typeof transfer.price === 'number' && Number.isFinite(transfer.price) ? `£${transfer.price.toFixed(2)}` : 'Price to be confirmed'
   return (
     <div className="lg:col-span-4">
       <div className="sticky top-24 space-y-gutter-grid">
@@ -465,7 +474,7 @@ function PassengerSummary() {
                   directions_car
                 </span>
                 <span className="font-label-sm text-label-sm">
-                  {transfer.vehicleName || 'Not selected'}
+                  {typeof transfer.vehicleName === 'string' ? transfer.vehicleName : 'Not selected'}
                 </span>
               </div>
             </div>
@@ -473,13 +482,13 @@ function PassengerSummary() {
               <SummaryPoint
                 icon="location_on"
                 label="Pickup"
-                meta={`${transfer.pickUpDate || ""} ${transfer.pickUpTime || ""}`}
-                value={transfer.pickUpLocation || "Not selected"}
+                meta={`${typeof transfer.pickUpDate === 'string' ? transfer.pickUpDate : ''} ${typeof transfer.pickUpTime === 'string' ? transfer.pickUpTime : ''}`}
+                value={typeof transfer.pickUpLocation === 'string' ? transfer.pickUpLocation : 'Not selected'}
               />
               <SummaryPoint
                 icon="near_me"
                 label="Drop-off"
-                value={transfer.dropOffLocation || "Not selected"}
+                value={typeof transfer.dropOffLocation === 'string' ? transfer.dropOffLocation : 'Not selected'}
               />
             </div>
             <div className="bg-white/5 rounded-lg p-4 space-y-2">
