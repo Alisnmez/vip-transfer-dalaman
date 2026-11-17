@@ -75,3 +75,17 @@ If column names differ, **stop** and inspect actual names first. Never run `DROP
 - **Do not** disable TLS, open the database to `0.0.0.0/0`, or paste database credentials into chat to work around this.
 - Next: connect with an authorized TLS-enabled client from an allowlisted workstation or a secure internal connection, run `docs/sql/postgres_booking_readonly_audit.sql`, and record schema metadata only.
 - Before any migration or `ddl-auto` change: verify an actual backup and isolated restore. Free-plan database expiry/backup capabilities must be checked in Render, not assumed.
+
+
+## Backup and isolated restore acceptance checklist (not yet executed)
+
+Before schema migration, an authorized operator must:
+
+1. Confirm the **actual** backup mechanism available for this Render database plan, its retention, and whether a downloadable logical dump or snapshot is supported. Do not assume Free plan includes managed backups.
+2. Produce a backup using the supported mechanism, store it encrypted with access restricted to the operator, and record its timestamp and source database identity. Never commit backups or credentials to Git.
+3. Restore **only** into a newly created, isolated disposable PostgreSQL instance; do not restore over staging or production.
+4. In the isolated restored database, compare table names, booking row count, minimum/maximum booking ID, and index/constraint metadata with the source's corresponding **aggregate-only** inventory. Avoid exporting customer records to logs.
+5. Run the backend integration test suite against a separate disposable test database, then verify a synthetic booking can be inserted and read in the restored environment only after confirming the environment is isolated.
+6. Record who performed the drill, the elapsed restore time, and whether all checks passed. Remove the disposable instance securely after approval.
+
+**Gate:** Until both source inventory and an isolated restore are evidenced, keep `spring.jpa.hibernate.ddl-auto=update` unchanged and do not enable schema migrations on the connected Render database.
