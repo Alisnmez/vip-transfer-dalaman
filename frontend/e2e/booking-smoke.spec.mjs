@@ -55,3 +55,26 @@ test('mobile booking and admin routes render at common phone widths', async ({ p
   }
   expect(errors, 'Uncaught mobile browser errors').toEqual([])
 })
+
+test('incomplete transfer cannot proceed to passenger details', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+  await page.goto('http://127.0.0.1:4173/booking')
+  await expect(page.getByRole('heading', { name: 'Transfer Information' })).toBeVisible()
+  await page.getByRole('link', { name: 'Next: Passenger Details' }).click()
+  await expect(page).toHaveURL(/\/booking(?:\?.*)?$/)
+  await expect(page.getByRole('alert')).toContainText('Please enter pickup, destination, date and time')
+  expect(errors, 'Uncaught errors during transfer validation').toEqual([])
+})
+
+test('malformed stored transfer draft does not crash the booking page', async ({ page }) => {
+  const errors = []
+  page.on('pageerror', error => errors.push(error.message))
+  await page.addInitScript(() => {
+    localStorage.setItem('bookingTransferInfo', '{invalid json')
+  })
+  await page.goto('http://127.0.0.1:4173/booking')
+  await expect(page.getByRole('heading', { name: 'Transfer Information' })).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Next: Passenger Details' })).toBeVisible()
+  expect(errors, 'Uncaught errors with malformed stored draft').toEqual([])
+})
