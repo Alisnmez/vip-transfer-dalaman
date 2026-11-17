@@ -87,14 +87,14 @@ class BookingIntegrationTests {
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED")))
                 .andExpect(status().isUnauthorized());
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                         .patch("/bookings/{id}/status", id)
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMED"));
 
@@ -102,7 +102,7 @@ class BookingIntegrationTests {
                         .patch("/bookings/{id}/status", id)
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\\"status\\":\\"CANCELLED\\"}"))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CANCELLED")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CANCELLED"));
 
@@ -110,7 +110,7 @@ class BookingIntegrationTests {
                         .patch("/bookings/{id}/status", id)
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\\"status\\":\\"CONFIRMED\\"}"))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED")))
                 .andExpect(status().isConflict());
 
         mockMvc.perform(get("/bookings/{id}", id).header("Authorization", auth))
