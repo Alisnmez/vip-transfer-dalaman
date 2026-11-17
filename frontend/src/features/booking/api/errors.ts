@@ -66,7 +66,11 @@ export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 
     }
     if (error.status === null && action === 'read') return 'Could not load bookings. Check your connection and try again.'
     if (error.status === null && action !== 'create') return 'Connection failed. Your changes may have been saved. Refresh to verify before trying again.'
-    if (error.status !== null && error.status >= 500) return 'The booking service is temporarily unavailable. Please try again later.'
+    if (error.status !== null && error.status >= 500) {
+      if (action === 'create') return 'The booking service may have saved your request. Please retry the same request or contact support before starting a new booking.'
+      if (action === 'read') return 'Could not load bookings because the service is temporarily unavailable. Please try again later.'
+      return 'The booking service is temporarily unavailable. Your changes may have been saved. Refresh to verify before trying again.'
+    }
     return error.message
   }
   return action === 'status' ? 'Could not update booking status.'
