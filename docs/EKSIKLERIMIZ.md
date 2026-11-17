@@ -1,3 +1,9 @@
+## 2026-11-17 — Dal karışıklığı denetimi ve güvenli düzeltme kararı
+- **Kök neden doğrulandı:** Görev listesi `docs/EKSIKLERIMIZ.md` yalnızca çalışma dalı `feature/booking-integration` üzerinden okunabildi; varsayılan `main` dosyayı içermiyor. `PROJECT_HANDOVER.md` da çalışma dalını doğruluyor.
+- **Karşılaştırma:** `main` üzerindeki `frontend/src/pages/public/HomePage.tsx` ve `InfoPages.tsx` çalışma dalındaki sürümlerden farklı. Çalışma dalında `HomePage` üzerindeki “View All Vehicles” bağlantısı **zaten** `/vehicles` hedefine gidiyor; `InfoPages` ise doğrulanmamış EUR fiyatlarını kullanmıyor ve kullanıcı tarafından belirlenen geçici iletişim bilgilerini koruyor. `main` sürümünü bu dosyaların üzerine kopyalamak regresyon oluşturabilir.
+- **Karar:** `main` üzerinde yanlışlıkla yapılan `cb4dc98` ve `e6be470` değişiklikleri **körü körüne cherry-pick/merge edilmeyecek**. SEO için yalnızca çalışma dalındaki mevcut router/metadata ve prerender uygulaması üzerinden gerekirse uyarlanmış değişiklik yapılacak. `main` üzerindeki commit'ler geri alınmadı; dal koruma/PR süreci ayrıca kurulmalı.
+- **Açık:** İki dalın tam diff'i, CI doğrulaması, güvenli PR/branch koruması ve gerçek tarayıcı E2E. Bu kayıt bir kod/CI düzeltmesinin tamamlandığı anlamına gelmez. Canlı veritabanı ve müşteri kayıtlarına dokunulmadı.
+
 # Güncel eksikler ve çözüm kayıtları
 
 ## 2026-11-17 — P0 beklenmeyen HTTP durumlarında backend hata metni gizleme
