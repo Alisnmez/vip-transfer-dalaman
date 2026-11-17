@@ -1,5 +1,22 @@
 # Deployment workflow — VIP Transfer Dalaman
 
+## MVP launch priorities — updated 2026-11-17
+
+**Goal:** publish a usable booking website quickly, then ship improvements in versions. **CI and SEO are launch priorities**, not optional post-launch extras.
+
+**P0 — before launch (minimal gates):**
+1. **CI:** existing frontend lint/unit/build, backend PostgreSQL tests and basic booking-browser smoke must pass on the release commit. Fix failing checks; do not add unrelated test suites or polish.
+2. **Booking:** customer can select transfer, enter required details, submit one booking and see confirmation; admin can sign in and view/manage it. Test with synthetic data on staging only.
+3. **SEO:** production domain/HTTPS; crawlable public pages; correct title and meta description, canonical URLs, sitemap.xml, robots.txt, mobile usability and Search Console verification/submission. Verify generated HTML and deployed domain; avoid claiming rankings.
+4. **Operations:** persistent production PostgreSQL separate from staging, private credentials, basic backup/restore path, working frontend-to-API URL/CORS, real contact details and clear cash-payment/cancellation wording.
+5. **Release:** deploy verified commit, perform short production smoke without altering real bookings, keep rollback/redeploy path.
+
+**P1 — after launch:** extensive E2E scenarios, Flyway/Liquibase migration automation (until then no blind schema changes), advanced security hardening, analytics dashboards, competitor price research, extra features and visual refinements. Track them in `docs/EKSIKLERIMIZ.md`.
+
+**Do not mistake a committed change for a passed CI run or a live deployment.** No production deploy or database mutation is authorized by this document.
+
+---
+
 Status: **TARGET PROCESS / NOT YET FULLY CONFIGURED**. This document defines how we will develop and release safely. Do not treat the branch protections, production services, or E2E gates below as already installed.
 
 ## Environments
