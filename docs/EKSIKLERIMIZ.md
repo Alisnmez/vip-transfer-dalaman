@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Madde 2: mobil form ve hata erişilebilirliği
+- `b816810`: boş/bozuk taslak, hatalı yolcu sayısı, dönüş tarihi ve iletişim sınırları için otomatik testler eklendi. GitHub Actions `43993053892` **success**.
+- `a07d61f`: yolcu sayfası özeti bozuk veya engellenmiş `localStorage` yüzünden render sırasında çökmesin diye güvenli okuma ve tür kontrolleri eklendi. GitHub Actions `43993308784` **success**.
+- `48fb52b` ve `18adb2e`: transfer/yolcu ortak metin alanlarının label-input bağlantısı `useId` ile kuruldu; yolcu genel hatasına `role="alert"` eklendi. CI sonucu bekliyor.
+- **Açık:** Gerçek 320/375/390 px mobil viewport, dokunmatik, klavye, form geri/ileri ve yenileme testi. Kod/CI kontrolü bunların yerine geçmez.
+- **Durum:** KOD VE OTOMATİK TEST İYİLEŞTİ; GERÇEK MOBİL E2E AÇIK.
+
+
 ## 2026-11-17 — P0 Madde 1 / ortak hata mesajları kontrolü
 - PostgreSQL entegrasyon testi doğrudan `PENDING → CANCELLED`, iptal sonrası yeniden açma reddi (`409`) ve tekrar okumada `CANCELLED` kalmasını doğruluyor (`d8e1601`); CI `43992012974` başarılı.
 - `bookingErrorMessage(error, action)` ortak fonksiyonu admin detay, rezervasyon oluşturma, liste ve dashboard tarafından kullanılıyor. `read` işlemlerinde yanlışlıkla "değişiklik kaydedilmiş olabilir" denmiyor. `05f3f9e` için CI `43992573836` başarılı.
