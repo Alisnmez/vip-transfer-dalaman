@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Madde 1 / ortak hata mesajları kontrolü
+- PostgreSQL entegrasyon testi doğrudan `PENDING → CANCELLED`, iptal sonrası yeniden açma reddi (`409`) ve tekrar okumada `CANCELLED` kalmasını doğruluyor (`d8e1601`); CI `43992012974` başarılı.
+- `bookingErrorMessage(error, action)` ortak fonksiyonu admin detay, rezervasyon oluşturma, liste ve dashboard tarafından kullanılıyor. `read` işlemlerinde yanlışlıkla "değişiklik kaydedilmiş olabilir" denmiyor. `05f3f9e` için CI `43992573836` başarılı.
+- Her `409` iptal kaynaklı olmayabilir; durum geçişi mesajı genel ve eyleme dönük hale getirildi (`78ee1e2`). Ek mesaj dalı testleri `c392b51` commit'inde; CI sonucu ayrıca kontrol edilecek.
+- **Açık:** Gerçek tarayıcıdan sentetik kayıtla uçtan uca test ve mobil cihaz/viewport kontrolleri. Otomatik CI, tarayıcı E2E yerine geçmez.
+
+
 ## 2026-11-17 — P0 Madde 1: rezervasyon uçtan uca kontrolü (güncel)
 - **CI kanıtı:** GitHub Actions `43991365510` commit `feef6d0` **success** (React/TypeScript ve Spring Boot/PostgreSQL). Bu, otomatik testlerin geçtiğini gösterir; gerçek tarayıcı E2E değildir.
 - **Tarayıcıdan salt-okunur gözlem:** Açık staging `/booking` formu yükleniyor. Açık `/admin/bookings/7` sayfasında rezervasyon #7 `COMPLETED` görünüyor. Bu kaydın önceki adımlarını veya nasıl oluşturulduğunu bu kontrolde doğrulamadık; mevcut müşteri kaydına dokunulmadı.
