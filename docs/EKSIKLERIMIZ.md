@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — HTTP 429 regresyon testi yanlış negatif kontrolü
+- **Kanıt:** `4cd6b8b` için GitHub Actions run `44018518674` **failure**: backend PostgreSQL işi success, frontend 54 testten 53'ü geçti; tek hata `bookingErrors.test.mjs` içindeki HTTP 429 mesaj testiydi.
+- **Neden:** Test `/Too Many Requests/i` ifadesini yasaklıyordu, fakat kullanıcı dostu yeni mesaj `Too many requests. Please wait a moment before trying again.` diye başlıyor. Test, teknik HTTP kodunu engellemek yerine anlamlı metni yanlışlıkla reddetti.
+- **Düzeltme:** `f11a43a` ile test yalnızca `HTTP` ve `429` teknik ifadelerini yasaklıyor, ayrıca ham sunucu mesajıyla birebir eşit olmadığını doğruluyor. Üretim kodu değiştirilmedi.
+- **Durum:** CI sonucu henüz ayrıca doğrulanacak. Gerçek tarayıcı E2E, veritabanı yedek/restore ve migration işleri açık.
+
+
 ## 2026-11-17 — P0 ortak API hata mesajı: HTTP 429
 - Önceki sözdizimi düzeltmesi `fa594ce` için GitHub Actions `44012436247` **success**; önceki CI kırılması kapandı.
 - **Kod:** Rezervasyon oluşturma, listeleme, düzenleme ve durum güncellemede HTTP 429 (çok sık istek) için ham sağlayıcı mesajı yerine bekleyip tekrar denemeyi öneren ortak mesaj eklendi (`dc2e047`).
