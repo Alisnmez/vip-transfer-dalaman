@@ -42,7 +42,7 @@ for (const page of landingPages) {
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${page.description}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
     .replace('</head>', `${canonical}</head>`)
-    .replace('<div id="root"></div>', `<div id="root"><main><h1>${page.heading}</h1><p>${page.body}</p>${page.links}</main></div>`)
+    .replace('<div id="root"></div>', `<div id="root"><main><h1>${page.heading}</h1><section>${page.body}</section>${page.links}</main></div>`)
   const folder = join('dist', page.path)
   await mkdir(folder, { recursive: true })
   await writeFile(join(folder, 'index.html'), html)
