@@ -10,7 +10,7 @@ import { useBookingPage } from '../../features/booking/useBookingPage'
 
 export function BookingListPage() {
   const nowMs = useBookingClock()
-  const { bookings, totalPages, totalElements, page, loading, error, refresh, changePage } = useBookingPage()
+  const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage } = useBookingPage()
   const [search, setSearch] = useState('')
 
   const query = search.trim().toLowerCase()
@@ -29,8 +29,9 @@ export function BookingListPage() {
             <h1 className="text-2xl font-bold text-admin-primary">Booking management</h1>
             <p className="text-on-surface-variant">{visibleBookings.length} shown · {totalElements} total requests</p>
           </div>
+          {lastUpdatedAt !== null && <span className="text-xs text-on-surface-variant">Last updated: {new Date(lastUpdatedAt).toLocaleTimeString()}</span>}
           <Link to="/admin/calendar" className="rounded-lg bg-admin-primary px-4 py-2 font-semibold text-white">Calendar</Link>
-          <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading} processingLabel="Refreshing..."
+          <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading || refreshing} processingLabel="Refreshing..."
             className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
             Refresh bookings
           </ProcessingButton>
