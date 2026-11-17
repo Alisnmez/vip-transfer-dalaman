@@ -45,3 +45,10 @@ test('shared user messages explain cancelled booking conflicts without HTTP code
   assert.match(bookingErrorMessage(bookingHttpError(401), 'status'), /sign in again/)
   assert.match(bookingErrorMessage(classifyBookingFailure(new TypeError('offline')), 'status'), /may have been saved/)
 })
+
+test('read-only admin failures never suggest that a booking was modified', () => {
+  const message = bookingErrorMessage(classifyBookingFailure(new TypeError('offline')), 'read')
+  assert.match(message, /Could not load bookings/)
+  assert.doesNotMatch(message, /changes may have been saved/i)
+  assert.match(bookingErrorMessage(bookingHttpError(403), 'read'), /sign in again/)
+})
