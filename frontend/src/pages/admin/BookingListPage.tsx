@@ -1,41 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getBookingPage } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingStatusIndicators } from '../../features/booking/components/BookingStatusIndicators'
 import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
 import { useBookingClock } from '../../features/booking/useBookingClock'
-import type { Booking } from '../../features/booking/types'
+import { useBookingPage } from '../../features/booking/useBookingPage'
 
 export function BookingListPage() {
-  const [bookings, setBookings] = useState<Booking[]>([])
   const nowMs = useBookingClock()
-  const [loadedKey, setLoadedKey] = useState('')
-  const [revision, setRevision] = useState(0)
-  const [page, setPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
-  const [totalElements, setTotalElements] = useState(0)
-  const [error, setError] = useState('')
+  const { bookings, totalPages, totalElements, page, loading, error, refresh, changePage } = useBookingPage()
   const [search, setSearch] = useState('')
-  const [refreshing, setRefreshing] = useState(false)
-  const loading = loadedKey !== `${page}:${revision}`
-
-  function refresh() {
-    if (refreshing || loading) return
-    setRefreshing(true)
-    setError('')
-    setRevision(value => value + 1)
-  }
-
-  useEffect(() => {
-    let active = true
-    getBookingPage(page)
-      .then(data => { if (active) { setBookings(data.content); setTotalPages(data.totalPages); setTotalElements(data.totalElements); setLoadedKey(`${page}:${revision}`); setError(''); setRefreshing(false) } })
-      .catch(err => { if (active) { setBookings([]); setTotalPages(0); setTotalElements(0); setError(err instanceof Error ? err.message : 'Unable to load bookings'); setLoadedKey(`${page}:${revision}`); setRefreshing(false) } })
-    return () => { active = false }
-  }, [page, revision])
 
   const query = search.trim().toLowerCase()
   const visibleBookings = (loading || error ? [] : bookings)
@@ -54,7 +30,7 @@ export function BookingListPage() {
             <p className="text-on-surface-variant">{visibleBookings.length} shown · {totalElements} total requests</p>
           </div>
           <Link to="/admin/calendar" className="rounded-lg bg-admin-primary px-4 py-2 font-semibold text-white">Calendar</Link>
-          <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading || refreshing} processingLabel="Refreshing..."
+          <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading} processingLabel="Refreshing..."
             className="rounded-lg border border-outline-variant bg-white px-4 py-2 font-semibold disabled:opacity-50">
             Refresh bookings
           </ProcessingButton>
@@ -112,9 +88,9 @@ export function BookingListPage() {
         )}
       </section>
       <nav aria-label="Booking pages" className="flex items-center justify-between gap-4 border-t border-outline-variant bg-white p-4">
-        <button type="button" disabled={loading || refreshing || page === 0} onClick={() => { setError(''); setPage(value => value - 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button>
+        <button type="button" disabled={loading || page === 0} onClick={() => changePage(page - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button>
         <span className="text-sm">Page {page + 1} of {Math.max(1, totalPages)}</span>
-        <button type="button" disabled={loading || refreshing || page + 1 >= totalPages} onClick={() => { setError(''); setPage(value => value + 1) }} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
+        <button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => changePage(page + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button>
       </nav>
     </main>
   )
