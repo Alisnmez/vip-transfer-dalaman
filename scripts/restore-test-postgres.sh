@@ -18,7 +18,7 @@ if [[ -n "${DATABASE_URL:-}" && "$RESTORE_DATABASE_URL" == "$DATABASE_URL" ]]; t
   exit 1
 fi
 # Require a recognizable disposable database name; use a separate instance for testing.
-if [[ ! "$RESTORE_DATABASE_URL" =~ /[^/?]*(restore_test|restore-test|disposable)[^/?]*(\\?|$) ]]; then
+if [[ ! "$RESTORE_DATABASE_URL" =~ /(restore_test|restore-test|disposable)(\\?|$) ]]; then
   echo "Restore URL must name a database containing restore_test, restore-test or disposable" >&2
   exit 1
 fi
