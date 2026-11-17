@@ -51,7 +51,7 @@ export function bookingInvalidSuccessResponse(cause?: unknown): BookingApiError 
 export function bookingErrorMessage(error: unknown, action: 'status' | 'edit' | 'create' | 'read' = 'create'): string {
   if (error instanceof BookingApiError) {
     if (error.status === 409) {
-      if (action === 'status') return 'This status change is not allowed. Cancelled bookings cannot be reopened. Refresh the booking to check its current status.'
+      if (action === 'status') return 'This status change is not allowed for the booking's current status. Refresh the booking to check its latest status.'
       if (action === 'edit') return 'This booking has changed or the edit is not allowed. Refresh the booking and try again.'
       if (action === 'read') return 'Booking data has changed. Refresh to load the latest information.'
       return 'This booking request conflicts with an existing request. Please check your details or contact support.'
