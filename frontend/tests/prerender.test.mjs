@@ -9,7 +9,7 @@ const source = resolve('scripts/prerender-routes.mjs')
 const routesSource = resolve('scripts/destination-routes.mjs')
 const template = '<html><head><title>Default</title><meta name="description" content="Default" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script src="/assets/main.js"></script></body></html>'
 
-async function run(domain) {
+async function run(domain, page = 'routes/fethiye') {
   const folder = await mkdtemp(join(tmpdir(), 'vip-prerender-'))
   try {
     await mkdir(join(folder, 'dist'))
@@ -22,7 +22,7 @@ async function run(domain) {
       env: { ...process.env, VITE_PUBLIC_SITE_URL: domain },
     })
     assert.equal(result.status, 0, result.stderr)
-    return await readFile(join(folder, 'dist/routes/fethiye/index.html'), 'utf8')
+    return await readFile(join(folder, 'dist', page, 'index.html'), 'utf8')
   } finally {
     await rm(folder, { recursive: true, force: true })
   }
@@ -42,4 +42,25 @@ test('production prerender provides canonical and metadata in initial HTML', asy
   assert.match(html, /rel="canonical" href="https:\/\/example.com\/routes\/fethiye"/)
   assert.match(html, /<h1>Dalaman Airport to Fethiye/)
   assert.match(html, /<meta name="description" content="Plan a private Dalaman Airport to Fethiye transfer/)
+})
+
+
+test('staging landing pages keep noindex and do not advertise canonical URLs', async () => {
+  for (const page of ['', 'routes', 'faq']) {
+    const html = await run('https://vip-transfer-dalaman-test.onrender.com', page)
+    assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
+    assert.doesNotMatch(html, /rel="canonical"/)
+    assert.match(html, /<h1>[^<]+<\/h1>/)
+  }
+})
+
+test('production landing pages have distinct initial HTML metadata', async () => {
+  const home = await run('https://example.com', '')
+  const routes = await run('https://example.com', 'routes')
+  assert.match(home, /<title>Dalaman Airport Transfers \| VIP Transfer Dalaman<\/title>/)
+  assert.match(home, /rel="canonical" href="https:\/\/example.com\/"/)
+  assert.match(routes, /rel="canonical" href="https:\/\/example.com\/routes"/)
+  assert.match(routes, /href="\/routes\/fethiye"/)
+  assert.match(routes, /content="index,follow"/)
+  assert.notEqual(home, routes)
 })
