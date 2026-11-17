@@ -104,3 +104,21 @@ test('HTTP 408 distinguishes read-only timeout from uncertain admin writes', () 
   assert.match(readMessage, /Loading bookings timed out/i)
   assert.doesNotMatch(readMessage, /saved|changes|408|HTTP/i)
 })
+
+test('HTTP 5xx does not encourage unsafe admin write retries', () => {
+  const error = bookingHttpError(503, 'Database unavailable')
+  assert.equal(error.uncertain, true)
+  for (const action of ['edit', 'status']) {
+    const message = bookingErrorMessage(error, action)
+    assert.match(message, /changes may have been saved/i)
+    assert.match(message, /Refresh to verify/i)
+    assert.doesNotMatch(message, /Database unavailable|HTTP|503/i)
+  }
+  const readMessage = bookingErrorMessage(error, 'read')
+  assert.match(readMessage, /Could not load bookings/i)
+  assert.doesNotMatch(readMessage, /saved|changes|HTTP|503/i)
+  const createMessage = bookingErrorMessage(error, 'create')
+  assert.match(createMessage, /may have saved your request/i)
+  assert.match(createMessage, /retry the same request/i)
+  assert.doesNotMatch(createMessage, /Database unavailable|HTTP|503/i)
+})
