@@ -325,12 +325,12 @@ class BookingIntegrationTests {
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED")))))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
                 .andExpect(status().isUnauthorized());
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
                         .header("Authorization", valid)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED")))))
+                        .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMED"));
         mockMvc.perform(get("/bookings/{id}", id).header("Authorization", valid))
