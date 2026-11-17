@@ -1,15 +1,10 @@
+import { destinationRoutes } from './destination-routes.mjs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
-const pages = [
-  ['marmaris', 'Marmaris', 'Marmaris is a coastal resort town with hotels, a marina and a lively waterfront.'],
-  ['fethiye', 'Fethiye', 'Fethiye offers a harbour, town centre and access to the surrounding coast.'],
-  ['oludeniz', 'Oludeniz', 'Oludeniz is known for its lagoon and beach area.'],
-  ['gocek', 'Gocek', 'Gocek is a marina destination on the Gulf of Fethiye.'],
-  ['icmeler', 'Icmeler', 'Icmeler is a resort area near Marmaris.'],
-]
+const pages = destinationRoutes.map(({ slug, name, intro }) => [slug, name, intro])
 const template = await readFile('dist/index.html', 'utf8')
 for (const [slug, name, intro] of pages) {
   const title = `Dalaman Airport to ${name} Private Transfer | VIP Transfer Dalaman`
