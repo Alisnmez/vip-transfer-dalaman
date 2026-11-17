@@ -10,6 +10,7 @@ export function useBookingPage() {
   const [result, setResult] = useState<BookingPage | null>(null)
   const [loadedKey, setLoadedKey] = useState('')
   const [error, setError] = useState('')
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null)
 
   const requestKey = `${page}:${revision}`
   const loading = loadedKey !== requestKey
@@ -20,6 +21,7 @@ export function useBookingPage() {
       .then(data => {
         if (!active) return
         setResult(data)
+        setLastUpdatedAt(Date.now())
         setError('')
         setLoadedKey(requestKey)
       })
@@ -36,6 +38,14 @@ export function useBookingPage() {
     if (!loading) setRevision(value => value + 1)
   }
 
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') setRevision(value => value + 1)
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => document.removeEventListener('visibilitychange', onVisible)
+  }, [])
+
   function changePage(nextPage: number) {
     if (loading || nextPage < 0 || (result && nextPage >= result.totalPages)) return
     setError('')
@@ -49,6 +59,7 @@ export function useBookingPage() {
     page,
     loading,
     error,
+    lastUpdatedAt,
     refresh,
     changePage,
   }
