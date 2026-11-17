@@ -1,5 +1,12 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 Madde 1: rezervasyon uçtan uca kontrolü (güncel)
+- **CI kanıtı:** GitHub Actions `43991365510` commit `feef6d0` **success** (React/TypeScript ve Spring Boot/PostgreSQL). Bu, otomatik testlerin geçtiğini gösterir; gerçek tarayıcı E2E değildir.
+- **Tarayıcıdan salt-okunur gözlem:** Açık staging `/booking` formu yükleniyor. Açık `/admin/bookings/7` sayfasında rezervasyon #7 `COMPLETED` görünüyor. Bu kaydın önceki adımlarını veya nasıl oluşturulduğunu bu kontrolde doğrulamadık; mevcut müşteri kaydına dokunulmadı.
+- **Kalan:** Ayrı test ortamı ve sentetik test kaydı güvenli biçimde hazırlanarak tarayıcıdan POST → admin PENDING → CONFIRMED → CANCELLED → yenileme sonrası durum kontrolü yapılacak. Mevcut canlı/staging müşteri kayıtlarını test için değiştirmeyeceğiz. Tarayıcı kontrol aracı yalnızca açık sayfaları okuyabiliyor; buton/form işlemi yapamıyor.
+- **Durum:** OTOMATİK TEST BAŞARILI; GERÇEK TARAYICI E2E AÇIK. Üretim GO için kapanmadı.
+
+
 ## 2026-11-17 — P0 Analitik: kullanıcı rızası ve rezervasyon dönüşüm adımları
 - **Durum:** KODLANDI; son CI, gerçek tarayıcı testi ve GA4 kimliği bekliyor.
 - **Kod:** `frontend/src/features/analytics/analytics.ts` (GA4 yalnızca geçerli `VITE_GA_MEASUREMENT_ID` ve açık rıza ile; sabit olay allowlist'i), `AnalyticsConsent.tsx` (Accept/Reject ve Privacy choices), router public sayfa görüntülemeleri, booking başlangıç/yolcu adımı/API başarılı talep eventleri.
