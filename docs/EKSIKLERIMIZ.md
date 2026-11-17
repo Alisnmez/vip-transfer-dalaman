@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P1 Admin rezervasyon listesinin sekmeye dönüşte güncellenmesi
+- **Durum:** KODLANDI — CI, Render ve gerçek admin smoke testi bekleniyor.
+- **Sorun / kök neden:** Booking management ilk açılışta ve manuel Refresh ile veri çekiyordu. Admin başka sekmede çalışıp geri döndüğünde yeni rezervasyonlar otomatik görünmüyordu; dashboard'daki görünür sekme yaklaşımı listede yoktu.
+- **Çözüm:** `frontend/src/features/booking/useBookingPage.ts` içinde `visibilitychange` dinleyicisi eklendi; sekme yeniden görünür olunca revizyon artırılarak yalnızca mevcut sayfa tekrar sorgulanıyor (`cf506125`). Eski isteğin `active` koruması var; arka planda sürekli 30 saniyelik liste sorgusu açılmadı. Son başarılı veri alma zamanı hook'a eklendi; ileride UI'da göstermek için kullanılabilir.
+- **Kabul kriteri:** Admin listesi açıkken başka sekmede yeni rezervasyon oluştur, admin sekmesine dön; yeni kayıt ilgili sayfada görünmeli. Hızlı sekme değişimi ve API hata/yeniden deneme durumlarında yanlış eski kayıt görünmemeli.
+- **Doğrulama:** `e41752ee` için CI `43986557018` **success**; bu yeni commit'in CI ve canlı doğrulaması **BEKLİYOR**. Render frontend `56aa6e5e` **live**, backend aynı commit kontrol anında **queued**. Canlı admin E2E yapılmadı.
+
+
 ## 2026-11-17 — Standart iş takip formatı ve güncel yayın engelleri
 
 **Bundan sonraki her geliştirme bu dosyada aynı şablonla kaydedilir:**
