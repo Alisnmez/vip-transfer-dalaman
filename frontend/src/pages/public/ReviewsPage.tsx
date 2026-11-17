@@ -12,7 +12,6 @@ export function ReviewsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [feedback, setFeedback] = useState('')
   const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null)
-  const [feedbackType, setFeedbackType] = useState<'success' | 'error' | null>(null)
   const [reviews, setReviews] = useState<PublicReview[]>([])
   useEffect(() => {
     getPublishedReviews().then(setReviews).catch(() => {
