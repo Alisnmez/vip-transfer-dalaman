@@ -1,5 +1,13 @@
 # Güncel eksikler ve çözüm kayıtları
 
+## 2026-11-17 — P0 PostgreSQL migration için güvenli şema envanteri hazırlandı
+- **Durum:** ARAÇ HAZIR — staging DB'de çalıştırma, yedek/restore ve migration henüz yapılmadı.
+- **Sorun:** Üretimde `ddl-auto=update` kullanılıyor; sürümlü migration'a geçmeden gerçek tablo, constraint, index ve sequence yapısı bilinmeli.
+- **Çözüm:** `docs/sql/postgres_booking_readonly_audit.sql` eklendi (`d7dcc1c2`). `BEGIN READ ONLY` ile salt-okunur transaction içinde DB/schema, kolon, constraint, indeks ve sequence meta verileri sorgulanır; `ROLLBACK` ile biter. Gerçek fiziksel sütun isimleri görülmeden idempotency satır sayımı çalıştırılmaz. `docs/POSTGRES_MIGRATION_PLAN.md` dosyasından bu araca bağlantı verildi (`54e4d1d8`).
+- **Doğrulama:** SQL henüz gerçek staging/production veritabanında çalıştırılmadı. Şema veya yedek durumu bilinmediğinden Hibernate ayarı değiştirilmedi.
+- **Kabul kriteri:** Staging'de salt-okunur sorgu başarıyla çalışmalı; idempotency unique constraint ve dashboard indeksleri doğrulanmalı; yedek/geri yükleme provası yapılmalı; sonra Flyway/Liquibase migration testi.
+
+
 ## 2026-11-17 — P0 Üretim veritabanı şema yönetimi denetimi
 - **Durum:** AÇIK — yayın öncesi migration ve yedek geri yükleme provası gerekli.
 - **Sorun / kök neden:** `src/main/resources/application.properties` dosyasında `spring.jpa.hibernate.ddl-auto=update` kullanılıyor. Bu ayar uygulama açılırken şemayı otomatik değiştirebilir; sürümlenmiş ve denetlenebilir üretim migration'ının yerini tutmaz. Veri kaybı yaşandığına dair kanıt yok, ancak üretim dağıtımında kontrolsüz şema değişikliği riski bulunuyor.
