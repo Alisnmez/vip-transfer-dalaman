@@ -8,6 +8,7 @@ import { PublicLayout } from '../layouts/PublicLayout'
 import { CalendarPage } from '../pages/admin/CalendarPage'
 import { BookingDetailPage } from '../pages/admin/BookingDetailPage'
 import { BookingListPage } from '../pages/admin/BookingListPage'
+import { ReviewModerationPage } from '../pages/admin/ReviewModerationPage'
 import { DashboardPage } from '../pages/admin/DashboardPage'
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
@@ -116,6 +117,7 @@ export const router = createBrowserRouter([
       { index: true, element: <DashboardPage /> },
       { path: 'calendar', element: <CalendarPage /> },
       { path: 'bookings', element: <BookingListPage /> },
+      { path: 'reviews', element: <ReviewModerationPage /> },
       { path: 'bookings/:bookingId', element: <BookingDetailPage /> },
       { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'route-prices', element: <Navigate to="/admin/bookings" replace /> },
