@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
+import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
 import { turkeyToday } from '../../features/booking/turkeyTime'
 import { destinationGroups } from '../../features/booking/destinationGroups'
@@ -57,6 +58,8 @@ function readTransferDraft(): TransferDraft {
 }
 
 export function BookingFormPage() {
+  // Track the first booking step without recording the customer's selections.
+  useState(() => { trackAnalyticsEvent('booking_started'); return true })
   const [draft] = useState(readTransferDraft)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
   const [selectedVehicleId, setSelectedVehicleId] = useState(transferVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
