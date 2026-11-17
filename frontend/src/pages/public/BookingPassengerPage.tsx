@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -310,7 +310,7 @@ export function BookingPassengerPage() {
               </form>
 
               {error && (
-                <div className="mt-6 rounded-lg border border-error/30 bg-error-container p-4 text-error">
+                <div role="alert" className="mt-6 rounded-lg border border-error/30 bg-error-container p-4 text-error">
                   {error}
                 </div>
               )}
@@ -419,12 +419,14 @@ function FormField({
   type?: string
   value?: string
 }) {
+  const fieldId = useId()
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-label-sm text-label-sm text-on-surface-variant">
+      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
         {label}
       </label>
       <input
+        id={fieldId}
         className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
         onChange={(event) => onChange?.(event.target.value)}
         placeholder={placeholder}
