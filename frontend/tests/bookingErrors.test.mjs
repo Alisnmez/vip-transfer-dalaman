@@ -149,3 +149,15 @@ test('client validation and missing booking errors never expose backend details'
     }
   }
 })
+
+
+test('unexpected HTTP statuses never expose internal backend messages', () => {
+  for (const status of [418, 451]) {
+    const error = bookingHttpError(status, 'SQL connection password leaked')
+    for (const action of ['create', 'edit', 'status', 'read']) {
+      const message = bookingErrorMessage(error, action)
+      assert.ok(message.length > 0)
+      assert.doesNotMatch(message, /SQL|password|leaked|418|451|HTTP/i)
+    }
+  }
+})
