@@ -56,7 +56,7 @@ export function AdminLayout() {
             <input autoComplete="current-password" type="password" required value={password} onChange={(event) => setPassword(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
           </label>
           {checking && <p role="status" className="text-sm text-on-surface-variant">Connecting to the admin service. The test server may take up to two minutes to wake up after inactivity. Please keep this page open.</p>}
-          {loginError && <p role="alert" className="text-error text-sm">{loginError}</p>
+          {loginError && <p role="alert" className="text-error text-sm">{loginError}</p>}
           <ProcessingButton processing={checking} processingLabel="Signing in..." type="submit" className="w-full rounded-lg bg-admin-primary p-3 font-semibold text-white disabled:opacity-50">Sign in</ProcessingButton>
         </form>
       </main>
