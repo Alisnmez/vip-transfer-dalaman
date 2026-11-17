@@ -40,6 +40,36 @@ const pageContent = {
   },
 }
 
+const frequentlyAskedQuestions = [
+  ['How do I book a transfer?', 'Choose your route, travel date, vehicle category and passenger details in the online booking form. Review the details before submitting your request.'],
+  ['Can I book a return transfer?', 'Yes. Select Round Trip and enter your return date and time.'],
+  ['What if my flight is delayed?', 'Please include your flight number if you have one and contact us if your travel details change. Pickup arrangements will be confirmed by the operator.'],
+  ['Can I request a child seat?', 'Yes. Select the number of baby seats in the booking form. Availability will be confirmed with your booking.'],
+  ['How can I change or cancel my booking?', 'Contact us with your booking reference. Any applicable terms will be confirmed by the operator.'],
+  ['How will I know my booking is confirmed?', 'After submitting your request, keep the booking reference. The operator will confirm the booking details separately.'],
+]
+
+export function FAQPage() {
+  return (
+    <div className="min-h-screen bg-background text-on-surface">
+      <PublicNavbar />
+      <main className="pt-32 pb-20 px-margin-page max-w-4xl mx-auto">
+        <h1 className="font-display-lg text-display-lg text-admin-primary mb-4">Frequently Asked Questions</h1>
+        <p className="text-on-surface-variant mb-8">Answers to common questions about booking a Dalaman airport transfer.</p>
+        <section aria-label="Frequently asked questions" className="space-y-3">
+          {frequentlyAskedQuestions.map(([question, answer]) => (
+            <details key={question} className="rounded-xl border border-outline-variant bg-white p-5">
+              <summary className="cursor-pointer font-semibold text-admin-primary">{question}</summary>
+              <p className="mt-3 text-on-surface-variant">{answer}</p>
+            </details>
+          ))}
+        </section>
+        <Link className="mt-8 inline-flex rounded-lg bg-admin-primary px-8 py-3 font-bold text-white" to="/booking">Book Your Transfer</Link>
+      </main>
+    </div>
+  )
+}
+
 export function VehiclesPage() {
   return <InfoPage content={pageContent.vehicles} />
 }
