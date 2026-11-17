@@ -1,61 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { getDashboardSummary } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
-import type { DashboardSummary } from '../../features/booking/api'
 import { bookingStatus, formatTransferDateTime } from '../../features/booking/formatters'
 import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
 import { sortBookingsByPriority } from '../../features/booking/bookingPriority'
 import { useBookingClock } from '../../features/booking/useBookingClock'
+import { useDashboardSummary } from '../../features/booking/useDashboardSummary'
 
 export function DashboardPage() {
   const nowMs = useBookingClock()
-  const [summary, setSummary] = useState<DashboardSummary | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-
-  const requestInFlight = useRef(false)
-
-  async function refresh(showError = true) {
-    if (requestInFlight.current) return
-    requestInFlight.current = true
-    if (showError) {
-      if (!summary) setLoading(true)
-      setError('')
-    }
-    try {
-      setSummary(await getDashboardSummary())
-      setError('')
-    } catch (err) {
-      if (showError) setError(err instanceof Error ? err.message : 'Unable to load bookings')
-    } finally {
-      requestInFlight.current = false
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    // Initial fetch updates state only after the network request settles.
-    requestInFlight.current = true
-    void getDashboardSummary()
-      .then(data => { setSummary(data); setError('') })
-      .catch(err => setError(err instanceof Error ? err.message : 'Unable to load bookings'))
-      .finally(() => { requestInFlight.current = false; setLoading(false) })
-    const timer = window.setInterval(() => {
-      if (document.visibilityState === 'visible') void refresh(false)
-    }, 30000)
-    const onVisible = () => {
-      if (document.visibilityState === 'visible') void refresh(false)
-    }
-    document.addEventListener('visibilitychange', onVisible)
-    return () => {
-      window.clearInterval(timer)
-      document.removeEventListener('visibilitychange', onVisible)
-    }
-    // Initial load and polling are managed by this effect, not by every render.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const { summary, loading, refreshing, error, refresh } = useDashboardSummary()
 
   const upcoming = sortBookingsByPriority(summary?.upcoming ?? [], nowMs)
 
@@ -66,7 +20,7 @@ export function DashboardPage() {
           <h1 className="text-2xl font-bold text-admin-primary">Booking overview</h1>
           <p className="text-on-surface-variant">Live booking requests from the database. Dates use Turkey time.</p>
         </div>
-        <ProcessingButton type="button" onClick={() => { void refresh() }} processing={loading} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 disabled:opacity-50">Refresh</ProcessingButton>
+        <ProcessingButton type="button" onClick={() => { void refresh(true) }} processing={loading || refreshing} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 disabled:opacity-50">Refresh</ProcessingButton>
       </div>
       {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
       {loading && <p role="status">Loading bookings from the server. The first request may take longer while the service starts...</p>}
