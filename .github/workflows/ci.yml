@@ -105,6 +105,27 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Verify PostgreSQL backup and disposable restore
+        shell: bash
+        env:
+          DATABASE_URL: postgresql://vip_test:vip_test_password@localhost:5432/vip_transfer_dalaman
+          RESTORE_DATABASE_URL: postgresql://vip_test:vip_test_password@localhost:5432/vip_restore_test
+          BACKUP_DIR: ${{ runner.temp }}/pg-backups
+          CONFIRM_DISPOSABLE_RESTORE: 'YES'
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-16
+          PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE TABLE backup_restore_probe (id integer PRIMARY KEY, marker text NOT NULL);'
+          PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c "INSERT INTO backup_restore_probe VALUES (1, 'verified-backup');"
+          bash scripts/backup-postgres.sh
+          PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE DATABASE vip_restore_test;'
+          BACKUP_FILE="$(find "$BACKUP_DIR" -maxdepth 1 -name '*.dump' -print -quit)"
+          export BACKUP_FILE
+          bash scripts/restore-test-postgres.sh
+          marker="$(PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_restore_test -Atqc 'SELECT marker FROM backup_restore_probe WHERE id=1')"
+          test "$marker" = 'verified-backup'
+          echo 'Backup/restore round trip verified against disposable PostgreSQL database.'
       - run: mvn -B test
       - name: Preserve backend test reports
         if: always()
