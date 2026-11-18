@@ -1,0 +1,43 @@
+name: Isolated booking email storage capacity
+on:
+  push:
+    branches: [test/isolated-booking-capacity-20261118]
+permissions:
+  contents: read
+jobs:
+  capacity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: capacity_ci
+          POSTGRES_USER: capacity_ci
+          POSTGRES_PASSWORD: disposable_ci_password
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U capacity_ci -d capacity_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/capacity_ci
+      SPRING_DATASOURCE_USERNAME: capacity_ci
+      SPRING_DATASOURCE_PASSWORD: disposable_ci_password
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Measure isolated bookings queue and storage
+        run: mvn -B -Dtest=IsolatedCapacityTest test
+      - name: Preserve measurements and test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: isolated-capacity-reports
+          path: target/surefire-reports/
+          retention-days: 14
