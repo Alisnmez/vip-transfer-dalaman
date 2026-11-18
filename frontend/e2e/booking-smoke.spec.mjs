@@ -59,7 +59,7 @@ async function adminFixture(page, { width = 1280 } = {}) {
   await page.getByLabel('Password', { exact: true }).fill('fixture-only')
   await page.getByRole('button', { name: 'Sign in', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Booking overview' })).toBeVisible()
-  return { requests, booking }
+  return { requests, booking, prices }
 }
 
 test('admin Dashboard renders API counts, refreshes and opens booking details', async ({ page }) => {
@@ -130,9 +130,15 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.goto('http://127.0.0.1:4173/admin/route-prices')
   await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
   await expect(page.getByRole('table')).toHaveCount(0)
-  await adminFixture(page)
+  const { requests } = await adminFixture(page)
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Route Prices', exact: true })).toBeVisible()
+  await expect(page.getByRole('row')).toHaveCount(26)
+  const readsBeforeSearch = requests.filter(r => r.path === '/route-prices').length
+  await page.getByLabel('Search route or vehicle').fill('marmaris')
+  await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
+  expect(requests.filter(r => r.path === '/route-prices').length).toBe(readsBeforeSearch)
+  await page.getByLabel('Search route or vehicle').fill('')
   await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris(Any Hotel)' })
   await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
   await expect(page.getByRole('cell', { name: 'Fethiye', exact: true })).toHaveCount(0)
@@ -150,6 +156,19 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
   await page.getByPlaceholder('Search destinations', { exact: true }).fill('Marmaris(Any Hotel)')
   await expect(page.getByText('£60.25', { exact: true })).toBeVisible()
+})
+
+test('admin stale price edit shows a useful conflict and reloads current prices', async ({ page }) => {
+  const { prices } = await adminFixture(page)
+  await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE TAXI', exact: true }).click()
+  await page.getByLabel('One-way price (GBP)', { exact: true }).fill('55.25')
+  prices[0].version = 0
+  prices[0].oneWay = 60.50
+  await page.getByRole('button', { name: 'Save prices', exact: true }).click()
+  await expect(page.getByRole('alert')).toContainText('changed by another admin')
+  await expect(page.getByRole('form', { name: 'Edit route prices' })).toHaveCount(0)
+  await expect(page.getByRole('cell', { name: '£60.50', exact: true })).toBeVisible()
 })
 
 test('admin mobile navigation opens each menu and signs out', async ({ page }) => {

@@ -18,19 +18,14 @@ function priceLabel(price: number) {
 
 export function RoutesPage() {
   const { prices: transferPrices, loading, error, refresh } = useTransferPrices()
-const destinations = [...new Set(transferPrices.map((price) => price.destination))]
-const startingPrices = destinations.map((destination) => ({
-  destination,
-  from: Math.min(...transferPrices.filter((price) => price.destination === destination).map((price) => price.oneWay)),
-}))
-
-const featuredRoutes = featuredDestinations
-  .map(({ name, slug }) => {
-    const route = startingPrices.find((item) => item.destination.toLowerCase().includes(name.toLowerCase()))
-    return route ? { ...route, slug } : null
-  })
-  .filter((route): route is NonNullable<typeof route> => route !== null)
-
+  const featuredRoutes = useMemo(() => {
+    const minimums = new Map<string, number>()
+    for (const price of transferPrices) minimums.set(price.destination, Math.min(minimums.get(price.destination) ?? Infinity, price.oneWay))
+    return featuredDestinations.map(({ name, slug }) => {
+      const match = [...minimums].find(([destination]) => destination.toLowerCase().includes(name.toLowerCase()))
+      return match ? { destination: match[0], from: match[1], slug } : null
+    }).filter((route): route is NonNullable<typeof route> => route !== null)
+  }, [transferPrices])
 
   const [search, setSearch] = useState('')
   const [selectedVehicle, setSelectedVehicle] = useState('taxi')

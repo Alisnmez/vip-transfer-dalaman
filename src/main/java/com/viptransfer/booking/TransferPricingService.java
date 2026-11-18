@@ -51,11 +51,15 @@ public class TransferPricingService {
             String destination = entry.path("destination").asText();
             String vehicleId = entry.path("vehicleId").asText();
             RoutePrice row = overrides.get(destination + "\u0000" + vehicleId);
-            boolean completeOverride = row != null && "GBP".equals(row.currency) && row.roundTripPrice != null;
+            boolean completeOverride = isUsableOverride(row);
             result.add(new PublishedPrice(destination, vehicleId, completeOverride ? row.price : entry.path("oneWay").decimalValue(),
                 completeOverride ? row.roundTripPrice : entry.path("roundTrip").decimalValue(), row == null ? -1 : row.version));
         }
         return result;
+    }
+
+    private boolean isUsableOverride(RoutePrice row) {
+        return row != null && "GBP".equals(row.currency) && row.roundTripPrice != null;
     }
 
     public void validateLuggageCapacity(String vehicleId, Integer luggageCount) {
@@ -107,9 +111,11 @@ public class TransferPricingService {
         } else {
             throw new IllegalArgumentException("Only airport routes are currently priced.");
         }
-        for (PublishedPrice entry : publishedPrices()) {
-            if (pricedDestination.equals(entry.destination()) && vehicleId.equals(entry.vehicleId())) {
-                return "round-trip".equals(tripType) ? entry.roundTrip() : entry.oneWay();
+        for (JsonNode entry : prices) {
+            if (pricedDestination.equals(entry.path("destination").asText()) && vehicleId.equals(entry.path("vehicleId").asText())) {
+                RoutePrice row = repository == null ? null : repository.findByOriginAndDestinationAndVehicleType("Dalaman Airport", pricedDestination, vehicleId).orElse(null);
+                if (isUsableOverride(row)) return "round-trip".equals(tripType) ? row.roundTripPrice : row.price;
+                return entry.path("round-trip".equals(tripType) ? "roundTrip" : "oneWay").decimalValue();
             }
         }
         throw new IllegalArgumentException("No price found for the selected destination and vehicle.");
