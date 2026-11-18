@@ -1,4 +1,4 @@
-import { findTransferPrice } from './pricing.ts'
+import { findTransferPrice, transferVehicles } from './pricing.ts'
 import { bookingVehicles } from './bookingVehicles.ts'
 
 export type TransferSelection = {
@@ -11,7 +11,7 @@ export type TransferSelection = {
   babySeatCount?: number
 }
 
-export function validateTransferSelection(transfer: TransferSelection): string | null {
+export function validateTransferSelection(transfer: TransferSelection, savedVehicleId?: string | null): string | null {
   const airport = 'Dalaman Airport'
   let destination: string | undefined
   if (transfer.pickUpLocation === airport) {
@@ -26,7 +26,10 @@ export function validateTransferSelection(transfer: TransferSelection): string |
     return 'Your route or vehicle is no longer available. Please return to the transfer step.'
   }
 
-  const vehicle = bookingVehicles.find(item => item.id === transfer.vehicleId)
+  // Admin edits may retain the saved legacy category; new choices use the current fleet.
+  const vehicle = savedVehicleId && transfer.vehicleId === savedVehicleId
+    ? transferVehicles.find(item => item.id === savedVehicleId)
+    : bookingVehicles.find(item => item.id === transfer.vehicleId)
   const passengers = transfer.passengerCount
   const luggage = transfer.luggageCount
   const babySeats = transfer.babySeatCount
