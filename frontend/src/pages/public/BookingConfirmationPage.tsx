@@ -1,3 +1,4 @@
+import { bookingVehicles } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
 import { Link } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
@@ -255,7 +256,7 @@ export function BookingConfirmationPage() {
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
-                  value={display(transferVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name)}
+                  value={display(bookingVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name ?? transferVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name)}
                 />
               </div>
             </div>

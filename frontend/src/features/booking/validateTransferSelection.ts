@@ -1,4 +1,5 @@
-import { findTransferPrice, transferVehicles } from './pricing.ts'
+import { findTransferPrice } from './pricing.ts'
+import { bookingVehicles } from './bookingVehicles.ts'
 
 export type TransferSelection = {
   pickUpLocation?: string
@@ -25,7 +26,7 @@ export function validateTransferSelection(transfer: TransferSelection): string |
     return 'Your route or vehicle is no longer available. Please return to the transfer step.'
   }
 
-  const vehicle = transferVehicles.find(item => item.id === transfer.vehicleId)
+  const vehicle = bookingVehicles.find(item => item.id === transfer.vehicleId)
   const passengers = transfer.passengerCount
   const luggage = transfer.luggageCount
   const babySeats = transfer.babySeatCount

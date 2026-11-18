@@ -1,3 +1,4 @@
+import { bookingVehicles } from '../src/features/booking/bookingVehicles.ts'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { validateTransferSelection } from '../src/features/booking/validateTransferSelection.ts'
@@ -39,7 +40,7 @@ const valid = {
   vehicleId: 'vip-minivan',
   tripType: 'one-way',
   passengerCount: 5,
-  luggageCount: 6,
+  luggageCount: 5,
   babySeatCount: 0,
 }
 
@@ -83,8 +84,8 @@ test('passenger, luggage and baby-seat capacity is checked before booking submis
   assert.equal(validateTransferSelection({ ...valid, passengerCount: 4, luggageCount: 5, babySeatCount: 2 }), null)
 })
 
-test('every published vehicle accepts its exact passenger limit and rejects one extra', () => {
-  for (const vehicle of transferVehicles) {
+test('every bookable vehicle accepts its exact passenger limit and rejects one extra', () => {
+  for (const vehicle of bookingVehicles) {
     const route = transferPrices.find(entry => entry.vehicleId === vehicle.id)
     assert.ok(route, 'missing route for ' + vehicle.id)
     const luggage = Math.min(8, vehicle.maxLuggage ?? 8)
@@ -110,5 +111,22 @@ test('fractional, missing and non-finite counts are rejected', () => {
   }
   for (const count of [undefined, 0, -1, 1.5, NaN, Infinity]) {
     assert.ok(validateTransferSelection({ ...valid, passengerCount: count }))
+  }
+})
+
+
+test('the four public fleet categories retain their intended existing fares', () => {
+  assert.deepEqual(bookingVehicles.map(v => [v.name, v.id]), [
+    ['VIP Vito', 'vip-minivan'], ['Ultra VIP Vito', 'maybach'],
+    ['Sprinter', 'minibus-long'], ['Ultra Sprinter', 'vip-minibus'],
+  ])
+  for (const vehicle of bookingVehicles) {
+    for (const destination of new Set(transferPrices.map(row => row.destination))) {
+      assert.ok(findTransferPrice(destination, vehicle.id, 'one-way') > 0)
+      assert.ok(findTransferPrice(destination, vehicle.id, 'round-trip') > 0)
+    }
+  }
+  for (const id of ['taxi', 'premium-vip-minivan', 'maybach-plus', 'minibus', 'vip-minibus-long']) {
+    assert.ok(validateTransferSelection({ ...valid, vehicleId: id }))
   }
 })

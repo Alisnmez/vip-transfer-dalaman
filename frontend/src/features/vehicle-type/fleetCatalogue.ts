@@ -4,6 +4,8 @@
 export const fleetCatalogue = [
   {
     name: 'VIP Vito',
+    bookingVehicleId: 'vip-minivan',
+    maxPassengers: 5,
     passengers: '1–5',
     luggage: 5,
     feature: 'Mercedes-Benz Vito with a standard VIP interior for families and small groups.',
@@ -11,6 +13,8 @@ export const fleetCatalogue = [
   },
   {
     name: 'Ultra VIP Vito',
+    bookingVehicleId: 'maybach',
+    maxPassengers: 4,
     passengers: '1–4',
     luggage: 4,
     feature: 'Mercedes-Benz Vito with a Maybach-style interior and additional privacy.',
@@ -18,6 +22,8 @@ export const fleetCatalogue = [
   },
   {
     name: 'Sprinter',
+    bookingVehicleId: 'minibus-long',
+    maxPassengers: 16,
     passengers: '5–16',
     luggage: 16,
     feature: 'Mercedes-Benz Sprinter minibus with generous space for family and group journeys.',
@@ -25,6 +31,8 @@ export const fleetCatalogue = [
   },
   {
     name: 'Ultra Sprinter',
+    bookingVehicleId: 'vip-minibus',
+    maxPassengers: 9,
     passengers: '7–9',
     luggage: 12,
     feature: 'Mercedes-Benz Sprinter with an upgraded VIP interior for a smaller group travelling in extra comfort.',
