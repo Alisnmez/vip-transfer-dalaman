@@ -1,0 +1,93 @@
+name: Production bounded read-only capacity probe
+
+on:
+  push:
+    branches: [diagnostics/production-readonly-capacity-20261118]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-readonly-capacity
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Bounded GET-only probe (no bookings or email)
+        shell: bash
+        run: |
+          python -u - <<'PY'
+          import concurrent.futures, urllib.request, urllib.error, time, json, statistics, threading, os, math
+          from datetime import datetime, timezone
+          URL = "https://dalamanway-api-prod.onrender.com/reviews"
+          stop = threading.Event()
+          lock = threading.Lock()
+          active = peak = 0
+          def request():
+              global active, peak
+              if stop.is_set(): return None
+              with lock:
+                  active += 1
+                  peak = max(peak, active)
+              started = time.monotonic()
+              status = 0
+              try:
+                  req = urllib.request.Request(URL, headers={"User-Agent": "DalamanWay-authorized-readonly-capacity-test"})
+                  with urllib.request.urlopen(req, timeout=5) as response:
+                      status = response.status
+                      body = response.read()
+                      json.loads(body)
+              except urllib.error.HTTPError as error:
+                  status = error.code
+              except Exception as error:
+                  status = type(error).__name__
+              elapsed = time.monotonic() - started
+              with lock: active -= 1
+              if status != 200 or elapsed > 3: stop.set()
+              return {"status": status, "seconds": elapsed}
+          results = []
+          print("Started UTC:", datetime.now(timezone.utc).isoformat())
+          print("Target:", URL, "GET only; no authentication, database writes or email.")
+          warm = request()
+          print("Warmup:", json.dumps(warm), flush=True)
+          if stop.is_set():
+              print("STOP: warmup failed or exceeded 3 seconds.")
+          else:
+              for concurrency, rate in [(1,2),(5,5),(10,10),(20,20),(30,30)]:
+                  peak = 0
+                  start = time.monotonic()
+                  pending = []
+                  with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
+                      for index in range(rate * 15):
+                          if stop.is_set(): break
+                          delay = start + index / rate - time.monotonic()
+                          if delay > 0: time.sleep(delay)
+                          if stop.is_set(): break
+                          pending.append(pool.submit(request))
+                      rows = [f.result() for f in pending]
+                  rows = [r for r in rows if r is not None]
+                  times = sorted(r["seconds"] for r in rows)
+                  elapsed = time.monotonic() - start
+                  failures = sum(r["status"] != 200 for r in rows)
+                  row = {"concurrency_limit":concurrency, "target_rps":rate, "actual_peak_inflight":peak,
+                         "requests":len(rows), "errors":failures, "elapsed_seconds":round(elapsed,3),
+                         "achieved_rps":round(len(rows)/elapsed,2),
+                         "median_ms":round(statistics.median(times)*1000,1) if times else None,
+                         "p95_ms":round(times[max(0, math.ceil(len(times)*.95)-1)]*1000,1) if times else None,
+                         "max_ms":round(max(times)*1000,1) if times else None,
+                         "statuses":{str(s):sum(r["status"]==s for r in rows) for s in set(r["status"] for r in rows)}}
+                  results.append(row)
+                  print("STAGE", json.dumps(row), flush=True)
+                  if stop.is_set() or failures or (row["p95_ms"] or 0) > 1500:
+                      print("STOP: failure, >3s individual response, or p95 >1500ms.", flush=True)
+                      break
+          print("Finished UTC:", datetime.now(timezone.utc).isoformat())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as report:
+              report.write("# Bounded production GET-only probe\n\n")
+              report.write("Endpoint: /reviews. This does not measure booking writes, email delivery, page rendering, or maximum user capacity. No secrets used.\n\n")
+              report.write("```json\n"+json.dumps({"warmup":warm,"stages":results},indent=2)+"\n```\n")
+          PY
