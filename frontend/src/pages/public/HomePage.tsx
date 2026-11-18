@@ -206,6 +206,15 @@ export function HomePage() {
                 decoding="async"
                 src="https://commons.wikimedia.org/wiki/Special:FilePath/%C3%96l%C3%BCdeniz%2C_Blue_Lagoon.jpg?width=1200"
               />
+              <details className="absolute right-3 top-3 z-10 text-xs text-white">
+                <summary aria-label="Ölüdeniz photo credits" title="Photo credits" className="flex h-8 w-8 cursor-pointer list-none items-center justify-center rounded-full bg-primary/80 text-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
+                  <span aria-hidden="true">ⓘ</span>
+                </summary>
+                <div className="absolute right-0 mt-2 w-48 rounded-lg bg-primary p-3 shadow-lg">
+                  <p>Photo: <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a></p>
+                  <a className="mt-2 inline-block underline" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+                </div>
+              </details>
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">Oludeniz</h3>
@@ -213,9 +222,6 @@ export function HomePage() {
               </div>
             </div>
           </div>
-          <p className="mt-3 text-xs text-on-surface-variant text-right">
-            Ölüdeniz photo: <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a> (CC BY-SA 4.0).
-          </p>
         </div>
       </section>
 
