@@ -29,8 +29,10 @@ export type ReviewSubmission = {
   publicationConsent: boolean
 }
 
-export function getPublishedReviews() {
-  return request<PublicReview[]>(REVIEW_URL)
+export type ReviewPage<T> = { content: T[]; number: number; totalPages: number; totalElements: number }
+
+export function getPublishedReviews(page = 0) {
+  return request<ReviewPage<PublicReview>>(`${REVIEW_URL}?page=${page}&size=10`)
 }
 
 export function submitReview(review: ReviewSubmission) {
@@ -40,8 +42,8 @@ export function submitReview(review: ReviewSubmission) {
   })
 }
 
-export function getPendingReviews(status: ReviewStatus = 'PENDING') {
-  return request<PendingReview[]>(`${REVIEW_URL}/moderation?status=${encodeURIComponent(status)}`, undefined, true)
+export function getPendingReviews(status: ReviewStatus = 'PENDING', page = 0) {
+  return request<ReviewPage<PendingReview>>(`${REVIEW_URL}/moderation?status=${encodeURIComponent(status)}&page=${page}&size=10`, undefined, true)
 }
 
 export function moderateReview(id: number, status: 'APPROVED' | 'REJECTED' | 'ARCHIVED') {
