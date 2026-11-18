@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 
 const catalogue = JSON.parse(readFileSync(new URL('../../src/main/resources/transfer-prices.json', import.meta.url), 'utf8')).map(item => ({ ...item, version: -1 }))
 test.beforeEach(async ({ page }) => {
-  await page.route('**/route-prices', route => route.request().method() === 'GET'
+  await page.route('**/route-prices', route => route.request().method() === 'GET' && !route.request().isNavigationRequest()
     ? route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalogue) })
     : route.continue())
 })
