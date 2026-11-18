@@ -57,7 +57,7 @@ test('staging landing pages keep noindex and do not advertise canonical URLs', a
 test('production landing pages have distinct initial HTML metadata', async () => {
   const home = await run('https://example.com', '')
   const routes = await run('https://example.com', 'routes')
-  assert.match(home, /<title>Dalaman Airport Transfers \| VIP Transfer Dalaman<\/title>/)
+  assert.match(home, /<title>Dalaman Airport Transfers \| DalamanWay<\/title>/)
   assert.match(home, /rel="canonical" href="https:\/\/example.com\/"/)
   assert.match(routes, /rel="canonical" href="https:\/\/example.com\/routes"/)
   assert.match(routes, /href="\/routes\/fethiye"/)
