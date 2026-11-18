@@ -44,7 +44,7 @@ public class GmailGateway implements EmailGateway {
         try {
             Map<?, ?> data = json.readValue(payload, Map.class);
             var message = sender.createMimeMessage();
-            var helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+            var helper = new MimeMessageHelper(message, data.get("html") instanceof String html && !html.isBlank(), StandardCharsets.UTF_8.name());
             // Enforce authenticated identity rather than accepting an arbitrary From from old queue entries.
             helper.setFrom(ACCOUNT, "DalamanWay");
             var recipients = (java.util.List<?>) data.get("to");
