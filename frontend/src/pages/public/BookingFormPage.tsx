@@ -682,7 +682,7 @@ function BookingFooter() {
   return (
     <footer className="w-full py-8 bg-slate-200 border-t border-outline-variant mt-12">
       <div className="max-w-7xl mx-auto px-margin-page flex flex-col gap-2">
-        <p className="font-title-md text-label-md font-bold text-admin-primary">DalamanWay</p>
+        <img src="/dalamanway-logo.svg" alt="DalamanWay — Private Airport Transfers" className="h-12 w-auto max-w-[240px] object-contain" />
         <p className="font-body-md text-body-sm text-on-surface-variant">
           Private airport transfer booking requests for Dalaman and nearby destinations.
         </p>
