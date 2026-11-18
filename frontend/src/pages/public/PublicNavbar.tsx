@@ -19,7 +19,7 @@ export function PublicNavbar() {
     <header className="fixed left-0 top-0 z-50 h-20 w-full border-b border-outline-variant bg-white shadow-sm">
       <div className="mx-auto flex h-full max-w-container-max items-center justify-between gap-3 px-4 sm:px-gutter">
         <Link className="min-w-0 text-lg font-bold leading-tight tracking-tight text-admin-primary sm:text-2xl" onClick={() => setMenuOpen(false)} to="/">
-          <img src="/dalamanway-logo.svg" alt="DalamanWay — Private Airport Transfers" className="h-10 w-auto max-w-[190px] object-contain sm:h-12 sm:max-w-[240px]" />
+          <img src="/dalamanway-logo.svg" alt="DalamanWay — Private Airport Transfers" className="h-10 w-auto max-w-full object-contain sm:h-12 sm:max-w-[240px]" />
         </Link>
 
         <nav aria-label={copy.main} className="hidden min-w-0 items-center justify-center gap-3 2xl:gap-5 2xl:flex">
@@ -43,7 +43,7 @@ export function PublicNavbar() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           {import.meta.env.VITE_LOCALIZATION_PREVIEW === 'true' && (
-            <select aria-label={copy.language} className="h-11 rounded-lg border border-slate-200 bg-white px-2 text-sm font-semibold text-admin-primary" value={language} onChange={event => setLanguage(parseLanguage(event.target.value))}>
+            <select aria-label={copy.language} className="h-11 max-w-28 rounded-lg border border-slate-200 bg-white px-2 text-sm font-semibold text-admin-primary" value={language} onChange={event => setLanguage(parseLanguage(event.target.value))}>
               {Object.entries(languages).map(([code, name]) => <option key={code} value={code} lang={code}>{name}</option>)}
             </select>
           )}

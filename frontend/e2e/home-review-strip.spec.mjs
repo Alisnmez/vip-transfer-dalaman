@@ -7,7 +7,7 @@ const reviews = [
 ]
 
 test('homepage review strip scrolls and preserves original review text', async ({ page }) => {
-  await page.setViewportSize({ width: 390, height: 844 })
+  await page.setViewportSize({ width: 320, height: 844 })
   await page.emulateMedia({ reducedMotion: 'no-preference' })
   let published = reviews
   await page.route('**/reviews?page=0&size=10', route => route.fulfill({
@@ -19,6 +19,9 @@ test('homepage review strip scrolls and preserves original review text', async (
   const section = page.getByRole('region', { name: 'Customer Reviews' })
   const track = section.locator('.home-review-track')
   await expect(section).toBeVisible()
+  await expect.poll(() => page.evaluate(() =>
+    document.documentElement.scrollWidth <= window.innerWidth,
+  )).toBe(true)
   await expect(section.locator('.home-review-group:not([aria-hidden]) [translate=no]')).toHaveText(
     reviews.flatMap(({ name, comment }) => [name, comment]),
   )
