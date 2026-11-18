@@ -267,7 +267,7 @@ public class BookingService {
         }
         boolean allowed = switch (current) {
             case "PENDING" -> "CONFIRMED".equals(status) || "CANCELLED".equals(status);
-            case "CONFIRMED" -> "COMPLETED".equals(status) || "CANCELLED".equals(status);
+            case "CONFIRMED" -> "PENDING".equals(status) || "COMPLETED".equals(status) || "CANCELLED".equals(status);
             case "COMPLETED" -> "CONFIRMED".equals(status) || "PENDING".equals(status);
             default -> false;
         };
