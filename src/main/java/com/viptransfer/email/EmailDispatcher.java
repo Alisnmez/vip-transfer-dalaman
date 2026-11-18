@@ -34,6 +34,7 @@ public class EmailDispatcher {
             try {
                 String providerId = gateway.send(pending.id().toString(), pending.payload());
                 jdbc.update("UPDATE booking_email_outbox SET status='ACCEPTED', provider_message_id=?, last_error=null WHERE id=?", providerId, pending.id());
+                log.info("Booking email event {} accepted by email provider", pending.id());
             } catch (EmailGateway.DeliveryFailure failure) {
                 int attempt = pending.attempts() + 1;
                 if (!failure.retryable || attempt >= 6) fail(pending, failure.getMessage());
@@ -42,6 +43,10 @@ public class EmailDispatcher {
                             Timestamp.from(Instant.now().plusSeconds(60L << (attempt - 1))), failure.getMessage(), pending.id());
                     log.warn("Booking email event {} will retry ({})", pending.id(), failure.getMessage());
                 }
+            } catch (RuntimeException unexpected) {
+                // The SMTP send outcome may be unknown; never retry automatically.
+                fail(pending, "DISPATCH_UNEXPECTED");
+                log.error("Booking email event {} encountered unexpected delivery error", pending.id(), unexpected);
             }
         }
     }
