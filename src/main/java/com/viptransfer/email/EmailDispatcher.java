@@ -4,6 +4,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
+import java.util.concurrent.TimeUnit;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.slf4j.Logger;
@@ -20,14 +22,26 @@ public class EmailDispatcher {
     private final JdbcTemplate jdbc;
     private final EmailGateway gateway;
     private final TransactionTemplate transactions;
+    private final int batchSize;
+    private final long maxRunNanos;
 
-    public EmailDispatcher(JdbcTemplate jdbc, EmailGateway gateway, PlatformTransactionManager manager) {
+    public EmailDispatcher(JdbcTemplate jdbc, EmailGateway gateway, PlatformTransactionManager manager,
+                           @Value("${app.email.batch-size:20}") int batchSize,
+                           @Value("${app.email.max-run-ms:5000}") long maxRunMs) {
+        if (batchSize < 1 || batchSize > 100) throw new IllegalArgumentException("Email batch size must be between 1 and 100.");
+        if (maxRunMs < 1 || maxRunMs > 30000) throw new IllegalArgumentException("Email dispatch budget must be between 1 and 30000 ms.");
         this.jdbc = jdbc; this.gateway = gateway; this.transactions = new TransactionTemplate(manager);
+        this.batchSize = batchSize; this.maxRunNanos = TimeUnit.MILLISECONDS.toNanos(maxRunMs);
+        log.info("Email dispatcher configured: batch={}, work budget={}ms", batchSize, maxRunMs);
     }
 
-    @Scheduled(fixedDelayString = "${app.email.poll-ms:15000}", initialDelayString = "${app.email.initial-delay-ms:15000}")
-    public void dispatch() {
-        for (int i = 0; i < 5; i++) {
+    @Scheduled(fixedDelayString = "${app.email.poll-ms:2000}", initialDelayString = "${app.email.initial-delay-ms:15000}")
+    public synchronized void dispatch() {
+        // One local worker, bounded work and one committed claim at a time.
+        // Finish an in-flight send even if the budget expires; never abandon an uncertain SMTP outcome.
+        long started = System.nanoTime();
+        for (int i = 0; i < batchSize && System.nanoTime() - started < maxRunNanos; i++) {
+            if (Thread.currentThread().isInterrupted()) break;
             Pending pending = transactions.execute(transaction -> claimOne());
             if (pending == null) break;
             if (!pending.expires().isAfter(Instant.now())) { fail(pending, "EXPIRED"); continue; }
