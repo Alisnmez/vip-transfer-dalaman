@@ -107,8 +107,8 @@ export function DashboardPage() {
   const [showAlert, setShowAlert] = useState(true)
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-6 min-w-0">
+      <div role="status" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950">\n        <strong>Demo dashboard:</strong> The figures, reservations, revenue chart and calendar below are illustrative, not live business data. Do not use them for operational or financial decisions.\n      </div>\n      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h2 className="font-title-lg text-title-lg text-on-surface">
             Good Morning, Ali 👋
