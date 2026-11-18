@@ -24,6 +24,7 @@ class BookingAdminUpdateTest {
     private BookingRepository repository;
     private TransferPricingService pricing;
     private BookingService service;
+    private com.viptransfer.email.BookingEmails bookingEmails;
     private Booking booking;
     private BookingRequestDto request;
 
@@ -31,8 +32,9 @@ class BookingAdminUpdateTest {
     void setUp() {
         repository = mock(BookingRepository.class);
         pricing = mock(TransferPricingService.class);
+        bookingEmails = mock(com.viptransfer.email.BookingEmails.class);
         service = new BookingService(repository, pricing, new ObjectMapper(),
-                mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
+                mock(PlatformTransactionManager.class), bookingEmails);
         booking = new Booking();
         booking.setId(10L);
         booking.setStatus("CONFIRMED");
