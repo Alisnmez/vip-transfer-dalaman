@@ -299,7 +299,7 @@ export function BookingFormPage() {
 
                     return (
                       <button
-                        className={`relative text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
+                        className={`relative min-w-0 text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
                           isSelected
                             ? 'border-2 border-admin-primary bg-primary-fixed/20'
                             : 'border border-outline-variant hover:border-admin-primary bg-white'
@@ -309,8 +309,8 @@ export function BookingFormPage() {
                         type="button"
                         aria-pressed={isSelected}
                       >
-                        <div className="h-32 mb-4 bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
-                          <span translate="no" className="material-symbols-outlined text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
+                        <div className="h-32 mb-4 min-w-0 overflow-hidden bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
+                          <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
                           <span className="text-xs text-slate-500">Vehicle category</span>
                         </div>
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
