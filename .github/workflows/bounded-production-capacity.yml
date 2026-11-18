@@ -39,17 +39,17 @@ jobs:
           print("BASELINE " + json.dumps(baseline), flush=True)
           if not baseline["ok"] or baseline["seconds"] > 1:
               raise SystemExit("Baseline failed or slow; no load applied")
-          for rate in [1, 2, 5, 10]:
+          for rate in [10, 25, 50]:
               results, skipped = [], 0
               start = time.perf_counter()
-              with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+              with concurrent.futures.ThreadPoolExecutor(max_workers=20) as pool:
                   futures = []
-                  for i in range(rate * 15):
+                  for i in range(rate * 30):
                       if stop.is_set(): break
                       delay = start + i / rate - time.perf_counter()
                       if delay > 0: time.sleep(delay)
                       if stop.is_set(): break
-                      if sum(not f.done() for f in futures) >= 10:
+                      if sum(not f.done() for f in futures) >= 20:
                           skipped += 1
                           stop.set()
                           break
@@ -72,7 +72,7 @@ jobs:
               time.sleep(3)
           with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
               f.write("# Bounded read capacity probe\n\n")
-              f.write("Endpoint: GET /reviews; production; no writes or email. Maximum 10 requests/second and 10 in flight. 15 seconds per stage.\n\n")
+              f.write("Endpoint: GET /reviews; production; no writes or email. Maximum 50 requests/second and 20 in flight. 30 seconds per stage.\n\n")
               f.write("|Target RPS|Requests|Achieved RPS|p95 ms|Errors|\n|---|---|---|---|---|\n")
               for r in rows:
                   f.write(f'|{r["target_rps"]}|{r["requests"]}|{r["achieved_rps"]}|{r["p95_ms"]}|{r["errors"]}|\n')
