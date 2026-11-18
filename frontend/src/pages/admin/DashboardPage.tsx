@@ -162,7 +162,7 @@ export function DashboardPage() {
         </button>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {kpiCards.map((card) => (
           <div className={card.cardClass} key={card.label}>
             <p className="text-on-surface-variant font-label-sm mb-1 uppercase tracking-wider opacity-60">
@@ -192,9 +192,9 @@ export function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 glass-card rounded-xl flex flex-col overflow-hidden">
-          <div className="p-5 border-b border-outline-variant flex items-center justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 min-w-0">
+        <div className="lg:col-span-2 min-w-0 glass-card rounded-xl flex flex-col overflow-hidden">
+          <div className="p-4 sm:p-5 border-b border-outline-variant flex flex-wrap items-center justify-between gap-2">
             <h4 className="font-title-md text-title-md">
               Today's Operational Timeline
             </h4>
@@ -205,7 +205,7 @@ export function DashboardPage() {
             </button>
           </div>
 
-          <div className="p-6 overflow-y-auto max-h-[400px] custom-scrollbar">
+          <div className="p-4 sm:p-6 overflow-y-auto max-h-[400px] custom-scrollbar">
             <div className="relative space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-px before:bg-outline-variant">
               <div className="relative pl-10 flex items-start justify-between">
                 <div className="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-status-assigned flex items-center justify-center border-4 border-white shadow-sm" />
@@ -353,16 +353,16 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 glass-card rounded-xl overflow-hidden flex flex-col">
-          <div className="p-5 border-b border-outline-variant flex items-center justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 min-w-0">
+        <div className="lg:col-span-2 min-w-0 glass-card rounded-xl overflow-hidden flex flex-col">
+          <div className="p-4 sm:p-5 border-b border-outline-variant flex flex-wrap items-center justify-between gap-2">
             <h4 className="font-title-md text-title-md">Recent Reservations</h4>
             <button className="text-admin-primary text-label-sm font-bold hover:underline">
               View All
             </button>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-label-sm">
+          <div className="min-w-0 overflow-x-auto">
+            <table className="w-full min-w-[680px] text-left text-label-sm">
               <thead className="bg-surface-container-low text-on-surface-variant uppercase tracking-wider text-[10px] font-bold">
                 <tr>
                   <th className="px-6 py-3">Time</th>
@@ -447,11 +447,11 @@ export function DashboardPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-8">
-        <div className="lg:col-span-2 glass-card rounded-xl p-6 flex flex-col">
-          <div className="flex items-center justify-between mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 min-w-0 pb-8">
+        <div className="lg:col-span-2 min-w-0 glass-card rounded-xl p-6 flex flex-col">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
             <h4 className="font-title-md text-title-md">Revenue Growth</h4>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-2 sm:gap-4">
               <span className="flex items-center gap-2 text-xs">
                 <span className="w-2 h-2 rounded-full bg-admin-primary" />
                 Current Week
