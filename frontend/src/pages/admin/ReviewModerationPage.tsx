@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getPendingReviews, moderateReview, reviewErrorMessage } from '../../features/reviews/api'
 import type { PendingReview, ReviewStatus } from '../../features/reviews/api'
 
@@ -18,32 +18,41 @@ export function ReviewModerationPage() {
   const [busyId, setBusyId] = useState<number | null>(null)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
+  const [revision, setRevision] = useState(0)
 
-  const refresh = useCallback(async () => {
+  function beginLoading() {
     setLoading(true)
     setError('')
-    try {
-      const result = await getPendingReviews(status, page)
-      setReviews(result.content)
-      setTotalPages(result.totalPages)
-    } catch (error) {
-      setError(reviewErrorMessage(error, 'load'))
-    } finally {
-      setLoading(false)
-    }
-  }, [status, page])
+    setReviews([])
+  }
+
+  function refresh() {
+    beginLoading()
+    setRevision(value => value + 1)
+  }
+
+  function changePage(nextPage: number) {
+    beginLoading()
+    setPage(nextPage)
+  }
 
   useEffect(() => {
     let active = true
     getPendingReviews(status, page).then(result => {
-      if (active) { setReviews(result.content); setTotalPages(result.totalPages) }
+      if (!active) return
+      // Another admin may have removed the last item while this page was open.
+      if (result.content.length === 0 && page > 0) {
+        setPage(Math.max(0, Math.min(page - 1, result.totalPages - 1)))
+        return
+      }
+      setReviews(result.content)
+      setTotalPages(result.totalPages)
+      setLoading(false)
     }).catch(error => {
-      if (active) setError(reviewErrorMessage(error, 'load'))
-    }).finally(() => {
-      if (active) setLoading(false)
+      if (active) { setError(reviewErrorMessage(error, 'load')); setLoading(false) }
     })
     return () => { active = false }
-  }, [status, page])
+  }, [status, page, revision])
 
   async function moderate(id: number, nextStatus: 'APPROVED' | 'REJECTED' | 'ARCHIVED') {
     if (busyId !== null) return
@@ -52,8 +61,9 @@ export function ReviewModerationPage() {
     setNotice('')
     try {
       await moderateReview(id, nextStatus)
-      setReviews(current => current.filter(review => review.id !== id))
       setNotice(nextStatus === 'ARCHIVED' ? 'Review archived. You can restore it from Archived.' : nextStatus === 'APPROVED' ? 'Review published.' : 'Review rejected.')
+      if (reviews.length === 1 && page > 0) changePage(page - 1)
+      else refresh()
     } catch (error) {
       setError(reviewErrorMessage(error, 'moderate'))
     } finally {
@@ -65,7 +75,7 @@ export function ReviewModerationPage() {
     <section className="w-full max-w-5xl p-4 sm:p-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <div><h1 className="text-2xl font-bold text-admin-primary">Customer review moderation</h1><p className="text-on-surface-variant">Manage reviews without permanently deleting customer feedback.</p></div>
-        <button type="button" onClick={() => { void refresh() }} disabled={loading || busyId !== null} className="rounded-lg border bg-white px-4 py-2 font-semibold disabled:opacity-50">Refresh</button>
+        <button type="button" onClick={refresh} disabled={loading || busyId !== null} className="rounded-lg border bg-white px-4 py-2 font-semibold disabled:opacity-50">Refresh</button>
       </div>
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter reviews by status">
         {tabs.map(tab => <button key={tab.status} type="button" aria-pressed={status === tab.status} disabled={busyId !== null} onClick={() => { if (tab.status !== status) { setLoading(true); setError(''); setReviews([]); setStatus(tab.status); setPage(0); setNotice('') } }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${status === tab.status ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{tab.label}</button>)}
@@ -89,7 +99,7 @@ export function ReviewModerationPage() {
           </article>
         ))}</div>
       )}
-      {totalPages > 1 && <nav aria-label="Moderation pages" className="mt-6 flex items-center justify-center gap-4"><button type="button" disabled={loading || page === 0} onClick={() => setPage(p => p - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button><span>Page {page + 1} of {totalPages}</span><button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => setPage(p => p + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button></nav>}
+      {totalPages > 1 && <nav aria-label="Moderation pages" className="mt-6 flex items-center justify-center gap-4"><button type="button" disabled={loading || busyId !== null || page === 0} onClick={() => changePage(page - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button><span>Page {page + 1} of {totalPages}</span><button type="button" disabled={loading || busyId !== null || page + 1 >= totalPages} onClick={() => changePage(page + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button></nav>}
     </section>
   )
 }

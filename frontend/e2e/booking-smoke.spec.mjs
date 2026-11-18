@@ -59,7 +59,7 @@ async function adminFixture(page, { width = 1280 } = {}) {
   await page.getByLabel('Password', { exact: true }).fill('fixture-only')
   await page.getByRole('button', { name: 'Sign in', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Booking overview' })).toBeVisible()
-  return { requests, booking, prices }
+  return { requests, booking, prices, reviews }
 }
 
 test('admin Dashboard renders API counts, refreshes and opens booking details', async ({ page }) => {
@@ -126,6 +126,35 @@ test('admin Customer Reviews paginates, publishes, archives and restores', async
   await page.getByRole('button', { name: 'Restore and publish', exact: true }).click()
   await page.getByRole('button', { name: 'Published', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+})
+
+test('admin review pagination hides stale rows while the next page loads', async ({ page }) => {
+  await adminFixture(page)
+  await page.getByRole('link', { name: 'Customer Reviews', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 1', exact: true })).toBeVisible()
+  let release
+  const waiting = new Promise(resolve => { release = resolve })
+  await page.route('**/reviews/moderation?*', async route => {
+    if (new URL(route.request().url()).searchParams.get('page') === '1') await waiting
+    await route.fallback()
+  })
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
+  await expect(page.getByText('Loading reviews...', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Review passenger 1', exact: true })).toHaveCount(0)
+  await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeDisabled()
+  release()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+})
+
+test('admin review refresh recovers when another admin empties the final page', async ({ page }) => {
+  const { reviews } = await adminFixture(page)
+  await page.getByRole('link', { name: 'Customer Reviews', exact: true }).click()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+  reviews[10].status = 'APPROVED'
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 1', exact: true })).toBeVisible()
+  await expect(page.getByRole('navigation', { name: 'Moderation pages', exact: true })).toHaveCount(0)
 })
 
 test('admin Route Prices requires sign-in, filters, saves and publishes edited fares', async ({ page }) => {
