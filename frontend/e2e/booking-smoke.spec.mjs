@@ -344,7 +344,7 @@ test('booking uses the four public fleet categories with their existing fares an
 
 test('admin vehicle editing offers the current fleet and preserves only the saved old category', async ({ page }) => {
   await adminFixture(page)
-  await page.goto('http://127.0.0.1:4173/admin/bookings/901')
+  await page.getByRole('link', { name: /#901.*Menu test passenger/ }).click()
   await page.getByRole('button', { name: 'Edit booking details', exact: true }).click()
   const vehicle = page.getByRole('combobox', { name: 'Vehicle', exact: true })
   await expect(vehicle).toHaveValue('mercedes-vito')
