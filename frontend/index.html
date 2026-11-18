@@ -238,6 +238,12 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+
+      /* Pre-rendered HTML is for crawlers and no-JS fallback; React replaces it on load.
+         Avoid showing its unstyled text for a split second before hydration. */
+      @media (scripting: enabled) {
+        #root > [data-prerender-fallback] { display: none; }
+      }
     </style>
     <title>Dalaman Airport Transfers | Private Transfers | DalamanWay</title>
     <meta name="description" content="Book private Dalaman Airport transfers with DalamanWay. Explore airport transfers to Marmaris, Fethiye, Oludeniz and more." />
