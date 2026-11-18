@@ -683,7 +683,7 @@ function BookingFooter() {
   return (
     <footer className="w-full py-8 bg-slate-200 border-t border-outline-variant mt-12">
       <div className="max-w-7xl mx-auto px-margin-page flex flex-col gap-2">
-        <p className="font-title-md text-label-md font-bold text-admin-primary">VIP Transfer Dalaman</p>
+        <p className="font-title-md text-label-md font-bold text-admin-primary">DalamanWay</p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
           Private airport transfer booking requests for Dalaman and nearby destinations.
         </p>
@@ -694,7 +694,7 @@ function BookingFooter() {
           Contact: <a href="tel:+905555555555" className="underline">0555 555 55 55</a> · <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          © {new Date().getFullYear()} VIP Transfer Dalaman.
+          © {new Date().getFullYear()} DalamanWay.
         </p>
       </div>
     </footer>
