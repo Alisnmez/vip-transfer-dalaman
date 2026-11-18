@@ -140,3 +140,20 @@ export function updateBookingStatus(id: number, status: string) {
   }, true)
 }
 
+
+export type BookingEmailStatus = {
+  id: string
+  bookingId: number
+  eventType: string
+  status: string
+  attempts: number
+  createdAt: string
+  nextAttemptAt: string | null
+  expiresAt: string | null
+  lastError: string | null
+  providerAccepted: boolean
+}
+
+export function getBookingEmailStatuses(id: number) {
+  return request<BookingEmailStatus[]>(`${BOOKING_URL}/${id}/email-status`, undefined, true)
+}
