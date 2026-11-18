@@ -116,6 +116,8 @@ test('admin Customer Reviews paginates, publishes, archives and restores', async
   await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Approve', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('Review published.')
+  await expect(page.getByRole('heading', { name: 'Review passenger 1', exact: true })).toBeVisible()
+  await expect(page.getByText('No pending reviews.', { exact: true })).toHaveCount(0)
   await page.getByRole('button', { name: 'Published', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
   await page.getByRole('button', { name: 'Archive', exact: true }).click()
