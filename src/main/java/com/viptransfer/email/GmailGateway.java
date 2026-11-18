@@ -51,7 +51,9 @@ public class GmailGateway implements EmailGateway {
             helper.setTo((String) recipients.getFirst());
             helper.setReplyTo((String) data.get("reply_to"));
             helper.setSubject((String) data.get("subject"));
-            helper.setText((String) data.get("text"), false);
+            String html = (String) data.get("html");
+            if (html != null && !html.isBlank()) helper.setText((String) data.get("text"), html);
+            else helper.setText((String) data.get("text"), false);
             message.setHeader("X-DalamanWay-Event", eventId);
             sender.send(message);
             return message.getMessageID() == null ? "smtp-" + eventId : message.getMessageID();
