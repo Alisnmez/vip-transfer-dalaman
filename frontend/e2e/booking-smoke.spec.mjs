@@ -1,4 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+
+const catalogue = JSON.parse(readFileSync(new URL('../../src/main/resources/transfer-prices.json', import.meta.url), 'utf8')).map(item => ({ ...item, version: -1 }))
+test.beforeEach(async ({ page }) => {
+  await page.route('**/route-prices', route => route.request().method() === 'GET'
+    ? route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalogue) })
+    : route.continue())
+})
 
 // Exercise the real admin UI against deterministic, disposable API fixtures.
 // PostgreSQL integration tests verify the real API separately.
@@ -12,15 +20,24 @@ async function adminFixture(page, { width = 1280 } = {}) {
   const reviews = Array.from({ length: 11 }, (_, i) => ({ id: i + 1, customerName: `Review passenger ${i + 1}`,
     rating: 5, comment: 'A punctual and comfortable transfer.', createdAt: '2026-11-18T09:00:00Z', status: 'PENDING' }))
   const requests = []
+  const prices = catalogue.map(item => ({ ...item }))
   await page.route('**/*', async route => {
     const req = route.request()
     const url = new URL(req.url())
     const path = url.pathname
-    if (!['/admin/auth-check', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
+    if (!['/route-prices', '/admin/auth-check', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
     if (req.isNavigationRequest()) return route.continue()
     requests.push({ path, search: url.search, method: req.method() })
-    expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
     const reply = body => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) })
+    if (path === '/route-prices' && req.method() === 'GET') return reply(prices)
+    expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+    if (path === '/route-prices') {
+      const edited = req.postDataJSON()
+      const row = prices.find(item => item.destination === edited.destination && item.vehicleId === edited.vehicleId)
+      if (row.version !== edited.version) return route.fulfill({ status: 409, contentType: 'application/json', body: '{}' })
+      Object.assign(row, edited, { version: row.version + 1 })
+      return reply(row)
+    }
     if (path === '/admin/auth-check') return reply({})
     if (path === '/bookings/dashboard') return reply({ total: 1, pending: 1, today: 1, upcoming: [booking] })
     if (path === '/bookings/page') return reply({ content: [booking], totalElements: 1, totalPages: 1, number: 0 })
@@ -109,18 +126,30 @@ test('admin Customer Reviews paginates, publishes, archives and restores', async
   await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
 })
 
-test('admin Route Prices requires sign-in and filters the read-only price list', async ({ page }) => {
+test('admin Route Prices requires sign-in, filters, saves and publishes edited fares', async ({ page }) => {
   await page.goto('http://127.0.0.1:4173/admin/route-prices')
   await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
   await expect(page.getByRole('table')).toHaveCount(0)
   await adminFixture(page)
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Route Prices', exact: true })).toBeVisible()
-  await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris' })
-  await expect(page.getByRole('cell', { name: 'Marmaris', exact: true }).first()).toBeVisible()
+  await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris(Any Hotel)' })
+  await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
   await expect(page.getByRole('cell', { name: 'Fethiye', exact: true })).toHaveCount(0)
+  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'PRIVATE VIP MINIVAN' })
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE VIP MINIVAN', exact: true }).click()
+  await page.getByLabel('One-way price (GBP)', { exact: true }).fill('60.25')
+  await page.getByLabel('Round-trip price (GBP)', { exact: true }).fill('115.50')
+  await page.getByRole('button', { name: 'Save prices', exact: true }).click()
+  await expect(page.getByRole('status')).toContainText('Prices saved for Marmaris')
+  await page.getByRole('button', { name: 'Refresh prices', exact: true }).click()
+  await expect(page.getByRole('cell', { name: '£60.25', exact: true })).toBeVisible()
   await page.getByLabel('Search route or vehicle').fill('no-such-destination')
   await expect(page.getByText('No prices match your filters.')).toBeVisible()
+  await page.goto('http://127.0.0.1:4173/routes')
+  await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
+  await page.getByPlaceholder('Search destinations', { exact: true }).fill('Marmaris(Any Hotel)')
+  await expect(page.getByText('£60.25', { exact: true })).toBeVisible()
 })
 
 test('admin mobile navigation opens each menu and signs out', async ({ page }) => {

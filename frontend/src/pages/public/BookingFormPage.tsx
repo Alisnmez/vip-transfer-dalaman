@@ -5,7 +5,8 @@ import { useEffect, useId, useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
-import { findTransferPrice, transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { turkeyToday } from '../../features/booking/turkeyTime'
 import { destinationGroups } from '../../features/booking/destinationGroups'
 import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
@@ -60,6 +61,7 @@ function readTransferDraft(): TransferDraft {
 }
 
 export function BookingFormPage() {
+  const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   useEffect(() => { trackAnalyticsEvent('booking_started') }, [])
   const [draft] = useState(readTransferDraft)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
@@ -98,6 +100,9 @@ export function BookingFormPage() {
       event.preventDefault()
       setFormError('Please enter pickup, destination, date and time before continuing.')
       return
+    }
+    if (pricesLoading || pricesError) {
+      event.preventDefault(); setFormError(pricesError || 'Please wait while current prices load.'); return
     }
     const scheduleError = validateTransferSchedule({
       pickUpDate, pickUpTime, tripType, returnDate, returnTime,
@@ -174,6 +179,8 @@ export function BookingFormPage() {
 
       <main className="pt-32 pb-20 px-margin-page max-w-7xl mx-auto">
         <BookingStepper activeStep={1} />
+        {pricesLoading && <p role="status">Loading current prices...</p>}
+        {pricesError && <div role="alert">{pricesError} <button type="button" onClick={refreshPrices}>Refresh prices</button></div>}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter-grid items-start">
           <section className="lg:col-span-8 bg-white border border-outline-variant rounded-xl p-8 booking-card">

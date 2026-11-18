@@ -1,14 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { transferVehicles } from '../../features/booking/pricing'
 import { PublicNavbar } from './PublicNavbar'
-
-const destinations = [...new Set(transferPrices.map((price) => price.destination))]
-const startingPrices = destinations.map((destination) => ({
-  destination,
-  from: Math.min(...transferPrices.filter((price) => price.destination === destination).map((price) => price.oneWay)),
-}))
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
 
 const featuredDestinations = [
   { name: 'Marmaris', slug: 'marmaris' },
@@ -17,6 +12,18 @@ const featuredDestinations = [
   { name: 'Gocek', slug: 'gocek' },
   { name: 'Icmeler', slug: 'icmeler' },
 ]
+function priceLabel(price: number) {
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2 }).format(price)
+}
+
+export function RoutesPage() {
+  const { prices: transferPrices, loading, error, refresh } = useTransferPrices()
+const destinations = [...new Set(transferPrices.map((price) => price.destination))]
+const startingPrices = destinations.map((destination) => ({
+  destination,
+  from: Math.min(...transferPrices.filter((price) => price.destination === destination).map((price) => price.oneWay)),
+}))
+
 const featuredRoutes = featuredDestinations
   .map(({ name, slug }) => {
     const route = startingPrices.find((item) => item.destination.toLowerCase().includes(name.toLowerCase()))
@@ -24,11 +31,7 @@ const featuredRoutes = featuredDestinations
   })
   .filter((route): route is NonNullable<typeof route> => route !== null)
 
-function priceLabel(price: number) {
-  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2 }).format(price)
-}
 
-export function RoutesPage() {
   const [search, setSearch] = useState('')
   const [selectedVehicle, setSelectedVehicle] = useState('taxi')
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
@@ -38,12 +41,14 @@ export function RoutesPage() {
     return transferPrices
       .filter((route) => route.vehicleId === selectedVehicle && route.destination.toLocaleLowerCase('en').includes(query))
       .sort((a, b) => a.destination.localeCompare(b.destination))
-  }, [search, selectedVehicle])
+  }, [search, selectedVehicle, transferPrices])
 
   return (
     <div className="min-h-screen bg-background text-on-surface">
       <PublicNavbar />
       <main>
+        {loading && <p role="status" className="pt-24 px-4">Loading current prices...</p>}
+        {error && <div role="alert" className="pt-24 px-4">{error} <button type="button" onClick={refresh}>Refresh prices</button></div>}
         <section className="relative overflow-hidden bg-admin-primary px-4 pb-16 pt-32 text-white sm:px-8 sm:pb-20 sm:pt-40">
           <div className="pointer-events-none absolute -right-28 -top-24 h-80 w-80 rounded-full border border-white/10" />
           <div className="pointer-events-none absolute -bottom-52 right-12 h-96 w-96 rounded-full border border-white/10" />
@@ -112,7 +117,7 @@ export function RoutesPage() {
                 </label>
                 <label className="space-y-2 text-sm font-semibold text-admin-primary">
                   <span className="block">Vehicle</span>
-                  <select className="min-h-12 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-4 text-base font-normal text-on-surface" onChange={(event) => setSelectedVehicle(event.target.value)} value={selectedVehicle}>
+                  <select aria-label="Vehicle" className="min-h-12 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-4 text-base font-normal text-on-surface" onChange={(event) => setSelectedVehicle(event.target.value)} value={selectedVehicle}>
                     {transferVehicles.map((vehicle) => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
                   </select>
                 </label>

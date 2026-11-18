@@ -9,6 +9,7 @@ import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '
 import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { validateAdminSchedule } from '../../features/booking/validateAdminSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
@@ -23,6 +24,7 @@ const nextStatuses: Record<string, string[]> = {
 
 export function BookingDetailPage() {
   const { bookingId } = useParams()
+  const { prices: currentPrices } = useTransferPrices()
   const id = Number(bookingId)
   const [booking, setBooking] = useState<Booking | null>(null)
   const [emailStatuses, setEmailStatuses] = useState<BookingEmailStatus[] | null>(null)
@@ -87,7 +89,7 @@ export function BookingDetailPage() {
   const destination = draft ? (draft.pickUpLocation === airport ? draft.dropOffLocation : draft.pickUpLocation) : ''
   const routeValid = !!draft && (draft.pickUpLocation === airport) !== (draft.dropOffLocation === airport)
   const selectedPrice = draft && routeValid
-    ? transferPrices.find(price => price.destination === destination && price.vehicleId === draft.vehicleId)
+    ? currentPrices.find(price => price.destination === destination && price.vehicleId === draft.vehicleId)
     : undefined
   const capacityValid = !!draft && validateTransferSelection(draft) === null
   const previewFare = selectedPrice && draft && capacityValid

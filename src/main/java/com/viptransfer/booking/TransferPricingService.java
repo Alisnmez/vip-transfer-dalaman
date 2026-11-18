@@ -4,6 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.viptransfer.pricing.RoutePriceRepository;
+import com.viptransfer.pricing.RoutePrice;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,11 +20,42 @@ import java.math.BigDecimal;
 public class TransferPricingService {
 
     private final JsonNode prices;
+    private final RoutePriceRepository repository;
+
+    public record PublishedPrice(String destination, String vehicleId, BigDecimal oneWay, BigDecimal roundTrip, long version) {}
 
     public TransferPricingService(ObjectMapper objectMapper) throws IOException {
+        this(objectMapper, null);
+    }
+
+    @Autowired
+    public TransferPricingService(ObjectMapper objectMapper, RoutePriceRepository repository) throws IOException {
+        this.repository = repository;
         try (InputStream input = new ClassPathResource("transfer-prices.json").getInputStream()) {
             this.prices = objectMapper.readTree(input);
         }
+    }
+
+    public boolean isPublishedRoute(String destination, String vehicleId) {
+        for (JsonNode entry : prices) {
+            if (entry.path("destination").asText().equals(destination) && entry.path("vehicleId").asText().equals(vehicleId)) return true;
+        }
+        return false;
+    }
+
+    public List<PublishedPrice> publishedPrices() {
+        Map<String, RoutePrice> overrides = repository == null ? Map.of() : repository.findByOrigin("Dalaman Airport").stream()
+            .collect(Collectors.toMap(row -> row.destination + "\u0000" + row.vehicleType, row -> row));
+        List<PublishedPrice> result = new ArrayList<>();
+        for (JsonNode entry : prices) {
+            String destination = entry.path("destination").asText();
+            String vehicleId = entry.path("vehicleId").asText();
+            RoutePrice row = overrides.get(destination + "\u0000" + vehicleId);
+            boolean completeOverride = row != null && "GBP".equals(row.currency) && row.roundTripPrice != null;
+            result.add(new PublishedPrice(destination, vehicleId, completeOverride ? row.price : entry.path("oneWay").decimalValue(),
+                completeOverride ? row.roundTripPrice : entry.path("roundTrip").decimalValue(), row == null ? -1 : row.version));
+        }
+        return result;
     }
 
     public void validateLuggageCapacity(String vehicleId, Integer luggageCount) {
@@ -69,11 +107,9 @@ public class TransferPricingService {
         } else {
             throw new IllegalArgumentException("Only airport routes are currently priced.");
         }
-        for (JsonNode entry : prices) {
-            if (pricedDestination.equals(entry.path("destination").asText())
-                    && vehicleId.equals(entry.path("vehicleId").asText())) {
-                String field = "round-trip".equals(tripType) ? "roundTrip" : "oneWay";
-                return entry.path(field).decimalValue();
+        for (PublishedPrice entry : publishedPrices()) {
+            if (pricedDestination.equals(entry.destination()) && vehicleId.equals(entry.vehicleId())) {
+                return "round-trip".equals(tripType) ? entry.roundTrip() : entry.oneWay();
             }
         }
         throw new IllegalArgumentException("No price found for the selected destination and vehicle.");

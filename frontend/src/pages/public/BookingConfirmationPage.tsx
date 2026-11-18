@@ -8,7 +8,8 @@ import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError, bookingErrorMessage } from '../../features/booking/api/errors'
-import { findTransferPrice, transferVehicles } from '../../features/booking/pricing'
+import { transferVehicles } from '../../features/booking/pricing'
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
 import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
 import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
@@ -36,6 +37,7 @@ function readSavedDetails<T>(key: string): T {
 
 
 export function BookingConfirmationPage() {
+  const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   const [confirmed, setConfirmed] = useState(false)
   const { processing, run } = useAsyncAction()
   const [receipt, setReceipt] = useState<BookingReceipt | null>(readReceipt)
@@ -57,7 +59,7 @@ export function BookingConfirmationPage() {
   const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
 
   function handleConfirm() {
-    if (!confirmed || receipt !== null) return
+    if (!confirmed || receipt !== null || pricesLoading || pricesError || catalogPrice === null) return
     void run(async () => {
     setError('')
     setSubmissionUncertain(false)
@@ -146,6 +148,8 @@ export function BookingConfirmationPage() {
       <PublicNavbar />
 
       <main className="pt-32 pb-24 px-margin-page max-w-6xl mx-auto">
+        {receipt === null && pricesLoading && <p role="status">Loading current prices...</p>}
+        {receipt === null && pricesError && <div role="alert">{pricesError} <button type="button" onClick={refreshPrices}>Refresh prices</button></div>}
         {receipt !== null ? (
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
@@ -340,7 +344,7 @@ export function BookingConfirmationPage() {
               processing={processing}
               processingLabel="PROCESSING..."
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!confirmed || processing || receipt !== null}
+              disabled={!confirmed || processing || receipt !== null || pricesLoading || !!pricesError || catalogPrice === null}
               onClick={handleConfirm}
               type="button"
             >
