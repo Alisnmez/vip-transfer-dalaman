@@ -22,8 +22,8 @@ export function AdminLayout() {
 
   return (
     <div className="bg-admin-background text-admin-on-surface min-h-screen">
-      <aside className="h-full w-64 fixed left-0 top-0 bg-admin-primary flex flex-col py-6 px-4 shadow-md z-50">
-        <div className="mb-10 px-2">
+      <aside className="w-full lg:w-64 lg:h-full lg:fixed lg:left-0 lg:top-0 bg-admin-primary flex flex-col py-3 lg:py-6 px-3 lg:px-4 shadow-md z-50">
+        <div className="mb-3 lg:mb-10 px-2">
           <h1 className="text-title-lg font-title-lg text-primary-fixed">
             VIP Transfer
           </h1>
@@ -32,7 +32,7 @@ export function AdminLayout() {
           </p>
         </div>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="flex lg:block gap-1 overflow-x-auto lg:overflow-visible lg:space-y-1 pb-1 lg:pb-0" aria-label="Admin navigation">
           {navItems.map((item) => (
             <NavLink
               key={`${item.to}-${item.label}`}
@@ -40,7 +40,7 @@ export function AdminLayout() {
               end={item.end}
               className={({ isActive }) =>
                 [
-                  'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
+                  'shrink-0 flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2 lg:py-3 rounded-lg transition-colors whitespace-nowrap',
                   isActive
                     ? 'text-primary-fixed-dim font-bold bg-primary-container/30'
                     : 'text-on-primary-container hover:text-primary-fixed-dim hover:bg-primary-container/20',
@@ -53,7 +53,7 @@ export function AdminLayout() {
           ))}
         </nav>
 
-        <div className="mt-auto border-t border-primary-container/30 pt-6 space-y-1">
+        <div className="hidden lg:block mt-auto border-t border-primary-container/30 pt-6 space-y-1">
           <button className="w-full bg-secondary-fixed text-on-secondary-fixed py-2 px-4 rounded-lg font-label-sm text-label-sm mb-4 hover:opacity-90 transition-opacity">
             New Booking
           </button>
@@ -73,12 +73,12 @@ export function AdminLayout() {
       <main
         className={
           usesCustomPageChrome
-            ? 'ml-64 h-screen flex flex-col overflow-hidden'
-            : 'ml-64 min-h-screen flex flex-col'
+            ? 'lg:ml-64 min-h-screen lg:h-screen flex flex-col lg:overflow-hidden min-w-0'
+            : 'lg:ml-64 min-h-screen flex flex-col min-w-0'
         }
       >
         {!usesCustomPageChrome && (
-          <header className="h-16 w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-8">
+          <header className="hidden lg:flex h-16 w-full sticky top-0 z-40 bg-surface-container-lowest border-b border-outline-variant items-center justify-between px-8">
           <div className="flex items-center gap-4 flex-1">
             <span className="font-title-lg text-title-lg text-admin-primary">
               Operations Hub
@@ -125,7 +125,7 @@ export function AdminLayout() {
         <Outlet />
 
         {!usesCustomPageChrome && (
-          <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-8">
+          <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant hidden lg:flex justify-between items-center px-8">
           <div className="text-label-sm text-on-surface-variant">
             © 2024 VIP Transfer Systems. All rights reserved.
           </div>
