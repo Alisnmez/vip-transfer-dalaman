@@ -16,10 +16,10 @@ export function RouteDetailPage() {
   const available = route ? transferPrices.some((price) => price.destination.toLowerCase().includes(route.match.toLowerCase())) : false
 
   if (!route || !available) {
-    return <><title>Route not available | VIP Transfer Dalaman</title><meta name="robots" content="noindex,nofollow" /><PublicNavbar /><main className="mx-auto max-w-4xl px-6 pb-20 pt-36"><h1 className="text-3xl font-bold">Route not available</h1><Link className="mt-6 inline-block underline" to="/routes">See available routes</Link></main></>
+    return <><title>Route not available | DalamanWay</title><meta name="robots" content="noindex,nofollow" /><PublicNavbar /><main className="mx-auto max-w-4xl px-6 pb-20 pt-36"><h1 className="text-3xl font-bold">Route not available</h1><Link className="mt-6 inline-block underline" to="/routes">See available routes</Link></main></>
   }
 
-  const title = `Dalaman Airport to ${route.name} Private Transfer | VIP Transfer Dalaman`
+  const title = `Dalaman Airport to ${route.name} Private Transfer | DalamanWay`
   const description = `Plan a private Dalaman Airport to ${route.name} transfer. Compare available vehicles and request a one-way or return journey.`
 
   return (
