@@ -56,7 +56,7 @@ public class BookingEmails {
         enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (#" + booking.getId() + ")", text, customerHtml(booking, event, description));
         if (settings.operator() != null && !settings.operator().isBlank()) {
             enqueue(booking.getId(), event, settings.operator(), "[Operator] DalamanWay #" + booking.getId() + " — " + event,
-                    description + "\n\n" + details + "\nReview details in the admin panel: https://dalamanway.com/admin/bookings/" + booking.getId());
+                    description + "\n\n" + details + "\nReview details in the admin panel: https://dalamanway.com/admin/bookings/" + booking.getId(), null);
         }
     }
 
