@@ -99,8 +99,8 @@ export function BookingListPage() {
   const visibleBookings = bookings.length > 0 ? bookings : []
 
   return (
-    <div className="h-full flex flex-col overflow-hidden bg-surface">
-      <header className="h-20 flex items-center justify-between px-gutter border-b border-outline-variant bg-white">
+    <div className="h-full min-w-0 flex flex-col overflow-x-hidden overflow-y-auto bg-surface">
+      <header className="min-h-20 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 sm:px-gutter py-4 border-b border-outline-variant bg-white">
         <div className="flex flex-col">
           <h2 className="font-title-md text-title-md text-on-surface">
             Booking Management
@@ -109,7 +109,7 @@ export function BookingListPage() {
             Viewing {visibleBookings.length} active transfers for Dalaman International
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <div className="relative group">
             <span className="material-symbols-outlined text-on-surface-variant group-hover:text-primary cursor-pointer transition-colors">
               notifications
@@ -126,8 +126,8 @@ export function BookingListPage() {
         </div>
       </header>
 
-      <section className="p-gutter flex flex-col gap-stack-md bg-white border-b border-outline-variant">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-stack-md">
+      <section className="p-4 sm:p-gutter flex flex-col gap-stack-md bg-white border-b border-outline-variant">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3">
           <div className="relative">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">
               search
@@ -170,7 +170,7 @@ export function BookingListPage() {
           </select>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <button className="bg-white border border-outline-variant text-on-surface px-4 py-2 rounded-lg text-label-sm font-label-sm hover:border-primary transition-all flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px]">
@@ -195,7 +195,7 @@ export function BookingListPage() {
         </div>
       </section>
 
-      <section className="flex-1 overflow-auto custom-scrollbar">
+      <section className="flex-1 min-h-[260px] min-w-0 overflow-x-auto overflow-y-auto custom-scrollbar">
         {loading && (
           <div className="p-gutter text-on-surface-variant">Bookings loading...</div>
         )}
@@ -326,8 +326,8 @@ export function BookingListPage() {
         </table>
       </section>
 
-      <footer className="h-16 flex items-center justify-between px-gutter border-t border-outline-variant bg-white">
-        <div className="flex items-center gap-stack-md">
+      <footer className="min-h-16 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between px-4 sm:px-gutter py-3 border-t border-outline-variant bg-white">
+        <div className="flex flex-wrap items-center gap-stack-md">
           <span className="text-label-sm font-label-sm text-on-surface-variant">
             Showing 1-10 of 48
           </span>
