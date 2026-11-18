@@ -30,6 +30,9 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(HttpMethod.GET, "/route-prices").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/route-prices").hasRole("ADMIN")
+                        .requestMatchers("/route-prices/**").denyAll()
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
                         .requestMatchers(HttpMethod.POST, "/reviews").permitAll()
                         .requestMatchers(HttpMethod.GET, "/reviews").permitAll()
@@ -57,6 +60,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/admin/auth-check", config);
         source.registerCorsConfiguration("/reviews", config);
         source.registerCorsConfiguration("/reviews/**", config);
+        source.registerCorsConfiguration("/route-prices", config);
         return source;
     }
 

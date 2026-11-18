@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.PageRequest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -23,16 +24,16 @@ class CustomerReviewControllerTest {
         String payload = "{\"name\":\"Sample passenger\",\"rating\":5,\"comment\":\"The driver was punctual and helpful.\",\"publicationConsent\":true}";
         mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON).content(payload))
             .andExpect(status().isAccepted());
-        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(content().json("[]"));
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk()).andExpect(jsonPath("$.content").isEmpty());
         mvc.perform(get("/reviews/moderation")).andExpect(status().isUnauthorized());
 
-        CustomerReview review = repository.findByStatusOrderByCreatedAtDesc("PENDING").get(0);
+        CustomerReview review = repository.findByStatus("PENDING", PageRequest.of(0, 10)).getContent().get(0);
         mvc.perform(patch("/reviews/" + review.id + "/moderation")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isOk()).andExpect(jsonPath("$.status").value("APPROVED"));
-        mvc.perform(get("/reviews")).andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].name").value("Sample passenger"));
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk())
+            .andExpect(jsonPath("$.content[0].name").value("Sample passenger"));
     }
 
     @Test
@@ -40,12 +41,12 @@ class CustomerReviewControllerTest {
         mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Rejected passenger\",\"rating\":2,\"comment\":\"The pickup was not on time.\",\"publicationConsent\":true}"))
             .andExpect(status().isAccepted());
-        CustomerReview review = repository.findByStatusOrderByCreatedAtDesc("PENDING").get(0);
+        CustomerReview review = repository.findByStatus("PENDING", PageRequest.of(0, 10)).getContent().get(0);
         mvc.perform(patch("/reviews/" + review.id + "/moderation")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"REJECTED\"}"))
             .andExpect(status().isOk());
-        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(content().json("[]"));
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk()).andExpect(jsonPath("$.content").isEmpty());
     }
 
     @Test
@@ -70,31 +71,43 @@ class CustomerReviewControllerTest {
         review.status = "APPROVED";
         repository.saveAndFlush(review);
 
-        mvc.perform(get("/reviews/moderation?status=APPROVED"))
+        mvc.perform(get("/reviews/moderation?page=0&status=APPROVED"))
             .andExpect(status().isUnauthorized());
-        mvc.perform(get("/reviews/moderation?status=APPROVED")
+        mvc.perform(get("/reviews/moderation?page=0&status=APPROVED")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].customerName").value("Archive passenger"));
+            .andExpect(jsonPath("$.content[0].customerName").value("Archive passenger"));
 
         mvc.perform(patch("/reviews/" + review.id + "/moderation")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"ARCHIVED\"}"))
             .andExpect(status().isOk());
-        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(content().json("[]"));
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk()).andExpect(jsonPath("$.content").isEmpty());
 
-        mvc.perform(get("/reviews/moderation?status=ARCHIVED")
+        mvc.perform(get("/reviews/moderation?page=0&status=ARCHIVED")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].customerName").value("Archive passenger"));
+            .andExpect(jsonPath("$.content[0].customerName").value("Archive passenger"));
 
         mvc.perform(patch("/reviews/" + review.id + "/moderation")
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isOk());
-        mvc.perform(get("/reviews")).andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].name").value("Archive passenger"))
-            .andExpect(jsonPath("$[0].createdAt").exists());
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk())
+            .andExpect(jsonPath("$.content[0].name").value("Archive passenger"))
+            .andExpect(jsonPath("$.content[0].createdAt").exists());
+    }
+
+    @Test
+    void legacyClientsStillReceiveArraysWhileNewClientsReceivePages() throws Exception {
+        mvc.perform(get("/reviews")).andExpect(status().isOk()).andExpect(jsonPath("$").isArray());
+        mvc.perform(get("/reviews?page=0")).andExpect(status().isOk()).andExpect(jsonPath("$.content").isArray());
+        mvc.perform(get("/reviews/moderation?status=PENDING")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
+            .andExpect(status().isOk()).andExpect(jsonPath("$").isArray());
+        mvc.perform(get("/reviews/moderation?status=PENDING&page=0")
+                .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword")))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.content").isArray());
     }
 
     @Test

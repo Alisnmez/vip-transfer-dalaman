@@ -49,7 +49,7 @@ export function BookingListPage() {
         </label>
         <div className="mt-4 flex flex-wrap items-end gap-4">
           <label className="text-sm font-semibold">Status
-            <select value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
+            <select aria-label="Status" value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
               <option value="all">All statuses</option>
               {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{status.replaceAll("_", " ")}</option>)}
             </select>

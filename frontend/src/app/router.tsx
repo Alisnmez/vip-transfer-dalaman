@@ -14,6 +14,8 @@ const BookingListPage = lazy(() => import('../pages/admin/BookingListPage').then
 // eslint-disable-next-line react-refresh/only-export-components
 const ReviewModerationPage = lazy(() => import('../pages/admin/ReviewModerationPage').then((module) => ({ default: module.ReviewModerationPage })))
 // eslint-disable-next-line react-refresh/only-export-components
+const RoutePricePage = lazy(() => import('../pages/admin/RoutePricePage').then((module) => ({ default: module.RoutePricePage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const DashboardPage = lazy(() => import('../pages/admin/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage'
 import { BookingFormPage } from '../pages/public/BookingFormPage'
@@ -125,7 +127,7 @@ export const router = createBrowserRouter([
       { path: 'reviews', element: <Suspense fallback={<div role="status">Loading...</div>}><ReviewModerationPage /></Suspense> },
       { path: 'bookings/:bookingId', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingDetailPage /></Suspense> },
       { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
-      { path: 'route-prices', element: <Navigate to="/admin/bookings" replace /> },
+      { path: 'route-prices', element: <Suspense fallback={<div role="status">Loading...</div>}><RoutePricePage /></Suspense> },
       { path: 'dispatch-hub', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'analytics', element: <Navigate to="/admin/bookings" replace /> },
     ],

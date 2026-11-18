@@ -1,4 +1,187 @@
 import { test, expect } from '@playwright/test'
+import { readFileSync } from 'node:fs'
+
+const catalogue = JSON.parse(readFileSync(new URL('../../src/main/resources/transfer-prices.json', import.meta.url), 'utf8')).map(item => ({ ...item, version: -1 }))
+test.beforeEach(async ({ page }) => {
+  await page.route('**/route-prices', route => route.request().method() === 'GET' && !route.request().isNavigationRequest()
+    ? route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalogue) })
+    : route.continue())
+})
+
+// Exercise the real admin UI against deterministic, disposable API fixtures.
+// PostgreSQL integration tests verify the real API separately.
+async function adminFixture(page, { width = 1280 } = {}) {
+  await page.setViewportSize({ width, height: 900 })
+  const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
+  const booking = { id: 901, customerName: 'Menu test passenger', passengerCount: 2,
+    pickUpLocation: 'Dalaman Airport', dropOffLocation: 'Marmaris', transferDateTime: `${day}T15:30:00`,
+    price: 50, status: 'PENDING', phoneNumber: '+447700900123', email: 'test@example.invalid',
+    transferAddress: 'Test hotel', vehicleId: 'mercedes-vito', tripType: 'one-way' }
+  const reviews = Array.from({ length: 11 }, (_, i) => ({ id: i + 1, customerName: `Review passenger ${i + 1}`,
+    rating: 5, comment: 'A punctual and comfortable transfer.', createdAt: '2026-11-18T09:00:00Z', status: 'PENDING' }))
+  const requests = []
+  const prices = catalogue.map(item => ({ ...item }))
+  await page.route('**/*', async route => {
+    const req = route.request()
+    const url = new URL(req.url())
+    const path = url.pathname
+    if (!['/route-prices', '/admin/auth-check', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
+    if (req.isNavigationRequest()) return route.continue()
+    requests.push({ path, search: url.search, method: req.method() })
+    const reply = body => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) })
+    if (path === '/route-prices' && req.method() === 'GET') return reply(prices)
+    expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+    if (path === '/route-prices') {
+      const edited = req.postDataJSON()
+      const row = prices.find(item => item.destination === edited.destination && item.vehicleId === edited.vehicleId)
+      if (row.version !== edited.version) return route.fulfill({ status: 409, contentType: 'application/json', body: '{}' })
+      Object.assign(row, edited, { version: row.version + 1 })
+      return reply(row)
+    }
+    if (path === '/admin/auth-check') return reply({})
+    if (path === '/bookings/dashboard') return reply({ total: 1, pending: 1, today: 1, upcoming: [booking] })
+    if (path === '/bookings/page') return reply({ content: [booking], totalElements: 1, totalPages: 1, number: 0 })
+    if (path === '/bookings/calendar') return reply(url.searchParams.get('month') === day.slice(0, 7) ? [booking] : [])
+    if (path === '/bookings/901/email-status') return reply([])
+    if (path === '/bookings/901/status') { booking.status = req.postDataJSON().status; return reply(booking) }
+    if (path === '/bookings/901') return reply(booking)
+    if (path === '/reviews/moderation') {
+      const filtered = reviews.filter(r => r.status === url.searchParams.get('status'))
+      const number = Number(url.searchParams.get('page'))
+      return reply({ content: filtered.slice(number * 10, number * 10 + 10), number, totalElements: filtered.length, totalPages: Math.ceil(filtered.length / 10) })
+    }
+    const review = reviews.find(r => r.id === Number(path.split('/')[2]))
+    review.status = req.postDataJSON().status
+    return reply({ status: review.status })
+  })
+  await page.goto('http://127.0.0.1:4173/admin')
+  await page.getByLabel('Username', { exact: true }).fill('fixture-admin')
+  await page.getByLabel('Password', { exact: true }).fill('fixture-only')
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Booking overview' })).toBeVisible()
+  return { requests, booking, prices }
+}
+
+test('admin Dashboard renders API counts, refreshes and opens booking details', async ({ page }) => {
+  const { requests } = await adminFixture(page)
+  await expect(page.getByText('Total booking requests', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click()
+  await expect.poll(() => requests.filter(r => r.path === '/bookings/dashboard').length).toBe(2)
+  await page.getByRole('link', { name: /#901.*Menu test passenger/ }).click()
+  await expect(page.getByRole('heading', { name: 'Booking request #901' })).toBeVisible()
+  await page.getByLabel('Booking status', { exact: true }).selectOption('CONFIRMED')
+  await expect(page.getByLabel('Booking status', { exact: true })).toHaveValue('CONFIRMED')
+  await expect.poll(() => requests.some(r => r.path === '/bookings/901/status' && r.method === 'PATCH')).toBe(true)
+})
+
+test('admin Bookings combines search, status and date filters and clears them', async ({ page }) => {
+  const { requests } = await adminFixture(page)
+  await page.getByRole('link', { name: 'Bookings', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Booking management' })).toBeVisible()
+  await page.getByLabel('Search all bookings').fill('Menu test')
+  await page.getByLabel('Status', { exact: true }).selectOption('PENDING')
+  await page.getByLabel('Transfer date from (Turkey)').fill('2026-11-01')
+  await page.getByLabel('Transfer date to (Turkey)').fill('2026-11-30')
+  await expect.poll(() => requests.some(r => {
+    const p = new URLSearchParams(r.search)
+    return r.path === '/bookings/page' && p.get('search') === 'Menu test' && p.get('status') === 'PENDING' && p.get('from') === '2026-11-01' && p.get('to') === '2026-11-30'
+  })).toBe(true)
+  await page.getByRole('button', { name: 'Clear filters' }).click()
+  await expect(page.getByLabel('Search all bookings')).toHaveValue('')
+  await expect(page.getByLabel('Status', { exact: true })).toHaveValue('all')
+  await expect(page.getByLabel('Transfer date from (Turkey)')).toHaveValue('')
+})
+
+test('admin Calendar changes views and periods and filters booking status', async ({ page }) => {
+  await adminFixture(page)
+  await page.getByRole('link', { name: 'Calendar', exact: true }).click()
+  for (const view of ['Month', 'Week', 'Day']) {
+    await page.getByRole('button', { name: view, exact: true }).click()
+    await expect(page.getByRole('button', { name: view, exact: true })).toHaveAttribute('aria-pressed', 'true')
+  }
+  await page.getByLabel('Booking status', { exact: true }).selectOption('CANCELLED')
+  await expect(page.getByRole('link', { name: /Menu test passenger/ })).toHaveCount(0)
+  await page.getByLabel('Booking status', { exact: true }).selectOption('ALL')
+  await expect(page.getByRole('link', { name: /Menu test passenger/ })).toBeVisible()
+  await page.getByRole('button', { name: 'Next period' }).click()
+  await page.getByRole('button', { name: 'Today', exact: true }).click()
+  await expect(page.getByRole('link', { name: /Menu test passenger/ })).toBeVisible()
+})
+
+test('admin Customer Reviews paginates, publishes, archives and restores', async ({ page }) => {
+  await adminFixture(page)
+  await page.getByRole('link', { name: 'Customer Reviews', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Customer review moderation' })).toBeVisible()
+  await page.getByRole('button', { name: 'Next', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Approve', exact: true }).click()
+  await expect(page.getByRole('status')).toContainText('Review published.')
+  await page.getByRole('button', { name: 'Published', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Archive', exact: true }).click()
+  await page.getByRole('button', { name: 'Archived', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+  await page.getByRole('button', { name: 'Restore and publish', exact: true }).click()
+  await page.getByRole('button', { name: 'Published', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Review passenger 11', exact: true })).toBeVisible()
+})
+
+test('admin Route Prices requires sign-in, filters, saves and publishes edited fares', async ({ page }) => {
+  await page.goto('http://127.0.0.1:4173/admin/route-prices')
+  await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
+  await expect(page.getByRole('table')).toHaveCount(0)
+  const { requests } = await adminFixture(page)
+  await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Route Prices', exact: true })).toBeVisible()
+  await expect(page.getByRole('row')).toHaveCount(26)
+  const readsBeforeSearch = requests.filter(r => r.path === '/route-prices').length
+  await page.getByLabel('Search route or vehicle').fill('marmaris')
+  await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
+  expect(requests.filter(r => r.path === '/route-prices').length).toBe(readsBeforeSearch)
+  await page.getByLabel('Search route or vehicle').fill('')
+  await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris(Any Hotel)' })
+  await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
+  await expect(page.getByRole('cell', { name: 'Fethiye', exact: true })).toHaveCount(0)
+  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'PRIVATE VIP MINIVAN' })
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE VIP MINIVAN', exact: true }).click()
+  await page.getByLabel('One-way price (GBP)', { exact: true }).fill('60.25')
+  await page.getByLabel('Round-trip price (GBP)', { exact: true }).fill('115.50')
+  await page.getByRole('button', { name: 'Save prices', exact: true }).click()
+  await expect(page.getByRole('status')).toContainText('Prices saved for Marmaris')
+  await page.getByRole('button', { name: 'Refresh prices', exact: true }).click()
+  await expect(page.getByRole('cell', { name: '£60.25', exact: true })).toBeVisible()
+  await page.getByLabel('Search route or vehicle').fill('no-such-destination')
+  await expect(page.getByText('No prices match your filters.')).toBeVisible()
+  await page.goto('http://127.0.0.1:4173/routes')
+  await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
+  await page.getByPlaceholder('Search destinations', { exact: true }).fill('Marmaris(Any Hotel)')
+  await expect(page.getByText('£60.25', { exact: true })).toBeVisible()
+})
+
+test('admin stale price edit shows a useful conflict and reloads current prices', async ({ page }) => {
+  const { prices } = await adminFixture(page)
+  await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE TAXI', exact: true }).click()
+  await page.getByLabel('One-way price (GBP)', { exact: true }).fill('55.25')
+  prices[0].version = 0
+  prices[0].oneWay = 60.50
+  await page.getByRole('button', { name: 'Save prices', exact: true }).click()
+  await expect(page.getByRole('alert')).toContainText('changed by another admin')
+  await expect(page.getByRole('form', { name: 'Edit route prices' })).toHaveCount(0)
+  await expect(page.getByRole('cell', { name: '£60.50', exact: true })).toBeVisible()
+})
+
+test('admin mobile navigation opens each menu and signs out', async ({ page }) => {
+  await adminFixture(page, { width: 390 })
+  for (const menu of ['Calendar', 'Bookings', 'Customer Reviews', 'Route Prices', 'Dashboard']) {
+    await page.getByRole('button', { name: 'Open navigation', exact: true }).click()
+    await page.locator('#admin-navigation').getByRole('link', { name: menu, exact: true }).click()
+    await expect(page.getByRole('button', { name: 'Open navigation', exact: true })).toHaveAttribute('aria-expanded', 'false')
+  }
+  await page.getByRole('button', { name: 'Open navigation', exact: true }).click()
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Admin sign in' })).toBeVisible()
+})
 
 test('booking transfer and passenger routes render without browser errors', async ({ page }) => {
   const errors = []

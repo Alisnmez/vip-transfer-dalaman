@@ -44,12 +44,24 @@ public class CustomerReviewController {
         return Map.of("message", "Your review was submitted for approval.");
     }
 
-    @GetMapping
+    // Keep already-open clients working during backend/frontend rolling deploys.
+    @GetMapping(params = "!page")
+    public List<PublicReview> legacyPublished(@RequestParam(defaultValue = "10") int size) {
+        return published(0, size).getContent();
+    }
+
+    @GetMapping(params = "page")
     public Page<PublicReview> published(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         return repository.findByStatus("APPROVED", pagination(page, size)).map(PublicReview::from);
     }
 
-    @GetMapping("/moderation")
+    @GetMapping(value = "/moderation", params = "!page")
+    public List<CustomerReview> legacyPending(@RequestParam(defaultValue = "PENDING") String status,
+                                             @RequestParam(defaultValue = "10") int size) {
+        return pending(status, 0, size).getContent();
+    }
+
+    @GetMapping(value = "/moderation", params = "page")
     public Page<CustomerReview> pending(@RequestParam(defaultValue = "PENDING") String status,
                                         @RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "10") int size) {
