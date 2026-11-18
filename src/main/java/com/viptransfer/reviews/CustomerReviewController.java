@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Map;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 @RestController
 @RequestMapping("/reviews")
@@ -42,16 +45,18 @@ public class CustomerReviewController {
     }
 
     @GetMapping
-    public List<PublicReview> published() {
-        return repository.findByStatusOrderByCreatedAtDesc("APPROVED").stream().map(PublicReview::from).toList();
+    public Page<PublicReview> published(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return repository.findByStatus("APPROVED", pagination(page, size)).map(PublicReview::from);
     }
 
     @GetMapping("/moderation")
-    public List<CustomerReview> pending(@RequestParam(defaultValue = "PENDING") String status) {
+    public Page<CustomerReview> pending(@RequestParam(defaultValue = "PENDING") String status,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size) {
         if (!List.of("PENDING", "APPROVED", "REJECTED", "ARCHIVED").contains(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid review status.");
         }
-        return repository.findByStatusOrderByCreatedAtDesc(status);
+        return repository.findByStatus(status, pagination(page, size));
     }
 
     @PatchMapping("/{id}/moderation")
@@ -69,6 +74,13 @@ public class CustomerReviewController {
         repository.save(review);
         return Map.of("status", status);
     }
+    private PageRequest pagination(int page, int size) {
+        if (page < 0 || size < 1 || size > 50) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid pagination parameters.");
+        }
+        return PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt").and(Sort.by(Sort.Direction.DESC, "id")));
+    }
+
     private boolean isAllowedTransition(String current, String next) {
         return switch (current) {
             case "PENDING" -> "APPROVED".equals(next) || "REJECTED".equals(next) || "ARCHIVED".equals(next);
