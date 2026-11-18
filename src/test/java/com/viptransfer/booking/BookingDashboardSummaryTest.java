@@ -20,7 +20,7 @@ class BookingDashboardSummaryTest {
     void summaryUsesDatabaseCountsAndLimitsUpcomingResults() {
         BookingRepository repository = mock(BookingRepository.class);
         BookingService service = new BookingService(repository, mock(TransferPricingService.class),
-                new ObjectMapper(), mock(PlatformTransactionManager.class));
+                new ObjectMapper(), mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
         Booking upcoming = new Booking();
         upcoming.setId(42L);
         upcoming.setStatus("CONFIRMED");

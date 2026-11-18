@@ -1,6 +1,6 @@
 # Transactional email setup and troubleshooting — VIP Transfer Dalaman
 
-**Status: GUIDE ONLY — NOT CONFIGURED.** Customer/operator emails are not currently sent automatically. This is a beginner-friendly deployment runbook, not evidence of working email delivery.
+**Status: IMPLEMENTED ON FEATURE BRANCH — PRODUCTION NOT ENABLED.** Customer/operator email code and tests are prepared. Provider DNS verification, secret configuration, deployment and an actual recipient inbox test remain required.
 
 ## Goal and scope
 
@@ -54,3 +54,45 @@ Recommended first evaluation: Resend transactional email API. **Provider, curren
 - Existing docs: `docs/EKSIKLERIMIZ.md`, `docs/DEPLOYMENT_WORKFLOW.md`, `docs/POSTGRES_MIGRATION_PLAN.md`.
 
 **Open tasks:** choose/verify provider and domain; implement backend gateway and templates; add persistent outbox/retry mechanism; run staging tests; configure real production credentials; verify operator and customer delivery.
+
+## Prepared implementation — 18 November 2026
+
+Implementation is on `feature/booking-email-and-admin-dates`; production sending is not yet enabled.
+
+- Resend free account created by the owner. Sending domain: `notify.dalamanway.com`, Ireland (`eu-west-1`).
+- Exact Resend DKIM TXT and two Forge CNAME records added in Porkbun; verification must show verified before activation. Root web, MX and SPF records preserved.
+- Environment reference: `.env.email.example`. The owner enters `EMAIL_API_KEY` directly in Render; never share it in chat or Git.
+- V2 adds `booking_email_outbox` and an index; it does not rewrite existing bookings. Booking creation and notification queueing share a database transaction. A scheduled worker sends only committed entries.
+- Received, confirmed, cancelled and reopened-pending notifications use accurate status wording. Customer and operator are separate recipients. Repeated booking/status requests do not queue another notification. Status writes lock the booking row to prevent concurrent duplicate transitions.
+- Provider retries use the same stored JSON payload and idempotency key. Retry 429, network failures, concurrent-request conflicts and 5xx with backoff. Permanent errors fail immediately, transient errors stop after six attempts, and events expire after 23 hours to stay inside Resend's 24-hour deduplication window.
+- Provider acceptance is recorded as `ACCEPTED`, not delivered. Delivery, bounces and inbox/spam checks require the Resend dashboard; webhook delivery tracking is not implemented.
+- Test recipients ending `.invalid` do not generate customer or operator mail. No historical bookings are backfilled.
+
+### Deployment and recovery
+
+1. Keep `EMAIL_ENABLED=false`. Review V2 and run CI plus Flyway/Hibernate validation against a disposable database.
+2. Verify DNS; use a domain-scoped sending key. Keep separate staging credentials and recipients; do not enable Flyway on the existing staging database without its separate migration review.
+3. Apply the additive V2 migration in a reviewed release. Set sender, monitored reply-to and optional operator address. Enable `EMAIL_ENABLED=true` only after provider verification and an authorized inbox test.
+4. After backend activation succeeds, set frontend `VITE_EMAIL_NOTIFICATIONS_ENABLED=true` and rebuild. Do not claim an email was delivered merely because the booking succeeded.
+5. Inspect counts with `SELECT status, count(*) FROM booking_email_outbox GROUP BY status;` using authorized database access. Logs contain event IDs and safe error codes, not recipient addresses or message bodies. Review `FAILED` rows rather than replaying them blindly.
+6. Emergency stop: set `EMAIL_ENABLED=false` and redeploy. Keep V2's table in place; do not roll back by dropping data. Old application code can run with the added table present.
+7. Free plan limits checked on https://resend.com/pricing on 18 November 2026: 3,000/month, 100/day. Each customer and operator notification consumes one email. No paid plan or automatic paid overage was enabled.
+
+**Pending:** DNS verified status, owner key saved in Render, CI, reviewed deployment, actual provider acceptance and recipient inbox/reply test. Until these pass, automatic production email delivery is not established.
+
+## Current owner choice — Gmail sender (18 November 2026)
+
+The owner selected `dalamanway.booking@gmail.com` as the actual sender and support mailbox. The earlier Resend domain setup remains optional; it cannot send as `gmail.com`.
+
+- Backend: `EMAIL_PROVIDER=gmail`, `EMAIL_FROM=DalamanWay <dalamanway.booking@gmail.com>`, `EMAIL_REPLY_TO=dalamanway.booking@gmail.com`, `EMAIL_OPERATOR=dalamanway.booking@gmail.com`.
+- Frontend: `VITE_SUPPORT_EMAIL=dalamanway.booking@gmail.com`; contact, receipt and booking support links share this setting.
+- Gmail uses authenticated `smtp.gmail.com:587`, required STARTTLS, server identity checks, and finite timeouts. The production backend uses paid Render compute; free instances block SMTP ports.
+- The owner enables Google 2-Step Verification if needed, generates a dedicated app password, and enters it directly as backend `EMAIL_GMAIL_APP_PASSWORD`. Never use the normal Google password or paste credentials into chat, source files or frontend configuration.
+- The From address is enforced as the selected Gmail account. Replies and operator notifications use the same mailbox. Enable after an authorized recipient test.
+- SMTP does not provide an idempotency API. The worker commits `SENDING` before network delivery. A process interruption leaves `SENDING` for review; ambiguous SMTP errors become `FAILED` with `SMTP_UNKNOWN` and are not automatically resent. This prevents blind duplicate sends but requires operator review of uncertain events. Resend's known transient failures retain bounded retries.
+- Acceptance is not proof of inbox delivery. Verify Gmail Sent, recipient inbox/spam and a reply. Existing queued messages are not rewritten automatically.
+
+Official references checked 18 November 2026:
+https://support.google.com/mail/answer/185833
+https://developers.google.com/workspace/gmail/imap/imap-smtp
+https://render.com/changelog/free-web-services-will-no-longer-allow-outbound-traffic-to-smtp-ports

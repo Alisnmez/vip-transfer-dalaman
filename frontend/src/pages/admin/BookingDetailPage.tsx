@@ -8,6 +8,7 @@ import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '
 import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { validateAdminSchedule } from '../../features/booking/validateAdminSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
 const pricedDestinations = [...new Set(transferPrices.map(price => price.destination))]
@@ -82,6 +83,8 @@ export function BookingDetailPage() {
   async function saveDetails(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (!draft || !booking) return
+    const scheduleError = validateAdminSchedule(draft, booking)
+    if (scheduleError) { setError(scheduleError); setErrorAction('saving details'); return }
     const destination = draft.pickUpLocation === airport ? draft.dropOffLocation : draft.pickUpLocation
     const validRoute = (draft.pickUpLocation === airport) !== (draft.dropOffLocation === airport)
     const priced = transferPrices.some(price => price.destination === destination && price.vehicleId === draft.vehicleId)

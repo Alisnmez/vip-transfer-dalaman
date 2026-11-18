@@ -1,3 +1,4 @@
+import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -152,7 +153,7 @@ function InfoPage({
             <h2 className="font-title-md text-title-md text-admin-primary mb-4">Contact us</h2>
             <div className="flex flex-col gap-3">
               <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">Phone: 0555 555 55 55</a>
-              <a className="text-admin-primary underline underline-offset-4" href="mailto:ali_sonmez35@hotmail.com">Email: ali_sonmez35@hotmail.com</a>
+              <a className="text-admin-primary underline underline-offset-4" href={`mailto:${supportEmail}`}>Email: {supportEmail}</a>
             </div>
           </section>
         )}

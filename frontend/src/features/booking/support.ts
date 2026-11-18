@@ -1,6 +1,6 @@
 export type SupportRequest = 'change' | 'cancel'
 
-const supportEmail = 'ali_sonmez35@hotmail.com'
+export const supportEmail = (import.meta.env.VITE_SUPPORT_EMAIL || 'dalamanway.booking@gmail.com').trim()
 
 // WhatsApp is enabled only after a real business number is configured.
 // Never send customers to the temporary phone placeholder.
