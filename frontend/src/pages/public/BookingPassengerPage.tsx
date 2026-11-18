@@ -58,7 +58,7 @@ export function BookingPassengerPage() {
   const [lastName, setLastName] = useState(() => draft.customerName?.trim().split(/\s+/).slice(1).join(' ') ?? '')
   const [phoneNumber, setPhoneNumber] = useState(() => {
     const number = draft.phoneNumber ?? ''
-    const code = ['+370', '+90', '+44', '+49', '+33', '+1'].find((item) => number.startsWith(item))
+    const code = ['+370', '+90', '+44', '+49', '+33', '+41', '+1'].find((item) => number.startsWith(item))
     return code ? number.slice(code.length) : ''
   })
   const [countryCode, setCountryCode] = useState(() => ['+370', '+90', '+44', '+49', '+33', '+1'].find((code) => draft.phoneNumber?.startsWith(code)) ?? '+90')
@@ -215,6 +215,7 @@ export function BookingPassengerPage() {
                         <option value="+44">🇬🇧 +44</option>
                         <option value="+49">🇩🇪 +49</option>
                         <option value="+33">🇫🇷 +33</option>
+                         <option value="+41">🇨🇭 +41</option>
                         <option value="+1">🇺🇸 +1</option>
                         <option value="+370">🇱🇹 +370</option>
                       </select>
