@@ -13,7 +13,7 @@ export function HomePage() {
       meta.setAttribute('name', 'description')
       document.head.appendChild(meta)
     }
-    document.title = 'Dalaman Airport Private Transfers | VIP Transfer Dalaman'
+    document.title = 'Dalaman Airport Private Transfers | DalamanWay'
     meta.setAttribute('content', 'Book private transfers from Dalaman Airport to Fethiye, Gocek, Marmaris and Oludeniz. Explore routes and arrange your airport pickup.')
     return () => {
       document.title = previousTitle
@@ -236,7 +236,7 @@ export function HomePage() {
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-lg mb-stack-lg">
             <div className="font-headline-lg text-headline-lg text-white font-bold">
-              VIP Transfer Dalaman
+              DalamanWay
             </div>
             <div className="flex flex-wrap gap-stack-lg">
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">Services</Link>
@@ -252,7 +252,7 @@ export function HomePage() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
             <p className="text-white/40 font-body-md">
-              © {new Date().getFullYear()} VIP Transfer Dalaman. All rights reserved.
+              © {new Date().getFullYear()} DalamanWay. All rights reserved.
             </p>
 
           </div>
