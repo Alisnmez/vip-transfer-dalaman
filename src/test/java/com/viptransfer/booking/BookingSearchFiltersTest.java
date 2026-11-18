@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 class BookingSearchFiltersTest {
     private BookingService service(BookingRepository repository) {
         return new BookingService(repository, mock(TransferPricingService.class),
-                new ObjectMapper(), mock(PlatformTransactionManager.class));
+                new ObjectMapper(), mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
     }
 
     @Test

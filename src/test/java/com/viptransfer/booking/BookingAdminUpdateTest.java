@@ -32,7 +32,7 @@ class BookingAdminUpdateTest {
         repository = mock(BookingRepository.class);
         pricing = mock(TransferPricingService.class);
         service = new BookingService(repository, pricing, new ObjectMapper(),
-                mock(PlatformTransactionManager.class));
+                mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
         booking = new Booking();
         booking.setId(10L);
         booking.setStatus("CONFIRMED");
@@ -56,7 +56,28 @@ class BookingAdminUpdateTest {
         request.setPhoneNumber("+905551234567");
         request.setEmail("test@example.com");
         when(repository.findById(10L)).thenReturn(Optional.of(booking));
+        when(repository.findByIdForUpdate(10L)).thenReturn(Optional.of(booking));
         when(repository.save(any(Booking.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    }
+
+    @Test
+    void changingPickupToPastDoesNotMutateBooking() {
+        var original = booking.getTransferDateTime();
+        request.setTransferDateTime(LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul")).minusDays(1));
+        assertThrows(IllegalArgumentException.class, () -> service.updateBooking(10L, request));
+        assertEquals(original, booking.getTransferDateTime());
+        assertEquals("Customer", booking.getCustomerName());
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void changingReturnBeforePickupDoesNotMutateBooking() {
+        request.setTransferDateTime(LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul")).plusDays(2));
+        request.setTripType("round-trip");
+        request.setReturnDateTime(request.getTransferDateTime().minusMinutes(1));
+        assertThrows(IllegalArgumentException.class, () -> service.updateBooking(10L, request));
+        assertEquals("one-way", booking.getTripType());
+        verify(repository, never()).save(any());
     }
 
     @Test

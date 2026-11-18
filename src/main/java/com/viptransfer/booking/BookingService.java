@@ -23,13 +23,16 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class BookingService {
 
+    private final com.viptransfer.email.BookingEmails bookingEmails;
     private final BookingRepository bookingRepository;
     private final TransferPricingService transferPricingService;
     private final ObjectMapper objectMapper;
     private final TransactionTemplate transactionTemplate;
 
     public BookingService(BookingRepository bookingRepository, TransferPricingService transferPricingService,
-                          ObjectMapper objectMapper, PlatformTransactionManager transactionManager) {
+                          ObjectMapper objectMapper, PlatformTransactionManager transactionManager,
+                          com.viptransfer.email.BookingEmails bookingEmails) {
+        this.bookingEmails = bookingEmails;
         this.bookingRepository = bookingRepository;
         this.transferPricingService = transferPricingService;
         this.objectMapper = objectMapper;
@@ -42,7 +45,7 @@ public class BookingService {
 
     public Booking createBooking(BookingRequestDto dto, String key) {
         if (key == null) {
-            return createNewBooking(dto, null, null);
+            return transactionTemplate.execute(status -> createNewBooking(dto, null, null));
         }
         if (!key.matches("[A-Za-z0-9_-]{16,64}")) {
             throw new IllegalArgumentException("Invalid Idempotency-Key.");
@@ -105,7 +108,9 @@ public class BookingService {
         booking.setTripType(dto.getTripType());
         booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
-        return bookingRepository.saveAndFlush(booking);
+        Booking saved = bookingRepository.saveAndFlush(booking);
+        bookingEmails.queue(saved, "RECEIVED");
+        return saved;
     }
 
     private void validateSchedule(BookingRequestDto dto) {
@@ -254,7 +259,8 @@ public class BookingService {
         if (status == null || !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status.");
         }
-        Booking booking = getBooking(id);
+        Booking booking = bookingRepository.findByIdForUpdate(id)
+                .orElseThrow(() -> new BookingNotFoundException(id));
         String current = booking.getStatus() == null ? "PENDING" : booking.getStatus();
         if (current.equals(status)) {
             return booking;
@@ -270,7 +276,9 @@ public class BookingService {
                     "Invalid booking status transition from " + current + " to " + status + ".");
         }
         booking.setStatus(status);
-        return bookingRepository.save(booking);
+        Booking saved = bookingRepository.save(booking);
+        if (!"COMPLETED".equals(status)) bookingEmails.queue(saved, status);
+        return saved;
     }
 
 }

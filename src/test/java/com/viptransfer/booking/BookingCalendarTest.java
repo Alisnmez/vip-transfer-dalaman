@@ -19,7 +19,7 @@ class BookingCalendarTest {
     void calendarQueriesOnlyTheSelectedMonth() {
         BookingRepository repository = mock(BookingRepository.class);
         BookingService service = new BookingService(repository, mock(TransferPricingService.class),
-                new ObjectMapper(), mock(PlatformTransactionManager.class));
+                new ObjectMapper(), mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
         YearMonth month = YearMonth.of(2027, 1);
         when(repository.findByTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThanOrderByTransferDateTimeAsc(
                 LocalDateTime.of(2027, 1, 1, 0, 0),
@@ -35,7 +35,7 @@ class BookingCalendarTest {
     void calendarRejectsMonthOutsideAllowedRange() {
         BookingRepository repository = mock(BookingRepository.class);
         BookingService service = new BookingService(repository, mock(TransferPricingService.class),
-                new ObjectMapper(), mock(PlatformTransactionManager.class));
+                new ObjectMapper(), mock(PlatformTransactionManager.class), mock(com.viptransfer.email.BookingEmails.class));
         ResponseStatusException error = assertThrows(ResponseStatusException.class,
                 () -> service.getCalendarBookings(YearMonth.of(2035, 1)));
         assertEquals(HttpStatus.BAD_REQUEST, error.getStatusCode());
