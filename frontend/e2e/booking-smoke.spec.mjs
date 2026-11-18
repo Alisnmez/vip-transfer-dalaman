@@ -165,6 +165,8 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Route Prices', exact: true })).toBeVisible()
   await expect(page.getByRole('row')).toHaveCount(26)
+  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText(['All vehicles', 'VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter'])
+  await expect(page.getByText('236', { exact: true })).toBeVisible()
   const readsBeforeSearch = requests.filter(r => r.path === '/route-prices').length
   await page.getByLabel('Search route or vehicle').fill('marmaris')
   await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
@@ -173,8 +175,8 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris(Any Hotel)' })
   await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
   await expect(page.getByRole('cell', { name: 'Fethiye', exact: true })).toHaveCount(0)
-  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'PRIVATE VIP MINIVAN' })
-  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE VIP MINIVAN', exact: true }).click()
+  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'VIP Vito' })
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) VIP Vito', exact: true }).click()
   await page.getByLabel('One-way price (GBP)', { exact: true }).fill('60.25')
   await page.getByLabel('Round-trip price (GBP)', { exact: true }).fill('115.50')
   await page.getByRole('button', { name: 'Save prices', exact: true }).click()
@@ -192,10 +194,11 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
 test('admin stale price edit shows a useful conflict and reloads current prices', async ({ page }) => {
   const { prices } = await adminFixture(page)
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
-  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) PRIVATE TAXI', exact: true }).click()
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) VIP Vito', exact: true }).click()
   await page.getByLabel('One-way price (GBP)', { exact: true }).fill('55.25')
-  prices[0].version = 0
-  prices[0].oneWay = 60.50
+  const current = prices.find(row => row.destination === 'Marmaris(Any Hotel)' && row.vehicleId === 'vip-minivan')
+  current.version = 0
+  current.oneWay = 60.50
   await page.getByRole('button', { name: 'Save prices', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('changed by another admin')
   await expect(page.getByRole('form', { name: 'Edit route prices' })).toHaveCount(0)
@@ -297,6 +300,7 @@ test('malformed stored transfer draft does not crash the booking page', async ({
 test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {
   await page.goto('http://127.0.0.1:4173/routes')
   await expect(page.getByText('59 destinations found · Prices in GBP, per vehicle', { exact: true })).toBeVisible()
+  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText(['VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter'])
   await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
   await page.getByPlaceholder('Search destinations', { exact: true }).fill('Alanya')
   await expect(page.getByText('£250.00', { exact: true })).toBeVisible()
@@ -335,4 +339,16 @@ test('booking uses the four public fleet categories with their existing fares an
   await vehicleCard('Sprinter').click()
   await page.getByRole('button', { name: 'Round Trip', exact: true }).click()
   await expect(vehicleCard('Sprinter').getByText('£160.00', { exact: true })).toBeVisible()
+})
+
+
+test('admin vehicle editing offers the current fleet and preserves only the saved old category', async ({ page }) => {
+  await adminFixture(page)
+  await page.getByRole('link', { name: /#901.*Menu test passenger/ }).click()
+  await page.getByRole('button', { name: 'Edit booking details', exact: true }).click()
+  const vehicle = page.getByRole('combobox', { name: 'Vehicle', exact: true })
+  await expect(vehicle).toHaveValue('mercedes-vito')
+  await expect(vehicle.locator('option')).toHaveText(['Select vehicle', 'VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter', 'mercedes-vito (previous category)'])
+  await vehicle.selectOption('maybach')
+  await expect(vehicle).toHaveValue('maybach')
 })

@@ -4,9 +4,9 @@ import type { TransferPrice } from '../../features/booking/useTransferPrices'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { BookingApiError } from '../../features/booking/api/errors'
 
-import { transferVehicles } from '../../features/booking/pricing'
+import { bookingVehicles } from '../../features/booking/bookingVehicles'
 
-const vehicleNames = new Map<string, string>(transferVehicles.map((vehicle) => [vehicle.id, vehicle.name]))
+const vehicleNames = new Map<string, string>(bookingVehicles.map((vehicle) => [vehicle.id, vehicle.name]))
 const normalize = (value: string) => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().replaceAll('ı', 'i')
 const pageSize = 25
 
@@ -31,7 +31,7 @@ export function RoutePricePage() {
   const [vehicleId, setVehicleId] = useState('')
   const [destination, setDestination] = useState('')
   const destinations = useMemo(() => [...new Set(prices.map(item => item.destination))], [prices])
-  const indexedPrices = useMemo(() => prices.map(item => ({ item, searchText: normalize(`${item.destination} ${vehicleNames.get(item.vehicleId) ?? item.vehicleId}`) })), [prices])
+  const indexedPrices = useMemo(() => prices.filter(item => vehicleNames.has(item.vehicleId)).map(item => ({ item, searchText: normalize(`${item.destination} ${vehicleNames.get(item.vehicleId) ?? item.vehicleId}`) })), [prices])
 
   const filteredPrices = useMemo(() => {
     const query = normalize(search.trim())
@@ -91,7 +91,7 @@ export function RoutePricePage() {
         </div>
         <div className="glass-card rounded-xl p-5">
           <p className="text-sm text-on-surface-variant">Vehicle types</p>
-          <p className="mt-2 text-3xl font-bold text-admin-primary">{transferVehicles.length}</p>
+          <p className="mt-2 text-3xl font-bold text-admin-primary">{bookingVehicles.length}</p>
         </div>
         <div className="glass-card rounded-xl p-5">
           <p className="text-sm text-on-surface-variant">Matching prices</p>
@@ -122,7 +122,7 @@ export function RoutePricePage() {
             Vehicle
             <select aria-label="Vehicle" className="w-full rounded-lg border border-outline-variant bg-white px-4 py-3 text-base font-normal" onChange={(event) => { setVehicleId(event.target.value); setPage(0) }} value={vehicleId}>
               <option value="">All vehicles</option>
-              {transferVehicles.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
+              {bookingVehicles.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
             </select>
           </label>
         </div>

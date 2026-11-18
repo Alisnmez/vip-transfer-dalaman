@@ -1,4 +1,4 @@
-import { bookingVehicles } from '../../features/booking/bookingVehicles'
+import { vehicleLabel } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
 import { Link } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
@@ -9,7 +9,6 @@ import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { createBooking } from '../../features/booking/api'
 import { BookingApiError, bookingErrorMessage } from '../../features/booking/api/errors'
-import { transferVehicles } from '../../features/booking/pricing'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
 import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
@@ -256,7 +255,7 @@ export function BookingConfirmationPage() {
                 <SummaryBlock
                   icon="airport_shuttle"
                   label="Vehicle Class"
-                  value={display(bookingVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name ?? transferVehicles.find(vehicle => vehicle.id === transfer.vehicleId)?.name)}
+                  value={vehicleLabel(transfer.vehicleId)}
                 />
               </div>
             </div>

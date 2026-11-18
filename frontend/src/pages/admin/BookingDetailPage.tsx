@@ -1,3 +1,4 @@
+import { bookingVehicles, vehicleLabel } from '../../features/booking/bookingVehicles'
 import { useEffect, useState } from 'react'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { Link, useParams } from 'react-router-dom'
@@ -8,7 +9,7 @@ import type { BookingEmailStatus } from '../../features/booking/api'
 import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
-import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { transferPrices } from '../../features/booking/pricing'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { validateAdminSchedule } from '../../features/booking/validateAdminSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
@@ -91,7 +92,7 @@ export function BookingDetailPage() {
   const selectedPrice = draft && routeValid
     ? currentPrices.find(price => price.destination === destination && price.vehicleId === draft.vehicleId)
     : undefined
-  const capacityValid = !!draft && validateTransferSelection(draft) === null
+  const capacityValid = !!draft && validateTransferSelection(draft, booking?.vehicleId) === null
   const previewFare = selectedPrice && draft && capacityValid
     ? (draft.tripType === 'round-trip' ? selectedPrice.roundTrip : selectedPrice.oneWay)
     : null
@@ -165,9 +166,12 @@ export function BookingDetailPage() {
           </label>
         ))}
         <label className="text-sm font-semibold">Vehicle
-          <select required value={draft.vehicleId} onChange={event => setDraft(current => current ? { ...current, vehicleId: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900">
+          <select aria-label="Vehicle" required value={draft.vehicleId} onChange={event => setDraft(current => current ? { ...current, vehicleId: event.target.value } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900">
             <option value="">Select vehicle</option>
-            {transferVehicles.map(vehicle => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
+            {bookingVehicles.map(vehicle => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
+            {booking?.vehicleId && !bookingVehicles.some(vehicle => vehicle.id === booking.vehicleId) && (
+              <option value={booking.vehicleId}>{vehicleLabel(booking.vehicleId)} (previous category)</option>
+            )}
           </select>
         </label>
         <label className="text-sm font-semibold">Trip type<select value={draft.tripType} onChange={event => setDraft(current => current ? { ...current, tripType: event.target.value as BookingRequest['tripType'], returnDateTime: event.target.value === 'one-way' ? undefined : current.returnDateTime } : current)} className="mt-2 block w-full rounded-lg border border-outline-variant bg-white p-3 text-gray-900"><option value="one-way">One-way</option><option value="round-trip">Round-trip</option></select></label>
@@ -198,7 +202,7 @@ export function BookingDetailPage() {
             ['Hotel', booking.hotelName || 'Not provided'],
             ['Transfer address', booking.transferAddress || 'Not provided'],
             ['Special requests', booking.specialRequests || 'None'],
-            ['Vehicle category', booking.vehicleId || 'Not provided'],
+            ['Vehicle category', vehicleLabel(booking.vehicleId)],
             ['Luggage', booking.luggageCount ?? 'Not provided'],
             ['Baby seats', booking.babySeatCount ?? 'Not provided'],
             ['Published fare (GBP)', `£${Number(booking.price).toFixed(2)}`],

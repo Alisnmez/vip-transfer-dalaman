@@ -1,4 +1,4 @@
-import { bookingVehicles } from '../src/features/booking/bookingVehicles.ts'
+import { bookingVehicles, vehicleLabel } from '../src/features/booking/bookingVehicles.ts'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { validateTransferSelection } from '../src/features/booking/validateTransferSelection.ts'
@@ -129,4 +129,17 @@ test('the four public fleet categories retain their intended existing fares', ()
   for (const id of ['taxi', 'premium-vip-minivan', 'maybach-plus', 'minibus', 'vip-minibus-long']) {
     assert.ok(validateTransferSelection({ ...valid, vehicleId: id }))
   }
+})
+
+
+test('admin can retain the saved legacy category without reopening it for new bookings', () => {
+  const old = { ...valid, vehicleId: 'taxi', passengerCount: 3, luggageCount: 3 }
+  assert.ok(validateTransferSelection(old))
+  assert.equal(validateTransferSelection(old, 'taxi'), null)
+  assert.ok(validateTransferSelection({ ...old, passengerCount: 4 }, 'taxi'))
+  assert.ok(validateTransferSelection({ ...old, vehicleId: 'premium-vip-minivan' }, 'taxi'))
+  for (const vehicle of bookingVehicles) assert.equal(vehicleLabel(vehicle.id), vehicle.name)
+  assert.equal(vehicleLabel('taxi'), 'PRIVATE TAXI')
+  assert.equal(vehicleLabel('old-vehicle'), 'old-vehicle')
+  assert.equal(vehicleLabel(''), 'Not provided')
 })
