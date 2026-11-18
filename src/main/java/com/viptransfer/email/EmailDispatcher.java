@@ -26,7 +26,7 @@ public class EmailDispatcher {
     private final long maxRunNanos;
 
     public EmailDispatcher(JdbcTemplate jdbc, EmailGateway gateway, PlatformTransactionManager manager,
-                           @Value("${app.email.batch-size:20}") int batchSize,
+                           @Value("${app.email.batch-size:5}") int batchSize,
                            @Value("${app.email.max-run-ms:5000}") long maxRunMs) {
         if (batchSize < 1 || batchSize > 100) throw new IllegalArgumentException("Email batch size must be between 1 and 100.");
         if (maxRunMs < 1 || maxRunMs > 30000) throw new IllegalArgumentException("Email dispatch budget must be between 1 and 30000 ms.");
