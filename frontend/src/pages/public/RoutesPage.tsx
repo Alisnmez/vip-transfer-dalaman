@@ -118,7 +118,7 @@ export function RoutesPage() {
                 </label>
                 <label className="space-y-2 text-sm font-semibold text-admin-primary">
                   <span className="block">Journey type</span>
-                  <select className="min-h-12 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-4 text-base font-normal text-on-surface" onChange={(event) => setTripType(event.target.value as 'one-way' | 'round-trip')} value={tripType}>
+                  <select aria-label="Journey type" className="min-h-12 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-4 text-base font-normal text-on-surface" onChange={(event) => setTripType(event.target.value as 'one-way' | 'round-trip')} value={tripType}>
                     <option value="one-way">One way</option>
                     <option value="round-trip">Round trip</option>
                   </select>

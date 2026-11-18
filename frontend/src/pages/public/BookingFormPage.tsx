@@ -223,7 +223,7 @@ export function BookingFormPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location<RequiredMark /></label>
-                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
+                  <select aria-label="Pickup Location" className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
                     <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
                     {groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
@@ -234,7 +234,7 @@ export function BookingFormPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination<RequiredMark /></label>
-                  <select className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
+                  <select aria-label="Destination" className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">Select destination</option>
                     {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">Dalaman Airport (DLM)</option>}
                     {pickUpLocation === "Dalaman Airport" && groupedDestinationOptions.map((group) => (

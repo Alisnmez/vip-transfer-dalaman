@@ -303,7 +303,7 @@ test('expanded resorts show all vehicle fares and return prices before booking',
   await page.getByLabel('Journey type', { exact: true }).selectOption('round-trip')
   await expect(page.getByText('£500.00', { exact: true })).toBeVisible()
   await page.goto('http://127.0.0.1:4173/booking')
-  const destination = page.getByRole('combobox').nth(1)
+  const destination = page.getByRole('combobox', { name: 'Destination', exact: true })
   await expect(destination.locator('optgroup option')).toHaveCount(59)
   for (const name of ['Bozburun', 'Sogut', 'Marmaris Cruise Port', 'Turunc Kumlubuk', 'Alanya', 'Yalikavak', 'Didim']) {
     await destination.selectOption(name)
