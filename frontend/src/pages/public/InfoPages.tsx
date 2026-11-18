@@ -30,7 +30,7 @@ const pageContent = {
   },
   contact: {
     eyebrow: 'Contact',
-    title: 'Contact VIP Transfer Dalaman',
+    title: 'Contact DalamanWay',
     description:
       'Share your route, travel date, passenger count, and flight number through the booking request form.',
     items: [
@@ -102,7 +102,7 @@ function InfoPage({
       meta.setAttribute('name', 'description')
       document.head.appendChild(meta)
     }
-    document.title = `${content.title} | VIP Transfer Dalaman`
+    document.title = `${content.title} | DalamanWay`
     meta.setAttribute('content', content.description)
     return () => {
       document.title = previousTitle
