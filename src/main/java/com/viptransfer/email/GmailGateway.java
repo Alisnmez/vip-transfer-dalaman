@@ -62,7 +62,7 @@ public class GmailGateway implements EmailGateway {
         } catch (MailException error) {
             // SMTP has no provider idempotency API. An uncertain send must be reviewed, never blindly resent.
             throw new DeliveryFailure("SMTP_UNKNOWN", false);
-        } catch (java.io.IOException | MessagingException error) {
+        } catch (java.io.IOException | MessagingException | IllegalStateException error) {
             throw new DeliveryFailure("SMTP_MESSAGE", false);
         }
     }
