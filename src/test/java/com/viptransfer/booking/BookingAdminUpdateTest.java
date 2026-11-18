@@ -193,6 +193,15 @@ class BookingAdminUpdateTest {
     }
 
     @Test
+    void confirmedBookingCanBeReturnedToPending() {
+        booking.setStatus("CONFIRMED");
+        Booking updated = service.updateStatus(10L, "PENDING");
+        assertEquals("PENDING", updated.getStatus());
+        verify(repository).save(booking);
+        verify(bookingEmails).queue(booking, "PENDING");
+    }
+
+    @Test
     void completedBookingCanBeReopenedAsPending() {
         booking.setStatus("COMPLETED");
         Booking updated = service.updateStatus(10L, "PENDING");
