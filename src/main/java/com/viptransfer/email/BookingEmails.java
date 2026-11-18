@@ -55,7 +55,7 @@ public class BookingEmails {
             case "COMPLETED" -> "Thank you for travelling with DalamanWay";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
-        enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (#" + booking.getId() + ")", text, customerHtml(booking, event, description));
+        enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (#" + booking.getId() + ")", text, customerHtml(booking, event, description).replace("DETAIL_CHANGES", ""));
         if (settings.operator() != null && !settings.operator().isBlank()) {
             enqueue(booking.getId(), event, settings.operator(), "[Operator] DalamanWay #" + booking.getId() + " — " + event,
                     description + "\n\n" + details + "\nReview details in the admin panel: https://dalamanway.com/admin/bookings/" + booking.getId(), null);
@@ -140,7 +140,7 @@ public class BookingEmails {
                 </td></tr></table></td></tr></table></body></html>
                 """.replace("STATUS_COLOR", statusColor).replace("STATUS_TEXT", escape(status))
                 .replace("HEADLINE_TEXT", escape(headline)).replace("DESCRIPTION_TEXT", escape(description))
-                .replace("DETAIL_ROWS", rows).replace("DETAIL_CHANGES", "");
+                .replace("DETAIL_ROWS", rows);
     }
 
     private void enqueue(Long bookingId, String event, String recipient, String subject, String text, String html) {
