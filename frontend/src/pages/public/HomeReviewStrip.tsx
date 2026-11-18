@@ -26,6 +26,7 @@ export function HomeReviewStrip() {
   const copy = reviewCopy[language]
   const [reviews, setReviews] = useState<PublicReview[]>([])
   const [paused, setPaused] = useState(false)
+  const [demo, setDemo] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -33,7 +34,11 @@ export function HomeReviewStrip() {
       ? Promise.resolve(demoReviews)
       : getPublishedReviews().then(result => result.content)
     feed.then(result => {
-      if (active) setReviews(result)
+      if (!active) return
+      const showDemo = isDemoPreview()
+        || (window.location.hostname === 'vip-transfer-dalaman-test.onrender.com' && result.length < 2)
+      setDemo(showDemo)
+      setReviews(showDemo ? demoReviews : result)
     }).catch(() => {
       // Reviews are optional on the home page. The reviews page reports API errors.
     })
@@ -59,7 +64,7 @@ export function HomeReviewStrip() {
             )}
           </div>
         </div>
-        {isDemoPreview() && <p className="mb-3 text-sm font-semibold">Demo content · Sample reviews for testing</p>}
+        {demo && <p className="mb-3 text-sm font-semibold">Demo content · Sample reviews for testing</p>}
         <div className="home-review-viewport" data-motion={canScroll && !paused}>
           <div className="home-review-track">
             {copies.map(duplicate => (
