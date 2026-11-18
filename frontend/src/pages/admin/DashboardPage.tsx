@@ -122,7 +122,7 @@ export function DashboardPage() {
             <span className="text-secondary font-bold">€1,280</span>
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button className="flex items-center gap-2 px-4 py-2 bg-white border border-outline-variant rounded-lg font-label-sm text-on-surface hover:bg-surface-container-low transition-colors">
             <span className="material-symbols-outlined text-sm">refresh</span>
             Refresh
