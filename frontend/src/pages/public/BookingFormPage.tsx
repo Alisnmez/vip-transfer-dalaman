@@ -31,7 +31,9 @@ const vehicles = [
 ]
 
 export function BookingFormPage() {
-  const navigate = useNavigate()\n  const [validationError, setValidationError] = useState('')\n  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
+  const navigate = useNavigate()
+  const [validationError, setValidationError] = useState('')
+  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
   const [selectedVehicleId, setSelectedVehicleId] = useState('van')
   const [pickUpLocation, setPickUpLocation] = useState('')
   const [dropOffLocation, setDropOffLocation] = useState('')
@@ -44,7 +46,17 @@ export function BookingFormPage() {
   const selectedVehicle =
     vehicles.find((vehicle) => vehicle.id === selectedVehicleId) ?? vehicles[1]
 
-  function saveTransferInfo() {\n    if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {\n      setValidationError('Enter both locations and your pickup date and time.')\n      return\n    }\n    const pickupTimestamp = new Date(`${pickUpDate}T${pickUpTime}`).getTime()\n    if (!Number.isFinite(pickupTimestamp) || pickupTimestamp <= Date.now()) {\n      setValidationError('Pickup must be in the future. Check the local transfer time.')\n      return\n    }\n    setValidationError('')
+  function saveTransferInfo() {
+    if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
+      setValidationError('Enter both locations and your pickup date and time.')
+      return
+    }
+    const pickupTimestamp = new Date(`${pickUpDate}T${pickUpTime}`).getTime()
+    if (!Number.isFinite(pickupTimestamp) || pickupTimestamp <= Date.now()) {
+      setValidationError('Pickup must be in the future. Check the local transfer time.')
+      return
+    }
+    setValidationError('')
     localStorage.setItem(
       'bookingTransferInfo',
       JSON.stringify({
@@ -56,6 +68,7 @@ export function BookingFormPage() {
         price: Number(selectedVehicle.price.replace('€', '')),
       }),
     )
+    navigate('/booking/passenger')
   }
 
   return (
@@ -210,7 +223,8 @@ export function BookingFormPage() {
                 />
               </div>
 
-              {validationError && <p role="alert" className="text-error text-sm">{validationError}</p>}\n              <div className="pt-8 border-t border-outline-variant flex justify-end">
+              {validationError && <p role="alert" className="text-error text-sm">{validationError}</p>}
+              <div className="pt-8 border-t border-outline-variant flex justify-end">
                 <button
                   className="px-12 py-4 bg-admin-primary text-on-primary font-title-md text-title-md rounded-lg hover:opacity-90 transition-all flex items-center gap-2 group"
                   onClick={saveTransferInfo}
