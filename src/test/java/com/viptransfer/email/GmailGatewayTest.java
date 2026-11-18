@@ -41,6 +41,7 @@ class GmailGatewayTest {
                 """;
         new GmailGateway(sender, new ObjectMapper()).send("event-html", payload);
         verify(sender).send(message);
+        message.saveChanges();
         assertTrue(message.isMimeType("multipart/*"));
         java.io.ByteArrayOutputStream output = new java.io.ByteArrayOutputStream();
         message.writeTo(output);
