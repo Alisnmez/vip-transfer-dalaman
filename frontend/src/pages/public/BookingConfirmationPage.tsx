@@ -445,7 +445,7 @@ function ConfirmationFooter() {
     <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
         <p className="text-sm text-on-surface-variant">
-          © {new Date().getFullYear()} VIP Transfer Dalaman
+          © {new Date().getFullYear()} DalamanWay
         </p>
         <div className="flex gap-5 text-sm">
           <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
