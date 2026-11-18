@@ -1,0 +1,22 @@
+name: Email optimization postdeploy readiness
+on:
+  push:
+    branches: [perf/email-dispatch-20261118]
+permissions:
+  contents: read
+jobs:
+  readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Check public read endpoints only
+        shell: python
+        run: |
+          import json, time, urllib.request
+          for host in ["dalamanway-api-prod", "vip-transfer-dalaman-api-test"]:
+              start=time.perf_counter()
+              req=urllib.request.Request("https://"+host+".onrender.com/reviews", headers={"User-Agent":"DalamanWay-authorized-readiness-check/1.0"})
+              with urllib.request.urlopen(req, timeout=15) as response:
+                  assert response.status == 200
+                  assert isinstance(json.loads(response.read(1048576)), list)
+              print(host+" HTTP 200 JSON list verified; elapsed_ms="+str(round((time.perf_counter()-start)*1000, 1)), flush=True)
