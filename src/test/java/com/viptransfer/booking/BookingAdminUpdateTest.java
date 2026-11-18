@@ -91,6 +91,22 @@ class BookingAdminUpdateTest {
     }
 
     @Test
+    void contactOnlyEditDoesNotNotifyCustomer() {
+        request.setPhoneNumber("+905551112233");
+        service.updateBooking(10L, request);
+        verify(bookingEmails, never()).queueUpdated(any(), anyString());
+    }
+
+    @Test
+    void destinationEditQueuesChangeSummary() {
+        request.setDropOffLocation("Marmaris(Any Hotel)");
+        when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
+                .thenReturn(new BigDecimal("47.50"));
+        service.updateBooking(10L, request);
+        verify(bookingEmails).queueUpdated(eq(booking), contains("Destination: Turunc"));
+    }
+
+    @Test
     void confirmedBookingCanChangeDestinationAndRecalculateFare() {
         request.setDropOffLocation("Marmaris(Any Hotel)");
         when(pricing.calculatePrice(any(), any(), any(), any(), anyInt()))
@@ -201,6 +217,13 @@ class BookingAdminUpdateTest {
         assertEquals("PENDING", updated.getStatus());
         verify(repository).save(booking);
         verify(bookingEmails).queue(booking, "PENDING");
+    }
+
+    @Test
+    void completingBookingQueuesThankYou() {
+        booking.setStatus("CONFIRMED");
+        service.updateStatus(10L, "COMPLETED");
+        verify(bookingEmails).queue(booking, "COMPLETED");
     }
 
     @Test
