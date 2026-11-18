@@ -3,7 +3,8 @@ import { useAsyncAction } from '../../hooks/useAsyncAction'
 import { Link, useParams } from 'react-router-dom'
 import { ProcessingButton } from '../../components/ProcessingButton'
 
-import { getBooking, updateBooking, updateBookingStatus } from '../../features/booking/api'
+import { getBooking, getBookingEmailStatuses, updateBooking, updateBookingStatus } from '../../features/booking/api'
+import type { BookingEmailStatus } from '../../features/booking/api'
 import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
@@ -24,6 +25,9 @@ export function BookingDetailPage() {
   const { bookingId } = useParams()
   const id = Number(bookingId)
   const [booking, setBooking] = useState<Booking | null>(null)
+  const [emailStatuses, setEmailStatuses] = useState<BookingEmailStatus[] | null>(null)
+  const [emailError, setEmailError] = useState('')
+  const [emailLoading, setEmailLoading] = useState(false)
   const [error, setError] = useState('')
   const [errorAction, setErrorAction] = useState('loading booking')
   const [notice, setNotice] = useState('')
@@ -41,6 +45,14 @@ export function BookingDetailPage() {
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [id])
+
+  async function refreshEmailStatuses() {
+    if (!Number.isSafeInteger(id) || id < 1) return
+    setEmailLoading(true); setEmailError('')
+    try { setEmailStatuses(await getBookingEmailStatuses(id)) }
+    catch (error) { setEmailError(error instanceof Error ? error.message : 'Could not load email history.') }
+    finally { setEmailLoading(false) }
+  }
 
   async function changeStatus(status: string) {
     if (!booking || status === bookingStatus(booking.status)) return
@@ -196,6 +208,23 @@ export function BookingDetailPage() {
           ))}
         </dl>
       )}
+      {booking && <section aria-label="Booking email history" className="mt-6 rounded-xl border border-outline-variant bg-white p-4 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div><h2 className="text-lg font-bold">Email delivery history</h2><p className="text-sm text-on-surface-variant">Provider acceptance is not proof of inbox delivery. No messages are resent from this screen.</p></div>
+          <button type="button" disabled={emailLoading} onClick={() => { void refreshEmailStatuses() }} className="rounded-lg bg-admin-primary px-4 py-2 font-semibold text-white disabled:opacity-50">{emailLoading ? 'Checking...' : 'Check email status'}</button>
+        </div>
+        {emailError && <p role="alert" className="mt-3 text-error">{emailError}</p>}
+        {emailStatuses && <div className="mt-4 space-y-3" aria-live="polite">
+          {emailStatuses.length === 0 && <p>No queued emails were found for this booking. Check whether email was enabled when it was created.</p>}
+          {emailStatuses.map(item => <article key={item.id} className="rounded-lg border border-outline-variant bg-gray-50 p-3 text-sm">
+            <div className="flex flex-wrap justify-between gap-2"><strong>{item.eventType}</strong><strong>{item.status}</strong></div>
+            <p>Attempts: {item.attempts} · Created: {new Date(item.createdAt).toLocaleString()}</p>
+            <p>Accepted by provider: {item.providerAccepted ? 'Yes (not delivery confirmation)' : 'No / unknown'}</p>
+            {item.lastError && <p className="text-error">Last error: {item.lastError}</p>}
+            {item.status === 'FAILED' && <p className="font-semibold text-amber-800">Requires manual review. Do not resend without checking the mailbox first.</p>}
+          </article>)}
+        </div>}
+      </section>}
       <p className="mt-6 text-sm text-on-surface-variant">Status changes and customer detail edits are separate. Editing details only recalculates the fare when pricing inputs change. Verify the new fare with the customer before confirming.</p>
     </section>
   )
