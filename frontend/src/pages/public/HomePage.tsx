@@ -235,9 +235,9 @@ export function HomePage() {
       <footer className="bg-primary border-t border-primary/20 py-stack-lg">
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-lg mb-stack-lg">
-            <div className="font-headline-lg text-headline-lg text-white font-bold">
-              DalamanWay
-            </div>
+            <Link to="/" aria-label="DalamanWay home" className="inline-flex items-center">
+              <img src="/dalamanway-logo-light.svg" alt="DalamanWay — Private Airport Transfers" className="h-16 w-auto max-w-[270px] object-contain sm:h-20 sm:max-w-[340px]" />
+            </Link>
             <div className="flex flex-wrap gap-stack-lg">
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">Services</Link>
               <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">Vehicles</Link>
