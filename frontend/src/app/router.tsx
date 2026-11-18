@@ -1,3 +1,4 @@
+import { LanguageProvider } from '../shared/localization/LanguageProvider'
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
 import { lazy, Suspense, useLayoutEffect } from 'react'
 import { trackPublicPage } from '../features/analytics/analytics'
@@ -95,7 +96,7 @@ function ScrollToTop() {
 
 // eslint-disable-next-line react-refresh/only-export-components
 function PublicPageLayout() {
-  return <><ScrollToTop /><PublicLayout /><AnalyticsConsent /></>
+  return <LanguageProvider><ScrollToTop /><PublicLayout /><AnalyticsConsent /></LanguageProvider>
 }
 
 export const router = createBrowserRouter([

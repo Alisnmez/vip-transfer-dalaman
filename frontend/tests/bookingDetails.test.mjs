@@ -78,6 +78,7 @@ test('mobile form drafts reject blank fields and malformed saved values', () => 
 
 test('contact fields enforce maximum lengths and permit valid international numbers', () => {
   assert.equal(check(transfer, { ...passenger, phoneNumber: '+37061234567' }), null)
+  assert.equal(check(transfer, { ...passenger, phoneNumber: '+79123456789', countryOfResidence: 'Russia' }), null)
   assert.ok(check(transfer, { ...passenger, customerName: 'A'.repeat(162) }))
   assert.ok(check(transfer, { ...passenger, email: 'a'.repeat(250) + '@example.com' }))
   assert.ok(check(transfer, { ...passenger, phoneNumber: '+1234567890123456' }))

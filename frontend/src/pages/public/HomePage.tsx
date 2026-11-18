@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
+import { HomeReviewStrip } from './HomeReviewStrip'
 
 export function HomePage() {
   useEffect(() => {
@@ -244,6 +245,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <HomeReviewStrip />
 
       <footer className="bg-primary border-t border-primary/20 py-stack-lg">
         <div className="max-w-container-max mx-auto px-gutter">

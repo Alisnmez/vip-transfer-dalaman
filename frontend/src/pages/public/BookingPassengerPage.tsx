@@ -10,6 +10,17 @@ import { validateTransferSelection } from '../../features/booking/validateTransf
 import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 
 
+const dialingCodes = [
+  { code: '+90', label: '🇹🇷 +90' },
+  { code: '+44', label: '🇬🇧 +44' },
+  { code: '+49', label: '🇩🇪 +49' },
+  { code: '+7', label: '🇷🇺 +7' },
+  { code: '+33', label: '🇫🇷 +33' },
+  { code: '+41', label: '🇨🇭 +41' },
+  { code: '+1', label: '🇺🇸 +1' },
+  { code: '+370', label: '🇱🇹 +370' },
+]
+
 type SavedPassenger = {
   customerName?: string
   phoneNumber?: string
@@ -56,12 +67,12 @@ export function BookingPassengerPage() {
   const [draft] = useState(readPassengerDraft)
   const [firstName, setFirstName] = useState(() => draft.customerName?.trim().split(/\s+/)[0] ?? '')
   const [lastName, setLastName] = useState(() => draft.customerName?.trim().split(/\s+/).slice(1).join(' ') ?? '')
-  const [phoneNumber, setPhoneNumber] = useState(() => {
-    const number = draft.phoneNumber ?? ''
-    const code = ['+370', '+90', '+44', '+49', '+33', '+41', '+1'].find((item) => number.startsWith(item))
-    return code ? number.slice(code.length) : ''
-  })
-  const [countryCode, setCountryCode] = useState(() => ['+370', '+90', '+44', '+49', '+33', '+1'].find((code) => draft.phoneNumber?.startsWith(code)) ?? '+90')
+  const savedPhone = draft.phoneNumber ?? ''
+  const savedCountryCode = dialingCodes.find(({ code }) => savedPhone.startsWith(code))?.code
+  const [phoneNumber, setPhoneNumber] = useState(() => savedCountryCode ? savedPhone.slice(savedCountryCode.length) : '')
+  const [countryCode, setCountryCode] = useState(savedCountryCode ?? '+90')
+  const tenDigitNumber = ['+90', '+1', '+7'].includes(countryCode)
+  const nationalNumberLimit = tenDigitNumber ? 10 : 15 - (countryCode.length - 1)
   const [email, setEmail] = useState(draft.email ?? '')
   const [countryOfResidence, setCountryOfResidence] = useState(draft.countryOfResidence ?? '')
   const [transferAddress, setTransferAddress] = useState(draft.transferAddress ?? '')
@@ -92,8 +103,8 @@ export function BookingPassengerPage() {
     }
     const digits = phoneNumber.replace(/\D/g, '')
     const countryDigits = countryCode.replace(/\D/g, '').length
-    if (((countryCode === '+90' || countryCode === '+1') && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
-      setPhoneError(countryCode === '+90' ? 'Turkish mobile numbers must contain 10 digits and start with 5 (without +90).' : countryCode === '+1' ? 'US and Canadian numbers must contain 10 digits (without +1).' : 'Enter a valid national number: at least 7 digits and no more than 15 digits including the country code.')
+    if ((tenDigitNumber && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
+      setPhoneError(countryCode === '+90' ? 'Turkish mobile numbers must contain 10 digits and start with 5 (without +90).' : countryCode === '+1' ? 'US and Canadian numbers must contain 10 digits (without +1).' : countryCode === '+7' ? 'Enter 10 digits after the +7 dialing code.' : 'Enter a valid national number: at least 7 digits and no more than 15 digits including the country code.')
       return
     }
     if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
@@ -211,21 +222,26 @@ export function BookingPassengerPage() {
                     </label>
                     <div className="flex min-w-0">
                       <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber(''); setPhoneError('') }}>
-                        <option value="+90">🇹🇷 +90</option>
-                        <option value="+44">🇬🇧 +44</option>
-                        <option value="+49">🇩🇪 +49</option>
-                        <option value="+33">🇫🇷 +33</option>
-                         <option value="+41">🇨🇭 +41</option>
-                        <option value="+1">🇺🇸 +1</option>
-                        <option value="+370">🇱🇹 +370</option>
+                        {dialingCodes.map(({ code, label }) => <option key={code} value={code}>{label}</option>)}
                       </select>
                       <input
                         className="min-w-0 flex-1 border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                        onChange={(event) => { const raw = event.target.value.replace(/\D/g, ''); const national = countryCode === '+90' && raw.length === 11 && raw.startsWith('0') ? raw.slice(1) : raw; setPhoneNumber(national.slice(0, countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length)); setPhoneError('') }}
+                        onChange={(event) => {
+                          const value = event.target.value.trim()
+                          const raw = value.replace(/\D/g, '')
+                          const national = countryCode === '+90' && raw.length === 11 && raw.startsWith('0')
+                            ? raw.slice(1)
+                            : raw
+                          const russianNational = raw.length === 11 && (value.startsWith('+7') || raw.startsWith('8'))
+                            ? raw.slice(1)
+                            : raw
+                          setPhoneNumber(countryCode === '+7' ? russianNational : national.slice(0, nationalNumberLimit))
+                          setPhoneError('')
+                        }}
                         placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
                         autoComplete="tel-national"
                         inputMode="numeric"
-                        maxLength={countryCode === '+90' || countryCode === '+1' ? 10 : 15 - countryCode.replace(/\D/g, '').length}
+                        maxLength={countryCode === '+7' ? undefined : nationalNumberLimit}
                         type="tel"
                         value={phoneNumber}
                       />

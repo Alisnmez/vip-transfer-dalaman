@@ -1,0 +1,53 @@
+.home-review-viewport {
+  overflow-x: auto;
+}
+
+.home-review-track,
+.home-review-group {
+  display: flex;
+  width: max-content;
+}
+
+.home-review-group {
+  flex: none;
+  gap: 1rem;
+  margin: 0;
+  padding: 0 1rem 0 0;
+  list-style: none;
+}
+
+.home-review-card {
+  width: min(21rem, 73vw);
+}
+
+.home-review-group[aria-hidden="true"] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-review-viewport[data-motion="true"] {
+    overflow: hidden;
+  }
+
+  .home-review-viewport[data-motion="true"] .home-review-track {
+    animation: home-review-scroll 45s linear infinite;
+  }
+
+  .home-review-viewport[data-motion="true"]:hover .home-review-track {
+    animation-play-state: paused;
+  }
+
+  .home-review-viewport[data-motion="true"] .home-review-group[aria-hidden="true"] {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-review-pause {
+    display: none;
+  }
+}
+
+@keyframes home-review-scroll {
+  to { transform: translateX(-50%); }
+}
