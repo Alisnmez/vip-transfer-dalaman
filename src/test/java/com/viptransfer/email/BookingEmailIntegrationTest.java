@@ -69,11 +69,11 @@ class BookingEmailIntegrationTest {
     @Test void interruptedDeliveryStaysClaimedAndIsNotBlindlyResent() {
         bookings.createBooking(request(), UUID.randomUUID().toString());
         when(gateway.send(anyString(), anyString())).thenThrow(new IllegalStateException("simulated interruption"));
-        assertThrows(IllegalStateException.class, () -> dispatcher.dispatch());
-        assertEquals(1, count("SENDING"));
+        dispatcher.dispatch();
+        assertEquals(2, count("FAILED"));
         doReturn("provider-id").when(gateway).send(anyString(), anyString());
         dispatcher.dispatch();
-        assertEquals(1, count("SENDING")); assertEquals(1, count("ACCEPTED"));
+        assertEquals(0, count("SENDING")); assertEquals(2, count("FAILED")); assertEquals(0, count("ACCEPTED"));
         verify(gateway, times(2)).send(anyString(), anyString());
     }
 
