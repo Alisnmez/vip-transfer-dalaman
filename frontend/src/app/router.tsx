@@ -49,13 +49,13 @@ function ScrollToTop() {
     }
     robots.content = production && indexable ? 'index,follow' : 'noindex,nofollow'
     const pageMetadata: Record<string, { title: string; description: string }> = {
-      '/': { title: 'Dalaman Airport Transfers | VIP Transfer Dalaman', description: 'Request private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz and nearby destinations.' },
-      '/routes': { title: 'Dalaman Airport Transfer Routes | VIP Transfer Dalaman', description: 'Explore Dalaman Airport private transfer routes to Marmaris, Fethiye, Oludeniz, Gocek and Icmeler.' },
-      '/vehicles': { title: 'Airport Transfer Vehicles | VIP Transfer Dalaman', description: 'Explore private Dalaman airport transfer vehicle categories for your passengers and luggage.' },
-      '/services': { title: 'Private Airport Transfer Services | VIP Transfer Dalaman', description: 'Request airport pickup, hotel transfers and return journeys from Dalaman Airport.' },
-      '/contact': { title: 'Contact VIP Transfer Dalaman | Airport Transfer Support', description: 'Contact VIP Transfer Dalaman about transfer bookings, changes and cancellations.' },
-      '/faq': { title: 'Dalaman Airport Transfer FAQ | VIP Transfer Dalaman', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
-      '/reviews': { title: 'Customer Reviews | VIP Transfer Dalaman', description: 'Share your experience with VIP Transfer Dalaman and learn how customer feedback is reviewed.' },
+      '/': { title: 'Dalaman Airport Transfers | DalamanWay', description: 'Request private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz and nearby destinations.' },
+      '/routes': { title: 'Dalaman Airport Transfer Routes | DalamanWay', description: 'Explore Dalaman Airport private transfer routes to Marmaris, Fethiye, Oludeniz, Gocek and Icmeler.' },
+      '/vehicles': { title: 'Airport Transfer Vehicles | DalamanWay', description: 'Explore private Dalaman airport transfer vehicle categories for your passengers and luggage.' },
+      '/services': { title: 'Private Airport Transfer Services | DalamanWay', description: 'Request airport pickup, hotel transfers and return journeys from Dalaman Airport.' },
+      '/contact': { title: 'Contact DalamanWay | Airport Transfer Support', description: 'Contact DalamanWay about transfer bookings, changes and cancellations.' },
+      '/faq': { title: 'Dalaman Airport Transfer FAQ | DalamanWay', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
+      '/reviews': { title: 'Customer Reviews | DalamanWay', description: 'Share your experience with DalamanWay and learn how customer feedback is reviewed.' },
     }
     const destinationNames: Record<string, string> = {
       marmaris: 'Marmaris',
@@ -68,11 +68,11 @@ function ScrollToTop() {
     const destination = destinationSlug ? destinationNames[destinationSlug] : undefined
     const metadata = destination
       ? {
-          title: `Dalaman Airport to ${destination} Private Transfer | VIP Transfer Dalaman`,
+          title: `Dalaman Airport to ${destination} Private Transfer | DalamanWay`,
           description: `Request a private transfer from Dalaman Airport to ${destination}. Compare available vehicle options and plan your journey.`,
         }
       : pageMetadata[pathname]
-    document.title = metadata?.title ?? (indexable ? 'Dalaman Airport Private Transfer | VIP Transfer Dalaman' : 'VIP Transfer Dalaman')
+    document.title = metadata?.title ?? (indexable ? 'Dalaman Airport Private Transfer | DalamanWay' : 'DalamanWay')
     let description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
     if (!description) {
       description = document.createElement('meta')
