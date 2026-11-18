@@ -1,0 +1,79 @@
+name: Bounded production read capacity
+on:
+  push:
+    branches: [test/production-capacity-20261118]
+permissions:
+  contents: read
+concurrency:
+  group: production-capacity-probe
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Measure public database reads without changing data
+        shell: python
+        run: |
+          import concurrent.futures, json, math, os, threading, time, urllib.request
+          URL = "https://dalamanway-api-prod.onrender.com/reviews"
+          stop = threading.Event()
+          rows = []
+          def request():
+              start = time.perf_counter()
+              try:
+                  req = urllib.request.Request(URL, headers={"User-Agent": "DalamanWay-authorized-capacity-check/1.0"})
+                  with urllib.request.urlopen(req, timeout=3) as response:
+                      status = response.status
+                      body = response.read(1048577)
+                      if len(body) > 1048576: raise ValueError("response too large")
+                      if not isinstance(json.loads(body), list): raise ValueError("unexpected response")
+                  ok = status == 200
+              except Exception as exc:
+                  status = type(exc).__name__
+                  ok = False
+              elapsed = time.perf_counter() - start
+              if not ok or elapsed > 2: stop.set()
+              return {"ok": ok, "seconds": elapsed, "status": status}
+          baseline = request()
+          print("BASELINE " + json.dumps(baseline), flush=True)
+          if not baseline["ok"] or baseline["seconds"] > 1:
+              raise SystemExit("Baseline failed or slow; no load applied")
+          for rate in [1, 2, 5, 10]:
+              results, skipped = [], 0
+              start = time.perf_counter()
+              with concurrent.futures.ThreadPoolExecutor(max_workers=10) as pool:
+                  futures = []
+                  for i in range(rate * 15):
+                      if stop.is_set(): break
+                      delay = start + i / rate - time.perf_counter()
+                      if delay > 0: time.sleep(delay)
+                      if stop.is_set(): break
+                      if sum(not f.done() for f in futures) >= 10:
+                          skipped += 1
+                          stop.set()
+                          break
+                      futures.append(pool.submit(request))
+                  results = [f.result() for f in futures]
+              if not results: break
+              elapsed = time.perf_counter() - start
+              times = sorted(x["seconds"] for x in results)
+              p95 = times[math.ceil(len(times) * .95) - 1]
+              errors = sum(not x["ok"] for x in results)
+              row = {"target_rps": rate, "requests": len(results), "elapsed_seconds": round(elapsed, 3),
+                     "achieved_rps": round(len(results)/elapsed, 2), "p50_ms": round(times[len(times)//2]*1000, 1),
+                     "p95_ms": round(p95*1000, 1), "max_ms": round(max(times)*1000, 1),
+                     "errors": errors, "skipped": skipped}
+              rows.append(row)
+              print("STAGE " + json.dumps(row), flush=True)
+              if errors or skipped or p95 > 1 or stop.is_set():
+                  print("STOP: latency/error/concurrency threshold reached", flush=True)
+                  break
+              time.sleep(3)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("# Bounded read capacity probe\n\n")
+              f.write("Endpoint: GET /reviews; production; no writes or email. Maximum 10 requests/second and 10 in flight. 15 seconds per stage.\n\n")
+              f.write("|Target RPS|Requests|Achieved RPS|p95 ms|Errors|\n|---|---|---|---|---|\n")
+              for r in rows:
+                  f.write(f'|{r["target_rps"]}|{r["requests"]}|{r["achieved_rps"]}|{r["p95_ms"]}|{r["errors"]}|\n')
+              f.write("\nThis is a short read-only lower-bound measurement, not a booking/write capacity test or a proven maximum.\n")
