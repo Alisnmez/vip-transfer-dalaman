@@ -230,6 +230,15 @@ public class BookingService {
             updatedFare = transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(),
                     dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount());
         }
+        StringBuilder changes = new StringBuilder();
+        appendChange(changes, "Pick-up", existingBooking.getPickUpLocation(), dto.getPickUpLocation());
+        appendChange(changes, "Destination", existingBooking.getDropOffLocation(), dto.getDropOffLocation());
+        appendChange(changes, "Pick-up time (Türkiye)", existingBooking.getTransferDateTime(), dto.getTransferDateTime());
+        appendChange(changes, "Return time (Türkiye)", existingBooking.getReturnDateTime(), dto.getReturnDateTime());
+        appendChange(changes, "Vehicle", existingBooking.getVehicleId(), dto.getVehicleId());
+        appendChange(changes, "Passengers", existingBooking.getPassengerCount(), dto.getPassengerCount());
+        appendChange(changes, "Trip type", existingBooking.getTripType(), dto.getTripType());
+        if (fareChanged) appendChange(changes, "Quoted fare (GBP)", existingBooking.getPrice(), updatedFare);
         existingBooking.setCustomerName(dto.getCustomerName());
         existingBooking.setPassengerCount(dto.getPassengerCount());
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
@@ -251,7 +260,19 @@ public class BookingService {
             existingBooking.setPrice(updatedFare);
         }
 
-        return bookingRepository.save(existingBooking);
+        Booking saved = bookingRepository.save(existingBooking);
+        if (!changes.isEmpty() && !"CANCELLED".equals(saved.getStatus())) {
+            bookingEmails.queueUpdated(saved, changes.toString().stripTrailing());
+        }
+        return saved;
+    }
+
+    private static void appendChange(StringBuilder changes, String label, Object before, Object after) {
+        if (!Objects.equals(before, after)) {
+            changes.append(label).append(": ")
+                    .append(before == null ? "Not set" : before)
+                    .append(" → ").append(after == null ? "Not set" : after).append("\\n");
+        }
     }
 
     @Transactional
@@ -277,7 +298,7 @@ public class BookingService {
         }
         booking.setStatus(status);
         Booking saved = bookingRepository.save(booking);
-        if (!"COMPLETED".equals(status)) bookingEmails.queue(saved, status);
+        bookingEmails.queue(saved, status);
         return saved;
     }
 
