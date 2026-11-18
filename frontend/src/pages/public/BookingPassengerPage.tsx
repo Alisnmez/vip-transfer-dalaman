@@ -580,9 +580,10 @@ function PassengerFooter() {
   return (
     <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-on-surface-variant">
-          © {new Date().getFullYear()} DalamanWay
-        </p>
+        <div className="flex items-center gap-3">
+          <img src="/dalamanway-mark.svg" alt="" aria-hidden="true" className="h-9 w-12 object-contain" />
+          <p className="text-sm text-on-surface-variant">© {new Date().getFullYear()} DalamanWay</p>
+        </div>
         <div className="flex gap-5 text-sm">
           <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
           <Link className="text-admin-primary hover:underline" to="/services">Services</Link>
