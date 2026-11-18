@@ -310,3 +310,29 @@ test('expanded resorts show all vehicle fares and return prices before booking',
     await expect(destination).toHaveValue(name)
   }
 })
+
+test('booking uses the four public fleet categories with their existing fares and limits', async ({ page }) => {
+  await page.goto('http://127.0.0.1:4173/booking')
+  const vehicleCard = name => page.getByRole('button').filter({ has: page.getByRole('heading', { name, exact: true }) })
+  await expect(page.getByRole('button', { pressed: true })).toHaveCount(1)
+  for (const name of ['VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter']) {
+    await expect(vehicleCard(name)).toBeVisible()
+  }
+  for (const name of ['PRIVATE TAXI', 'PRIVATE PREMIUM VIP MINIVAN', 'PRIVATE MERCEDES MAYBACH +', 'PRIVATE VIP MINIBUS LONG']) {
+    await expect(page.getByRole('heading', { name, exact: true })).toHaveCount(0)
+  }
+  await page.getByRole('combobox', { name: 'Destination', exact: true }).selectOption('Marmaris(Any Hotel)')
+  for (const [name, amount] of [['VIP Vito', '£47.50'], ['Ultra VIP Vito', '£62.50'], ['Sprinter', '£80.50'], ['Ultra Sprinter', '£87.50']]) {
+    await vehicleCard(name).click()
+    await expect(vehicleCard(name)).toHaveAttribute('aria-pressed', 'true')
+    await expect(vehicleCard(name).getByText(amount, { exact: true })).toBeVisible()
+  }
+  await vehicleCard('Ultra VIP Vito').click()
+  for (let i = 0; i < 3; i++) await page.getByRole('button', { name: 'Increase Passengers', exact: true }).click()
+  await expect(page.getByRole('button', { name: 'Increase Passengers', exact: true })).toBeDisabled()
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Increase Luggages', exact: true }).click()
+  await expect(page.getByRole('button', { name: 'Increase Luggages', exact: true })).toBeDisabled()
+  await vehicleCard('Sprinter').click()
+  await page.getByRole('button', { name: 'Round Trip', exact: true }).click()
+  await expect(vehicleCard('Sprinter').getByText('£160.00', { exact: true })).toBeVisible()
+})

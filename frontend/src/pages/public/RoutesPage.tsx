@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { transferVehicles } from '../../features/booking/pricing'
+import { bookingVehicles } from '../../features/booking/bookingVehicles'
 import { PublicNavbar } from './PublicNavbar'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 
@@ -20,7 +20,7 @@ export function RoutesPage() {
   const { prices: transferPrices, loading, error, refresh } = useTransferPrices()
   const featuredRoutes = useMemo(() => {
     const minimums = new Map<string, number>()
-    for (const price of transferPrices) minimums.set(price.destination, Math.min(minimums.get(price.destination) ?? Infinity, price.oneWay))
+    for (const price of transferPrices.filter(row => bookingVehicles.some(vehicle => vehicle.id === row.vehicleId))) minimums.set(price.destination, Math.min(minimums.get(price.destination) ?? Infinity, price.oneWay))
     return featuredDestinations.map(({ name, slug }) => {
       const match = [...minimums].find(([destination]) => destination.toLowerCase().includes(name.toLowerCase()))
       return match ? { destination: match[0], from: match[1], slug } : null
@@ -28,7 +28,7 @@ export function RoutesPage() {
   }, [transferPrices])
 
   const [search, setSearch] = useState('')
-  const [selectedVehicle, setSelectedVehicle] = useState('taxi')
+  const [selectedVehicle, setSelectedVehicle] = useState<string>(bookingVehicles[0].id)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
 
   const routes = useMemo(() => {
@@ -113,7 +113,7 @@ export function RoutesPage() {
                 <label className="space-y-2 text-sm font-semibold text-admin-primary">
                   <span className="block">Vehicle</span>
                   <select aria-label="Vehicle" className="min-h-12 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-4 text-base font-normal text-on-surface" onChange={(event) => setSelectedVehicle(event.target.value)} value={selectedVehicle}>
-                    {transferVehicles.map((vehicle) => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
+                    {bookingVehicles.map((vehicle) => <option key={vehicle.id} value={vehicle.id}>{vehicle.name}</option>)}
                   </select>
                 </label>
                 <label className="space-y-2 text-sm font-semibold text-admin-primary">

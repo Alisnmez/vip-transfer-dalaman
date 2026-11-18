@@ -1,3 +1,4 @@
+import { bookingVehicles } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
 import { Link } from 'react-router-dom'
 import { useEffect, useId, useState } from 'react'
@@ -5,7 +6,7 @@ import { useEffect, useId, useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
-import { transferPrices, transferVehicles } from '../../features/booking/pricing'
+import { transferPrices } from '../../features/booking/pricing'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { turkeyToday } from '../../features/booking/turkeyTime'
 import { destinationGroups } from '../../features/booking/destinationGroups'
@@ -65,7 +66,7 @@ export function BookingFormPage() {
   useEffect(() => { trackAnalyticsEvent('booking_started') }, [])
   const [draft] = useState(readTransferDraft)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
-  const [selectedVehicleId, setSelectedVehicleId] = useState(transferVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
+  const [selectedVehicleId, setSelectedVehicleId] = useState(bookingVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
   const [pickUpLocation, setPickUpLocation] = useState(draft.pickUpLocation || 'Dalaman Airport')
   const [dropOffLocation, setDropOffLocation] = useState(draft.dropOffLocation ?? '')
   const [pickUpDate, setPickUpDate] = useState(draft.pickUpDate ?? '')
@@ -87,11 +88,11 @@ export function BookingFormPage() {
   }))
   const routeDestination = pickUpLocation === 'Dalaman Airport' ? dropOffLocation : dropOffLocation === 'Dalaman Airport' ? pickUpLocation : ''
   const availableDestinations = pickUpLocation === 'Dalaman Airport' ? destinations : ['Dalaman Airport']
-  const availableVehicles = transferVehicles.filter((vehicle) => findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
+  const availableVehicles = bookingVehicles.filter((vehicle) => !routeDestination || findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
   const effectiveVehicleId = availableVehicles.some((vehicle) => vehicle.id === selectedVehicleId) ? selectedVehicleId : availableVehicles[0]?.id ?? selectedVehicleId
   const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
   const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
-  const selectedVehicle = transferVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? transferVehicles[1]
+  const selectedVehicle = bookingVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? bookingVehicles[0]
   const maxAllowedPassengers = selectedVehicle.maxPassengers
   const maxAllowedLuggage = Math.min(8, selectedVehicle.maxLuggage ?? 8)
 
@@ -291,13 +292,14 @@ export function BookingFormPage() {
                 <label className="font-label-sm text-label-sm text-on-surface-variant block">
                   Select Vehicle Type
                 </label>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-gutter-grid">
+                <p className="text-sm text-on-surface-variant">For more than 8 bags, contact us before booking.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
                     const isSelected = effectiveVehicleId === vehicle.id
 
                     return (
                       <button
-                        className={`relative text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
+                        className={`relative min-w-0 text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
                           isSelected
                             ? 'border-2 border-admin-primary bg-primary-fixed/20'
                             : 'border border-outline-variant hover:border-admin-primary bg-white'
@@ -305,9 +307,10 @@ export function BookingFormPage() {
                         key={vehicle.id}
                         onClick={() => setSelectedVehicleId(vehicle.id)}
                         type="button"
+                        aria-pressed={isSelected}
                       >
-                        <div className="h-32 mb-4 bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
-                          <span translate="no" className="material-symbols-outlined text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
+                        <div className="h-32 mb-4 min-w-0 overflow-hidden bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
+                          <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
                           <span className="text-xs text-slate-500">Vehicle category</span>
                         </div>
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
@@ -549,7 +552,7 @@ function BookingSummary({
 }: {
   babySeats: number
   passengers: number
-  selectedVehicle: (typeof transferVehicles)[number]
+  selectedVehicle: (typeof bookingVehicles)[number]
   pickUpLocation: string
   dropOffLocation: string
   pickUpDate: string
