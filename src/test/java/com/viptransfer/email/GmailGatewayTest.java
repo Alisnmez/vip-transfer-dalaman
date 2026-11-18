@@ -30,6 +30,25 @@ class GmailGatewayTest {
         assertEquals("Pending confirmation.", message.getContent());
         assertEquals("event-1", message.getHeader("X-DalamanWay-Event", null));
     }
+    @Test void htmlNotificationContainsPlainTextAndHtmlAlternatives() throws Exception {
+        JavaMailSender sender = mock(JavaMailSender.class);
+        MimeMessage message = new MimeMessage(Session.getInstance(new Properties()));
+        when(sender.createMimeMessage()).thenReturn(message);
+        String payload = """
+                {"from":"dalamanway.booking@gmail.com","to":["customer@example.com"],
+                "reply_to":"dalamanway.booking@gmail.com","subject":"Booking received",
+                "text":"Pending confirmation.","html":"<h1>Booking received</h1>"}
+                """;
+        new GmailGateway(sender, new ObjectMapper()).send("event-html", payload);
+        verify(sender).send(message);
+        assertTrue(message.isMimeType("multipart/*"));
+        jakarta.mail.Multipart parts = (jakarta.mail.Multipart) message.getContent();
+        assertEquals(2, parts.getCount());
+        assertTrue(parts.getBodyPart(0).isMimeType("text/plain"));
+        assertEquals("Pending confirmation.", parts.getBodyPart(0).getContent());
+        assertTrue(parts.getBodyPart(1).isMimeType("text/html"));
+        assertEquals("<h1>Booking received</h1>", parts.getBodyPart(1).getContent());
+    }
     @Test void uncertainSmtpFailureIsNotAutomaticallyRetried() {
         JavaMailSender sender = mock(JavaMailSender.class);
         when(sender.createMimeMessage()).thenReturn(new MimeMessage(Session.getInstance(new Properties())));
