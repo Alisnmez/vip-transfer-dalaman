@@ -34,6 +34,7 @@ public class BookingEmails {
             case "CONFIRMED" -> "Your transfer booking has been confirmed by the operator.";
             case "CANCELLED" -> "Your booking has been cancelled by the operator.";
             case "PENDING" -> "Your booking is now pending operator confirmation.";
+            case "COMPLETED" -> "Thank you for travelling with DalamanWay. We hope you enjoyed a comfortable journey and look forward to welcoming you again.";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
         String details = "Booking reference: #" + booking.getId()
@@ -51,6 +52,7 @@ public class BookingEmails {
             case "CONFIRMED" -> "Your airport transfer is confirmed";
             case "CANCELLED" -> "Your transfer booking has been cancelled";
             case "PENDING" -> "Update: your booking is awaiting confirmation";
+            case "COMPLETED" -> "Thank you for travelling with DalamanWay";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
         enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (#" + booking.getId() + ")", text, customerHtml(booking, event, description));
@@ -60,6 +62,22 @@ public class BookingEmails {
         }
     }
 
+
+    /** Notify only when customer-facing journey details change, with a before/after summary. */
+    public void queueUpdated(Booking booking, String changes) {
+        if (!settings.enabled() || booking.getEmail() == null || booking.getEmail().isBlank()
+                || booking.getEmail().toLowerCase(Locale.ROOT).endsWith(".invalid")) return;
+        String description = "Your transfer details have been updated. Please review the changes below. "
+                + "If you did not request this change, reply to this email.";
+        String text = "DalamanWay\\n\\n" + description + "\\n\\nChanges:\\n" + changes
+                + "\\n\\nBooking reference: #" + booking.getId()
+                + "\\nNo online payment has been collected. Payment arrangements are confirmed by our team.";
+        String html = customerHtml(booking, "UPDATED", description)
+                .replace("DETAIL_CHANGES", "<div style='white-space:pre-line;padding:14px;background:#f1f5f9;color:#1E3A5F;font-size:14px'>"
+                        + escape(changes).replace("\\n", "<br>") + "</div>");
+        enqueue(booking.getId(), "UPDATED", booking.getEmail(),
+                "DalamanWay | Your transfer details have been updated (#" + booking.getId() + ")", text, html);
+    }
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, d MMM yyyy 'at' HH:mm", Locale.UK);
 
@@ -81,11 +99,13 @@ public class BookingEmails {
             case "CONFIRMED" -> "Your transfer is confirmed";
             case "CANCELLED" -> "Your booking has been cancelled";
             case "PENDING" -> "Your booking is awaiting confirmation";
+            case "COMPLETED" -> "Thank you for travelling with us";
+            case "UPDATED" -> "Your transfer details have been updated";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
         String status = "RECEIVED".equals(event) ? "PENDING" : event;
         String statusColor = switch (status) {
-            case "CONFIRMED" -> "#087F69";
+            case "CONFIRMED", "COMPLETED", "UPDATED" -> "#087F69";
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
         };
@@ -111,7 +131,7 @@ public class BookingEmails {
                 <div style="display:inline-block;padding:7px 12px;border-radius:20px;background:#f1f5f9;color:STATUS_COLOR;font-size:12px;font-weight:700;letter-spacing:1px">STATUS_TEXT</div>
                 <h1 style="font-size:25px;line-height:1.3;margin:20px 0 12px;color:#1E3A5F">HEADLINE_TEXT</h1>
                 <p style="font-size:15px;line-height:1.7;color:#475569;margin:0 0 24px">DESCRIPTION_TEXT</p>
-                <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">DETAIL_ROWS</table>
+                DETAIL_CHANGES<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">DETAIL_ROWS</table>
                 <p style="font-size:13px;line-height:1.7;color:#64748b;margin:24px 0 0">No online payment has been collected. Payment arrangements are confirmed by our team.</p>
                 <p style="font-size:14px;line-height:1.7;color:#475569;margin:16px 0 0">Need help? Simply reply to this email and include your booking reference.</p>
                 <p style="margin:24px 0 0"><a href="https://dalamanway.com" style="display:inline-block;background:#2A9D8F;color:#fff;text-decoration:none;padding:13px 22px;border-radius:7px;font-size:14px;font-weight:700">Visit DalamanWay</a></p>
@@ -120,7 +140,7 @@ public class BookingEmails {
                 </td></tr></table></td></tr></table></body></html>
                 """.replace("STATUS_COLOR", statusColor).replace("STATUS_TEXT", escape(status))
                 .replace("HEADLINE_TEXT", escape(headline)).replace("DESCRIPTION_TEXT", escape(description))
-                .replace("DETAIL_ROWS", rows);
+                .replace("DETAIL_ROWS", rows).replace("DETAIL_CHANGES", "");
     }
 
     private void enqueue(Long bookingId, String event, String recipient, String subject, String text, String html) {
