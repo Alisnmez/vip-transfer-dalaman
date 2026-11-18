@@ -4,6 +4,33 @@ import { Link } from 'react-router-dom'
 
 import { PublicNavbar } from './PublicNavbar'
 
+const vehicles = [
+  {
+    name: 'Mercedes Vito Executive',
+    passengers: 7,
+    luggage: 6,
+    feature: 'Climate control',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv2p8bkO-_AX12JvvsBkxiP_AI8kMYN3CNIcP5D6gR8G8WRTG-PtIQzzdmoLxpMkqX5r6xQ9ARsYFZfMPXgBaUkybXXnwcybZR79Tw5cYctdR4VhGnJ4kKLFwHZ26hzfT2ChEO3b-XI2P_w9awItJ4oIvncn34UqtwH-0LRn7uXaoZEksFZ-zYpPluxOvKclxhYQgBJaDsa0xwCRTrTllrTdrHxxCGEOCijYUacTqc3NJ7NFdlmT4WXVfrBArPpoG6pD3g8_jKiXA',
+    amenities: ['Complimentary Refreshments', 'High Speed Wi-Fi', 'Professional Chauffeur'],
+  },
+  {
+    name: 'Corporate Minivan Pro',
+    passengers: 9,
+    luggage: 10,
+    feature: 'On-board media',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDsVW7MPfi8TokzykrBOlOa83IL9dMqnkU_VjOTz2LiBhSAX4yWbZNtlmHeYo1IMKiwXsFr6H9SpO5bUZF1KqOGy1dvfOAzduwRcuLneG2QcxGf0fS9K6_iK2X1EWC7M5r-cVlsQ9HYnhQ7vLf6J3XcU0yQOQJ0ZVgZ2One-wMrAE78j96s-F44Oqdg7hP8wwIHM1aLW5toOnex9fH1s11NhKa7X4efDsUaZZzSE22hVqE7F0hCINy-YvMU5Pxg_BWMvPlft6gL27g',
+    amenities: ['Premium Leather Seating', 'On-board Workstation', 'Privacy Partition'],
+  },
+  {
+    name: 'Executive Sedan',
+    passengers: 3,
+    luggage: 3,
+    feature: 'Comfort seating',
+    image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQNRpwgcupfrZXHII2tiBKFGPwsQaMEy4bDaGTyuSW5oJ2tvlAzWy9g7HFZn9snTInkHZnAPeEXcXiP2UdLMJjGlFOx9AQb77RkqsgwcDq98lwiSSujxth2UMRrL39J1BQLICgrDulP_9wNUdnS3NlZ3WJNjNGVkdrpL03boQESWXy69IX9EOdWOTPO1SioIrrOsqov560Mj8b0z6h0kkD5Cs3Nb__0z8r1WOeZvJV4vNLYJDFcRyp6p3kb9t1Jn0BTUpPKbf0ck0',
+    amenities: ['Discreet Service', 'Perfect for Solo Travelers', 'Modern Fleet Models'],
+  },
+]
+
 const pageContent = {
   vehicles: {
     eyebrow: 'Vehicles',
@@ -73,7 +100,47 @@ export function FAQPage() {
 }
 
 export function VehiclesPage() {
-  return <InfoPage content={pageContent.vehicles} />
+  return (
+    <div className="min-h-screen bg-background text-on-surface">
+      <PublicNavbar />
+      <main className="mx-auto max-w-7xl px-margin-page pb-20 pt-32">
+        <header className="mb-10 max-w-3xl">
+          <p className="mb-4 text-sm font-bold uppercase tracking-wide text-secondary">Our Vehicles</p>
+          <h1 className="mb-4 font-display-lg text-display-lg text-admin-primary">Professional Transfer Vehicles</h1>
+          <p className="text-lg text-on-surface-variant">
+            Explore our vehicle categories and choose the right option for your transfer.
+            Vehicle availability and final details are confirmed with your booking.
+          </p>
+        </header>
+        <section aria-label="Vehicle categories" className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {vehicles.map((vehicle) => (
+            <article className="overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
+              <img alt={vehicle.name} className="h-56 w-full object-cover" loading="lazy" src={vehicle.image} />
+              <div className="space-y-4 p-6">
+                <h2 className="text-xl font-bold text-admin-primary">{vehicle.name}</h2>
+                <div className="flex flex-wrap gap-4 text-sm text-on-surface-variant">
+                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-lg">person</span>{vehicle.passengers} passengers</span>
+                  <span className="flex items-center gap-1"><span className="material-symbols-outlined text-lg">luggage</span>{vehicle.luggage} bags</span>
+                </div>
+                <p className="text-sm text-on-surface-variant">{vehicle.feature}</p>
+                <ul className="space-y-2 text-sm text-on-surface-variant">
+                  {vehicle.amenities.map((amenity) => (
+                    <li className="flex items-center gap-2" key={amenity}>
+                      <span className="material-symbols-outlined text-base text-secondary">check_circle</span>
+                      {amenity}
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/booking" className="block rounded-lg bg-admin-primary px-5 py-3 text-center font-bold text-white hover:opacity-90">
+                  Book This Vehicle Category
+                </Link>
+              </div>
+            </article>
+          ))}
+        </section>
+      </main>
+    </div>
+  )
 }
 
 export function ServicesPage() {
