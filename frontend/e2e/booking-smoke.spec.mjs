@@ -293,3 +293,20 @@ test('malformed stored transfer draft does not crash the booking page', async ({
   await expect(page.getByRole('link', { name: 'Next: Passenger Details' })).toBeVisible()
   expect(errors, 'Uncaught errors with malformed stored draft').toEqual([])
 })
+
+test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {
+  await page.goto('http://127.0.0.1:4173/routes')
+  await expect(page.getByText('59 destinations found · Prices in GBP, per vehicle', { exact: true })).toBeVisible()
+  await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
+  await page.getByPlaceholder('Search destinations', { exact: true }).fill('Alanya')
+  await expect(page.getByText('£250.00', { exact: true })).toBeVisible()
+  await page.getByLabel('Journey type', { exact: true }).selectOption('round-trip')
+  await expect(page.getByText('£500.00', { exact: true })).toBeVisible()
+  await page.goto('http://127.0.0.1:4173/booking')
+  const destination = page.getByRole('combobox').nth(1)
+  await expect(destination.locator('optgroup option')).toHaveCount(59)
+  for (const name of ['Bozburun', 'Sogut', 'Marmaris Cruise Port', 'Turunc Kumlubuk', 'Alanya', 'Yalikavak', 'Didim']) {
+    await destination.selectOption(name)
+    await expect(destination).toHaveValue(name)
+  }
+})
