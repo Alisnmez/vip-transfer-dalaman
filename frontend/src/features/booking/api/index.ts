@@ -146,6 +146,7 @@ export type BookingEmailStatus = {
   bookingId: number
   eventType: string
   status: string
+  recipientRole: string
   attempts: number
   createdAt: string
   nextAttemptAt: string | null
