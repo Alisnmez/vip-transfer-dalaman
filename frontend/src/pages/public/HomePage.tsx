@@ -201,7 +201,10 @@ export function HomePage() {
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 data-alt="Oludeniz"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_vr3fHpQP68Kr_7f-l5syaEf7PxR1Hue-_7S_uD6j-gn9C-pPTe8wKnpfBmP1hrUkLiNuZS1OHHXpUg44cRKzxadh2qEd_pz2F9UgBhFc-gVQOhJNgiTKVoz4RsKm9Cm5lFAYSSW85xACWUQKyB08bfL7182edAJ7veOc3D1UYSvQMJ7Z5xeBxaelrhLIUhc6fq-IdU4UUzeu0OHaoLXtdQip1-7jr8m7hWwOmCipDgwWtbjSbm6vJPTw73xFAactfoPYHLQnDAE"
+                alt="Aerial photograph of the Blue Lagoon in Ölüdeniz, Turkey"
+                loading="lazy"
+                decoding="async"
+                src="https://commons.wikimedia.org/wiki/Special:FilePath/%C3%96l%C3%BCdeniz%2C_Blue_Lagoon.jpg?width=1200"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
@@ -210,6 +213,9 @@ export function HomePage() {
               </div>
             </div>
           </div>
+          <p className="mt-3 text-xs text-on-surface-variant text-right">
+            Ölüdeniz photo: <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a> (CC BY-SA 4.0).
+          </p>
         </div>
       </section>
 
