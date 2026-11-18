@@ -1348,5 +1348,1841 @@
     "vehicleId": "minibus-long",
     "oneWay": 167.5,
     "roundTrip": 335
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "taxi",
+    "oneWay": 82.5,
+    "roundTrip": 165
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "vip-minivan",
+    "oneWay": 87.5,
+    "roundTrip": 175
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 117.5,
+    "roundTrip": 235
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "maybach",
+    "oneWay": 157.5,
+    "roundTrip": 315
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "maybach-plus",
+    "oneWay": 172.5,
+    "roundTrip": 345
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "minibus",
+    "oneWay": 117.5,
+    "roundTrip": 235
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "vip-minibus",
+    "oneWay": 177.5,
+    "roundTrip": 355
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 247.5,
+    "roundTrip": 495
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "minibus-long",
+    "oneWay": 177.5,
+    "roundTrip": 355
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "taxi",
+    "oneWay": 82.5,
+    "roundTrip": 165
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "vip-minivan",
+    "oneWay": 87.5,
+    "roundTrip": 175
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 117.5,
+    "roundTrip": 235
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "maybach",
+    "oneWay": 157.5,
+    "roundTrip": 315
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "maybach-plus",
+    "oneWay": 172.5,
+    "roundTrip": 345
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "minibus",
+    "oneWay": 117.5,
+    "roundTrip": 235
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "vip-minibus",
+    "oneWay": 177.5,
+    "roundTrip": 355
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 247.5,
+    "roundTrip": 495
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "minibus-long",
+    "oneWay": 177.5,
+    "roundTrip": 355
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "taxi",
+    "oneWay": 42.5,
+    "roundTrip": 85
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "vip-minivan",
+    "oneWay": 47.5,
+    "roundTrip": 95
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 57.5,
+    "roundTrip": 115
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "maybach",
+    "oneWay": 62.5,
+    "roundTrip": 125
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "maybach-plus",
+    "oneWay": 72.5,
+    "roundTrip": 145
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "minibus",
+    "oneWay": 77.5,
+    "roundTrip": 155
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "vip-minibus",
+    "oneWay": 87.5,
+    "roundTrip": 175
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 97.5,
+    "roundTrip": 195
+  },
+  {
+    "destination": "Marmaris Cruise Port",
+    "vehicleId": "minibus-long",
+    "oneWay": 80.5,
+    "roundTrip": 160
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "taxi",
+    "oneWay": 70.0,
+    "roundTrip": 140.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "taxi",
+    "oneWay": 70.0,
+    "roundTrip": 140.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "taxi",
+    "oneWay": 60.0,
+    "roundTrip": 120.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "taxi",
+    "oneWay": 147.5,
+    "roundTrip": 295.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "taxi",
+    "oneWay": 160.0,
+    "roundTrip": 320.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "taxi",
+    "oneWay": 172.5,
+    "roundTrip": 345.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "taxi",
+    "oneWay": 192.5,
+    "roundTrip": 385.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "taxi",
+    "oneWay": 180.0,
+    "roundTrip": 360.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "taxi",
+    "oneWay": 170.0,
+    "roundTrip": 340.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "taxi",
+    "oneWay": 197.5,
+    "roundTrip": 395.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "taxi",
+    "oneWay": 145.0,
+    "roundTrip": 290.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "taxi",
+    "oneWay": 237.5,
+    "roundTrip": 475.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "taxi",
+    "oneWay": 215.0,
+    "roundTrip": 430.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "taxi",
+    "oneWay": 165.0,
+    "roundTrip": 330.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "taxi",
+    "oneWay": 242.5,
+    "roundTrip": 485.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "taxi",
+    "oneWay": 150.0,
+    "roundTrip": 300.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "taxi",
+    "oneWay": 132.5,
+    "roundTrip": 265.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "taxi",
+    "oneWay": 112.5,
+    "roundTrip": 225.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "taxi",
+    "oneWay": 130.0,
+    "roundTrip": 260.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "taxi",
+    "oneWay": 137.5,
+    "roundTrip": 275.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "taxi",
+    "oneWay": 120.0,
+    "roundTrip": 240.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "taxi",
+    "oneWay": 125.0,
+    "roundTrip": 250.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "taxi",
+    "oneWay": 130.0,
+    "roundTrip": 260.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "taxi",
+    "oneWay": 127.5,
+    "roundTrip": 255.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "taxi",
+    "oneWay": 135.0,
+    "roundTrip": 270.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "taxi",
+    "oneWay": 135.0,
+    "roundTrip": 270.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "taxi",
+    "oneWay": 140.0,
+    "roundTrip": 280.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "taxi",
+    "oneWay": 127.5,
+    "roundTrip": 255.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "taxi",
+    "oneWay": 130.0,
+    "roundTrip": 260.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "taxi",
+    "oneWay": 157.5,
+    "roundTrip": 315.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "taxi",
+    "oneWay": 142.5,
+    "roundTrip": 285.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "vip-minivan",
+    "oneWay": 75.0,
+    "roundTrip": 150.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "vip-minivan",
+    "oneWay": 75.0,
+    "roundTrip": 150.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "vip-minivan",
+    "oneWay": 65.0,
+    "roundTrip": 130.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "vip-minivan",
+    "oneWay": 155.0,
+    "roundTrip": 310.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "vip-minivan",
+    "oneWay": 167.5,
+    "roundTrip": 335.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "vip-minivan",
+    "oneWay": 182.5,
+    "roundTrip": 365.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "vip-minivan",
+    "oneWay": 202.5,
+    "roundTrip": 405.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "vip-minivan",
+    "oneWay": 187.5,
+    "roundTrip": 375.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "vip-minivan",
+    "oneWay": 180.0,
+    "roundTrip": 360.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "vip-minivan",
+    "oneWay": 207.5,
+    "roundTrip": 415.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "vip-minivan",
+    "oneWay": 152.5,
+    "roundTrip": 305.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "vip-minivan",
+    "oneWay": 250.0,
+    "roundTrip": 500.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "vip-minivan",
+    "oneWay": 225.0,
+    "roundTrip": 450.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "vip-minivan",
+    "oneWay": 172.5,
+    "roundTrip": 345.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "vip-minivan",
+    "oneWay": 255.0,
+    "roundTrip": 510.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "vip-minivan",
+    "oneWay": 157.5,
+    "roundTrip": 315.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "vip-minivan",
+    "oneWay": 140.0,
+    "roundTrip": 280.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "vip-minivan",
+    "oneWay": 117.5,
+    "roundTrip": 235.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "vip-minivan",
+    "oneWay": 137.5,
+    "roundTrip": 275.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "vip-minivan",
+    "oneWay": 142.5,
+    "roundTrip": 285.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "vip-minivan",
+    "oneWay": 125.0,
+    "roundTrip": 250.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "vip-minivan",
+    "oneWay": 132.5,
+    "roundTrip": 265.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "vip-minivan",
+    "oneWay": 137.5,
+    "roundTrip": 275.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "vip-minivan",
+    "oneWay": 132.5,
+    "roundTrip": 265.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "vip-minivan",
+    "oneWay": 142.5,
+    "roundTrip": 285.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "vip-minivan",
+    "oneWay": 140.0,
+    "roundTrip": 280.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "vip-minivan",
+    "oneWay": 147.5,
+    "roundTrip": 295.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "vip-minivan",
+    "oneWay": 135.0,
+    "roundTrip": 270.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "vip-minivan",
+    "oneWay": 135.0,
+    "roundTrip": 270.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "vip-minivan",
+    "oneWay": 167.5,
+    "roundTrip": 335.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "vip-minivan",
+    "oneWay": 150.0,
+    "roundTrip": 300.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 87.5,
+    "roundTrip": 175.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 87.5,
+    "roundTrip": 175.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 75.0,
+    "roundTrip": 150.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 227.5,
+    "roundTrip": 455.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 245.0,
+    "roundTrip": 490.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 295.0,
+    "roundTrip": 590.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 262.5,
+    "roundTrip": 525.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 305.0,
+    "roundTrip": 610.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 225.0,
+    "roundTrip": 450.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 365.0,
+    "roundTrip": 730.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 330.0,
+    "roundTrip": 660.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 255.0,
+    "roundTrip": 510.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 372.5,
+    "roundTrip": 745.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 230.0,
+    "roundTrip": 460.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 205.0,
+    "roundTrip": 410.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 170.0,
+    "roundTrip": 340.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 200.0,
+    "roundTrip": 400.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 210.0,
+    "roundTrip": 420.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 182.5,
+    "roundTrip": 365.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 192.5,
+    "roundTrip": 385.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 200.0,
+    "roundTrip": 400.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 195.0,
+    "roundTrip": 390.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 207.5,
+    "roundTrip": 415.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 205.0,
+    "roundTrip": 410.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 215.0,
+    "roundTrip": 430.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 197.5,
+    "roundTrip": 395.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 197.5,
+    "roundTrip": 395.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 242.5,
+    "roundTrip": 485.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 220.0,
+    "roundTrip": 440.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "maybach",
+    "oneWay": 102.5,
+    "roundTrip": 205.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "maybach",
+    "oneWay": 102.5,
+    "roundTrip": 205.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "maybach",
+    "oneWay": 87.5,
+    "roundTrip": 175.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "maybach",
+    "oneWay": 257.5,
+    "roundTrip": 515.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "maybach",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "maybach",
+    "oneWay": 300.0,
+    "roundTrip": 600.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "maybach",
+    "oneWay": 332.5,
+    "roundTrip": 665.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "maybach",
+    "oneWay": 310.0,
+    "roundTrip": 620.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "maybach",
+    "oneWay": 295.0,
+    "roundTrip": 590.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "maybach",
+    "oneWay": 342.5,
+    "roundTrip": 685.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "maybach",
+    "oneWay": 252.5,
+    "roundTrip": 505.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "maybach",
+    "oneWay": 412.5,
+    "roundTrip": 825.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "maybach",
+    "oneWay": 372.5,
+    "roundTrip": 745.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "maybach",
+    "oneWay": 285.0,
+    "roundTrip": 570.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "maybach",
+    "oneWay": 420.0,
+    "roundTrip": 840.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "maybach",
+    "oneWay": 260.0,
+    "roundTrip": 520.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "maybach",
+    "oneWay": 230.0,
+    "roundTrip": 460.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "maybach",
+    "oneWay": 192.5,
+    "roundTrip": 385.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "maybach",
+    "oneWay": 225.0,
+    "roundTrip": 450.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "maybach",
+    "oneWay": 235.0,
+    "roundTrip": 470.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "maybach",
+    "oneWay": 207.5,
+    "roundTrip": 415.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "maybach",
+    "oneWay": 215.0,
+    "roundTrip": 430.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "maybach",
+    "oneWay": 225.0,
+    "roundTrip": 450.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "maybach",
+    "oneWay": 220.0,
+    "roundTrip": 440.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "maybach",
+    "oneWay": 235.0,
+    "roundTrip": 470.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "maybach",
+    "oneWay": 232.5,
+    "roundTrip": 465.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "maybach",
+    "oneWay": 242.5,
+    "roundTrip": 485.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "maybach",
+    "oneWay": 222.5,
+    "roundTrip": 445.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "maybach",
+    "oneWay": 222.5,
+    "roundTrip": 445.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "maybach",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "maybach",
+    "oneWay": 247.5,
+    "roundTrip": 495.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "maybach-plus",
+    "oneWay": 130.0,
+    "roundTrip": 260.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "maybach-plus",
+    "oneWay": 130.0,
+    "roundTrip": 260.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "maybach-plus",
+    "oneWay": 107.5,
+    "roundTrip": 215.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "maybach-plus",
+    "oneWay": 285.0,
+    "roundTrip": 570.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "maybach-plus",
+    "oneWay": 307.5,
+    "roundTrip": 615.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "maybach-plus",
+    "oneWay": 332.5,
+    "roundTrip": 665.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "maybach-plus",
+    "oneWay": 370.0,
+    "roundTrip": 740.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "maybach-plus",
+    "oneWay": 345.0,
+    "roundTrip": 690.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "maybach-plus",
+    "oneWay": 327.5,
+    "roundTrip": 655.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "maybach-plus",
+    "oneWay": 380.0,
+    "roundTrip": 760.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "maybach-plus",
+    "oneWay": 280.0,
+    "roundTrip": 560.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "maybach-plus",
+    "oneWay": 460.0,
+    "roundTrip": 920.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "maybach-plus",
+    "oneWay": 412.5,
+    "roundTrip": 825.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "maybach-plus",
+    "oneWay": 317.5,
+    "roundTrip": 635.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "maybach-plus",
+    "oneWay": 465.0,
+    "roundTrip": 930.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "maybach-plus",
+    "oneWay": 290.0,
+    "roundTrip": 580.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "maybach-plus",
+    "oneWay": 255.0,
+    "roundTrip": 510.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "maybach-plus",
+    "oneWay": 215.0,
+    "roundTrip": 430.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "maybach-plus",
+    "oneWay": 250.0,
+    "roundTrip": 500.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "maybach-plus",
+    "oneWay": 262.5,
+    "roundTrip": 525.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "maybach-plus",
+    "oneWay": 230.0,
+    "roundTrip": 460.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "maybach-plus",
+    "oneWay": 240.0,
+    "roundTrip": 480.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "maybach-plus",
+    "oneWay": 250.0,
+    "roundTrip": 500.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "maybach-plus",
+    "oneWay": 242.5,
+    "roundTrip": 485.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "maybach-plus",
+    "oneWay": 260.0,
+    "roundTrip": 520.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "maybach-plus",
+    "oneWay": 257.5,
+    "roundTrip": 515.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "maybach-plus",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "maybach-plus",
+    "oneWay": 247.5,
+    "roundTrip": 495.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "maybach-plus",
+    "oneWay": 247.5,
+    "roundTrip": 495.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "maybach-plus",
+    "oneWay": 305.0,
+    "roundTrip": 610.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "maybach-plus",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "minibus",
+    "oneWay": 117.5,
+    "roundTrip": 235.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "minibus",
+    "oneWay": 117.5,
+    "roundTrip": 235.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "minibus",
+    "oneWay": 92.5,
+    "roundTrip": 185.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "minibus",
+    "oneWay": 250.0,
+    "roundTrip": 500.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "minibus",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "minibus",
+    "oneWay": 292.5,
+    "roundTrip": 585.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "minibus",
+    "oneWay": 322.5,
+    "roundTrip": 645.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "minibus",
+    "oneWay": 300.0,
+    "roundTrip": 600.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "minibus",
+    "oneWay": 287.5,
+    "roundTrip": 575.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "minibus",
+    "oneWay": 332.5,
+    "roundTrip": 665.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "minibus",
+    "oneWay": 245.0,
+    "roundTrip": 490.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "minibus",
+    "oneWay": 400.0,
+    "roundTrip": 800.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "minibus",
+    "oneWay": 362.5,
+    "roundTrip": 725.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "minibus",
+    "oneWay": 277.5,
+    "roundTrip": 555.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "minibus",
+    "oneWay": 407.5,
+    "roundTrip": 815.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "minibus",
+    "oneWay": 252.5,
+    "roundTrip": 505.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "minibus",
+    "oneWay": 222.5,
+    "roundTrip": 445.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "minibus",
+    "oneWay": 187.5,
+    "roundTrip": 375.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "minibus",
+    "oneWay": 217.5,
+    "roundTrip": 435.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "minibus",
+    "oneWay": 230.0,
+    "roundTrip": 460.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "minibus",
+    "oneWay": 200.0,
+    "roundTrip": 400.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "minibus",
+    "oneWay": 210.0,
+    "roundTrip": 420.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "minibus",
+    "oneWay": 220.0,
+    "roundTrip": 440.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "minibus",
+    "oneWay": 212.5,
+    "roundTrip": 425.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "minibus",
+    "oneWay": 227.5,
+    "roundTrip": 455.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "minibus",
+    "oneWay": 225.0,
+    "roundTrip": 450.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "minibus",
+    "oneWay": 235.0,
+    "roundTrip": 470.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "minibus",
+    "oneWay": 215.0,
+    "roundTrip": 430.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "minibus",
+    "oneWay": 217.5,
+    "roundTrip": 435.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "minibus",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "minibus",
+    "oneWay": 240.0,
+    "roundTrip": 480.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "vip-minibus",
+    "oneWay": 137.5,
+    "roundTrip": 275.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "vip-minibus",
+    "oneWay": 137.5,
+    "roundTrip": 275.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "vip-minibus",
+    "oneWay": 107.5,
+    "roundTrip": 215.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "vip-minibus",
+    "oneWay": 315.0,
+    "roundTrip": 630.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "vip-minibus",
+    "oneWay": 337.5,
+    "roundTrip": 675.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "vip-minibus",
+    "oneWay": 367.5,
+    "roundTrip": 735.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "vip-minibus",
+    "oneWay": 407.5,
+    "roundTrip": 815.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "vip-minibus",
+    "oneWay": 380.0,
+    "roundTrip": 760.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "vip-minibus",
+    "oneWay": 360.0,
+    "roundTrip": 720.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "vip-minibus",
+    "oneWay": 420.0,
+    "roundTrip": 840.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "vip-minibus",
+    "oneWay": 310.0,
+    "roundTrip": 620.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "vip-minibus",
+    "oneWay": 505.0,
+    "roundTrip": 1010.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "vip-minibus",
+    "oneWay": 455.0,
+    "roundTrip": 910.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "vip-minibus",
+    "oneWay": 350.0,
+    "roundTrip": 700.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "vip-minibus",
+    "oneWay": 512.5,
+    "roundTrip": 1025.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "vip-minibus",
+    "oneWay": 317.5,
+    "roundTrip": 635.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "vip-minibus",
+    "oneWay": 280.0,
+    "roundTrip": 560.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "vip-minibus",
+    "oneWay": 235.0,
+    "roundTrip": 470.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "vip-minibus",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "vip-minibus",
+    "oneWay": 290.0,
+    "roundTrip": 580.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "vip-minibus",
+    "oneWay": 252.5,
+    "roundTrip": 505.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "vip-minibus",
+    "oneWay": 265.0,
+    "roundTrip": 530.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "vip-minibus",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "vip-minibus",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "vip-minibus",
+    "oneWay": 287.5,
+    "roundTrip": 575.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "vip-minibus",
+    "oneWay": 282.5,
+    "roundTrip": 565.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "vip-minibus",
+    "oneWay": 295.0,
+    "roundTrip": 590.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "vip-minibus",
+    "oneWay": 272.5,
+    "roundTrip": 545.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "vip-minibus",
+    "oneWay": 272.5,
+    "roundTrip": 545.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "vip-minibus",
+    "oneWay": 335.0,
+    "roundTrip": 670.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "vip-minibus",
+    "oneWay": 302.5,
+    "roundTrip": 605.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 172.5,
+    "roundTrip": 345.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 172.5,
+    "roundTrip": 345.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 147.5,
+    "roundTrip": 295.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 430.0,
+    "roundTrip": 860.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 462.5,
+    "roundTrip": 925.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 502.5,
+    "roundTrip": 1005.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 555.0,
+    "roundTrip": 1110.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 517.5,
+    "roundTrip": 1035.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 492.5,
+    "roundTrip": 985.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 572.5,
+    "roundTrip": 1145.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 422.5,
+    "roundTrip": 845.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 690.0,
+    "roundTrip": 1380.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 622.5,
+    "roundTrip": 1245.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 477.5,
+    "roundTrip": 955.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 702.5,
+    "roundTrip": 1405.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 435.0,
+    "roundTrip": 870.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 385.0,
+    "roundTrip": 770.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 322.5,
+    "roundTrip": 645.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 375.0,
+    "roundTrip": 750.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 395.0,
+    "roundTrip": 790.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 345.0,
+    "roundTrip": 690.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 362.5,
+    "roundTrip": 725.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 377.5,
+    "roundTrip": 755.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 365.0,
+    "roundTrip": 730.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 392.5,
+    "roundTrip": 785.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 387.5,
+    "roundTrip": 775.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 405.0,
+    "roundTrip": 810.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 372.5,
+    "roundTrip": 745.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 372.5,
+    "roundTrip": 745.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 457.5,
+    "roundTrip": 915.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 415.0,
+    "roundTrip": 830.0
+  },
+  {
+    "destination": "Turunc Kumlubuk",
+    "vehicleId": "minibus-long",
+    "oneWay": 132.5,
+    "roundTrip": 265.0
+  },
+  {
+    "destination": "Orhaniye",
+    "vehicleId": "minibus-long",
+    "oneWay": 132.5,
+    "roundTrip": 265.0
+  },
+  {
+    "destination": "Marmaris Hisaronu",
+    "vehicleId": "minibus-long",
+    "oneWay": 97.5,
+    "roundTrip": 195.0
+  },
+  {
+    "destination": "Antalya City Center",
+    "vehicleId": "minibus-long",
+    "oneWay": 315.0,
+    "roundTrip": 630.0
+  },
+  {
+    "destination": "Lara",
+    "vehicleId": "minibus-long",
+    "oneWay": 337.5,
+    "roundTrip": 675.0
+  },
+  {
+    "destination": "Belek",
+    "vehicleId": "minibus-long",
+    "oneWay": 367.5,
+    "roundTrip": 735.0
+  },
+  {
+    "destination": "Side",
+    "vehicleId": "minibus-long",
+    "oneWay": 407.5,
+    "roundTrip": 815.0
+  },
+  {
+    "destination": "Kemer",
+    "vehicleId": "minibus-long",
+    "oneWay": 380.0,
+    "roundTrip": 760.0
+  },
+  {
+    "destination": "Kundu",
+    "vehicleId": "minibus-long",
+    "oneWay": 360.0,
+    "roundTrip": 720.0
+  },
+  {
+    "destination": "Manavgat",
+    "vehicleId": "minibus-long",
+    "oneWay": 420.0,
+    "roundTrip": 840.0
+  },
+  {
+    "destination": "Muratpasa",
+    "vehicleId": "minibus-long",
+    "oneWay": 310.0,
+    "roundTrip": 620.0
+  },
+  {
+    "destination": "Alanya",
+    "vehicleId": "minibus-long",
+    "oneWay": 505.0,
+    "roundTrip": 1010.0
+  },
+  {
+    "destination": "Avsallar",
+    "vehicleId": "minibus-long",
+    "oneWay": 455.0,
+    "roundTrip": 910.0
+  },
+  {
+    "destination": "Konyaalti",
+    "vehicleId": "minibus-long",
+    "oneWay": 350.0,
+    "roundTrip": 700.0
+  },
+  {
+    "destination": "Mahmutlar",
+    "vehicleId": "minibus-long",
+    "oneWay": 512.5,
+    "roundTrip": 1025.0
+  },
+  {
+    "destination": "Akyarlar",
+    "vehicleId": "minibus-long",
+    "oneWay": 317.5,
+    "roundTrip": 635.0
+  },
+  {
+    "destination": "Bitez",
+    "vehicleId": "minibus-long",
+    "oneWay": 280.0,
+    "roundTrip": 560.0
+  },
+  {
+    "destination": "Gulluk",
+    "vehicleId": "minibus-long",
+    "oneWay": 235.0,
+    "roundTrip": 470.0
+  },
+  {
+    "destination": "Gumbet",
+    "vehicleId": "minibus-long",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Gundogan",
+    "vehicleId": "minibus-long",
+    "oneWay": 290.0,
+    "roundTrip": 580.0
+  },
+  {
+    "destination": "Güvercinlik",
+    "vehicleId": "minibus-long",
+    "oneWay": 252.5,
+    "roundTrip": 505.0
+  },
+  {
+    "destination": "Kaynar",
+    "vehicleId": "minibus-long",
+    "oneWay": 265.0,
+    "roundTrip": 530.0
+  },
+  {
+    "destination": "Konacik",
+    "vehicleId": "minibus-long",
+    "oneWay": 275.0,
+    "roundTrip": 550.0
+  },
+  {
+    "destination": "Torba",
+    "vehicleId": "minibus-long",
+    "oneWay": 267.5,
+    "roundTrip": 535.0
+  },
+  {
+    "destination": "Turgutreis",
+    "vehicleId": "minibus-long",
+    "oneWay": 287.5,
+    "roundTrip": 575.0
+  },
+  {
+    "destination": "Turkbuku",
+    "vehicleId": "minibus-long",
+    "oneWay": 282.5,
+    "roundTrip": 565.0
+  },
+  {
+    "destination": "Yalikavak",
+    "vehicleId": "minibus-long",
+    "oneWay": 295.0,
+    "roundTrip": 590.0
+  },
+  {
+    "destination": "Yaliciftlik",
+    "vehicleId": "minibus-long",
+    "oneWay": 272.5,
+    "roundTrip": 545.0
+  },
+  {
+    "destination": "Oren",
+    "vehicleId": "minibus-long",
+    "oneWay": 272.5,
+    "roundTrip": 545.0
+  },
+  {
+    "destination": "Kusadasi",
+    "vehicleId": "minibus-long",
+    "oneWay": 335.0,
+    "roundTrip": 670.0
+  },
+  {
+    "destination": "Didim",
+    "vehicleId": "minibus-long",
+    "oneWay": 302.5,
+    "roundTrip": 605.0
   }
 ]

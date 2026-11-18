@@ -2,6 +2,36 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { validateTransferSelection } from '../src/features/booking/validateTransferSelection.ts'
 import { findTransferPrice, transferPrices, transferVehicles } from '../src/features/booking/pricing.ts'
+import { readFileSync } from 'node:fs'
+import { destinationGroups } from '../src/features/booking/destinationGroups.ts'
+
+test('frontend, backend and destination selector share the complete priced catalogue', () => {
+  const backendPrices = JSON.parse(readFileSync(new URL('../../src/main/resources/transfer-prices.json', import.meta.url), 'utf8'))
+  assert.deepEqual(transferPrices, backendPrices)
+  assert.equal(backendPrices.length, 531)
+  const original = JSON.parse(readFileSync(new URL('../../docs/pricing/original-catalogue-2026-11-18.json', import.meta.url), 'utf8'))
+  for (const row of original) assert.deepEqual(backendPrices.find(item => item.destination === row.destination && item.vehicleId === row.vehicleId), row)
+  for (const name of new Set(backendPrices.map(row => row.destination))) {
+    assert.equal(backendPrices.filter(row => row.destination === name).length, transferVehicles.length)
+  }
+  const names = destinationGroups.flatMap(group => group.names)
+  assert.equal(names.length, new Set(names).size)
+  assert.deepEqual(new Set(names), new Set(backendPrices.map(row => row.destination)))
+})
+
+test('source aliases preserve verified fares and cruise vehicles use the Marmaris zone', () => {
+  assert.equal(findTransferPrice('Marmaris Cruise Port', 'taxi', 'one-way'), 42.5)
+  assert.equal(findTransferPrice('Marmaris Cruise Port', 'taxi', 'round-trip'), 85)
+  for (const vehicle of transferVehicles) {
+    assert.equal(findTransferPrice('Marmaris Cruise Port', vehicle.id, 'one-way'), findTransferPrice('Marmaris(Any Hotel)', vehicle.id, 'one-way'))
+  }
+  for (const name of ['Bozburun', 'Sogut']) {
+    for (const vehicle of transferVehicles) {
+      assert.equal(findTransferPrice(name, vehicle.id, 'one-way'), findTransferPrice('Bozburun / Sogut', vehicle.id, 'one-way'))
+      assert.equal(findTransferPrice(name, vehicle.id, 'round-trip'), findTransferPrice('Bozburun / Sogut', vehicle.id, 'round-trip'))
+    }
+  }
+})
 
 const valid = {
   pickUpLocation: 'Dalaman Airport',
