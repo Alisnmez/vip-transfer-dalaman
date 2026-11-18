@@ -217,7 +217,7 @@ export function BookingDetailPage() {
         {emailStatuses && <div className="mt-4 space-y-3" aria-live="polite">
           {emailStatuses.length === 0 && <p>No queued emails were found for this booking. Check whether email was enabled when it was created.</p>}
           {emailStatuses.map(item => <article key={item.id} className="rounded-lg border border-outline-variant bg-gray-50 p-3 text-sm">
-            <div className="flex flex-wrap justify-between gap-2"><strong>{item.eventType}</strong><strong>{item.status}</strong></div>
+            <div className="flex flex-wrap justify-between gap-2"><strong>{item.recipientRole === 'CUSTOMER' ? 'Customer' : 'Operator / other'} · {item.eventType}</strong><strong>{item.status}</strong></div>
             <p>Attempts: {item.attempts} · Created: {new Date(item.createdAt).toLocaleString()}</p>
             <p>Accepted by provider: {item.providerAccepted ? 'Yes (not delivery confirmation)' : 'No / unknown'}</p>
             {item.lastError && <p className="text-error">Last error: {item.lastError}</p>}
