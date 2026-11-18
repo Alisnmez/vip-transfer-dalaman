@@ -12,6 +12,8 @@ const tabs: { status: ReviewStatus; label: string }[] = [
 export function ReviewModerationPage() {
   const [status, setStatus] = useState<ReviewStatus>('PENDING')
   const [reviews, setReviews] = useState<PendingReview[]>([])
+  const [page, setPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
   const [loading, setLoading] = useState(true)
   const [busyId, setBusyId] = useState<number | null>(null)
   const [error, setError] = useState('')
@@ -21,25 +23,27 @@ export function ReviewModerationPage() {
     setLoading(true)
     setError('')
     try {
-      setReviews(await getPendingReviews(status))
+      const result = await getPendingReviews(status, page)
+      setReviews(result.content)
+      setTotalPages(result.totalPages)
     } catch (error) {
       setError(reviewErrorMessage(error, 'load'))
     } finally {
       setLoading(false)
     }
-  }, [status])
+  }, [status, page])
 
   useEffect(() => {
     let active = true
-    getPendingReviews(status).then(items => {
-      if (active) setReviews(items)
+    getPendingReviews(status, page).then(result => {
+      if (active) { setReviews(result.content); setTotalPages(result.totalPages) }
     }).catch(error => {
       if (active) setError(reviewErrorMessage(error, 'load'))
     }).finally(() => {
       if (active) setLoading(false)
     })
     return () => { active = false }
-  }, [status])
+  }, [status, page])
 
   async function moderate(id: number, nextStatus: 'APPROVED' | 'REJECTED' | 'ARCHIVED') {
     if (busyId !== null) return
@@ -64,7 +68,7 @@ export function ReviewModerationPage() {
         <button type="button" onClick={() => { void refresh() }} disabled={loading || busyId !== null} className="rounded-lg border bg-white px-4 py-2 font-semibold disabled:opacity-50">Refresh</button>
       </div>
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter reviews by status">
-        {tabs.map(tab => <button key={tab.status} type="button" aria-pressed={status === tab.status} disabled={busyId !== null} onClick={() => { if (tab.status !== status) { setLoading(true); setError(''); setReviews([]); setStatus(tab.status); setNotice('') } }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${status === tab.status ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{tab.label}</button>)}
+        {tabs.map(tab => <button key={tab.status} type="button" aria-pressed={status === tab.status} disabled={busyId !== null} onClick={() => { if (tab.status !== status) { setLoading(true); setError(''); setReviews([]); setStatus(tab.status); setPage(0); setNotice('') } }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${status === tab.status ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{tab.label}</button>)}
       </div>
       {error && <p role="alert" className="mb-4 text-red-700">{error}</p>}
       {notice && <p role="status" className="mb-4 text-green-700">{notice}</p>}
@@ -85,6 +89,7 @@ export function ReviewModerationPage() {
           </article>
         ))}</div>
       )}
+      {totalPages > 1 && <nav aria-label="Moderation pages" className="mt-6 flex items-center justify-center gap-4"><button type="button" disabled={loading || page === 0} onClick={() => setPage(p => p - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button><span>Page {page + 1} of {totalPages}</span><button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => setPage(p => p + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button></nav>}
     </section>
   )
 }
