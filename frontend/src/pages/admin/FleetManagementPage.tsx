@@ -21,7 +21,7 @@ export function FleetManagementPage() {
       </div>
 
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
-        These are the six vehicle categories shown on the public Vehicles page.
+        These are the four vehicle categories shown on the public Vehicles page.
         Availability and individual vehicle assignments are not tracked here yet.
       </div>
 

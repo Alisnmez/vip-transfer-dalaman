@@ -84,14 +84,14 @@ export function VehiclesPage() {
           <h1 className="mb-4 font-display-lg text-display-lg text-admin-primary">Professional Transfer Vehicles</h1>
           <p className="text-lg text-on-surface-variant">
             Explore our vehicle categories and choose the right option for your transfer.
-            Models are examples; a similar vehicle may be assigned. Equipment, availability and luggage space are confirmed before travel. SUV requests and more than 8 bags need a separate quotation.
+            Models are examples; a similar vehicle may be assigned. Equipment, availability and luggage space are confirmed before travel. For more than 8 bags, contact us before booking.
           </p>
         </header>
         <section aria-label="Vehicle categories" className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {fleetCatalogue.map((vehicle) => (
-            <article className="overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
-              <div aria-hidden="true" className="h-56 w-full bg-surface-container-low" />
-              <div className="space-y-4 p-6">
+            <article className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
+              <div aria-hidden="true" className="h-56 w-full shrink-0 bg-surface-container-low" />
+              <div className="flex flex-1 flex-col gap-4 p-6">
                 <h2 className="text-xl font-bold text-admin-primary">{vehicle.name}</h2>
                 <div className="flex flex-wrap gap-4 text-sm text-on-surface-variant">
                   <span className="flex items-center gap-1"><span className="material-symbols-outlined text-lg">person</span>{vehicle.passengers} passengers</span>
@@ -106,8 +106,8 @@ export function VehiclesPage() {
                     </li>
                   ))}
                 </ul>
-                <Link to={vehicle.enquiryOnly ? "/contact" : "/booking"} className="block rounded-lg bg-admin-primary px-5 py-3 text-center font-bold text-white hover:opacity-90">
-                  {vehicle.enquiryOnly ? "Request Availability & Price" : "Book a Transfer"}
+                <Link to="/booking" className="mt-auto block rounded-lg bg-admin-primary px-5 py-3 text-center font-bold text-white hover:opacity-90">
+                  Book a Transfer
                 </Link>
               </div>
             </article>
