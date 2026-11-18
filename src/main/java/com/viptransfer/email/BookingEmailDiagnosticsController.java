@@ -23,25 +23,29 @@ public class BookingEmailDiagnosticsController {
     }
 
     public record EmailStatus(UUID id, long bookingId, String eventType,
-                              String status, int attempts, OffsetDateTime createdAt,
+                              String status, String recipientRole, int attempts, OffsetDateTime createdAt,
                               OffsetDateTime nextAttemptAt, OffsetDateTime expiresAt,
                               String lastError, boolean providerAccepted) {}
 
     @GetMapping("/{bookingId:[0-9]+}/email-status")
     public List<EmailStatus> forBooking(@PathVariable long bookingId) {
         return jdbc.query("""
-                SELECT id, booking_id, event_type, status, attempts, created_at,
-                       next_attempt_at, expires_at, last_error,
-                       (provider_message_id IS NOT NULL) AS provider_accepted
-                FROM booking_email_outbox
-                WHERE booking_id = ?
-                ORDER BY created_at DESC, id DESC
+                SELECT o.id, o.booking_id, o.event_type, o.status, o.attempts, o.created_at,
+                       o.next_attempt_at, o.expires_at, o.last_error,
+                       (o.provider_message_id IS NOT NULL) AS provider_accepted,
+                       CASE WHEN lower(o.payload::jsonb -> 'to' ->> 0) = lower(b.email)
+                            THEN 'CUSTOMER' ELSE 'OPERATOR_OR_OTHER' END AS recipient_role
+                FROM booking_email_outbox o
+                JOIN booking b ON b.id = o.booking_id
+                WHERE o.booking_id = ?
+                ORDER BY o.created_at DESC, o.id DESC
                 LIMIT 100
                 """, (rs, index) -> new EmailStatus(
                 rs.getObject("id", UUID.class),
                 rs.getLong("booking_id"),
                 rs.getString("event_type"),
                 rs.getString("status"),
+                rs.getString("recipient_role"),
                 rs.getInt("attempts"),
                 rs.getObject("created_at", OffsetDateTime.class),
                 rs.getObject("next_attempt_at", OffsetDateTime.class),
