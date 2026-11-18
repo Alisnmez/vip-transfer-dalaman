@@ -69,12 +69,12 @@ public class BookingEmails {
                 || booking.getEmail().toLowerCase(Locale.ROOT).endsWith(".invalid")) return;
         String description = "Your transfer details have been updated. Please review the changes below. "
                 + "If you did not request this change, reply to this email.";
-        String text = "DalamanWay\\n\\n" + description + "\\n\\nChanges:\\n" + changes
-                + "\\n\\nBooking reference: #" + booking.getId()
-                + "\\nNo online payment has been collected. Payment arrangements are confirmed by our team.";
+        String text = "DalamanWay\n\n" + description + "\n\nChanges:\n" + changes
+                + "\n\nBooking reference: #" + booking.getId()
+                + "\nNo online payment has been collected. Payment arrangements are confirmed by our team.";
         String html = customerHtml(booking, "UPDATED", description)
                 .replace("DETAIL_CHANGES", "<div style='white-space:pre-line;padding:14px;background:#f1f5f9;color:#1E3A5F;font-size:14px'>"
-                        + escape(changes).replace("\\n", "<br>") + "</div>");
+                        + escape(changes).replace("\n", "<br>") + "</div>");
         enqueue(booking.getId(), "UPDATED", booking.getEmail(),
                 "DalamanWay | Your transfer details have been updated (#" + booking.getId() + ")", text, html);
     }
