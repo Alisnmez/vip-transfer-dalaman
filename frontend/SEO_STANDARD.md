@@ -426,3 +426,5 @@ PR #24 ile tüm rota sayfalarının ilk HTML ve React görünümüne rezervasyon
 86 frontend testi, lint ve üretim derlemesi geçti. Test ortamında 22 HTTP/HTML kontrolü geçti. Üretimde 28 indekslenebilir URL, altı uygulama adresi ve iki hatalı adres üzerinde toplam 36 HTTP/HTML kontrolü geçti. Rotalarda dört araç kapasitesi ve karşılıklı en/de/ru/x-default eşleşmeleri üretim HTML'inde doğrulandı.
 
 Search Console URL denetiminde İngilizce Marmaris ve Göcek dizinde. İngilizce Fethiye, Ölüdeniz, İçmeler, Dalyan ve Sarıgerme ile Almanca/Rusça Marmaris, Göcek, Fethiye ve Ölüdeniz henüz dizinde görünmedi. Ülke bazlı sıralama ve tıklamalar için performans verisi işleniyor.
+
+28 adreslik harita gönderilirken Google “Site haritası başarıyla gönderildi” onayını verdi. Aynı anda listede önceki okumadan 22 keşfedilen sayfa görünüyordu. Son altı dil adresi için bireysel URL denetimleri doğrulanmadı.
