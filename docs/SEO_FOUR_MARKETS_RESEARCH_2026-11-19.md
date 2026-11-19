@@ -102,7 +102,7 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 | SEO-02 | Sitemap ve robots indeksleme testleri | `/robots.txt`, `/sitemap.xml` | KODLANDI / TEST BEKLİYOR | `5424274`; yeni commit CI doğrulaması |
 | SEO-03 | Prerender title, description, canonical ve noindex regresyon testi | `/routes/marmaris`, `/faq` | KODLANDI / TEST BEKLİYOR | `0c074ec`; test kapsamı genişletildi, mevcut branch'in son SHA'sında yeniden koşulmalı |
 | SEO-04 | Open Graph ve Twitter meta etiketleri | `/routes/:slug`, `/`, `/vehicles`, `/services`, `/contact`, `/faq`, `/reviews`, `/routes` | KODLANDI / TEST BEKLİYOR | `0b57e68`, test `aa9828e`; gerçek HTML ve sosyal paylaşım önizlemesi kontrol edilmeli |
-| SEO-05 | Production HTTP/indexability denetimi | `/`, `/robots.txt`, `/sitemap.xml`, örnek rotalar | PLANLANDI | Gerçek HTTP 200, canonical, robots ve yönlendirme doğrula |
+| SEO-05 | Production HTTP/indexability denetimi | `/`, `/robots.txt`, `/sitemap.xml`, örnek rotalar | BLOKE (erişim) | 2026-11-19 HTTP denemeleri erişim engeline takıldı; dış erişimi olan Work/CI ortamından doğrula |
 | SEO-06 | Dört dil için kalıcı URL ve geçiş stratejisi | `/en-gb/`, `/de/`, `/ru/`, `/tr/` ve rota varyantları | PLANLANDI | Mevcut React router/i18n kontrolü, 301 ve eski URL koruması |
 | SEO-07 | Dil bazlı HTML, title, H1, canonical ve hreflang | SEO-06 URL'leri | PLANLANDI | Karşılıklı hreflang ve self-canonical testleri |
 | SEO-08 | Lokalize sitemap ve JS'siz prerender | SEO-06 URL'leri ve sitemap | PLANLANDI | Yalnızca tam çevrilmiş, 200/indexlenebilir URL'leri ekle |
@@ -121,6 +121,16 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 **SEO-03 — Prerender regresyonu (2026-11-19).** **Dosya:** `frontend/tests/prerender-seo.test.mjs`. **Hedef:** `/routes/marmaris`, `/faq`. **Yaklaşım:** sahte HTML şablonu ile Node prerender script'ini çalıştırıp title, canonical, robots ve HTML fallback varlığını doğrulayan testler; staging'de noindex kontrolü. **Commit:** `0c074ec`; **PR:** #17. Bu SHA için GitHub Actions'da build checks, booking browser smoke, comprehensive release quality gate ve dependency security audit **success** görüldü; testlerin bireysel adımları/logları ayrıca incelenmedi. **Kalan:** güncel branch SHA'sında yeniden CI, gerekirse test beklentisi düzeltmesi.
 
 **SEO-04 — Sosyal meta etiketleri (2026-11-19).** **Dosya:** `frontend/scripts/prerender-routes.mjs`; test güncellemesi `frontend/tests/prerender-seo.test.mjs`. **Hedef:** prerender edilen 5 rota ve 7 landing sayfası. **Yaklaşım:** her sayfaya `og:type`, `og:title`, `og:description`, `twitter:card`; yalnızca production'da `og:url` eklenerek staging URL paylaşımı önlendi. **Commitler:** `0b57e68` ve `aa9828e`. **Durum:** kodlandı, son SHA için test ve gerçek HTML doğrulaması bekliyor. **Kalan:** sayfa bazında meta değerleri, URL normalizasyonu, sosyal önizleme ve build testi.
+
+### SEO-05 — Canlı HTTP denetimi ilerleme kaydı (2026-11-19)
+
+**Kapsam:** `https://dalamanway.com/`, `/robots.txt`, `/sitemap.xml`, `/routes/marmaris`.
+
+**Yapılan işlem:** Her dört URL'ye web erişim aracıyla doğrudan GET denendi; ana sayfa için `DisabledError`, diğerleri için erişilemez sonucu alındı. Ayrı çalışma ortamında Python `requests.get` ile dört URL tekrar denendi; hepsi `NameResolutionError` (DNS çözümlenemedi) nedeniyle başarısız oldu. **Bu bir sitenin kapalı olduğu veya SEO'nun bozuk olduğu kanıtı değildir; kullanılan çalışma ortamının dış erişim kısıtıdır.** HTTP status, canonical, robots, yönlendirme ve gerçek sitemap içeriği **doğrulanamadı**.
+
+**Karar:** Üretim ayarlarına veya DNS'e körlemesine müdahale edilmedi; siteye deploy yapılmadı. SEO-05 durumu `BLOKE (erişim)` olarak tutuldu. **Sonraki uygulama:** Work Mode'un erişebildiği tarayıcıda veya ağ erişimi olan GitHub Actions runner'ında dört URL için status, final URL, HTML meta robots, canonical, sitemap/robots içerik ve yönlendirme zincirini kaydet; çıktıyı bu maddeye ekle. Gerekirse `curl -IL https://dalamanway.com/`, `curl -fsSL https://dalamanway.com/robots.txt`, `curl -fsSL https://dalamanway.com/sitemap.xml` ve rota HTML denetimi yap. Başarı ancak gerçek yanıtla yazılır.
+
+**Devam noktası:** SEO-05 canlı ölçümü açık; buna paralel SEO-06 için mevcut React router ve i18n dosyalarını yalnızca okuyarak mimari inceleme yapılabilir. Work Mode test sonuçları gelince son commit SHA'sına göre yeniden doğrula.
 
 ### Şu an tam olarak neredeyiz?
 **Son kodlanan görev: SEO-04.** **Bir sonraki teknik görev: SEO-05**, ardından SEO-06/07. SEO-02/03/04 için güncel branch'in testleri ve staging doğrulaması açık. **Hiçbiri bu kayıt itibarıyla production'a yayınlanmadı.** PR #17 ve #18 ayrı tutuldu; Work Mode'un yaptığı değişiklikler birleştirilmeden önce diff ve çakışma kontrolü yapılmalı.
