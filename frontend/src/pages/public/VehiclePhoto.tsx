@@ -10,6 +10,8 @@ const exteriorPhotos: Record<string, string> = {
 }
 const interiorPhotos: Record<string, string | undefined> = {
   maybach: 'https://images.openai.com/static-rsc-4/dgnQ8mUxYj0E690E_lgfRUhVi9f-Eq49wZSkASjf-i1m09Tix4UCrvwCoPX1ZaVV1pgSV9O1ikB73O78oOtoh2AQTWRdifQqr_M7v1XnioLDBUiVjUtza5FTSTIc9bMTp6WJ10ZGjc4mwnHI9YIEcIxT7ulehJbR11pIKuijiM8?purpose=inline',
+  'minibus-long': 'https://images.openai.com/static-rsc-4/P8zBkyzCa7LiMCCGoUN0H83sVEA7Rh4vu8skHeGA5-e9_q3Sk3nVGoQjOsNjzMBMyR5poBxmf2ICiXOcZ_Fz3MroRpu0voSYYgq6j1UpJqKOGxuQAgeZWEIQy6xMGdkpgLMJ4atQiyhfypJS6CjBe9iwp-JuWLZoWfxti6eVW0s?purpose=inline',
+  'vip-minibus': 'https://images.openai.com/static-rsc-4/BXMV8Z-26W5EFttaDizoMzDjMyHFHezu0hvoBfSUTKQdaSr1DeK7vTia_VgabJP1ujPdatL0GSGOnezHD5V837NiuBEZqFvNC1xP6QbzUd1p9CkE4e3mNh0GDXLRGf_vwcX78WfS0oCmJOBOnBp_2l-7JZ_k2meGmqGh47_eFSc?purpose=inline',
 }
 
 export function VehiclePhoto({ vehicleId, name, className = 'h-56' }: { vehicleId: string; name: string; className?: string }) {
