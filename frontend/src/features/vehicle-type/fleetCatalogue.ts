@@ -27,7 +27,7 @@ export const fleetCatalogue = [
     passengers: '5–16',
     luggage: 16,
     feature: 'Mercedes-Benz Sprinter minibus with generous space for family and group journeys.',
-    amenities: ['Standard VIP interior and comfortable seats', 'Open cabin without a driver partition', 'Air conditioning', 'For more than 8 bags, contact us before booking'],
+    amenities: ['Standard VIP interior and comfortable seats', 'Open cabin without a driver partition', 'Air conditioning', 'Confirm luggage size with the operator before travel'],
   },
   {
     name: 'Ultra Sprinter',
@@ -36,6 +36,6 @@ export const fleetCatalogue = [
     passengers: '7–9',
     luggage: 12,
     feature: 'Mercedes-Benz Sprinter with an upgraded VIP interior for a smaller group travelling in extra comfort.',
-    amenities: ['Premium seating and driver partition', 'Dual screens and PlayStation, subject to confirmation', 'Wi-Fi and refreshments, subject to confirmation', 'For more than 8 bags, contact us before booking'],
+    amenities: ['Premium seating and driver partition', 'Dual screens and PlayStation, subject to confirmation', 'Wi-Fi and refreshments, subject to confirmation', 'Confirm luggage size with the operator before travel'],
   },
 ] as const
