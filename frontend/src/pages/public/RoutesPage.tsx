@@ -81,7 +81,7 @@ export function RoutesPage() {
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-admin-primary/5 text-admin-primary">
                     <span translate="no" aria-hidden="true" className="material-symbols-outlined">{index % 2 === 0 ? 'location_on' : 'explore'}</span>
                   </span>
-                  <span className="rounded-full bg-surface-container-low px-3 py-1 text-xs font-medium text-on-surface-variant">Private transfer</span>
+                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-800">Private transfer</span>
                 </div>
                 <div className="mt-8 flex items-end justify-between gap-3">
                   <div className="min-w-0">
