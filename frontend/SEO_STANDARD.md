@@ -418,3 +418,11 @@ Sonraki ölçüm: Search Console'da yeni adreslerin keşif ve indeks durumları,
 19 Kasım'da Google Search Console, yeniden gönderim öncesinde sitemap.xml için “Başarılı”, son okuma 19 Kasım ve 12 keşfedilen sayfa gösterdi. 22 URL içeren aynı harita yeniden gönderildi; Google başarılı gönderimi onayladı. Performans ve indeks kapsamı raporlarında veri işleniyordu. Keşfedilen 12 adresi indeks sayısı olarak kullanmayın.
 
 Almanca Fethiye aramalarında [Fethiye Tours](https://www.fethiyetours.com/de/fethiye-airport-transfer/) araç başına ücretin kapsamını ve buluşma sürecini açıklıyor. Rusça Ölüdeniz örneğinde [Dalaman Airport Transfer](https://www.dalamanairporttransfer.com/ru/peredaca/dalaman-aeroport/oludeniz) araç ve valiz kapasitesini gösteriyor. İngilizce [Hero Transfer](https://www.herotransfer.com/price-list/) Ölüdeniz için tek yön GBP fiyatlarını araç türüyle birlikte listeliyor. Bunlar dil bazlı içerik örnekleridir; ülke bazında Google sırası ölçülmedi. DalamanWay için sonraki içerik önceliği, rezervasyonla tutarlı ve doğrulanmış araç, bagaj, ücret ve buluşma bilgisini ilk HTML'de erişilebilir kılmak.
+
+### Yedi rotanın üç dilde yayını ve Google indeks denetimi
+
+PR #24 ile tüm rota sayfalarının ilk HTML ve React görünümüne rezervasyon filosuyla aynı katalogdan dört aracın yolcu ve bagaj kapasitesi eklendi. Güncel fiyat karşılaştırması GBP ve araç başına ücret açıklamasıyla bağlantılandı. PR #25 ile İçmeler, Dalyan ve Sarıgerme için Almanca ve Rusça içerikler eklendi. Son üretim kodu `a166b6b`. Kapsam 7 EN + 7 DE + 7 RU = 21/21 rota-dil sayfası. Canlı site haritasında 28 adres var. Bu yüzdeler sayfa kapsamını ölçer.
+
+86 frontend testi, lint ve üretim derlemesi geçti. Test ortamında 22 HTTP/HTML kontrolü geçti. Üretimde 28 indekslenebilir URL, altı uygulama adresi ve iki hatalı adres üzerinde toplam 36 HTTP/HTML kontrolü geçti. Rotalarda dört araç kapasitesi ve karşılıklı en/de/ru/x-default eşleşmeleri üretim HTML'inde doğrulandı.
+
+Search Console URL denetiminde İngilizce Marmaris ve Göcek dizinde. İngilizce Fethiye, Ölüdeniz, İçmeler, Dalyan ve Sarıgerme ile Almanca/Rusça Marmaris, Göcek, Fethiye ve Ölüdeniz henüz dizinde görünmedi. Ülke bazlı sıralama ve tıklamalar için performans verisi işleniyor.
