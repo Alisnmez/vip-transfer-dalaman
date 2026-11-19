@@ -120,3 +120,96 @@ Keep public URL paths stable. When changing domains, update the canonical origin
 - Route SERP examples: https://dalamangotransfer.com/en/dalaman-airport-to-marmaris-transfer ; https://www.get4s.com/en/blog/dalaman-to-marmaris-transfer ; https://www.airportstransferturkey.com/guides/dalaman-airport-to-marmaris-icmeler
 
 **Verification:** Direct retrieval of the production robots.txt and sitemap.xml was attempted but unavailable through the public web retrieval tool; production indexability remains unverified. Do not mark this checklist completed based on repository inspection alone.
+
+
+## Professional SEO operating playbook — 2026-11-19 (research and execution specification)
+
+**Operating assumptions:** DalamanWay is already live, with a custom domain reportedly acquired. Do not confuse production deployment with Google indexation. Confirm the canonical host via live HTTP and Render DNS/configuration before changing production. No ranking, volume, backlinks, Search Console ownership, or conversion figures have been verified here.
+
+### How an experienced SEO team works
+
+1. **Baseline and diagnosis before optimization:** crawl the public domain and export URL, status, title, H1, canonical, meta robots, sitemap membership, internal-link depth, mobile performance and indexation status. Capture Search Console performance by query, page, country and device; GA4 organic landing pages and booking enquiries. Record a dated baseline.
+2. **SERP intent and keyword clustering:** group variants by intent rather than creating a page for every phrase. Separate airport transfer service, destination transfer, pricing/comparison and informational queries. Manually inspect search results in target countries and devices before selecting titles.
+3. **Information architecture:** one primary landing page per distinct customer need, with supporting useful pages. Use homepage -> routes -> destination -> vehicles/FAQ -> booking. Prefer discoverable HTML anchors, consistent breadcrumbs and stable URLs. Avoid thin city-page duplication and doorway-page networks.
+4. **Technical delivery:** one canonical HTTPS hostname, correct HTTP status, crawlable initial HTML, consistent title/description/robots/canonical before and after hydration, production-only sitemap, staging noindex, private booking noindex, correct 404/301 and verified robots directives. Test Render's actual nested-path response.
+5. **Content production:** subject-matter verified local information, genuinely useful route-specific details, clear process, fare source and currency, practical luggage/child-seat conditions, relevant internal links and prominent booking CTA. Maintain editorial evidence, review date and content owner. Do not publish fabricated testimonials, prices, driving times or guarantees.
+6. **Authority and reputation:** verified business identity/contact/policies, authentic customer feedback, appropriate business directory profiles where eligible, and editorial referrals from legitimate accommodation and travel partners. Avoid paid link schemes and automated mass outreach.
+7. **Experimentation and reporting:** prioritize by expected impact × confidence ÷ effort; ship in small releases, check Search Console indexing and organic enquiries, review 28-day trends and seasonal context, iterate based on observed data rather than rank promises.
+
+### DalamanWay keyword-to-URL map (hypotheses; validate in Search Console / keyword tools)
+
+| Cluster | Example searches | Primary URL | Intent | Next improvement |
+| --- | --- | --- | --- | --- |
+| Airport transfer | dalaman airport transfer; dalaman airport private transfer | / | Book | Clear service proposition, trusted booking process, routes |
+| Routes / fares | dalaman airport transfer prices; dalaman transfer prices | /routes | Compare and book | Actual per-vehicle GBP prices from pricing system |
+| Marmaris | dalaman airport to marmaris transfer; marmaris airport transfer | /routes/marmaris | Book | Specific pickup/drop-off guidance and fare comparison |
+| Fethiye | dalaman airport to fethiye transfer | /routes/fethiye | Book | Local destination detail and pricing |
+| Ölüdeniz | dalaman airport to oludeniz transfer; dalaman to ölüdeniz | /routes/oludeniz | Book | Address/hotel guidance, vehicle choices |
+| Göcek | dalaman airport to gocek transfer | /routes/gocek | Book | Marina/hotel drop-off guidance when verified |
+| İçmeler | dalaman airport to icmeler transfer | /routes/icmeler | Book | Distinguish from Marmaris transfer page |
+| Vehicle capacity | dalaman airport private minibus transfer; dalaman vito transfer | /vehicles | Compare | Verified seat/luggage capacities and accessibility |
+| Booking questions | dalaman airport transfer return journey; child seat | /faq | Inform | Accurate operator policies; avoid promises |
+
+**Keyword caution:** No monthly search volume, difficulty, CPC or current ranking is asserted. Do not generate near-duplicate pages for singular/plural, taxi/transfer, or transliteration variations unless search intent and useful content differ materially.
+
+### Competitor pattern review (public page observations, not endorsement)
+
+- **Dalaman Go Transfer:** destination directory displays routes, per-vehicle prices and many destination subdivisions; useful inspiration for *discoverability and transparent comparisons*, not a mandate to copy 100+ pages or reuse its claims.
+- **Airport Transfers Turkey:** practical guide compares airport coaches, taxis and private transfers for Fethiye/Marmaris/Ölüdeniz/Göcek; useful inspiration for *decision support* and a potential future independently fact-checked comparison guide.
+- **intransfers:** directory lists transfer operators and service attributes; highlights the importance of consistent business facts and third-party discovery, but listed claims must not be assumed true for DalamanWay.
+- **Our differentiation:** focused airport-to-resort booking UX, transparent vehicle luggage limits, destination-prefilled booking and clearly explained request/confirmation process. Validate every operational claim.
+
+### Route-page editorial template and acceptance gate
+
+For each of the five destination pages:
+- Distinct H1 naming Dalaman Airport and destination; original 100–300+ words **only if they add real value**, not arbitrary word-count padding.
+- Short answer above the fold: service type, destination, booking CTA and link to actual pricing.
+- Explain the *actual* pickup and drop-off information requested, destination-specific accommodation areas when verified, flight number handling, passenger and luggage constraints, and return-transfer steps.
+- Use existing pricing data and vehicle limits as the only source for fare and capacity claims; label conditional availability. Do not invent a flat fare, fixed journey time or airport meet-and-greet.
+- Link to /routes, /vehicles, /faq and destination-prefilled /booking; include clear breadcrumb navigation and descriptive alt text for real destination imagery.
+- Add an FAQ section only when it answers real user questions and the operator confirms the answers. FAQ schema is not a guaranteed rich-result opportunity.
+- Pass accessibility, mobile layout, initial HTML, metadata uniqueness and booking-link tests before release.
+
+### Technical QA matrix (run against actual production AND staging)
+
+| Check | Production acceptance | Staging acceptance |
+| --- | --- | --- |
+| Host | One approved custom HTTPS canonical host; other hostnames 301 if feasible | No production canonical or sitemap indexability |
+| /robots.txt | HTTP 200; appropriate crawling rules; sitemap URL | HTTP 200; Disallow: / |
+| /sitemap.xml | HTTP 200; valid XML; only 200, canonical, indexable public URLs | No production URLs / empty sitemap |
+| Public pages | HTTP 200, unique initial title/description/H1, self canonical, indexable | HTTP 200, noindex |
+| /booking, /admin, sensitive paths | Noindex or authentication as appropriate; absent from sitemap | Noindex or authentication |
+| Unknown /routes slug | Real HTTP 404 if unsupported; no soft-404 page | Same |
+| Rendering | Googlebot-accessible CSS/JS; content useful without JS; no conflicting hydrated meta | Same with noindex |
+| Images and UX | Sized/lazy-loaded non-LCP images, responsive formats; real mobile LCP/INP/CLS measurement | Same |
+| Structured data | Only accurate Organization/WebSite/BreadcrumbList data where supported; validate rich results | No misleading business claims |
+| Domain transition | Canonical, sitemap, redirects and Search Console match | Preview stays blocked |
+
+**Important correction:** robots.txt Disallow is not a reliable substitute for noindex; blocked pages may not be crawled to observe their noindex. Use actual authentication for sensitive content. The production robots configuration must be reviewed for this interaction before any change.
+
+### Measurement and prioritization
+
+- **North-star:** qualified organic booking requests and confirmed bookings (with attribution limitations).
+- **Leading indicators:** indexed intended URLs, non-brand impressions/clicks, route-level CTR, top queries, mobile Core Web Vitals, booking CTA clicks and completed requests.
+- **Reporting:** baseline on release, weekly technical checks, 28-day Search Console comparisons, monthly conversion review; annotate releases and account for holiday seasonality.
+- **First sprint (P0):** verify canonical domain and deployed HTML, robots/sitemap, GSC ownership and all route statuses; fix blocking indexing defects.
+- **Second sprint (P1):** unify prerender/client metadata sources, automated 12-page parity and status tests, route content quality and genuine pricing.
+- **Third sprint (P1/P2):** performance improvements based on Lighthouse/field metrics, verified business trust signals, original comparison/help articles only where search demand exists.
+- **Ongoing:** legitimate partner links, content refreshes and Search Console-driven updates.
+
+### Release gates and responsibilities
+
+- No direct production deployment solely because source commits exist. Require green CI, staging smoke test, noindex safety and production-specific SEO regression checks.
+- Do not configure Search Console, Analytics, DNS, Render environment variables or business profiles without verified account access and correct domain/ownership.
+- Avoid any claim of first-page results, fixed ranking timelines, keyword volumes or ROI before measurement.
+
+### Research references (checked 2026-11-19)
+
+- Google Search Central SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
+- Google technical SEO and indexation: https://developers.google.com/search/docs/fundamentals/get-started
+- Google navigation/internal-link structure: https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure
+- Competitor destination index: https://dalamangotransfer.com/en/destinations
+- Competitor transfer comparison guide: https://www.airportstransferturkey.com/guides/dalaman-airport-to-fethiye-marmaris
+- Competitor operator directory: https://intransfers.com/transfers/turkey/dalaman-airport-dlm/
+
+**Evidence boundary:** Competitor observations come from public pages. Keyword clusters and execution priorities are our recommendations. Google guidance is documented above. No live crawl or Search Console analytics are represented as completed in this section.
