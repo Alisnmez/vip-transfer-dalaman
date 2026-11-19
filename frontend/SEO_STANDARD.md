@@ -385,3 +385,22 @@ Bu kayıt, yukarıdaki hazırlık aşaması notlarından sonraki durumu gösteri
 **Pilot test sonucu:** `f3ded1f` dört GitHub Actions iş akışını geçti. Render testinde 18 genel yolun ilk HTML yanıtı, dört yeni dil yolunda doğru `lang`, staging noindex/robots politikası ve boş staging sitemap doğrulandı. Tarayıcıda Göcek’in Almancadan Rusçaya geçişi ve rezervasyon hedefi doğrulandı. Test servisi `4d15033`, asıl rewrite kuralları ve On Commit ayarına döndü. Aday canlıya alınmadı. [PR #21](https://github.com/Alisnmez/vip-transfer-dalaman/pull/21)
 
 **Canlı yayın — 19 Kasım 2026:** `f3ded1f` aday sürümü `dep-dbvgkhe7bikc738i80f0` dağıtımıyla canlı frontend'e alındı. Dalyan ve Sarıgerme ile dört Almanca/Rusça adres için altı tam eşleşme, mevcut 11 tam eşleşmenin ardından ve `/* → /app-shell.html` kuralının üstüne eklendi. Canlı sitemap'teki 18 URL HTTP 200, doğru ilk HTML, tek H1 ve kendi canonical adresini verdi. Marmaris ve Göcek varyantları karşılıklı hreflang ile eşleşti. Ana sayfadaki Organization verisi, robots.txt, JS giriş dosyası ve beş uygulama URL'sinin noindex HTML'i doğrulandı. Göcek'te Almanca → Rusça → rezervasyon ve mevcut İngilizce adrese dönüş tarayıcıda geçti. Test rezervasyonu gönderilmedi. Google'ın yeni URL'leri indeksleme durumu henüz doğrulanmadı.
+
+## 19 Kasım 2026 — Üç hedef pazarda görünürlük
+
+Canlı kontrolde site haritasındaki 18 adresin tamamı HTTP 200, tek H1, kendine ait canonical ve index,follow döndürdü. /booking ilk HTML'de noindex döndürdü. İlgili dokuz SEO testi geçti.
+
+| Hedef pazar | Yayındaki rota sayfaları | Kapsam |
+| --- | --- | --- |
+| Birleşik Krallık | Yedi İngilizce rota | 7/7 |
+| Almanya | Marmaris ve Göcek | 2/7 |
+| Rusya | Marmaris ve Göcek | 2/7 |
+
+Üç dilde yedi rota hedefinde 11/21 sayfa yayında (%52). Bu ölçüm içerik kapsamını gösterir. Ülke bazlı sıralama başlangıç değerleri henüz doğrulanmadı.
+
+### Sıradaki işler ve kabul ölçütleri
+
+1. Bilinmeyen rota canlıda HTTP 200 ve noindex dönüyor. Geçersiz adresin HTTP 404, geçerli rota ve doğrudan açılan rezervasyon bağlantısının HTTP 200 döndüğünü önce test ortamında doğrula.
+2. Almanca ve Rusça Fethiye ile Ölüdeniz sayfalarını hazırla. Dört yeni adresin her birinde doğru dil, özgün rota bilgisi, kendine ait canonical, karşılıklı hreflang, site haritası kaydı ve doğru destinasyona açılan rezervasyon bağlantısını doğrula. Ardından İçmeler, Dalyan ve Sarıgerme için aynı kontrolü uygula.
+3. Rota sayfalarının ilk HTML'ine yolcunun kararını etkileyen, işletmenin doğruladığı araç, bagaj ve buluşma bilgilerini ekle. Fiyat gösteriliyorsa rezervasyon sistemiyle aynı kaynaktan üret.
+4. Search Console'da 18 adreslik haritanın son okunma tarihini ve yeni rota adreslerinin indeks durumunu kaydet. Performans raporunda Birleşik Krallık, Almanya ve Rusya'yı ayrı filtrele. Her pazar için markasız rota sorgularını ilgili açılış sayfasıyla eşleştir. Son 28 günü önceki 28 günle gösterim, tıklama, CTR ve ortalama konum üzerinden karşılaştır. Veri azsa tarih aralığı ve gösterim sayısını kaydet. Organik rezervasyon taleplerini ölçüm kurulunca ayrıca izle.
