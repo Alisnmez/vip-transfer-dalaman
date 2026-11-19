@@ -103,7 +103,7 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 | SEO-03 | Prerender title, description, canonical ve noindex regresyon testi | `/routes/marmaris`, `/faq` | KODLANDI / TEST BEKLİYOR | `0c074ec`; test kapsamı genişletildi, mevcut branch'in son SHA'sında yeniden koşulmalı |
 | SEO-04 | Open Graph ve Twitter meta etiketleri | `/routes/:slug`, `/`, `/vehicles`, `/services`, `/contact`, `/faq`, `/reviews`, `/routes` | KODLANDI / TEST BEKLİYOR | `0b57e68`, test `aa9828e`; gerçek HTML ve sosyal paylaşım önizlemesi kontrol edilmeli |
 | SEO-05 | Production HTTP/indexability denetimi | `/`, `/robots.txt`, `/sitemap.xml`, örnek rotalar | BLOKE (erişim) | 2026-11-19 HTTP denemeleri erişim engeline takıldı; dış erişimi olan Work/CI ortamından doğrula |
-| SEO-06 | Dört dil için kalıcı URL ve geçiş stratejisi | `/en-gb/`, `/de/`, `/ru/`, `/tr/` ve rota varyantları | PLANLANDI | Mevcut React router/i18n kontrolü, 301 ve eski URL koruması |
+| SEO-06 | Dört dil için kalıcı URL ve geçiş stratejisi | `/en-gb/`, `/de/`, `/ru/`, `/tr/` ve rota varyantları | DEVAM EDİYOR (mimari keşif) | Router ve JS SEO davranışı incelendi; LanguageProvider/URL stratejisi sırada |
 | SEO-07 | Dil bazlı HTML, title, H1, canonical ve hreflang | SEO-06 URL'leri | PLANLANDI | Karşılıklı hreflang ve self-canonical testleri |
 | SEO-08 | Lokalize sitemap ve JS'siz prerender | SEO-06 URL'leri ve sitemap | PLANLANDI | Yalnızca tam çevrilmiş, 200/indexlenebilir URL'leri ekle |
 | SEO-09 | Özgün rota içerikleri | Marmaris, Fethiye, Ölüdeniz, İçmeler, Göcek, Dalyan, Sarıgerme; 4 dil | PLANLANDI | Operasyonel doğrulama, çeviri ve iç bağlantı |
@@ -131,6 +131,18 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 **Karar:** Üretim ayarlarına veya DNS'e körlemesine müdahale edilmedi; siteye deploy yapılmadı. SEO-05 durumu `BLOKE (erişim)` olarak tutuldu. **Sonraki uygulama:** Work Mode'un erişebildiği tarayıcıda veya ağ erişimi olan GitHub Actions runner'ında dört URL için status, final URL, HTML meta robots, canonical, sitemap/robots içerik ve yönlendirme zincirini kaydet; çıktıyı bu maddeye ekle. Gerekirse `curl -IL https://dalamanway.com/`, `curl -fsSL https://dalamanway.com/robots.txt`, `curl -fsSL https://dalamanway.com/sitemap.xml` ve rota HTML denetimi yap. Başarı ancak gerçek yanıtla yazılır.
 
 **Devam noktası:** SEO-05 canlı ölçümü açık; buna paralel SEO-06 için mevcut React router ve i18n dosyalarını yalnızca okuyarak mimari inceleme yapılabilir. Work Mode test sonuçları gelince son commit SHA'sına göre yeniden doğrula.
+
+### SEO-06 — Router/i18n mimari inceleme (2026-11-19, kod değişikliği yok)
+
+**İncelenen dosyalar:** `frontend/src/App.tsx`, `frontend/src/app/providers.tsx`, `frontend/src/app/router.tsx`, `frontend/src/main.tsx`, `frontend/package.json`.
+
+**Somut bulgular:** Uygulama `react-router-dom` v7 `createBrowserRouter` kullanıyor. Public route'lar `/`, `/routes`, `/routes/:slug`, `/vehicles`, `/services`, `/contact`, `/faq`, `/reviews`, `/booking` ve rezervasyon alt sayfaları; `/admin` ayrı. Public layout `LanguageProvider` ile sarılıyor, ancak router'da `/en-gb`, `/de`, `/ru`, `/tr` eşleşmesi **yok**. Bilinmeyen yollar wildcard ile `/` adresine yönlendiriliyor. Bu nedenle yalnızca statik dil URL'leri üretmek kullanıcıyı ana sayfaya düşürebilir; önce router uyarlaması şart.
+
+**SEO riski:** `ScrollToTop` `pathname` değiştiğinde robots, title, description ve canonical'ı JS tarafında yeniden yazıyor. Indexlenebilir yol listesi yalnızca İngilizce mevcut URL'leri kapsıyor. Dil URL'leri eklenirse bu liste ve metadata eşlemesi güncellenmeden tarayıcıda `noindex` kalabilir; prerender edilmiş head ile JS metadata çelişebilir. Ayrıca `/booking` ve `/admin` noindex davranışı korunmalı.
+
+**Karar / çözüm sırası:** (1) `LanguageProvider` ve dil anahtarı bileşenlerinin URL senkronizasyonunu incele; (2) geriye uyumlu dil-prefiksli router tasarımı ve mevcut İngilizce URL'ler için canonical/redirect stratejisi çıkar; (3) route/SEO metadata tek kaynaktan beslensin; (4) statik prerender, sitemap, reciprocal hreflang ve tarayıcı yönlendirmesini birlikte test et. **Henüz yeni dil URL'si yayınlanmadı veya kodlanmadı.**
+
+**Devam noktası:** `frontend/src/shared/localization/LanguageProvider` ve dil seçim bileşenlerini oku; eski URL'lerin booking navigasyonuna etkisini test planına ekle. Bu mimari inceleme SEO-06'nın yalnızca keşif alt adımıdır; görev hâlâ `DEVAM EDİYOR`.
 
 ### Şu an tam olarak neredeyiz?
 **Son kodlanan görev: SEO-04.** **Bir sonraki teknik görev: SEO-05**, ardından SEO-06/07. SEO-02/03/04 için güncel branch'in testleri ve staging doğrulaması açık. **Hiçbiri bu kayıt itibarıyla production'a yayınlanmadı.** PR #17 ve #18 ayrı tutuldu; Work Mode'un yaptığı değişiklikler birleştirilmeden önce diff ve çakışma kontrolü yapılmalı.
