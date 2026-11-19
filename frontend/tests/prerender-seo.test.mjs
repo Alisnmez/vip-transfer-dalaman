@@ -38,7 +38,7 @@ test('production prerendered route has crawlable title, description, canonical a
   assert.match(route, /<meta name="robots" content="index,follow"/)
   assert.match(route, /<link rel="canonical" href="https:\/\/dalamanway\.com\/routes\/marmaris"/)
   assert.match(route, /<h1>Dalaman Airport to Marmaris Private Transfer/)
-  assert.match(route, /data-prerender-fallback/)
+  assert.match(route, /data-prerender-fallback/)\n  assert.match(route, /<meta property="og:title" content="Dalaman Airport to Marmaris Private Transfer/)\n  assert.match(route, /<meta property="og:url" content="https:\\/\\/dalamanway\\.com\\/routes\\/marmaris"/)\n  assert.match(route, /<meta name="twitter:card" content="summary"/)
   assert.match(faq, /<h1>Frequently Asked Questions<\/h1>/)
   assert.match(faq, /<meta name="robots" content="index,follow"/)
 })
@@ -48,7 +48,7 @@ test('staging prerendered pages remain noindex without production canonicals', a
     const { route, faq } = await render(url)
     for (const html of [route, faq]) {
       assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
-      assert.doesNotMatch(html, /rel="canonical"/)
+      assert.doesNotMatch(html, /rel="canonical"/)\n      assert.doesNotMatch(html, /property="og:url"/)
     }
   }
 })
