@@ -155,7 +155,9 @@ export function HomePage() {
             <div className="md:col-span-2 md:row-span-2 relative rounded-xl overflow-hidden group border border-outline">
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                data-alt="Fethiye Marina"
+                alt="Fethiye Marina"
+                loading="lazy"
+                decoding="async"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOK1KM9F2Y7leTkTeOhHhnk3VW5SYz7VSpbtXEDc0wp2tByE7Ri26sDHSSF2pw2VMvlqpkHiwYswfRKKIKXYOcZ6oZAL6djRVTXN6hX563nv9I90K-aDDZhqhug7ij3oMrV9SYc_aitmhgiZu2GLn5DxFhE7G3aZBTSwBYeRQNNaoaO1bXa1f3lb27SbvzUZZ1_aGUZVjylaMPe04cScc8j3VEKcLM43VaDaDj_P2lKPwbhgZoiZu-mzXAC_hNdZAoF0wgGzjUVlY"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
@@ -176,7 +178,9 @@ export function HomePage() {
             <div className="md:col-span-2 relative rounded-xl overflow-hidden group border border-outline">
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                data-alt="Gocek"
+                alt="Gocek"
+                loading="lazy"
+                decoding="async"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOoevwDWp2dwsb3kyAbOt18NiYyZnU-otp8oMvvN0dAop3O0F7d7R1p5TZ4oVhIn__oejP4s-CbC4cfdF2YENvwyxPgoYrBe16j-mf95TaokOcp1y1ULaDK0GIGCcRvZ7Fi59650xA9EYYj44NFBhopQPjcD6J7iUOqiU6FZZQ4lwAlLB-n7CwE0YKWRbX2wfVtPyUy_SquSFJF_aEI-B-Is7qPe9Xf2PF8lYCAbdYnF6VOacrL5qNgZD9iDZ3_Y0t1j_XPaYmmog"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
@@ -191,7 +195,9 @@ export function HomePage() {
             <div className="md:col-span-1 relative rounded-xl overflow-hidden group border border-outline">
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                data-alt="Marmaris"
+                alt="Marmaris"
+                loading="lazy"
+                decoding="async"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7Q8VhPQ9vxEnZPMQlxFOH5Bq6VI3ircpXbpY8zDjl1oP6yWyHuIXDvjHdwGEGb-yqm1NG7eOgJVexdTGpecalboFhK83kZuUAkT8GP-Td1bskh-f5Bh9iyy5k_PtJNGSMpq8rdrjnr33ToG3EsT0zQbhhFzzYZuTUIgktHADpsgbw6H7T1CgcvnGrDoJr81uaylbrRxq27QLggC8yoYmnDS8iBkmtKf2t0Eod6filBbv6dFTaw2cnSM2VcaZSXAeu8Igbn3gaZdQ"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
