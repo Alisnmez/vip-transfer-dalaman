@@ -428,3 +428,9 @@ PR #24 ile tüm rota sayfalarının ilk HTML ve React görünümüne rezervasyon
 Search Console URL denetiminde İngilizce Marmaris ve Göcek dizinde. İngilizce Fethiye, Ölüdeniz, İçmeler, Dalyan ve Sarıgerme ile Almanca/Rusça Marmaris, Göcek, Fethiye ve Ölüdeniz henüz dizinde görünmedi. Ülke bazlı sıralama ve tıklamalar için performans verisi işleniyor.
 
 28 adreslik harita gönderilirken Google “Site haritası başarıyla gönderildi” onayını verdi. Aynı anda listede önceki okumadan 22 keşfedilen sayfa görünüyordu. Son altı dil adresi için bireysel URL denetimleri doğrulanmadı.
+
+### 19 Kasım 2026 — Son canlı kontrol ve Google URL denetimi
+
+Canlı site haritasındaki 28 benzersiz adresin tamamı doğrudan HTTP 200, tek H1, index,follow ve kendi canonical adresini döndürdü. Yedi rotanın 21 EN/DE/RU sürümünde HTML dili, karşılıklı en/de/ru/x-default hedefleri ve destinasyon parametreli rezervasyon bağlantısı doğrulandı. Dört rezervasyon ve iki yönetim adresi HTTP 200 ve noindex,nofollow döndürdü. İki geçersiz adres HTTP 404 döndürdü. 36/36 adres kontrolü geçti.
+
+Search Console, son okuma tarihi 19 Kasım olan başarılı site haritasında 28 keşfedilen sayfa bildirdi (önceki kayıt 22). Her rota URL'si ayrı denetlendi. İngilizce Marmaris ve Göcek dizinde; diğer beş İngilizce rota ve 14 Almanca/Rusça rota henüz dizinde görünmüyor. Sonuç yalnızca 21 rota URL'sini kapsar. Ülkeler sekmesi henüz etkin değildi ve performans raporu verilerin işlendiğini gösteriyordu. Birleşik Krallık, Almanya ve Rusya için gösterim, tıklama veya konum değeri doğrulanamadı. Bu kontrolde uygulama kodu veya yayın yapılandırması için düzeltme gerekmedi.
