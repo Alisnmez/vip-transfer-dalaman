@@ -404,3 +404,11 @@ Canlı kontrolde site haritasındaki 18 adresin tamamı HTTP 200, tek H1, kendin
 2. Almanca ve Rusça Fethiye ile Ölüdeniz sayfalarını hazırla. Dört yeni adresin her birinde doğru dil, özgün rota bilgisi, kendine ait canonical, karşılıklı hreflang, site haritası kaydı ve doğru destinasyona açılan rezervasyon bağlantısını doğrula. Ardından İçmeler, Dalyan ve Sarıgerme için aynı kontrolü uygula.
 3. Rota sayfalarının ilk HTML'ine yolcunun kararını etkileyen, işletmenin doğruladığı araç, bagaj ve buluşma bilgilerini ekle. Fiyat gösteriliyorsa rezervasyon sistemiyle aynı kaynaktan üret.
 4. Search Console'da 18 adreslik haritanın son okunma tarihini ve yeni rota adreslerinin indeks durumunu kaydet. Performans raporunda Birleşik Krallık, Almanya ve Rusya'yı ayrı filtrele. Her pazar için markasız rota sorgularını ilgili açılış sayfasıyla eşleştir. Son 28 günü önceki 28 günle gösterim, tıklama, CTR ve ortalama konum üzerinden karşılaştır. Veri azsa tarih aralığı ve gösterim sayısını kaydet. Organik rezervasyon taleplerini ölçüm kurulunca ayrıca izle.
+
+### 19 Kasım — Fethiye ve Ölüdeniz yayını ve HTTP 404 doğrulaması
+
+PR #23, commit `a5c17fc`. Almanca ve Rusça Fethiye ve Ölüdeniz sayfaları yayında. Rota kapsamı EN 7/7, DE 4/7, RU 4/7; toplam 15/21. Üretim site haritası 22 adres içeriyor.
+
+Yerelde 86 frontend testi, lint ve üretim derlemesi geçti. Test servisinde 12 HTTP/HTML kontrolü geçti ve site haritası boş kaldı. Üretimde 22 site haritası adresinin her biri HTTP 200, tek H1, doğru HTML dili, index,follow ve kendi canonical adresini verdi. Altı rezervasyon/yönetim adresi HTTP 200 ve noindex döndü. İki bilinmeyen genel/rota adresi HTTP 404 döndü. Test ve üretim statik servislerinde genel rewrite yerine rezervasyon ve yönetim yollarına özel kurallar ve dört yeni rota için statik HTML kuralları kaydedildi.
+
+Sonraki ölçüm: Search Console'da yeni adreslerin keşif ve indeks durumları, ardından ülke/sorgu/sayfa performansı. HTTP kontrolleri Google indeks durumunu ölçmez.
