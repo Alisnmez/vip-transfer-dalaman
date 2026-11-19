@@ -14,7 +14,7 @@ const interiorPhotos: Record<string, string | undefined> = {
   'vip-minibus': 'https://images.openai.com/static-rsc-4/BXMV8Z-26W5EFttaDizoMzDjMyHFHezu0hvoBfSUTKQdaSr1DeK7vTia_VgabJP1ujPdatL0GSGOnezHD5V837NiuBEZqFvNC1xP6QbzUd1p9CkE4e3mNh0GDXLRGf_vwcX78WfS0oCmJOBOnBp_2l-7JZ_k2meGmqGh47_eFSc?purpose=inline',
 }
 
-export function VehiclePhoto({ vehicleId, name, className = 'h-56' }: { vehicleId: string; name: string; className?: string }) {
+export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle = true }: { vehicleId: string; name: string; className?: string; showToggle?: boolean }) {
   const [showInterior, setShowInterior] = useState(false)
   const [failed, setFailed] = useState(false)
   const exterior = exteriorPhotos[vehicleId]
@@ -29,7 +29,7 @@ export function VehiclePhoto({ vehicleId, name, className = 'h-56' }: { vehicleI
       ) : <div className="flex h-full items-center justify-center text-sm text-slate-500">{name}</div>}
       {interior && <img src={interior} alt="" aria-hidden="true" loading="lazy" decoding="async"
         className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showInterior ? 'opacity-100' : 'opacity-0'}`} />}
-      {interior && <button type="button" aria-label={showInterior ? `Show ${name} exterior` : `Show ${name} interior`}
+      {interior && showToggle && <button type="button" aria-label={showInterior ? `Show ${name} exterior` : `Show ${name} interior`}
         aria-pressed={showInterior} onClick={(event) => { event.preventDefault(); event.stopPropagation(); setShowInterior(value => !value) }}
         className="absolute bottom-2 right-2 rounded-md bg-black/70 px-3 py-2 text-xs font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
         {showInterior ? 'Exterior' : 'Interior'}
