@@ -16,13 +16,6 @@ import { destinationGroups } from '../../features/booking/destinationGroups'
 import { validateTransferSchedule } from '../../features/booking/validateTransferSchedule'
 import { validateTransferSelection } from '../../features/booking/validateTransferSelection'
 
-// Generic icons avoid implying that an unverified vehicle photograph is the exact booked car.
-function vehicleIcon(vehicleId: string): string {
-  if (vehicleId === 'taxi') return 'local_taxi'
-  if (vehicleId.includes('minibus')) return 'airport_shuttle'
-  return 'directions_car'
-}
-
 type TransferDraft = {
   tripType?: 'one-way' | 'round-trip'
   vehicleId?: string

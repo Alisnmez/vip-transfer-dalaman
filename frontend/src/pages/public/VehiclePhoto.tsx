@@ -16,21 +16,24 @@ const interiorPhotos: Record<string, string | undefined> = {
 
 export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle = true }: { vehicleId: string; name: string; className?: string; showToggle?: boolean }) {
   const [showInterior, setShowInterior] = useState(false)
-  const [failed, setFailed] = useState(false)
+  const [previewInterior, setPreviewInterior] = useState(false)
+  const [exteriorFailed, setExteriorFailed] = useState(false)
+  const [interiorFailed, setInteriorFailed] = useState(false)
   const exterior = exteriorPhotos[vehicleId]
   const interior = interiorPhotos[vehicleId]
   return (
-    <div className={`group relative w-full overflow-hidden bg-slate-100 ${className}`}
-      onMouseEnter={() => { if (interior) setShowInterior(true) }}
-      onMouseLeave={() => setShowInterior(false)}>
-      {exterior && !failed ? (
+    <div className={`relative w-full overflow-hidden bg-slate-100 ${className}`}
+      onPointerEnter={event => { if (event.pointerType === 'mouse') setPreviewInterior(true) }}
+      onPointerLeave={() => setPreviewInterior(false)}>
+      {exterior && !exteriorFailed ? (
         <img src={exterior} alt={`${name} exterior (illustrative vehicle)`} loading="lazy" decoding="async"
-          onError={() => setFailed(true)} className="h-full w-full object-cover" />
+          onError={() => setExteriorFailed(true)} className="h-full w-full object-cover" />
       ) : <div className="flex h-full items-center justify-center text-sm text-slate-500">{name}</div>}
-      {interior && <img src={interior} alt="" aria-hidden="true" loading="lazy" decoding="async"
-        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showInterior ? 'opacity-100' : 'opacity-0'}`} />}
-      {interior && showToggle && <button type="button" aria-label={showInterior ? `Show ${name} exterior` : `Show ${name} interior`}
-        aria-pressed={showInterior} onClick={(event) => { event.preventDefault(); event.stopPropagation(); setShowInterior(value => !value) }}
+      {interior && !interiorFailed && <img src={interior} alt="" aria-hidden="true" loading="lazy" decoding="async"
+        onError={() => setInteriorFailed(true)}
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showInterior || previewInterior ? 'opacity-100' : 'opacity-0'}`} />}
+      {interior && !interiorFailed && showToggle && <button type="button" aria-label={showInterior ? `Show ${name} exterior` : `Show ${name} interior`}
+        aria-pressed={showInterior} onClick={() => { setPreviewInterior(false); setShowInterior(value => !value) }}
         className="absolute bottom-2 right-2 rounded-md bg-black/70 px-3 py-2 text-xs font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
         {showInterior ? 'Exterior' : 'Interior'}
       </button>}
