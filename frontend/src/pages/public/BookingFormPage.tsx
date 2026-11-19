@@ -39,7 +39,7 @@ type TransferDraft = {
 
 function readTransferDraft(): TransferDraft {
   try {
-    const value: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+    const value: unknown = JSON.parse(sessionStorage.getItem('bookingTransferInfo') || '{}')
     if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
     const raw = value as Record<string, unknown>
     const readString = (key: string) => typeof raw[key] === 'string' ? raw[key] as string : undefined
