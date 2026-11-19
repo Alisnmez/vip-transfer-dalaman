@@ -357,3 +357,7 @@ Bu kayıt, yukarıdaki hazırlık aşaması notlarından sonraki durumu gösteri
 İlgili yönlendirmeler: [Google çok dilli site rehberi](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites) · [Search Console sahiplik doğrulaması](https://support.google.com/webmasters/answer/9008080).
 
 **Rota adayı `1905edc` test sonucu:** Dört GitHub Actions kontrolü geçti. Render testinde beş rota adresinin ilk HTML'inde İngilizce not ve `noindex` doğrulandı. Göcek sayfasında dil seçicisiyle İngilizce, Almanca ve Rusça notlar görüldü. Rezervasyon bağlantısı Göcek'i otomatik seçti. Test servisi `4d15033` sürümüne ve commit geldiğinde otomatik dağıtıma döndürüldü. Rota adayı canlıya alınmadı. [PR #19](https://github.com/Alisnmez/vip-transfer-dalaman/pull/19)
+
+**Canlı rota yayını — 19 Kasım 2026:** Onaylanan `1905edc` sürümü Render frontend dağıtımı `dep-dbvg0m6c6qcc73b620hg` ile yayında. Beş rota HTTP 200, kendi canonical adresi ve İngilizce varış notunu ilk HTML'de verdi. 12 genel, 5 uygulama adresi ile robots.txt ve sitemap tekrar doğrulandı. Göcek notu tarayıcıda EN/DE/RU görüldü ve rezervasyon hedefi otomatik seçildi. Test rezervasyonu gönderilmedi.
+
+**Search Console:** Google, `dalamanway.com` için alan adı TXT doğrulamasını hazırladı. Porkbun oturumu açılana kadar doğrulama kaydı eklenmedi. Sahiplik doğrulamasından sonra sitemap ve indeksleme raporları kontrol edilecek.
