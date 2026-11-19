@@ -4,7 +4,7 @@
  */
 export const seoConfig = {
   brandName: import.meta.env.VITE_SITE_NAME?.trim() || 'Dalaman Airport Transfers',
-  siteUrl: (import.meta.env.VITE_SITE_URL?.trim() || '').replace(/\/$/, ''),
+  siteUrl: (import.meta.env.VITE_PUBLIC_SITE_URL?.trim() || '').replace(/\/$/, ''),
   defaultLocale: 'en_GB',
   defaultDescription:
     'Book private transfers from Dalaman Airport to Marmaris, Fethiye, Oludeniz and more. Compare vehicle options and prices in GBP.',
@@ -37,6 +37,14 @@ export const seoPages: Record<string, SeoPage> = {
     title: 'Contact | Dalaman Airport Transfers',
     description: 'Contact our team about private airport transfers from Dalaman Airport, booking details and travel questions.',
   },
+  '/faq': {
+    title: 'Dalaman Airport Transfer FAQs | DalamanWay',
+    description: 'Find answers about Dalaman airport transfer requests, return journeys, flight details, child seats and booking changes.',
+  },
+  '/reviews': {
+    title: 'Customer Reviews | DalamanWay',
+    description: 'Learn about customer feedback and how to share your Dalaman airport transfer experience with DalamanWay.',
+  },
   '/booking': {
     title: 'Book a Dalaman Airport Transfer',
     description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.',
@@ -46,6 +54,17 @@ export const seoPages: Record<string, SeoPage> = {
 
 export function getSeoPage(pathname: string): SeoPage {
   const normalized = pathname.replace(/\/$/, '') || '/'
+  const destinations: Record<string, string> = {
+    marmaris: 'Marmaris', fethiye: 'Fethiye', oludeniz: 'Oludeniz', gocek: 'Gocek', icmeler: 'Icmeler',
+  }
+  const slug = normalized.match(/^\/routes\/([a-z]+)$/)?.[1]
+  if (slug && destinations[slug]) {
+    const name = destinations[slug]
+    return {
+      title: `Dalaman Airport to ${name} Private Transfer | DalamanWay`,
+      description: `Plan a private Dalaman Airport to ${name} transfer. Compare available vehicles and request a one-way or return journey.`,
+    }
+  }
   return seoPages[normalized] || {
     title: 'Dalaman Airport Transfer Booking',
     description: seoConfig.defaultDescription,
