@@ -42,7 +42,7 @@ export function RoutesPage() {
     <div className="min-h-screen bg-background text-on-surface">
       <PublicNavbar />
       <main>
-        {loading && <p role="status" className="pt-24 px-4">Loading current prices...</p>}
+        {loading && <span className="sr-only" role="status">Updating route prices</span>}
         {error && <div role="alert" className="pt-24 px-4">{error} <button type="button" onClick={refresh}>Refresh prices</button></div>}
         <section className="relative overflow-hidden bg-admin-primary px-4 pb-16 pt-32 text-white sm:px-8 sm:pb-20 sm:pt-40">
           <div className="pointer-events-none absolute -right-28 -top-24 h-80 w-80 rounded-full border border-white/10" />
