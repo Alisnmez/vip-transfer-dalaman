@@ -100,9 +100,9 @@ export function RoutesPage() {
         <section className="bg-surface-container-low px-4 py-14 sm:px-8 sm:py-20" id="all-routes" aria-labelledby="all-routes-heading">
           <div className="mx-auto max-w-7xl">
             <div className="mb-8">
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-secondary">PLAN YOUR TRANSFER</p>
-              <h2 className="text-2xl font-bold tracking-tight text-admin-primary sm:text-3xl" id="all-routes-heading">Find your route & price</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-on-surface-variant">Choose a vehicle and journey type to compare prices from the same list used by our booking form.</p>
+              <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.2em] text-amber-700">PLAN YOUR TRANSFER</p>
+              <h2 className="text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl" id="all-routes-heading">Find your route & price</h2>
+              <p className="mt-2 max-w-2xl text-base font-medium leading-relaxed text-slate-800">Choose a vehicle and journey type to compare prices from the same list used by our booking form.</p>
             </div>
             <div className="rounded-2xl border border-outline-variant bg-white p-4 shadow-sm sm:p-6">
               <div className="grid gap-4 md:grid-cols-3">
