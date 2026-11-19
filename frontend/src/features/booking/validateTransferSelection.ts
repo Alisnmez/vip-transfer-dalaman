@@ -37,7 +37,7 @@ export function validateTransferSelection(transfer: TransferSelection, savedVehi
   if (!vehicle || !Number.isInteger(passengers) || passengers === undefined ||
       passengers < 1 || passengers > vehicle.maxPassengers ||
       !Number.isInteger(luggage) || luggage === undefined ||
-      luggage < 0 || luggage > Math.min(8, vehicle.maxLuggage ?? 8) ||
+      luggage < 0 || luggage > vehicle.maxLuggage ?? 0 ||
       !Number.isInteger(babySeats) || babySeats === undefined ||
       babySeats < 0 || babySeats > 2) {
     return 'Passenger, luggage or baby seat count is invalid for the selected vehicle. Please review your transfer.'
