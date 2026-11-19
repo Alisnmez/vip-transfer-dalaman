@@ -39,6 +39,8 @@ test('SEO indexing remains disabled for localhost and Render domains', async () 
 test('production sitemap includes only canonical public URLs with no booking data', async () => {
   const { robots, sitemap } = await buildSeo('https://dalamanway.com/')
   assert.match(robots, /Sitemap: https:\/\/dalamanway\.com\/sitemap\.xml/)
+  assert.match(robots, /^Disallow: \/admin$/m)
+  assert.doesNotMatch(robots, /^Disallow: \/(?:booking.*)?$/m)
   assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/routes\/marmaris<\/loc>/)
   assert.doesNotMatch(sitemap, /<loc>[^<]*(booking|admin|token|reference)/i)
   assert.doesNotMatch(sitemap, /dalamanway\.com\/\//)

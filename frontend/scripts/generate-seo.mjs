@@ -10,7 +10,8 @@ if (isProductionSite) {
   const escapeXml = (value) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;')
   const urls = routes.map((route) => '  <url><loc>' + escapeXml(siteUrl + route) + '</loc></url>').join('\n')
   await writeFile('public/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '\n</urlset>\n')
-  await writeFile('public/robots.txt', 'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /booking\nSitemap: ' + siteUrl + '/sitemap.xml\n')
+  // Crawlers need access to booking routes to read the app shell's noindex tag.
+  await writeFile('public/robots.txt', 'User-agent: *\nAllow: /\nDisallow: /admin\nSitemap: ' + siteUrl + '/sitemap.xml\n')
 } else {
   await writeFile('public/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></urlset>\n')
   await writeFile('public/robots.txt', 'User-agent: *\nDisallow: /\n')
