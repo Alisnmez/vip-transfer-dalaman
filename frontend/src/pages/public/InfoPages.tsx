@@ -84,7 +84,7 @@ export function VehiclesPage() {
           <h1 className="mb-4 font-display-lg text-display-lg text-admin-primary">Professional Transfer Vehicles</h1>
           <p className="text-lg text-on-surface-variant">
             Explore our vehicle categories and choose the right option for your transfer.
-            Models are examples; a similar vehicle may be assigned. Equipment, availability and luggage space are confirmed before travel. For more than 8 bags, contact us before booking.
+            Models are examples; a similar vehicle may be assigned. Equipment, availability and luggage space are confirmed before travel. Luggage limits depend on the selected vehicle.
           </p>
         </header>
         <section aria-label="Vehicle categories" className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -106,7 +106,7 @@ export function VehiclesPage() {
                     </li>
                   ))}
                 </ul>
-                <Link to="/booking" className="mt-auto block rounded-lg bg-admin-primary px-5 py-3 text-center font-bold text-white hover:opacity-90">
+                <Link to={`/booking?vehicle=${encodeURIComponent(vehicle.bookingVehicleId)}`} className="mt-auto block rounded-lg bg-admin-primary px-5 py-3 text-center font-bold text-white hover:opacity-90">
                   Book a Transfer
                 </Link>
               </div>
