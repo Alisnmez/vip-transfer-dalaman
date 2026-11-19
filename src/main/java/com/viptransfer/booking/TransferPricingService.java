@@ -68,9 +68,12 @@ public class TransferPricingService {
         }
         int maximum = switch (vehicleId) {
             case "taxi" -> 3;
-            case "vip-minivan", "premium-vip-minivan" -> 6;
+            case "vip-minivan" -> 5;
+            case "premium-vip-minivan" -> 6;
             case "maybach", "maybach-plus" -> 4;
-            case "minibus", "vip-minibus", "vip-minibus-long", "minibus-long" -> 8;
+            case "minibus" -> 8;
+            case "vip-minibus" -> 12;
+            case "vip-minibus-long", "minibus-long" -> 16;
             default -> throw new IllegalArgumentException("Invalid vehicle.");
         };
 
