@@ -35,7 +35,7 @@ export function RouteDetailPage() {
           <h2 className="text-2xl font-bold text-admin-primary">Plan your journey</h2>
           <p className="mt-3 leading-relaxed">Compare the available vehicle options and current listed fares on our routes page. You can request a one-way or return transfer; the team will review your request before confirmation.</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to="/booking">Request a transfer</Link>
+            <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to={`/booking?destination=${encodeURIComponent(route.match)}`}>Request a transfer</Link>
             <Link className="rounded-lg border border-outline-variant px-6 py-3 font-semibold text-admin-primary" to="/routes">Compare routes and prices</Link>
           </div>
         </section>
