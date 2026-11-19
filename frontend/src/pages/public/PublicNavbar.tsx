@@ -42,14 +42,17 @@ export function PublicNavbar() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-          {import.meta.env.VITE_LOCALIZATION_PREVIEW === 'true' && (
-            <select aria-label={copy.language} className="h-11 max-w-28 rounded-lg border border-slate-200 bg-white px-2 text-sm font-semibold text-admin-primary" value={language} onChange={event => setLanguage(parseLanguage(event.target.value))}>
-              {Object.entries(languages).map(([code, name]) => <option key={code} value={code} lang={code}>{name}</option>)}
-            </select>
-          )}
           <Link className="hidden shrink-0 rounded-lg bg-admin-primary px-4 py-3 text-sm font-semibold text-on-primary transition-opacity hover:opacity-90 sm:inline-flex" to="/booking">
             {copy.book}
           </Link>
+          <select
+            aria-label={copy.language}
+            className="h-11 max-w-28 rounded-lg border border-slate-200 bg-white px-2 text-sm font-semibold text-admin-primary"
+            value={language}
+            onChange={event => setLanguage(parseLanguage(event.target.value))}
+          >
+            {Object.entries(languages).map(([code, name]) => <option key={code} value={code} lang={code}>{name}</option>)}
+          </select>
           <button
             aria-controls="mobile-navigation"
             aria-expanded={menuOpen}
