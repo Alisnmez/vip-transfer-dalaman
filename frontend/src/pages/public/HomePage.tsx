@@ -2,6 +2,7 @@ import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { HomeReviewStrip } from './HomeReviewStrip'
 
@@ -142,6 +143,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <GuestPhotos />
 
       <section className="py-24 bg-white border-y border-outline" id="routes">
         <div className="max-w-container-max mx-auto px-gutter">

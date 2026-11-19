@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { getPublishedReviews, submitReview, reviewErrorMessage } from '../../features/reviews/api'
 import type { PublicReview } from '../../features/reviews/api'
@@ -55,6 +56,8 @@ export function ReviewsPage() {
         </p>
         {reviews.length > 0 && <section aria-label="Published customer reviews" className="mt-8 grid gap-4 md:grid-cols-2">{reviews.map(review => <article key={review.id} className="rounded-2xl border border-outline-variant bg-white p-6 shadow-sm"><div className="flex items-center gap-3"><div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-100 font-bold text-amber-900">{review.name.trim().charAt(0).toUpperCase()}</div><div><h2 className="font-semibold text-admin-primary">{review.name}</h2>{review.createdAt && !Number.isNaN(Date.parse(review.createdAt)) && <time dateTime={review.createdAt} className="text-xs text-on-surface-variant">{new Date(review.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time>}</div></div><p aria-label={`${review.rating} out of 5 stars`} className="mt-4 text-lg tracking-wider text-amber-500">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p><p className="mt-3 whitespace-pre-wrap break-words leading-relaxed text-on-surface-variant">{review.comment}</p></article>)}</section>}
         {totalPages > 1 && <nav aria-label="Review pages" className="mt-6 flex items-center justify-center gap-4"><button type="button" disabled={page === 0} onClick={() => setPage(p => p - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Previous</button><span>Page {page + 1} of {totalPages}</span><button type="button" disabled={page + 1 >= totalPages} onClick={() => setPage(p => p + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">Next</button></nav>}
+        <GuestPhotos gallery />
+
         <section aria-label="Share a review" className="mt-10 rounded-xl border border-outline-variant bg-white p-8">
           <h2 className="mb-2 text-xl font-semibold text-admin-primary">Share your experience</h2>
           <p className="mb-6 text-on-surface-variant">
