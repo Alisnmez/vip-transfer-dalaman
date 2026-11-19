@@ -412,3 +412,9 @@ PR #23, commit `a5c17fc`. Almanca ve Rusça Fethiye ve Ölüdeniz sayfaları yay
 Yerelde 86 frontend testi, lint ve üretim derlemesi geçti. Test servisinde 12 HTTP/HTML kontrolü geçti ve site haritası boş kaldı. Üretimde 22 site haritası adresinin her biri HTTP 200, tek H1, doğru HTML dili, index,follow ve kendi canonical adresini verdi. Altı rezervasyon/yönetim adresi HTTP 200 ve noindex döndü. İki bilinmeyen genel/rota adresi HTTP 404 döndü. Test ve üretim statik servislerinde genel rewrite yerine rezervasyon ve yönetim yollarına özel kurallar ve dört yeni rota için statik HTML kuralları kaydedildi.
 
 Sonraki ölçüm: Search Console'da yeni adreslerin keşif ve indeks durumları, ardından ülke/sorgu/sayfa performansı. HTTP kontrolleri Google indeks durumunu ölçmez.
+
+### Search Console ve pazar örneklemi
+
+19 Kasım'da Google Search Console, yeniden gönderim öncesinde sitemap.xml için “Başarılı”, son okuma 19 Kasım ve 12 keşfedilen sayfa gösterdi. 22 URL içeren aynı harita yeniden gönderildi; Google başarılı gönderimi onayladı. Performans ve indeks kapsamı raporlarında veri işleniyordu. Keşfedilen 12 adresi indeks sayısı olarak kullanmayın.
+
+Almanca Fethiye aramalarında [Fethiye Tours](https://www.fethiyetours.com/de/fethiye-airport-transfer/) araç başına ücretin kapsamını ve buluşma sürecini açıklıyor. Rusça Ölüdeniz örneğinde [Dalaman Airport Transfer](https://www.dalamanairporttransfer.com/ru/peredaca/dalaman-aeroport/oludeniz) araç ve valiz kapasitesini gösteriyor. İngilizce [Hero Transfer](https://www.herotransfer.com/price-list/) Ölüdeniz için tek yön GBP fiyatlarını araç türüyle birlikte listeliyor. Bunlar dil bazlı içerik örnekleridir; ülke bazında Google sırası ölçülmedi. DalamanWay için sonraki içerik önceliği, rezervasyonla tutarlı ve doğrulanmış araç, bagaj, ücret ve buluşma bilgisini ilk HTML'de erişilebilir kılmak.
