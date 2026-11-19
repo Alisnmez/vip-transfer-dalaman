@@ -302,3 +302,13 @@ Render üretim frontend'i `frontend/dist` yayınlayan bir Static Site. Son eğik
 4. **P1 / Etki 3, kanıt 5, efor 3, risk 3.** İlk HTML ve React meta etiketlerini ortak kaynaktan üret. Canonical/robots/title tutarlılığı için canlı HTTP ve tarayıcı regresyon kontrolü ekle. Booking noindex ve geçersiz rota 404 davranışlarını gözden geçir.
 
 Bu güncelleme araştırma ve denetim kaydıdır. Render yönlendirme kuralları veya canlı uygulama bu denetimde değiştirilmedi. Search Console, gerçek Google UK sıra ölçümü, cihaz karşılaştırması ve rakip backlink incelemesi henüz doğrulanmadı.
+
+
+### P0 test ortamı doğrulaması — 19 Kasım 2026
+
+Render test frontend'inde 11 tam yol rewrite kuralı, genel `/* → /index.html` kuralının önüne eklendi. Her kural `/yol → /yol/index.html` biçiminde ve tarayıcı adresini değiştirmeden mevcut prerender dosyasını sunuyor. Genel kural rezervasyon ve yönetim bağlantıları için listenin sonunda.
+
+- 12/12 genel URL, son eğik çizgi eklemeden HTTP 200 ve benzersiz ilk HTML başlığı döndürdü. Her yanıtta tek H1 bulundu ve eğik çizgili adresle aynı HTML geldi.
+- `/booking`, `/booking/lookup`, `/admin` ve `/admin/bookings` HTTP 200 ve uygulama kabuğunu döndürdü. Bu kontrol rezervasyon gönderimi veya yönetici kimlik doğrulaması içermiyor.
+- Test ortamında `noindex,nofollow`, canonical etiketinin yokluğu, taramaya kapalı robots.txt ve boş sitemap doğrulandı.
+- Üretim ayarları değişmedi. Üretim kabulü için aynı kuralların uygulanmasından sonra 12 sitemap URL'sinde doğru HTML ve kendi canonical adresi doğrulanmalı. Google'ın seçtiği canonical ve indeks durumu Search Console'da ayrıca kontrol edilmeli.
