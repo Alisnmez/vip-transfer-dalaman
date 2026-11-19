@@ -315,6 +315,51 @@ test('malformed stored transfer draft does not crash the booking page', async ({
   expect(errors, 'Uncaught errors with malformed stored draft').toEqual([])
 })
 
+test('legacy persistent booking data is cleared while language preference survives', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('bookingTransferInfo', JSON.stringify({ customerName: 'Legacy Person' }))
+    localStorage.setItem('bookingPassengerInfo', JSON.stringify({ email: 'legacy@example.invalid' }))
+    localStorage.setItem('lastBookingReceipt', JSON.stringify({ customerName: 'Legacy Person' }))
+    localStorage.setItem('dalamanway-language', 'en')
+  })
+  await page.goto('http://127.0.0.1:4173/booking')
+  await expect(page.getByRole('heading', { name: 'Transfer Information' })).toBeVisible()
+  const remaining = await page.evaluate(() => ({
+    transfer: localStorage.getItem('bookingTransferInfo'),
+    passenger: localStorage.getItem('bookingPassengerInfo'),
+    receipt: localStorage.getItem('lastBookingReceipt'),
+    language: localStorage.getItem('dalamanway-language'),
+  }))
+  expect(remaining).toEqual({ transfer: null, passenger: null, receipt: null, language: 'en' })
+})
+
+test('session booking drafts survive reload but are not persistent or shared with a fresh tab', async ({ page, context }) => {
+  await page.goto('http://127.0.0.1:4173/booking')
+  await page.evaluate(() => {
+    sessionStorage.setItem('bookingTransferInfo', JSON.stringify({ pickUpLocation: 'Dalaman Airport', dropOffLocation: 'Marmaris(Any Hotel)' }))
+    sessionStorage.setItem('bookingPassengerInfo', JSON.stringify({ customerName: 'Test Passenger' }))
+  })
+  await page.reload()
+  const sameTab = await page.evaluate(() => ({
+    transfer: sessionStorage.getItem('bookingTransferInfo'),
+    passenger: sessionStorage.getItem('bookingPassengerInfo'),
+    persistentTransfer: localStorage.getItem('bookingTransferInfo'),
+    persistentPassenger: localStorage.getItem('bookingPassengerInfo'),
+  }))
+  expect(JSON.parse(sameTab.transfer).pickUpLocation).toBe('Dalaman Airport')
+  expect(JSON.parse(sameTab.passenger).customerName).toBe('Test Passenger')
+  expect(sameTab.persistentTransfer).toBeNull()
+  expect(sameTab.persistentPassenger).toBeNull()
+  const freshTab = await context.newPage()
+  await freshTab.goto('http://127.0.0.1:4173/booking')
+  const isolated = await freshTab.evaluate(() => ({
+    transfer: sessionStorage.getItem('bookingTransferInfo'),
+    passenger: sessionStorage.getItem('bookingPassengerInfo'),
+  }))
+  expect(isolated).toEqual({ transfer: null, passenger: null })
+  await freshTab.close()
+})
+
 test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {
   await page.goto('http://127.0.0.1:4173/routes')
   await expect(page.getByText('59 destinations found · Prices in GBP, per vehicle', { exact: true })).toBeVisible()
