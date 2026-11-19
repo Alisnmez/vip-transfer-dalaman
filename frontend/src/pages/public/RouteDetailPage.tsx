@@ -42,6 +42,7 @@ export function RouteDetailPage() {
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-admin-primary">Information to prepare</h2>
           <p className="mt-3 leading-relaxed">Have your arrival date and time, flight number if applicable, passenger and luggage counts, and your destination hotel or address ready. For return journeys, include your return pickup date and time.</p>
+          <p className="mt-4 leading-relaxed">Before you request your journey, <Link className="font-semibold underline underline-offset-2" to="/vehicles">compare private transfer vehicles and luggage capacity</Link> or <Link className="font-semibold underline underline-offset-2" to="/faq">read our airport transfer booking FAQs</Link>. You can also <Link className="font-semibold underline underline-offset-2" to="/routes">compare Dalaman Airport transfer routes and prices</Link>.</p>
         </section>
       </main>
     </>
