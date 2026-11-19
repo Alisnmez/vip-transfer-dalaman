@@ -88,7 +88,7 @@ test('every bookable vehicle accepts its exact passenger limit and rejects one e
   for (const vehicle of bookingVehicles) {
     const route = transferPrices.find(entry => entry.vehicleId === vehicle.id)
     assert.ok(route, 'missing route for ' + vehicle.id)
-    const luggage = Math.min(8, vehicle.maxLuggage ?? 8)
+    const luggage = vehicle.maxLuggage ?? 0
     const selection = {
       ...valid,
       dropOffLocation: route.destination,
