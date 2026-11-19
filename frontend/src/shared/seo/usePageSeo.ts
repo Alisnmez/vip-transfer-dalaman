@@ -19,7 +19,6 @@ export function usePageSeo() {
     const page = getSeoPage(pathname)
     const canonical = getCanonicalUrl(pathname)
     document.title = page.title
-    document.documentElement.lang = 'en'
     setMeta('description', page.description)
     // The preview environment must never accidentally become indexed.
     setMeta('robots', canonical && page.indexable !== false ? 'index,follow' : 'noindex,nofollow')

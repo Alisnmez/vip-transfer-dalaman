@@ -1,3 +1,4 @@
+import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -61,6 +62,7 @@ function isAirportPickup(): boolean {
 }
 
 export function BookingPassengerPage() {
+  const t = useBookingCopy()
   useEffect(() => { trackAnalyticsEvent('booking_passenger_step') }, [])
   const navigate = useNavigate()
   const { processing, run } = useAsyncAction()
@@ -184,11 +186,10 @@ export function BookingPassengerPage() {
           <div className="lg:col-span-8">
             <div className="bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding shadow-sm">
               <h2 className="font-title-lg text-title-lg text-admin-primary mb-6">
-                Customer Details
+                {t("Customer Details")}
               </h2>
               <p className="font-body-md text-body-md text-on-surface-variant mb-8">
-                Please provide your contact information to ensure a smooth pickup
-                experience.
+                {t("Please provide your contact information to ensure a smooth pickup experience.")}
               </p>
 
               <RequiredFieldNote />
@@ -202,14 +203,14 @@ export function BookingPassengerPage() {
               }}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <FormField
-                    label="First Name" required
-                    placeholder="e.g. Alexander"
+                    label={t("First Name")} required
+                    placeholder={t("e.g. Alexander")}
                     value={firstName}
                     onChange={setFirstName}
                   />
                   <FormField
-                    label="Last Name" required
-                    placeholder="e.g. Hamilton"
+                    label={t("Last Name")} required
+                    placeholder={t("e.g. Hamilton")}
                     value={lastName}
                     onChange={setLastName}
                   />
@@ -218,10 +219,10 @@ export function BookingPassengerPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                   <div className="flex flex-col gap-2">
                     <label className="font-label-sm text-label-sm text-on-surface-variant">
-                      Phone Number<RequiredMark />
+                      {t("Phone Number")}<RequiredMark />
                     </label>
                     <div className="flex min-w-0">
-                      <select aria-label="Country dialing code" className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber(''); setPhoneError('') }}>
+                      <select aria-label={t("Country dialing code")} className="border border-r-0 border-outline-variant bg-slate-100 rounded-l-lg px-2 text-sm" value={countryCode} onChange={(event) => { setCountryCode(event.target.value); setPhoneNumber(''); setPhoneError('') }}>
                         {dialingCodes.map(({ code, label }) => <option key={code} value={code}>{label}</option>)}
                       </select>
                       <input
@@ -238,7 +239,7 @@ export function BookingPassengerPage() {
                           setPhoneNumber(countryCode === '+7' ? russianNational : national.slice(0, nationalNumberLimit))
                           setPhoneError('')
                         }}
-                        placeholder={countryCode === '+90' ? '5551234567' : 'Phone number'}
+                        placeholder={countryCode === '+90' ? '5551234567' : t("Phone number")}
                         autoComplete="tel-national"
                         inputMode="numeric"
                         maxLength={countryCode === '+7' ? undefined : nationalNumberLimit}
@@ -246,62 +247,62 @@ export function BookingPassengerPage() {
                         value={phoneNumber}
                       />
                     </div>
-                    {phoneError && <p role="alert" className="text-sm text-error">{phoneError}</p>}
+                    {phoneError && <p role="alert" className="text-sm text-error">{t(phoneError)}</p>}
                   </div>
                   <FormField
-                    label="Email Address" required
+                    label={t("Email Address")} required
                     onChange={(value) => { setEmail(value); setEmailError('') }}
                     placeholder="name@example.com"
                     type="email"
                     value={email}
                   />
-                  {emailError && <p role="alert" className="text-sm text-error">{emailError}</p>}
+                  {emailError && <p role="alert" className="text-sm text-error">{t(emailError)}</p>}
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="country-of-residence" className="font-label-sm text-label-sm text-on-surface-variant">Country of Residence<RequiredMark /></label>
+                  <label htmlFor="country-of-residence" className="font-label-sm text-label-sm text-on-surface-variant">{t("Country of Residence")}<RequiredMark /></label>
                   <select id="country-of-residence" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md bg-white" value={countryOfResidence} onChange={(event) => setCountryOfResidence(event.target.value)} required>
-                    <option value="">Select your country</option>
-                    <option value="United Kingdom">United Kingdom</option>
-                    <option value="Russia">Russia</option>
-                    <option value="Germany">Germany</option>
-                    <option value="Lebanon">Lebanon</option>
-                    <option value="Netherlands">Netherlands</option>
-                    <option value="Denmark">Denmark</option>
-                    <option value="Turkey">Turkey</option>
-                    <option value="United States">United States</option>
-                    <option value="France">France</option>
-                    <option value="Belgium">Belgium</option>
-                    <option value="Romania">Romania</option>
-                    <option value="Sweden">Sweden</option>
-                    <option value="Norway">Norway</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Italy">Italy</option>
-                    <option value="Ukraine">Ukraine</option>
-                    <option value="Ireland">Ireland</option>
-                    <option value="Switzerland">Switzerland</option>
-                    <option value="United Arab Emirates">United Arab Emirates</option>
-                    <option value="Saudi Arabia">Saudi Arabia</option>
-                    <option value="Cyprus">Cyprus</option>
-                    <option value="Finland">Finland</option>
-                    <option value="Lithuania">Lithuania</option>
-                    <option value="Latvia">Latvia</option>
-                    <option value="Estonia">Estonia</option>
-                    <option value="Other">Other</option>
+                    <option value="">{t("Select your country")}</option>
+                    <option value="United Kingdom">{t("United Kingdom")}</option>
+                    <option value="Russia">{t("Russia")}</option>
+                    <option value="Germany">{t("Germany")}</option>
+                    <option value="Lebanon">{t("Lebanon")}</option>
+                    <option value="Netherlands">{t("Netherlands")}</option>
+                    <option value="Denmark">{t("Denmark")}</option>
+                    <option value="Turkey">{t("Turkey")}</option>
+                    <option value="United States">{t("United States")}</option>
+                    <option value="France">{t("France")}</option>
+                    <option value="Belgium">{t("Belgium")}</option>
+                    <option value="Romania">{t("Romania")}</option>
+                    <option value="Sweden">{t("Sweden")}</option>
+                    <option value="Norway">{t("Norway")}</option>
+                    <option value="Australia">{t("Australia")}</option>
+                    <option value="Italy">{t("Italy")}</option>
+                    <option value="Ukraine">{t("Ukraine")}</option>
+                    <option value="Ireland">{t("Ireland")}</option>
+                    <option value="Switzerland">{t("Switzerland")}</option>
+                    <option value="United Arab Emirates">{t("United Arab Emirates")}</option>
+                    <option value="Saudi Arabia">{t("Saudi Arabia")}</option>
+                    <option value="Cyprus">{t("Cyprus")}</option>
+                    <option value="Finland">{t("Finland")}</option>
+                    <option value="Lithuania">{t("Lithuania")}</option>
+                    <option value="Latvia">{t("Latvia")}</option>
+                    <option value="Estonia">{t("Estonia")}</option>
+                    <option value="Other">{t("Other")}</option>
                   </select>
-                  <p className="text-sm text-on-surface-variant">Your home country, not your transfer address in Turkey.</p>
+                  <p className="text-sm text-on-surface-variant">{t("Your home country, not your transfer address in Turkey.")}</p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant">
-                    {isAirportPickup() ? 'Drop-off Address in Turkey' : 'Pickup Address in Turkey'}<RequiredMark />
+                    {isAirportPickup() ? t("Drop-off Address in Turkey") : t("Pickup Address in Turkey")}<RequiredMark />
                   </label>
                   <p className="text-sm text-on-surface-variant">
-                    Enter the hotel, villa, apartment or exact street address where the driver should meet you or drop you off. Not your home address abroad.
+                    {t("Enter the hotel, villa, apartment or exact street address where the driver should meet you or drop you off. Not your home address abroad.")}
                   </p>
                   <input
                     className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
-                    placeholder="e.g. Green Nature Diamond Hotel, Siteler, Marmaris"
+                    placeholder={t("e.g. Green Nature Diamond Hotel, Siteler, Marmaris")}
                     type="text"
                     value={transferAddress}
                     onChange={(event) => setTransferAddress(event.target.value)}
@@ -310,17 +311,17 @@ export function BookingPassengerPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="hotel-name" className="font-label-sm text-label-sm text-on-surface-variant">Hotel or Accommodation Name (optional)</label>
-                  <input id="hotel-name" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md" placeholder="e.g. Green Nature Diamond Hotel" maxLength={120} value={hotelName} onChange={(event) => setHotelName(event.target.value)} />
+                  <label htmlFor="hotel-name" className="font-label-sm text-label-sm text-on-surface-variant">{t("Hotel or Accommodation Name (optional)")}</label>
+                  <input id="hotel-name" className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md" placeholder={t("e.g. Green Nature Diamond Hotel")} maxLength={120} value={hotelName} onChange={(event) => setHotelName(event.target.value)} />
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <label className="font-label-sm text-label-sm text-on-surface-variant">
-                    Special Requests
+                    {t("Special Requests")}
                   </label>
                   <textarea
                     className="w-full border-outline-variant rounded-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all resize-none"
-                    placeholder="Child seat requirements, extra luggage details, or other pickup instructions..."
+                    placeholder={t("Child seat requirements, extra luggage details, or other pickup instructions...")}
                     rows={4}
                     value={specialRequests}
                     onChange={(event) => setSpecialRequests(event.target.value)}
@@ -330,7 +331,7 @@ export function BookingPassengerPage() {
 
               {error && (
                 <div role="alert" className="mt-6 rounded-lg border border-error/30 bg-error-container p-4 text-error">
-                  {error}
+                  {t(error)}
                 </div>
               )}
 
@@ -342,16 +343,16 @@ export function BookingPassengerPage() {
                   <span translate="no" className="material-symbols-outlined text-base">
                     arrow_back
                   </span>
-                  Back
+                  {t("Back")}
                 </Link>
                 <ProcessingButton
                   className="flex min-w-0 max-w-full flex-wrap items-center justify-center gap-2 px-4 sm:px-8 py-3 bg-admin-primary text-on-primary rounded-lg font-label-sm text-label-sm text-center hover:opacity-90 shadow-md transition-all disabled:opacity-60"
                   type="submit"
                   form="passenger-details-form"
                   processing={processing}
-                  processingLabel="Continuing..."
+                  processingLabel={t("Continuing...")}
                 >
-                  Continue to Confirmation
+                  {t("Continue to Confirmation")}
                   <span translate="no" className="material-symbols-outlined text-base">
                     arrow_forward
                   </span>
@@ -370,13 +371,14 @@ export function BookingPassengerPage() {
 }
 
 function PassengerStepper() {
+  const t = useBookingCopy()
   return (
     <div className="mb-12 max-w-3xl mx-auto">
       <div className="flex items-center justify-between relative">
         <div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-container-high -translate-y-1/2 z-0" />
-        <StepperItem complete label="Transfer" />
-        <StepperItem active label="Passenger" number="2" />
-        <StepperItem label="Confirmation" number="3" />
+        <StepperItem complete label={t("Transfer")} />
+        <StepperItem active label={t("Passenger")} number="2" />
+        <StepperItem label={t("Confirmation")} number="3" />
       </div>
     </div>
   )
@@ -460,6 +462,7 @@ function FormField({
 }
 
 function PassengerSummary() {
+  const t = useBookingCopy()
   // Browser storage may be disabled or contain an invalid draft.
   const [transfer] = useState<Record<string, unknown>>(() => {
     try {
@@ -470,7 +473,7 @@ function PassengerSummary() {
       return {}
     }
   })
-  const price = typeof transfer.price === 'number' && Number.isFinite(transfer.price) ? `£${transfer.price.toFixed(2)}` : 'Price to be confirmed'
+  const price = typeof transfer.price === 'number' && Number.isFinite(transfer.price) ? `£${transfer.price.toFixed(2)}` : t("Price to be confirmed")
   return (
     <div className="lg:col-span-4">
       <div className="sticky top-24 space-y-gutter-grid">
@@ -484,42 +487,42 @@ function PassengerSummary() {
             <div className="absolute inset-0 bg-gradient-to-t from-admin-primary via-transparent to-transparent" />
             <div className="absolute bottom-4 left-6">
               <span className="bg-secondary text-on-secondary px-2 py-1 rounded text-label-xs uppercase tracking-wider">
-                Executive Class
+                {t("Executive Class")}
               </span>
             </div>
           </div>
           <div className="p-6 space-y-6">
             <div>
               <h3 className="font-title-md text-title-md mb-2">
-                Booking Summary
+                {t("Booking Summary")}
               </h3>
               <div className="flex items-center gap-2 opacity-80">
                 <span translate="no" className="material-symbols-outlined text-sm">
                   directions_car
                 </span>
                 <span className="font-label-sm text-label-sm">
-                  {typeof transfer.vehicleName === 'string' ? transfer.vehicleName : 'Not selected'}
+                  {typeof transfer.vehicleName === 'string' ? transfer.vehicleName : t("Not selected")}
                 </span>
               </div>
             </div>
             <div className="space-y-4 border-t border-white/10 pt-4">
               <SummaryPoint
                 icon="location_on"
-                label="Pickup"
+                label={t("Pickup")}
                 meta={`${typeof transfer.pickUpDate === 'string' ? transfer.pickUpDate : ''} ${typeof transfer.pickUpTime === 'string' ? transfer.pickUpTime : ''}`}
-                value={typeof transfer.pickUpLocation === 'string' ? transfer.pickUpLocation : 'Not selected'}
+                value={typeof transfer.pickUpLocation === 'string' ? transfer.pickUpLocation : t("Not selected")}
               />
               <SummaryPoint
                 icon="near_me"
-                label="Drop-off"
-                value={typeof transfer.dropOffLocation === 'string' ? transfer.dropOffLocation : 'Not selected'}
+                label={t("Drop-off")}
+                value={typeof transfer.dropOffLocation === 'string' ? transfer.dropOffLocation : t("Not selected")}
               />
             </div>
             <div className="bg-white/5 rounded-lg p-4 space-y-2">
-              <PriceLine label="Base Fare" value={price} />
+              <PriceLine label={t("Base Fare")} value={price} />
               
               <div className="flex justify-between items-center pt-2 border-t border-white/10">
-                <span className="font-title-md text-title-md">Total</span>
+                <span className="font-title-md text-title-md">{t("Total")}</span>
                 <span className="font-title-md text-title-md text-secondary-fixed">
                   {price}
                 </span>
@@ -533,7 +536,7 @@ function PassengerSummary() {
                 verified_user
               </span>
               <span className="font-label-sm text-label-sm">
-                Review the price before submitting your request.
+                {t("Review the price before submitting your request.")}
               </span>
             </div>
           </div>
@@ -545,10 +548,10 @@ function PassengerSummary() {
           </div>
           <div>
             <p className="font-label-sm text-label-sm text-admin-primary font-bold">
-              Need Assistance?
+              {t("Need Assistance?")}
             </p>
             <p className="font-label-xs text-label-xs text-on-surface-variant">
-              Use the contact page for transfer questions.
+              {t("Use the contact page for transfer questions.")}
             </p>
           </div>
         </div>
@@ -594,6 +597,7 @@ function PriceLine({ label, value }: { label: string; value: string }) {
 }
 
 function PassengerFooter() {
+  const t = useBookingCopy()
   return (
     <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
@@ -602,8 +606,8 @@ function PassengerFooter() {
           <p className="text-sm text-on-surface-variant">© {new Date().getFullYear()} DalamanWay</p>
         </div>
         <div className="flex gap-5 text-sm">
-          <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
-          <Link className="text-admin-primary hover:underline" to="/services">Services</Link>
+          <Link className="text-admin-primary hover:underline" to="/contact">{t("Contact")}</Link>
+          <Link className="text-admin-primary hover:underline" to="/services">{t("Services")}</Link>
         </div>
       </div>
     </footer>

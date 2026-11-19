@@ -1,3 +1,4 @@
+import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { bookingVehicles, clampVehicleCount } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -63,6 +64,7 @@ function readTransferDraft(): TransferDraft {
 }
 
 export function BookingFormPage() {
+  const t = useBookingCopy()
   const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   useEffect(() => { trackAnalyticsEvent('booking_started') }, [])
   const [searchParams] = useSearchParams()
@@ -96,7 +98,7 @@ export function BookingFormPage() {
   const availableVehicles = bookingVehicles.filter((vehicle) => !routeDestination || findTransferPrice(routeDestination, vehicle.id, tripType) !== null)
   const effectiveVehicleId = availableVehicles.some((vehicle) => vehicle.id === selectedVehicleId) ? selectedVehicleId : availableVehicles[0]?.id ?? selectedVehicleId
   const price = findTransferPrice(routeDestination, effectiveVehicleId, tripType)
-  const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
+  const priceLabel = price === null ? t("Price on request") : `£${price.toFixed(2)}`
   const selectedVehicle = bookingVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? bookingVehicles[0]
   const maxAllowedPassengers = selectedVehicle.maxPassengers
   const maxAllowedLuggage = selectedVehicle.maxLuggage
@@ -187,17 +189,17 @@ export function BookingFormPage() {
 
       <main className="pt-32 pb-20 px-margin-page max-w-7xl mx-auto">
         <BookingStepper activeStep={1} />
-        {pricesLoading && <p role="status">Loading current prices...</p>}
-        {pricesError && <div role="alert">{pricesError} <button type="button" onClick={refreshPrices}>Refresh prices</button></div>}
+        {pricesLoading && <p role="status">{t("Loading current prices...")}</p>}
+        {pricesError && <div role="alert">{t(pricesError)} <button type="button" onClick={refreshPrices}>{t("Refresh prices")}</button></div>}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter-grid items-start">
           <section className="lg:col-span-8 bg-white border border-outline-variant rounded-xl p-8 booking-card">
             <div className="mb-8">
               <h1 className="font-title-lg text-title-lg text-admin-primary mb-2">
-                Transfer Information
+                {t("Transfer Information")}
               </h1>
               <p className="font-body-md text-body-md text-on-surface-variant">
-                Configure your transfer details to see available vehicles.
+                {t("Configure your transfer details to see available vehicles.")}
               </p>
             </div>
 
@@ -213,7 +215,7 @@ export function BookingFormPage() {
                   onClick={() => setTripType('one-way')}
                   type="button"
                 >
-                  One Way
+                  {t("One Way")}
                 </button>
                 <button
                   className={`px-8 py-2 rounded-md font-label-sm text-label-sm transition-all ${
@@ -224,15 +226,15 @@ export function BookingFormPage() {
                   onClick={() => setTripType('round-trip')}
                   type="button"
                 >
-                  Round Trip
+                  {t("Round Trip")}
                 </button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Pickup Location<RequiredMark /></label>
-                  <select aria-label="Pickup Location" className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
-                    <option value="Dalaman Airport">Dalaman Airport (DLM)</option>
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">{t("Pickup Location")}<RequiredMark /></label>
+                  <select aria-label={t("Pickup Location")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
+                    <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>
                     {groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
                         {group.names.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
@@ -241,10 +243,10 @@ export function BookingFormPage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">Destination<RequiredMark /></label>
-                  <select aria-label="Destination" className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
-                    <option value="">Select destination</option>
-                    {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">Dalaman Airport (DLM)</option>}
+                  <label className="font-label-sm text-label-sm text-on-surface-variant block">{t("Destination")}<RequiredMark /></label>
+                  <select aria-label={t("Destination")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
+                    <option value="">{t("Select destination")}</option>
+                    {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>}
                     {pickUpLocation === "Dalaman Airport" && groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
                         {group.names.map((destination) => <option key={destination} value={destination}>{destination}</option>)}
@@ -255,19 +257,19 @@ export function BookingFormPage() {
               </div>
 
               <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-600">
-                <span>Published prices cover transfers between Dalaman Airport and the destinations listed above, in either direction.</span>
+                <span>{t("Published prices cover transfers between Dalaman Airport and the destinations listed above, in either direction.")}</span>
                 <button type="button" className="rounded-lg border border-outline-variant px-4 py-2 font-semibold text-admin-primary hover:bg-slate-50" onClick={() => {
                   if (!dropOffLocation) return
                   setPickUpLocation(dropOffLocation)
                   setDropOffLocation(pickUpLocation)
                   setFormError('')
-                }}>⇄ Swap pickup and destination</button>
+                }}>{t("⇄ Swap pickup and destination")}</button>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
                 <TextField
                   icon="calendar_today"
-                  label="Pickup Date" required
+                  label={t("Pickup Date")} required
                   type="date"
                   min={today}
                   value={pickUpDate}
@@ -276,30 +278,30 @@ export function BookingFormPage() {
                 />
                 <TextField
                   icon="schedule"
-                  label="Pickup Time" required
+                  label={t("Pickup Time")} required
                   type="time"
                   value={pickUpTime}
                   onChange={setPickUpTime}
                 />
-                <TextField icon="flight_takeoff" label="Flight Number (optional)" placeholder="TK1234" value={flightNumber} onChange={setFlightNumber} />
+                <TextField icon="flight_takeoff" label={t("Flight Number (optional)")} placeholder="TK1234" value={flightNumber} onChange={setFlightNumber} />
               </div>
 
               {tripType === 'round-trip' && (
                 <div className="space-y-3 rounded-lg border border-outline-variant bg-slate-50 p-4">
-                  <p className="font-semibold">Return journey: {dropOffLocation || 'Destination'} → {pickUpLocation}</p>
-                  <p className="text-sm text-slate-600">Choose when you want to travel back. Your return does not have to be on the same day or at the same time.</p>
+                  <p className="font-semibold">{t("Return journey:")} {dropOffLocation || t("Destination")} → {pickUpLocation}</p>
+                  <p className="text-sm text-slate-600">{t("Choose when you want to travel back. Your return does not have to be on the same day or at the same time.")}</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
-                    <TextField icon="calendar_today" label="Return Date" required type="date" min={pickUpDate && pickUpDate > today ? pickUpDate : today} value={returnDate} onFocus={refreshToday} onChange={(value) => { refreshToday(); if (!value || (value >= turkeyToday() && (!pickUpDate || value >= pickUpDate))) { setReturnDate(value); setFormError('') } else { setFormError('Return date cannot be before pickup date or today.') } }} />
-                    <TextField icon="schedule" label="Return Time" required type="time" value={returnTime} onChange={setReturnTime} />
+                    <TextField icon="calendar_today" label={t("Return Date")} required type="date" min={pickUpDate && pickUpDate > today ? pickUpDate : today} value={returnDate} onFocus={refreshToday} onChange={(value) => { refreshToday(); if (!value || (value >= turkeyToday() && (!pickUpDate || value >= pickUpDate))) { setReturnDate(value); setFormError('') } else { setFormError('Return date cannot be before pickup date or today.') } }} />
+                    <TextField icon="schedule" label={t("Return Time")} required type="time" value={returnTime} onChange={setReturnTime} />
                   </div>
                 </div>
               )}
 
               <div className="space-y-4">
                 <label className="font-label-sm text-label-sm text-on-surface-variant block">
-                  Select Vehicle Type
+                  {t("Select Vehicle Type")}
                 </label>
-                <p className="text-sm text-on-surface-variant">Luggage allowance changes with your vehicle selection.</p>
+                <p className="text-sm text-on-surface-variant">{t("Luggage allowance changes with your vehicle selection.")}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
                     const isSelected = effectiveVehicleId === vehicle.id
@@ -318,17 +320,17 @@ export function BookingFormPage() {
                       >
                         <div className="h-32 mb-4 min-w-0 overflow-hidden bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
                           <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
-                          <span className="text-xs text-slate-500">Vehicle category</span>
+                          <span className="text-xs text-slate-500">{t("Vehicle category")}</span>
                         </div>
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>
                         <p className="text-[11px] text-on-surface-variant mb-3">
-                          Max {vehicle.maxPassengers} passengers{vehicle.maxLuggage === null ? '' : `, ${vehicle.maxLuggage} luggage`}
+                          {t("Max")} {vehicle.maxPassengers} {t("passengers")}{vehicle.maxLuggage === null ? '' : `, ${vehicle.maxLuggage} ${t("luggage")}`}
                         </p>
                         <div className="flex justify-between items-center">
                           <span className="font-title-md text-title-md text-admin-primary">
-                            {findTransferPrice(routeDestination, vehicle.id, tripType) === null ? 'Select destination' : `£${findTransferPrice(routeDestination, vehicle.id, tripType)?.toFixed(2)}`}
+                            {findTransferPrice(routeDestination, vehicle.id, tripType) === null ? t("Select destination") : `£${findTransferPrice(routeDestination, vehicle.id, tripType)?.toFixed(2)}`}
                           </span>
                           <span
                             className={`material-symbols-outlined text-secondary ${
@@ -351,21 +353,21 @@ export function BookingFormPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
                 <CounterField
-                  label="Passengers"
+                  label={t("Passengers")}
                   min={1}
                   max={maxAllowedPassengers}
                   value={safePassengers}
                   onChange={setPassengers}
                 />
                 <CounterField
-                  label="Luggages"
+                  label={t("Luggages")}
                   min={0}
                   max={maxAllowedLuggage}
                   value={safeLuggages}
                   onChange={setLuggages}
                 />
                 <CounterField
-                  label="Baby Seats"
+                  label={t("Baby Seats")}
                   min={0}
                   max={2}
                   value={babySeats}
@@ -373,14 +375,14 @@ export function BookingFormPage() {
                 />
               </div>
 
-              {formError && <p role="alert" className="text-error">{formError}</p>}
+              {formError && <p role="alert" className="text-error">{t(formError)}</p>}
               <div className="pt-8 border-t border-outline-variant flex justify-end">
                 <Link
                   className="px-12 py-4 bg-admin-primary text-on-primary font-title-md text-title-md rounded-lg hover:opacity-90 transition-all flex items-center gap-2 group"
                   onClick={saveTransferInfo}
                   to="/booking/passenger"
                 >
-                  Next: Passenger Details
+                  {t("Next: Passenger Details")}
                   <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                     arrow_forward
                   </span>
@@ -408,7 +410,8 @@ export function BookingFormPage() {
 }
 
 function BookingStepper({ activeStep }: { activeStep: number }) {
-  const steps = ['Transfer', 'Passenger', 'Confirmation']
+  const t = useBookingCopy()
+  const steps = [t("Transfer"), t("Passenger"), t("Confirmation")]
 
   return (
     <div className="w-full max-w-4xl mx-auto mb-12">
@@ -512,6 +515,7 @@ function CounterField({
   onChange: (value: number) => void
   value: number
 }) {
+  const t = useBookingCopy()
   return (
     <div className="space-y-2">
       <label className="font-label-sm text-label-sm text-on-surface-variant">
@@ -521,7 +525,7 @@ function CounterField({
         <button
           className="px-4 py-3 hover:bg-slate-100 text-admin-primary"
           disabled={value <= min}
-          aria-label={`Decrease ${label}`}
+          aria-label={`${t("Decrease")} ${label}`}
           onClick={() => onChange(Math.max(min, value - 1))}
           type="button"
         >
@@ -536,7 +540,7 @@ function CounterField({
         <button
           className="px-4 py-3 hover:bg-slate-100 text-admin-primary"
           disabled={value >= max}
-          aria-label={`Increase ${label}`}
+          aria-label={`${t("Increase")} ${label}`}
           onClick={() => onChange(Math.min(max, value + 1))}
           type="button"
         >
@@ -566,13 +570,14 @@ function BookingSummary({
   pickUpTime: string
   priceLabel: string
 }) {
+  const t = useBookingCopy()
   return (
     <aside className="lg:col-span-4 sticky top-24">
       <div className="bg-white border border-outline-variant rounded-xl overflow-hidden booking-card">
         <div className="bg-admin-primary p-6 text-on-primary">
-          <h2 className="font-title-md text-title-md">Booking Summary</h2>
+          <h2 className="font-title-md text-title-md">{t("Booking Summary")}</h2>
           <p className="font-label-xs text-label-xs opacity-70">
-            Review your trip details
+            {t("Review your trip details")}
           </p>
         </div>
         <div className="p-6 space-y-6">
@@ -583,10 +588,10 @@ function BookingSummary({
               <div className="w-3 h-3 rounded-full bg-secondary" />
             </div>
             <div className="flex-1 space-y-4">
-              <SummaryLocation label="Pickup" value={pickUpLocation} />
+              <SummaryLocation label={t("Pickup")} value={t(pickUpLocation)} />
               <SummaryLocation
-                label="Dropoff"
-                value={dropOffLocation || "Select destination"}
+                label={t("Dropoff")}
+                value={dropOffLocation ? t(dropOffLocation) : t("Select destination")}
               />
             </div>
           </div>
@@ -596,18 +601,18 @@ function BookingSummary({
           <div className="space-y-4">
             <SummaryRow
               icon="directions_car"
-              label="Vehicle"
+              label={t("Vehicle")}
               value={selectedVehicle.name}
             />
             <SummaryRow
               icon="group"
-              label="Passengers"
+              label={t("Passengers")}
               value={`${passengers} Adults, ${babySeats} Infant`}
             />
             <SummaryRow
               icon="calendar_today"
-              label="Date & Time"
-              value={pickUpDate && pickUpTime ? `${pickUpDate} ${pickUpTime}` : "Select date and time"}
+              label={t("Date & Time")}
+              value={pickUpDate && pickUpTime ? `${pickUpDate} ${pickUpTime}` : t("Select date and time")}
             />
           </div>
 
@@ -616,7 +621,7 @@ function BookingSummary({
           <div className="pt-2">
             <div className="flex justify-between items-center mb-2">
               <span className="font-body-md text-body-md text-on-surface-variant">
-                Subtotal
+                {t("Subtotal")}
               </span>
               <span className="font-label-sm text-label-sm text-admin-primary">
                 {priceLabel}
@@ -626,14 +631,14 @@ function BookingSummary({
             <div className="flex justify-between items-end bg-slate-100 p-4 rounded-lg">
               <div>
                 <span className="font-label-xs text-label-xs text-on-surface-variant uppercase">
-                  Estimated Total
+                  {t("Estimated Total")}
                 </span>
                 <div className="font-title-lg text-title-lg text-admin-primary">
                   {priceLabel}
                 </div>
               </div>
               <div className="text-[10px] text-on-surface-variant text-right">
-                Final terms will be confirmed by the operator
+                {t("Final terms will be confirmed by the operator")}
               </div>
             </div>
           </div>
@@ -646,7 +651,7 @@ function BookingSummary({
               verified_user
             </span>
             <span className="text-[12px] text-secondary font-medium leading-tight">
-              This is a booking request. Cancellation and payment terms will be confirmed by the operator.
+              {t("This is a booking request. Cancellation and payment terms will be confirmed by the operator.")}
             </span>
           </div>
         </div>
@@ -697,18 +702,19 @@ function SummaryRow({
 }
 
 function BookingFooter() {
+  const t = useBookingCopy()
   return (
     <footer className="w-full py-8 bg-slate-200 border-t border-outline-variant mt-12">
       <div className="max-w-7xl mx-auto px-margin-page flex flex-col gap-2">
-        <img src="/dalamanway-logo.svg" alt="DalamanWay — Private Airport Transfers" className="h-12 w-auto max-w-[240px] object-contain" />
+        <img src="/dalamanway-logo.svg" alt={t("DalamanWay — Private Airport Transfers")} className="h-12 w-auto max-w-[240px] object-contain" />
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          Private airport transfer booking requests for Dalaman and nearby destinations.
+          {t("Private airport transfer booking requests for Dalaman and nearby destinations.")}
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          Prices are shown in GBP. Your request is subject to operator confirmation.
+          {t("Prices are shown in GBP. Your request is subject to operator confirmation.")}
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          Contact: <a href="tel:+905555555555" className="underline">0555 555 55 55</a> · <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
+          {t("Contact:")} <a href="tel:+905555555555" className="underline">0555 555 55 55</a> · <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
           © {new Date().getFullYear()} DalamanWay.

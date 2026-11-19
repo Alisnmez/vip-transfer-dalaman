@@ -1,3 +1,4 @@
+import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { vehicleLabel } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
 import { Link } from 'react-router-dom'
@@ -37,6 +38,7 @@ function readSavedDetails<T>(key: string): T {
 
 
 export function BookingConfirmationPage() {
+  const t = useBookingCopy()
   const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   const [confirmed, setConfirmed] = useState(false)
   const { processing, run } = useAsyncAction()
@@ -51,12 +53,12 @@ export function BookingConfirmationPage() {
 
   const [transfer] = useState<TransferDetails>(() => readSavedDetails<TransferDetails>('bookingTransferInfo'))
   const [passenger] = useState<PassengerDetails>(() => readSavedDetails<PassengerDetails>('bookingPassengerInfo'))
-  const display = (v: unknown) => v == null || v === '' ? 'Not provided' : String(v)
+  const display = (v: unknown) => v == null || v === '' ? t('Not provided') : String(v)
   const routeDestination = transfer.pickUpLocation === 'Dalaman Airport' ? transfer.dropOffLocation : transfer.dropOffLocation === 'Dalaman Airport' ? transfer.pickUpLocation : ''
   const catalogPrice = routeDestination && transfer.vehicleId && transfer.tripType ? findTransferPrice(routeDestination, transfer.vehicleId, transfer.tripType) : null
-  const price = catalogPrice === null ? 'Price to be confirmed' : `£${catalogPrice.toFixed(2)}`
-  const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : 'Not provided'
-  const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : 'Not provided'
+  const price = catalogPrice === null ? t("Price to be confirmed") : `£${catalogPrice.toFixed(2)}`
+  const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : t("Not provided")
+  const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : t("Not provided")
 
   function handleConfirm() {
     if (!confirmed || receipt !== null || pricesLoading || pricesError || catalogPrice === null) return
@@ -148,15 +150,15 @@ export function BookingConfirmationPage() {
       <PublicNavbar />
 
       <main className="pt-32 pb-24 px-margin-page max-w-6xl mx-auto">
-        {receipt === null && pricesLoading && <p role="status">Loading current prices...</p>}
-        {receipt === null && pricesError && <div role="alert">{pricesError} <button type="button" onClick={refreshPrices}>Refresh prices</button></div>}
+        {receipt === null && pricesLoading && <p role="status">{t("Loading current prices...")}</p>}
+        {receipt === null && pricesError && <div role="alert">{t(pricesError)} <button type="button" onClick={refreshPrices}>{t("Refresh prices")}</button></div>}
         {receipt !== null ? (
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
-            <h1 className="text-3xl font-bold text-admin-primary mb-3">Your Booking Request Was Received!</h1>
-            <p className="mb-3 text-on-surface-variant">Your transfer request is pending confirmation. Please save your booking reference.</p>
-            <p className="mb-6 text-sm text-on-surface-variant">{import.meta.env.VITE_EMAIL_NOTIFICATIONS_ENABLED === 'true' ? 'Booking updates will be sent by email. Please check your inbox and spam folder, and keep this reference.' : 'Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.'}</p>
-            <p className="text-sm uppercase tracking-wide">Booking Reference</p>
+            <h1 className="text-3xl font-bold text-admin-primary mb-3">{t("Your Booking Request Was Received!")}</h1>
+            <p className="mb-3 text-on-surface-variant">{t("Your transfer request is pending confirmation. Please save your booking reference.")}</p>
+            <p className="mb-6 text-sm text-on-surface-variant">{import.meta.env.VITE_EMAIL_NOTIFICATIONS_ENABLED === 'true' ? t("Booking updates will be sent by email. Please check your inbox and spam folder, and keep this reference.") : t("Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.")}</p>
+            <p className="text-sm uppercase tracking-wide">{t("Booking Reference")}</p>
             <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
             <div className="mb-6 flex flex-wrap justify-center gap-3">
               <button
@@ -170,28 +172,28 @@ export function BookingConfirmationPage() {
                 }}
                 type="button"
               >
-                Copy Booking Reference
+                {t("Copy Booking Reference")}
               </button>
               <a
                 className="rounded-lg bg-admin-primary px-5 py-2 font-semibold text-white"
                 href={`mailto:${supportEmail}?subject=${encodeURIComponent(`Booking request #${receipt.id}`)}&body=${encodeURIComponent(`Hello, I am contacting you about booking request #${receipt.id}.\n\nPlease let me know the status of my request.\n\nThank you.`)}`}
               >
-                Contact About This Booking
+                {t("Contact About This Booking")}
               </a>
               <Link className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary"
-                to="/booking/lookup">Manage or Cancel Booking</Link>
+                to="/booking/lookup">{t("Manage or Cancel Booking")}</Link>
             </div>
-            <p className="mb-5 text-sm text-on-surface-variant">Changes and cancellations are requests only. Your booking remains unchanged until the operator confirms.</p>
-            {error && <p role="alert" className="mb-4 text-sm text-error">{error}</p>}
+            <p className="mb-5 text-sm text-on-surface-variant">{t("Changes and cancellations are requests only. Your booking remains unchanged until the operator confirms.")}</p>
+            {error && <p role="alert" className="mb-4 text-sm text-error">{t(error)}</p>}
             <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
-              <p><strong>Passenger:</strong> {display(receipt.customerName)}</p>
-              <p><strong>Pickup:</strong> {display(receipt.pickUpLocation)}</p>
-              <p><strong>Destination:</strong> {display(receipt.dropOffLocation)}</p>
-              {receipt.returnSchedule && <p><strong>Return:</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
-              <p><strong>Schedule:</strong> {receipt.schedule}</p>
-              <p className="text-sm text-on-surface-variant">Keep this reference for your records. Your request is awaiting confirmation.</p>
+              <p><strong>{t("Passenger:")}</strong> {display(receipt.customerName)}</p>
+              <p><strong>{t("Pickup:")}</strong> {t(display(receipt.pickUpLocation))}</p>
+              <p><strong>{t("Destination:")}</strong> {t(display(receipt.dropOffLocation))}</p>
+              {receipt.returnSchedule && <p><strong>{t("Return:")}</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
+              <p><strong>{t("Schedule:")}</strong> {receipt.schedule}</p>
+              <p className="text-sm text-on-surface-variant">{t("Keep this reference for your records. Your request is awaiting confirmation.")}</p>
             </div>
-            <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">Back to Home</Link>
+            <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">{t("Back to Home")}</Link>
           </section>
         ) : (
           <>
@@ -199,10 +201,10 @@ export function BookingConfirmationPage() {
 
         <header className="text-center mb-12">
           <h1 className="font-title-lg text-title-lg text-admin-primary mb-2">
-            Review Your Booking Request
+            {t("Review Your Booking Request")}
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Please review your details before sending a transfer request. The operator will confirm availability.
+            {t("Please review your details before sending a transfer request. The operator will confirm availability.")}
           </p>
         </header>
 
@@ -213,48 +215,48 @@ export function BookingConfirmationPage() {
                 directions_car
               </span>
               <h2 className="font-title-md text-title-md text-on-surface">
-                Transfer Summary
+                {t("Transfer Summary")}
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="flight_takeoff"
-                  label="Pickup Location"
-                  value={display(transfer.pickUpLocation)}
+                  label={t("Pickup Location")}
+                  value={t(display(transfer.pickUpLocation))}
                 />
                 <SummaryBlock
                   icon="location_on"
-                  label="Destination"
-                  value={display(transfer.dropOffLocation)}
+                  label={t("Destination")}
+                  value={t(display(transfer.dropOffLocation))}
                 />
               </div>
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="calendar_today"
-                  label="Outbound Pickup"
+                  label={t("Outbound Pickup")}
                   value={schedule}
                 />
                 {transfer.tripType === 'round-trip' && (
                   <>
                     <SummaryBlock
                       icon="event"
-                      label="Return Pickup"
+                      label={t("Return Pickup")}
                       value={returnSchedule}
                     />
                     <SummaryBlock
                       icon="sync_alt"
-                      label="Return Route"
-                      value={display(transfer.dropOffLocation) + ' → ' + display(transfer.pickUpLocation)}
+                      label={t("Return Route")}
+                      value={t(display(transfer.dropOffLocation)) + ' → ' + t(display(transfer.pickUpLocation))}
                     />
                   </>
                 )}
-                {transfer.flightNumber && <SummaryBlock icon="flight_takeoff" label="Flight Number" value={transfer.flightNumber} />}
-                <SummaryBlock icon="luggage" label="Luggage" value={display(transfer.luggageCount)} />
-                <SummaryBlock icon="child_care" label="Baby Seats" value={display(transfer.babySeatCount)} />
+                {transfer.flightNumber && <SummaryBlock icon="flight_takeoff" label={t("Flight Number")} value={transfer.flightNumber} />}
+                <SummaryBlock icon="luggage" label={t("Luggage")} value={display(transfer.luggageCount)} />
+                <SummaryBlock icon="child_care" label={t("Baby Seats")} value={display(transfer.babySeatCount)} />
                 <SummaryBlock
                   icon="airport_shuttle"
-                  label="Vehicle Class"
+                  label={t("Vehicle Class")}
                   value={vehicleLabel(transfer.vehicleId)}
                 />
               </div>
@@ -264,25 +266,25 @@ export function BookingConfirmationPage() {
           <aside className="md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-container-padding flex flex-col justify-between shadow-lg">
             <div>
               <h3 className="font-title-md text-title-md text-primary-fixed-dim mb-2">
-                Price Details
+                {t("Price Details")}
               </h3>
               <p className="font-label-xs text-label-xs opacity-70 mb-4 uppercase">
-                Published Route Estimate
+                {t("Published Route Estimate")}
               </p>
             </div>
             <div className="py-6 border-y border-on-primary-container/20">
               <div className="flex justify-between items-baseline">
-                <span className="font-body-md text-body-md">Estimated Price</span>
+                <span className="font-body-md text-body-md">{t("Estimated Price")}</span>
                 <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
-                The final fare and any additional charges will be confirmed before your transfer.
+                {t("The final fare and any additional charges will be confirmed before your transfer.")}
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
               <span translate="no" className="material-symbols-outlined text-sm">info</span>
               <span className="font-label-sm text-label-sm">
-                Please check your luggage count and special requests before submitting.
+                {t("Please check your luggage count and special requests before submitting.")}
               </span>
             </div>
           </aside>
@@ -292,16 +294,16 @@ export function BookingConfirmationPage() {
               <span translate="no" className="material-symbols-outlined text-admin-primary">
                 person
               </span>
-              <h2 className="font-title-md text-title-md">Customer Details</h2>
+              <h2 className="font-title-md text-title-md">{t("Customer Details")}</h2>
             </div>
             <div className="space-y-4">
-              <DetailRow label="Full Name" value={display(passenger.customerName)} />
-              <DetailRow label="Phone" value={display(passenger.phoneNumber)} />
-              <DetailRow label="Email" value={display(passenger.email)} />
-              <DetailRow label="Country of Residence" value={display(passenger.countryOfResidence)} />
-              {passenger.hotelName && <DetailRow label="Hotel / Accommodation" value={passenger.hotelName} />}
-              <DetailRow label="Transfer Address in Turkey" value={display(passenger.transferAddress)} />
-              {passenger.specialRequests && <DetailRow label="Special Requests" value={passenger.specialRequests} />}
+              <DetailRow label={t("Full Name")} value={display(passenger.customerName)} />
+              <DetailRow label={t("Phone")} value={display(passenger.phoneNumber)} />
+              <DetailRow label={t("Email")} value={display(passenger.email)} />
+              <DetailRow label={t("Country of Residence")} value={t(display(passenger.countryOfResidence))} />
+              {passenger.hotelName && <DetailRow label={t("Hotel / Accommodation")} value={passenger.hotelName} />}
+              <DetailRow label={t("Transfer Address in Turkey")} value={display(passenger.transferAddress)} />
+              {passenger.specialRequests && <DetailRow label={t("Special Requests")} value={passenger.specialRequests} />}
             </div>
           </section>
 
@@ -310,16 +312,14 @@ export function BookingConfirmationPage() {
               <span translate="no" className="material-symbols-outlined text-secondary">
                 payments
               </span>
-              <h2 className="font-title-md text-title-md">Payment Information</h2>
+              <h2 className="font-title-md text-title-md">{t("Payment Information")}</h2>
             </div>
             <div className="flex-grow space-y-4">
               <p className="font-body-md text-on-surface-variant">
-                Payment is cash only. No online or card payment is collected.
-                The payment timing, accepted cash currency and any additional
-                charges will be confirmed by the operator before your transfer.
+                {t("Payment is cash only. No online or card payment is collected. The payment timing, accepted cash currency and any additional charges will be confirmed by the operator before your transfer.")}
               </p>
               <p className="font-label-sm text-on-surface-variant">
-                Submitting a booking request does not mean the transfer has been confirmed.
+                {t("Submitting a booking request does not mean the transfer has been confirmed.")}
               </p>
             </div>
           </section>
@@ -335,23 +335,23 @@ export function BookingConfirmationPage() {
                 type="checkbox"
               />
               <span className="font-body-md text-on-surface-variant group-hover:text-on-surface">
-                I confirm that all information provided is correct.
+                {t("I confirm that all information provided is correct.")}
               </span>
             </label>
-            {error && <p role="alert" className="text-error">{error}</p>}
-            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.</p>}
+            {error && <p role="alert" className="text-error">{t(error)}</p>}
+            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">{t("The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.")}</p>}
             <ProcessingButton
               processing={processing}
-              processingLabel="PROCESSING..."
+              processingLabel={t("PROCESSING...")}
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={!confirmed || processing || receipt !== null || pricesLoading || !!pricesError || catalogPrice === null}
               onClick={handleConfirm}
               type="button"
             >
-              SUBMIT BOOKING REQUEST
+              {t("SUBMIT BOOKING REQUEST")}
             </ProcessingButton>
             <p className="font-label-xs text-label-xs text-outline">
-              By submitting, you confirm the details above are accurate and request a transfer.
+              {t("By submitting, you confirm the details above are accurate and request a transfer.")}
             </p>
           </div>
         </section>
@@ -365,12 +365,13 @@ export function BookingConfirmationPage() {
 }
 
 function ConfirmationStepper() {
+  const t = useBookingCopy()
   return (
     <section className="mb-12">
       <div className="flex justify-between items-center max-w-3xl mx-auto relative">
-        <StepperItem complete label="Transfer" />
-        <StepperItem complete label="Passenger" />
-        <StepperItem active label="Confirmation" />
+        <StepperItem complete label={t("Transfer")} />
+        <StepperItem complete label={t("Passenger")} />
+        <StepperItem active label={t("Confirmation")} />
       </div>
     </section>
   )
@@ -446,6 +447,7 @@ function DetailRow({ label, value }: { label: string; value: string }) {
 }
 
 function ConfirmationFooter() {
+  const t = useBookingCopy()
   return (
     <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
@@ -454,8 +456,8 @@ function ConfirmationFooter() {
           <p className="text-sm text-on-surface-variant">© {new Date().getFullYear()} DalamanWay</p>
         </div>
         <div className="flex gap-5 text-sm">
-          <Link className="text-admin-primary hover:underline" to="/contact">Contact</Link>
-          <Link className="text-admin-primary hover:underline" to="/services">Services</Link>
+          <Link className="text-admin-primary hover:underline" to="/contact">{t("Contact")}</Link>
+          <Link className="text-admin-primary hover:underline" to="/services">{t("Services")}</Link>
         </div>
       </div>
     </footer>
