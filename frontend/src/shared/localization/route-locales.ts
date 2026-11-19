@@ -17,6 +17,21 @@ export const localizedRouteCopy = {
     de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Ölüdeniz', intro: 'Für die Fahrt nach Ölüdeniz können Sie eine einfache Fahrt oder eine Rückfahrt zum Flughafen anfragen. Halten Sie den Namen Ihrer Unterkunft und die Flugnummer für die Buchung bereit.' },
     ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Олюдениз', intro: 'Для поездки в Олюдениз можно заказать трансфер в одну сторону или сразу указать обратную поездку в аэропорт. При оформлении заявки укажите название отеля и номер рейса.' },
   },
+  icmeler: {
+    destination: 'Icmeler(Any Hotel)',
+    de: { heading: 'Privater Transfer vom Flughafen Dalaman nach İçmeler', intro: 'Für ein Hotel in İçmeler können Sie die Hinfahrt ab Dalaman und die Rückfahrt ab Hotel zusammen anfragen. Liegt der Abholeingang an einer Seitenstraße, geben Sie ihn im Buchungsformular an.' },
+    ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Ичмелер', intro: 'Для поездки в отель в Ичмелере можно сразу заказать и обратный трансфер. Если вход для посадки находится на боковой улице, уточните его в заявке.' },
+  },
+  dalyan: {
+    destination: 'Dalyan',
+    de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Dalyan', intro: 'Für Ihre Fahrt nach Dalyan ist der Zielort im Formular vorausgewählt. Bei einer Pension oder einem Ferienhaus am Fluss hilft der Name der Unterkunft zusammen mit der Straßenadresse.' },
+    ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Дальян', intro: 'Дальян уже выбран в форме как пункт назначения. Если вы едете в гостевой дом или на виллу у реки, добавьте название жилья и адрес для подъезда.' },
+  },
+  sarigerme: {
+    destination: 'Sarigerme',
+    de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Sarıgerme', intro: 'Reisen Sie zu einem Strandhotel in Sarıgerme oder zu einer Unterkunft im Ort? Geben Sie das konkrete Fahrtziel an. Für die Rückfahrt lässt sich die Abholzeit gesondert eintragen.' },
+    ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Сарыгерме', intro: 'Укажите, куда вас отвезти в Сарыгерме: к въезду в пляжный отель или по адресу в посёлке. Для обратного трансфера можно отдельно указать время подачи машины.' },
+  },
   gocek: {
     destination: 'Gocek',
     de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Göcek', intro: 'Göcek liegt am Golf von Fethiye und ist für seine Jachthäfen bekannt. Geben Sie bei der Anfrage den Jachthafen oder das Hotel an.' },
