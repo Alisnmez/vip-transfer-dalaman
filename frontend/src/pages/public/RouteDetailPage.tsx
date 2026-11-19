@@ -1,8 +1,9 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { transferPrices } from '../../features/booking/pricing'
 import airportArrivalNotes from '../../features/route-price/airport-arrival-notes.json'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
+import { matchLocalizedRoute, routeLanguageLabels, routeLanguagePath, routeLanguages } from '../../shared/localization/route-locales'
 
 const destinations = [
   { slug: 'marmaris', name: 'Marmaris', match: 'Marmaris(Any Hotel)', russianName: "Мармарис", intro: { en: 'Marmaris is a coastal resort town with hotels, a marina and a lively waterfront. Choose your vehicle before requesting an airport pickup.', de: "Marmaris ist ein Badeort mit Hotels, Jachthafen und belebter Uferpromenade. Wählen Sie Ihr Fahrzeug, bevor Sie die Abholung am Flughafen anfragen.", ru: "Мармарис — курорт с отелями, яхтенной гаванью и оживлённой набережной. Выберите автомобиль перед бронированием трансфера из аэропорта." } },
@@ -66,17 +67,18 @@ const routeCopy = {
 }
 
 export function RouteDetailPage() {
-  const { language } = useLanguage()
+  const { language, setLanguage } = useLanguage()
   const copy = routeCopy[language]
   const { slug } = useParams()
-  const route = destinations.find((item) => item.slug === slug)
+  const localized = matchLocalizedRoute(useLocation().pathname)
+  const route = destinations.find((item) => item.slug === (localized?.slug ?? slug))
   const available = route ? transferPrices.some((price) => price.destination.toLowerCase().includes(route.match.toLowerCase())) : false
 
   if (!route || !available) {
     return <><title>Route not available | DalamanWay</title><meta name="robots" content="noindex,nofollow" /><PublicNavbar /><main className="mx-auto max-w-4xl px-6 pb-20 pt-36"><h1 className="text-3xl font-bold">{copy.unavailable}</h1><Link className="mt-6 inline-block underline" to="/routes">{copy.available}</Link></main></>
   }
 
-  const heading = {
+  const heading = localized?.copy?.heading ?? {
     en: `Dalaman Airport to ${route.name} private transfer`,
     de: `Privater Transfer vom Flughafen Dalaman nach ${route.name}`,
     ru: `Индивидуальный трансфер из аэропорта Даламан — ${route.russianName}`,
@@ -86,13 +88,17 @@ export function RouteDetailPage() {
 
   return (
     <>
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      {!localized && <><title>{title}</title><meta name="description" content={description} /></>}
       <PublicNavbar />
       <main className="mx-auto max-w-5xl px-5 pb-20 pt-36 sm:px-8">
         <nav aria-label={copy.breadcrumb} className="mb-8 text-sm text-on-surface-variant"><Link className="underline" to="/routes">{copy.routes}</Link> / {language === 'ru' ? route.russianName : route.name}</nav>
         <h1 className="max-w-3xl text-4xl font-bold text-admin-primary sm:text-5xl">{heading}</h1>
-        <p className="mt-6 max-w-3xl text-lg leading-relaxed">{route.intro[language]}</p>
+        <p className="mt-6 max-w-3xl text-lg leading-relaxed">{localized?.copy?.intro ?? route.intro[language]}</p>
+        {localized && <nav className="mt-4 flex flex-wrap gap-4 text-sm">
+          {routeLanguages.map(option => <Link key={option} lang={option} hrefLang={option}
+            className="underline" aria-current={option === language ? 'page' : undefined}
+            to={routeLanguagePath(route.slug, option)} onClick={() => setLanguage(option)}>{routeLanguageLabels[option].name}</Link>)}
+        </nav>}
         <section className="mt-8 max-w-3xl">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.arrival}</h2>
           <p className="mt-3 leading-relaxed">{airportArrivalNotes[route.slug][language]}</p>

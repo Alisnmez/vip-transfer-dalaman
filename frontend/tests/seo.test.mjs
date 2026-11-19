@@ -1,19 +1,15 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { mkdtemp, readFile, rm, cp, writeFile } from 'node:fs/promises'
+import { mkdtemp, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const source = resolve('scripts/generate-seo.mjs')
-const destinations = resolve('scripts/destination-routes.mjs')
 
 async function generate(domain) {
   const directory = await mkdtemp(join(tmpdir(), 'vip-seo-'))
-  await cp(source, join(directory, 'generate-seo.mjs'))
-  await cp(destinations, join(directory, 'destination-routes.mjs'))
-  await writeFile(join(directory, 'package.json'), '{"type":"module"}')
-  const result = spawnSync(process.execPath, ['generate-seo.mjs'], {
+  const result = spawnSync(process.execPath, [source], {
     cwd: directory,
     encoding: 'utf8',
     env: { ...process.env, VITE_PUBLIC_SITE_URL: domain },
@@ -40,5 +36,7 @@ test('production sitemap includes public routes and excludes private booking/adm
   assert.match(sitemap, /<loc>https:\/\/example.com\/routes\/fethiye<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/faq<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/reviews<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/example.com\/de\/routes\/marmaris<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/example.com\/ru\/routes\/gocek<\/loc>/)
   assert.doesNotMatch(sitemap, /<loc>[^<]*\/(booking|admin)/)
 })

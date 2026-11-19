@@ -1,9 +1,13 @@
 import { destinationRoutes } from './destination-routes.mjs'
 import { mkdir, writeFile } from 'node:fs/promises'
+import { localizedRouteCopy, routeLanguagePath, routeLanguages } from '../src/shared/localization/route-locales.ts'
 
 const siteUrl = process.env.VITE_PUBLIC_SITE_URL?.trim().replace(/\/$/, '')
 const isProductionSite = Boolean(siteUrl && /^https:\/\/[a-z0-9.-]+$/i.test(siteUrl) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(siteUrl))
 const routes = ['/', '/routes', ...destinationRoutes.map(({ slug }) => `/routes/${slug}`), '/vehicles', '/services', '/contact', '/faq', '/reviews']
+routes.push(...Object.keys(localizedRouteCopy).flatMap(slug =>
+  routeLanguages.filter(language => language !== 'en').map(language => routeLanguagePath(slug, language)),
+))
 
 await mkdir('public', { recursive: true })
 if (isProductionSite) {

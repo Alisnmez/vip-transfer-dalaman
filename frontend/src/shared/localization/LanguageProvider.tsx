@@ -9,8 +9,9 @@ function savedLanguage(): Language {
   }
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState(savedLanguage)
+export function LanguageProvider({ children, routeLanguage }: { children: ReactNode; routeLanguage?: Language }) {
+  const [preferredLanguage, setLanguage] = useState(() => routeLanguage ?? savedLanguage())
+  const language = routeLanguage ?? preferredLanguage
 
   useEffect(() => {
     const previousLanguage = document.documentElement.lang

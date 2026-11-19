@@ -8,6 +8,24 @@ test.beforeEach(async ({ page }) => {
     : route.continue())
 })
 
+test('localized route URLs select their language and keep the destination on booking', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.addInitScript(() => localStorage.setItem('dalamanway-language', 'en'))
+  await page.goto('http://127.0.0.1:4173/de/routes/marmaris')
+  await expect(page.getByRole('heading', { name: 'Privater Transfer vom Flughafen Dalaman nach Marmaris' })).toBeVisible()
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+  await page.getByRole('combobox', { name: 'Sprache der Website' }).selectOption('ru')
+  await expect(page).toHaveURL(/\/ru\/routes\/marmaris$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ru')
+  await page.getByRole('link', { name: 'Заказать трансфер', exact: true }).click()
+  await expect(page.getByRole('combobox', { name: 'Пункт назначения', exact: true })).toHaveValue('Marmaris(Any Hotel)')
+  await page.goto('http://127.0.0.1:4173/ru/routes/gocek')
+  await expect(page.getByRole('heading', { name: 'Индивидуальный трансфер из аэропорта Даламан в Гёджек' })).toBeVisible()
+  await page.getByRole('link', { name: 'English', exact: true }).click()
+  await expect(page).toHaveURL(/\/routes\/gocek$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+})
+
 // Exercise the real admin UI against deterministic, disposable API fixtures.
 // PostgreSQL integration tests verify the real API separately.
 async function adminFixture(page, { width = 1280 } = {}) {

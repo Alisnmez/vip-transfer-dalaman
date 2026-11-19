@@ -1,4 +1,5 @@
 import { LanguageProvider } from '../shared/localization/LanguageProvider'
+import { localizedRouteCopy, matchLocalizedRoute, routeLanguages } from '../shared/localization/route-locales'
 import { createBrowserRouter, Navigate, useLocation } from 'react-router-dom'
 import { lazy, Suspense, useLayoutEffect } from 'react'
 import { trackPublicPage } from '../features/analytics/analytics'
@@ -40,6 +41,7 @@ function ScrollToTop() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
     trackPublicPage(pathname)
+    if (matchLocalizedRoute(pathname)) return
     const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
     const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
     const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews']
@@ -98,8 +100,15 @@ function ScrollToTop() {
 
 // eslint-disable-next-line react-refresh/only-export-components
 function PublicPageLayout() {
-  return <LanguageProvider><ScrollToTop /><PublicLayout /><AnalyticsConsent /></LanguageProvider>
+  const { pathname } = useLocation()
+  return <LanguageProvider routeLanguage={matchLocalizedRoute(pathname)?.language}><ScrollToTop /><PublicLayout /><AnalyticsConsent /></LanguageProvider>
 }
+
+const translatedRoutes = routeLanguages.filter(language => language !== 'en').flatMap(language =>
+  Object.keys(localizedRouteCopy).map(slug => ({
+    path: `${language}/routes/${slug}`, element: <RouteDetailPage />,
+  })),
+)
 
 export const router = createBrowserRouter([
   {
@@ -109,6 +118,7 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'routes', element: <RoutesPage /> },
       { path: 'routes/:slug', element: <RouteDetailPage /> },
+      ...translatedRoutes,
       { path: 'vehicles', element: <VehiclesPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'contact', element: <ContactPage /> },

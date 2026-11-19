@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import { languages, parseLanguage, useLanguage } from '../../shared/localization/language'
 import { publicNavItems } from './publicNavigation'
+import { matchLocalizedRoute, routeLanguagePath } from '../../shared/localization/route-locales'
 
 const navigationCopy = {
   en: { main: 'Main navigation', mobile: 'Mobile navigation', book: 'Book Now', open: 'Open menu', close: 'Close menu', language: 'Website language' },
@@ -12,6 +13,9 @@ const navigationCopy = {
 
 export function PublicNavbar() {
   const { language, setLanguage } = useLanguage()
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
+  const localized = matchLocalizedRoute(pathname)
   const copy = navigationCopy[language]
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -49,7 +53,11 @@ export function PublicNavbar() {
             aria-label={copy.language}
             className="h-11 max-w-28 rounded-lg border border-slate-200 bg-white px-2 text-sm font-semibold text-admin-primary"
             value={language}
-            onChange={event => setLanguage(parseLanguage(event.target.value))}
+            onChange={event => {
+              const next = parseLanguage(event.target.value)
+              setLanguage(next)
+              if (localized) navigate(routeLanguagePath(localized.slug, next))
+            }}
           >
             {Object.entries(languages).map(([code, name]) => <option key={code} value={code} lang={code}>{name}</option>)}
           </select>

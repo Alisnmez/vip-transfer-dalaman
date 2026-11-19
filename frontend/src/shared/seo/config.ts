@@ -1,3 +1,5 @@
+import { matchLocalizedRoute } from '../localization/route-locales'
+
 /**
  * Single source of truth for public-page SEO.
  * Do not hardcode brand names or domains inside individual pages.
@@ -53,6 +55,8 @@ export const seoPages: Record<string, SeoPage> = {
 }
 
 export function getSeoPage(pathname: string): SeoPage {
+  const localized = matchLocalizedRoute(pathname)?.copy
+  if (localized) return { title: `${localized.heading} | DalamanWay`, description: localized.intro }
   const normalized = pathname.replace(/\/$/, '') || '/'
   const destinations: Record<string, string> = {
     marmaris: 'Marmaris', fethiye: 'Fethiye', oludeniz: 'Oludeniz', gocek: 'Gocek', icmeler: 'Icmeler', dalyan: 'Dalyan', sarigerme: 'Sarigerme',

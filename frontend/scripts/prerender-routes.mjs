@@ -2,6 +2,7 @@ import { destinationRoutes } from './destination-routes.mjs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import airportArrivalNotes from '../src/features/route-price/airport-arrival-notes.json' with { type: 'json' }
+import { isLocalizedRoute, localizedRouteCopy, routeAlternates, routeLanguageLabels, routeLanguagePath, routeLanguages } from '../src/shared/localization/route-locales.ts'
 
 const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
@@ -18,21 +19,37 @@ const appShell = template
 await writeFile('dist/app-shell.html', appShell)
 
 for (const [slug, name, intro] of pages) {
-  const title = `Dalaman Airport to ${name} Private Transfer | DalamanWay`
-  const description = `Plan a private Dalaman Airport to ${name} transfer. Compare available vehicles and request a one-way or return journey.`
-  const canonical = production ? `<link rel="canonical" href="${site}/routes/${slug}" />` : ''
+  const pilot = isLocalizedRoute(slug) ? localizedRouteCopy[slug] : undefined
+  const alternates = production && pilot
+    ? routeAlternates(slug).map(({ language, path }) => `<link rel="alternate" hreflang="${language}" href="${site}${path}" />`).join('')
+    : ''
+  const languageLinks = pilot ? routeLanguages.map(language =>
+    `<a href="${routeLanguagePath(slug, language)}" lang="${language}" hreflang="${language}">${routeLanguageLabels[language].name}</a>`,
+  ).join(' ') : ''
   const robots = production ? 'index,follow' : 'noindex,nofollow'
-  const html = template
-    .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
-    .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${description}" />`)
-    .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
-    .replace('</head>', `${canonical}<meta property="og:type" content="website" /><meta property="og:title" content="${title}" /><meta property="og:description" content="${description}" />${production ? `<meta property="og:url" content="${site}/routes/${slug}" />` : ''}<meta name="twitter:card" content="summary" /></head>`)
-    .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${title}</h1><p>${intro}</p><h2>Where should we drop you off?</h2><p>${airportArrivalNotes[slug].en}</p><a href="/booking">Request a transfer</a> <a href="/routes">Compare routes and prices</a></main></div>`)
-  const folder = join('dist', 'routes', slug)
-  await mkdir(folder, { recursive: true })
-  await writeFile(join(folder, 'index.html'), html)
+  for (const language of pilot ? routeLanguages : ['en']) {
+    const copy = language === 'en' ? undefined : pilot[language]
+    const heading = copy?.heading ?? `Dalaman Airport to ${name} Private Transfer`
+    const title = `${heading} | DalamanWay`
+    const description = copy?.intro ?? `Plan a private Dalaman Airport to ${name} transfer. Compare available vehicles and request a one-way or return journey.`
+    const path = routeLanguagePath(slug, language)
+    const canonical = production ? `<link rel="canonical" href="${site}${path}" />` : ''
+    const labels = routeLanguageLabels[language]
+    const booking = pilot ? `/booking?destination=${encodeURIComponent(pilot.destination)}` : '/booking'
+    const routeLink = language === 'en' ? ' <a href="/routes">Compare routes and prices</a>' : ''
+    const html = template
+      .replace('<html lang="en">', `<html lang="${language}">`)
+      .replace(/<title>[^<]*<\/title>/, `<title>${title}</title>`)
+      .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${description}" />`)
+      .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
+      .replace('</head>', `${canonical}${alternates}<meta property="og:type" content="website" /><meta property="og:title" content="${title}" /><meta property="og:description" content="${description}" />${production ? `<meta property="og:url" content="${site}${path}" />` : ''}<meta name="twitter:card" content="summary" /></head>`)
+      .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${heading}</h1><p>${copy?.intro ?? intro}</p><h2>${labels.arrival}</h2><p>${airportArrivalNotes[slug][language]}</p><a href="${booking}">${labels.booking}</a>${routeLink} ${languageLinks}</main></div>`)
+    const folder = join('dist', path.slice(1))
+    await mkdir(folder, { recursive: true })
+    await writeFile(join(folder, 'index.html'), html)
+  }
 }
-console.log(`Generated ${pages.length} static route HTML pages (${production ? 'production' : 'noindex staging'})`)
+console.log(`Generated static route HTML pages (${production ? 'production' : 'noindex staging'})`)
 
 // Generate crawlable initial HTML for the public landing pages.
 // These pages remain client-rendered after JavaScript loads.

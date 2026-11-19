@@ -7,7 +7,8 @@ import { spawnSync } from 'node:child_process'
 
 const script = resolve('scripts/prerender-routes.mjs')
 const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
-  'routes/gocek', 'routes/icmeler', 'routes/dalyan', 'routes/sarigerme', 'vehicles', 'services', 'contact', 'faq', 'reviews']
+  'routes/gocek', 'routes/icmeler', 'routes/dalyan', 'routes/sarigerme', 'vehicles', 'services', 'contact', 'faq', 'reviews',
+  'de/routes/marmaris', 'ru/routes/marmaris', 'de/routes/gocek', 'ru/routes/gocek']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
@@ -66,9 +67,26 @@ test('all staging pages remain noindex without production canonicals', async () 
     const { pages } = await render(url)
     for (const [path, html] of pages) {
       assert.match(html, /<meta name="robots" content="noindex,nofollow"/, path)
-      assert.doesNotMatch(html, /rel="canonical"|property="og:url"|application\/ld\+json/, path)
+      assert.doesNotMatch(html, /rel="canonical"|<link rel="alternate"|property="og:url"|application\/ld\+json/, path)
     }
   }
+})
+
+test('pilot route languages have reciprocal alternates and localized initial HTML', async () => {
+  const origin = 'https://dalamanway.com'
+  const { pages } = await render(origin)
+  for (const slug of ['marmaris', 'gocek']) {
+    const variants = { en: `routes/${slug}`, de: `de/routes/${slug}`, ru: `ru/routes/${slug}` }
+    for (const [language, path] of Object.entries(variants)) {
+      const html = pages.get(path)
+      assert.ok(html.includes(`<html lang="${language}">`), path)
+      for (const [locale, target] of Object.entries({ ...variants, 'x-default': variants.en })) {
+        assert.ok(html.includes(`<link rel="alternate" hreflang="${locale}" href="${origin}/${target}" />`), path)
+      }
+    }
+  }
+  assert.match(pages.get('de/routes/marmaris'), /<h1>Privater Transfer vom Flughafen Dalaman nach Marmaris<\/h1>/)
+  assert.match(pages.get('ru/routes/gocek'), /<h1>Индивидуальный трансфер из аэропорта Даламан в Гёджек<\/h1>/)
 })
 
 test('SPA fallback keeps the application entry point and excludes homepage SEO metadata', async () => {

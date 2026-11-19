@@ -1,20 +1,16 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { mkdtemp, cp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdtemp, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const script = resolve('scripts/generate-seo.mjs')
-const destinations = resolve('scripts/destination-routes.mjs')
 
 async function buildSeo(url) {
   const dir = await mkdtemp(join(tmpdir(), 'seo-security-'))
   try {
-    await cp(script, join(dir, 'generate-seo.mjs'))
-    await cp(destinations, join(dir, 'destination-routes.mjs'))
-    await writeFile(join(dir, 'package.json'), '{"type":"module"}')
-    const result = spawnSync(process.execPath, ['generate-seo.mjs'], {
+    const result = spawnSync(process.execPath, [script], {
       cwd: dir, encoding: 'utf8',
       env: { ...process.env, VITE_PUBLIC_SITE_URL: url },
     })

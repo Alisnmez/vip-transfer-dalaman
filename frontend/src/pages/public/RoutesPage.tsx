@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { bookingVehicles } from '../../features/booking/bookingVehicles'
 import { useLanguage } from '../../shared/localization/language'
+import { routeLanguagePath } from '../../shared/localization/route-locales'
 import { PublicNavbar } from './PublicNavbar'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 
@@ -195,7 +196,7 @@ export function RoutesPage() {
                     <h3 className="text-lg font-bold text-admin-primary">{route.destination}</h3>
                     <p className="mt-1 text-xs text-on-surface-variant">{copy.airport} · {copy.from} {priceLabel(route.from)}</p>
                   </div>
-                  <Link className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" to={`/routes/${route.slug}`} aria-label={`${copy.compare} ${route.destination}`}>
+                  <Link className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" to={routeLanguagePath(route.slug, language)} aria-label={`${copy.compare} ${route.destination}`}>
                     <span translate="no" aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
                   </Link>
                 </div>

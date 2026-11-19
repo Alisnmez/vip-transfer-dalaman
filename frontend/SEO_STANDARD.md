@@ -372,3 +372,12 @@ Bu kayıt, yukarıdaki hazırlık aşaması notlarından sonraki durumu gösteri
 - Yerel mobil Lighthouse simülasyonunda Marmaris LCP 1,39 sn ve CLS 0 çıktı. Ana sayfa için toplam skor üretilmedi. Bu ölçüm yerel aday derlemesine aittir ve gerçek kullanıcı verisi değildir.
 - Kalan işler: test Render yönlendirmeleri, canlı onayı ve yayımlama. İki yeni yol için `/routes/dalyan → /routes/dalyan/index.html` ve `/routes/sarigerme → /routes/sarigerme/index.html` kuralları genel fallback'in üstünde olmalı. Yayından sonra 14 sitemap adresini tekrar kontrol et.
 - Ayrı dil URL'leri, hreflang ve canlı mobil saha ölçümü açık. Rezervasyon taslaklarının tarayıcıda saklanma süresi ayrı gizlilik incelemesinde ele alınacak.
+
+**Render ve Search Console takip kaydı:** Dalyan/Sarıgerme adayı `30d8c67` dört CI kontrolünü geçti. Render testinde 14 genel URL, iki yeni yol ve staging robots/sitemap doğrulandı. Test servisi önceki sürüm, yönlendirme ve otomatik dağıtım ayarlarına döndü. Ana sayfa Google dizininde. Marmaris ve Göcek için ilk dizine ekleme talepleri kabul edildi. Search Console mobil Önemli Web Verileri raporu yeterli saha verisi olmadığını gösterdi. [PR #20](https://github.com/Alisnmez/vip-transfer-dalaman/pull/20)
+
+### Almanca ve Rusça rota pilotu — 19 Kasım 2026
+
+- Marmaris ve Göcek için mevcut İngilizce yollar korundu. Almanca ve Rusça yollar ilk HTML'de doğru dili, çevrilmiş başlığı ve metni verir. Üretimde her varyant kendi canonical adresini taşır. Üç varyant ve `x-default` karşılıklı hreflang ile eşleşir.
+- 86 frontend testi, 19 tarayıcı senaryosu, lint ve üretim derlemesi yerelde geçti. Mobil tarayıcı testinde doğrudan Almanca açılış, Rusçaya geçiş, Rusça rezervasyon formunda doğru Marmaris seçimi ve Göcek'in İngilizce adresine dönüş doğrulandı.
+- Pilot yayını için `/de/routes/marmaris`, `/ru/routes/marmaris`, `/de/routes/gocek` ve `/ru/routes/gocek` yolları kendi `/index.html` dosyalarına yönlenmeli. Kurallar genel fallback'in üstünde olmalı. Dalyan ve Sarıgerme de aynı adayla yayına alınırsa onların iki kuralı da eklenir.
+- Render testinde yeni yolları, noindex sınırını ve canlıdan önce 18 adresi kapsayan sitemap derlemesini doğrula. Pilotu diğer rotalara genişletme ve saha verisi, pilot yayınından sonra ayrı doğrulama bekliyor.
