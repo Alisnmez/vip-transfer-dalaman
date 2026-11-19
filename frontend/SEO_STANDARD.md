@@ -324,3 +324,19 @@ Canlı `/booking` ilk HTML'de hâlâ ana sayfa canonical'i ve `index,follow` dö
 SEO dalındaki prerender testinin sözdizimi düzeltildi. Test, 12 genel adresin tamamında tek canonical ve H1, benzersiz title, Open Graph/Twitter etiketleri ve test ortamının indeksleme sınırlarını doğruluyor. Yerelde 84 test, lint ve üretim ayarlı frontend derlemesi geçti. Bu testler gerçek Google indeks durumu yerine üretilen HTML çıktısını denetler.
 
 Bir sonraki geliştirme için dil seçicisinin mevcut EN/DE/RU davranışı ve İngilizce adresler korunmalı. Ayrı dil URL'leri ve karşılıklı hreflang uygulamadan önce ilgili sayfaların tam çevirileri ve sunucu yönlendirmeleri doğrulanmalı. Önceki araştırma ve karar kaydı [SEO dört pazar araştırmasında](../docs/SEO_FOUR_MARKETS_RESEARCH_2026-11-19.md) bulunuyor.
+
+### Uygulama yolları için noindex — 19 Kasım 2026
+
+Derleme, prerender öncesi Vite girişinden `dist/app-shell.html` üretiyor. Bu dosya uygulamanın JS/CSS bağlantılarını ve React kökünü koruyor. İlk HTML'de `noindex,nofollow` var. Ana sayfanın canonical, açıklama ve sosyal paylaşım etiketleri bu dosyada bulunmuyor.
+
+Uygulama sırası:
+
+1. SEO PR'ı test ortamına dağıtıldıktan sonra `/app-shell.html` adresinin gerçekten yeni dosyayı döndürdüğünü doğrula.
+2. Render test frontend'inde 11 tam yol eşleşmesini koru. Listenin sonundaki genel rewrite hedefini `/index.html` yerine `/app-shell.html` yap. Test ortamında `Disallow: /` kalır.
+3. Testte rezervasyon, yolcu bilgisi, onay, sorgulama ve admin adreslerinin ilk HTML'ini, JS dosyalarını ve tarayıcı akışını doğrula. Canlı onayından sonra aynı sırayı üretimde uygula ve 12 sitemap URL'sini tekrar kontrol et.
+4. Üretimde rezervasyon adreslerinin `noindex` yanıtı doğrulandıktan sonra `Disallow: /booking` kuralını ayrı değişiklik olarak değerlendir. Google, taraması engellenen sayfanın `noindex` etiketini okuyamaz. Admin erişimi uygulama yetkilendirmesiyle korunur. Genel SPA kuralı bilinmeyen adresler için HTTP 200 döndürebilir. Gerçek 404 ayrı çalışmadır.
+
+Yerel sonuç: 85 test, lint ve production derlemesi geçti. Yerel HTTP rewrite simülasyonunda 12 genel URL ve 5 uygulama adresi beklenen ilk HTML'i ve JS girişini döndürdü. Render kuralı henüz değiştirilmedi.
+
+- [Render rewrite kuralları](https://render.com/docs/redirects-rewrites)
+- [Google noindex dokümantasyonu](https://developers.google.com/search/docs/crawling-indexing/block-indexing)

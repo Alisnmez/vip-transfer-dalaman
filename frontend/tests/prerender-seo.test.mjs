@@ -9,7 +9,7 @@ const script = resolve('scripts/prerender-routes.mjs')
 const routes = resolve('scripts/destination-routes.mjs')
 const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
   'routes/gocek', 'routes/icmeler', 'vehicles', 'services', 'contact', 'faq', 'reviews']
-const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div></body></html>'
+const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
   const dir = await mkdtemp(join(tmpdir(), 'vip-prerender-seo-'))
@@ -24,9 +24,10 @@ async function render(siteUrl) {
       env: { ...process.env, VITE_PUBLIC_SITE_URL: siteUrl },
     })
     assert.equal(result.status, 0, result.stderr)
-    return new Map(await Promise.all(publicPaths.map(async path => [
+    const pages = new Map(await Promise.all(publicPaths.map(async path => [
       path, await readFile(join(dir, 'dist', path, 'index.html'), 'utf8'),
     ])))
+    return { pages, shell: await readFile(join(dir, 'dist/app-shell.html'), 'utf8') }
   } finally {
     await rm(dir, { recursive: true, force: true })
   }
@@ -34,7 +35,7 @@ async function render(siteUrl) {
 
 test('production prerendered route has crawlable title, description, canonical and content', async () => {
   const origin = 'https://dalamanway.com'
-  const pages = await render(origin)
+  const { pages } = await render(origin)
   const titles = new Set()
   for (const [path, html] of pages) {
     const canonical = origin + '/' + path
@@ -57,9 +58,20 @@ test('production prerendered route has crawlable title, description, canonical a
 
 test('all staging pages remain noindex without production canonicals', async () => {
   for (const url of ['', 'https://dalamanway-staging.onrender.com']) {
-    for (const [path, html] of await render(url)) {
+    const { pages } = await render(url)
+    for (const [path, html] of pages) {
       assert.match(html, /<meta name="robots" content="noindex,nofollow"/, path)
       assert.doesNotMatch(html, /rel="canonical"|property="og:url"/, path)
     }
+  }
+})
+
+test('SPA fallback keeps the application entry point and excludes homepage SEO metadata', async () => {
+  for (const origin of ['https://dalamanway.com', '']) {
+    const { shell } = await render(origin)
+    assert.match(shell, /<meta name="robots" content="noindex,nofollow"/)
+    assert.match(shell, /<div id="root"><\/div>/)
+    assert.match(shell, /src="\/assets\/app\.js"/)
+    assert.doesNotMatch(shell, /rel="canonical"|property="og:|name="twitter:|data-prerender-fallback/)
   }
 })

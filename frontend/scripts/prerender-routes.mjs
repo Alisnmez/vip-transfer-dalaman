@@ -6,6 +6,16 @@ const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
 const pages = destinationRoutes.map(({ slug, name, intro }) => [slug, name, intro])
 const template = await readFile('dist/index.html', 'utf8')
+
+// Render's SPA fallback uses this shell for non-prerendered paths.
+// Keep the same app entry point without the homepage's indexing metadata.
+const appShell = template
+  .replace(/<title>[^<]*<\/title>/, '<title>DalamanWay</title>')
+  .replace(/<meta name="robots" content="[^"]*"\s*\/>/, '<meta name="robots" content="noindex,nofollow" />')
+  .replace(/<meta name="description"[^>]*>/, '')
+  .replace(/<link rel="canonical"[^>]*>|<meta (?:property="og:[^"]+"|name="twitter:[^"]+")[^>]*>/g, '')
+await writeFile('dist/app-shell.html', appShell)
+
 for (const [slug, name, intro] of pages) {
   const title = `Dalaman Airport to ${name} Private Transfer | DalamanWay`
   const description = `Plan a private Dalaman Airport to ${name} transfer. Compare available vehicles and request a one-way or return journey.`
