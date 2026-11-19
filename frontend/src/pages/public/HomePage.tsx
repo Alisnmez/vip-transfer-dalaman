@@ -2,11 +2,152 @@ import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import { useLanguage } from '../../shared/localization/language'
 import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { HomeReviewStrip } from './HomeReviewStrip'
 
+const homeCopy = {
+  en: {
+    hero: "Professional Airport Transfers from Dalaman",
+    intro: "Request a private airport transfer across the Turquoise Coast. Review your route and vehicle options before submitting.",
+    book: "Book Now",
+    routes: "View Routes & Prices",
+    assistance: "Booking Assistance",
+    assistanceDetail: "Send your transfer details with your booking request.",
+    estimates: "Route Price Estimates",
+    estimateDetail: "Review the published route estimate before sending your request.",
+    drivers: "Professional Drivers",
+    driversDetail: "Vehicle options for private airport transfers.",
+    vehicles: "Our Vehicles",
+    vehiclesIntro: "Explore vehicle options for your transfer.",
+    allVehicles: "View All Vehicles",
+    car: "Private Car",
+    carDetail: "Choose a private car category for your transfer request.",
+    minivan: "Private Minivan",
+    minivanDetail: "Select a minivan category and enter your passenger and luggage needs.",
+    group: "Group Transfer",
+    groupDetail: "Check available group vehicle categories in the booking form.",
+    options: "View Options & Prices",
+    popular: "Preferred Routes",
+    badge: "DALAMAN ROUTE",
+    fethiye: "Dalaman to Fethiye",
+    fethiyeDetail: "Request a private transfer to Fethiye and review your route price.",
+    viewPrice: "View prices when booking",
+    gocek: "Dalaman to Gocek",
+    marmaris: "Marmaris",
+    oludeniz: "Oludeniz",
+    cta: "Ready for a Seamless Journey?",
+    ctaDetail: "Send your transfer request online and review the route price before submitting.",
+    request: "Request a Transfer",
+    contact: "Contact Us",
+    homeLabel: "DalamanWay home",
+    logo: "DalamanWay — Private Airport Transfers",
+    services: "Services",
+    fleet: "Vehicles",
+    faq: "FAQ",
+    reviews: "Customer Reviews",
+    rights: "DalamanWay. All rights reserved.",
+    photo: "Ölüdeniz photo:",
+    marinaAlt: "Fethiye Marina",
+    gocekAlt: "Gocek",
+    lagoonAlt: "Aerial photograph of the Blue Lagoon in Ölüdeniz, Turkey",
+  },
+  de: {
+    hero: "Professionelle Flughafentransfers ab Dalaman",
+    intro: "Fragen Sie einen privaten Flughafentransfer an der Türkisküste an. Prüfen Sie Ihre Strecke und Fahrzeugoptionen vor dem Absenden.",
+    book: "Jetzt buchen",
+    routes: "Strecken und Preise ansehen",
+    assistance: "Hilfe bei der Buchung",
+    assistanceDetail: "Geben Sie die Transferdetails in Ihrer Buchungsanfrage an.",
+    estimates: "Richtpreise für Ihre Strecke",
+    estimateDetail: "Prüfen Sie den veröffentlichten Richtpreis, bevor Sie Ihre Anfrage senden.",
+    drivers: "Professionelle Fahrer",
+    driversDetail: "Fahrzeugoptionen für private Flughafentransfers.",
+    vehicles: "Unsere Fahrzeuge",
+    vehiclesIntro: "Entdecken Sie die Fahrzeugoptionen für Ihren Transfer.",
+    allVehicles: "Alle Fahrzeuge ansehen",
+    car: "Privater Pkw",
+    carDetail: "Wählen Sie für Ihren Transfer eine Pkw-Kategorie.",
+    minivan: "Privater Minivan",
+    minivanDetail: "Wählen Sie einen Minivan und geben Sie die Anzahl der Fahrgäste und Gepäckstücke an.",
+    group: "Gruppentransfer",
+    groupDetail: "Prüfen Sie im Buchungsformular die verfügbaren Fahrzeuge für Gruppen.",
+    options: "Optionen und Preise ansehen",
+    popular: "Beliebte Strecken",
+    badge: "STRECKE AB DALAMAN",
+    fethiye: "Von Dalaman nach Fethiye",
+    fethiyeDetail: "Fragen Sie einen privaten Transfer nach Fethiye an und prüfen Sie den Preis.",
+    viewPrice: "Preise bei der Buchung ansehen",
+    gocek: "Von Dalaman nach Göcek",
+    marmaris: "Marmaris",
+    oludeniz: "Ölüdeniz",
+    cta: "Bereit für eine entspannte Fahrt?",
+    ctaDetail: "Senden Sie Ihre Transferanfrage online. Prüfen Sie den Preis vor dem Absenden.",
+    request: "Transfer anfragen",
+    contact: "Kontakt",
+    homeLabel: "DalamanWay-Startseite",
+    logo: "DalamanWay — Private Flughafentransfers",
+    services: "Leistungen",
+    fleet: "Fahrzeuge",
+    faq: "Häufige Fragen",
+    reviews: "Kundenbewertungen",
+    rights: "DalamanWay. Alle Rechte vorbehalten.",
+    photo: "Foto von Ölüdeniz:",
+    marinaAlt: "Jachthafen von Fethiye",
+    gocekAlt: "Göcek",
+    lagoonAlt: "Luftaufnahme der Blauen Lagune in Ölüdeniz, Türkei",
+  },
+  ru: {
+    hero: "Профессиональные трансферы из аэропорта Даламан",
+    intro: "Закажите индивидуальный трансфер по Бирюзовому побережью. Проверьте маршрут и варианты автомобилей перед отправкой заявки.",
+    book: "Забронировать",
+    routes: "Смотреть маршруты и цены",
+    assistance: "Помощь с бронированием",
+    assistanceDetail: "Укажите детали поездки в заявке на бронирование.",
+    estimates: "Ориентировочные цены на трансфер",
+    estimateDetail: "Проверьте опубликованную ориентировочную цену перед отправкой заявки.",
+    drivers: "Профессиональные водители",
+    driversDetail: "Варианты автомобилей для индивидуального трансфера.",
+    vehicles: "Наши автомобили",
+    vehiclesIntro: "Посмотрите варианты автомобилей для поездки.",
+    allVehicles: "Смотреть все автомобили",
+    car: "Легковой автомобиль",
+    carDetail: "Выберите категорию легкового автомобиля.",
+    minivan: "Минивэн",
+    minivanDetail: "Выберите категорию минивэна и укажите количество пассажиров и багажа.",
+    group: "Групповой трансфер",
+    groupDetail: "Проверьте доступные категории транспорта для групп в форме бронирования.",
+    options: "Смотреть варианты и цены",
+    popular: "Популярные маршруты",
+    badge: "МАРШРУТ ИЗ ДАЛАМАНА",
+    fethiye: "Из Даламана в Фетхие",
+    fethiyeDetail: "Закажите индивидуальный трансфер в Фетхие и проверьте цену поездки.",
+    viewPrice: "Цены при бронировании",
+    gocek: "Из Даламана в Гёджек",
+    marmaris: "Мармарис",
+    oludeniz: "Олюдениз",
+    cta: "Готовы к комфортной поездке?",
+    ctaDetail: "Отправьте заявку на трансфер онлайн. Проверьте цену перед отправкой.",
+    request: "Заказать трансфер",
+    contact: "Связаться с нами",
+    homeLabel: "Главная страница DalamanWay",
+    logo: "DalamanWay — Индивидуальные трансферы из аэропорта",
+    services: "Услуги",
+    fleet: "Автомобили",
+    faq: "Частые вопросы",
+    reviews: "Отзывы клиентов",
+    rights: "DalamanWay. Все права защищены.",
+    photo: "Фото Олюдениза:",
+    marinaAlt: "Яхтенная гавань Фетхие",
+    gocekAlt: "Гёджек",
+    lagoonAlt: "Голубая лагуна в Олюденизе, Турция, вид с воздуха",
+  },
+}
+
 export function HomePage() {
+  const { language } = useLanguage()
+  const copy = homeCopy[language]
   useEffect(() => {
     const previousTitle = document.title
     const existingMeta = document.querySelector('meta[name="description"]')
@@ -34,10 +175,10 @@ export function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary" />
         <div className="relative z-10 w-full min-w-0 max-w-container-max mx-auto px-gutter text-center">
           <h1 className="font-display-lg text-display-lg text-white mb-stack-md max-w-4xl mx-auto">
-            Professional Airport Transfers from Dalaman
+            {copy.hero}
           </h1>
           <p className="font-body-lg text-body-lg text-white/80 mb-stack-lg max-w-2xl mx-auto">
-            Request a private airport transfer across the Turquoise Coast. Review your route and vehicle options before submitting.
+            {copy.intro}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-stack-md">
@@ -45,13 +186,13 @@ export function HomePage() {
               className="bg-secondary text-on-secondary px-10 py-4 rounded-lg font-bold text-lg shadow-lg hover:opacity-90 transition-opacity"
               to="/booking"
             >
-              Book Now
+              {copy.book}
             </Link>
             <Link
               className="bg-white/10 border border-white/30 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/15 transition-colors"
               to="/routes"
             >
-              View Routes & Prices
+              {copy.routes}
             </Link>
           </div>
         </div>
@@ -67,9 +208,9 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">Booking Assistance</h3>
+                <h3 className="font-title-md text-on-surface">{copy.assistance}</h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Send your transfer details with your booking request.
+                  {copy.assistanceDetail}
                 </p>
               </div>
             </div>
@@ -80,9 +221,9 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">Route Price Estimates</h3>
+                <h3 className="font-title-md text-on-surface">{copy.estimates}</h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Review the published route estimate before sending your request.
+                  {copy.estimateDetail}
                 </p>
               </div>
             </div>
@@ -94,10 +235,10 @@ export function HomePage() {
               </div>
               <div>
                 <h3 className="font-title-md text-on-surface">
-                  Professional Drivers
+                  {copy.drivers}
                 </h3>
                 <p className="font-body-md text-on-surface-variant">
-                  Vehicle options for private airport transfers.
+                  {copy.driversDetail}
                 </p>
               </div>
             </div>
@@ -110,14 +251,14 @@ export function HomePage() {
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end mb-stack-lg">
             <div>
               <h2 className="font-headline-lg text-headline-lg text-on-surface">
-                Our Vehicles
+                {copy.vehicles}
               </h2>
               <p className="text-on-surface-variant mt-2">
-                Explore vehicle options for your transfer.
+                {copy.vehiclesIntro}
               </p>
             </div>
             <Link className="text-secondary font-bold flex items-center gap-2 group self-start shrink-0" to="/vehicles">
-              View All Vehicles
+              {copy.allVehicles}
               <span translate="no" className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                 arrow_forward
               </span>
@@ -125,9 +266,9 @@ export function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
             {[
-              { title: 'Private Car', icon: 'local_taxi', detail: 'Choose a private car category for your transfer request.' },
-              { title: 'Private Minivan', icon: 'directions_car', detail: 'Select a minivan category and enter your passenger and luggage needs.' },
-              { title: 'Group Transfer', icon: 'airport_shuttle', detail: 'Check available group vehicle categories in the booking form.' },
+              { title: copy.car, icon: 'local_taxi', detail: copy.carDetail },
+              { title: copy.minivan, icon: 'directions_car', detail: copy.minivanDetail },
+              { title: copy.group, icon: 'airport_shuttle', detail: copy.groupDetail },
             ].map((vehicle) => (
               <article key={vehicle.title} className="professional-card accent-border-left min-w-0 p-6 rounded-xl">
                 <div className="h-32 min-w-0 mb-6 rounded-lg bg-primary/5 flex items-center justify-center overflow-hidden">
@@ -136,7 +277,7 @@ export function HomePage() {
                 <h3 className="font-title-md text-on-surface mb-2">{vehicle.title}</h3>
                 <p className="text-on-surface-variant mb-6">{vehicle.detail}</p>
                 <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
-                  View Options &amp; Prices
+                  {copy.options}
                 </Link>
               </article>
             ))}
@@ -149,13 +290,13 @@ export function HomePage() {
       <section className="py-24 bg-white border-y border-outline" id="routes">
         <div className="max-w-container-max mx-auto px-gutter">
           <h2 className="font-headline-lg text-headline-lg text-on-surface mb-stack-lg">
-            Preferred Routes
+            {copy.popular}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-stack-md h-auto md:h-[600px]">
             <div className="md:col-span-2 md:row-span-2 relative rounded-xl overflow-hidden group border border-outline">
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Fethiye Marina"
+                alt={copy.marinaAlt}
                 loading="lazy"
                 decoding="async"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOK1KM9F2Y7leTkTeOhHhnk3VW5SYz7VSpbtXEDc0wp2tByE7Ri26sDHSSF2pw2VMvlqpkHiwYswfRKKIKXYOcZ6oZAL6djRVTXN6hX563nv9I90K-aDDZhqhug7ij3oMrV9SYc_aitmhgiZu2GLn5DxFhE7G3aZBTSwBYeRQNNaoaO1bXa1f3lb27SbvzUZZ1_aGUZVjylaMPe04cScc8j3VEKcLM43VaDaDj_P2lKPwbhgZoiZu-mzXAC_hNdZAoF0wgGzjUVlY"
@@ -163,22 +304,22 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-lg">
                 <span className="bg-secondary text-white px-3 py-1 rounded-full text-label-sm font-bold mb-2 inline-block">
-                  DALAMAN ROUTE
+                  {copy.badge}
                 </span>
                 <h3 className="font-display-lg text-3xl text-white mb-2">
-                  Dalaman to Fethiye
+                  {copy.fethiye}
                 </h3>
                 <p className="text-white/80 mb-4">
-                  Request a private transfer to Fethiye and review your route price.
+                  {copy.fethiyeDetail}
                 </p>
-                <div className="text-secondary font-bold text-2xl">View prices when booking</div>
+                <div className="text-secondary font-bold text-2xl">{copy.viewPrice}</div>
               </div>
             </div>
 
             <div className="md:col-span-2 relative rounded-xl overflow-hidden group border border-outline">
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                alt="Gocek"
+                alt={copy.gocekAlt}
                 loading="lazy"
                 decoding="async"
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOoevwDWp2dwsb3kyAbOt18NiYyZnU-otp8oMvvN0dAop3O0F7d7R1p5TZ4oVhIn__oejP4s-CbC4cfdF2YENvwyxPgoYrBe16j-mf95TaokOcp1y1ULaDK0GIGCcRvZ7Fi59650xA9EYYj44NFBhopQPjcD6J7iUOqiU6FZZQ4lwAlLB-n7CwE0YKWRbX2wfVtPyUy_SquSFJF_aEI-B-Is7qPe9Xf2PF8lYCAbdYnF6VOacrL5qNgZD9iDZ3_Y0t1j_XPaYmmog"
@@ -186,9 +327,9 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-headline-lg text-2xl text-white mb-1">
-                  Dalaman to Gocek
+                  {copy.gocek}
                 </h3>
-                <div className="text-secondary font-bold">View prices when booking</div>
+                <div className="text-secondary font-bold">{copy.viewPrice}</div>
               </div>
             </div>
 
@@ -202,8 +343,8 @@ export function HomePage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
-                <h3 className="font-title-md text-white mb-1">Marmaris</h3>
-                <div className="text-secondary font-bold">View prices when booking</div>
+                <h3 className="font-title-md text-white mb-1">{copy.marmaris}</h3>
+                <div className="text-secondary font-bold">{copy.viewPrice}</div>
               </div>
             </div>
 
@@ -211,15 +352,15 @@ export function HomePage() {
               <img
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 data-alt="Oludeniz"
-                alt="Aerial photograph of the Blue Lagoon in Ölüdeniz, Turkey"
+                alt={copy.lagoonAlt}
                 loading="lazy"
                 decoding="async"
                 src="https://commons.wikimedia.org/wiki/Special:FilePath/%C3%96l%C3%BCdeniz%2C_Blue_Lagoon.jpg?width=1200"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
-                <h3 className="font-title-md text-white mb-1">Oludeniz</h3>
-                <div className="text-secondary font-bold">View prices when booking</div>
+                <h3 className="font-title-md text-white mb-1">{copy.oludeniz}</h3>
+                <div className="text-secondary font-bold">{copy.viewPrice}</div>
               </div>
             </div>
           </div>
@@ -229,18 +370,18 @@ export function HomePage() {
       <section className="py-24 relative bg-background">
         <div className="max-w-container-max mx-auto px-gutter text-center relative z-10">
           <h2 className="font-display-lg text-display-lg text-on-surface mb-stack-md">
-            Ready for a Seamless Journey?
+            {copy.cta}
           </h2>
           <p className="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-xl mx-auto">
-            Send your transfer request online and review the route price before submitting.
+            {copy.ctaDetail}
           </p>
           <div className="flex flex-col md:flex-row gap-stack-md justify-center">
             <Link to="/booking" className="bg-primary text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
-              Request a Transfer
+              {copy.request}
             </Link>
             <Link to="/contact" className="bg-white border border-outline text-on-surface px-12 py-4 rounded-lg font-bold text-lg hover:border-secondary transition-all flex items-center justify-center gap-2">
               <span translate="no" className="material-symbols-outlined text-secondary">chat</span>
-              Contact Us
+              {copy.contact}
             </Link>
           </div>
         </div>
@@ -251,15 +392,15 @@ export function HomePage() {
       <footer className="bg-primary border-t border-primary/20 py-stack-lg">
         <div className="max-w-container-max mx-auto px-gutter">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-lg mb-stack-lg">
-            <Link to="/" aria-label="DalamanWay home" className="inline-flex items-center">
-              <img src="/dalamanway-logo-light.svg" alt="DalamanWay — Private Airport Transfers" className="h-16 w-auto max-w-[270px] object-contain sm:h-20 sm:max-w-[340px]" />
+            <Link to="/" aria-label={copy.homeLabel} className="inline-flex items-center">
+              <img src="/dalamanway-logo-light.svg" alt={copy.logo} className="h-16 w-auto max-w-[270px] object-contain sm:h-20 sm:max-w-[340px]" />
             </Link>
             <div className="flex flex-wrap gap-stack-lg">
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">Services</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">Vehicles</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/faq">FAQ</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/reviews">Customer Reviews</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">Contact Us</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">{copy.services}</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">{copy.fleet}</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/faq">{copy.faq}</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/reviews">{copy.reviews}</Link>
+              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">{copy.contact}</Link>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 pb-stack-md">
@@ -268,12 +409,12 @@ export function HomePage() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
             <p className="text-white/40 font-body-md">
-              © {new Date().getFullYear()} DalamanWay. All rights reserved.
+              © {new Date().getFullYear()} {copy.rights}
             </p>
 
           </div>
           <p className="mt-4 text-xs text-white/70">
-            Ölüdeniz photo: <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a>
+            {copy.photo} <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a>
             {' · '}
             <a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
           </p>
