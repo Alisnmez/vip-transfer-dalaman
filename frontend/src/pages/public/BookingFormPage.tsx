@@ -6,6 +6,7 @@ import { useEffect, useId, useState } from 'react'
 import { PublicNavbar } from './PublicNavbar'
 import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
+import { initialTransferRoute } from '../../features/booking/initialTransferRoute'
 import { transferPrices } from '../../features/booking/pricing'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { turkeyToday } from '../../features/booking/turkeyTime'
@@ -67,16 +68,12 @@ export function BookingFormPage() {
   const [searchParams] = useSearchParams()
   const [draft] = useState(readTransferDraft)
   const requestedVehicleId = searchParams.get('vehicle')
-  const requestedDestination = searchParams.get('destination')?.trim().toLocaleLowerCase('en')
-  const matchedDestination = requestedDestination
-    ? [...new Set(transferPrices.map(price => price.destination))].find(destination =>
-        destination.toLocaleLowerCase('en') === requestedDestination || destination.toLocaleLowerCase('en').includes(requestedDestination))
-    : undefined
+  const initialRoute = initialTransferRoute(searchParams.get('destination'), draft)
   const initialVehicleId = bookingVehicles.some(vehicle => vehicle.id === requestedVehicleId) ? requestedVehicleId! : draft.vehicleId
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
   const [selectedVehicleId, setSelectedVehicleId] = useState(bookingVehicles.some((vehicle) => vehicle.id === initialVehicleId) ? initialVehicleId! : 'vip-minivan')
-  const [pickUpLocation, setPickUpLocation] = useState(draft.pickUpLocation || 'Dalaman Airport')
-  const [dropOffLocation, setDropOffLocation] = useState(matchedDestination ?? draft.dropOffLocation ?? '')
+  const [pickUpLocation, setPickUpLocation] = useState(initialRoute.pickUpLocation)
+  const [dropOffLocation, setDropOffLocation] = useState(initialRoute.dropOffLocation)
   const [pickUpDate, setPickUpDate] = useState(draft.pickUpDate ?? '')
   const [pickUpTime, setPickUpTime] = useState(draft.pickUpTime ?? '')
   const [flightNumber, setFlightNumber] = useState(draft.flightNumber ?? '')
