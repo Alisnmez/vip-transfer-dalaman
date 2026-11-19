@@ -144,8 +144,18 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 
 **Devam noktası:** `frontend/src/shared/localization/LanguageProvider` ve dil seçim bileşenlerini oku; eski URL'lerin booking navigasyonuna etkisini test planına ekle. Bu mimari inceleme SEO-06'nın yalnızca keşif alt adımıdır; görev hâlâ `DEVAM EDİYOR`.
 
+### SEO-06 — Dil durumunun URL ile ilişkisi, ikinci inceleme (2026-11-19)
+
+**İncelenen dosya:** `frontend/src/shared/localization/LanguageProvider.tsx` (blob `425a594`).
+
+**Bulgu:** Dil durumu `useState(savedLanguage)` ile `localStorage` üzerinden başlatılıyor. `useEffect`, `document.documentElement.lang` ve `localStorage` değerini güncelliyor. Bu provider'da URL path'ini okuma veya değiştirme yok. Bu yüzden aynı `/routes/marmaris` adresi tarayıcıdaki önceki dil seçimine göre farklı dillerde görünebilir; arama motoruna tutarlı dil bazlı URL/HTML üretimi için yeterli değil.
+
+**Güvenli çözüm taslağı:** Önce `language.ts`, çeviri sözlüğü ve dil seçicisini incele; `en`/`de`/`ru`/`tr` tiplerinin gerçekten desteklendiğini doğrula. Mevcut İngilizce rotaları ve booking URL'lerini koru. Public içerik için URL'den dil seçen ve mevcut seçiciyle uyumlu bir katman tasarla; booking/admin'a otomatik dil-prefiksi ekleme. Ardından React router, prerender HTML `lang`, metadata, canonical, sitemap ve reciprocal hreflang'ı aynı URL tablosuna bağla. Her dilde içerik ve navigasyon tam doğrulanmadan indexleme açma.
+
+**Değişiklik kapsamı:** Bu adım yalnızca inceleme ve devir kaydıdır; frontend davranışı değiştirilmedi. **SEO-06 devam ediyor.** Sonraki dosyalar: `frontend/src/shared/localization/language.ts` ve dil seçim UI'sı.
+
 ### Şu an tam olarak neredeyiz?
-**Son kodlanan görev: SEO-04.** **Bir sonraki teknik görev: SEO-05**, ardından SEO-06/07. SEO-02/03/04 için güncel branch'in testleri ve staging doğrulaması açık. **Hiçbiri bu kayıt itibarıyla production'a yayınlanmadı.** PR #17 ve #18 ayrı tutuldu; Work Mode'un yaptığı değişiklikler birleştirilmeden önce diff ve çakışma kontrolü yapılmalı.
+**Son kodlanan görev: SEO-04.** **SEO-05 canlı HTTP erişimi nedeniyle bloke; SEO-06 router ve LanguageProvider incelemesi sürüyor.** Ardından SEO-07. SEO-02/03/04 için güncel branch'in testleri ve staging doğrulaması açık. **Hiçbiri bu kayıt itibarıyla production'a yayınlanmadı.** PR #17 ve #18 ayrı tutuldu; Work Mode'un yaptığı değişiklikler birleştirilmeden önce diff ve çakışma kontrolü yapılmalı.
 
 ---
 
