@@ -259,14 +259,14 @@ class BookingIntegrationTests {
                 "email", "luggage@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way",
-                "luggageCount", 6
+                "luggageCount", 5
         ));
         request.put("babySeatCount", 2);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.luggageCount").value(6))
+                .andExpect(jsonPath("$.luggageCount").value(5))
                 .andExpect(jsonPath("$.babySeatCount").value(2));
 
         request.put("babySeatCount", 0);
@@ -278,7 +278,7 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.luggageCount").value(0))
                 .andExpect(jsonPath("$.babySeatCount").value(0));
 
-        request.put("luggageCount", 6);
+        request.put("luggageCount", 5);
         request.put("babySeatCount", -1);
         mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -483,19 +483,19 @@ class BookingIntegrationTests {
                 "email", "capacity-update@example.com",
                 "vehicleId", "vip-minivan",
                 "tripType", "one-way",
-                "luggageCount", 6
+                "luggageCount", 5
         ));
         String created = mockMvc.perform(post("/bookings")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.luggageCount").value(6))
+                .andExpect(jsonPath("$.luggageCount").value(5))
                 .andReturn().getResponse().getContentAsString();
         Long id = objectMapper.readTree(created).get("id").asLong();
         String adminAuthorization = "Basic " + Base64.getEncoder()
                 .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
 
-        request.put("luggageCount", 7);
+        request.put("luggageCount", 6);
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
                         .header("Authorization", adminAuthorization)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -506,7 +506,7 @@ class BookingIntegrationTests {
         mockMvc.perform(get("/bookings/{id}", id)
                         .header("Authorization", adminAuthorization))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.luggageCount").value(6));
+                .andExpect(jsonPath("$.luggageCount").value(5));
 
         request.put("luggageCount", 5);
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
