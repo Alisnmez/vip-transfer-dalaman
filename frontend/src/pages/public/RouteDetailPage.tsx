@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { transferPrices } from '../../features/booking/pricing'
 import airportArrivalNotes from '../../features/route-price/airport-arrival-notes.json'
 import { useLanguage } from '../../shared/localization/language'
@@ -69,6 +70,7 @@ const routeCopy = {
 export function RouteDetailPage() {
   const { language, setLanguage } = useLanguage()
   const copy = routeCopy[language]
+  const labels = routeLanguageLabels[language]
   const { slug } = useParams()
   const localized = matchLocalizedRoute(useLocation().pathname)
   const route = destinations.find((item) => item.slug === (localized?.slug ?? slug))
@@ -102,6 +104,16 @@ export function RouteDetailPage() {
         <section className="mt-8 max-w-3xl">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.arrival}</h2>
           <p className="mt-3 leading-relaxed">{airportArrivalNotes[route.slug][language]}</p>
+        </section>
+        <section className="mt-8 max-w-3xl">
+          <h2 className="text-2xl font-bold text-admin-primary">{labels.fleet}</h2>
+          <table className="my-4 w-full text-left text-sm">
+            <thead><tr>{[labels.vehicle, labels.passengers, labels.luggage].map(label => <th scope="col" className="py-2" key={label}>{label}</th>)}</tr></thead>
+            <tbody>{fleetCatalogue.map(vehicle => <tr key={vehicle.bookingVehicleId} className="border-t border-outline-variant">
+              <th scope="row" className="py-2">{vehicle.name}</th><td>{vehicle.maxPassengers}</td><td>{vehicle.luggage}</td>
+            </tr>)}</tbody>
+          </table>
+          <Link className="underline" to="/routes">{labels.fare}</Link>
         </section>
         <section className="mt-12 rounded-2xl border border-outline-variant bg-white p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.plan}</h2>
