@@ -7,6 +7,8 @@ import { spawnSync } from 'node:child_process'
 
 const script = resolve('scripts/prerender-routes.mjs')
 const routes = resolve('scripts/destination-routes.mjs')
+const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
+  'routes/gocek', 'routes/icmeler', 'vehicles', 'services', 'contact', 'faq', 'reviews']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div></body></html>'
 
 async function render(siteUrl) {
@@ -22,33 +24,42 @@ async function render(siteUrl) {
       env: { ...process.env, VITE_PUBLIC_SITE_URL: siteUrl },
     })
     assert.equal(result.status, 0, result.stderr)
-    return {
-      home: await readFile(join(dir, 'dist/index.html'), 'utf8'),
-      route: await readFile(join(dir, 'dist/routes/marmaris/index.html'), 'utf8'),
-      faq: await readFile(join(dir, 'dist/faq/index.html'), 'utf8'),
-    }
+    return new Map(await Promise.all(publicPaths.map(async path => [
+      path, await readFile(join(dir, 'dist', path, 'index.html'), 'utf8'),
+    ])))
   } finally {
     await rm(dir, { recursive: true, force: true })
   }
 }
 
 test('production prerendered route has crawlable title, description, canonical and content', async () => {
-  const { route, faq } = await render('https://dalamanway.com')
-  assert.match(route, /<title>Dalaman Airport to Marmaris Private Transfer \| DalamanWay<\/title>/)
-  assert.match(route, /<meta name="robots" content="index,follow"/)
-  assert.match(route, /<link rel="canonical" href="https:\/\/dalamanway\.com\/routes\/marmaris"/)
-  assert.match(route, /<h1>Dalaman Airport to Marmaris Private Transfer/)
-  assert.match(route, /data-prerender-fallback/)\n  assert.match(route, /<meta property="og:title" content="Dalaman Airport to Marmaris Private Transfer/)\n  assert.match(route, /<meta property="og:url" content="https:\\/\\/dalamanway\\.com\\/routes\\/marmaris"/)\n  assert.match(route, /<meta name="twitter:card" content="summary"/)
-  assert.match(faq, /<h1>Frequently Asked Questions<\/h1>/)
-  assert.match(faq, /<meta name="robots" content="index,follow"/)
+  const origin = 'https://dalamanway.com'
+  const pages = await render(origin)
+  const titles = new Set()
+  for (const [path, html] of pages) {
+    const canonical = origin + '/' + path
+    const [title] = [...html.matchAll(/<title>([^<]+)<\/title>/g)].map(match => match[1])
+    assert.ok(title && !titles.has(title), path)
+    titles.add(title)
+    assert.equal([...html.matchAll(/<h1(?:\s|>)/g)].length, 1, path)
+    assert.equal([...html.matchAll(/rel="canonical"/g)].length, 1, path)
+    assert.ok(html.includes(`<link rel="canonical" href="${canonical}"`), path)
+    assert.ok(html.includes(`<meta property="og:url" content="${canonical}"`), path)
+    assert.ok(html.includes(`<meta property="og:title" content="${title}"`), path)
+    assert.match(html, /<meta property="og:description" content="[^"]+"/)
+    assert.match(html, /<meta name="twitter:card" content="summary"/)
+    assert.match(html, /<meta name="robots" content="index,follow"/)
+    assert.match(html, /data-prerender-fallback/)
+  }
+  assert.match(pages.get('routes/marmaris'), /<h1>Dalaman Airport to Marmaris Private Transfer/)
+  assert.match(pages.get('faq'), /<h1>Frequently Asked Questions<\/h1>/)
 })
 
-test('staging prerendered pages remain noindex without production canonicals', async () => {
+test('all staging pages remain noindex without production canonicals', async () => {
   for (const url of ['', 'https://dalamanway-staging.onrender.com']) {
-    const { route, faq } = await render(url)
-    for (const html of [route, faq]) {
-      assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
-      assert.doesNotMatch(html, /rel="canonical"/)\n      assert.doesNotMatch(html, /property="og:url"/)
+    for (const [path, html] of await render(url)) {
+      assert.match(html, /<meta name="robots" content="noindex,nofollow"/, path)
+      assert.doesNotMatch(html, /rel="canonical"|property="og:url"/, path)
     }
   }
 })

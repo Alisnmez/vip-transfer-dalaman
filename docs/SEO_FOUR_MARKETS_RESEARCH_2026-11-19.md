@@ -163,3 +163,7 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 - https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites
 - https://developers.google.com/search/docs/specialty/international/localized-versions
 - Rakip URL'leri yukarıda.
+
+### 19 Kasım 2026 — SEO-05 yeniden ölçüm ve SEO-02/03/04 doğrulaması
+
+Önceki HTTP erişim engeli aşıldı. Canlı 12 adresin ilk HTML ve test ortamı sonuçları, branch karşılaştırması, yerel test sonucu ve açık `/booking` bulgusu [ana SEO standardına](../frontend/SEO_STANDARD.md) eklendi. Google Search Console ve dil bazlı indexlenebilir URL'ler ayrı doğrulama bekliyor.

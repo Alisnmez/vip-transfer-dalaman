@@ -312,3 +312,15 @@ Render test frontend'inde 11 tam yol rewrite kuralı, genel `/* → /index.html`
 - `/booking`, `/booking/lookup`, `/admin` ve `/admin/bookings` HTTP 200 ve uygulama kabuğunu döndürdü. Bu kontrol rezervasyon gönderimi veya yönetici kimlik doğrulaması içermiyor.
 - Test ortamında `noindex,nofollow`, canonical etiketinin yokluğu, taramaya kapalı robots.txt ve boş sitemap doğrulandı.
 - Üretim ayarları değişmedi. Üretim kabulü için aynı kuralların uygulanmasından sonra 12 sitemap URL'sinde doğru HTML ve kendi canonical adresi doğrulanmalı. Google'ın seçtiği canonical ve indeks durumu Search Console'da ayrıca kontrol edilmeli.
+
+### SEO dalı ve canlı yeniden denetim — 19 Kasım 2026
+
+Canlı ve test frontend sürümü aynı commit'te (`4d15033`). Canlıda site haritasındaki 12 adresin tamamı eğik çizgisiz isteklerde HTTP 200, benzersiz ilk HTML başlığı, kendi canonical adresi ve `index,follow` döndürdü. Önceki genel sayfa rewrite bulgusu bu yeniden denetimde görülmedi. Testte aynı 12 adres HTTP 200 ve `noindex,nofollow` döndürdü, canonical yoktu ve site haritası boştu.
+
+Canlı `/booking` ilk HTML'de hâlâ ana sayfa canonical'i ve `index,follow` döndürüyor. Üretim robots.txt bu yolu taramaya kapatıyor. Bu durum site haritasındaki 12 genel adresten ayrı bir iş. Search Console mülk erişimi, Google'ın seçtiği canonical ve gerçek dizin durumu doğrulanmadı.
+
+Çakışma kontrolünde SEO dalının tabanı aktif teslim dalı (`feature/booking-integration`) ile aynı bulundu. Dört pazar araştırması dalı SEO dalının geçmişinde bulunuyor. `main` ayrışmış; bu çalışma `feature/seo-audit-checks-20261119` dalında yürütüldü. Mevcut dallar ve Render ayarları korundu.
+
+SEO dalındaki prerender testinin sözdizimi düzeltildi. Test, 12 genel adresin tamamında tek canonical ve H1, benzersiz title, Open Graph/Twitter etiketleri ve test ortamının indeksleme sınırlarını doğruluyor. Yerelde 84 test, lint ve üretim ayarlı frontend derlemesi geçti. Bu testler gerçek Google indeks durumu yerine üretilen HTML çıktısını denetler.
+
+Bir sonraki geliştirme için dil seçicisinin mevcut EN/DE/RU davranışı ve İngilizce adresler korunmalı. Ayrı dil URL'leri ve karşılıklı hreflang uygulamadan önce ilgili sayfaların tam çevirileri ve sunucu yönlendirmeleri doğrulanmalı. Önceki araştırma ve karar kaydı [SEO dört pazar araştırmasında](../docs/SEO_FOUR_MARKETS_RESEARCH_2026-11-19.md) bulunuyor.
