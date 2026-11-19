@@ -73,7 +73,7 @@ export function getSeoPage(pathname: string): SeoPage {
 }
 
 export function getCanonicalUrl(pathname: string): string | null {
-  if (!seoConfig.siteUrl || !/^https:\/\/[^/]+$/i.test(seoConfig.siteUrl)) return null
+  if (!seoConfig.siteUrl || !/^https:\/\/[^/]+$/i.test(seoConfig.siteUrl) || /onrender\.com|localhost|127\.0\.0\.1/i.test(seoConfig.siteUrl)) return null
   const normalized = pathname.replace(/\/$/, '') || '/'
   return `${seoConfig.siteUrl}${normalized === '/' ? '/' : normalized}`
 }
