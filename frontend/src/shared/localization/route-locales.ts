@@ -7,6 +7,16 @@ export const localizedRouteCopy = {
     de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Marmaris', intro: 'Marmaris ist ein Badeort mit Hotels, Jachthafen und belebter Uferpromenade. Geben Sie bei der Anfrage Ihre genaue Zieladresse an.' },
     ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Мармарис', intro: 'Мармарис — курорт с отелями, яхтенной гаванью и оживлённой набережной. Укажите точный адрес при оформлении заявки.' },
   },
+  fethiye: {
+    destination: 'Fethiye City Center(Any Hotel)',
+    de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Fethiye', intro: 'Planen Sie die Fahrt vom Flughafen zu Ihrer Unterkunft in Fethiye. Für ein Hotel im Stadtzentrum ist das Ziel bereits vorausgewählt. Liegt Ihr Hotel außerhalb des Zentrums, wählen Sie im Formular das passende Ziel.' },
+    ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Фетхие', intro: 'Для поездки в центр Фетхие этот пункт назначения уже выбран в форме. Если ваш отель находится за пределами центра, выберите район отеля при оформлении заявки.' },
+  },
+  oludeniz: {
+    destination: 'Oludeniz(Any Hotel)',
+    de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Ölüdeniz', intro: 'Für die Fahrt nach Ölüdeniz können Sie eine einfache Fahrt oder eine Rückfahrt zum Flughafen anfragen. Halten Sie den Namen Ihrer Unterkunft und die Flugnummer für die Buchung bereit.' },
+    ru: { heading: 'Индивидуальный трансфер из аэропорта Даламан в Олюдениз', intro: 'Для поездки в Олюдениз можно заказать трансфер в одну сторону или сразу указать обратную поездку в аэропорт. При оформлении заявки укажите название отеля и номер рейса.' },
+  },
   gocek: {
     destination: 'Gocek',
     de: { heading: 'Privater Transfer vom Flughafen Dalaman nach Göcek', intro: 'Göcek liegt am Golf von Fethiye und ist für seine Jachthäfen bekannt. Geben Sie bei der Anfrage den Jachthafen oder das Hotel an.' },
