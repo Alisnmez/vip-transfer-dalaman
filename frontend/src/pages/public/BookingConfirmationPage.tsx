@@ -19,7 +19,7 @@ import type { BookingReceipt, ReceiptStorage } from '../../features/booking/rece
 function availableReceiptStorages(): ReceiptStorage[] {
   const storages: ReceiptStorage[] = []
   try { storages.push(sessionStorage) } catch { /* Storage may be disabled. */ }
-  try { storages.push(localStorage) } catch { /* Storage may be disabled. */ }
+  
   return storages
 }
 
@@ -29,7 +29,7 @@ function readReceipt(): BookingReceipt | null {
 
 function readSavedDetails<T>(key: string): T {
   try {
-    const value: unknown = JSON.parse(localStorage.getItem(key) || '{}')
+    const value: unknown = JSON.parse(sessionStorage.getItem(key) || '{}')
     return value && typeof value === 'object' && !Array.isArray(value) ? value as T : {} as T
   } catch {
     return {} as T
@@ -66,8 +66,8 @@ export function BookingConfirmationPage() {
     setError('')
     setSubmissionUncertain(false)
     try {
-      const savedTransfer = localStorage.getItem('bookingTransferInfo')
-      const savedPassenger = localStorage.getItem('bookingPassengerInfo')
+      const savedTransfer = sessionStorage.getItem('bookingTransferInfo')
+      const savedPassenger = sessionStorage.getItem('bookingPassengerInfo')
       if (!savedTransfer || !savedPassenger) {
         setError('Your booking information is missing. Please start the booking again.')
         return
@@ -133,8 +133,8 @@ export function BookingConfirmationPage() {
       setReceipt(savedReceipt)
       trackAnalyticsEvent('booking_request_submitted')
       try {
-        localStorage.removeItem('bookingTransferInfo')
-        localStorage.removeItem('bookingPassengerInfo')
+        sessionStorage.removeItem('bookingTransferInfo')
+        sessionStorage.removeItem('bookingPassengerInfo')
       } catch {
         // Booking succeeded; failure to clean up local drafts must not show an error.
       }
