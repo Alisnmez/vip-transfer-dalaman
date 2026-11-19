@@ -259,3 +259,46 @@ Increase qualified organic traffic and completed private Dalaman airport transfe
 - Do not expose API keys, account data, or customer booking details in reports or commits.
 - If a required app connection or permission is unavailable, state the blocker precisely; continue independent checks instead of claiming completion.
 - Preserve existing project coding standards, production behavior and all approved vehicle capacities; never modify the booking backend solely for SEO.
+
+
+## Canlı site ve rakip karşılaştırması — 19 Kasım 2026
+
+### Canlı HTML ve indekslenebilirlik
+
+Doğrudan HTTPS GET ile ilk HTML incelendi. JavaScript çalıştırılmadı. Gerçek Google indeks durumu ve seçtiği canonical için Search Console verisi gerekli.
+
+| URL ve kontrol | Gözlenen sonuç | Öncelik |
+| --- | --- | --- |
+| `/` | HTTP 200, tek anasayfa H1, `index,follow` ve `https://dalamanway.com/` canonical | Sağlam |
+| `/robots.txt` ve `/sitemap.xml` | HTTP 200. Sitemap 12 canlı domain URL’si listeliyor. Admin ve booking sitemape dahil değil. | Sağlam |
+| Sitemapteki 11 alt URL, son eğik çizgisiz | HTTP 200. İlk HTML'de anasayfanın başlığı, H1'i ve canonical adresi geliyor. Buna beş rota, rota listesi, araçlar, hizmetler, iletişim, SSS ve yorumlar dahil. | P0 |
+| Aynı 11 URL, son eğik çizgili | HTTP 200 ve her sayfanın kendine ait prerender HTML'i geliyor. Canonical eğik çizgisiz URL'yi gösteriyor. Marmaris'in doğrudan `/routes/marmaris/index.html` adresi de rota HTML'ini döndürüyor. | P0 |
+| `/routes/seo-audit-nonexistent` | HTTP 200, ilk yanıtta anasayfa HTML'si. Gerçek 404 davranışı eksik. | P1 |
+| `/booking` | İlk HTML anasayfa canonical'i ve `index,follow` içeriyor, robots.txt taramayı engelliyor. Sitemap dışında. Rezervasyon URL'sinin ilk yanıtta noindex politikasını doğrula. | P1 |
+| HTTP ve www | Örnek anasayfa istekleri HTTPS www'siz domaine ulaştı. Üretim Render adresi HTTP 200 ve özel domain canonical'i döndürdü. | P2 |
+| Staging | Anasayfa ilk HTML'sinde `noindex,nofollow`; robots.txt `Disallow: /`. | Sağlam |
+
+Render üretim frontend'i `frontend/dist` yayınlayan bir Static Site. Son eğik çizgili ve dosya adresli sonuçlar, sayfa dosyalarının yayında bulunduğunu gösteriyor. Sorun, sitemapte tercih edilen URL'nin hangi HTML'i servis ettiği. Mevcut Render kuralları bu denetimde değiştirilmedi. Kaynakta ayrıca prerender scripti, router ve ortak SEO hook'u meta etiketlerini ayrı ayrı yönetiyor. Mevcut üç test dosyasında 11/11 test geçti. Bu testler dosya üretimini doğruluyor, Render'ın bu dosyaları sitemap URL'lerinde servis ettiğini doğrulamıyor.
+
+### İngilizce arama örneklemi ve rakipler
+
+19 Kasım web araması örneği. Sorgular İngilizce, UK müşteri niyeti dikkate alındı. Yerel Google UK mobil ve masaüstü sıralaması, reklam konumu ve Map Pack bu örneklemden teyit edilemez. Gözlemler rakiplerin sayfada gösterdiği bilgileri tanımlar.
+
+| Sorgu / örnek | Sayfadaki somut fark | DalamanWay’de karşılığı |
+| --- | --- | --- |
+| Dalaman to Fethiye, Marmaris, Ölüdeniz — [Dalaman Travel](https://www.dalamantravel.com/en/dalaman-airport-to-fethiye-transfer) | Ayrı rota sayfaları, süre aralığını etkileyen koşullar, araç başına GBP fiyatı ve araç seçenekleri | Rota sayfası ve rezervasyon bağlantısı var. Fiyat ve araç karşılaştırmasını rota üzerinde gösterme fırsatı var. |
+| Dalaman to Fethiye, Marmaris — [Discover Travel](https://www.discovertravelturkey.com/en/airport-transfers/dlm-fethiye/) | Başlangıç fiyatı, ödeme şekli, otel/adres ve uçuş bilgisi, erişilebilir araç seçeneği | Fethiye sayfasında otel/adres hatırlatması ve rezervasyon bağlantısı var. Onaylı koşulları ve fiyatı daha erken göster. |
+| Dalaman to Fethiye, Ölüdeniz — [Transfers Via Dalaman](https://www.transfersviadalaman.com/transfers/dalaman-to-fethiye) | GBP fiyatı, yolcu kapasitesi, buluşma bilgisi ve rota SSS'si | VIP Vito için araç ve valiz bilgisi proje verisinde var. Rota bağlamında görünür kıl. Buluşma ve gecikme bilgisini işletme onayına göre ekle. |
+| Dalaman to Fethiye — [Agne Tours](https://agnetours.com/dalaman-airport-to-fethiye/) | Araç türleri, fiyat, kapasite ve aynı sayfada rezervasyon akışı | Rota seçili rezervasyon mevcut. Araç seçeneklerini tıklamadan önce göster. |
+| Dalaman airport transfer — [Monarch Transfer](https://monarchtransfer.com/en) | Genel servis teklifi içinde yaygın rotalar ve buluşma bilgisi | DalamanWay’de beş rota var. Rota listesinin ilk HTML’ini düzelt ve rota bağlantılarını görünür tut. |
+| Dalaman airport transfer prices — [Airport Transfers Turkey](https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices) | Bölge bazlı fiyat ve ulaşım alternatifi karşılaştırması | Var olan rota ve fiyat sayfası bu sorgu için aday. Güvenilir fiyat kaynağını ve araç başına ücret bilgisini kullan. |
+| Dalaman airport transfers — [Dalamanhavalimani.com](https://www.dalamanhavalimani.com/en/dalaman-airport-transfers/) | Destinasyon süreleri ve ulaşım seçenekleri tablosu | İhtiyaç varsa mevcut rota listesine yalnızca doğrulanmış bilgiler eklenebilir. |
+
+### Sıralı uygulama
+
+1. **P0 / Etki 5, kanıt 5, efor 2, risk 2.** Staging'de 11 eğik çizgisiz URL için kendi `/…/index.html` dosyasına tam yol rewrite kurallarını genel SPA kuralından önce dene. Aynı URL'yi koru. Üretim kabulü: sitemapteki 12 URL'nin her biri ilk yanıtında HTTP 200, tek doğru canonical, doğru H1 ve sayfaya özel title döndürür. Staging noindex kalır. Rezervasyon ve admin doğrudan bağlantılarını smoke test et. Genel SPA kuralını kaldırmak yerine 404 davranışını ayrı iş olarak değerlendir.
+2. **P1 / Etki 4, kanıt 5, efor 3, risk 2.** Marmaris ve Fethiye ile pilot başlat. Mevcut fiyat kaynağından araç başına GBP fiyatı, doğrulanmış yolcu ve valiz kapasitesi, otel/adres ve buluşma talimatı ile rota seçili rezervasyon ekle. Başarıyı organik görünümler, tıklamalar ve nitelikli rezervasyon talepleriyle ölç. Pilot seçimi hacim sıralaması iddiası içermez.
+3. **P1 / Etki 4, kanıt 5, efor 2, risk 1.** Üretim doğrulamasından sonra Search Console’da sitemap durumunu kontrol et, iki pilot URL'yi incele, Google'ın seçtiği canonical'i ve indeks durumunu kaydet, gerekli URL’ler için yeniden tarama iste. [Google URL Inspection](https://support.google.com/webmasters/answer/9012289/) · [Render rewrite kuralları](https://render.com/docs/redirects-rewrites)
+4. **P1 / Etki 3, kanıt 5, efor 3, risk 3.** İlk HTML ve React meta etiketlerini ortak kaynaktan üret. Canonical/robots/title tutarlılığı için canlı HTTP ve tarayıcı regresyon kontrolü ekle. Booking noindex ve geçersiz rota 404 davranışlarını gözden geçir.
+
+Bu güncelleme araştırma ve denetim kaydıdır. Render yönlendirme kuralları veya canlı uygulama bu denetimde değiştirilmedi. Search Console, gerçek Google UK sıra ölçümü, cihaz karşılaştırması ve rakip backlink incelemesi henüz doğrulanmadı.
