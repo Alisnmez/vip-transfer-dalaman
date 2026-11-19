@@ -4,6 +4,38 @@ Tarih: 2026-11-19 | Durum: Araştırma ve uygulama talimatı; canlıya alınmad�
 
 > Mevcut SEO MD dosyasının konumu henüz doğrulanamadı. Bu belge mevcut planı **değiştirmez**; UK SEO araştırma tablosundaki rota/içerik ilkeleri ve mevcut frontend SEO scriptleri esas alınarak hazırlanmış tamamlayıcı bir uygulama ekidir. Arama hacmi, rekabet puanı veya sıralama garantisi uydurulmamıştır. Uygulamadan önce mevcut ana SEO MD ile karşılaştır.
 
+## DEVİR TESLİM / YENİ SOHBET İÇİN ÖNCE BURAYI OKU
+
+**Bu bölüm gelecekteki bir ChatGPT/Work oturumunun projeyi güvenli şekilde devralması içindir.** Bu dosyayı okumak, önceki işlerin doğrulandığı anlamına gelmez. Önce GitHub'ın güncel branch/commit/PR/CI durumunu sorgula; aşağıdaki snapshot tarihsel kayıttır.
+
+### Son bilinen durum (2026-11-19)
+- **Repo:** `Alisnmez/vip-transfer-dalaman`.
+- **Production:** `https://dalamanway.com`, Render frontend `srv-dbuegc7f3r2c73ar68kg`, backend `srv-dbueg6mc6qcc73dh282g`; son doğrulanan production SHA `4d150336313dddfd78c45b1a261fc0fbdd91e223`. Bu SEO branch'i production'a dağıtılmadı.
+- **Production deploy branch:** `feature/booking-integration`. `main` çok geride/farklıdır; **main'e körlemesine merge yapma**.
+- **SEO geliştirme branch'i:** `feature/seo-audit-checks-20261119`. **Bu belgeyi içeren commit:** `4f733d5`. İlk araştırma/test branch'i `research/international-seo-four-markets-20261119`.
+- **PR'ler:** #17 araştırma branch'inden `feature/booking-integration` hedefine; #18 SEO audit branch'inden araştırma branch'ine açıldı. Her ikisinin güncel merge/CI durumu yeniden sorgulanmalı. Paralel Work Mode başka değişiklikler yapıyor olabilir.
+- **Son tamamlanan kodlama görevi:** SEO-04 (Open Graph/Twitter metadata). **Sonraki plan görevi:** SEO-05 (canlı HTTP/indexability audit). **Önceki görevlerden açık kalite kapısı:** SEO-02, SEO-03, SEO-04'ün **güncel HEAD SHA** üzerinde CI/test/build/staging doğrulaması.
+- **Test kanıtı:** `0c074ec` SHA'sı için dört GitHub Actions workflow'u `success` görüldü; bu, sonraki commitleri kapsamaz. `5424274`, `0b57e68`, `aa9828e` ve bu belge commit'i için tüm kontrollerin geçtiği iddia edilmez.
+- **Ana SEO MD belirsizliği:** Bu dosya tamamlayıcı belgedir; eski/ana SEO MD'nin konumu kesinleşmedi. Bulunursa mevcut notları silmeden karşılaştır ve ilişkilendir.
+
+### Yeni oturumun yapacağı kesin sıra
+1. **Oku:** Bu bölüm + aşağıdaki SEO-01…SEO-13 tablosu ve teknik kayıtlar. Sonra ilgili script ve test dosyalarını incele; tabloyu körü körüne doğru kabul etme.
+2. **GitHub doğrula:** production branch HEAD, çalışma branch HEAD, #17/#18, Work Mode değişiklikleri, commit SHA'larına ait Actions job/step/log sonuçları. Başka sohbetin yazdığı dosyayı üzerine ezme; en son SHA ile oku ve optimistic concurrency (blob SHA) kullan.
+3. **Kalite kapısı:** `frontend/package.json` içindeki `lint`, `test`, `build` komutları ile browser smoke ve staging HTML/robots/sitemap kontrolünü çalıştır veya sonuçlarını kanıtla. Çalıştıramıyorsan açıkça `TEST BEKLİYOR` yaz; başka SHA'nın sonucunu aktararak `geçti` deme.
+4. **SEO-05:** Gerçek production HTTP durum kodları, canonical, robots meta, sitemap ve yönlendirmeleri ölç; bulguları URL + beklenen/gerçek + tarih + kanıt olarak SEO-05'e ekle. Mevcut booking akışını değiştirme.
+5. **SEO-06 ve sonrası:** Önce React router/i18n yapısını incele. Dört dil URL'leri, hreflang ve içerikleri tek seferde değil küçük PR'larla ilerlet. Yarım çeviri URL'lerini indexleme.
+6. **Her kod adımında:** Değiştirilen dosyalar ve URL'ler, yaklaşım/neden, commit SHA, test komutu ve sonucu, açık sorun, bir sonraki küçük adım bu dosyaya eklenir. Aynı maddede tarihli `İlerleme kaydı` ekle; geçmişi silme.
+7. **Deploy:** Kullanıcının daha önce belirttiği güvenli yayın beklentisine uy: güncel HEAD CI + staging + booking smoke geçmeden ve production etkisi kontrol edilmeden yayınlama. Auto-deploy ayarını doğrula; GitHub'a push otomatik deploy tetikleyebilir.
+
+### Çakışma ve yanlış devam etmeyi önleme protokolü
+- **Tek doğruluk kaynağı:** Bu dosyadaki görev kimlikleri + GitHub'ın güncel SHA/PR/CI kayıtları; eski sohbet metni tek başına yeterli değil.
+- **Yazma yöntemi:** Dosyanın güncel blob SHA'sını al; yalnızca ilgili görev satırını ve tarihli ilerleme kaydını güncelle; diğer maddeleri ve önceki kayıtları aynen koru. SHA çakışırsa yeniden oku, iki değişikliği birleştir, tekrar dene. Dosyayı eski kopyayla komple overwrite etme.
+- **İş paylaşımı:** Work Mode test yapıyorsa aynı kodu eşzamanlı değiştirme; PR diff'lerini karşılaştır. Ayrı branch'leri doğrulama olmadan birleştirme.
+- **Durum disiplini:** `KODLANDI` ≠ `TEST GEÇTİ` ≠ `CANLIDA DOĞRULANDI`. Bir sonraki görev planlanmış olsa da açık test blokajlarını atlama.
+- **Sonraki oturuma tek cümlelik devir:** “SEO-04 kodlandı; SEO-02/03/04 için güncel branch testleri açık; önce GitHub/Work değişikliklerini ve CI'yi doğrula, ardından SEO-05 production HTTP denetimine geç; hiçbir SEO değişikliği henüz canlıya alınmadı.”
+
+---
+
 ## Doğrulanan mevcut durum
 - `frontend/scripts/generate-seo.mjs`: üretim domain'i `VITE_PUBLIC_SITE_URL` ile tanımlandığında sitemap ve robots.txt üretir; diğer ortamlarda indekslemeyi kapatır.
 - `frontend/scripts/prerender-routes.mjs`: İngilizce rota ve landing HTML üretir; Almanca/Rusça/Türkçe ayrı statik HTML, dil bazlı canonical ve hreflang üretimi görünmüyor.
