@@ -8,7 +8,8 @@ import { spawnSync } from 'node:child_process'
 const script = resolve('scripts/prerender-routes.mjs')
 const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
   'routes/gocek', 'routes/icmeler', 'routes/dalyan', 'routes/sarigerme', 'vehicles', 'services', 'contact', 'faq', 'reviews',
-  'de/routes/marmaris', 'ru/routes/marmaris', 'de/routes/gocek', 'ru/routes/gocek']
+  'de/routes/marmaris', 'ru/routes/marmaris', 'de/routes/gocek', 'ru/routes/gocek',
+  'de/routes/fethiye', 'ru/routes/fethiye', 'de/routes/oludeniz', 'ru/routes/oludeniz']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
@@ -75,7 +76,7 @@ test('all staging pages remain noindex without production canonicals', async () 
 test('pilot route languages have reciprocal alternates and localized initial HTML', async () => {
   const origin = 'https://dalamanway.com'
   const { pages } = await render(origin)
-  for (const slug of ['marmaris', 'gocek']) {
+  for (const slug of ['marmaris', 'gocek', 'fethiye', 'oludeniz']) {
     const variants = { en: `routes/${slug}`, de: `de/routes/${slug}`, ru: `ru/routes/${slug}` }
     for (const [language, path] of Object.entries(variants)) {
       const html = pages.get(path)
