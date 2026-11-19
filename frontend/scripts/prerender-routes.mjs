@@ -48,11 +48,14 @@ const landingPages = [
 for (const page of landingPages) {
   const canonical = production ? `<link rel="canonical" href="${site}/${page.path}" />` : ''
   const robots = production ? 'index,follow' : 'noindex,nofollow'
+  const organization = production && page.path === ''
+    ? `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: 'DalamanWay', url: `${site}/` })}</script>`
+    : ''
   const html = template
     .replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${page.description}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
-    .replace('</head>', `${canonical}<meta property="og:type" content="website" /><meta property="og:title" content="${page.title}" /><meta property="og:description" content="${page.description}" />${production ? `<meta property="og:url" content="${site}/${page.path}" />` : ''}<meta name="twitter:card" content="summary" /></head>`)
+    .replace('</head>', `${canonical}<meta property="og:type" content="website" /><meta property="og:title" content="${page.title}" /><meta property="og:description" content="${page.description}" />${production ? `<meta property="og:url" content="${site}/${page.path}" />` : ''}<meta name="twitter:card" content="summary" />${organization}</head>`)
     .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${page.heading}</h1><section>${page.body}</section>${page.links}</main></div>`)
   const folder = join('dist', page.path)
   await mkdir(folder, { recursive: true })

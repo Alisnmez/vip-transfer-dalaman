@@ -45,7 +45,7 @@ export function trackAnalyticsEvent(event: AnalyticsEvent): void {
 export function trackPublicPage(pathname: string): void {
   if (!analyticsConsent() || !validId) return
   const allowed = ['/', '/routes', '/vehicles', '/services', '/contact']
-  if (!allowed.includes(pathname) && !/^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)) return
+  if (!allowed.includes(pathname) && !/^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler|dalyan|sarigerme)$/.test(pathname)) return
   initializeAnalytics()
   ;(window as AnalyticsWindow).gtag?.('event', 'page_view', { page_path: pathname })
 }

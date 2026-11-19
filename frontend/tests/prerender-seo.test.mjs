@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process'
 
 const script = resolve('scripts/prerender-routes.mjs')
 const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
-  'routes/gocek', 'routes/icmeler', 'vehicles', 'services', 'contact', 'faq', 'reviews']
+  'routes/gocek', 'routes/icmeler', 'routes/dalyan', 'routes/sarigerme', 'vehicles', 'services', 'contact', 'faq', 'reviews']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
@@ -51,6 +51,13 @@ test('production prerendered route has crawlable title, description, canonical a
   assert.match(pages.get('routes/marmaris'), /<h1>Dalaman Airport to Marmaris Private Transfer/)
   assert.match(pages.get('routes/marmaris'), /include the marina name and the entrance/)
   assert.match(pages.get('routes/gocek'), /For a yacht handover/)
+  assert.match(pages.get('routes/dalyan'), /Use the full address for your riverside hotel/)
+  assert.match(pages.get('routes/sarigerme'), /hotel confirmation gives a resort entrance/)
+  const organization = pages.get('').match(/<script type="application\/ld\+json">(.*?)<\/script>/)?.[1]
+  assert.deepEqual(JSON.parse(organization), {
+    '@context': 'https://schema.org', '@type': 'Organization', name: 'DalamanWay', url: origin + '/',
+  })
+  assert.doesNotMatch(pages.get('routes/dalyan'), /application\/ld\+json/)
   assert.match(pages.get('faq'), /<h1>Frequently Asked Questions<\/h1>/)
 })
 
@@ -59,7 +66,7 @@ test('all staging pages remain noindex without production canonicals', async () 
     const { pages } = await render(url)
     for (const [path, html] of pages) {
       assert.match(html, /<meta name="robots" content="noindex,nofollow"/, path)
-      assert.doesNotMatch(html, /rel="canonical"|property="og:url"/, path)
+      assert.doesNotMatch(html, /rel="canonical"|property="og:url"|application\/ld\+json/, path)
     }
   }
 })

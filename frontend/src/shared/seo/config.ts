@@ -55,7 +55,7 @@ export const seoPages: Record<string, SeoPage> = {
 export function getSeoPage(pathname: string): SeoPage {
   const normalized = pathname.replace(/\/$/, '') || '/'
   const destinations: Record<string, string> = {
-    marmaris: 'Marmaris', fethiye: 'Fethiye', oludeniz: 'Oludeniz', gocek: 'Gocek', icmeler: 'Icmeler',
+    marmaris: 'Marmaris', fethiye: 'Fethiye', oludeniz: 'Oludeniz', gocek: 'Gocek', icmeler: 'Icmeler', dalyan: 'Dalyan', sarigerme: 'Sarigerme',
   }
   const slug = normalized.match(/^\/routes\/([a-z]+)$/)?.[1]
   if (slug && destinations[slug]) {

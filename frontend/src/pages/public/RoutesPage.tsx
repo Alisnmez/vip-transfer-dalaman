@@ -12,6 +12,8 @@ const featuredDestinations = [
   { name: 'Oludeniz', slug: 'oludeniz' },
   { name: 'Gocek', slug: 'gocek' },
   { name: 'Icmeler', slug: 'icmeler' },
+  { name: 'Dalyan', slug: 'dalyan' },
+  { name: 'Sarigerme', slug: 'sarigerme' },
 ]
 function priceLabel(price: number) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2 }).format(price)

@@ -23,5 +23,15 @@
     "en": "Choose İçmeler if that is where your accommodation is located, even when a listing also mentions nearby Marmaris. For the return transfer, give the hotel name and the pickup entrance if it differs from the main address.",
     "de": "Wählen Sie İçmeler, wenn Ihre Unterkunft dort liegt, selbst wenn in der Anzeige auch das nahe Marmaris genannt wird. Geben Sie für die Rückfahrt den Hotelnamen und den Abholeingang an, falls dieser von der Hauptadresse abweicht.",
     "ru": "Выберите Ичмелер, если жильё находится там, даже если в описании указан соседний Мармарис. Для обратного трансфера укажите название отеля и вход, где вас нужно забрать, если он отличается от основного адреса."
+  },
+  "dalyan": {
+    "en": "Use the full address for your riverside hotel, apartment or villa. If the accommodation gave you specific road access instructions, include them under Special Requests.",
+    "de": "Geben Sie die vollständige Adresse Ihres Hotels, Apartments oder Ihrer Villa am Fluss an. Besondere Hinweise zur Zufahrt können Sie im Feld für Sonderwünsche ergänzen.",
+    "ru": "Укажите полный адрес отеля, апартаментов или виллы у реки. Если хозяева прислали инструкции по подъезду, добавьте их в поле особых пожеланий."
+  },
+  "sarigerme": {
+    "en": "Check whether your hotel confirmation gives a resort entrance or a village address. Enter the hotel or property name and the pickup point for the return trip if it differs from your drop-off.",
+    "de": "Prüfen Sie, ob Ihre Hotelbestätigung einen Eingang zur Ferienanlage oder eine Adresse im Ort nennt. Geben Sie den Namen der Unterkunft und gegebenenfalls einen abweichenden Abholpunkt für die Rückfahrt an.",
+    "ru": "Проверьте, указан ли в подтверждении бронирования вход в курортный комплекс или адрес в посёлке. Укажите название жилья и место подачи на обратную поездку, если оно отличается от места высадки."
   }
 }

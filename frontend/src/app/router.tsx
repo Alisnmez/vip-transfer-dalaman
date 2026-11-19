@@ -43,7 +43,7 @@ function ScrollToTop() {
     const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
     const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
     const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews']
-    const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler)$/.test(pathname)
+    const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler|dalyan|sarigerme)$/.test(pathname)
     let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
     if (!robots) {
       robots = document.createElement('meta')
@@ -66,6 +66,8 @@ function ScrollToTop() {
       oludeniz: 'Oludeniz',
       gocek: 'Gocek',
       icmeler: 'Icmeler',
+      dalyan: 'Dalyan',
+      sarigerme: 'Sarigerme',
     }
     const destinationSlug = /^\/routes\/([a-z]+)$/.exec(pathname)?.[1]
     const destination = destinationSlug ? destinationNames[destinationSlug] : undefined

@@ -63,7 +63,7 @@ test('production landing pages have distinct initial HTML metadata', async () =>
 })
 
 test('all supported route pages have unique production canonicals', async () => {
-  const slugs = ['marmaris', 'fethiye', 'oludeniz', 'gocek', 'icmeler']
+  const slugs = ['marmaris', 'fethiye', 'oludeniz', 'gocek', 'icmeler', 'dalyan', 'sarigerme']
   for (const slug of slugs) {
     const html = await run('https://example.com/', `routes/${slug}`)
     assert.match(html, new RegExp(`rel="canonical" href="https://example.com/routes/${slug}"`))

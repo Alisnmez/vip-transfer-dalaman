@@ -363,3 +363,12 @@ Bu kayıt, yukarıdaki hazırlık aşaması notlarından sonraki durumu gösteri
 **Search Console:** Google, `dalamanway.com` için alan adı TXT doğrulamasını hazırladı. Porkbun oturumu açılana kadar doğrulama kaydı eklenmedi. Sahiplik doğrulamasından sonra sitemap ve indeksleme raporları kontrol edilecek.
 
 **Search Console doğrulaması — 19 Kasım 2026:** Porkbun'da kök `dalamanway.com` için Google TXT kaydı eklendi. Search Console alan adı mülkünde sahiplik doğrulandı. `https://dalamanway.com/sitemap.xml` gönderildi, Google 19 Kasım'da okudu ve 12 keşfedilen sayfayla Başarılı durumunu gösterdi. Bu sayı indekslenen sayfa sayısı değildir. Ana sayfanın URL Denetimi ilk kontrolde “URL Google'da yok” ve “URL Google tarafından bilinmiyor” sonucunu verdi. Dizine ekleme talebi kabul edilerek öncelikli tarama sırasına alındı. Performans raporu veri işliyor ve henüz veri göstermiyor. Sonraki kontrol: ana sayfa ve Marmaris/Göcek için indeks durumu ve seçilen canonical; veri oluşunca ülke, sorgu, sayfa ve 28/90 günlük gösterim/tıklama karşılaştırması.
+
+### Rota genişletme ve genel kontrol — 19 Kasım 2026
+
+- Search Console yeniden denetiminde ana sayfa dizinde. Marmaris ve Göcek henüz dizinde görünmedi.
+- Dalyan ve Sarıgerme için EN/DE/RU rota içeriği, ilk HTML ve sitemap hazırlandı. Ana sayfaya görünen marka adı ve canonical URL ile sınırlı Organization JSON-LD eklendi.
+- Yerelde Java 21 ve PostgreSQL ile 102 backend testi, 85 frontend testi, 18 Playwright senaryosu, lint ve üretim derlemesi geçti. npm audit 0 bulgu döndürdü. 360, 390 ve 430 px mobil genişliklerinde iki yeni rotada yatay taşma görülmedi ve rezervasyon hedefi otomatik seçildi.
+- Yerel mobil Lighthouse simülasyonunda Marmaris LCP 1,39 sn ve CLS 0 çıktı. Ana sayfa için toplam skor üretilmedi. Bu ölçüm yerel aday derlemesine aittir ve gerçek kullanıcı verisi değildir.
+- Kalan işler: test Render yönlendirmeleri, canlı onayı ve yayımlama. İki yeni yol için `/routes/dalyan → /routes/dalyan/index.html` ve `/routes/sarigerme → /routes/sarigerme/index.html` kuralları genel fallback'in üstünde olmalı. Yayından sonra 14 sitemap adresini tekrar kontrol et.
+- Ayrı dil URL'leri, hreflang ve canlı mobil saha ölçümü açık. Rezervasyon taslaklarının tarayıcıda saklanma süresi ayrı gizlilik incelemesinde ele alınacak.
