@@ -1,6 +1,7 @@
 import { destinationRoutes } from './destination-routes.mjs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import airportArrivalNotes from '../src/features/route-price/airport-arrival-notes.json' with { type: 'json' }
 
 const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
@@ -26,7 +27,7 @@ for (const [slug, name, intro] of pages) {
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${description}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
     .replace('</head>', `${canonical}<meta property="og:type" content="website" /><meta property="og:title" content="${title}" /><meta property="og:description" content="${description}" />${production ? `<meta property="og:url" content="${site}/routes/${slug}" />` : ''}<meta name="twitter:card" content="summary" /></head>`)
-    .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${title}</h1><p>${intro}</p><p>Compare available vehicle options and request a transfer from Dalaman Airport to ${name}.</p><a href="/booking">Request a transfer</a> <a href="/routes">Compare routes and prices</a></main></div>`)
+    .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${title}</h1><p>${intro}</p><h2>Where should we drop you off?</h2><p>${airportArrivalNotes[slug].en}</p><a href="/booking">Request a transfer</a> <a href="/routes">Compare routes and prices</a></main></div>`)
   const folder = join('dist', 'routes', slug)
   await mkdir(folder, { recursive: true })
   await writeFile(join(folder, 'index.html'), html)

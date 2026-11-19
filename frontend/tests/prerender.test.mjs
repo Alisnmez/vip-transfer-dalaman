@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 
 const source = resolve('scripts/prerender-routes.mjs')
-const routesSource = resolve('scripts/destination-routes.mjs')
 const template = '<html><head><title>Default</title><meta name="description" content="Default" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script src="/assets/main.js"></script></body></html>'
 
 async function run(domain, page = 'routes/fethiye') {
@@ -14,9 +13,7 @@ async function run(domain, page = 'routes/fethiye') {
   try {
     await mkdir(join(folder, 'dist'))
     await writeFile(join(folder, 'dist/index.html'), template)
-    await cp(source, join(folder, 'prerender-routes.mjs'))
-    await cp(routesSource, join(folder, 'destination-routes.mjs'))
-    const result = spawnSync(process.execPath, ['prerender-routes.mjs'], {
+    const result = spawnSync(process.execPath, [source], {
       cwd: folder,
       encoding: 'utf8',
       env: { ...process.env, VITE_PUBLIC_SITE_URL: domain },

@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { transferPrices } from '../../features/booking/pricing'
+import airportArrivalNotes from '../../features/route-price/airport-arrival-notes.json'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
 
@@ -22,6 +23,7 @@ const routeCopy = {
     request: "Request a transfer",
     compare: "Compare routes and prices",
     prepare: "Information to prepare",
+    arrival: "Where should we drop you off?",
     prepareDetails: "Have your arrival date and time, flight number if applicable, passenger and luggage counts, and your destination hotel or address ready. For return journeys, include your return pickup date and time.",
     vehicles: "Compare private transfer vehicles and luggage capacity",
     faq: "Read our airport transfer booking FAQs",
@@ -37,6 +39,7 @@ const routeCopy = {
     request: "Transfer anfragen",
     compare: "Strecken und Preise vergleichen",
     prepare: "Was Sie bereithalten sollten",
+    arrival: "Wo sollen wir Sie absetzen?",
     prepareDetails: "Halten Sie Ankunftsdatum und -zeit, gegebenenfalls die Flugnummer, die Anzahl der Fahrgäste und Gepäckstücke sowie Ihr Hotel oder Ihre Zieladresse bereit. Geben Sie bei einer Rückfahrt auch Abholdatum und -zeit an.",
     vehicles: "Fahrzeuge und Gepäckkapazität vergleichen",
     faq: "Häufige Fragen zur Buchung lesen",
@@ -52,6 +55,7 @@ const routeCopy = {
     request: "Заказать трансфер",
     compare: "Сравнить маршруты и цены",
     prepare: "Что нужно подготовить",
+    arrival: "Где вас высадить?",
     prepareDetails: "Подготовьте дату и время прибытия, номер рейса при наличии, количество пассажиров и багажа, а также название отеля или точный адрес. Для обратной поездки укажите дату и время подачи автомобиля.",
     vehicles: "Сравнить автомобили и вместимость багажа",
     faq: "Прочитать ответы на вопросы о бронировании",
@@ -87,6 +91,10 @@ export function RouteDetailPage() {
         <nav aria-label={copy.breadcrumb} className="mb-8 text-sm text-on-surface-variant"><Link className="underline" to="/routes">{copy.routes}</Link> / {language === 'ru' ? route.russianName : route.name}</nav>
         <h1 className="max-w-3xl text-4xl font-bold text-admin-primary sm:text-5xl">{heading}</h1>
         <p className="mt-6 max-w-3xl text-lg leading-relaxed">{route.intro[language]}</p>
+        <section className="mt-8 max-w-3xl">
+          <h2 className="text-2xl font-bold text-admin-primary">{copy.arrival}</h2>
+          <p className="mt-3 leading-relaxed">{airportArrivalNotes[route.slug][language]}</p>
+        </section>
         <section className="mt-12 rounded-2xl border border-outline-variant bg-white p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.plan}</h2>
           <p className="mt-3 leading-relaxed">{copy.planDetails}</p>

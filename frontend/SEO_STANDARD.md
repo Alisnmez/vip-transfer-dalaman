@@ -340,3 +340,18 @@ Yerel sonuç: 85 test, lint ve production derlemesi geçti. Yerel HTTP rewrite s
 
 - [Render rewrite kuralları](https://render.com/docs/redirects-rewrites)
 - [Google noindex dokümantasyonu](https://developers.google.com/search/docs/crawling-indexing/block-indexing)
+
+### Devam kaydı — 19 Kasım 2026
+
+Bu kayıt, yukarıdaki hazırlık aşaması notlarından sonraki durumu gösterir.
+
+| İş | Durum ve kanıt | Sıradaki adım |
+|---|---|---|
+| SEO-02, SEO-03, SEO-05 ve ilk SEO-13 yayını | Canlı frontend `ca5812c`. 12 sitemap adresi HTTP 200, kendi canonical'ı ve `index,follow` döndürdü. Beş uygulama adresi `noindex` HTML'i verdi. Üretim `robots.txt` rezervasyon taramasına izin veriyor. Render testte `Disallow: /` korunuyor. Dört CI kontrolü, 85 yerel test ve Göcek rezervasyon ön seçimi doğrulandı. | Sonraki sürüm için aynı kontrolleri yenile. |
+| SEO-06–08, dil adresleri | Mevcut dil tercihi tarayıcıda saklanıyor. İngilizce adresler olduğu gibi kalacak. İlk pilot için Almanca ve Rusça Marmaris ve Göcek adresleri ayrı bir değişiklikte değerlendirilecek. | URL'deki dili ilk HTML'de ve React açılışında sabitle. Dil bağlantıları, karşılıklı hreflang, kendi canonical'ı ve Render tam yol kuralları birlikte test edilmeden sitemap'e ekleme. İngilizce adres ve rezervasyon sorgu parametresi için regresyon testi çalıştır. Türkçe, tam çeviri hazır olduğunda ayrı olarak değerlendirilecek. |
+| SEO-09, rota içeriği | Marmaris, Fethiye, Ölüdeniz, Göcek ve İçmeler varış notları EN/DE/RU olarak eklendi. İngilizce notlar JS öncesi HTML'de de yer alıyor. 85 yerel test, lint ve üretim derlemesi geçti. | Render testinde üç dili ve rota bağlantılarını kontrol et. Dalyan ve Sarıgerme için rota içeriği ve yayın kuralları ayrı değişiklikte tamamlanacak. |
+| SEO-10, mobil performans | Canlı ana sayfa ve Marmaris ilk HTML'inde aynı 5 JS ve 1 CSS dosyasına referans var. Canlıdan gzip olarak alınan bu 6 dosya toplam 165.285 bayt. Bu ölçüm resimleri, fontları, API isteklerini ve sonradan yüklenen dosyaları kapsamıyor. Lighthouse bağlantı ve sertifika hatası verdi. PageSpeed API kota nedeniyle HTTP 429 döndürdü. | Canlı mobil ölçümü erişebilen bir tarayıcıda tekrarla. LCP, CLS ve yüklenen kaynakları kaydet. |
+| SEO-11, yapılandırılmış veri | İşletme bilgileri doğrulanana kadar planlandı. | Görünen işletme bilgilerini karşılaştır ve yalnızca doğrulanabilen alanları işaretle. |
+| SEO-12, Search Console | Açık Google hesabında mevcut mülk görünmedi. `dalamanway.com` alan adı formu hazırlandı. Yetkili DNS sunucuları Porkbun'da. | Doğru Google hesabı için sahiplik doğrulaması, sitemap durumu ve başlangıç performans verileri bekliyor. |
+
+İlgili yönlendirmeler: [Google çok dilli site rehberi](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites) · [Search Console sahiplik doğrulaması](https://support.google.com/webmasters/answer/9008080).

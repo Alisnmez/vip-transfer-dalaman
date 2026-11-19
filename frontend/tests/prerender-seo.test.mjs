@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { mkdtemp, mkdir, readFile, rm, cp, writeFile } from 'node:fs/promises'
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const script = resolve('scripts/prerender-routes.mjs')
-const routes = resolve('scripts/destination-routes.mjs')
 const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/oludeniz',
   'routes/gocek', 'routes/icmeler', 'vehicles', 'services', 'contact', 'faq', 'reviews']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
@@ -14,12 +13,9 @@ const template = '<!doctype html><html lang="en"><head><title>Template</title><m
 async function render(siteUrl) {
   const dir = await mkdtemp(join(tmpdir(), 'vip-prerender-seo-'))
   try {
-    await cp(script, join(dir, 'prerender-routes.mjs'))
-    await cp(routes, join(dir, 'destination-routes.mjs'))
-    await writeFile(join(dir, 'package.json'), '{"type":"module"}')
     await mkdir(join(dir, 'dist'))
     await writeFile(join(dir, 'dist/index.html'), template)
-    const result = spawnSync(process.execPath, ['prerender-routes.mjs'], {
+    const result = spawnSync(process.execPath, [script], {
       cwd: dir, encoding: 'utf8',
       env: { ...process.env, VITE_PUBLIC_SITE_URL: siteUrl },
     })
@@ -53,6 +49,8 @@ test('production prerendered route has crawlable title, description, canonical a
     assert.match(html, /data-prerender-fallback/)
   }
   assert.match(pages.get('routes/marmaris'), /<h1>Dalaman Airport to Marmaris Private Transfer/)
+  assert.match(pages.get('routes/marmaris'), /include the marina name and the entrance/)
+  assert.match(pages.get('routes/gocek'), /For a yacht handover/)
   assert.match(pages.get('faq'), /<h1>Frequently Asked Questions<\/h1>/)
 })
 
