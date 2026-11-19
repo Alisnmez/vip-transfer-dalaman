@@ -213,3 +213,49 @@ For each of the five destination pages:
 - Competitor operator directory: https://intransfers.com/transfers/turkey/dalaman-airport-dlm/
 
 **Evidence boundary:** Competitor observations come from public pages. Keyword clusters and execution priorities are our recommendations. Google guidance is documented above. No live crawl or Search Console analytics are represented as completed in this section.
+
+
+---
+
+## ChatGPT Work execution brief — 2026-11-19
+
+**Read this section first when operating in ChatGPT Work.** Treat the entire SEO_STANDARD.md as the existing project standard, not as a request to replace architecture. Site: https://dalamanway.com; staging: https://vip-transfer-dalaman-test.onrender.com; repository: Alisnmez/vip-transfer-dalaman; working branch historically feature/booking-integration. Verify current branches, deployment state and credentials rather than assuming historical information is current.
+
+### Mission and definition of success
+Increase qualified organic traffic and completed private Dalaman airport transfer booking requests, especially airport-to-Marmaris, Fethiye, Ölüdeniz, Göcek and İçmeler. Rankings are a leading indicator, not a guaranteed outcome. Preserve the existing booking flow and visual design. Use verified, ethical SEO methods and Google Search Central guidance.
+
+### Work mode operating instructions (execute, do not just describe)
+1. **Read and reconcile:** read this entire file, repository SEO config, prerender scripts, route content, deployment config, tests and recent commits. Produce a short inventory of implemented, unverified and broken features. Check whether earlier commits are on staging, production, or neither.
+2. **Live technical audit first:** inspect actual https://dalamanway.com and representative destination URLs, /robots.txt, /sitemap.xml, HTML source without JavaScript, HTTP status, redirects, canonical, meta robots, title, H1, descriptions, internal links, structured data, mobile usability and 404 behavior. Check www and Render hosts for duplicate indexing. Verify production VITE_PUBLIC_SITE_URL at build time if Render access exists; never reveal secrets. Test staging noindex separately. Record each URL, observation, evidence and severity; do not infer deployed behavior from code alone.
+3. **Search Console / analytics:** when connected and authorized, inspect domain ownership, indexing reports, submitted sitemap, URL inspection, queries, pages, countries, devices, CTR and clicks. Compare 28-day and 3-month periods where data exists; note seasonality and small samples. If access is missing, report exactly what cannot be verified and proceed with public audit and code work. Never fabricate search volume or position.
+4. **Competitor SERP research:** independently search Google for the keyword clusters below in the actual target customer markets (e.g. UK English and relevant Turkish/international variants), preferably mobile and desktop. Record the *actual observed* top organic results, dates, locale and whether ads/map packs are present. Do not assert a competitor ranks first from one search or from a company's own claim. Study at least 5 directly competing sites and 2 high-quality informational alternatives. Starting candidates to verify: Suntransfers, Mavi Transfer, Dalaman Go Transfer, Dalamantransport, GET4S, Airport Transfers Turkey, and other current SERP leaders. For each observed competitor, capture landing URL, target intent, title/H1, route coverage, original local details, pricing transparency, UX, FAQs, schema, internal linking, trust indicators, mobile speed and relevant legitimate backlinks/citations where verifiable. Do not copy their text or invent backlink counts, traffic, domain authority or ranking causes.
+5. **Gap analysis and opportunity scoring:** compare each relevant DalamanWay page against the *currently observed* SERP leaders. Separate observed facts from hypotheses. Score each candidate action 1–5 on business impact, evidence confidence, effort and risk; prioritize blockers first, then high-intent route content, then measured performance and authority. Explain why a competitor might perform better as a hypothesis, not as proven causality.
+6. **Implement smallest safe batch:** fix confirmed technical blockers first; align generated initial HTML and hydrated React metadata; retain one central SEO source, unique canonical/title/description/H1, valid sitemap, production indexability, staging noindex, real 404s and descriptive crawlable links. Then improve the five route pages with genuinely useful *verified* destination-specific pickup/drop-off, route and luggage details, actual booking-system prices, FAQs and booking CTAs. No invented travel times, prices, reviews, licensing, promises or spam/doorway pages. Do not add orange visual styling or unrelated design changes.
+7. **Quality gates:** run existing frontend/backend CI, SEO tests, initial HTML parity tests for every indexable route, staging smoke tests, booking regression (vehicle preselection, destination preselection, luggage per vehicle), mobile checks, canonical/sitemap/robots checks and staging noindex verification. Fix failures following repository conventions. Do not deploy to production until all required tests pass and the user authorizes production deployment.
+8. **Report and iterate:** update this MD with a dated evidence-backed audit, competitor matrix, query-to-URL map, prioritized backlog, changed files, commit SHAs, test results, deployment status and remaining blockers. Report what is actually verified. After release, monitor Search Console indexing, 28-day non-brand impressions/clicks/CTR, organic booking requests and route-level conversion; do not promise top-10 placement.
+
+### Initial keyword/SERP research matrix
+| Search intent | Example queries | Our primary page |
+| --- | --- | --- |
+| Airport transfer booking | dalaman airport transfer; dalaman airport private transfer | / |
+| Route comparison and prices | dalaman airport transfer prices; dalaman transfer prices | /routes |
+| Marmaris | dalaman airport to marmaris transfer | /routes/marmaris |
+| Fethiye | dalaman airport to fethiye transfer | /routes/fethiye |
+| Ölüdeniz | dalaman airport to oludeniz transfer | /routes/oludeniz |
+| Göcek | dalaman airport to gocek transfer | /routes/gocek |
+| İçmeler | dalaman airport to icmeler transfer | /routes/icmeler |
+| Group/private vehicle | dalaman airport minibus transfer; dalaman private vito transfer | /vehicles |
+
+### Required deliverables
+- **A. Baseline:** live URL-by-URL technical SEO table with verified HTTP/HTML observations and unresolved access limitations.
+- **B. Competitor evidence:** dated SERP sample and competitor-by-competitor matrix with source URLs and actionable gaps; distinguish paid placements from organic rankings.
+- **C. Prioritized work:** P0/P1/P2 backlog with impact, confidence, effort, risks and explicit acceptance tests.
+- **D. Implementation:** minimal code changes and commits on the correct feature branch, with CI and staging results; production only after user authorization.
+- **E. Updated standard:** append outcomes to this file without erasing historical findings, noting superseded claims.
+
+### Safety, integrity and operating constraints
+- Respect robots/access policies and rate limits; no evasion, scraping behind logins, fake reviews, keyword stuffing, mass-generated location pages, paid-link schemes or fabricated business profiles.
+- Do not assume search rankings are stable across country, device or date. Treat competitor practices as examples to test, not guaranteed ranking factors.
+- Do not expose API keys, account data, or customer booking details in reports or commits.
+- If a required app connection or permission is unavailable, state the blocker precisely; continue independent checks instead of claiming completion.
+- Preserve existing project coding standards, production behavior and all approved vehicle capacities; never modify the booking backend solely for SEO.
