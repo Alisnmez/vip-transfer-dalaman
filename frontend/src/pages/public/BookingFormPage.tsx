@@ -148,7 +148,7 @@ export function BookingFormPage() {
     }
     setFormError('')
     try {
-      localStorage.setItem(
+      sessionStorage.setItem(
         'bookingTransferInfo',
         JSON.stringify({
         dropOffLocation: dropOffLocation.trim(),
