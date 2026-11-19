@@ -1,3 +1,4 @@
+import { fleetCatalogue } from '../src/features/vehicle-type/fleetCatalogue.ts'
 import { destinationRoutes } from './destination-routes.mjs'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
@@ -35,6 +36,10 @@ for (const [slug, name, intro] of pages) {
     const path = routeLanguagePath(slug, language)
     const canonical = production ? `<link rel="canonical" href="${site}${path}" />` : ''
     const labels = routeLanguageLabels[language]
+    const vehicleRows = fleetCatalogue.map(vehicle =>
+      `<tr><th scope="row">${vehicle.name}</th><td>${vehicle.maxPassengers}</td><td>${vehicle.luggage}</td></tr>`,
+    ).join('')
+    const fleet = `<section><h2>${labels.fleet}</h2><table><thead><tr><th scope="col">${labels.vehicle}</th><th scope="col">${labels.passengers}</th><th scope="col">${labels.luggage}</th></tr></thead><tbody>${vehicleRows}</tbody></table><a href="/routes">${labels.fare}</a></section>`
     const booking = pilot ? `/booking?destination=${encodeURIComponent(pilot.destination)}` : '/booking'
     const routeLink = language === 'en' ? ' <a href="/routes">Compare routes and prices</a>' : ''
     const html = template
@@ -43,7 +48,7 @@ for (const [slug, name, intro] of pages) {
       .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${description}" />`)
       .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
       .replace('</head>', `${canonical}${alternates}<meta property="og:type" content="website" /><meta property="og:title" content="${title}" /><meta property="og:description" content="${description}" />${production ? `<meta property="og:url" content="${site}${path}" />` : ''}<meta name="twitter:card" content="summary" /></head>`)
-      .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${heading}</h1><p>${copy?.intro ?? intro}</p><h2>${labels.arrival}</h2><p>${airportArrivalNotes[slug][language]}</p><a href="${booking}">${labels.booking}</a>${routeLink} ${languageLinks}</main></div>`)
+      .replace('<div id="root"></div>', `<div id="root"><main data-prerender-fallback><h1>${heading}</h1><p>${copy?.intro ?? intro}</p><h2>${labels.arrival}</h2><p>${airportArrivalNotes[slug][language]}</p>${fleet}<a href="${booking}">${labels.booking}</a>${routeLink} ${languageLinks}</main></div>`)
     const folder = join('dist', path.slice(1))
     await mkdir(folder, { recursive: true })
     await writeFile(join(folder, 'index.html'), html)

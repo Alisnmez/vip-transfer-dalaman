@@ -25,9 +25,9 @@ export const localizedRouteCopy = {
 } as const
 
 export const routeLanguageLabels = {
-  en: { name: 'English', arrival: 'Where should we drop you off?', booking: 'Request a transfer' },
-  de: { name: 'Deutsch', arrival: 'Wo sollen wir Sie absetzen?', booking: 'Transfer anfragen' },
-  ru: { name: 'Русский', arrival: 'Где вас высадить?', booking: 'Заказать трансфер' },
+  en: { name: 'English', fleet: 'Which vehicle fits your group?', vehicle: 'Vehicle', passengers: 'Max. passengers', luggage: 'Max. bags', fare: 'Compare current fares in GBP per vehicle', arrival: 'Where should we drop you off?', booking: 'Request a transfer' },
+  de: { name: 'Deutsch', fleet: 'Welches Fahrzeug passt zu Ihrer Gruppe?', vehicle: 'Fahrzeug', passengers: 'Max. Fahrgäste', luggage: 'Max. Gepäckstücke', fare: 'Aktuelle Preise in GBP pro Fahrzeug vergleichen', arrival: 'Wo sollen wir Sie absetzen?', booking: 'Transfer anfragen' },
+  ru: { name: 'Русский', fleet: 'Какой автомобиль подойдёт вашей группе?', vehicle: 'Автомобиль', passengers: 'Макс. пассажиров', luggage: 'Макс. мест багажа', fare: 'Сравнить актуальные цены в фунтах за автомобиль', arrival: 'Где вас высадить?', booking: 'Заказать трансфер' },
 } as const
 
 export function isLocalizedRoute(slug: string): slug is keyof typeof localizedRouteCopy {
