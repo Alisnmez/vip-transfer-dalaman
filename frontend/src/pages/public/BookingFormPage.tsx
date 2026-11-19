@@ -1,6 +1,6 @@
-import { bookingVehicles } from '../../features/booking/bookingVehicles'
+import { bookingVehicles, clampVehicleCount } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useId, useState } from 'react'
 
 import { PublicNavbar } from './PublicNavbar'
@@ -64,9 +64,12 @@ function readTransferDraft(): TransferDraft {
 export function BookingFormPage() {
   const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   useEffect(() => { trackAnalyticsEvent('booking_started') }, [])
+  const [searchParams] = useSearchParams()
   const [draft] = useState(readTransferDraft)
+  const requestedVehicleId = searchParams.get('vehicle')
+  const initialVehicleId = bookingVehicles.some(vehicle => vehicle.id === requestedVehicleId) ? requestedVehicleId! : draft.vehicleId
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
-  const [selectedVehicleId, setSelectedVehicleId] = useState(bookingVehicles.some((vehicle) => vehicle.id === draft.vehicleId) ? draft.vehicleId! : 'vip-minivan')
+  const [selectedVehicleId, setSelectedVehicleId] = useState(bookingVehicles.some((vehicle) => vehicle.id === initialVehicleId) ? initialVehicleId! : 'vip-minivan')
   const [pickUpLocation, setPickUpLocation] = useState(draft.pickUpLocation || 'Dalaman Airport')
   const [dropOffLocation, setDropOffLocation] = useState(draft.dropOffLocation ?? '')
   const [pickUpDate, setPickUpDate] = useState(draft.pickUpDate ?? '')
@@ -94,7 +97,9 @@ export function BookingFormPage() {
   const priceLabel = price === null ? 'Price on request' : `£${price.toFixed(2)}`
   const selectedVehicle = bookingVehicles.find((vehicle) => vehicle.id === effectiveVehicleId) ?? bookingVehicles[0]
   const maxAllowedPassengers = selectedVehicle.maxPassengers
-  const maxAllowedLuggage = Math.min(8, selectedVehicle.maxLuggage ?? 8)
+  const maxAllowedLuggage = selectedVehicle.maxLuggage
+  const safePassengers = clampVehicleCount(passengers, maxAllowedPassengers, 1)
+  const safeLuggages = clampVehicleCount(luggages, maxAllowedLuggage)
 
   function saveTransferInfo(event: React.MouseEvent<HTMLAnchorElement>) {
     if (!pickUpLocation.trim() || !dropOffLocation.trim() || !pickUpDate || !pickUpTime) {
@@ -125,7 +130,7 @@ export function BookingFormPage() {
     }
     const selectionError = validateTransferSelection({
       pickUpLocation, dropOffLocation, vehicleId: effectiveVehicleId, tripType,
-      passengerCount: passengers, luggageCount: luggages, babySeatCount: babySeats,
+      passengerCount: safePassengers, luggageCount: safeLuggages, babySeatCount: babySeats,
     })
     if (selectionError) {
       event.preventDefault()
@@ -145,7 +150,7 @@ export function BookingFormPage() {
         dropOffLocation: dropOffLocation.trim(),
         vehicleName: selectedVehicle.name,
         tripType,
-        passengerCount: passengers,
+        passengerCount: safePassengers,
         pickUpDate,
         pickUpLocation: pickUpLocation.trim(),
         pickUpTime,
@@ -155,7 +160,7 @@ export function BookingFormPage() {
         currency: 'GBP',
         vehicleId: effectiveVehicleId,
         flightNumber: flightNumber.trim() || undefined,
-        luggageCount: luggages,
+        luggageCount: safeLuggages,
         babySeatCount: babySeats,
         }),
       )
@@ -292,7 +297,7 @@ export function BookingFormPage() {
                 <label className="font-label-sm text-label-sm text-on-surface-variant block">
                   Select Vehicle Type
                 </label>
-                <p className="text-sm text-on-surface-variant">For more than 8 bags, contact us before booking.</p>
+                <p className="text-sm text-on-surface-variant">Luggage allowance changes with your vehicle selection.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
                     const isSelected = effectiveVehicleId === vehicle.id
@@ -347,14 +352,14 @@ export function BookingFormPage() {
                   label="Passengers"
                   min={1}
                   max={maxAllowedPassengers}
-                  value={passengers}
+                  value={safePassengers}
                   onChange={setPassengers}
                 />
                 <CounterField
                   label="Luggages"
                   min={0}
                   max={maxAllowedLuggage}
-                  value={luggages}
+                  value={safeLuggages}
                   onChange={setLuggages}
                 />
                 <CounterField
@@ -384,7 +389,7 @@ export function BookingFormPage() {
 
           <BookingSummary
             babySeats={babySeats}
-            passengers={passengers}
+            passengers={safePassengers}
             selectedVehicle={selectedVehicle}
             pickUpLocation={pickUpLocation}
             dropOffLocation={dropOffLocation}
