@@ -7,8 +7,16 @@ export const bookingVehicles = fleetCatalogue.map(vehicle => ({
   id: vehicle.bookingVehicleId,
   name: vehicle.name,
   maxPassengers: vehicle.maxPassengers,
-  maxLuggage: Math.min(8, vehicle.luggage),
+  maxLuggage: vehicle.luggage,
 }))
+
+export function getVehicleLimits(vehicleId: string) {
+  return bookingVehicles.find(vehicle => vehicle.id === vehicleId) ?? null
+}
+
+export function clampVehicleCount(value: number, maximum: number, minimum = 0): number {
+  return Math.max(minimum, Math.min(maximum, value))
+}
 
 export function vehicleLabel(id?: string | null): string {
   return bookingVehicles.find(vehicle => vehicle.id === id)?.name
