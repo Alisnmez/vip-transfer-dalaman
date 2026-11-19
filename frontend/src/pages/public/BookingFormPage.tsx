@@ -1,3 +1,4 @@
+import { VehiclePhoto } from './VehiclePhoto'
 import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { bookingVehicles, clampVehicleCount } from '../../features/booking/bookingVehicles'
 import { supportEmail } from '../../features/booking/support'
@@ -318,10 +319,7 @@ export function BookingFormPage() {
                         type="button"
                         aria-pressed={isSelected}
                       >
-                        <div className="h-32 mb-4 min-w-0 overflow-hidden bg-slate-50 rounded-lg flex flex-col gap-2 items-center justify-center" aria-hidden="true">
-                          <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-6xl text-admin-primary">{vehicleIcon(vehicle.id)}</span>
-                          <span className="text-xs text-slate-500">{t("Vehicle category")}</span>
-                        </div>
+                        <VehiclePhoto vehicleId={vehicle.id} name={vehicle.name} className="h-32 mb-4 rounded-lg" showToggle={false} />
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>

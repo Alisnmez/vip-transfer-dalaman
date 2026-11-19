@@ -1,3 +1,4 @@
+import { VehiclePhoto } from './VehiclePhoto'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
@@ -287,7 +288,7 @@ export function VehiclesPage() {
             const details = language === 'en' ? vehicle : fleetCopy[language][vehicle.bookingVehicleId]
             return (
               <article className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
-                <div aria-hidden="true" className="h-56 w-full shrink-0 bg-surface-container-low" />
+                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="h-56 shrink-0" />
                 <div className="flex flex-1 flex-col gap-4 p-6">
                   <h2 className="text-xl font-bold text-admin-primary">{vehicle.name}</h2>
                   <div className="flex flex-wrap gap-4 text-sm text-on-surface-variant">
