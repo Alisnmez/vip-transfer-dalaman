@@ -1,3 +1,4 @@
+import { sanitizePersonName, isValidPersonName, isValidEmail, sanitizePhoneDigits } from '../../shared/utils/inputValidation'
 import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -104,13 +105,17 @@ export function BookingPassengerPage() {
       setError('Please complete your name, phone number and email address.')
       return
     }
-    const digits = phoneNumber.replace(/\D/g, '')
+    if (!isValidPersonName(firstName) || !isValidPersonName(lastName)) {
+      setError('First and last names must contain at least 2 letters and cannot contain numbers or symbols.')
+      return
+    }
+    const digits = sanitizePhoneDigits(phoneNumber)
     const countryDigits = countryCode.replace(/\D/g, '').length
     if ((tenDigitNumber && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
       setPhoneError(countryCode === '+90' ? 'Turkish mobile numbers must contain 10 digits and start with 5 (without +90).' : countryCode === '+1' ? 'US and Canadian numbers must contain 10 digits (without +1).' : countryCode === '+7' ? 'Enter 10 digits after the +7 dialing code.' : 'Enter a valid national number: at least 7 digits and no more than 15 digits including the country code.')
       return
     }
-    if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
+    if (!isValidEmail(email)) {
       setEmailError('Please enter a valid email address.')
       return
     }
@@ -208,13 +213,13 @@ export function BookingPassengerPage() {
                     label={t("First Name")} required
                     placeholder={t("e.g. Alexander")}
                     value={firstName}
-                    onChange={setFirstName}
+                    onChange={(value) => setFirstName(sanitizePersonName(value))}
                   />
                   <FormField
                     label={t("Last Name")} required
                     placeholder={t("e.g. Hamilton")}
                     value={lastName}
-                    onChange={setLastName}
+                    onChange={(value) => setLastName(sanitizePersonName(value))}
                   />
                 </div>
 
