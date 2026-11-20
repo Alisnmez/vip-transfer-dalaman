@@ -251,7 +251,7 @@ export function HomePage() {
           <div className="grid grid-cols-1 gap-stack-lg sm:grid-cols-2 lg:grid-cols-4">
             {fleetCatalogue.map((vehicle) => (
               <article key={vehicle.bookingVehicleId} className="professional-card accent-border-left flex min-w-0 flex-col rounded-xl p-6">
-                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-36 rounded-lg" exteriorOnly />
+                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-36 rounded-lg" />
                 <h3 className="mb-4 font-title-md text-on-surface">{vehicle.name}</h3>
                 <Link to={`/booking?vehicle=${encodeURIComponent(vehicle.bookingVehicleId)}`} className="mt-auto block w-full rounded-lg bg-primary px-2 py-3 text-center font-bold text-white transition-all hover:opacity-90">
                   {copy.options}
