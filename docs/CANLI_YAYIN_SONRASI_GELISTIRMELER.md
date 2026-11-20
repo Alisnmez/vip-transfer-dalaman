@@ -53,3 +53,24 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 - **Karar:** İlk sürümde online ödeme olmayacak; ileride opsiyonel özellik olarak değerlendirilebilir.
 - **Test:** Yalnızca plan/dokümantasyon değişikliği; uygulama kodu değiştirilmedi.
 - **Sonraki adım:** İlk yayın için tahsilat biçimi ve iptal politikasını netleştirirken, yayın sonrası fikirleri bu dosyada biriktirmek.
+
+
+## 2026-11-20 — Rakip karşılaştırması ve yeni geliştirme adayları
+
+**Araştırma:** Dalaman Go Transfer, Transferhood, Monarch Transfer, GET4S, RideGlobus, Dalaman Transfer ve DriveOnPort. Ayrıntılı rapor: kullanıcıya verilen `DALAMANWAY_RAKIP_ANALIZI_2026-11-20.md`. Rakip vaatleri doğrulanmış DalamanWay hizmeti sayılmaz.
+
+| Öncelik | Fırsat | Neden / kabul kriteri | Durum |
+|---|---|---|---|
+| P0 | Kişisel verili rezervasyon taslağını güvenli hale getirme | localStorage yolcu verisi ve eski taslaklar temizlenir; geri/yenileme/ortak cihaz senaryoları test edilir | AÇIK — ayrı gizlilik PR'ları kontrol edilecek |
+| P0 | Araç fotoğrafları ve lisans | Dört dış, uygun iç görsel; geçici üçüncü taraf URL yerine izinli yerel optimize görsel, mobil ve hover testleri | KISMEN — PR #27 merge edildi, doğrulama gerekli |
+| P0 | Gerçek fiyat, ödeme, iptal ve karşılama koşulları | Sitedeki her vaat işletmece onaylı; fiyat araç başına mı açık; yanlış ücretsiz hizmet iddiası yok | DOĞRULAMA GEREKİYOR |
+| P1 | Araç karşılaştırma kartları | Yolcu/valiz, donanım, iç/dış fotoğraf, gruba uygunluk; mobil kullanılabilir | FİKİR |
+| P1 | Rezervasyon özeti ve karşılama rehberi | Uçuş/araç/fiyat/ödeme/meeting point ve destek kanalı net | FİKİR |
+| P1 | Çocuk koltuğu/özel istek akışı | Yaş/kilo, koltuk sayısı, ek bagaj, admin iletimi; uygunluk ve ücret onaylı | FİKİR |
+| P1 | Gerçek güven kanıtları | Doğrulanmış şirket/lisans/yorum/iletişim; uydurma puan yok | FİKİR |
+| P2 | SEO ve dönüşüm ölçümü | Özgün rota rehberleri, indeks/ülke/sorgu takibi, rızalı GA4 hunisi | İLERİ OPTİMİZASYON |
+| P2 | Otel/marina adres önerileri, B2B ortaklıklar | Hatalı adresleri azaltma, gerçek partner rezervasyonu ve kârlılık ölçümü | FİKİR |
+
+**Rakip kaynakları:** https://dalamangotransfer.com/en/vehicles ; https://transferhood.com/city/dalaman/ ; https://monarchtransfer.com/en ; https://www.get4s.com/en/transfers/dalaman-transfer ; https://rideglobus.com/airport-transfers/turkiye/dalaman-airport ; https://www.dalamantransfer.com/frequently-asked-questions/ ; https://driveonport.com/dalaman-airport-dlm/
+
+**Sıra:** Önce P0 rezervasyon güvenliği ve yayın kapıları, sonra P1 dönüşüm/operasyon, ardından ölçüme bağlı P2 büyüme. Bu kayıt yalnızca dokümantasyondur; özellikler uygulanmadı, prod yayını yapılmadı.
