@@ -17,14 +17,32 @@
 }
 
 .home-review-card {
+  align-self: stretch;
   width: min(21rem, 73vw);
+}
+
+.home-review-comment {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.home-review-card[data-expanded="true"] .home-review-comment {
+  display: block;
+}
+
+@media (hover: hover) {
+  .home-review-card:hover .home-review-comment {
+    display: block;
+  }
 }
 
 .home-review-group[aria-hidden="true"] {
   display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .home-review-viewport[data-motion="true"] {
     overflow: hidden;
   }
@@ -33,6 +51,8 @@
     animation: home-review-scroll 45s linear infinite;
   }
 
+  .home-review-viewport[data-motion="true"]:focus-within .home-review-track,
+  .home-review-viewport[data-motion="true"][data-review-expanded="true"] .home-review-track,
   .home-review-viewport[data-motion="true"]:hover .home-review-track {
     animation-play-state: paused;
   }
@@ -42,7 +62,7 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (hover: none), (prefers-reduced-motion: reduce) {
   .home-review-pause {
     display: none;
   }

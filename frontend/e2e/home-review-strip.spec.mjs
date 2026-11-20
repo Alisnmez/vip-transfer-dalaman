@@ -66,3 +66,28 @@ test('homepage shows the same ten latest published reviews as the reviews page',
   await expect(page).toHaveURL(/#share-review$/)
   await expect(page.getByRole('region', { name: 'Share a review' })).toBeInViewport()
 })
+
+test('a long homepage review expands on hover and by button', async ({ page }) => {
+  const comment = 'A detailed transfer note about finding the right entrance and fitting the luggage. '.repeat(8).trim()
+  await page.route('**/reviews?page=0&size=10', route => route.fulfill({
+    headers: { 'access-control-allow-origin': '*' },
+    json: { content: [{ id: 20, name: 'Test Traveller', rating: 5, comment }], number: 0, totalElements: 1, totalPages: 1 },
+  }))
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto(site.href)
+  const card = page.getByRole('region', { name: 'Customer Reviews' }).getByRole('listitem')
+  const review = card.locator('.home-review-comment')
+  await expect(review).toHaveCSS('display', '-webkit-box')
+  await card.hover()
+  await expect(review).toHaveCSS('display', 'block')
+  await page.mouse.move(0, 0)
+  await expect(review).toHaveCSS('display', '-webkit-box')
+  const more = card.getByRole('button', { name: 'Read full review: Test Traveller' })
+  await more.press('Space')
+  const less = card.getByRole('button', { name: 'Show less: Test Traveller' })
+  await expect(less).toHaveAttribute('aria-expanded', 'true')
+  await expect(review).toHaveCSS('display', 'block')
+  await less.press('Space')
+  await expect(more).toHaveAttribute('aria-expanded', 'false')
+  await expect(review).toHaveCSS('display', '-webkit-box')
+})
