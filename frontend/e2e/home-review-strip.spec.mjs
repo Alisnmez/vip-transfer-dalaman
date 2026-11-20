@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 
-const site = process.env.STAGING_FRONTEND_URL ?? 'http://127.0.0.1:4173'
+const site = new URL(process.env.STAGING_FRONTEND_URL ?? 'http://127.0.0.1:4173')
+site.searchParams.set('demo-reviews', '0')
 const reviews = [
   { id: 1, name: 'Testgast', rating: 5, comment: 'Die Abholung war pünktlich.' },
   { id: 2, name: 'Тестовый пассажир', rating: 4, comment: 'Водитель приехал вовремя.' },
@@ -14,7 +15,7 @@ test('homepage review strip scrolls and preserves original review text', async (
     headers: { 'access-control-allow-origin': '*' },
     json: { content: published, number: 0, totalElements: published.length, totalPages: 1 },
   }))
-  await page.goto(site)
+  await page.goto(site.href)
 
   const section = page.getByRole('region', { name: 'Customer Reviews' })
   const track = section.locator('.home-review-track')
@@ -55,7 +56,7 @@ test('homepage shows the same ten latest published reviews as the reviews page',
     json: { content: latestReviews, number: 0, totalElements: 12, totalPages: 2 },
   }))
 
-  await page.goto(site)
+  await page.goto(site.href)
   const strip = page.getByRole('region', { name: 'Customer Reviews' })
   const latestNames = latestReviews.map(review => review.name)
   await expect(strip.locator('.home-review-group:not([aria-hidden]) li > p:first-child')).toHaveText(latestNames)
