@@ -1,6 +1,5 @@
 package com.viptransfer.reviews;
 
-import com.viptransfer.validation.InputFormats;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ public class CustomerReviewController {
     }
 
     public record ReviewSubmission(
-        @NotBlank @Size(max = 80) @Pattern(regexp = InputFormats.PERSON_NAME) String name,
+        @NotBlank @Size(max = 80) String name,
         @Min(1) @Max(5) int rating,
         @NotBlank @Size(min = 10, max = 1500) String comment,
         @AssertTrue boolean publicationConsent

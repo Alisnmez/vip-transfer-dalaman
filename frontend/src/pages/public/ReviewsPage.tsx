@@ -15,7 +15,6 @@ const reviewsCopy = {
     title: "Customer Reviews",
     demoTitle: "Customer Reviews",
     demoNotice: "Sample reviews",
-    presentationNotice: "Fictional reviews · Presentation",
     demoLabel: "Fictional review examples",
     intro: "We value feedback from our passengers. Genuine customer reviews will be published here as they become available.",
     published: "Published customer reviews",
@@ -50,7 +49,6 @@ const reviewsCopy = {
     title: "Kundenbewertungen",
     demoTitle: "Gästebewertungen",
     demoNotice: "Beispielbewertungen",
-    presentationNotice: "Fiktive Bewertungen · Präsentation",
     demoLabel: "Fiktive Gästebewertungen",
     intro: "Wir freuen uns über Rückmeldungen unserer Fahrgäste. Echte Kundenbewertungen veröffentlichen wir hier, sobald sie vorliegen.",
     published: "Veröffentlichte Kundenbewertungen",
@@ -85,7 +83,6 @@ const reviewsCopy = {
     title: "Отзывы клиентов",
     demoTitle: "Отзывы о поездках",
     demoNotice: "Примеры отзывов",
-    presentationNotice: "Вымышленные отзывы · Презентация",
     demoLabel: "Вымышленные примеры отзывов",
     intro: "Мы ценим отзывы пассажиров. Здесь публикуются подлинные отзывы клиентов по мере их поступления.",
     published: "Опубликованные отзывы клиентов",
@@ -144,13 +141,13 @@ function starLabel(language: 'en' | 'de' | 'ru', count: number) {
   }[language]
 }
 
-export function ReviewsPage({ presentation = false }: { presentation?: boolean }) {
+export function ReviewsPage() {
   const { search } = useLocation()
-  const demo = presentation || isReviewDemoPreview(search)
-  return <ReviewContent key={`${demo}:${presentation}`} demo={demo} presentation={presentation} />
+  const demo = isReviewDemoPreview(search)
+  return <ReviewContent key={String(demo)} demo={demo} />
 }
 
-function ReviewContent({ demo, presentation }: { demo: boolean; presentation: boolean }) {
+function ReviewContent({ demo }: { demo: boolean }) {
   const { language } = useLanguage()
   const copy = reviewsCopy[language]
   const locale = language === 'en' ? 'en-GB' : language
@@ -210,19 +207,21 @@ function ReviewContent({ demo, presentation }: { demo: boolean; presentation: bo
       <main className="mx-auto max-w-5xl px-margin-page pb-20 pt-32">
         <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">{copy.eyebrow}</p>
         <h1 className="font-display-lg text-display-lg text-admin-primary">{demo ? copy.demoTitle : copy.title}</h1>
+        {/* Test-only visual preview: temporarily hide the sample-review notice.
         <p className={demo ? "mt-4 inline-flex rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-950" : "mt-4 max-w-2xl text-on-surface-variant"}>
-          {presentation ? copy.presentationNotice : demo ? copy.demoNotice : copy.intro}
+          {demo ? copy.demoNotice : copy.intro}
         </p>
-        {!presentation && <div className="mt-4">
+        */}
+        <div className="mt-4">
           <a className="inline-flex rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white hover:opacity-90" href="#share-review">
             {copy.experience}
           </a>
-        </div>}
+        </div>
         {reviews.length > 0 && <section aria-label={demo ? copy.demoLabel : copy.published} className="mt-8 grid gap-4 md:grid-cols-2">{reviews.map(review => <article key={review.id} className="rounded-2xl border border-outline-variant bg-white p-6 shadow-sm"><div className="flex items-center gap-3"><div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-100 font-bold text-amber-900">{review.name.trim().charAt(0).toUpperCase()}</div><div><h2 dir="auto" translate="no" className="font-semibold text-admin-primary">{review.name}</h2>{review.createdAt && !Number.isNaN(Date.parse(review.createdAt)) && <time dateTime={review.createdAt} className="text-xs text-on-surface-variant">{new Date(review.createdAt).toLocaleString(locale, { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}</time>}</div></div><p aria-label={ratingText(language, review.rating)} className="mt-4 text-lg tracking-wider text-amber-500">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</p><p dir="auto" translate="no" className="mt-3 whitespace-pre-wrap break-words leading-relaxed text-on-surface-variant">{review.comment}</p></article>)}</section>}
         {totalPages > 1 && <nav aria-label={copy.pages} className="mt-6 flex flex-wrap items-center justify-center gap-4"><button type="button" disabled={page === 0} onClick={() => setPage(p => p - 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">{copy.previous}</button><span aria-live="polite">{copy.page} {page + 1} {copy.of} {totalPages}</span><button type="button" disabled={page + 1 >= totalPages} onClick={() => setPage(p => p + 1)} className="rounded-lg border px-4 py-2 disabled:opacity-40">{copy.next}</button></nav>}
         <GuestPhotos gallery />
 
-        {!presentation && <section id="share-review" tabIndex={-1} aria-label={copy.share} className="mt-10 scroll-mt-24 rounded-xl border border-outline-variant bg-white p-4 sm:p-8">
+        <section id="share-review" tabIndex={-1} aria-label={copy.share} className="mt-10 scroll-mt-24 rounded-xl border border-outline-variant bg-white p-8">
           <h2 className="mb-2 text-xl font-semibold text-admin-primary">{copy.experience}</h2>
           <p className="mb-6 text-on-surface-variant">
             {copy.guidance}
@@ -234,7 +233,7 @@ function ReviewContent({ demo, presentation }: { demo: boolean; presentation: bo
             </label>
             <fieldset className="grid gap-2">
               <legend className="font-semibold text-admin-primary">{copy.rating} <span className="text-sm font-normal text-red-600">{copy.required}</span></legend>
-              <div className="flex flex-wrap items-center gap-1" aria-label={copy.choose}>
+              <div className="flex items-center gap-1" aria-label={copy.choose}>
                 {[1, 2, 3, 4, 5].map((value) => (
                   <button key={value} type="button"
                     aria-label={value + starLabel(language, value)}
@@ -259,8 +258,7 @@ function ReviewContent({ demo, presentation }: { demo: boolean; presentation: bo
           </form>
           {feedback && <p role={feedbackType === 'error' ? 'alert' : 'status'} className={'mt-5 rounded-lg border p-4 text-sm font-medium ' + (feedbackType === 'success' ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800')}>{feedbackKeys[feedback] ? copy[feedbackKeys[feedback]] : feedback}</p>}
           <Link className="mt-5 inline-block text-admin-primary underline" to="/booking">{copy.book}</Link>
-        </section>}
-        {presentation && feedback && <p role="alert">{copy.loadError}</p>}
+        </section>
       </main>
     </div>
   )

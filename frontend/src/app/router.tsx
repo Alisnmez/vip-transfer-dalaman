@@ -124,7 +124,6 @@ export const router = createBrowserRouter([
       { path: 'contact', element: <ContactPage /> },
       { path: 'faq', element: <FAQPage /> },
       { path: 'reviews', element: <ReviewsPage /> },
-      { path: 'reviews/presentation', element: <ReviewsPage presentation /> },
       { path: 'booking', element: <BookingFormPage /> },
       { path: 'booking/passenger', element: <BookingPassengerPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },

@@ -1,8 +1,6 @@
 package com.viptransfer.booking.dto;
 
-import com.viptransfer.validation.InputFormats;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -11,7 +9,6 @@ public class BookingRequestDto {
 
     @jakarta.validation.constraints.Size(max = 120, message = "Customer name must be at most 120 characters.")
     @NotBlank(message = "Customer name is required.")
-    @Pattern(regexp = InputFormats.PERSON_NAME, message = "Customer name contains invalid characters.")
     private String customerName;
 
     @NotNull(message = "Passenger count is required.")

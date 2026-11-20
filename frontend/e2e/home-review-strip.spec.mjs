@@ -92,29 +92,3 @@ test('a long homepage review expands on hover and by button', async ({ page }) =
   await expect(more).toHaveAttribute('aria-expanded', 'false')
   await expect.poll(isClipped).toBe(true)
 })
-
-test('review presentation and submission fit a narrow mobile screen', async ({ page }) => {
-  await page.setViewportSize({ width: 320, height: 740 })
-  await page.goto(new URL('/reviews/presentation', site).href)
-  const examples = page.getByRole('region', { name: 'Fictional review examples' })
-  await expect(examples.getByRole('article')).toHaveCount(10)
-  await expect(page.getByText('Page 1 of 17')).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Share your experience' })).toHaveCount(0)
-  await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex,nofollow')
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-  await page.getByRole('button', { name: 'Next' }).click()
-  await expect(page.getByText('Page 2 of 17')).toBeVisible()
-
-  await page.route('**/reviews?page=0&size=10', route => route.fulfill({
-    headers: { 'access-control-allow-origin': '*' },
-    json: { content: [], number: 0, totalElements: 0, totalPages: 0 },
-  }))
-  await page.goto(new URL('/reviews?demo-reviews=0', site).href)
-  await page.getByRole('link', { name: 'Share your experience' }).click()
-  const name = page.getByLabel('Your name')
-  await name.fill('123Éléonore O’Neill')
-  await expect(name).toHaveValue('Éléonore O’Neill')
-  await name.fill('Анна42')
-  await expect(name).toHaveValue('Анна')
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-})
