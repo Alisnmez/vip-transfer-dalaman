@@ -1,3 +1,4 @@
+import { sanitizePersonName, isValidPersonName } from '../../shared/utils/inputValidation'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { GuestPhotos } from './GuestPhotos'
@@ -176,7 +177,11 @@ function ReviewContent({ demo }: { demo: boolean }) {
 
   async function submitFeedback(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    if (!permission || !name.trim() || !rating || comment.trim().length < 10 || submitting) return
+    if (!permission || !isValidPersonName(name) || !rating || comment.trim().length < 10 || submitting) {
+      setFeedbackType('error')
+      setFeedback('Please enter a valid name (letters only, at least 2 characters) and complete all required fields.')
+      return
+    }
     setSubmitting(true)
     setFeedback('')
     setFeedbackType(null)
@@ -224,7 +229,7 @@ function ReviewContent({ demo }: { demo: boolean }) {
           <form className="grid max-w-xl gap-5" onSubmit={submitFeedback}>
             <label className="grid gap-2 font-semibold text-admin-primary" htmlFor="review-name">
               {copy.name} <span className="text-sm font-normal text-red-600">{copy.required}</span>
-              <input className="rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-name" maxLength={80} onChange={(event) => setName(event.target.value)} required type="text" value={name} />
+              <input className="rounded-lg border border-outline-variant p-3 font-normal text-on-surface" id="review-name" autoComplete="name" maxLength={80} onChange={(event) => setName(sanitizePersonName(event.target.value))} required type="text" value={name} />
             </label>
             <fieldset className="grid gap-2">
               <legend className="font-semibold text-admin-primary">{copy.rating} <span className="text-sm font-normal text-red-600">{copy.required}</span></legend>
