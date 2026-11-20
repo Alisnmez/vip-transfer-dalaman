@@ -71,6 +71,7 @@ export type DashboardSummary = {
   pending: number
   today: number
   upcoming: Booking[]
+  started?: Booking[]
 }
 
 export function getDashboardSummary() {

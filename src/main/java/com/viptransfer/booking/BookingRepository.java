@@ -24,12 +24,19 @@ public interface BookingRepository extends JpaRepository<Booking, Long>, JpaSpec
 
     @org.springframework.data.jpa.repository.Query("""
             select b from Booking b
-            where (b.status = 'CONFIRMED' and b.transferDateTime <= :now)
-               or (b.status in ('PENDING', 'CONFIRMED') and b.transferDateTime > :now)
-            order by case when b.status = 'CONFIRMED' and b.transferDateTime <= :now then 0 else 1 end,
-                     b.transferDateTime asc, b.id asc
+            where b.status in ('PENDING', 'CONFIRMED') and b.transferDateTime > :now
+            order by b.transferDateTime asc, b.id asc
             """)
-    java.util.List<Booking> findDashboardBookings(
+    java.util.List<Booking> findUpcomingDashboardBookings(
+            @org.springframework.data.repository.query.Param("now") java.time.LocalDateTime now,
+            org.springframework.data.domain.Pageable pageable);
+
+    @org.springframework.data.jpa.repository.Query("""
+            select b from Booking b
+            where b.status = 'CONFIRMED' and b.transferDateTime <= :now
+            order by b.transferDateTime desc, b.id asc
+            """)
+    java.util.List<Booking> findStartedDashboardBookings(
             @org.springframework.data.repository.query.Param("now") java.time.LocalDateTime now,
             org.springframework.data.domain.Pageable pageable);
 }

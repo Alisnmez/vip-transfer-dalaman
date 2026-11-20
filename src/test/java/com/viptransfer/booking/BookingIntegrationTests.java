@@ -5,14 +5,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -31,6 +35,32 @@ class BookingIntegrationTests {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Test
+    @Transactional
+    void dashboardQueriesKeepUpcomingPickupsAheadOfTheLimitAndTrackStartedSeparately() {
+        LocalDateTime cutoff = LocalDateTime.of(2050, 1, 1, 12, 0);
+        saveDashboardPickup(cutoff.plusDays(2), "CONFIRMED");
+        Long first = saveDashboardPickup(cutoff.plusHours(1), "PENDING");
+        Long sameTime = saveDashboardPickup(cutoff.plusHours(1), "CONFIRMED");
+        saveDashboardPickup(cutoff.plusMinutes(5), "CANCELLED");
+        Long older = saveDashboardPickup(cutoff.minusHours(2), "CONFIRMED");
+        Long reached = saveDashboardPickup(cutoff, "CONFIRMED");
+        saveDashboardPickup(cutoff.minusMinutes(1), "PENDING");
+
+        PageRequest firstTwo = PageRequest.of(0, 2);
+        assertEquals(List.of(first, sameTime), bookingRepository.findUpcomingDashboardBookings(cutoff, firstTwo)
+                .stream().map(Booking::getId).toList());
+        assertEquals(List.of(reached, older), bookingRepository.findStartedDashboardBookings(cutoff, firstTwo)
+                .stream().map(Booking::getId).toList());
+    }
+
+    private Long saveDashboardPickup(LocalDateTime dateTime, String status) {
+        Booking booking = new Booking();
+        booking.setTransferDateTime(dateTime);
+        booking.setStatus(status);
+        return bookingRepository.save(booking).getId();
+    }
 
 
     @Test

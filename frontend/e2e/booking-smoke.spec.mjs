@@ -28,13 +28,21 @@ test('localized route URLs select their language and keep the destination on boo
 
 // Exercise the real admin UI against deterministic, disposable API fixtures.
 // PostgreSQL integration tests verify the real API separately.
-async function adminFixture(page, { width = 1280 } = {}) {
+async function adminFixture(page, { width = 1280, extraDashboardBookings = false } = {}) {
   await page.setViewportSize({ width, height: 900 })
-  const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
+  const turkeyDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' })
+  const day = turkeyDate.format(new Date())
+  const tomorrow = turkeyDate.format(new Date(Date.now() + 86_400_000))
+  const yesterday = turkeyDate.format(new Date(Date.now() - 86_400_000))
   const booking = { id: 901, customerName: 'Menu test passenger', passengerCount: 2,
     pickUpLocation: 'Dalaman Airport', dropOffLocation: 'Marmaris', transferDateTime: `${day}T15:30:00`,
     price: 50, status: 'PENDING', phoneNumber: '+447700900123', email: 'test@example.invalid',
     transferAddress: 'Test hotel', vehicleId: 'mercedes-vito', tripType: 'one-way' }
+  const dashboardBooking = { ...booking, transferDateTime: `${tomorrow}T15:30:00` }
+  const later = { ...dashboardBooking, id: 899, customerName: 'Later pickup', transferDateTime: `${tomorrow}T18:30:00` }
+  const earlier = { ...dashboardBooking, id: 904, customerName: 'Nearest pickup', transferDateTime: `${tomorrow}T09:00:00`,
+    vehicleId: 'vip-minivan', luggageCount: 3, flightNumber: 'LS123', price: 52.5 }
+  const started = { ...booking, id: 905, customerName: 'Past scheduled pickup', status: 'CONFIRMED', transferDateTime: `${yesterday}T09:00:00` }
   const reviews = Array.from({ length: 11 }, (_, i) => ({ id: i + 1, customerName: `Review passenger ${i + 1}`,
     rating: 5, comment: 'A punctual and comfortable transfer.', createdAt: '2026-11-18T09:00:00Z', status: 'PENDING' }))
   const requests = []
@@ -57,7 +65,9 @@ async function adminFixture(page, { width = 1280 } = {}) {
       return reply(row)
     }
     if (path === '/admin/auth-check') return reply({})
-    if (path === '/bookings/dashboard') return reply({ total: 1, pending: 1, today: 1, upcoming: [booking] })
+    if (path === '/bookings/dashboard') return reply(extraDashboardBookings
+      ? { total: 4, pending: 3, today: 0, upcoming: [later, dashboardBooking, earlier], started: [started] }
+      : { total: 1, pending: 1, today: 0, upcoming: [dashboardBooking] })
     if (path === '/bookings/page') return reply({ content: [booking], totalElements: 1, totalPages: 1, number: 0 })
     if (path === '/bookings/calendar') return reply(url.searchParams.get('month') === day.slice(0, 7) ? [booking] : [])
     if (path === '/bookings/901/email-status') return reply([])
@@ -90,6 +100,21 @@ test('admin Dashboard renders API counts, refreshes and opens booking details', 
   await page.getByLabel('Booking status', { exact: true }).selectOption('CONFIRMED')
   await expect(page.getByLabel('Booking status', { exact: true })).toHaveValue('CONFIRMED')
   await expect.poll(() => requests.some(r => r.path === '/bookings/901/status' && r.method === 'PATCH')).toBe(true)
+})
+
+test('admin Dashboard puts the nearest pickup first on mobile and separates past pickups', async ({ page }) => {
+  await adminFixture(page, { width: 390, extraDashboardBookings: true })
+  const upcoming = page.getByRole('region', { name: 'Upcoming pickups' })
+  await expect(upcoming.getByRole('link')).toHaveText([/Nearest pickup/, /Menu test passenger/, /Later pickup/])
+  const first = upcoming.getByRole('link').first()
+  await expect(first).toContainText('09:00')
+  await expect(first).toContainText('VIP Vito')
+  await expect(first).toContainText('LS123')
+  await expect(first).toContainText('£52.50')
+  await expect(first).toHaveAttribute('href', '/admin/bookings/904')
+  await expect(page.getByRole('region', { name: 'Confirmed pickups past their scheduled time' }))
+    .toContainText('Past scheduled pickup')
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390)
 })
 
 test('admin Bookings combines search, status and date filters and clears them', async ({ page }) => {

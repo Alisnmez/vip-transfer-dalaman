@@ -3,6 +3,7 @@ package com.viptransfer.booking;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.time.LocalDateTime;
@@ -24,11 +25,15 @@ class BookingDashboardSummaryTest {
         Booking upcoming = new Booking();
         upcoming.setId(42L);
         upcoming.setStatus("CONFIRMED");
+        Booking started = new Booking();
+        started.setId(18L);
+        started.setStatus("CONFIRMED");
         when(repository.count()).thenReturn(120L);
         when(repository.countByStatus("PENDING")).thenReturn(7L);
         when(repository.countByStatusInAndTransferDateTimeGreaterThanEqualAndTransferDateTimeLessThan(
                 anyCollection(), any(LocalDateTime.class), any(LocalDateTime.class))).thenReturn(3L);
-        when(repository.findDashboardBookings(any(LocalDateTime.class), any(org.springframework.data.domain.Pageable.class))).thenReturn(List.of(upcoming));
+        when(repository.findUpcomingDashboardBookings(any(LocalDateTime.class), any(Pageable.class))).thenReturn(List.of(upcoming));
+        when(repository.findStartedDashboardBookings(any(LocalDateTime.class), any(Pageable.class))).thenReturn(List.of(started));
 
         Map<String, Object> result = service.getDashboardSummary();
 
@@ -36,6 +41,7 @@ class BookingDashboardSummaryTest {
         assertEquals(7L, result.get("pending"));
         assertEquals(3L, result.get("today"));
         assertEquals(List.of(upcoming), result.get("upcoming"));
+        assertEquals(List.of(started), result.get("started"));
 
         @SuppressWarnings("unchecked")
         ArgumentCaptor<Collection<String>> statuses = ArgumentCaptor.forClass(Collection.class);
@@ -48,7 +54,9 @@ class BookingDashboardSummaryTest {
         assertEquals(start.getValue().plusDays(1), end.getValue());
         assertEquals(0, start.getValue().getHour());
         assertEquals(0, start.getValue().getMinute());
-        verify(repository).findDashboardBookings(any(LocalDateTime.class), argThat(page -> page.getPageSize() == 8));
+        ArgumentCaptor<LocalDateTime> cutoff = ArgumentCaptor.forClass(LocalDateTime.class);
+        verify(repository).findUpcomingDashboardBookings(cutoff.capture(), argThat(page -> page.getPageSize() == 12));
+        verify(repository).findStartedDashboardBookings(eq(cutoff.getValue()), argThat(page -> page.getPageSize() == 8));
         verify(repository, never()).findAll();
     }
 }
