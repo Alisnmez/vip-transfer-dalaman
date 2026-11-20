@@ -57,7 +57,6 @@ const infoCopy = {
     bags: "bags",
     contactLabel: "Contact details",
     contactUs: "Contact us",
-    phone: "Phone:",
     email: "Email:",
     home: "Back to Home",
   },
@@ -109,7 +108,6 @@ const infoCopy = {
     bags: "Gepäckstücke",
     contactLabel: "Kontaktdaten",
     contactUs: "Kontaktieren Sie uns",
-    phone: "Telefon:",
     email: "E-Mail:",
     home: "Zur Startseite",
   },
@@ -161,7 +159,6 @@ const infoCopy = {
     bags: "мест багажа",
     contactLabel: "Контактные данные",
     contactUs: "Свяжитесь с нами",
-    phone: "Телефон:",
     email: "Эл. почта:",
     home: "На главную",
   },
@@ -401,7 +398,6 @@ function InfoPage({
           <section aria-label={copy.contactLabel} className="mt-8 rounded-xl border border-outline-variant bg-white p-6">
             <h2 className="font-title-md text-title-md text-admin-primary mb-4">{copy.contactUs}</h2>
             <div className="flex flex-col gap-3">
-              <a className="text-admin-primary underline underline-offset-4" href="tel:+905555555555">{copy.phone} 0555 555 55 55</a>
               <a className="text-admin-primary underline underline-offset-4" href={`mailto:${supportEmail}`}>{copy.email} {supportEmail}</a>
             </div>
           </section>

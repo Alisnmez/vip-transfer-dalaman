@@ -4,6 +4,7 @@ import { supportEmail } from '../../features/booking/support'
 import { Link } from 'react-router-dom'
 import { useLayoutEffect, useState } from 'react'
 
+import { BookingPolicyLinks } from './BookingPolicyLinks'
 import { PublicNavbar } from './PublicNavbar'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
@@ -325,6 +326,7 @@ export function BookingConfirmationPage() {
         </div>
 
         <section className="mt-12 bg-white border border-outline-variant rounded-xl p-8 card-soft-shadow text-center max-w-2xl mx-auto">
+          <div className="mb-6"><BookingPolicyLinks /></div>
           <div className="flex flex-col items-center gap-6">
             <label className="flex items-center gap-3 cursor-pointer group">
               <input

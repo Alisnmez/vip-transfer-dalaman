@@ -1,5 +1,7 @@
 package com.viptransfer.email;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viptransfer.booking.Booking;
 import com.viptransfer.booking.BookingService;
 import com.viptransfer.booking.dto.BookingRequestDto;
@@ -11,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -64,6 +67,47 @@ class BookingEmailIntegrationTest {
                 }));
         assertEquals(before, jdbc.queryForObject("SELECT count(*) FROM booking", Long.class));
         assertEquals(0, count("PENDING"));
+    }
+
+    @Test void customerReceivesOnePendingAndOneConfirmedMessageForTheSameBooking() throws Exception {
+        when(gateway.send(anyString(), anyString())).thenReturn("provider-test-id");
+        String key = UUID.randomUUID().toString();
+        var dto = request();
+        Booking booking = bookings.createBooking(dto, key);
+        assertEquals(booking.getId(), bookings.createBooking(dto, key).getId());
+
+        var payloads = org.mockito.ArgumentCaptor.forClass(String.class);
+        dispatcher.dispatch();
+        verify(gateway, times(2)).send(anyString(), payloads.capture());
+        assertEquals("PENDING", bookings.getBooking(booking.getId()).getStatus());
+        var mapper = new ObjectMapper();
+        var messages = new ArrayList<JsonNode>();
+        for (String payload : payloads.getAllValues()) {
+            var message = mapper.readTree(payload);
+            if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
+        }
+        assertEquals(1, messages.size());
+        assertEquals("DalamanWay | We received your transfer request (#" + booking.getId() + ")",
+                messages.getFirst().path("subject").asText());
+        assertTrue(messages.getFirst().path("text").asText().contains("not yet confirmed"));
+        assertTrue(messages.getFirst().path("html").asText().contains("PENDING"));
+
+        bookings.updateStatus(booking.getId(), "CONFIRMED");
+        bookings.updateStatus(booking.getId(), "CONFIRMED");
+        dispatcher.dispatch();
+        var allPayloads = org.mockito.ArgumentCaptor.forClass(String.class);
+        verify(gateway, times(4)).send(anyString(), allPayloads.capture());
+        for (String payload : allPayloads.getAllValues().subList(2, 4)) {
+            var message = mapper.readTree(payload);
+            if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
+        }
+        assertEquals(2, messages.size());
+        var confirmed = messages.getLast();
+        assertEquals("DalamanWay | Your airport transfer is confirmed (#" + booking.getId() + ")",
+                confirmed.path("subject").asText());
+        assertTrue(confirmed.path("html").asText().contains("CONFIRMED"));
+        assertFalse(confirmed.path("text").asText().contains("not yet confirmed"));
+        assertEquals(4, count("ACCEPTED"));
     }
 
     @Test void interruptedDeliveryStaysClaimedAndIsNotBlindlyResent() {
