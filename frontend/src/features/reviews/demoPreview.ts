@@ -3,5 +3,6 @@ export function isReviewTestHost() {
 }
 
 export function isReviewDemoPreview(search: string) {
-  return isReviewTestHost() && new URLSearchParams(search).get('demo-reviews') !== '0'
+  const requested = new URLSearchParams(search).get('demo-reviews')
+  return requested === '1' || (isReviewTestHost() && requested !== '0')
 }
