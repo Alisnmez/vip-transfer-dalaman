@@ -3,18 +3,18 @@ import type { PublicReview, ReviewPage } from './api'
 // Fictional examples for classroom presentations on the Render test site.
 const examples = [
   ["Hannah Prescott", 5, "Dalaman → Marmaris", "We got in after midnight from Manchester. I spotted the board as soon as we came out and we were on our way before I'd managed to text home."],
-  ["Graham Lister", 5, "Dalaman → İçmeler", "We followed the pickup instructions and saw our name on a board just outside arrivals. The van was spotless and the driver took both cases while we got the children settled."],
+  ["Graham Lister", 5, "Dalaman → İçmeler", "Easy pickup, lovely driver. Would book again."],
   ["Nina Berger", 5, "Dalaman → Marmaris", "Wir sind spät in Dalaman gelandet. Der Fahrer hat uns am Ausgang mit einem Namensschild empfangen. Die Fahrt zum Hotel war angenehm und wir konnten uns endlich entspannen."],
   ["Laura Mayfield", 5, "Dalaman → Ölüdeniz", "Two kids, a buggy and three cases. Everything fitted without having to put a bag on anyone's lap, which was exactly what I wanted after the flight."],
-  ["Martin Bellamy", 5, "Fethiye → Dalaman", "Pickup at 4:50 am and the driver was already outside our apartment when we came down. Uneventful in the best possible way."],
+  ["Martin Bellamy", 5, "Fethiye → Dalaman", "Bang on time for our early flight."],
   ["Mia Thornton", 5, "Dalaman → Göcek", "Our bags took ages to come out. I sent a quick message from the carousel and got a reply saying where to meet. We were in Göcek not long after leaving the terminal."],
   ["Tom Radcliffe", 5, "Dalaman → Dalyan", "Booked this after deciding against a hire car for a short break. I sent a pin for the villa and we went straight to the right gate."],
   ["Анна Морозова", 5, "Даламан → Фетхие", "Наш рейс задержался, и я написала водителю после посадки. Он быстро ответил и объяснил, где встретиться. До отеля доехали спокойно, с чемоданами помогли."],
   ["Debbie Sutton", 5, "Marmaris → Dalaman", "Our return pickup was at 6:15. The driver messaged when he was outside reception, helped with the bags and left us loads of time at the airport."],
-  ["Neil Cartwright", 5, "Dalaman → Hisarönü", "First time booking a private transfer. Nice to go straight to the hotel instead of sitting through all the coach drop-offs."],
+  ["Neil Cartwright", 5, "Dalaman → Hisarönü", "Straight to the hotel. Just what we needed."],
   ["Isobel Whitaker", 5, "Dalaman → Sarıgerme", "Only a short hop to Sarıgerme. We knew the price before we booked and the driver dropped us right at the hotel entrance. Exactly what we wanted."],
-  ["Jack Fletcher", 5, "Dalaman ↔ Fethiye", "Our flight landed early and I thought we'd have to wait. The driver messaged while we were at the carousel. Return was just as straightforward."],
-  ["Lukas Hoffmann", 5, "Dalaman → Dalyan", "Wir hatten für vier Personen gebucht und wollten wissen, ob der Kinderwagen ins Auto passt. Die Rückmeldung war klar, und vor Ort war genug Platz für alles."],
+  ["Jack Fletcher", 5, "Dalaman ↔ Fethiye", "Both pickups went smoothly. Cheers!"],
+  ["Lukas Hoffmann", 5, "Dalaman → Dalyan", "Pünktlich, sauber und unkompliziert."],
   ["Anna Kirkland", 5, "Dalaman → Kalkan", "Longer journey than I expected, but the seats were comfy. We asked for a quick stop for the loo and it wasn't a fuss."],
   ["Robyn Dawson", 5, "Ölüdeniz → Dalaman", "Our hotel has two entrances. The driver sent a pin for the one by reception so we knew exactly where to wait. Helpful when you're leaving before breakfast."],
   ["Emily Harrington", 5, "Dalaman → Marmaris", "I was travelling on my own and the clear pickup instructions made a real difference. Recognised the board and didn't need to ring anyone."],
@@ -24,12 +24,12 @@ const examples = [
   ["Olivia Jarvis", 5, "Dalaman → Göcek", "Driver dropped us at the marina entrance and pointed us toward the right pontoon. Saved us dragging two cases along the whole waterfront."],
   ["Chris Vaughan", 5, "Dalaman ↔ Dalyan", "I booked both legs together for Dalyan. I could see the airport meeting details and the return pickup time in the messages, so I could put both in my calendar before we flew."],
   ["Fiona Ellwood", 5, "Dalaman → İçmeler", "My mum takes a bit longer to get into a van. The driver gave her time and loaded the cases while she got settled. That was appreciated."],
-  ["Илья Соколов", 5, "Даламан → Гёджек", "Отправили точку на карте, потому что у дома не было заметной вывески. Водитель довёз прямо до нужных ворот. После перелёта это особенно порадовало."],
+  ["Илья Соколов", 5, "Даламан → Гёджек", "Всё чётко, доехали быстро. Спасибо!"],
   ["Ellie Greenwood", 5, "Dalaman → Ölüdeniz", "The air con was on when we got in. After waiting in the heat by the terminal that was the best part of the whole journey."],
   ["Dan Mercer", 5, "Dalaman → Kaş", "Seven of us in the Sprinter with a case each. Everyone had room to stretch out, and it was nice getting to Kaş together without splitting into two cars."],
   ["Megan Davies", 5, "Marmaris → Dalaman", "Our hotel changed which entrance taxis could use. I sent the new entrance the night before and got a reply confirming it. Pickup was from the right spot."],
   ["Leah Beaumont", 5, "Dalaman → Fethiye", "We asked about a child seat when we booked and it was ready when we arrived. The driver waited while we got our toddler settled, no rushing us."],
-  ["Daniel Krüger", 5, "Dalaman → Ölüdeniz", "Den Preis konnte ich schon vor dem Abschicken der Anfrage sehen. Am Flughafen hat alles geklappt, und der Kleinbus war bei der Hitze angenehm kühl."],
+  ["Daniel Krüger", 5, "Dalaman → Ölüdeniz", "Sauberer Bus, netter Fahrer. Gerne wieder."],
   ["Sam Wilkins", 5, "Dalaman → Sarıgerme", "Quick from arrivals to the hotel. The kids were asleep before we got there, which tells you how smooth the drive was."],
   ["Vicky Rowland", 5, "Dalaman → Marmaris", "Our flight was late getting into Dalaman. I messaged when we landed and got a quick reply. The driver was where he said he'd be and we went straight to the hotel."],
   ["Alex Stafford", 5, "Dalaman ↔ Hisarönü", "We changed our return flight and asked whether the pickup could be moved. They confirmed a new time by message and that's when the driver arrived."],
@@ -49,12 +49,15 @@ const examples = [
   ["Miriam Fischer", 5, "Dalaman ↔ İçmeler", "Hin- und Rückfahrt zusammen gebucht. Am Rückreisetag hat der Fahrer kurz geschrieben, an welchem Eingang er wartet. Das war praktisch, weil unser Hotel zwei Zufahrten hat."],
   ["Nina Spencer", 5, "Dalaman → Ölüdeniz", "We had two big cases and a folded pushchair and I'd been worrying about whether they'd fit. There was enough space and we didn't have to rearrange the seats."],
   ["Owen Lawson", 5, "Dalyan → Dalaman", "The driver was already parked by reception and sent the van details so it was easy to spot him. Plenty of time at Dalaman for a coffee before boarding."],
-  ["Jenny Abbott", 5, "Dalaman → Marmaris", "It was pouring when we landed. The driver pulled up close to the shelter so we could load the bags without getting soaked."],
+  ["Jenny Abbott", 5, "Dalaman → Marmaris", "Driver was helpful and the van was spotless."],
   ["Suzanne Riley", 5, "Dalaman ↔ Fethiye", "Airport pickup was smooth and the driver for our return arrived a few minutes early. Being able to go straight from our apartment to the terminal made the last morning much easier."],
-  ["Dave Glover", 5, "Dalaman → Sarıgerme", "Everything as agreed. The booking was for one of the smaller vehicles and it was the right size for us."],
+  ["Dave Glover", 5, "Dalaman → Sarıgerme", "On time and no fuss. Thanks!"],
   ["Дмитрий Волков", 5, "Даламан → Дальян", "Нас было пятеро с чемоданами. Вещи поместились без проблем, в салоне было чисто и прохладно. Водитель высадил нас прямо у входа в гостиницу."],
   ["Aisha Bennett", 5, "Dalaman → İçmeler", "I saved the pickup instructions before takeoff because my data is unreliable abroad. Found the meeting point straight away and the ride to İçmeler was easy."],
 ] as const
+
+const newestSample = Date.UTC(2026, 10, 19, 17, 42)
+const hourInMilliseconds = 60 * 60 * 1000
 
 export function getClassroomReviews(page: number): ReviewPage<PublicReview> {
   const size = 10
@@ -64,6 +67,7 @@ export function getClassroomReviews(page: number): ReviewPage<PublicReview> {
       id: -(start + index + 1),
       name,
       rating,
+      createdAt: new Date(newestSample - (start + index) * 29.65 * hourInMilliseconds).toISOString(),
       comment: `${route}\n\n${comment}`,
     })),
     number: page,
