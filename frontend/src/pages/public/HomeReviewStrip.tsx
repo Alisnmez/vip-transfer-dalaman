@@ -54,7 +54,9 @@ function ReviewStrip({ demo }: { demo: boolean }) {
             )}
           </div>
         </div>
+        {/* Test-only visual preview: temporarily hide the sample-review notice.
         {demo && <p className="mb-3 text-sm font-semibold">{copy.fiction}</p>}
+        */}
         <div className="home-review-viewport" data-motion={canScroll && !paused} data-review-expanded={expandedReview !== null}>
           <div className="home-review-track">
             {copies.map(duplicate => (
