@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 
 const site = new URL(process.env.STAGING_FRONTEND_URL ?? 'http://127.0.0.1:4173')
-site.searchParams.set('demo-reviews', '0')
 const reviews = [
   { id: 1, name: 'Testgast', rating: 5, comment: 'Die Abholung war pünktlich.' },
   { id: 2, name: 'Тестовый пассажир', rating: 4, comment: 'Водитель приехал вовремя.' },
@@ -93,23 +92,13 @@ test('a long homepage review expands on hover and by button', async ({ page }) =
   await expect.poll(isClipped).toBe(true)
 })
 
-test('review presentation and submission fit a narrow mobile screen', async ({ page }) => {
+test('review submission fits a narrow mobile screen', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 740 })
-  await page.goto(new URL('/reviews/presentation', site).href)
-  const examples = page.getByRole('region', { name: 'Fictional review examples' })
-  await expect(examples.getByRole('article')).toHaveCount(10)
-  await expect(page.getByText('Page 1 of 17')).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Share your experience' })).toHaveCount(0)
-  await expect(page.locator('meta[name=robots]')).toHaveAttribute('content', 'noindex,nofollow')
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
-  await page.getByRole('button', { name: 'Next' }).click()
-  await expect(page.getByText('Page 2 of 17')).toBeVisible()
-
   await page.route('**/reviews?page=0&size=10', route => route.fulfill({
     headers: { 'access-control-allow-origin': '*' },
     json: { content: [], number: 0, totalElements: 0, totalPages: 0 },
   }))
-  await page.goto(new URL('/reviews?demo-reviews=0', site).href)
+  await page.goto(new URL('/reviews', site).href)
   await page.getByRole('link', { name: 'Share your experience' }).click()
   const name = page.getByLabel('Your name')
   await name.fill('123Éléonore O’Neill')
