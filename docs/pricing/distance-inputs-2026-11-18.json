@@ -1,0 +1,284 @@
+{
+  "retrievedDate": "2026-11-18",
+  "origin": "Dalaman Airport (DLM)",
+  "distanceDisclaimer": "Approximate published road distances to a representative resort/area, not a navigation calculation or an exact hotel quote. Providers use different routes/endpoints.",
+  "calibration": [
+    {
+      "destination": "Sarigerme",
+      "distanceKm": 19,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Gocek",
+      "distanceKm": 25,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Dalyan",
+      "distanceKm": 29,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "distanceKm": 53,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "distanceKm": 63,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "distanceKm": 65,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Akyaka",
+      "distanceKm": 71,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "distanceKm": 98,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "distanceKm": 105,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Turunc",
+      "distanceKm": 116,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Kalkan",
+      "distanceKm": 128,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Selimiye",
+      "distanceKm": 136,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "distanceKm": 142,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Kas",
+      "distanceKm": 155,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    },
+    {
+      "destination": "Datça",
+      "distanceKm": 164,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations"
+    }
+  ],
+  "newDestinations": [
+    {
+      "destination": "Turunc Kumlubuk",
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Orhaniye",
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Antalya City Center",
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Lara",
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Belek",
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Side",
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Kemer",
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Kundu",
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Manavgat",
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Muratpasa",
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Alanya",
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Avsallar",
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Konyaalti",
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Mahmutlar",
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Akyarlar",
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Bitez",
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Gulluk",
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Gumbet",
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Gundogan",
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Güvercinlik",
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Kaynar",
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified"
+    },
+    {
+      "destination": "Konacik",
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Torba",
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Turgutreis",
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Turkbuku",
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Yalikavak",
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Oren",
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Kusadasi",
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    },
+    {
+      "destination": "Didim",
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance"
+    }
+  ],
+  "excludedCalibration": [
+    {
+      "destination": "Faralya",
+      "distanceKm": 68,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "reason": "Mountain/access premium: not representative of general road-distance tariff"
+    },
+    {
+      "destination": "Kabak",
+      "distanceKm": 76,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "reason": "Mountain/access premium: not representative of general road-distance tariff"
+    }
+  ]
+}

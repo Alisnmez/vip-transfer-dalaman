@@ -1,0 +1,37 @@
+{
+  "marmaris": {
+    "en": "Enter the full hotel name and address in your request. If you are heading to the marina, include the marina name and the entrance your party will use instead of entering Marmaris alone.",
+    "de": "Geben Sie den vollständigen Hotelnamen und die Adresse an. Wenn Sie zur Marina fahren, ergänzen Sie den Namen des Yachthafens und den gewünschten Eingang.",
+    "ru": "Укажите полное название и адрес отеля. Если вы едете в яхтенную гавань, добавьте её название и нужный вход."
+  },
+  "fethiye": {
+    "en": "Check whether your accommodation is in Fethiye town centre or in a nearby resort such as Çalış or Ölüdeniz. Choose the actual destination and include the address from your accommodation confirmation.",
+    "de": "Prüfen Sie, ob Ihre Unterkunft im Zentrum von Fethiye oder in einem nahe gelegenen Ferienort wie Çalış oder Ölüdeniz liegt. Wählen Sie das tatsächliche Ziel und geben Sie die Adresse aus Ihrer Unterkunftsbestätigung an.",
+    "ru": "Уточните, находится ли жильё в центре Фетхие или на соседнем курорте, например в Чалыше или Олюденизе. Выберите фактический пункт назначения и укажите адрес из подтверждения проживания."
+  },
+  "oludeniz": {
+    "en": "Check whether the address is by Ölüdeniz beach or in Hisarönü or Ovacık. Use the destination listed on your accommodation confirmation. For a villa, add a map pin or a nearby landmark in the booking notes.",
+    "de": "Prüfen Sie, ob die Adresse am Strand von Ölüdeniz, in Hisarönü oder in Ovacık liegt. Nutzen Sie das Ziel aus Ihrer Unterkunftsbestätigung. Geben Sie bei einer Villa einen Kartenpunkt oder einen Orientierungspunkt in den Buchungshinweisen an.",
+    "ru": "Уточните, находится ли адрес у пляжа Олюдениз, в Хисарёню или Оваджыке. Выберите пункт назначения из подтверждения проживания. Для виллы добавьте точку на карте или ближайший ориентир в примечания к заявке."
+  },
+  "gocek": {
+    "en": "For a yacht handover, include the marina name and your agreed meeting point. If you are staying at a hotel first, give that address as your drop-off so it is clear where the journey ends.",
+    "de": "Wenn Sie eine Yacht übernehmen, nennen Sie die Marina und den vereinbarten Treffpunkt. Wenn Sie zuerst im Hotel übernachten, geben Sie dessen Adresse als Fahrtziel an.",
+    "ru": "Если вы принимаете яхту, укажите название марины и согласованное место встречи. Если сначала вы останавливаетесь в отеле, укажите его адрес как пункт высадки."
+  },
+  "icmeler": {
+    "en": "Choose İçmeler if that is where your accommodation is located, even when a listing also mentions nearby Marmaris. For the return transfer, give the hotel name and the pickup entrance if it differs from the main address.",
+    "de": "Wählen Sie İçmeler, wenn Ihre Unterkunft dort liegt, selbst wenn in der Anzeige auch das nahe Marmaris genannt wird. Geben Sie für die Rückfahrt den Hotelnamen und den Abholeingang an, falls dieser von der Hauptadresse abweicht.",
+    "ru": "Выберите Ичмелер, если жильё находится там, даже если в описании указан соседний Мармарис. Для обратного трансфера укажите название отеля и вход, где вас нужно забрать, если он отличается от основного адреса."
+  },
+  "dalyan": {
+    "en": "Use the full address for your riverside hotel, apartment or villa. If the accommodation gave you specific road access instructions, include them under Special Requests.",
+    "de": "Geben Sie die vollständige Adresse Ihres Hotels, Apartments oder Ihrer Villa am Fluss an. Besondere Hinweise zur Zufahrt können Sie im Feld für Sonderwünsche ergänzen.",
+    "ru": "Укажите полный адрес отеля, апартаментов или виллы у реки. Если хозяева прислали инструкции по подъезду, добавьте их в поле особых пожеланий."
+  },
+  "sarigerme": {
+    "en": "Check whether your hotel confirmation gives a resort entrance or a village address. Enter the hotel or property name and the pickup point for the return trip if it differs from your drop-off.",
+    "de": "Prüfen Sie, ob Ihre Hotelbestätigung einen Eingang zur Ferienanlage oder eine Adresse im Ort nennt. Geben Sie den Namen der Unterkunft und gegebenenfalls einen abweichenden Abholpunkt für die Rückfahrt an.",
+    "ru": "Проверьте, указан ли в подтверждении бронирования вход в курортный комплекс или адрес в посёлке. Укажите название жилья и место подачи на обратную поездку, если оно отличается от места высадки."
+  }
+}

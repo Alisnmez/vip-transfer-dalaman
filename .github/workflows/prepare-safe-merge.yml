@@ -1,0 +1,34 @@
+name: Safe merge rehearsal
+
+on:
+  push:
+    branches:
+      - release/booking-integration-safe-merge
+    paths:
+      - .github/workflows/prepare-safe-merge.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/booking-integration-safe-merge
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Merge main into isolated release branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          # Preserve the developed implementation when both branches edit the same lines.
+          # Non-conflicting main changes are retained.
+          git merge --no-edit -X ours origin/main
+          git push origin HEAD:release/booking-integration-safe-merge
+      - name: Show merge result
+        run: git log -1 --oneline

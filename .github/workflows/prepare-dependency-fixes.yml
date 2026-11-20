@@ -1,0 +1,58 @@
+name: Prepare dependency security fixes
+
+on:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - '.github/workflows/prepare-dependency-fixes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  prepare-fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Apply compatible npm security fixes
+        working-directory: frontend
+        run: |
+          npm ci
+          npm install react-router-dom@latest
+          npm audit fix || echo 'Some development-only advisories may remain; production audit below is mandatory.'
+          npm audit --omit=dev --audit-level=high
+          npm run lint
+          npm test
+          npm run build
+      - name: Commit verified dependency fixes to development branch
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/feature/booking-integration'
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- frontend/package.json frontend/package-lock.json; then
+            echo 'No dependency changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add frontend/package.json frontend/package-lock.json
+          git commit -m 'fix(deps): apply verified npm security updates'
+          git push origin HEAD:feature/booking-integration
+      - name: Save proposed changes for review
+        if: always()
+        run: |
+          git diff HEAD~1 -- frontend/package.json frontend/package-lock.json > dependency-fixes.patch || true
+          git status --short
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reviewed-dependency-fixes
+          path: dependency-fixes.patch
+          retention-days: 14

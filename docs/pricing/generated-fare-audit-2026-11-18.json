@@ -1,0 +1,3051 @@
+{
+  "generatedFrom": "distance-inputs-2026-11-18.json",
+  "currency": "GBP",
+  "roundTripRule": "2 x oneWay for new estimates; no additional competitor discount",
+  "validation": {
+    "taxi": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 4.27,
+      "maxAbsoluteErrorGbp": 10.83
+    },
+    "vip-minivan": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 4.53,
+      "maxAbsoluteErrorGbp": 10.83
+    },
+    "premium-vip-minivan": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 5.24,
+      "maxAbsoluteErrorGbp": 13.64
+    },
+    "maybach": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 12.02,
+      "maxAbsoluteErrorGbp": 25.0
+    },
+    "maybach-plus": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 17.17,
+      "maxAbsoluteErrorGbp": 35.0
+    },
+    "minibus": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 15.04,
+      "maxAbsoluteErrorGbp": 43.0
+    },
+    "vip-minibus": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 11.53,
+      "maxAbsoluteErrorGbp": 34.0
+    },
+    "vip-minibus-long": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 24.23,
+      "maxAbsoluteErrorGbp": 50.0
+    },
+    "minibus-long": {
+      "leaveOneOutMeanAbsoluteErrorGbp": 13.39,
+      "maxAbsoluteErrorGbp": 38.26
+    }
+  },
+  "newFares": [
+    {
+      "destination": "Bozburun",
+      "vehicleId": "taxi",
+      "oneWay": 82.5,
+      "roundTrip": 165,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "vip-minivan",
+      "oneWay": 87.5,
+      "roundTrip": 175,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 117.5,
+      "roundTrip": 235,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "maybach",
+      "oneWay": 157.5,
+      "roundTrip": 315,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "maybach-plus",
+      "oneWay": 172.5,
+      "roundTrip": 345,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "minibus",
+      "oneWay": 117.5,
+      "roundTrip": 235,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "vip-minibus",
+      "oneWay": 177.5,
+      "roundTrip": 355,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 247.5,
+      "roundTrip": 495,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Bozburun",
+      "vehicleId": "minibus-long",
+      "oneWay": 177.5,
+      "roundTrip": 355,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "taxi",
+      "oneWay": 82.5,
+      "roundTrip": 165,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "vip-minivan",
+      "oneWay": 87.5,
+      "roundTrip": 175,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 117.5,
+      "roundTrip": 235,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "maybach",
+      "oneWay": 157.5,
+      "roundTrip": 315,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "maybach-plus",
+      "oneWay": 172.5,
+      "roundTrip": 345,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "minibus",
+      "oneWay": 117.5,
+      "roundTrip": 235,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "vip-minibus",
+      "oneWay": 177.5,
+      "roundTrip": 355,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 247.5,
+      "roundTrip": 495,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Sogut",
+      "vehicleId": "minibus-long",
+      "oneWay": 177.5,
+      "roundTrip": 355,
+      "method": "verified combined source zone",
+      "reference": "Bozburun / Sogut"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "taxi",
+      "oneWay": 42.5,
+      "roundTrip": 85,
+      "method": "verified source taxi fare",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "vip-minivan",
+      "oneWay": 47.5,
+      "roundTrip": 95,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 57.5,
+      "roundTrip": 115,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "maybach",
+      "oneWay": 62.5,
+      "roundTrip": 125,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "maybach-plus",
+      "oneWay": 72.5,
+      "roundTrip": 145,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "minibus",
+      "oneWay": 77.5,
+      "roundTrip": 155,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "vip-minibus",
+      "oneWay": 87.5,
+      "roundTrip": 175,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 97.5,
+      "roundTrip": 195,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "vehicleId": "minibus-long",
+      "oneWay": 80.5,
+      "roundTrip": 160,
+      "method": "estimated same Marmaris zone",
+      "reference": "Marmaris(Any Hotel)"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "taxi",
+      "oneWay": 70.0,
+      "roundTrip": 140.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "taxi",
+      "oneWay": 70.0,
+      "roundTrip": 140.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "taxi",
+      "oneWay": 60.0,
+      "roundTrip": 120.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "taxi",
+      "oneWay": 147.5,
+      "roundTrip": 295.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "taxi",
+      "oneWay": 160.0,
+      "roundTrip": 320.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "taxi",
+      "oneWay": 172.5,
+      "roundTrip": 345.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "taxi",
+      "oneWay": 192.5,
+      "roundTrip": 385.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "taxi",
+      "oneWay": 180.0,
+      "roundTrip": 360.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "taxi",
+      "oneWay": 170.0,
+      "roundTrip": 340.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "taxi",
+      "oneWay": 197.5,
+      "roundTrip": 395.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "taxi",
+      "oneWay": 145.0,
+      "roundTrip": 290.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "taxi",
+      "oneWay": 237.5,
+      "roundTrip": 475.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "taxi",
+      "oneWay": 215.0,
+      "roundTrip": 430.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "taxi",
+      "oneWay": 165.0,
+      "roundTrip": 330.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "taxi",
+      "oneWay": 242.5,
+      "roundTrip": 485.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "taxi",
+      "oneWay": 150.0,
+      "roundTrip": 300.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "taxi",
+      "oneWay": 132.5,
+      "roundTrip": 265.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "taxi",
+      "oneWay": 112.5,
+      "roundTrip": 225.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "taxi",
+      "oneWay": 130.0,
+      "roundTrip": 260.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "taxi",
+      "oneWay": 137.5,
+      "roundTrip": 275.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "taxi",
+      "oneWay": 120.0,
+      "roundTrip": 240.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "taxi",
+      "oneWay": 125.0,
+      "roundTrip": 250.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "taxi",
+      "oneWay": 130.0,
+      "roundTrip": 260.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "taxi",
+      "oneWay": 127.5,
+      "roundTrip": 255.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "taxi",
+      "oneWay": 135.0,
+      "roundTrip": 270.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "taxi",
+      "oneWay": 135.0,
+      "roundTrip": 270.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "taxi",
+      "oneWay": 140.0,
+      "roundTrip": 280.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "taxi",
+      "oneWay": 127.5,
+      "roundTrip": 255.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "taxi",
+      "oneWay": 130.0,
+      "roundTrip": 260.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "taxi",
+      "oneWay": 157.5,
+      "roundTrip": 315.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "taxi",
+      "oneWay": 142.5,
+      "roundTrip": 285.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "vip-minivan",
+      "oneWay": 75.0,
+      "roundTrip": 150.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "vip-minivan",
+      "oneWay": 75.0,
+      "roundTrip": 150.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "vip-minivan",
+      "oneWay": 65.0,
+      "roundTrip": 130.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "vip-minivan",
+      "oneWay": 155.0,
+      "roundTrip": 310.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "vip-minivan",
+      "oneWay": 167.5,
+      "roundTrip": 335.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "vip-minivan",
+      "oneWay": 182.5,
+      "roundTrip": 365.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "vip-minivan",
+      "oneWay": 202.5,
+      "roundTrip": 405.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "vip-minivan",
+      "oneWay": 187.5,
+      "roundTrip": 375.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "vip-minivan",
+      "oneWay": 180.0,
+      "roundTrip": 360.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "vip-minivan",
+      "oneWay": 207.5,
+      "roundTrip": 415.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "vip-minivan",
+      "oneWay": 152.5,
+      "roundTrip": 305.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "vip-minivan",
+      "oneWay": 250.0,
+      "roundTrip": 500.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "vip-minivan",
+      "oneWay": 225.0,
+      "roundTrip": 450.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "vip-minivan",
+      "oneWay": 172.5,
+      "roundTrip": 345.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "vip-minivan",
+      "oneWay": 255.0,
+      "roundTrip": 510.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "vip-minivan",
+      "oneWay": 157.5,
+      "roundTrip": 315.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "vip-minivan",
+      "oneWay": 140.0,
+      "roundTrip": 280.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "vip-minivan",
+      "oneWay": 117.5,
+      "roundTrip": 235.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "vip-minivan",
+      "oneWay": 137.5,
+      "roundTrip": 275.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "vip-minivan",
+      "oneWay": 142.5,
+      "roundTrip": 285.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "vip-minivan",
+      "oneWay": 125.0,
+      "roundTrip": 250.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "vip-minivan",
+      "oneWay": 132.5,
+      "roundTrip": 265.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "vip-minivan",
+      "oneWay": 137.5,
+      "roundTrip": 275.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "vip-minivan",
+      "oneWay": 132.5,
+      "roundTrip": 265.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "vip-minivan",
+      "oneWay": 142.5,
+      "roundTrip": 285.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "vip-minivan",
+      "oneWay": 140.0,
+      "roundTrip": 280.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "vip-minivan",
+      "oneWay": 147.5,
+      "roundTrip": 295.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "vip-minivan",
+      "oneWay": 135.0,
+      "roundTrip": 270.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "vip-minivan",
+      "oneWay": 135.0,
+      "roundTrip": 270.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "vip-minivan",
+      "oneWay": 167.5,
+      "roundTrip": 335.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "vip-minivan",
+      "oneWay": 150.0,
+      "roundTrip": 300.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 87.5,
+      "roundTrip": 175.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 87.5,
+      "roundTrip": 175.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 75.0,
+      "roundTrip": 150.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 227.5,
+      "roundTrip": 455.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 245.0,
+      "roundTrip": 490.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 295.0,
+      "roundTrip": 590.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 262.5,
+      "roundTrip": 525.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 305.0,
+      "roundTrip": 610.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 225.0,
+      "roundTrip": 450.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 365.0,
+      "roundTrip": 730.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 330.0,
+      "roundTrip": 660.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 255.0,
+      "roundTrip": 510.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 372.5,
+      "roundTrip": 745.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 230.0,
+      "roundTrip": 460.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 205.0,
+      "roundTrip": 410.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 170.0,
+      "roundTrip": 340.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 200.0,
+      "roundTrip": 400.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 210.0,
+      "roundTrip": 420.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 182.5,
+      "roundTrip": 365.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 192.5,
+      "roundTrip": 385.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 200.0,
+      "roundTrip": 400.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 195.0,
+      "roundTrip": 390.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 207.5,
+      "roundTrip": 415.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 205.0,
+      "roundTrip": 410.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 215.0,
+      "roundTrip": 430.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 197.5,
+      "roundTrip": 395.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 197.5,
+      "roundTrip": 395.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 242.5,
+      "roundTrip": 485.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "premium-vip-minivan",
+      "oneWay": 220.0,
+      "roundTrip": 440.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "maybach",
+      "oneWay": 102.5,
+      "roundTrip": 205.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "maybach",
+      "oneWay": 102.5,
+      "roundTrip": 205.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "maybach",
+      "oneWay": 87.5,
+      "roundTrip": 175.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "maybach",
+      "oneWay": 257.5,
+      "roundTrip": 515.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "maybach",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "maybach",
+      "oneWay": 300.0,
+      "roundTrip": 600.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "maybach",
+      "oneWay": 332.5,
+      "roundTrip": 665.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "maybach",
+      "oneWay": 310.0,
+      "roundTrip": 620.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "maybach",
+      "oneWay": 295.0,
+      "roundTrip": 590.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "maybach",
+      "oneWay": 342.5,
+      "roundTrip": 685.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "maybach",
+      "oneWay": 252.5,
+      "roundTrip": 505.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "maybach",
+      "oneWay": 412.5,
+      "roundTrip": 825.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "maybach",
+      "oneWay": 372.5,
+      "roundTrip": 745.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "maybach",
+      "oneWay": 285.0,
+      "roundTrip": 570.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "maybach",
+      "oneWay": 420.0,
+      "roundTrip": 840.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "maybach",
+      "oneWay": 260.0,
+      "roundTrip": 520.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "maybach",
+      "oneWay": 230.0,
+      "roundTrip": 460.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "maybach",
+      "oneWay": 192.5,
+      "roundTrip": 385.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "maybach",
+      "oneWay": 225.0,
+      "roundTrip": 450.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "maybach",
+      "oneWay": 235.0,
+      "roundTrip": 470.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "maybach",
+      "oneWay": 207.5,
+      "roundTrip": 415.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "maybach",
+      "oneWay": 215.0,
+      "roundTrip": 430.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "maybach",
+      "oneWay": 225.0,
+      "roundTrip": 450.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "maybach",
+      "oneWay": 220.0,
+      "roundTrip": 440.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "maybach",
+      "oneWay": 235.0,
+      "roundTrip": 470.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "maybach",
+      "oneWay": 232.5,
+      "roundTrip": 465.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "maybach",
+      "oneWay": 242.5,
+      "roundTrip": 485.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "maybach",
+      "oneWay": 222.5,
+      "roundTrip": 445.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "maybach",
+      "oneWay": 222.5,
+      "roundTrip": 445.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "maybach",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "maybach",
+      "oneWay": 247.5,
+      "roundTrip": 495.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "maybach-plus",
+      "oneWay": 130.0,
+      "roundTrip": 260.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "maybach-plus",
+      "oneWay": 130.0,
+      "roundTrip": 260.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "maybach-plus",
+      "oneWay": 107.5,
+      "roundTrip": 215.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "maybach-plus",
+      "oneWay": 285.0,
+      "roundTrip": 570.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "maybach-plus",
+      "oneWay": 307.5,
+      "roundTrip": 615.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "maybach-plus",
+      "oneWay": 332.5,
+      "roundTrip": 665.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "maybach-plus",
+      "oneWay": 370.0,
+      "roundTrip": 740.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "maybach-plus",
+      "oneWay": 345.0,
+      "roundTrip": 690.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "maybach-plus",
+      "oneWay": 327.5,
+      "roundTrip": 655.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "maybach-plus",
+      "oneWay": 380.0,
+      "roundTrip": 760.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "maybach-plus",
+      "oneWay": 280.0,
+      "roundTrip": 560.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "maybach-plus",
+      "oneWay": 460.0,
+      "roundTrip": 920.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "maybach-plus",
+      "oneWay": 412.5,
+      "roundTrip": 825.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "maybach-plus",
+      "oneWay": 317.5,
+      "roundTrip": 635.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "maybach-plus",
+      "oneWay": 465.0,
+      "roundTrip": 930.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "maybach-plus",
+      "oneWay": 290.0,
+      "roundTrip": 580.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "maybach-plus",
+      "oneWay": 255.0,
+      "roundTrip": 510.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "maybach-plus",
+      "oneWay": 215.0,
+      "roundTrip": 430.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "maybach-plus",
+      "oneWay": 250.0,
+      "roundTrip": 500.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "maybach-plus",
+      "oneWay": 262.5,
+      "roundTrip": 525.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "maybach-plus",
+      "oneWay": 230.0,
+      "roundTrip": 460.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "maybach-plus",
+      "oneWay": 240.0,
+      "roundTrip": 480.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "maybach-plus",
+      "oneWay": 250.0,
+      "roundTrip": 500.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "maybach-plus",
+      "oneWay": 242.5,
+      "roundTrip": 485.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "maybach-plus",
+      "oneWay": 260.0,
+      "roundTrip": 520.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "maybach-plus",
+      "oneWay": 257.5,
+      "roundTrip": 515.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "maybach-plus",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "maybach-plus",
+      "oneWay": 247.5,
+      "roundTrip": 495.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "maybach-plus",
+      "oneWay": 247.5,
+      "roundTrip": 495.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "maybach-plus",
+      "oneWay": 305.0,
+      "roundTrip": 610.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "maybach-plus",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "minibus",
+      "oneWay": 117.5,
+      "roundTrip": 235.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "minibus",
+      "oneWay": 117.5,
+      "roundTrip": 235.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "minibus",
+      "oneWay": 92.5,
+      "roundTrip": 185.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "minibus",
+      "oneWay": 250.0,
+      "roundTrip": 500.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "minibus",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "minibus",
+      "oneWay": 292.5,
+      "roundTrip": 585.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "minibus",
+      "oneWay": 322.5,
+      "roundTrip": 645.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "minibus",
+      "oneWay": 300.0,
+      "roundTrip": 600.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "minibus",
+      "oneWay": 287.5,
+      "roundTrip": 575.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "minibus",
+      "oneWay": 332.5,
+      "roundTrip": 665.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "minibus",
+      "oneWay": 245.0,
+      "roundTrip": 490.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "minibus",
+      "oneWay": 400.0,
+      "roundTrip": 800.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "minibus",
+      "oneWay": 362.5,
+      "roundTrip": 725.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "minibus",
+      "oneWay": 277.5,
+      "roundTrip": 555.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "minibus",
+      "oneWay": 407.5,
+      "roundTrip": 815.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "minibus",
+      "oneWay": 252.5,
+      "roundTrip": 505.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "minibus",
+      "oneWay": 222.5,
+      "roundTrip": 445.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "minibus",
+      "oneWay": 187.5,
+      "roundTrip": 375.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "minibus",
+      "oneWay": 217.5,
+      "roundTrip": 435.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "minibus",
+      "oneWay": 230.0,
+      "roundTrip": 460.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "minibus",
+      "oneWay": 200.0,
+      "roundTrip": 400.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "minibus",
+      "oneWay": 210.0,
+      "roundTrip": 420.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "minibus",
+      "oneWay": 220.0,
+      "roundTrip": 440.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "minibus",
+      "oneWay": 212.5,
+      "roundTrip": 425.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "minibus",
+      "oneWay": 227.5,
+      "roundTrip": 455.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "minibus",
+      "oneWay": 225.0,
+      "roundTrip": 450.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "minibus",
+      "oneWay": 235.0,
+      "roundTrip": 470.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "minibus",
+      "oneWay": 215.0,
+      "roundTrip": 430.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "minibus",
+      "oneWay": 217.5,
+      "roundTrip": 435.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "minibus",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "minibus",
+      "oneWay": 240.0,
+      "roundTrip": 480.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "vip-minibus",
+      "oneWay": 137.5,
+      "roundTrip": 275.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "vip-minibus",
+      "oneWay": 137.5,
+      "roundTrip": 275.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "vip-minibus",
+      "oneWay": 107.5,
+      "roundTrip": 215.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "vip-minibus",
+      "oneWay": 315.0,
+      "roundTrip": 630.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "vip-minibus",
+      "oneWay": 337.5,
+      "roundTrip": 675.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "vip-minibus",
+      "oneWay": 367.5,
+      "roundTrip": 735.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "vip-minibus",
+      "oneWay": 407.5,
+      "roundTrip": 815.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "vip-minibus",
+      "oneWay": 380.0,
+      "roundTrip": 760.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "vip-minibus",
+      "oneWay": 360.0,
+      "roundTrip": 720.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "vip-minibus",
+      "oneWay": 420.0,
+      "roundTrip": 840.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "vip-minibus",
+      "oneWay": 310.0,
+      "roundTrip": 620.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "vip-minibus",
+      "oneWay": 505.0,
+      "roundTrip": 1010.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "vip-minibus",
+      "oneWay": 455.0,
+      "roundTrip": 910.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "vip-minibus",
+      "oneWay": 350.0,
+      "roundTrip": 700.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "vip-minibus",
+      "oneWay": 512.5,
+      "roundTrip": 1025.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "vip-minibus",
+      "oneWay": 317.5,
+      "roundTrip": 635.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "vip-minibus",
+      "oneWay": 280.0,
+      "roundTrip": 560.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "vip-minibus",
+      "oneWay": 235.0,
+      "roundTrip": 470.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "vip-minibus",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "vip-minibus",
+      "oneWay": 290.0,
+      "roundTrip": 580.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "vip-minibus",
+      "oneWay": 252.5,
+      "roundTrip": 505.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "vip-minibus",
+      "oneWay": 265.0,
+      "roundTrip": 530.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "vip-minibus",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "vip-minibus",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "vip-minibus",
+      "oneWay": 287.5,
+      "roundTrip": 575.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "vip-minibus",
+      "oneWay": 282.5,
+      "roundTrip": 565.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "vip-minibus",
+      "oneWay": 295.0,
+      "roundTrip": 590.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "vip-minibus",
+      "oneWay": 272.5,
+      "roundTrip": 545.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "vip-minibus",
+      "oneWay": 272.5,
+      "roundTrip": 545.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "vip-minibus",
+      "oneWay": 335.0,
+      "roundTrip": 670.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "vip-minibus",
+      "oneWay": 302.5,
+      "roundTrip": 605.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 172.5,
+      "roundTrip": 345.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 172.5,
+      "roundTrip": 345.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 147.5,
+      "roundTrip": 295.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 430.0,
+      "roundTrip": 860.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 462.5,
+      "roundTrip": 925.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 502.5,
+      "roundTrip": 1005.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 555.0,
+      "roundTrip": 1110.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 517.5,
+      "roundTrip": 1035.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 492.5,
+      "roundTrip": 985.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 572.5,
+      "roundTrip": 1145.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 422.5,
+      "roundTrip": 845.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 690.0,
+      "roundTrip": 1380.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 622.5,
+      "roundTrip": 1245.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 477.5,
+      "roundTrip": 955.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 702.5,
+      "roundTrip": 1405.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 435.0,
+      "roundTrip": 870.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 385.0,
+      "roundTrip": 770.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 322.5,
+      "roundTrip": 645.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 375.0,
+      "roundTrip": 750.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 395.0,
+      "roundTrip": 790.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 345.0,
+      "roundTrip": 690.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 362.5,
+      "roundTrip": 725.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 377.5,
+      "roundTrip": 755.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 365.0,
+      "roundTrip": 730.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 392.5,
+      "roundTrip": 785.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 387.5,
+      "roundTrip": 775.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 405.0,
+      "roundTrip": 810.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 372.5,
+      "roundTrip": 745.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 372.5,
+      "roundTrip": 745.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 457.5,
+      "roundTrip": 915.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "vip-minibus-long",
+      "oneWay": 415.0,
+      "roundTrip": 830.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "vehicleId": "minibus-long",
+      "oneWay": 132.5,
+      "roundTrip": 265.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Orhaniye",
+      "vehicleId": "minibus-long",
+      "oneWay": 132.5,
+      "roundTrip": 265.0,
+      "distanceKm": 121,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "vehicleId": "minibus-long",
+      "oneWay": 97.5,
+      "roundTrip": 195.0,
+      "distanceKm": 114,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated distance interpolation"
+    },
+    {
+      "destination": "Antalya City Center",
+      "vehicleId": "minibus-long",
+      "oneWay": 315.0,
+      "roundTrip": 630.0,
+      "distanceKm": 235.77,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Lara",
+      "vehicleId": "minibus-long",
+      "oneWay": 337.5,
+      "roundTrip": 675.0,
+      "distanceKm": 254,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Belek",
+      "vehicleId": "minibus-long",
+      "oneWay": 367.5,
+      "roundTrip": 735.0,
+      "distanceKm": 276,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Side",
+      "vehicleId": "minibus-long",
+      "oneWay": 407.5,
+      "roundTrip": 815.0,
+      "distanceKm": 305.4,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Side",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kemer",
+      "vehicleId": "minibus-long",
+      "oneWay": 380.0,
+      "roundTrip": 760.0,
+      "distanceKm": 285,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kundu",
+      "vehicleId": "minibus-long",
+      "oneWay": 360.0,
+      "roundTrip": 720.0,
+      "distanceKm": 271,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Manavgat",
+      "vehicleId": "minibus-long",
+      "oneWay": 420.0,
+      "roundTrip": 840.0,
+      "distanceKm": 315,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Muratpasa",
+      "vehicleId": "minibus-long",
+      "oneWay": 310.0,
+      "roundTrip": 620.0,
+      "distanceKm": 232,
+      "sourceUrl": "https://www.haqqitours.com/en/turkey/fethiye/transfers/dalaman-airport-to-muratpasa/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Alanya",
+      "vehicleId": "minibus-long",
+      "oneWay": 505.0,
+      "roundTrip": 1010.0,
+      "distanceKm": 380,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Avsallar",
+      "vehicleId": "minibus-long",
+      "oneWay": 455.0,
+      "roundTrip": 910.0,
+      "distanceKm": 342.3,
+      "sourceUrl": "https://www.rome2rio.com/s/Dalaman-Airport-DLM/Avsallar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konyaalti",
+      "vehicleId": "minibus-long",
+      "oneWay": 350.0,
+      "roundTrip": 700.0,
+      "distanceKm": 263,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Mahmutlar",
+      "vehicleId": "minibus-long",
+      "oneWay": 512.5,
+      "roundTrip": 1025.0,
+      "distanceKm": 386,
+      "sourceUrl": "https://wecaretransfer.com/en/transfer/dalaman-airport-to-mahmutlar",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Akyarlar",
+      "vehicleId": "minibus-long",
+      "oneWay": 317.5,
+      "roundTrip": 635.0,
+      "distanceKm": 239,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Bitez",
+      "vehicleId": "minibus-long",
+      "oneWay": 280.0,
+      "roundTrip": 560.0,
+      "distanceKm": 211,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gulluk",
+      "vehicleId": "minibus-long",
+      "oneWay": 235.0,
+      "roundTrip": 470.0,
+      "distanceKm": 177,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gumbet",
+      "vehicleId": "minibus-long",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 206,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Gundogan",
+      "vehicleId": "minibus-long",
+      "oneWay": 290.0,
+      "roundTrip": 580.0,
+      "distanceKm": 217,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Güvercinlik",
+      "vehicleId": "minibus-long",
+      "oneWay": 252.5,
+      "roundTrip": 505.0,
+      "distanceKm": 190,
+      "sourceUrl": "https://uni-transfers.com/transfers/guvercinlik/",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kaynar",
+      "vehicleId": "minibus-long",
+      "oneWay": 265.0,
+      "roundTrip": 530.0,
+      "distanceKm": 198.48,
+      "sourceUrl": "https://www.mytransfers.com/en/destination/turkey/dalaman-airport-dlm/",
+      "basis": "Torba-area proxy; no direct Kaynar road measurement verified",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Konacik",
+      "vehicleId": "minibus-long",
+      "oneWay": 275.0,
+      "roundTrip": 550.0,
+      "distanceKm": 207,
+      "sourceUrl": "https://wecaretransfer.com/en/destination/bodrum-konacik",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Torba",
+      "vehicleId": "minibus-long",
+      "oneWay": 267.5,
+      "roundTrip": 535.0,
+      "distanceKm": 201,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turgutreis",
+      "vehicleId": "minibus-long",
+      "oneWay": 287.5,
+      "roundTrip": 575.0,
+      "distanceKm": 215,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Turkbuku",
+      "vehicleId": "minibus-long",
+      "oneWay": 282.5,
+      "roundTrip": 565.0,
+      "distanceKm": 213,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yalikavak",
+      "vehicleId": "minibus-long",
+      "oneWay": 295.0,
+      "roundTrip": 590.0,
+      "distanceKm": 222,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Yaliciftlik",
+      "vehicleId": "minibus-long",
+      "oneWay": 272.5,
+      "roundTrip": 545.0,
+      "distanceKm": 204,
+      "sourceUrl": "https://www.bodrumviptransfers.com/en/bodrum-airport-yaliciftlik-transfer",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Oren",
+      "vehicleId": "minibus-long",
+      "oneWay": 272.5,
+      "roundTrip": 545.0,
+      "distanceKm": 205,
+      "sourceUrl": "https://dalamangotransfer.com/en/destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Kusadasi",
+      "vehicleId": "minibus-long",
+      "oneWay": 335.0,
+      "roundTrip": 670.0,
+      "distanceKm": 252,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    },
+    {
+      "destination": "Didim",
+      "vehicleId": "minibus-long",
+      "oneWay": 302.5,
+      "roundTrip": 605.0,
+      "distanceKm": 228,
+      "sourceUrl": "https://www.ziptransfers.com/en/dalaman-airport-transfers/all-destinations",
+      "basis": "Published approximate road distance",
+      "method": "estimated long-distance proportional extrapolation"
+    }
+  ]
+}

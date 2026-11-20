@@ -1,36 +1,129 @@
 import type { Booking, BookingRequest } from '../types'
+import { getAdminAuthorization } from '../adminCredentials'
+import { createSingleFlight } from '../singleFlight'
+import { createRetryKeyStore } from '../retryKeys'
+import { bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure } from './errors'
 
-const BOOKING_URL = '/bookings'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
+const BOOKING_URL = `${API_BASE_URL}/bookings`
+const ADMIN_AUTH_URL = `${API_BASE_URL}/admin/auth-check`
 
-async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json',
-      ...options?.headers,
-    },
-    ...options,
-  })
+// Retry keys survive refreshes within the same tab, with an in-memory fallback.
+const retryKeys = createRetryKeyStore(
+  (() => { try { return sessionStorage } catch { return null } })(),
+  () => crypto.randomUUID(),
+)
+const runBookingOnce = createSingleFlight<Booking>()
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => null)
-    throw new Error(error?.message ?? 'Request failed')
+async function retryStorageKey(payload: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(payload))
+  const hex = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('')
+  return `booking-retry:${hex}`
+}
+
+export async function request<T>(url: string, options?: RequestInit, admin = false, timeoutMs = 60000): Promise<T> {
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+
+  try {
+    const authorization = admin ? getAdminAuthorization() : null
+    const response = await fetch(url, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(authorization ? { Authorization: authorization } : {}),
+        ...options?.headers,
+      },
+      signal: controller.signal,
+    })
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => null)
+      throw bookingHttpError(response.status, error?.message)
+    }
+
+    const responseText = await response.text()
+    try {
+      return (responseText ? JSON.parse(responseText) : undefined) as T
+    } catch (error) {
+      throw bookingInvalidSuccessResponse(error)
+    }
+  } catch (error) {
+    const failure = classifyBookingFailure(error)
+    if (!options?.method || options.method === 'GET') {
+      if (failure.status === null && failure.uncertain) {
+        throw new Error('Could not connect to the booking service. It may be starting up. Please wait a moment and refresh.', { cause: error })
+      }
+    }
+    throw failure
+  } finally {
+    clearTimeout(timeout)
   }
+}
 
-  return response.json()
+export function checkAdminAccess() {
+  // Authentication does not need to download private booking details.
+  return request<void>(ADMIN_AUTH_URL, undefined, true, 150000)
+}
+
+export type DashboardSummary = {
+  total: number
+  pending: number
+  today: number
+  upcoming: Booking[]
+  started?: Booking[]
+}
+
+export function getDashboardSummary() {
+  return request<DashboardSummary>(`${BOOKING_URL}/dashboard`, undefined, true)
 }
 
 export function getBookings() {
-  return request<Booking[]>(BOOKING_URL)
+  return request<Booking[]>(BOOKING_URL, undefined, true)
+}
+
+export type BookingPage = {
+  content: Booking[]
+  totalElements: number
+  totalPages: number
+  number: number
+}
+
+export function getCalendarBookings(month: string) {
+  return request<Booking[]>(`${BOOKING_URL}/calendar?month=${encodeURIComponent(month)}`, undefined, true)
+}
+
+export type BookingFilters = { status?: string; from?: string; to?: string; search?: string }
+
+export function getBookingPage(page: number, size = 25, filters: BookingFilters = {}) {
+  const params = new URLSearchParams({ page: String(page), size: String(size) })
+  if (filters.status) params.set('status', filters.status)
+  if (filters.from) params.set('from', filters.from)
+  if (filters.to) params.set('to', filters.to)
+  if (filters.search?.trim()) params.set('search', filters.search.trim())
+  return request<BookingPage>(`${BOOKING_URL}/page?${params.toString()}`, undefined, true)
 }
 
 export function getBooking(id: number) {
-  return request<Booking>(`${BOOKING_URL}/${id}`)
+  return request<Booking>(`${BOOKING_URL}/${id}`, undefined, true)
 }
 
-export function createBooking(data: BookingRequest) {
-  return request<Booking>(BOOKING_URL, {
-    method: 'POST',
-    body: JSON.stringify(data),
+export async function createBooking(data: BookingRequest) {
+  const payload = JSON.stringify(data)
+  const storageKey = await retryStorageKey(payload)
+  return runBookingOnce(storageKey, async () => {
+    const key = retryKeys.getOrCreate(storageKey)
+
+    const booking = await request<Booking>(BOOKING_URL, {
+      method: 'POST',
+      headers: { 'Idempotency-Key': key },
+      body: payload,
+    })
+    if (!booking || !Number.isSafeInteger(booking.id) || booking.id < 1) {
+      throw bookingInvalidSuccessResponse()
+    }
+    retryKeys.clear(storageKey)
+    return booking
   })
 }
 
@@ -38,18 +131,31 @@ export function updateBooking(id: number, data: BookingRequest) {
   return request<Booking>(`${BOOKING_URL}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
-  })
+  }, true)
 }
 
-export async function deleteBooking(id: number) {
-  const response = await fetch(`${BOOKING_URL}/${id}`, {
-    method: 'DELETE',
-  })
+export function updateBookingStatus(id: number, status: string) {
+  return request<Booking>(`${BOOKING_URL}/${id}/status`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status }),
+  }, true)
+}
 
-  if (!response.ok) {
-    const error = await response.json().catch(() => null)
-    throw new Error(error?.message ?? 'Request failed')
-  }
 
-  return response.text()
+export type BookingEmailStatus = {
+  id: string
+  bookingId: number
+  eventType: string
+  status: string
+  recipientRole: string
+  attempts: number
+  createdAt: string
+  nextAttemptAt: string | null
+  expiresAt: string | null
+  lastError: string | null
+  providerAccepted: boolean
+}
+
+export function getBookingEmailStatuses(id: number) {
+  return request<BookingEmailStatus[]>(`${BOOKING_URL}/${id}/email-status`, undefined, true)
 }
