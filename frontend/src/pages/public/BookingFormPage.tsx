@@ -5,6 +5,7 @@ import { supportEmail } from '../../features/booking/support'
 import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useId, useState } from 'react'
 
+import { BookingPolicyLinks } from './BookingPolicyLinks'
 import { PublicNavbar } from './PublicNavbar'
 import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
@@ -390,6 +391,7 @@ export function BookingFormPage() {
             priceLabel={priceLabel}
           />
         </div>
+        <div className="mt-6"><BookingPolicyLinks /></div>
       </main>
 
       <BookingFooter />
@@ -702,7 +704,7 @@ function BookingFooter() {
           {t("Prices are shown in GBP. Your request is subject to operator confirmation.")}
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
-          {t("Contact:")} <a href="tel:+905555555555" className="underline">0555 555 55 55</a> · <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
+          {t("Contact:")} <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
         </p>
         <p className="font-body-md text-body-sm text-on-surface-variant">
           © {new Date().getFullYear()} DalamanWay.

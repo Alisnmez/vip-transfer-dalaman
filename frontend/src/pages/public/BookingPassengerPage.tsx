@@ -2,6 +2,7 @@ import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { BookingPolicyLinks } from './BookingPolicyLinks'
 import { PublicNavbar } from './PublicNavbar'
 import { RequiredFieldNote, RequiredMark } from '../../components/RequiredFieldNote'
 import { trackAnalyticsEvent } from '../../features/analytics/analytics'
@@ -193,6 +194,7 @@ export function BookingPassengerPage() {
               </p>
 
               <RequiredFieldNote />
+              <div className="mb-5"><BookingPolicyLinks /></div>
               <form id="passenger-details-form" noValidate className="space-y-stack-md" onSubmit={(event) => {
                 event.preventDefault()
                 void run(async () => {

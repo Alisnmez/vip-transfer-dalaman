@@ -414,6 +414,8 @@ test('successful booking clears both drafts and keeps the receipt in the current
   await page.getByRole('checkbox', { name: 'I confirm that all information provided is correct.' }).check()
   await page.getByRole('button', { name: 'Submit booking request' }).click()
   await expect(page.getByText('#902', { exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Your Booking Request Was Received!' })).toBeVisible()
+  await expect(page.getByText('Your transfer request is pending confirmation. Please save your booking reference.')).toBeVisible()
   const storage = await page.evaluate(() => ({
     transfer: sessionStorage.getItem('bookingTransferInfo'),
     passenger: sessionStorage.getItem('bookingPassengerInfo'),
@@ -427,6 +429,19 @@ test('successful booking clears both drafts and keeps the receipt in the current
   await expect(freshTab.getByRole('heading', { name: 'Review Your Booking Request' })).toBeVisible()
   await expect(freshTab.getByText('#902', { exact: true })).toHaveCount(0)
   await freshTab.close()
+})
+
+test('booking terms and data-use summary are available before entering passenger details', async ({ page }) => {
+  await page.goto('http://127.0.0.1:4173/booking/passenger')
+  await page.getByText('How we use your booking details', { exact: true }).click()
+  await expect(page.getByText(/We use your name, contact details and journey information/)).toBeVisible()
+  await page.getByText('Changes and cancellations', { exact: true }).click()
+  await expect(page.getByText(/Wait for written confirmation before treating your transfer/)).toBeVisible()
+  await expect(page.locator('details').getByRole('link', { name: 'Manage Booking', exact: true })).toHaveAttribute('href', '/booking/lookup')
+  await page.getByRole('combobox', { name: 'Website language' }).selectOption('de')
+  await expect(page.getByText('So verwenden wir Ihre Buchungsdaten', { exact: true })).toBeVisible()
+  await page.getByRole('combobox', { name: 'Sprache der Website' }).selectOption('ru')
+  await expect(page.getByText('Изменение и отмена бронирования', { exact: true })).toBeVisible()
 })
 
 test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {

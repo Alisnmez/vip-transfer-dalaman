@@ -404,7 +404,6 @@ export function HomePage() {
             </div>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 pb-stack-md">
-            <a className="text-white/80 hover:text-white underline underline-offset-4" href="tel:+905555555555">0555 555 55 55</a>
             <a className="text-white/80 hover:text-white underline underline-offset-4" href={`mailto:${supportEmail}`}>{supportEmail}</a>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
