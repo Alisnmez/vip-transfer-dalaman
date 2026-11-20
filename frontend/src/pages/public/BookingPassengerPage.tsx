@@ -1,3 +1,4 @@
+import { cleanPersonName, digitsOnly, isEmailAddress, isPersonName } from '../../shared/validation/inputFormats'
 import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { useEffect, useId, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -104,13 +105,18 @@ export function BookingPassengerPage() {
       setError('Please complete your name, phone number and email address.')
       return
     }
-    const digits = phoneNumber.replace(/\D/g, '')
-    const countryDigits = countryCode.replace(/\D/g, '').length
+    const fullName = `${firstName.trim()} ${lastName.trim()}`
+    if (!isPersonName(firstName.trim(), 80) || !isPersonName(lastName.trim(), 80) || !isPersonName(fullName, 120)) {
+      setError('Enter a valid name using letters. The full name can contain up to 120 characters.')
+      return
+    }
+    const digits = digitsOnly(phoneNumber)
+    const countryDigits = digitsOnly(countryCode).length
     if ((tenDigitNumber && digits.length !== 10) || digits.length < 7 || countryDigits + digits.length > 15 || (countryCode === '+90' && !digits.startsWith('5'))) {
       setPhoneError(countryCode === '+90' ? 'Turkish mobile numbers must contain 10 digits and start with 5 (without +90).' : countryCode === '+1' ? 'US and Canadian numbers must contain 10 digits (without +1).' : countryCode === '+7' ? 'Enter 10 digits after the +7 dialing code.' : 'Enter a valid national number: at least 7 digits and no more than 15 digits including the country code.')
       return
     }
-    if (email.trim().length > 254 || !/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)+$/.test(email.trim())) {
+    if (!isEmailAddress(email)) {
       setEmailError('Please enter a valid email address.')
       return
     }
@@ -161,8 +167,8 @@ export function BookingPassengerPage() {
     }
     try {
       sessionStorage.setItem('bookingPassengerInfo', JSON.stringify({
-      customerName: `${firstName.trim()} ${lastName.trim()}`,
-      phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
+      customerName: fullName,
+      phoneNumber: `${countryCode}${digitsOnly(phoneNumber)}`,
       email: email.trim().toLowerCase(),
       countryOfResidence,
       transferAddress: transferAddress.trim(),
@@ -208,13 +214,13 @@ export function BookingPassengerPage() {
                     label={t("First Name")} required
                     placeholder={t("e.g. Alexander")}
                     value={firstName}
-                    onChange={setFirstName}
+                    onChange={value => setFirstName(cleanPersonName(value))}
                   />
                   <FormField
                     label={t("Last Name")} required
                     placeholder={t("e.g. Hamilton")}
                     value={lastName}
-                    onChange={setLastName}
+                    onChange={value => setLastName(cleanPersonName(value))}
                   />
                 </div>
 
@@ -231,7 +237,7 @@ export function BookingPassengerPage() {
                         className="min-w-0 flex-1 border-outline-variant rounded-r-lg p-3 font-body-md text-body-md focus:border-admin-primary focus:ring-0 form-input-shadow transition-all"
                         onChange={(event) => {
                           const value = event.target.value.trim()
-                          const raw = value.replace(/\D/g, '')
+                          const raw = digitsOnly(value)
                           const national = countryCode === '+90' && raw.length === 11 && raw.startsWith('0')
                             ? raw.slice(1)
                             : raw

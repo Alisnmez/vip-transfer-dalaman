@@ -1,3 +1,4 @@
+import { isFlightNumber } from '../../shared/validation/inputFormats'
 import { VehiclePhoto } from './VehiclePhoto'
 import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { bookingVehicles, clampVehicleCount } from '../../features/booking/bookingVehicles'
@@ -136,7 +137,7 @@ export function BookingFormPage() {
       setFormError(selectionError)
       return
     }
-    if (flightNumber.trim() && !/^[A-Za-z0-9 -]{1,20}$/.test(flightNumber.trim())) {
+    if (flightNumber.trim() && !isFlightNumber(flightNumber.trim())) {
       event.preventDefault()
       setFormError('Please enter a valid flight number (up to 20 letters, digits, spaces or hyphens).')
       return
