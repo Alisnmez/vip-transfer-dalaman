@@ -2,10 +2,12 @@ import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { useLanguage } from '../../shared/localization/language'
 import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { HomeReviewStrip } from './HomeReviewStrip'
+import { VehiclePhoto } from './VehiclePhoto'
 
 const homeCopy = {
   en: {
@@ -22,12 +24,6 @@ const homeCopy = {
     vehicles: "Our Vehicles",
     vehiclesIntro: "Explore vehicle options for your transfer.",
     allVehicles: "View All Vehicles",
-    car: "Private Car",
-    carDetail: "Choose a private car category for your transfer request.",
-    minivan: "Private Minivan",
-    minivanDetail: "Select a minivan category and enter your passenger and luggage needs.",
-    group: "Group Transfer",
-    groupDetail: "Check available group vehicle categories in the booking form.",
     options: "View Options & Prices",
     popular: "Preferred Routes",
     badge: "DALAMAN ROUTE",
@@ -67,12 +63,6 @@ const homeCopy = {
     vehicles: "Unsere Fahrzeuge",
     vehiclesIntro: "Entdecken Sie die Fahrzeugoptionen für Ihren Transfer.",
     allVehicles: "Alle Fahrzeuge ansehen",
-    car: "Privater Pkw",
-    carDetail: "Wählen Sie für Ihren Transfer eine Pkw-Kategorie.",
-    minivan: "Privater Minivan",
-    minivanDetail: "Wählen Sie einen Minivan und geben Sie die Anzahl der Fahrgäste und Gepäckstücke an.",
-    group: "Gruppentransfer",
-    groupDetail: "Prüfen Sie im Buchungsformular die verfügbaren Fahrzeuge für Gruppen.",
     options: "Optionen und Preise ansehen",
     popular: "Beliebte Strecken",
     badge: "STRECKE AB DALAMAN",
@@ -112,12 +102,6 @@ const homeCopy = {
     vehicles: "Наши автомобили",
     vehiclesIntro: "Посмотрите варианты автомобилей для поездки.",
     allVehicles: "Смотреть все автомобили",
-    car: "Легковой автомобиль",
-    carDetail: "Выберите категорию легкового автомобиля.",
-    minivan: "Минивэн",
-    minivanDetail: "Выберите категорию минивэна и укажите количество пассажиров и багажа.",
-    group: "Групповой трансфер",
-    groupDetail: "Проверьте доступные категории транспорта для групп в форме бронирования.",
     options: "Смотреть варианты и цены",
     popular: "Популярные маршруты",
     badge: "МАРШРУТ ИЗ ДАЛАМАНА",
@@ -264,19 +248,12 @@ export function HomePage() {
               </span>
             </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
-            {[
-              { title: copy.car, icon: 'local_taxi', detail: copy.carDetail },
-              { title: copy.minivan, icon: 'directions_car', detail: copy.minivanDetail },
-              { title: copy.group, icon: 'airport_shuttle', detail: copy.groupDetail },
-            ].map((vehicle) => (
-              <article key={vehicle.title} className="professional-card accent-border-left min-w-0 p-6 rounded-xl">
-                <div className="h-32 min-w-0 mb-6 rounded-lg bg-primary/5 flex items-center justify-center overflow-hidden">
-                  <span translate="no" className="material-symbols-outlined block max-w-full overflow-hidden whitespace-nowrap text-primary text-6xl">{vehicle.icon}</span>
-                </div>
-                <h3 className="font-title-md text-on-surface mb-2">{vehicle.title}</h3>
-                <p className="text-on-surface-variant mb-6">{vehicle.detail}</p>
-                <Link to="/booking" className="block text-center w-full py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 transition-all">
+          <div className="grid grid-cols-1 gap-stack-lg sm:grid-cols-2 lg:grid-cols-4">
+            {fleetCatalogue.map((vehicle) => (
+              <article key={vehicle.bookingVehicleId} className="professional-card accent-border-left flex min-w-0 flex-col rounded-xl p-6">
+                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-36 rounded-lg" exteriorOnly />
+                <h3 className="mb-4 font-title-md text-on-surface">{vehicle.name}</h3>
+                <Link to={`/booking?vehicle=${encodeURIComponent(vehicle.bookingVehicleId)}`} className="mt-auto block w-full rounded-lg bg-primary px-2 py-3 text-center font-bold text-white transition-all hover:opacity-90">
                   {copy.options}
                 </Link>
               </article>
