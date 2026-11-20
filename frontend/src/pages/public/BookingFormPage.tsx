@@ -1,3 +1,4 @@
+import { normalizeFlightNumber } from '../../shared/utils/inputValidation'
 import { VehiclePhoto } from './VehiclePhoto'
 import { useBookingCopy } from '../../shared/localization/bookingCopy'
 import { bookingVehicles, clampVehicleCount } from '../../features/booking/bookingVehicles'
@@ -275,7 +276,7 @@ export function BookingFormPage() {
                   value={pickUpTime}
                   onChange={setPickUpTime}
                 />
-                <TextField icon="flight_takeoff" label={t("Flight Number (optional)")} placeholder="TK1234" value={flightNumber} onChange={setFlightNumber} />
+                <TextField icon="flight_takeoff" label={t("Flight Number (optional)")} placeholder="TK1234" value={flightNumber} onChange={(value) => setFlightNumber(normalizeFlightNumber(value))} />
               </div>
 
               {tripType === 'round-trip' && (
