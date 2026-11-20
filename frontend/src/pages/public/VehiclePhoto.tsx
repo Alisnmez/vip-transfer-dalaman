@@ -42,7 +42,7 @@ const interiorPhotos: Record<string, string | undefined> = {
   'vip-minibus': 'https://images.openai.com/static-rsc-4/BXMV8Z-26W5EFttaDizoMzDjMyHFHezu0hvoBfSUTKQdaSr1DeK7vTia_VgabJP1ujPdatL0GSGOnezHD5V837NiuBEZqFvNC1xP6QbzUd1p9CkE4e3mNh0GDXLRGf_vwcX78WfS0oCmJOBOnBp_2l-7JZ_k2meGmqGh47_eFSc?purpose=inline',
 }
 
-export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle = true }: { vehicleId: string; name: string; className?: string; showToggle?: boolean }) {
+export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle = true, exteriorOnly = false }: { vehicleId: string; name: string; className?: string; showToggle?: boolean; exteriorOnly?: boolean }) {
   const { language } = useLanguage()
   const copy = photoCopy[language]
   const [showInterior, setShowInterior] = useState(false)
@@ -50,11 +50,11 @@ export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle =
   const [exteriorFailed, setExteriorFailed] = useState(false)
   const [interiorFailed, setInteriorFailed] = useState(false)
   const exterior = exteriorPhotos[vehicleId]
-  const interior = interiorPhotos[vehicleId]
+  const interior = exteriorOnly ? undefined : interiorPhotos[vehicleId]
   const interiorVisible = Boolean(interior && !interiorFailed && (showInterior || previewInterior))
   return (
     <div className={`relative w-full overflow-hidden bg-slate-100 ${className}`}
-      onPointerEnter={event => { if (event.pointerType === 'mouse') setPreviewInterior(true) }}
+      onPointerEnter={event => { if (interior && event.pointerType === 'mouse') setPreviewInterior(true) }}
       onPointerLeave={() => setPreviewInterior(false)}>
       {exterior && !exteriorFailed ? (
         <img src={exterior.src} alt={copy.exteriorAlt(name)} aria-hidden={interiorVisible} loading="lazy" decoding="async"
