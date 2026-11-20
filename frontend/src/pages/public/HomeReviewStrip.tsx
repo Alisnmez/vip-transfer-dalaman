@@ -21,6 +21,7 @@ export function HomeReviewStrip() {
 function ReviewStrip({ demo }: { demo: boolean }) {
   const { language } = useLanguage()
   const copy = reviewCopy[language]
+  const locale = language === 'en' ? 'en-GB' : language
   const [reviews, setReviews] = useState<PublicReview[]>([])
   const [paused, setPaused] = useState(false)
   const [expandedReview, setExpandedReview] = useState<number | null>(null)
@@ -59,10 +60,16 @@ function ReviewStrip({ demo }: { demo: boolean }) {
             {copies.map(duplicate => (
               <ul key={String(duplicate)} aria-hidden={duplicate || undefined} className="home-review-group">
                 {reviews.map(review => (
-                  <li key={review.id} data-expanded={expandedReview === review.id} className="home-review-card rounded-xl border border-outline-variant bg-white p-5">
-                    <p dir="auto" translate="no" className="break-words font-semibold text-admin-primary">{review.name}</p>
-                    <p aria-label={copy.rating(review.rating)} className="text-amber-600">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</p>
-                    <p dir="auto" translate="no" className="home-review-comment mt-2 whitespace-pre-wrap break-words text-on-surface-variant">{review.comment}</p>
+                  <li key={review.id} data-expanded={expandedReview === review.id} className="home-review-card rounded-2xl border border-outline-variant bg-white p-6 shadow-sm">
+                    <div className="flex items-center gap-3">
+                      <div aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-amber-100 font-bold text-amber-900">{review.name.trim().charAt(0).toUpperCase()}</div>
+                      <div className="min-w-0">
+                        <h3 dir="auto" translate="no" className="break-words font-semibold text-admin-primary">{review.name}</h3>
+                        {review.createdAt && !Number.isNaN(Date.parse(review.createdAt)) && <time dateTime={review.createdAt} className="text-xs text-on-surface-variant">{new Date(review.createdAt).toLocaleString(locale, { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}</time>}
+                      </div>
+                    </div>
+                    <p aria-label={copy.rating(review.rating)} className="mt-4 text-lg tracking-wider text-amber-500">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</p>
+                    <p dir="auto" translate="no" className="home-review-comment mt-3 whitespace-pre-wrap break-words leading-relaxed text-on-surface-variant">{review.comment}</p>
                     {!duplicate && (
                       <button type="button" aria-expanded={expandedReview === review.id}
                         aria-label={`${expandedReview === review.id ? copy.less : copy.more}: ${review.name}`}
