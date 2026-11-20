@@ -1,10 +1,9 @@
 import { sanitizePersonName, isValidPersonName } from '../../shared/utils/inputValidation'
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { submitReview, reviewErrorMessage } from '../../features/reviews/api'
-import { isReviewDemoPreview } from '../../features/reviews/demoPreview'
 import { loadReviewPage } from '../../features/reviews/reviewFeed'
 import { useLanguage } from '../../shared/localization/language'
 import type { PublicReview } from '../../features/reviews/api'
@@ -133,12 +132,10 @@ function starLabel(language: 'en' | 'de' | 'ru', count: number) {
 }
 
 export function ReviewsPage() {
-  const { search } = useLocation()
-  const demo = isReviewDemoPreview(search)
-  return <ReviewContent key={String(demo)} demo={demo} />
+  return <ReviewContent />
 }
 
-function ReviewContent({ demo }: { demo: boolean }) {
+function ReviewContent() {
   const { language } = useLanguage()
   const copy = reviewsCopy[language]
   const locale = language === 'en' ? 'en-GB' : language
@@ -154,7 +151,7 @@ function ReviewContent({ demo }: { demo: boolean }) {
   const [totalPages, setTotalPages] = useState(0)
   useEffect(() => {
     let active = true
-    loadReviewPage(page, demo).then(result => {
+    loadReviewPage(page).then(result => {
       if (!active) return
       setReviews(result.content)
       setTotalPages(result.totalPages)
@@ -164,7 +161,7 @@ function ReviewContent({ demo }: { demo: boolean }) {
       setFeedback(reviewErrorMessage(undefined, 'load'))
     })
     return () => { active = false }
-  }, [demo, page])
+  }, [page])
 
   async function submitFeedback(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -198,7 +195,7 @@ function ReviewContent({ demo }: { demo: boolean }) {
       <main className="mx-auto max-w-5xl px-margin-page pb-20 pt-32">
         <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">{copy.eyebrow}</p>
         <h1 className="font-display-lg text-display-lg text-admin-primary">{copy.title}</h1>
-        {!demo && <p className="mt-4 max-w-2xl text-on-surface-variant">{copy.intro}</p>}
+        <p className="mt-4 max-w-2xl text-on-surface-variant">{copy.intro}</p>
         <div className="mt-4">
           <a className="inline-flex rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white hover:opacity-90" href="#share-review">
             {copy.experience}
