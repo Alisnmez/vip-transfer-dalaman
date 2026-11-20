@@ -45,7 +45,7 @@ function ReviewStrip({ demo }: { demo: boolean }) {
         <div className="mb-stack-md flex flex-wrap items-center justify-between gap-3">
           <h2 id="home-review-heading" className="font-headline-lg text-headline-lg">{copy.heading}</h2>
           <div className="flex flex-wrap items-center gap-4">
-            <Link to={isReviewTestHost() && !demo ? "/reviews?demo-reviews=0" : "/reviews"} className="font-semibold underline underline-offset-4">{copy.all}</Link>
+            <Link to={demo ? "/reviews?demo-reviews=1" : isReviewTestHost() ? "/reviews?demo-reviews=0" : "/reviews"} className="font-semibold underline underline-offset-4">{copy.all}</Link>
             {canScroll && (
               <button type="button" className="home-review-pause rounded-lg border border-outline px-3 py-2" onClick={() => setPaused(value => !value)}>
                 {paused ? copy.resume : copy.pause}
