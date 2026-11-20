@@ -1,12 +1,10 @@
 import { useState } from 'react'
 
-// Review-only references supplied by the project owner. Replace with licensed,
-// locally hosted images before production. These CDN URLs may expire.
-const exteriorPhotos: Record<string, string> = {
-  "vip-minivan": "https://images.openai.com/static-rsc-4/-RS8FRs6GidybdzW-Zo_o4eGPwBZKeYTZ7P0uidrPSt2f1Fxm5n85jFtgZYoRKrjlTh7Zv1L1BIMHpA5nkMaAJg7lRFGeVzWH59_NcKCkdx7du1nFPC644rvaxo70t-G5ri4zw5bZ6iw-QEngpDm824Sard_L6u8hIjmCRyrd2g?purpose=inline",
-  "maybach": "https://images.openai.com/static-rsc-4/DZcP4gyqeA8GMylHWO79ok3PzKseaM_s2EvCYTZRYuRCBIiIMgeNrgBBoEcCZoYJU2e-TCAFkDYfkBoW8s1_trPyWkTpAZLcoini0lHfl7FkoEXz-v4fUrWAqUxW5jX42EljQsVBK_ilSh5WfFF3LY4qZnhiJOWYm1NQPaQPqeE?purpose=inline",
-  "minibus-long": "https://images.openai.com/static-rsc-4/vaVb-vKHfvA-D1tt2Bc5_iW2t4nEdHmMXHFMbvY84tDnov02aNTpVS0SM96o510y442kw-M-Zn24YpkmgkOmkLV_DAa5ujt8p0680R1hkhFff9zUDTlOsUHHlj85Zu15HzKSHx8g3S7oaC2G-bbZY-A1AD66_2JmsPYz7U_g4KE?purpose=inline",
-  "vip-minibus": "https://images.openai.com/static-rsc-4/WXj0fuvQAfOtVK8odHp02IsYdtwd3m2fAqJHWxU8Gi3LkAN87N_0c9ujfSIA8UjN7Ul47vIywsQ0dY1kPYHc4NEilgxnj1eWbphX5N23eUf20SErIAhPW_VHKWno2qduwwIjXBzV7UnQIdTgdRcEeWpxzIh-FdpdUe_foEzpHjE?purpose=inline"
+const exteriorPhotos: Record<string, { src: string; objectPosition?: string }> = {
+  'vip-minivan': { src: '/images/vehicles/vip-vito-exterior.webp', objectPosition: 'center 65%' },
+  maybach: { src: '/images/vehicles/ultra-vip-vito-exterior.webp', objectPosition: 'center 75%' },
+  'minibus-long': { src: '/images/vehicles/sprinter-exterior.webp', objectPosition: 'center 75%' },
+  'vip-minibus': { src: 'https://images.openai.com/static-rsc-4/WXj0fuvQAfOtVK8odHp02IsYdtwd3m2fAqJHWxU8Gi3LkAN87N_0c9ujfSIA8UjN7Ul47vIywsQ0dY1kPYHc4NEilgxnj1eWbphX5N23eUf20SErIAhPW_VHKWno2qduwwIjXBzV7UnQIdTgdRcEeWpxzIh-FdpdUe_foEzpHjE?purpose=inline' },
 }
 const interiorPhotos: Record<string, string | undefined> = {
   // VIP Tours İstanbul cabin photo for staging review.
@@ -28,7 +26,8 @@ export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle =
       onPointerEnter={event => { if (event.pointerType === 'mouse') setPreviewInterior(true) }}
       onPointerLeave={() => setPreviewInterior(false)}>
       {exterior && !exteriorFailed ? (
-        <img src={exterior} alt={`${name} exterior (illustrative vehicle)`} loading="lazy" decoding="async"
+        <img src={exterior.src} alt={`${name} exterior (illustrative vehicle)`} loading="lazy" decoding="async"
+          style={{ objectPosition: exterior.objectPosition }}
           onError={() => setExteriorFailed(true)} className="h-full w-full object-cover" />
       ) : <div className="flex h-full items-center justify-center text-sm text-slate-500">{name}</div>}
       {interior && !interiorFailed && <img src={interior} alt="" aria-hidden="true" loading="lazy" decoding="async"
