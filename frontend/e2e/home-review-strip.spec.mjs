@@ -62,4 +62,7 @@ test('homepage shows the same ten latest published reviews as the reviews page',
   await expect(strip.locator('.home-review-group:not([aria-hidden]) li > p:first-child')).toHaveText(latestNames)
   await strip.getByRole('link', { name: 'Read all reviews' }).click()
   await expect(page.getByRole('region', { name: 'Published customer reviews' }).getByRole('heading')).toHaveText(latestNames)
+  await page.getByRole('link', { name: 'Share your experience' }).click()
+  await expect(page).toHaveURL(/#share-review$/)
+  await expect(page.getByRole('region', { name: 'Share a review' })).toBeInViewport()
 })
