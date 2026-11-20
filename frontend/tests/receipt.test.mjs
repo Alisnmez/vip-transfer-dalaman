@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { readReceiptFromStorages, saveReceiptToStorages, RECEIPT_KEY, RECEIPT_MAX_AGE_MS } from '../src/features/booking/receipt.ts'
+import { clearPersistentBookingData, readReceiptFromStorages, saveReceiptToStorages, RECEIPT_KEY, RECEIPT_MAX_AGE_MS } from '../src/features/booking/receipt.ts'
 
 function memoryStorage() {
   const values = new Map()
@@ -16,12 +16,13 @@ const receipt = {
   dropOffLocation: 'Marmaris', schedule: '2027-01-03 15:00', savedAt: now,
 }
 
-test('receipt survives a simulated reload and falls back to local storage', () => {
+test('receipt survives reload in the same tab but is not copied to persistent storage', () => {
   const session = memoryStorage()
   const local = memoryStorage()
-  saveReceiptToStorages(receipt, [session, local])
-  assert.deepEqual(readReceiptFromStorages([session, local], now), receipt)
-  assert.deepEqual(readReceiptFromStorages([memoryStorage(), local], now), receipt)
+  saveReceiptToStorages(receipt, [session])
+  assert.deepEqual(readReceiptFromStorages([session], now), receipt)
+  assert.equal(readReceiptFromStorages([memoryStorage()], now), null)
+  assert.equal(local.getItem(RECEIPT_KEY), null)
 })
 
 test('expired, future-dated and malformed receipts are discarded', () => {
@@ -49,4 +50,13 @@ test('blocked storage does not hide a valid receipt in another storage', () => {
   const available = memoryStorage()
   saveReceiptToStorages(receipt, [blocked, available])
   assert.deepEqual(readReceiptFromStorages([blocked, available], now), receipt)
+})
+
+test('legacy persistent booking drafts and receipts are removed without touching other preferences', () => {
+  const storage = memoryStorage()
+  for (const key of ['bookingTransferInfo', 'bookingPassengerInfo', RECEIPT_KEY]) storage.setItem(key, 'private')
+  storage.setItem('language', 'de')
+  clearPersistentBookingData(storage)
+  for (const key of ['bookingTransferInfo', 'bookingPassengerInfo', RECEIPT_KEY]) assert.equal(storage.getItem(key), null)
+  assert.equal(storage.getItem('language'), 'de')
 })

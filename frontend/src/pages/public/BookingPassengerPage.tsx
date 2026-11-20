@@ -34,7 +34,7 @@ type SavedPassenger = {
 
 function readPassengerDraft(): SavedPassenger {
   try {
-    const value: unknown = JSON.parse(localStorage.getItem('bookingPassengerInfo') || '{}')
+    const value: unknown = JSON.parse(sessionStorage.getItem('bookingPassengerInfo') || '{}')
     if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
     const raw = value as Record<string, unknown>
     const readString = (key: string) => typeof raw[key] === 'string' ? raw[key] as string : undefined
@@ -54,7 +54,7 @@ function readPassengerDraft(): SavedPassenger {
 
 function isAirportPickup(): boolean {
   try {
-    const saved = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+    const saved = JSON.parse(sessionStorage.getItem('bookingTransferInfo') || '{}')
     return saved?.pickUpLocation === 'Dalaman Airport'
   } catch {
     return true
@@ -90,7 +90,7 @@ export function BookingPassengerPage() {
     setPhoneError('')
     let savedTransferInfo: string | null
     try {
-      savedTransferInfo = localStorage.getItem('bookingTransferInfo')
+      savedTransferInfo = sessionStorage.getItem('bookingTransferInfo')
     } catch {
       setError('Browser storage is unavailable. Please enable site storage and retry.')
       return
@@ -159,7 +159,7 @@ export function BookingPassengerPage() {
       return
     }
     try {
-      localStorage.setItem('bookingPassengerInfo', JSON.stringify({
+      sessionStorage.setItem('bookingPassengerInfo', JSON.stringify({
       customerName: `${firstName.trim()} ${lastName.trim()}`,
       phoneNumber: `${countryCode}${phoneNumber.replace(/\D/g, '')}`,
       email: email.trim().toLowerCase(),
@@ -466,7 +466,7 @@ function PassengerSummary() {
   // Browser storage may be disabled or contain an invalid draft.
   const [transfer] = useState<Record<string, unknown>>(() => {
     try {
-      const saved: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+      const saved: unknown = JSON.parse(sessionStorage.getItem('bookingTransferInfo') || '{}')
       return saved && typeof saved === 'object' && !Array.isArray(saved)
         ? saved as Record<string, unknown> : {}
     } catch {

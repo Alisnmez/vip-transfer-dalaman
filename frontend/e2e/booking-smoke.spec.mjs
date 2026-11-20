@@ -332,12 +332,101 @@ test('malformed stored transfer draft does not crash the booking page', async ({
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   await page.addInitScript(() => {
-    localStorage.setItem('bookingTransferInfo', '{invalid json')
+    sessionStorage.setItem('bookingTransferInfo', '{invalid json')
   })
   await page.goto('http://127.0.0.1:4173/booking')
   await expect(page.getByRole('heading', { name: 'Transfer Information' })).toBeVisible()
   await expect(page.getByRole('link', { name: 'Next: Passenger Details' })).toBeVisible()
   expect(errors, 'Uncaught errors with malformed stored draft').toEqual([])
+})
+
+test('legacy persistent booking data is cleared while language preference survives', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('bookingTransferInfo', JSON.stringify({ customerName: 'Legacy Person' }))
+    localStorage.setItem('bookingPassengerInfo', JSON.stringify({ email: 'legacy@example.invalid' }))
+    localStorage.setItem('lastBookingReceipt', JSON.stringify({ customerName: 'Legacy Person' }))
+    localStorage.setItem('dalamanway-language', 'en')
+  })
+  await page.goto('http://127.0.0.1:4173/booking')
+  await expect(page.getByRole('heading', { name: 'Transfer Information' })).toBeVisible()
+  const remaining = await page.evaluate(() => ({
+    transfer: localStorage.getItem('bookingTransferInfo'),
+    passenger: localStorage.getItem('bookingPassengerInfo'),
+    receipt: localStorage.getItem('lastBookingReceipt'),
+    language: localStorage.getItem('dalamanway-language'),
+  }))
+  expect(remaining).toEqual({ transfer: null, passenger: null, receipt: null, language: 'en' })
+})
+
+test('session booking drafts survive reload but are not persistent or shared with a fresh tab', async ({ page, context }) => {
+  await page.goto('http://127.0.0.1:4173/booking')
+  await page.evaluate(() => {
+    sessionStorage.setItem('bookingTransferInfo', JSON.stringify({ pickUpLocation: 'Dalaman Airport', dropOffLocation: 'Marmaris(Any Hotel)' }))
+    sessionStorage.setItem('bookingPassengerInfo', JSON.stringify({ customerName: 'Test Passenger' }))
+  })
+  await page.reload()
+  const sameTab = await page.evaluate(() => ({
+    transfer: sessionStorage.getItem('bookingTransferInfo'),
+    passenger: sessionStorage.getItem('bookingPassengerInfo'),
+    persistentTransfer: localStorage.getItem('bookingTransferInfo'),
+    persistentPassenger: localStorage.getItem('bookingPassengerInfo'),
+  }))
+  expect(JSON.parse(sameTab.transfer).pickUpLocation).toBe('Dalaman Airport')
+  expect(JSON.parse(sameTab.passenger).customerName).toBe('Test Passenger')
+  expect(sameTab.persistentTransfer).toBeNull()
+  expect(sameTab.persistentPassenger).toBeNull()
+  const freshTab = await context.newPage()
+  await freshTab.goto('http://127.0.0.1:4173/booking')
+  const isolated = await freshTab.evaluate(() => ({
+    transfer: sessionStorage.getItem('bookingTransferInfo'),
+    passenger: sessionStorage.getItem('bookingPassengerInfo'),
+  }))
+  expect(isolated).toEqual({ transfer: null, passenger: null })
+  await freshTab.close()
+})
+
+test('successful booking clears both drafts and keeps the receipt in the current tab', async ({ page, context }) => {
+  await page.route('**/bookings', async route => {
+    expect(route.request().method()).toBe('POST')
+    expect(route.request().postDataJSON().email).toBe('booking@example.invalid')
+    await route.fulfill({ json: { id: 902 } })
+  })
+  await page.goto('http://127.0.0.1:4173/booking')
+  const tomorrow = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' })
+    .format(new Date(Date.now() + 86_400_000))
+  await page.getByLabel('Destination', { exact: true }).selectOption('Marmaris(Any Hotel)')
+  await page.getByLabel(/Pickup Date/).fill(tomorrow)
+  await page.getByLabel(/Pickup Time/).fill('15:30')
+  await page.getByRole('link', { name: 'Next: Passenger Details' }).click()
+  await page.getByLabel(/First Name/).fill('Test')
+  await page.getByLabel(/Last Name/).fill('Passenger')
+  await page.getByLabel('Country dialing code').selectOption('+44')
+  await page.getByPlaceholder('Phone number', { exact: true }).fill('7700900123')
+  await page.getByLabel(/Email Address/).fill('booking@example.invalid')
+  await page.getByLabel(/Country of Residence/).selectOption('United Kingdom')
+  await page.getByPlaceholder('e.g. Green Nature Diamond Hotel, Siteler, Marmaris', { exact: true }).fill('Example Hotel, Marmaris')
+  const continueButton = page.getByRole('button', { name: 'Continue to Confirmation' })
+  await continueButton.click()
+  await expect(page.getByRole('heading', { name: 'Review Your Booking Request' })).toBeVisible()
+  await page.goBack()
+  await expect(page.getByLabel(/Email Address/)).toHaveValue('booking@example.invalid')
+  await continueButton.click()
+  await page.getByRole('checkbox', { name: 'I confirm that all information provided is correct.' }).check()
+  await page.getByRole('button', { name: 'Submit booking request' }).click()
+  await expect(page.getByText('#902', { exact: true })).toBeVisible()
+  const storage = await page.evaluate(() => ({
+    transfer: sessionStorage.getItem('bookingTransferInfo'),
+    passenger: sessionStorage.getItem('bookingPassengerInfo'),
+    persistent: ['bookingTransferInfo', 'bookingPassengerInfo', 'lastBookingReceipt'].map(key => localStorage.getItem(key)),
+  }))
+  expect(storage).toEqual({ transfer: null, passenger: null, persistent: [null, null, null] })
+  await page.reload()
+  await expect(page.getByText('#902', { exact: true })).toBeVisible()
+  const freshTab = await context.newPage()
+  await freshTab.goto('http://127.0.0.1:4173/booking/confirmation')
+  await expect(freshTab.getByRole('heading', { name: 'Review Your Booking Request' })).toBeVisible()
+  await expect(freshTab.getByText('#902', { exact: true })).toHaveCount(0)
+  await freshTab.close()
 })
 
 test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {

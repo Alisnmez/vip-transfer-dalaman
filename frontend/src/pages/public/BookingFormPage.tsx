@@ -33,7 +33,7 @@ type TransferDraft = {
 
 function readTransferDraft(): TransferDraft {
   try {
-    const value: unknown = JSON.parse(localStorage.getItem('bookingTransferInfo') || '{}')
+    const value: unknown = JSON.parse(sessionStorage.getItem('bookingTransferInfo') || '{}')
     if (!value || typeof value !== 'object' || Array.isArray(value)) return {}
     const raw = value as Record<string, unknown>
     const readString = (key: string) => typeof raw[key] === 'string' ? raw[key] as string : undefined
@@ -142,7 +142,7 @@ export function BookingFormPage() {
     }
     setFormError('')
     try {
-      localStorage.setItem(
+      sessionStorage.setItem(
         'bookingTransferInfo',
         JSON.stringify({
         dropOffLocation: dropOffLocation.trim(),
@@ -167,13 +167,10 @@ export function BookingFormPage() {
       setFormError('Your browser could not save the transfer details. Please enable site storage and try again.')
       return
     }
-    for (const kind of ['session', 'local'] as const) {
-      try {
-        const storage = kind === 'session' ? sessionStorage : localStorage
-        storage.removeItem('lastBookingReceipt')
-      } catch {
-        // Continue when a browser storage mechanism is unavailable.
-      }
+    try {
+      sessionStorage.removeItem('lastBookingReceipt')
+    } catch {
+      // Continue when browser storage is unavailable.
     }
   }
 
