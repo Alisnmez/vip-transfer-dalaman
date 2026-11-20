@@ -2,11 +2,11 @@ import type { PublicReview, ReviewPage } from './api'
 
 // Fictional examples for classroom presentations on the Render test site.
 const examples = [
-  ["Hannah Prescott", 5, "2026-09-27T09:56:00Z", "landed just after midnight from Manchester, saw our name board straight away. in Marmaris before I'd even got round to texting my sister"],
-  ["Graham Lister", 5, "2026-09-05T17:06:00Z", "easy pickup and a lovely driver. cheers!"],
+  ["hannah Prescott", 5, "2026-09-27T09:56:00Z", "landed just after midnight from Manchester, saw our name board straight away. in Marmaris before I'd even got round to texting my sister"],
+  ["Graham", 5, "2026-09-05T17:06:00Z", "easy pickup and a lovely driver. cheers!"],
   ["Nina Berger", 5, "2026-08-26T13:20:00Z", "Pünktlich trotz später Landung. Am Ausgang direkt unser Schild gesehen, das war nach dem Flug echt angenehm."],
   ["Laura Mayfield", 5, "2026-08-16T08:11:00Z", "2 kids, buggy and 3 cases and nobody had to sit with a bag on their lap. That alone did it for me 😂"],
-  ["Martin Bellamy", 5, "2026-07-26T20:48:00Z", "4.50 pickup, bang on time"],
+  ["Martin B", 5, "2026-07-26T20:48:00Z", "4.50 pickup, bang on time"],
   ["Mia Thornton", 5, "2026-07-21T13:48:00Z", "Waited longer for our suitcases than for the transfer. We sent a quick message from baggage reclaim and got directions straight back. In Göcek in no time."],
   ["Tom Radcliffe", 5, "2026-07-07T14:52:00Z", "sent the villa pin before we flew. straight to the right gate with no messing about"],
   ["Анна Морозова", 5, "2026-06-16T14:32:00Z", "рейс задержался, написала уже после посадки. водитель быстро ответил и объяснил, куда идти. до отеля доехали спокойно, спасибо"],
@@ -15,11 +15,11 @@ const examples = [
   ["Gavin Mason", 5, "2026-05-23T10:44:00Z", "We landed in the rain. Driver brought the van up while we waited under cover."],
   ["Mark Wood", 5, "2026-05-22T08:13:00Z", "Good ride after a long day. Didn't have to explain where the villa was again, he'd already got the pin."],
   ["Kieran Holden", 5, "2026-05-22T03:18:00Z", "We booked the larger vehicle for the group and had enough space even with the extra holdall we bought on holiday."],
-  ["Lucy Holden", 5, "2026-05-21T21:16:00Z", "an easy start to the week. thanks"],
+  ["lucy", 5, "2026-05-21T21:16:00Z", "an easy start to the week. thanks"],
   ["Natalie Gibson", 5, "2026-05-16T06:34:00Z", "Booked both legs separately. The return details were easy to dig out when we needed them."],
   ["Holly Palmer", 5, "2026-05-06T08:08:00Z", "easy to find at arrivals, better than I was expecting"],
   ["Lena Lorenz", 5, "2026-05-04T08:09:00Z", "Nach einem langen Flug war das kühle Auto echt angenehm. Koffer rein und direkt zum Hotel."],
-  ["Craig Gibson", 5, "2026-05-03T16:25:00Z", "The kids were grumpy at the airport and asleep ten minutes after getting in. That'll do."],
+  ["Craig", 5, "2026-05-03T16:25:00Z", "The kids were grumpy at the airport and asleep ten minutes after getting in. That'll do."],
   ["Isobel Whitaker", 5, "2026-05-02T13:04:00Z", "Only a quick trip to Sarıgerme but worth having it booked. We knew what we were paying and got dropped right at reception."],
   ["Jack Fletcher", 5, "2026-04-26T12:49:00Z", "both pickups spot on, thanks"],
   ["Jonas Lorenz", 5, "2026-04-18T21:14:00Z", "Waren müde nach der Landung. Schön, ohne weitere Stopps direkt zur Unterkunft zu fahren."],
