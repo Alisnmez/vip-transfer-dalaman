@@ -3,15 +3,17 @@ import test from 'node:test'
 import { getClassroomReviews } from '../src/features/reviews/classroomReviews.ts'
 import { isReviewDemoPreview } from '../src/features/reviews/demoPreview.ts'
 
-test('classroom reviews are available only on the opted-in test host', (context) => {
+test('classroom reviews default on the test host and cannot be enabled on production', (context) => {
   const previousWindow = globalThis.window
   context.after(() => { globalThis.window = previousWindow })
 
   globalThis.window = { location: { hostname: 'dalamanway.com' } }
+  assert.equal(isReviewDemoPreview(''), false)
   assert.equal(isReviewDemoPreview('?demo-reviews=1'), false)
   globalThis.window.location.hostname = 'vip-transfer-dalaman-test.onrender.com'
-  assert.equal(isReviewDemoPreview(''), false)
+  assert.equal(isReviewDemoPreview(''), true)
   assert.equal(isReviewDemoPreview('?demo-reviews=1'), true)
+  assert.equal(isReviewDemoPreview('?demo-reviews=0'), false)
 })
 
 test('the demo fixture covers 52 unique reviews across six pages', () => {

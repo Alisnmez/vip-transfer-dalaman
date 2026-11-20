@@ -1,4 +1,7 @@
-export function isReviewDemoPreview(search: string) {
+export function isReviewTestHost() {
   return window.location.hostname === 'vip-transfer-dalaman-test.onrender.com'
-    && new URLSearchParams(search).get('demo-reviews') === '1'
+}
+
+export function isReviewDemoPreview(search: string) {
+  return isReviewTestHost() && new URLSearchParams(search).get('demo-reviews') !== '0'
 }
