@@ -26,6 +26,12 @@ test('the demo fixture covers 52 unique reviews across six pages', () => {
   const timestamps = reviews.map(review => Date.parse(review.createdAt))
   assert.ok(timestamps.every(Number.isFinite))
   assert.ok(timestamps.slice(1).every((timestamp, index) => timestamp < timestamps[index]))
+  assert.match(reviews[0].createdAt, /^2026-09-/)
+  assert.match(reviews.at(-1).createdAt, /^2023-05-/)
+  for (const review of reviews) {
+    assert.match(review.createdAt, /^(?:2026-0[4-9]|202[3-5]-0[5-9])-/)
+    assert.doesNotMatch(review.comment, /[→↔]/)
+  }
   const lastNames = reviews.slice(-10).map(review => review.name)
   assert.ok(lastNames.includes("Miriam Fischer"))
   assert.ok(lastNames.includes("Дмитрий Волков"))
