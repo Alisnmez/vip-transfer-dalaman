@@ -74,3 +74,11 @@ Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni
 **Rakip kaynakları:** https://dalamangotransfer.com/en/vehicles ; https://transferhood.com/city/dalaman/ ; https://monarchtransfer.com/en ; https://www.get4s.com/en/transfers/dalaman-transfer ; https://rideglobus.com/airport-transfers/turkiye/dalaman-airport ; https://www.dalamantransfer.com/frequently-asked-questions/ ; https://driveonport.com/dalaman-airport-dlm/
 
 **Sıra:** Önce P0 rezervasyon güvenliği ve yayın kapıları, sonra P1 dönüşüm/operasyon, ardından ölçüme bağlı P2 büyüme. Bu kayıt yalnızca dokümantasyondur; özellikler uygulanmadı, prod yayını yapılmadı.
+
+### 2026-11-20 — UK derin araştırma eki
+
+[UK rekabet ve dönüşüm araştırması](DALAMANWAY_UK_COMPETITOR_DEEP_RESEARCH.md) on alan adının kanıt matrisi, 54 İngilizce sorgu adayı, canlı/test/kod denetimi ve 30/60/90 günlük planı içeriyor. Mevcut tablodaki işleri yeniden açmadan, ilk uygulama sırası ve kabul koşulları için raporun 13 ve 14. bölümlerini kullan.
+
+- **Yeni doğrulama:** Canlı sitemap içindeki 28 URL 200 ve self-canonical. Marmaris VIP Vito formunda canlı ve test fiyatı £47,50 tek yön ve £95 gidiş-dönüş. Dört araç kartı ve kapasite bilgisi mevcut. Gizlilik metni ve yolcu taslağı riskinin kabul adımları raporda.
+- **Kanıt sınırı:** UK Google sıra ve hacim verisi ile Search Console dışa aktarımı henüz alınmadı. İki büyük alan adında tahmini trafik var. Bu değerler Dalaman alt sayfası ziyareti anlamına gelmiyor.
+- **İlerleme:** Özet ve ayrıntılı rapor dokümantasyon olarak hazırlanıyor. Uygulama işlerini önce Render test ortamında doğrula, kullanıcı inceleyip açıkça onayladıktan sonra canlıya al.
