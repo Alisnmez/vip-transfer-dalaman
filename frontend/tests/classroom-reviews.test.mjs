@@ -16,12 +16,15 @@ test('classroom reviews default on the test host and cannot be enabled on produc
   assert.equal(isReviewDemoPreview('?demo-reviews=0'), false)
 })
 
-test('the demo fixture covers 52 unique reviews across six pages', () => {
-  const pages = Array.from({ length: 6 }, (_, page) => getClassroomReviews(page))
-  assert.deepEqual(pages.map(page => page.content.length), [10, 10, 10, 10, 10, 2])
-  assert.ok(pages.every(page => page.totalPages === 6 && page.totalElements === 52))
+test('the demo fixture covers 162 distinct reviews across seventeen pages', () => {
+  const pages = Array.from({ length: 17 }, (_, page) => getClassroomReviews(page))
+  assert.deepEqual(pages.map(page => page.content.length), [...Array(16).fill(10), 2])
+  assert.ok(pages.every(page => page.totalPages === 17 && page.totalElements === 162))
   const reviews = pages.flatMap(page => page.content)
-  assert.equal(new Set(reviews.map(review => review.id)).size, 52)
+  assert.equal(new Set(reviews.map(review => review.id)).size, 162)
+  assert.equal(new Set(reviews.map(review => review.name)).size, 162)
+  const normalizedComments = reviews.map(review => review.comment.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim())
+  assert.equal(new Set(normalizedComments).size, 162)
   assert.ok(reviews.every(review => review.rating === 5))
   const timestamps = reviews.map(review => Date.parse(review.createdAt))
   assert.ok(timestamps.every(Number.isFinite))
