@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getPublishedReviews, type PublicReview } from '../../features/reviews/api'
+import { isReviewDemoPreview } from '../../features/reviews/demoPreview'
 import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
 
@@ -16,11 +17,6 @@ const demoReviews: PublicReview[] = [
   { id: -3, name: 'Русский · Demo', rating: 4, comment: 'До отеля в Мармарисе доехали комфортно. В аэропорту немного поискали место встречи, но водитель быстро ответил.' },
 ]
 
-function isDemoPreview() {
-  return window.location.hostname === 'vip-transfer-dalaman-test.onrender.com'
-    && new URLSearchParams(window.location.search).get('demo-reviews') === '1'
-}
-
 export function HomeReviewStrip() {
   const { language } = useLanguage()
   const copy = reviewCopy[language]
@@ -30,12 +26,12 @@ export function HomeReviewStrip() {
 
   useEffect(() => {
     let active = true
-    const feed = isDemoPreview()
+    const feed = isReviewDemoPreview(window.location.search)
       ? Promise.resolve(demoReviews)
       : getPublishedReviews().then(result => result.content)
     feed.then(result => {
       if (!active) return
-      const showDemo = isDemoPreview()
+      const showDemo = isReviewDemoPreview(window.location.search)
         || (window.location.hostname === 'vip-transfer-dalaman-test.onrender.com' && result.length < 2)
       setDemo(showDemo)
       setReviews(showDemo ? demoReviews : result)
@@ -56,7 +52,7 @@ export function HomeReviewStrip() {
         <div className="mb-stack-md flex flex-wrap items-center justify-between gap-3">
           <h2 id="home-review-heading" className="font-headline-lg text-headline-lg">{copy.heading}</h2>
           <div className="flex flex-wrap items-center gap-4">
-            <Link to="/reviews" className="font-semibold underline underline-offset-4">{copy.all}</Link>
+            <Link to={demo ? "/reviews?demo-reviews=1" : "/reviews"} className="font-semibold underline underline-offset-4">{copy.all}</Link>
             {canScroll && (
               <button type="button" className="home-review-pause rounded-lg border border-outline px-3 py-2" onClick={() => setPaused(value => !value)}>
                 {paused ? copy.resume : copy.pause}
