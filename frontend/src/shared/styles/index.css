@@ -221,3 +221,76 @@ textarea {
     flex-direction: column;
   }
 }
+
+
+/* Public booking pages: compact, touch-friendly layout on small screens. */
+@media (max-width: 767px) {
+  html, body, #root {
+    max-width: 100%;
+  }
+
+  .booking-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .booking-card input,
+  .booking-card select,
+  .booking-card textarea {
+    max-width: 100%;
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .booking-card select,
+  .booking-card input {
+    min-height: 44px;
+  }
+
+  .booking-card .inline-flex:has(> button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .booking-card .inline-flex:has(> button) > button {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-inline: 10px;
+  }
+
+  .booking-card .grid > * {
+    min-width: 0;
+  }
+
+  .confirmation-step {
+    min-width: 0;
+  }
+
+  .confirmation-step:not(:last-child)::after {
+    right: calc(-50% + 12px);
+    left: calc(50% + 12px);
+  }
+
+  #routes .grid > div {
+    min-height: 220px;
+  }
+
+  #routes .grid > div:first-child {
+    min-height: 300px;
+  }
+
+  #routes .grid > div > div:last-child {
+    padding: 18px;
+  }
+
+  #routes h3 {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 380px) {
+  .booking-card {
+    padding: 16px 12px;
+  }
+}

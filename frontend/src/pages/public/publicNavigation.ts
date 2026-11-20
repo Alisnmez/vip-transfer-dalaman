@@ -1,7 +1,10 @@
 export const publicNavItems = [
-  { label: 'Home', to: '/' },
-  { label: 'Routes', to: '/routes' },
-  { label: 'Vehicles', to: '/vehicles' },
-  { label: 'Services', to: '/services' },
-  { label: 'Contact', to: '/contact' },
+  { label: 'Home', translations: { en: 'Home', de: 'Startseite', ru: 'Главная' }, to: '/' },
+  { label: 'Routes', translations: { en: 'Routes', de: 'Strecken', ru: 'Маршруты' }, to: '/routes' },
+  { label: 'Vehicles', translations: { en: 'Vehicles', de: 'Fahrzeuge', ru: 'Автомобили' }, to: '/vehicles' },
+  { label: 'Services', translations: { en: 'Services', de: 'Leistungen', ru: 'Услуги' }, to: '/services' },
+  { label: 'Manage Booking', translations: { en: 'Manage Booking', de: 'Buchung verwalten', ru: 'Управление бронированием' }, to: '/booking/lookup' },
+  { label: 'FAQ', translations: { en: 'FAQ', de: 'Häufige Fragen', ru: 'Частые вопросы' }, to: '/faq' },
+  { label: 'Customer Reviews', translations: { en: 'Customer Reviews', de: 'Kundenbewertungen', ru: 'Отзывы клиентов' }, to: '/reviews' },
+  { label: 'Contact', translations: { en: 'Contact', de: 'Kontakt', ru: 'Контакты' }, to: '/contact' },
 ]

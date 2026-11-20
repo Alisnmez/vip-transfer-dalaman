@@ -1,23 +1,148 @@
-import { useState } from 'react'
+import { useBookingCopy } from '../../shared/localization/bookingCopy'
+import { vehicleLabel } from '../../features/booking/bookingVehicles'
+import { supportEmail } from '../../features/booking/support'
+import { Link } from 'react-router-dom'
+import { useLayoutEffect, useState } from 'react'
 
+import { BookingPolicyLinks } from './BookingPolicyLinks'
 import { PublicNavbar } from './PublicNavbar'
+import { trackAnalyticsEvent } from '../../features/analytics/analytics'
+import { useAsyncAction } from '../../hooks/useAsyncAction'
+import { ProcessingButton } from '../../components/ProcessingButton'
+import { createBooking } from '../../features/booking/api'
+import { BookingApiError, bookingErrorMessage } from '../../features/booking/api/errors'
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
+import { validateBookingDetails } from '../../features/booking/validateBookingDetails'
+import type { TransferDetails, PassengerDetails } from '../../features/booking/validateBookingDetails'
+import { readReceiptFromStorages, saveReceiptToStorages } from '../../features/booking/receipt'
+import type { BookingReceipt, ReceiptStorage } from '../../features/booking/receipt'
 
-const informationLinks = ['Insurance Coverage', 'Trust & Safety']
-const legalLinks = ['Terms of Service', 'Privacy Policy']
+function availableReceiptStorages(): ReceiptStorage[] {
+  const storages: ReceiptStorage[] = []
+  try { storages.push(sessionStorage) } catch { /* Storage may be disabled. */ }
+  return storages
+}
+
+function readReceipt(): BookingReceipt | null {
+  return readReceiptFromStorages(availableReceiptStorages())
+}
+
+function readSavedDetails<T>(key: string): T {
+  try {
+    const value: unknown = JSON.parse(sessionStorage.getItem(key) || '{}')
+    return value && typeof value === 'object' && !Array.isArray(value) ? value as T : {} as T
+  } catch {
+    return {} as T
+  }
+}
+
 
 export function BookingConfirmationPage() {
+  const t = useBookingCopy()
+  const { findPrice: findTransferPrice, loading: pricesLoading, error: pricesError, refresh: refreshPrices } = useTransferPrices()
   const [confirmed, setConfirmed] = useState(false)
-  const [processing, setProcessing] = useState(false)
-  const [completed, setCompleted] = useState(false)
+  const { processing, run } = useAsyncAction()
+  const [receipt, setReceipt] = useState<BookingReceipt | null>(readReceipt)
+
+  useLayoutEffect(() => {
+    if (receipt !== null) window.scrollTo(0, 0)
+  }, [receipt])
+
+  const [error, setError] = useState('')
+  const [submissionUncertain, setSubmissionUncertain] = useState(false)
+
+  const [transfer] = useState<TransferDetails>(() => readSavedDetails<TransferDetails>('bookingTransferInfo'))
+  const [passenger] = useState<PassengerDetails>(() => readSavedDetails<PassengerDetails>('bookingPassengerInfo'))
+  const display = (v: unknown) => v == null || v === '' ? t('Not provided') : String(v)
+  const routeDestination = transfer.pickUpLocation === 'Dalaman Airport' ? transfer.dropOffLocation : transfer.dropOffLocation === 'Dalaman Airport' ? transfer.pickUpLocation : ''
+  const catalogPrice = routeDestination && transfer.vehicleId && transfer.tripType ? findTransferPrice(routeDestination, transfer.vehicleId, transfer.tripType) : null
+  const price = catalogPrice === null ? t("Price to be confirmed") : `£${catalogPrice.toFixed(2)}`
+  const schedule = transfer.pickUpDate && transfer.pickUpTime ? transfer.pickUpDate + ' ' + transfer.pickUpTime : t("Not provided")
+  const returnSchedule = transfer.returnDate && transfer.returnTime ? transfer.returnDate + ' ' + transfer.returnTime : t("Not provided")
 
   function handleConfirm() {
-    if (!confirmed || processing) return
-
-    setProcessing(true)
-    window.setTimeout(() => {
-      setProcessing(false)
-      setCompleted(true)
-    }, 900)
+    if (!confirmed || receipt !== null || pricesLoading || pricesError || catalogPrice === null) return
+    void run(async () => {
+    setError('')
+    setSubmissionUncertain(false)
+    try {
+      const savedTransfer = sessionStorage.getItem('bookingTransferInfo')
+      const savedPassenger = sessionStorage.getItem('bookingPassengerInfo')
+      if (!savedTransfer || !savedPassenger) {
+        setError('Your booking information is missing. Please start the booking again.')
+        return
+      }
+      let transfer: unknown
+      let passenger: unknown
+      try {
+        transfer = JSON.parse(savedTransfer)
+        passenger = JSON.parse(savedPassenger)
+      } catch {
+        setError('Saved booking details are invalid. Please return to the previous steps and enter them again.')
+        return
+      }
+      if (!transfer || typeof transfer !== 'object' || Array.isArray(transfer) ||
+          !passenger || typeof passenger !== 'object' || Array.isArray(passenger)) {
+        setError('Saved booking details are invalid. Please return to the previous steps.')
+        return
+      }
+      const transferData = transfer as TransferDetails
+      const passengerData = passenger as PassengerDetails
+      const validationError = validateBookingDetails(transferData, passengerData)
+      if (validationError) {
+        setError(validationError)
+        return
+      }
+      // TypeScript narrows optional draft fields before constructing the API request.
+      if (!transferData.pickUpDate || !transferData.pickUpTime || !transferData.vehicleId ||
+          !transferData.pickUpLocation || !transferData.dropOffLocation || !transferData.tripType ||
+          transferData.passengerCount === undefined || !passengerData.customerName ||
+          !passengerData.phoneNumber || !passengerData.email) {
+        setError('Required booking information is missing. Please return to the previous steps.')
+        return
+      }
+      const booking = await createBooking({
+        customerName: passengerData.customerName,
+        passengerCount: transferData.passengerCount,
+        pickUpLocation: transferData.pickUpLocation,
+        dropOffLocation: transferData.dropOffLocation,
+        transferDateTime: `${transferData.pickUpDate}T${transferData.pickUpTime}:00`,
+        ...(transferData.tripType === 'round-trip' ? { returnDateTime: `${transferData.returnDate}T${transferData.returnTime}:00` } : {}),
+        phoneNumber: passengerData.phoneNumber,
+        email: passengerData.email,
+        vehicleId: transferData.vehicleId,
+        ...(transferData.flightNumber ? { flightNumber: transferData.flightNumber } : {}),
+        ...(typeof transferData.luggageCount === 'number' ? { luggageCount: transferData.luggageCount } : {}),
+        ...(typeof transferData.babySeatCount === 'number' ? { babySeatCount: transferData.babySeatCount } : {}),
+        countryOfResidence: passengerData.countryOfResidence || '',
+        transferAddress: passengerData.transferAddress || '',
+        hotelName: passengerData.hotelName || '',
+        specialRequests: passengerData.specialRequests || '',
+        tripType: transferData.tripType,
+      })
+      const savedReceipt: BookingReceipt = {
+        id: booking.id,
+        savedAt: Date.now(),
+        customerName: passengerData.customerName,
+        pickUpLocation: transferData.pickUpLocation,
+        dropOffLocation: transferData.dropOffLocation,
+        schedule: `${transferData.pickUpDate} ${transferData.pickUpTime}`,
+        ...(transferData.tripType === 'round-trip' ? { returnSchedule: `${transferData.returnDate} ${transferData.returnTime}` } : {}),
+      }
+      saveReceiptToStorages(savedReceipt, availableReceiptStorages())
+      setReceipt(savedReceipt)
+      trackAnalyticsEvent('booking_request_submitted')
+      try {
+        sessionStorage.removeItem('bookingTransferInfo')
+        sessionStorage.removeItem('bookingPassengerInfo')
+      } catch {
+        // Booking succeeded; failure to clean up local drafts must not show an error.
+      }
+    } catch (err) {
+      setSubmissionUncertain(err instanceof BookingApiError && err.uncertain)
+      setError(bookingErrorMessage(err, 'create'))
+    }
+    })
   }
 
   return (
@@ -25,50 +150,114 @@ export function BookingConfirmationPage() {
       <PublicNavbar />
 
       <main className="pt-32 pb-24 px-margin-page max-w-6xl mx-auto">
+        {receipt === null && pricesLoading && <p role="status">{t("Loading current prices...")}</p>}
+        {receipt === null && pricesError && <div role="alert">{t(pricesError)} <button type="button" onClick={refreshPrices}>{t("Refresh prices")}</button></div>}
+        {receipt !== null ? (
+          <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
+            <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
+            <h1 className="text-3xl font-bold text-admin-primary mb-3">{t("Your Booking Request Was Received!")}</h1>
+            <p className="mb-3 text-on-surface-variant">{t("Your transfer request is pending confirmation. Please save your booking reference.")}</p>
+            <p className="mb-6 text-sm text-on-surface-variant">{import.meta.env.VITE_EMAIL_NOTIFICATIONS_ENABLED === 'true' ? t("Booking updates will be sent by email. Please check your inbox and spam folder, and keep this reference.") : t("Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.")}</p>
+            <p className="text-sm uppercase tracking-wide">{t("Booking Reference")}</p>
+            <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
+            <div className="mb-6 flex flex-wrap justify-center gap-3">
+              <button
+                className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary hover:bg-slate-100"
+                onClick={() => {
+                  if (navigator.clipboard?.writeText) {
+                    void navigator.clipboard.writeText(String(receipt.id)).catch(() => setError('Unable to copy automatically. Please select the booking reference above.'))
+                  } else {
+                    setError('Automatic copy is unavailable. Please select the booking reference above.')
+                  }
+                }}
+                type="button"
+              >
+                {t("Copy Booking Reference")}
+              </button>
+              <a
+                className="rounded-lg bg-admin-primary px-5 py-2 font-semibold text-white"
+                href={`mailto:${supportEmail}?subject=${encodeURIComponent(`Booking request #${receipt.id}`)}&body=${encodeURIComponent(`Hello, I am contacting you about booking request #${receipt.id}.\n\nPlease let me know the status of my request.\n\nThank you.`)}`}
+              >
+                {t("Contact About This Booking")}
+              </a>
+              <Link className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary"
+                to="/booking/lookup">{t("Manage or Cancel Booking")}</Link>
+            </div>
+            <p className="mb-5 text-sm text-on-surface-variant">{t("Changes and cancellations are requests only. Your booking remains unchanged until the operator confirms.")}</p>
+            {error && <p role="alert" className="mb-4 text-sm text-error">{t(error)}</p>}
+            <div className="rounded-xl bg-slate-100 p-5 text-left space-y-2">
+              <p><strong>{t("Passenger:")}</strong> {display(receipt.customerName)}</p>
+              <p><strong>{t("Pickup:")}</strong> {t(display(receipt.pickUpLocation))}</p>
+              <p><strong>{t("Destination:")}</strong> {t(display(receipt.dropOffLocation))}</p>
+              {receipt.returnSchedule && <p><strong>{t("Return:")}</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
+              <p><strong>{t("Schedule:")}</strong> {receipt.schedule}</p>
+              <p className="text-sm text-on-surface-variant">{t("Keep this reference for your records. Your request is awaiting confirmation.")}</p>
+            </div>
+            <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">{t("Back to Home")}</Link>
+          </section>
+        ) : (
+          <>
         <ConfirmationStepper />
 
         <header className="text-center mb-12">
           <h1 className="font-title-lg text-title-lg text-admin-primary mb-2">
-            Final Confirmation
+            {t("Review Your Booking Request")}
           </h1>
           <p className="font-body-md text-body-md text-on-surface-variant">
-            Please review your booking details before confirming your transfer.
+            {t("Please review your details before sending a transfer request. The operator will confirm availability.")}
           </p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid">
           <section className="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow transition-standard hover:border-primary-fixed-dim">
             <div className="flex items-center gap-3 mb-6 border-b border-outline-variant pb-4">
-              <span className="material-symbols-outlined text-admin-primary">
+              <span translate="no" className="material-symbols-outlined text-admin-primary">
                 directions_car
               </span>
               <h2 className="font-title-md text-title-md text-on-surface">
-                Transfer Summary
+                {t("Transfer Summary")}
               </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="flight_takeoff"
-                  label="Pickup Location"
-                  value="Dalaman Airport (DLM)"
+                  label={t("Pickup Location")}
+                  value={t(display(transfer.pickUpLocation))}
                 />
                 <SummaryBlock
                   icon="location_on"
-                  label="Destination"
-                  value="Fethiye Marina / Center"
+                  label={t("Destination")}
+                  value={t(display(transfer.dropOffLocation))}
                 />
               </div>
               <div className="flex flex-col gap-4">
                 <SummaryBlock
                   icon="calendar_today"
-                  label="Schedule"
-                  value="15 Oct 2024, 14:30"
+                  label={t("Outbound Pickup")}
+                  value={schedule}
                 />
+                {transfer.tripType === 'round-trip' && (
+                  <>
+                    <SummaryBlock
+                      icon="event"
+                      label={t("Return Pickup")}
+                      value={returnSchedule}
+                    />
+                    <SummaryBlock
+                      icon="sync_alt"
+                      label={t("Return Route")}
+                      value={t(display(transfer.dropOffLocation)) + ' → ' + t(display(transfer.pickUpLocation))}
+                    />
+                  </>
+                )}
+                {transfer.flightNumber && <SummaryBlock icon="flight_takeoff" label={t("Flight Number")} value={transfer.flightNumber} />}
+                <SummaryBlock icon="luggage" label={t("Luggage")} value={display(transfer.luggageCount)} />
+                <SummaryBlock icon="child_care" label={t("Baby Seats")} value={display(transfer.babySeatCount)} />
                 <SummaryBlock
                   icon="airport_shuttle"
-                  label="Vehicle Class"
-                  value="Mercedes-Benz Vito Premium"
+                  label={t("Vehicle Class")}
+                  value={vehicleLabel(transfer.vehicleId)}
                 />
               </div>
             </div>
@@ -77,90 +266,67 @@ export function BookingConfirmationPage() {
           <aside className="md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-container-padding flex flex-col justify-between shadow-lg">
             <div>
               <h3 className="font-title-md text-title-md text-primary-fixed-dim mb-2">
-                Price Details
+                {t("Price Details")}
               </h3>
               <p className="font-label-xs text-label-xs opacity-70 mb-4 uppercase">
-                Fixed Airport Rate
+                {t("Published Route Estimate")}
               </p>
             </div>
             <div className="py-6 border-y border-on-primary-container/20">
               <div className="flex justify-between items-baseline">
-                <span className="font-body-md text-body-md">Estimated Price</span>
-                <span className="font-title-lg text-title-lg text-white">€75</span>
+                <span className="font-body-md text-body-md">{t("Estimated Price")}</span>
+                <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
-                All taxes, parking, and tolls included.
+                {t("The final fare and any additional charges will be confirmed before your transfer.")}
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-sm">info</span>
+              <span translate="no" className="material-symbols-outlined text-sm">info</span>
               <span className="font-label-sm text-label-sm">
-                Final price may vary by luggage volume.
+                {t("Please check your luggage count and special requests before submitting.")}
               </span>
             </div>
           </aside>
 
           <section className="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow">
             <div className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-admin-primary">
+              <span translate="no" className="material-symbols-outlined text-admin-primary">
                 person
               </span>
-              <h2 className="font-title-md text-title-md">Customer Details</h2>
+              <h2 className="font-title-md text-title-md">{t("Customer Details")}</h2>
             </div>
             <div className="space-y-4">
-              <DetailRow label="Full Name" value="Julianna Rodriguez" />
-              <DetailRow label="Phone" value="+44 7911 123456" />
-              <DetailRow label="Email" value="j.rod@example.com" />
-              <DetailRow label="Hotel Name" value="The Yacht Classic Hotel" />
+              <DetailRow label={t("Full Name")} value={display(passenger.customerName)} />
+              <DetailRow label={t("Phone")} value={display(passenger.phoneNumber)} />
+              <DetailRow label={t("Email")} value={display(passenger.email)} />
+              <DetailRow label={t("Country of Residence")} value={t(display(passenger.countryOfResidence))} />
+              {passenger.hotelName && <DetailRow label={t("Hotel / Accommodation")} value={passenger.hotelName} />}
+              <DetailRow label={t("Transfer Address in Turkey")} value={display(passenger.transferAddress)} />
+              {passenger.specialRequests && <DetailRow label={t("Special Requests")} value={passenger.specialRequests} />}
             </div>
           </section>
 
           <section className="md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-xl p-container-padding card-soft-shadow flex flex-col">
             <div className="flex items-center gap-3 mb-6">
-              <span className="material-symbols-outlined text-secondary">
+              <span translate="no" className="material-symbols-outlined text-secondary">
                 payments
               </span>
-              <h2 className="font-title-md text-title-md">Payment Policy</h2>
+              <h2 className="font-title-md text-title-md">{t("Payment Information")}</h2>
             </div>
             <div className="flex-grow space-y-4">
-              <div className="p-4 bg-secondary-container/20 rounded-lg border border-secondary-container">
-                <p className="font-body-md text-on-secondary-container">
-                  Payment is made on the day of your transfer directly to your
-                  driver. We accept cash payments in EUR, GBP, USD and TRY.
-                </p>
-              </div>
-              <div>
-                <p className="font-label-sm text-on-surface-variant mb-2">
-                  Accepted Currencies:
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['€ EUR', '$ USD', '£ GBP', '₺ TRY'].map((currency) => (
-                    <span
-                      className="px-3 py-1 rounded bg-slate-100 text-on-surface-variant font-bold"
-                      key={currency}
-                    >
-                      {currency}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-2 text-admin-primary font-semibold">
-                <span
-                  className="material-symbols-outlined"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  verified_user
-                </span>
-                <span className="font-label-sm">
-                  Secure Booking: Your reservation is safely stored and
-                  instantly confirmed.
-                </span>
-              </div>
+              <p className="font-body-md text-on-surface-variant">
+                {t("Payment is cash only. No online or card payment is collected. The payment timing, accepted cash currency and any additional charges will be confirmed by the operator before your transfer.")}
+              </p>
+              <p className="font-label-sm text-on-surface-variant">
+                {t("Submitting a booking request does not mean the transfer has been confirmed.")}
+              </p>
             </div>
           </section>
         </div>
 
         <section className="mt-12 bg-white border border-outline-variant rounded-xl p-8 card-soft-shadow text-center max-w-2xl mx-auto">
+          <div className="mb-6"><BookingPolicyLinks /></div>
           <div className="flex flex-col items-center gap-6">
             <label className="flex items-center gap-3 cursor-pointer group">
               <input
@@ -170,27 +336,28 @@ export function BookingConfirmationPage() {
                 type="checkbox"
               />
               <span className="font-body-md text-on-surface-variant group-hover:text-on-surface">
-                I confirm that all information provided is correct.
+                {t("I confirm that all information provided is correct.")}
               </span>
             </label>
-            <button
+            {error && <p role="alert" className="text-error">{t(error)}</p>}
+            {submissionUncertain && <p role="status" className="max-w-lg text-sm text-on-surface-variant">{t("The request may have reached us. Keep this page open. You can retry using the same button; the booking reference key is reused for this request. If you remain unsure, contact support before starting a new booking.")}</p>}
+            <ProcessingButton
+              processing={processing}
+              processingLabel={t("PROCESSING...")}
               className="w-full md:w-auto px-12 py-5 bg-admin-primary text-on-primary font-title-md text-title-md rounded-full shadow-lg hover:shadow-xl transition-standard active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!confirmed || processing || completed}
+              disabled={!confirmed || processing || receipt !== null || pricesLoading || !!pricesError || catalogPrice === null}
               onClick={handleConfirm}
               type="button"
             >
-              {completed
-                ? 'BOOKING CONFIRMED'
-                : processing
-                  ? 'PROCESSING...'
-                  : 'CONFIRM BOOKING'}
-            </button>
+              {t("SUBMIT BOOKING REQUEST")}
+            </ProcessingButton>
             <p className="font-label-xs text-label-xs text-outline">
-              By clicking confirm, you agree to our Terms of Service and Privacy
-              Policy.
+              {t("By submitting, you confirm the details above are accurate and request a transfer.")}
             </p>
           </div>
         </section>
+          </>
+        )}
       </main>
 
       <ConfirmationFooter />
@@ -199,12 +366,13 @@ export function BookingConfirmationPage() {
 }
 
 function ConfirmationStepper() {
+  const t = useBookingCopy()
   return (
     <section className="mb-12">
       <div className="flex justify-between items-center max-w-3xl mx-auto relative">
-        <StepperItem complete label="Transfer" />
-        <StepperItem complete label="Passenger" />
-        <StepperItem active label="Confirmation" />
+        <StepperItem complete label={t("Transfer")} />
+        <StepperItem complete label={t("Passenger")} />
+        <StepperItem active label={t("Confirmation")} />
       </div>
     </section>
   )
@@ -258,7 +426,7 @@ function SummaryBlock({
   return (
     <div className="flex items-start gap-4">
       <div className="p-2 rounded bg-slate-100 text-admin-primary">
-        <span className="material-symbols-outlined text-[20px]">{icon}</span>
+        <span translate="no" className="material-symbols-outlined text-[20px]">{icon}</span>
       </div>
       <div>
         <p className="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">
@@ -280,54 +448,19 @@ function DetailRow({ label, value }: { label: string; value: string }) {
 }
 
 function ConfirmationFooter() {
+  const t = useBookingCopy()
   return (
-    <footer className="w-full py-12 bg-slate-200 border-t border-outline-variant">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter-grid px-margin-page max-w-7xl mx-auto">
-        <div className="flex flex-col gap-4">
-          <span className="font-title-md text-title-md font-bold text-admin-primary">
-            VIP Transfer Dalaman
-          </span>
-          <p className="font-body-md text-body-md text-on-surface-variant">
-            Professional airport transfer services specialized in Dalaman routes.
-          </p>
+    <footer className="w-full border-t border-outline-variant bg-slate-100 px-4 py-8">
+      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <img src="/dalamanway-mark.svg" alt="" aria-hidden="true" className="h-9 w-12 object-contain" />
+          <p className="text-sm text-on-surface-variant">© {new Date().getFullYear()} DalamanWay</p>
         </div>
-        <FooterColumn title="Information" items={informationLinks} />
-        <FooterColumn title="Legal" items={legalLinks} />
-        <div className="flex flex-col gap-2">
-          <p className="font-label-sm font-bold text-on-surface">Support</p>
-          <a
-            className="font-body-md text-body-md text-on-surface-variant hover:text-admin-primary"
-            href="#"
-          >
-            Contact Support
-          </a>
-          <p className="font-label-sm text-on-surface-variant mt-2">
-            Available 24/7 via WhatsApp
-          </p>
+        <div className="flex gap-5 text-sm">
+          <Link className="text-admin-primary hover:underline" to="/contact">{t("Contact")}</Link>
+          <Link className="text-admin-primary hover:underline" to="/services">{t("Services")}</Link>
         </div>
-      </div>
-      <div className="mt-12 px-margin-page text-center border-t border-outline-variant/30 pt-8">
-        <p className="font-body-md text-body-md text-on-surface-variant">
-          © 2024 VIP Transfer Dalaman. All rights reserved.
-        </p>
       </div>
     </footer>
-  )
-}
-
-function FooterColumn({ items, title }: { items: string[]; title: string }) {
-  return (
-    <div className="flex flex-col gap-2">
-      <p className="font-label-sm font-bold text-on-surface">{title}</p>
-      {items.map((item) => (
-        <a
-          className="font-body-md text-body-md text-on-surface-variant hover:text-admin-primary"
-          href="#"
-          key={item}
-        >
-          {item}
-        </a>
-      ))}
-    </div>
   )
 }

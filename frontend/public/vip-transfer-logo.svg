@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="title">
+<title>VIP Transfer Dalaman emblem</title>
+<rect width="64" height="64" rx="15" fill="#0B1C31"/>
+<path d="M10 39.5C19 29.5 31 27 43.5 28.5C47 29 50 30 54 32" stroke="#E5BE78" stroke-width="2.8" stroke-linecap="round"/>
+<path d="M17 39L24 33.5H42L49 39" stroke="#E5BE78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="24" cy="41" r="3.3" fill="#E5BE78"/><circle cx="43" cy="41" r="3.3" fill="#E5BE78"/>
+<path d="M38 19L52 13M44 13L50 17L55 20M48 16L47 10" stroke="#E5BE78" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M16 49H48" stroke="#E5BE78" stroke-width="1.2" opacity=".6"/>
+</svg>
