@@ -7,9 +7,9 @@ import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
 
 const reviewCopy = {
-  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', fiction: 'Fictional reviews for a classroom presentation.', rating: (value: number) => `${value} out of 5 stars` },
-  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', fiction: 'Fiktive Bewertungen für eine Unterrichtspräsentation.', rating: (value: number) => `${value} von 5 Sternen` },
-  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', fiction: 'Вымышленные отзывы для учебной презентации.', rating: (value: number) => `${value} из 5 звёзд` },
+  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', fiction: 'Sample reviews', rating: (value: number) => `${value} out of 5 stars` },
+  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', fiction: 'Beispielbewertungen', rating: (value: number) => `${value} von 5 Sternen` },
+  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', fiction: 'Примеры отзывов', rating: (value: number) => `${value} из 5 звёзд` },
 }
 
 export function HomeReviewStrip() {
