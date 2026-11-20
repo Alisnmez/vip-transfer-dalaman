@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import type { PublicReview } from '../../features/reviews/api'
-import { isReviewDemoPreview, isReviewTestHost } from '../../features/reviews/demoPreview'
 import { loadReviewPage } from '../../features/reviews/reviewFeed'
 import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
@@ -13,12 +12,10 @@ const reviewCopy = {
 }
 
 export function HomeReviewStrip() {
-  const { search } = useLocation()
-  const demo = isReviewDemoPreview(search)
-  return <ReviewStrip key={String(demo)} demo={demo} />
+  return <ReviewStrip />
 }
 
-function ReviewStrip({ demo }: { demo: boolean }) {
+function ReviewStrip() {
   const { language } = useLanguage()
   const copy = reviewCopy[language]
   const locale = language === 'en' ? 'en-GB' : language
@@ -27,13 +24,13 @@ function ReviewStrip({ demo }: { demo: boolean }) {
   const [expandedReview, setExpandedReview] = useState<number | null>(null)
   useEffect(() => {
     let active = true
-    loadReviewPage(0, demo).then(result => {
+    loadReviewPage(0).then(result => {
       if (active) setReviews(result.content)
     }).catch(() => {
       // Reviews are optional on the home page. The reviews page reports API errors.
     })
     return () => { active = false }
-  }, [demo])
+  }, [])
 
   if (!reviews.length) return null
 
@@ -46,7 +43,7 @@ function ReviewStrip({ demo }: { demo: boolean }) {
         <div className="mb-stack-md flex flex-wrap items-center justify-between gap-3">
           <h2 id="home-review-heading" className="font-headline-lg text-headline-lg">{copy.heading}</h2>
           <div className="flex flex-wrap items-center gap-4">
-            <Link to={demo ? "/reviews?demo-reviews=1" : isReviewTestHost() ? "/reviews?demo-reviews=0" : "/reviews"} className="font-semibold underline underline-offset-4">{copy.all}</Link>
+            <Link to="/reviews" className="font-semibold underline underline-offset-4">{copy.all}</Link>
             {canScroll && (
               <button type="button" className="home-review-pause rounded-lg border border-outline px-3 py-2" onClick={() => setPaused(value => !value)}>
                 {paused ? copy.resume : copy.pause}
