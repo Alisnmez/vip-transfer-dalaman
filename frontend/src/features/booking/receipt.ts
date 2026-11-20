@@ -52,3 +52,10 @@ export function saveReceiptToStorages(receipt: BookingReceipt, storages: readonl
     }
   }
 }
+
+/** Remove only legacy booking keys, never unrelated site preferences. */
+export function clearPersistentBookingData(storage: Pick<Storage, 'removeItem'>): void {
+  for (const key of ['bookingTransferInfo', 'bookingPassengerInfo', RECEIPT_KEY]) {
+    try { storage.removeItem(key) } catch { /* Storage may be unavailable. */ }
+  }
+}
