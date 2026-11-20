@@ -20,4 +20,5 @@ test('the demo fixture covers 42 unique reviews across five pages', () => {
   assert.ok(pages.every(page => page.totalPages === 5 && page.totalElements === 42))
   const reviews = pages.flatMap(page => page.content)
   assert.equal(new Set(reviews.map(review => review.id)).size, 42)
+  assert.ok(reviews.every(review => review.rating === 5))
 })

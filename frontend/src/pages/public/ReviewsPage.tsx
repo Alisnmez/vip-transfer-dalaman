@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
-import { getPublishedReviews, submitReview, reviewErrorMessage } from '../../features/reviews/api'
+import { submitReview, reviewErrorMessage } from '../../features/reviews/api'
 import { isReviewDemoPreview } from '../../features/reviews/demoPreview'
+import { loadReviewPage } from '../../features/reviews/reviewFeed'
 import { useLanguage } from '../../shared/localization/language'
 import type { PublicReview } from '../../features/reviews/api'
 
@@ -11,7 +12,7 @@ const reviewsCopy = {
   en: {
     eyebrow: "Your experiences",
     title: "Customer Reviews",
-    demoTitle: "Customer Reviews Demo",
+    demoTitle: "Customer Reviews",
     demoNotice: "Classroom demo. All 42 names, ratings and reviews are fictional examples.",
     demoLabel: "Fictional review examples",
     intro: "We value feedback from our passengers. Genuine customer reviews will be published here as they become available.",
@@ -45,7 +46,7 @@ const reviewsCopy = {
   de: {
     eyebrow: "Ihre Erfahrungen",
     title: "Kundenbewertungen",
-    demoTitle: "Demo mit Gästebewertungen",
+    demoTitle: "Gästebewertungen",
     demoNotice: "Demo für den Unterricht. Alle 42 Namen, Bewertungen und Texte sind frei erfunden.",
     demoLabel: "Fiktive Gästebewertungen",
     intro: "Wir freuen uns über Rückmeldungen unserer Fahrgäste. Echte Kundenbewertungen veröffentlichen wir hier, sobald sie vorliegen.",
@@ -79,7 +80,7 @@ const reviewsCopy = {
   ru: {
     eyebrow: "Ваши впечатления",
     title: "Отзывы клиентов",
-    demoTitle: "Демонстрация отзывов",
+    demoTitle: "Отзывы о поездках",
     demoNotice: "Учебная демонстрация. Все 42 имени, оценки и отзыва вымышлены.",
     demoLabel: "Вымышленные примеры отзывов",
     intro: "Мы ценим отзывы пассажиров. Здесь публикуются подлинные отзывы клиентов по мере их поступления.",
@@ -161,10 +162,7 @@ function ReviewContent({ demo }: { demo: boolean }) {
   const [totalPages, setTotalPages] = useState(0)
   useEffect(() => {
     let active = true
-    const request = demo
-      ? import('../../features/reviews/classroomReviews').then(({ getClassroomReviews }) => getClassroomReviews(page))
-      : getPublishedReviews(page)
-    request.then(result => {
+    loadReviewPage(page, demo).then(result => {
       if (!active) return
       setReviews(result.content)
       setTotalPages(result.totalPages)

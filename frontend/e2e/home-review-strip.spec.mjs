@@ -42,3 +42,23 @@ test('homepage review strip scrolls and preserves original review text', async (
   await expect(section.getByText(reviews[0].comment)).toBeVisible()
   await expect(section.getByText(reviews[1].comment)).toHaveCount(0)
 })
+
+test('homepage shows the same ten latest published reviews as the reviews page', async ({ page }) => {
+  const latestReviews = Array.from({ length: 10 }, (_, index) => ({
+    id: 100 - index,
+    name: `Review author ${index + 1}`,
+    rating: index === 0 ? 3 : 5,
+    comment: `Published transfer feedback ${index + 1}.`,
+  }))
+  await page.route('**/reviews?page=0&size=10', route => route.fulfill({
+    headers: { 'access-control-allow-origin': '*' },
+    json: { content: latestReviews, number: 0, totalElements: 12, totalPages: 2 },
+  }))
+
+  await page.goto(site)
+  const strip = page.getByRole('region', { name: 'Customer Reviews' })
+  const latestNames = latestReviews.map(review => review.name)
+  await expect(strip.locator('.home-review-group:not([aria-hidden]) li > p:first-child')).toHaveText(latestNames)
+  await strip.getByRole('link', { name: 'Read all reviews' }).click()
+  await expect(page.getByRole('region', { name: 'Published customer reviews' }).getByRole('heading')).toHaveText(latestNames)
+})

@@ -1,45 +1,37 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { getPublishedReviews, type PublicReview } from '../../features/reviews/api'
+import { Link, useLocation } from 'react-router-dom'
+import type { PublicReview } from '../../features/reviews/api'
 import { isReviewDemoPreview } from '../../features/reviews/demoPreview'
+import { loadReviewPage } from '../../features/reviews/reviewFeed'
 import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
 
 const reviewCopy = {
-  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', rating: (value: number) => `${value} out of 5 stars` },
-  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', rating: (value: number) => `${value} von 5 Sternen` },
-  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', rating: (value: number) => `${value} из 5 звёзд` },
+  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', fiction: 'Fictional reviews for a classroom presentation.', rating: (value: number) => `${value} out of 5 stars` },
+  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', fiction: 'Fiktive Bewertungen für eine Unterrichtspräsentation.', rating: (value: number) => `${value} von 5 Sternen` },
+  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', fiction: 'Вымышленные отзывы для учебной презентации.', rating: (value: number) => `${value} из 5 звёзд` },
 }
 
-const demoReviews: PublicReview[] = [
-  { id: -1, name: 'English · Demo', rating: 5, comment: 'Our flight was late, but the driver was waiting at the arrivals exit. We reached our hotel in Fethiye without any hassle.' },
-  { id: -2, name: 'Deutsch · Demo', rating: 5, comment: 'Der Fahrer hat uns am Ausgang mit einem Namensschild empfangen. Für unsere vier Koffer war im Vito genug Platz.' },
-  { id: -3, name: 'Русский · Demo', rating: 4, comment: 'До отеля в Мармарисе доехали комфортно. В аэропорту немного поискали место встречи, но водитель быстро ответил.' },
-]
-
 export function HomeReviewStrip() {
+  const { search } = useLocation()
+  const demo = isReviewDemoPreview(search)
+  return <ReviewStrip key={String(demo)} demo={demo} />
+}
+
+function ReviewStrip({ demo }: { demo: boolean }) {
   const { language } = useLanguage()
   const copy = reviewCopy[language]
   const [reviews, setReviews] = useState<PublicReview[]>([])
   const [paused, setPaused] = useState(false)
-  const [demo, setDemo] = useState(false)
-
   useEffect(() => {
     let active = true
-    const feed = isReviewDemoPreview(window.location.search)
-      ? Promise.resolve(demoReviews)
-      : getPublishedReviews().then(result => result.content)
-    feed.then(result => {
-      if (!active) return
-      const showDemo = isReviewDemoPreview(window.location.search)
-        || (window.location.hostname === 'vip-transfer-dalaman-test.onrender.com' && result.length < 2)
-      setDemo(showDemo)
-      setReviews(showDemo ? demoReviews : result)
+    loadReviewPage(0, demo).then(result => {
+      if (active) setReviews(result.content)
     }).catch(() => {
       // Reviews are optional on the home page. The reviews page reports API errors.
     })
     return () => { active = false }
-  }, [])
+  }, [demo])
 
   if (!reviews.length) return null
 
@@ -60,7 +52,7 @@ export function HomeReviewStrip() {
             )}
           </div>
         </div>
-        {demo && <p className="mb-3 text-sm font-semibold">Demo content · Sample reviews for testing</p>}
+        {demo && <p className="mb-3 text-sm font-semibold">{copy.fiction}</p>}
         <div className="home-review-viewport" data-motion={canScroll && !paused}>
           <div className="home-review-track">
             {copies.map(duplicate => (
