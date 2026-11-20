@@ -202,9 +202,11 @@ function ReviewContent({ demo }: { demo: boolean }) {
       <main className="mx-auto max-w-5xl px-margin-page pb-20 pt-32">
         <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">{copy.eyebrow}</p>
         <h1 className="font-display-lg text-display-lg text-admin-primary">{demo ? copy.demoTitle : copy.title}</h1>
+        {/* Test-only visual preview: temporarily hide the sample-review notice.
         <p className={demo ? "mt-4 inline-flex rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-950" : "mt-4 max-w-2xl text-on-surface-variant"}>
           {demo ? copy.demoNotice : copy.intro}
         </p>
+        */}
         <div className="mt-4">
           <a className="inline-flex rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white hover:opacity-90" href="#share-review">
             {copy.experience}
