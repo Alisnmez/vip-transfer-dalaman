@@ -1,4 +1,32 @@
 import { useState } from 'react'
+import { useLanguage } from '../../shared/localization/language'
+
+const photoCopy = {
+  en: {
+    interior: 'Interior',
+    exterior: 'Exterior',
+    showInterior: (name: string) => `Show ${name} interior`,
+    showExterior: (name: string) => `Show ${name} exterior`,
+    interiorAlt: (name: string) => `${name} interior (illustrative vehicle)`,
+    exteriorAlt: (name: string) => `${name} exterior (illustrative vehicle)`,
+  },
+  de: {
+    interior: 'Innenraum',
+    exterior: 'Außenansicht',
+    showInterior: (name: string) => `Innenraum von ${name} anzeigen`,
+    showExterior: (name: string) => `Außenansicht von ${name} anzeigen`,
+    interiorAlt: (name: string) => `${name} – Innenraum (Beispielfahrzeug)`,
+    exteriorAlt: (name: string) => `${name} – Außenansicht (Beispielfahrzeug)`,
+  },
+  ru: {
+    interior: 'Салон',
+    exterior: 'Внешний вид',
+    showInterior: (name: string) => `Показать салон ${name}`,
+    showExterior: (name: string) => `Показать внешний вид ${name}`,
+    interiorAlt: (name: string) => `${name} — салон (пример автомобиля)`,
+    exteriorAlt: (name: string) => `${name} — внешний вид (пример автомобиля)`,
+  },
+}
 
 const exteriorPhotos: Record<string, { src: string; objectPosition?: string }> = {
   'vip-minivan': { src: '/images/vehicles/vip-vito-exterior.webp', objectPosition: 'center 65%' },
@@ -15,28 +43,31 @@ const interiorPhotos: Record<string, string | undefined> = {
 }
 
 export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle = true }: { vehicleId: string; name: string; className?: string; showToggle?: boolean }) {
+  const { language } = useLanguage()
+  const copy = photoCopy[language]
   const [showInterior, setShowInterior] = useState(false)
   const [previewInterior, setPreviewInterior] = useState(false)
   const [exteriorFailed, setExteriorFailed] = useState(false)
   const [interiorFailed, setInteriorFailed] = useState(false)
   const exterior = exteriorPhotos[vehicleId]
   const interior = interiorPhotos[vehicleId]
+  const interiorVisible = Boolean(interior && !interiorFailed && (showInterior || previewInterior))
   return (
     <div className={`relative w-full overflow-hidden bg-slate-100 ${className}`}
       onPointerEnter={event => { if (event.pointerType === 'mouse') setPreviewInterior(true) }}
       onPointerLeave={() => setPreviewInterior(false)}>
       {exterior && !exteriorFailed ? (
-        <img src={exterior.src} alt={`${name} exterior (illustrative vehicle)`} loading="lazy" decoding="async"
+        <img src={exterior.src} alt={copy.exteriorAlt(name)} aria-hidden={interiorVisible} loading="lazy" decoding="async"
           style={{ objectPosition: exterior.objectPosition }}
           onError={() => setExteriorFailed(true)} className="h-full w-full object-cover" />
       ) : <div className="flex h-full items-center justify-center text-sm text-slate-500">{name}</div>}
-      {interior && !interiorFailed && <img src={interior} alt="" aria-hidden="true" loading="lazy" decoding="async"
+      {interior && !interiorFailed && <img src={interior} alt={copy.interiorAlt(name)} aria-hidden={!interiorVisible} loading="lazy" decoding="async"
         onError={() => setInteriorFailed(true)}
-        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${showInterior || previewInterior ? 'opacity-100' : 'opacity-0'}`} />}
-      {interior && !interiorFailed && showToggle && <button type="button" aria-label={showInterior ? `Show ${name} exterior` : `Show ${name} interior`}
+        className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${interiorVisible ? 'opacity-100' : 'opacity-0'}`} />}
+      {interior && !interiorFailed && showToggle && <button type="button" aria-label={showInterior ? copy.showExterior(name) : copy.showInterior(name)}
         aria-pressed={showInterior} onClick={() => { setPreviewInterior(false); setShowInterior(value => !value) }}
         className="absolute bottom-2 right-2 rounded-md bg-black/70 px-3 py-2 text-xs font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
-        {showInterior ? 'Exterior' : 'Interior'}
+        {showInterior ? copy.exterior : copy.interior}
       </button>}
     </div>
   )
