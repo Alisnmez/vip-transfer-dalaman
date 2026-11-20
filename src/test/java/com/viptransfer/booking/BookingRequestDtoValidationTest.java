@@ -5,7 +5,6 @@ import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +19,10 @@ class BookingRequestDtoValidationTest {
         request.setPickUpLocation("Dalaman Airport");
         request.setDropOffLocation("Fethiye");
         request.setTransferDateTime(LocalDateTime.now().plusDays(2));
-        request.setPrice(new BigDecimal("50.00"));
+        request.setVehicleId("vip-vito");
+        request.setTripType("ONE_WAY");
+        request.setPhoneNumber("+905551234567");
+        request.setEmail("test@example.com");
         return request;
     }
 
@@ -30,9 +32,9 @@ class BookingRequestDtoValidationTest {
     }
 
     @Test
-    void rejectsPastPickup() {
+    void rejectsMissingTransferDate() {
         BookingRequestDto request = validRequest();
-        request.setTransferDateTime(LocalDateTime.now().minusDays(1));
+        request.setTransferDateTime(null);
         assertTrue(validator.validate(request).stream()
                 .anyMatch(v -> v.getPropertyPath().toString().equals("transferDateTime")));
     }
@@ -47,10 +49,10 @@ class BookingRequestDtoValidationTest {
     }
 
     @Test
-    void rejectsZeroPassengersAndNegativePrice() {
+    void rejectsInvalidPassengerCountAndEmail() {
         BookingRequestDto request = validRequest();
         request.setPassengerCount(0);
-        request.setPrice(new BigDecimal("-1.00"));
+        request.setEmail("not-an-email");
         assertEquals(2, validator.validate(request).size());
     }
 }
