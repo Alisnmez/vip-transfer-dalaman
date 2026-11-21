@@ -357,6 +357,10 @@ export function HomePage() {
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">{copy.oludeniz}</h3>
                 <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Oludeniz#all-routes">{copy.viewPrice}</Link>
+                <p className="mt-2 text-[10px] leading-tight text-white/85">
+                  {copy.photo} <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a>
+                  {' · '}<a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
+                </p>
               </div>
             </div>
           </div>
@@ -435,11 +439,6 @@ export function HomePage() {
             </p>
 
           </div>
-          <p className="mt-4 text-xs text-white/70">
-            {copy.photo} <a className="underline" href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg" target="_blank" rel="noopener noreferrer">Kadirxmert / Wikimedia Commons</a>
-            {' · '}
-            <a className="underline" href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>
-          </p>
         </div>
       </footer>
     </>
