@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import { bookingVehicles } from '../../features/booking/bookingVehicles'
 import { useLanguage } from '../../shared/localization/language'
@@ -135,7 +135,8 @@ export function RoutesPage() {
     }).filter((route): route is NonNullable<typeof route> => route !== null)
   }, [transferPrices])
 
-  const [search, setSearch] = useState('')
+  const [searchParams] = useSearchParams()
+  const [search, setSearch] = useState(() => searchParams.get('destination') ?? '')
   const [selectedVehicle, setSelectedVehicle] = useState<string>(bookingVehicles[0].id)
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('one-way')
 
@@ -245,7 +246,7 @@ export function RoutesPage() {
                         <p className="text-xs text-on-surface-variant">{tripType === 'one-way' ? copy.oneWay : copy.roundTrip}</p>
                         <p className="text-xl font-bold tabular-nums text-admin-primary">{priceLabel(tripType === 'one-way' ? route.oneWay : route.roundTrip)}</p>
                       </div>
-                      <Link className="inline-flex min-h-11 items-center rounded-lg bg-admin-primary px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90" to="/booking">{copy.bookNow}</Link>
+                      <Link className="inline-flex min-h-11 items-center rounded-lg bg-admin-primary px-4 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90" to={`/booking?${new URLSearchParams({ destination: route.destination, vehicle: selectedVehicle, tripType })}`}>{copy.bookNow}</Link>
                     </div>
                   </article>
                 ))}
