@@ -347,13 +347,10 @@ export function HomePage() {
       {language === 'en' && (
         <section className="border-b border-outline bg-background py-16">
           <div className="mx-auto max-w-container-max px-gutter">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Travel guide</p>
-            <h2 className="mb-3 text-2xl font-bold text-on-surface">Plan your journey from Dalaman Airport</h2>
-            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Compare transfer options, check official shuttle information and plan the final leg to your accommodation.</p>
-            <div className="flex flex-wrap gap-x-6 gap-y-3">
-              <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-marmaris">Marmaris: bus, taxi or private transfer</Link>
-              <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-fethiye">Fethiye: shuttle stops and onward travel</Link>
-            </div>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Travel Guides</p>
+            <h2 className="mb-3 text-2xl font-bold text-on-surface">Find your kind of day on the Turquoise Coast</h2>
+            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Discover old towns, Lycian history, quiet hillside places and coastal scenery, then plan a private pickup around the places you want to see.</p>
+            <Link className="font-bold text-secondary underline underline-offset-4" to="/guides">Explore local travel guides</Link>
           </div>
         </section>
       )}

@@ -11,7 +11,7 @@ const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/
   'de/routes/marmaris', 'ru/routes/marmaris', 'de/routes/gocek', 'ru/routes/gocek',
   'de/routes/fethiye', 'ru/routes/fethiye', 'de/routes/oludeniz', 'ru/routes/oludeniz',
   'de/routes/icmeler', 'ru/routes/icmeler', 'de/routes/dalyan', 'ru/routes/dalyan', 'de/routes/sarigerme', 'ru/routes/sarigerme',
-  'guides/dalaman-airport-to-marmaris', 'guides/dalaman-airport-to-fethiye']
+  'guides', 'guides/dalaman-airport-to-marmaris', 'guides/dalaman-airport-to-fethiye', 'guides/kayakoy-oludeniz-day-plan', 'guides/dalyan-kaunos-iztuzu']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
@@ -64,18 +64,21 @@ test('production prerendered route has crawlable title, description, canonical a
   assert.doesNotMatch(pages.get('routes/dalyan'), /application\/ld\+json/)
   assert.match(pages.get('faq'), /<h1>Frequently Asked Questions<\/h1>/)
   const guide = pages.get('guides/dalaman-airport-to-marmaris')
-  assert.match(guide, /<title>Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer\? \| DalamanWay<\/title>/)
-  assert.match(guide, /<h1>Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer\?<\/h1>/)
-  assert.match(guide, /href="https:\/\/www\.dalamanairport\.aero\/en\/passengers\/public-transport\/"/)
+  assert.match(guide, /<title>Marmaris Old Town: Castle, Harbour and a Slower First Day \| DalamanWay<\/title>/)
+  assert.match(guide, /<h1>Marmaris Old Town: Castle, Harbour and a Slower First Day<\/h1>/)
+  assert.match(guide, /Marmaris Museum/)
+  assert.doesNotMatch(guide, /HAVAŞ|MUTTAŞ|shuttle|public transport/i)
   assert.match(guide, /href="\/routes\/marmaris"/)
   assert.match(guide, /name="robots" content="index,follow"/)
   const fethiyeGuide = pages.get('guides/dalaman-airport-to-fethiye')
-  assert.match(fethiyeGuide, /<title>Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey \| DalamanWay<\/title>/)
-  assert.match(fethiyeGuide, /<h1>Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey<\/h1>/)
-  assert.match(fethiyeGuide, /MUTTAŞ route 48-25/)
-  assert.match(fethiyeGuide, /55 km/)
+  assert.match(fethiyeGuide, /<title>Fethiye in One Day: Telmessos, Paspatur and the Harbour \| DalamanWay<\/title>/)
+  assert.match(fethiyeGuide, /<h1>Fethiye in One Day: Telmessos, Paspatur and the Harbour<\/h1>/)
+  assert.match(fethiyeGuide, /Amyntas Tomb/)
+  assert.doesNotMatch(fethiyeGuide, /HAVAŞ|MUTTAŞ|shuttle|public transport/i)
   assert.match(fethiyeGuide, /href="\/routes\/fethiye"/)
-  assert.match(fethiyeGuide, /href="\/guides\/dalaman-airport-to-marmaris"/)
+  assert.match(fethiyeGuide, /href="\/guides"/)
+  assert.match(pages.get('guides/kayakoy-oludeniz-day-plan'), /heritage-and-coast/i)
+  assert.match(pages.get('guides/dalyan-kaunos-iztuzu'), /loggerhead sea turtles/i)
 })
 
 test('all staging pages remain noindex without production canonicals', async () => {
@@ -88,10 +91,13 @@ test('all staging pages remain noindex without production canonicals', async () 
   }
 })
 
-test('homepage and sitemap discover both travel guides', async () => {
+test('homepage and travel guide hub discover all original destination guides', async () => {
   const { pages } = await render('https://dalamanway.com')
-  assert.match(pages.get(''), /href="\/guides\/dalaman-airport-to-marmaris"/)
-  assert.match(pages.get(''), /href="\/guides\/dalaman-airport-to-fethiye"/)
+  assert.match(pages.get(''), /href="\/guides"/)
+  const hub = pages.get('guides')
+  for (const path of ['dalaman-airport-to-marmaris', 'dalaman-airport-to-fethiye', 'kayakoy-oludeniz-day-plan', 'dalyan-kaunos-iztuzu']) {
+    assert.match(hub, new RegExp(`href="/guides/${path}"`))
+  }
   const { robots, sitemap } = await (async () => {
     const script = resolve('scripts/generate-seo.mjs')
     const dir = await mkdtemp(join(tmpdir(), 'vip-guide-sitemap-'))
@@ -104,8 +110,11 @@ test('homepage and sitemap discover both travel guides', async () => {
     }
   })()
   assert.match(robots, /Sitemap: https:\/\/dalamanway\.com\/sitemap\.xml/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/dalaman-airport-to-marmaris<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/dalaman-airport-to-fethiye<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/kayakoy-oludeniz-day-plan<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/dalyan-kaunos-iztuzu<\/loc>/)
 })
 
 test('pilot route languages have reciprocal alternates and localized initial HTML', async () => {

@@ -1,4 +1,5 @@
 import { matchLocalizedRoute } from '../localization/route-locales'
+import { travelGuides } from '../../content/guides'
 
 /**
  * Single source of truth for public-page SEO.
@@ -47,14 +48,14 @@ export const seoPages: Record<string, SeoPage> = {
     title: 'Customer Reviews | DalamanWay',
     description: 'Learn about customer feedback and how to share your Dalaman airport transfer experience with DalamanWay.',
   },
-  '/guides/dalaman-airport-to-marmaris': {
-    title: 'Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer? | DalamanWay',
-    description: 'Compare practical ways to travel from Dalaman Airport to Marmaris, what to check before you fly, and how to choose for your group.',
+  '/guides': {
+    title: 'Travel Guides for the Turquoise Coast | DalamanWay',
+    description: 'Explore original ideas for Marmaris, Fethiye, Kayaköy, Ölüdeniz and Dalyan, then plan a private airport pickup.',
   },
-  '/guides/dalaman-airport-to-fethiye': {
-    title: 'Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey | DalamanWay',
-    description: 'Find the official Dalaman Airport to Fethiye shuttle details, route stops and what to plan for your hotel or beach area.',
-  },
+  ...Object.fromEntries(travelGuides.map(guide => [guide.path, {
+    title: `${guide.title} | DalamanWay`,
+    description: guide.description,
+  }])),
   '/booking': {
     title: 'Book a Dalaman Airport Transfer',
     description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.',
