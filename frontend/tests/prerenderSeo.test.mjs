@@ -20,6 +20,13 @@ test('prerender writes correct landing page SEO metadata', () => {
       assert.match(html, /rel="canonical"/)
       assert.match(html, /<h1>/)
     }
+    const home = readFileSync(join(root, 'dist/index.html'), 'utf8')
+    const routeIndex = readFileSync(join(root, 'dist/routes/index.html'), 'utf8')
+    for (const slug of ['marmaris', 'fethiye', 'oludeniz', 'gocek', 'icmeler', 'dalyan', 'sarigerme']) {
+      assert.match(home, new RegExp(`href="/routes/${slug}"`), `homepage route link: ${slug}`)
+      assert.match(routeIndex, new RegExp(`href="/routes/${slug}"`), `route index link: ${slug}`)
+    }
+    assert.match(home, /to Marmaris, Fethiye, Oludeniz, Gocek, Icmeler, Dalyan and Sarigerme/)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }

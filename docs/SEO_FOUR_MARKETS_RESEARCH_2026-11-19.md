@@ -167,3 +167,18 @@ Bunlar gerçek SERP'lerde görülen terim ve rakip sayfa başlıklarından türe
 ### 19 Kasım 2026 — SEO-05 yeniden ölçüm ve SEO-02/03/04 doğrulaması
 
 Önceki HTTP erişim engeli aşıldı. Canlı 12 adresin ilk HTML ve test ortamı sonuçları, branch karşılaştırması, yerel test sonucu ve açık `/booking` bulgusu [ana SEO standardına](../frontend/SEO_STANDARD.md) eklendi. Google Search Console ve dil bazlı indexlenebilir URL'ler ayrı doğrulama bekliyor.
+
+### 21 Kasım 2026 — Search Console tekrar kontrolü ve indeks keşif desteği
+
+Search Console'da `sc-domain:dalamanway.com` mülkünde sitemap yeniden gönderildi. Google gönderimi **başarılı** kabul etti; gönderim tarihi 21 Kasım, ekrandaki son okuma tarihi 19 Kasım ve keşfedilen sayfa sayısı 28 olarak kaldı. Canlı `sitemap.xml` HTTP 200 verdi, 28 URL içerdi ve İngilizce/Almanca/Rusça Sarıgerme adreslerinin üçünü de içerdi. URL Denetimi'nde Sarıgerme için ilk sonuç “URL Google tarafından bilinmiyor / yönlendiren sitemap algılanmadı” olsa da tekrar gönderim sonrasında İçmeler, Dalyan ve diğer bazı sayfalarda `https://dalamanway.com/sitemap.xml` görünmeye başladı. Google raporunun sitemap güncellemesini işlemesi bekleniyor.
+
+Öncelikli URL'ler için Search Console'da “Dizine eklenmesi istendi” onayı alındı: `/routes/sarigerme`, `/routes/fethiye`, `/routes/oludeniz`, `/routes/icmeler`, `/routes/dalyan`, `/de/routes/fethiye`, `/ru/routes/fethiye`, `/de/routes/marmaris`, `/ru/routes/marmaris`. Bu, öncelikli tarama sırasına alındıklarını gösterir; indekslenme garantisi değildir. Kontrol anında bu URL'lerde yeni bir son tarama tarihi görünmüyordu.
+
+### 21 Kasım 2026 — Ana sayfadan rota bağlantıları
+
+GSC örnekleminde birçok rota keşfedilmiş fakat Googlebot tarafından henüz taranmamış olduğundan, JS öncesi ana sayfa HTML'si ve `/routes` dizini yedi İngilizce rotanın tümüne doğrudan bağlantı verecek şekilde güncellendi. Ana sayfa ve rota dizini açıklamalarına Dalyan ile Sarıgerme de eklendi; yeni fiyat veya hizmet iddiası eklenmedi.
+
+- **Değişen dosyalar:** `frontend/scripts/prerender-routes.mjs`, `frontend/tests/prerenderSeo.test.mjs`.
+- **Testler:** 87/87 frontend testi geçti, ESLint geçti, `VITE_PUBLIC_SITE_URL=https://dalamanway.com npm run build` geçti.
+- **Durum:** `KODLANDI / YEREL TEST GEÇTİ`; test sunucusu deploy ve HTTP kontrolü tamamlanmalı. Canlı yayına geçmeden önce staging sonucunu doğrula.
+- **Sıradaki adım:** Test branch'ine dağıt; ana sayfa ve `/routes` HTML'sinde yedi linki, staging `noindex`/boş sitemap politikasını kontrol et. Ardından aynı commit'i üretime al ve HTML/robots/sitemap'i tekrar doğrula. Search Console'daki tarama isteğinin indeks sonucunu daha sonra yeniden ölç.
