@@ -13,6 +13,7 @@ import java.util.Base64;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {"app.admin.password=test-admin-password"})
@@ -40,7 +41,9 @@ class AdminSessionTest {
                 .readTree(csrf.getResponse().getContentAsString()).get("token").asText();
         mvc.perform(post("/admin/session/logout").session(saved).header("X-CSRF-TOKEN", token))
                 .andExpect(status().isNoContent());
-        mvc.perform(get("/admin/auth-check")).andExpect(status().isUnauthorized());
+        mvc.perform(get("/admin/auth-check"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(header().doesNotExist("WWW-Authenticate"));
     }
 
     @Test

@@ -61,9 +61,10 @@ public class SecurityConfig {
                         .requestMatchers("/bookings/support/**").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
                         .requestMatchers(HttpMethod.GET, "/admin/session/csrf").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/auth-check").permitAll()
                         .requestMatchers(HttpMethod.POST, "/admin/session/login").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/admin/session/logout").hasRole("ADMIN")
-                        .requestMatchers("/bookings", "/bookings/**", "/admin/auth-check").hasRole("ADMIN")
+                        .requestMatchers("/bookings", "/bookings/**").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .build();

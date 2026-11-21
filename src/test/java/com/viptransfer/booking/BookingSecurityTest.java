@@ -12,8 +12,9 @@ import java.util.Base64;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {"app.admin.password=test-admin-password",
         "app.frontend.origin=https://vip-transfer-dalaman-test.onrender.com"})
@@ -37,7 +38,9 @@ class BookingSecurityTest {
         mockMvc.perform(get("/bookings/1")).andExpect(status().isUnauthorized());
         mockMvc.perform(patch("/bookings/1/status").contentType("application/json")
                 .content("{\"status\":\"CONFIRMED\"}")).andExpect(status().isForbidden());
-        mockMvc.perform(get("/admin/auth-check")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/admin/auth-check"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(header().doesNotExist("WWW-Authenticate"));
     }
 
     @Test
