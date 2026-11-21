@@ -41,7 +41,7 @@ No fixed fare, journey duration, service guarantee or keyword-volume claim is ma
 
 **Content included:** official MUTTAŞ route 48-25 details and named stops, HAVAŞ as an option to verify, Fethiye Otogar as the MUTTAŞ airport route endpoint, practical last-leg planning for Fethiye town, Göcek, Çalış and Ölüdeniz, a travel checklist and FAQs. It distinguishes the published direction-specific stops and directs readers to current operator pages.
 
-No fare or fixed journey-time estimate is stated. The guide uses official operator and airport sources and tells visitors to recheck schedules, stops and payment details before travel. Production build, metadata, canonical, one-H1 output, homepage link and sitemap inclusion have passed locally; staging and production release verification are still pending.
+No fare or fixed journey-time estimate is stated. The guide uses official operator and airport sources and tells visitors to recheck schedules, stops and payment details before travel. Production and staging builds, metadata, canonical, one-H1 output, homepage link and sitemap inclusion passed locally. Staging and production are now deployed and checked: staging is `noindex,nofollow` with no canonical and an empty sitemap; production is `index,follow` with the exact self-canonical URL and both guides in the homepage and sitemap. The Render rewrite serves the nested article path directly.
 
 ## Suggested next pages
 
@@ -62,6 +62,14 @@ Do not publish pages 3–5 until the underlying business details are verified. A
 - Build-time prerendering emits each complete article in the first HTML response with one H1, title, description, canonical and production `index,follow`.
 - Preview builds should remain `noindex,nofollow` and have no canonical.
 - Render must serve each nested guide URL as its generated `/index.html` before the general app-shell rewrite. Verify each actual staging response before live publication.
+
+## Release record — Fethiye guide
+
+- Pull request #56 was merged on 21 November 2026.
+- All 88 frontend tests passed; ESLint passed; production and staging builds passed.
+- Staging route verified at `https://vip-transfer-dalaman-test.onrender.com/guides/dalaman-airport-to-fethiye` with `noindex,nofollow`, no canonical, one H1, and the expected shuttle content. The staging sitemap stayed empty.
+- Production route verified at `https://dalamanway.com/guides/dalaman-airport-to-fethiye` with `index,follow`, a self-canonical, one H1, the booking link and the expected content. The production sitemap contains both guides, and the homepage links to both.
+- Live Render deploy: `dep-dc0h0dec6qcc73eb61og`.
 
 ## Sources
 
