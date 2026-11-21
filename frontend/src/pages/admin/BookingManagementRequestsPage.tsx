@@ -34,8 +34,6 @@ export function BookingManagementRequestsPage() {
 
   useEffect(() => {
     let active = true
-    setLoading(true)
-    setError('')
     getBookingManagementRequests(filter).then(result => {
       if (active) { setRequests(result); setLoading(false) }
     }).catch(() => {
@@ -46,6 +44,8 @@ export function BookingManagementRequestsPage() {
 
   function refresh() {
     setNotice('')
+    setError('')
+    setLoading(true)
     setRevision(value => value + 1)
   }
 
@@ -82,7 +82,7 @@ export function BookingManagementRequestsPage() {
         <button type="button" onClick={refresh} disabled={loading || busyId !== null} className="rounded-lg border bg-white px-4 py-2 font-semibold disabled:opacity-50">Refresh</button>
       </div>
       <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter booking requests">
-        {filters.map(item => <button key={item.value} type="button" aria-pressed={filter === item.value} disabled={busyId !== null} onClick={() => { setFilter(item.value); setNotice('') }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${filter === item.value ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{item.label}</button>)}
+        {filters.map(item => <button key={item.value} type="button" aria-pressed={filter === item.value} disabled={busyId !== null} onClick={() => { if (filter !== item.value) { setFilter(item.value); setLoading(true); setError('') } setNotice('') }} className={`rounded-lg border px-4 py-2 font-semibold disabled:opacity-50 ${filter === item.value ? 'bg-admin-primary text-white' : 'bg-white text-admin-primary'}`}>{item.label}</button>)}
       </div>
       {error && <p role="alert" className="mb-4 text-red-700">{error}</p>}
       {notice && <p role="status" className="mb-4 text-green-700">{notice}</p>}
