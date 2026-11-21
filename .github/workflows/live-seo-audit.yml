@@ -1,0 +1,24 @@
+name: Live SEO read-only audit
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'frontend/scripts/audit-live-seo.mjs'
+      - '.github/workflows/live-seo-audit.yml'
+  schedule:
+    - cron: '17 7 * * 1'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate audit script syntax
+        run: node --check frontend/scripts/audit-live-seo.mjs
+      - name: Audit live SEO responses (GET only)
+        run: node frontend/scripts/audit-live-seo.mjs

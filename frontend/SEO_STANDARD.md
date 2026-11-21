@@ -434,3 +434,54 @@ Search Console URL denetiminde İngilizce Marmaris ve Göcek dizinde. İngilizce
 Canlı site haritasındaki 28 benzersiz adresin tamamı doğrudan HTTP 200, tek H1, index,follow ve kendi canonical adresini döndürdü. Yedi rotanın 21 EN/DE/RU sürümünde HTML dili, karşılıklı en/de/ru/x-default hedefleri ve destinasyon parametreli rezervasyon bağlantısı doğrulandı. Dört rezervasyon ve iki yönetim adresi HTTP 200 ve noindex,nofollow döndürdü. İki geçersiz adres HTTP 404 döndürdü. 36/36 adres kontrolü geçti.
 
 Search Console, son okuma tarihi 19 Kasım olan başarılı site haritasında 28 keşfedilen sayfa bildirdi (önceki kayıt 22). Her rota URL'si ayrı denetlendi. İngilizce Marmaris ve Göcek dizinde; diğer beş İngilizce rota ve 14 Almanca/Rusça rota henüz dizinde görünmüyor. Sonuç yalnızca 21 rota URL'sini kapsar. Ülkeler sekmesi henüz etkin değildi ve performans raporu verilerin işlendiğini gösteriyordu. Birleşik Krallık, Almanya ve Rusya için gösterim, tıklama veya konum değeri doğrulanamadı. Bu kontrolde uygulama kodu veya yayın yapılandırması için düzeltme gerekmedi.
+
+
+## 21 Kasım 2026 — SEO çalışma devri, PR #54 ve Work modu test/yayın talimatı
+
+**Bu bölüm güncel çalışma notudur.** Önceki tarihli kayıtları silme veya yeni deploy yapılmış gibi yorumlama. Ayrıntılı branch envanteri ve çakışma önleme kuralları: `docs/BRANCH_WORKFLOW_HANDOFF_2026-11-21.md` (SEO branch'inde). İşe başlamadan önce GitHub HEAD'lerini, PR'ları ve Render servislerinin branch/deployed SHA değerlerini **yeniden kontrol et**.
+
+### Gerçekleşen değişiklikler
+
+- Çalışma dalı: `feature/seo-next-steps-20261121`, entegrasyon temeli `feature/booking-integration` (son kontrol edilen SHA `8e29062eee`). `main` ayrışmıştır; eski SEO dalları veya `main` körlemesine merge edilmez.
+- Taslak PR: [#54 — SEO: read-only sitemap audit and branch handoff documentation](https://github.com/Alisnmez/vip-transfer-dalaman/pull/54). **Henüz merge edilmedi.**
+- `frontend/scripts/audit-live-seo.mjs`: yalnızca GET ile sitemap'teki **28 benzersiz URL'yi** kontrol eder; her URL için HTTP 200, kendi tam URL'siyle eşleşen canonical ve noindex bulunmaması; ayrıca robots.txt HTTP 200, booking/admin noindex, iki geçersiz URL HTTP 404. JSON satırları ve toplam hata sayısı üretir. `SEO_AUDIT_ORIGIN` yalnızca onaylı DalamanWay HTTPS hostları olabilir. Script veri yazmaz, müşteri rezervasyonu göndermez.
+- `.github/workflows/live-seo-audit.yml`: manuel, PR değişikliklerinde ve varsayılan branch'e alındığında haftalık planlı çalıştırma için yapılandırıldı. Node 22 `node --check` ve canlı salt-okunur audit çalıştırır. Haftalık zamanlamanın henüz etkin olduğu varsayılmamalıdır.
+- `docs/BRANCH_WORKFLOW_HANDOFF_2026-11-21.md`: tüm görülen branch'ler, amaç sınıfları, açık PR'lar, riskler, güvenli çalışma protokolü ve yeni sohbet devri. Belgedeki SHA'lar tarihli snapshot'tır.
+- Son test edilen PR commit'i: `d0aa7a22911844ef11e6b13894695b5fc3437173`. **Bu PR frontend runtime, rezervasyon API'si, veritabanı şeması veya canlı site içeriğini değiştirmez.**
+
+### GitHub Actions kanıtı — 21 Kasım 2026
+
+Aşağıdaki beş workflow `d0aa7a2` commit'inde **completed/success** olarak doğrulandı:
+
+| Workflow | Run ID | Durum |
+| --- | --- | --- |
+| Dependency security audit | `44852316560` | success |
+| Live SEO read-only audit | `44852316672` | success; Node syntax ve live GET audit adımları başarılı |
+| Comprehensive release quality gate | `44852316568` | success |
+| Booking browser smoke test | `44852316562` | success |
+| Build checks | `44852316537` | success |
+
+**Kanıt sınırı:** GitHub Actions sonucu doğrulandı; canlı audit'in tek tek URL JSON logları bu kayda kopyalanmadı. Gerekirse `44852316672` run'ının job loglarını açıp `summary`, `failures`, `sitemapUrlsChecked` alanlarını kaydet. Bu test, Google'ın indeksleme durumunu veya gerçek kullanıcı Core Web Vitals verisini ölçmez.
+
+### Render ortamları — önce tekrar doğrula
+
+- Test frontend: `srv-dbt0pg5g1s2s738efhd0`, `https://vip-transfer-dalaman-test.onrender.com`; son kontrolde `feature/booking-integration`, auto-deploy **yes**.
+- Canlı frontend: `srv-dbuegc7f3r2c73ar68kg`, `https://dalamanway-prod.onrender.com` / özel alan adı `https://dalamanway.com`; son kontrolde `feature/booking-integration`, auto-deploy **no**.
+- Test backend: `srv-dbt0pe7f3r2c73bjqfo0`; canlı backend: `srv-dbueg6mc6qcc73dh282g`. Bu SEO PR'ı için backend deploy gerekli değildir.
+- **PR #54 kodu Render test/canlı frontend'e henüz dağıtılmadı.** Render servislerinin kaynak branch'i SEO çalışma dalı değildir. Sırf `trigger_deploy` çağırmak SEO branch'ini dağıtmaz; mevcut `feature/booking-integration` kaynak branch'ini yeniden dağıtabilir.
+
+### Work modu — istenen sıradaki uygulama
+
+1. GitHub'da PR #54 HEAD'ini ve beş workflow sonucunu yeniden doğrula. Branch/PR veya dosya çakışması varsa dur, diff'i incele. `main`, eski SEO dalları, açık diğer PR'lar ve müşteri verilerine dokunma.
+2. Bu PR'ın **yalnızca audit script + workflow + iki Markdown belge** değişiklikleri taşıdığını doğrula. SEO_STANDARD bu kayıt nedeniyle dördüncü dosyadır. Audit scriptinin doğru 28 URL'yi kapsadığını loglardan teyit et. Staging domaini için `SEO_AUDIT_ORIGIN` çalıştırırken beklenen sitemap'in boş ve robots'un disallow olması nedeniyle production-audit scriptini aynen staging'e uygulama; staging için ayrı index/noindex ve route smoke kontrolü yap.
+3. Test frontend'ini güncellemek için Render'ın branch ayarını izinsiz değiştirme. **Güvenli geçiş yöntemi seç:** PR #54'ü uygun onay ve başarılı CI sonrasında entegrasyon dalına merge etmek testin auto-deploy'unu tetikleyebilir; önce diğer açık PR'larla çakışma ve entegrasyonun güncel SHA'sını kontrol et. Alternatif olarak test servisinde geçici branch kullanacaksan eski branch, auto-deploy ve rewrite ayarlarını kaydet; geri dönüşü doğrula. Her iki yolda da müşteri rezervasyonu veya veritabanı migrasyonu başlatma.
+4. Testte deploy edilen **gerçek commit SHA** ve Render deploy ID/status bilgisini kaydet. Frontend build, staging robots `Disallow: /`, boş staging sitemap, rota HTTP yanıtları, EN/DE/RU ilk HTML, canonical/hreflang, booking/admin noindex, yanlış rota 404, mobil görünüm ve rezervasyon sayfasına yönlendirmeyi sentetik/veri yazmayan testlerle doğrula.
+5. **Yalnızca test dağıtımı ve tüm smoke kontrolleri başarılıysa** canlı frontend'e kontrollü deploy yap. Canlı frontend'in kaynak branch'i ve deploy commit'i beklenen sürümle eşleşmeli; auto-deploy ayarını değiştirme. Üretim DB/backend deploy etme. Ardından 28 sitemap URL'sini, robots, canonical, hreflang, noindex, 404 ve temel rezervasyon navigasyonunu salt-okunur kontrol et. Hata varsa geri dönüş planını uygula.
+6. Test ve canlı için her aşamayı `docs/EKSIKLERIMIZ.md` ve bu SEO standardına **gerçek deploy ID, commit, test sonucu, tarih** ile ekle. Başarısız veya atlanmış testleri başarılı olarak işaretleme. Kullanıcının test başarılıysa canlıya alma talebi vardır; yeni/öngörülmeyen kapsam değişikliği veya risk oluşursa ayrıca onay iste.
+
+### SEO iş listesi — deploy sonrasında
+
+- Google Search Console'da yeni site için 21 Kasım performans CSV'leri boştu; trafik/CTR/sıralama sayısı uydurma. Sitemap keşfi, Google indeksleme ve organik gösterimler ayrı kavramlardır.
+- İlk indeksleme kontrolleri: ana sayfa ve EN Marmaris/Göcek dizinde; diğer rota varyantları 19 Kasım denetiminde henüz dizinde değildi. Güncel URL denetim raporları gelmeden durum değişti varsayma.
+- Ülke bazlı UK/DE/RU sorgu ve sayfa analizi için veri oluşmasını bekle. O sırada doğrulanmış operasyonel bilgileri içeren özgün rota içeriği, internal linking, mobil performans ve Google'ın seçtiği canonical üzerinde çalış. Fiyat, süre, izin, yorum ve garanti uydurma.
+- Yeni SEO içerik kodu yazılacaksa ayrı ve küçük PR aç; bu audit PR'ıyla kapsamı karıştırma. Mevcut tasarım, yorum kartları ve rezervasyon akışını koru.
