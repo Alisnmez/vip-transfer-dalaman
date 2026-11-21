@@ -104,10 +104,10 @@ class RoutePriceIntegrationTest {
             .contentType(MediaType.APPLICATION_JSON).content(edit(60, 115, -1))).andExpect(status().isOk());
         mvc.perform(post("/bookings").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
             .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(60));
-        request.put("pickUpLocation", "Marmaris(Any Hotel)"); request.put("dropOffLocation", "Dalaman Airport").with(csrf());
+        request.put("pickUpLocation", "Marmaris(Any Hotel)"); request.put("dropOffLocation", "Dalaman Airport");
         mvc.perform(post("/bookings").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
             .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(60));
-        request.put("tripType", "round-trip").with(csrf()); request.put("returnDateTime", LocalDateTime.now().plusDays(7).withNano(0).toString());
+        request.put("tripType", "round-trip"); request.put("returnDateTime", LocalDateTime.now().plusDays(7).withNano(0).toString());
         mvc.perform(post("/bookings").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
             .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(115));
         mvc.perform(get("/bookings/" + originalId).with(httpBasic("testadmin", "testpassword")))
