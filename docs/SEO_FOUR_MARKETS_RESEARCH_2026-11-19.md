@@ -180,5 +180,7 @@ GSC örnekleminde birçok rota keşfedilmiş fakat Googlebot tarafından henüz 
 
 - **Değişen dosyalar:** `frontend/scripts/prerender-routes.mjs`, `frontend/tests/prerenderSeo.test.mjs`.
 - **Testler:** 87/87 frontend testi geçti, ESLint geçti, `VITE_PUBLIC_SITE_URL=https://dalamanway.com npm run build` geçti.
-- **Durum:** `KODLANDI / YEREL TEST GEÇTİ`; test sunucusu deploy ve HTTP kontrolü tamamlanmalı. Canlı yayına geçmeden önce staging sonucunu doğrula.
-- **Sıradaki adım:** Test branch'ine dağıt; ana sayfa ve `/routes` HTML'sinde yedi linki, staging `noindex`/boş sitemap politikasını kontrol et. Ardından aynı commit'i üretime al ve HTML/robots/sitemap'i tekrar doğrula. Search Console'daki tarama isteğinin indeks sonucunu daha sonra yeniden ölç.
+- **Durum:** `CANLIDA DOĞRULANDI` — commit `55a45c6` (tam SHA `55a45c62ff24a78d96a3f6116521148ed9abfdf1`).
+- **Staging:** Render dağıtımı başarılı. `/` ve `/routes` HTTP 200, yedi rotaya doğrudan link; staging `noindex`, `Disallow: /` ve boş sitemap korundu.
+- **Production:** Render frontend deploy'u başarılı. `/` ve `/routes` HTTP 200, yedi rotaya doğrudan link, canonical ve `index,follow`; `robots.txt` üretim kurallarını koruyor. Sitemap HTTP 200, 28 URL ve EN/DE/RU Sarıgerme URL'leri doğrulandı. Backend/API deploy edilmedi.
+- **Sonraki takip:** Search Console'da gönderilen dokuz indeks isteğinin tarama/indeks sonuçlarını yeniden denetle. Sıralama veya gösterim artışını henüz iddia etme; performans raporu şu an 0 gösterim/tıklama gösteriyor.
