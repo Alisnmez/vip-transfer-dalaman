@@ -51,7 +51,7 @@ const infoCopy = {
     bookVehicle: "Book a Transfer",
     fleet: "Our Vehicles",
     fleetTitle: "Professional Transfer Vehicles",
-    fleetIntro: "Explore our vehicle categories and choose the right option for your transfer. Models are examples; a similar vehicle may be assigned. Equipment, availability and luggage space are confirmed before travel. Luggage limits depend on the selected vehicle.",
+    fleetIntro: "Explore our vehicle categories and choose the right option for your transfer. Models are examples; a similar vehicle may be assigned. Vehicle assignment and luggage space are confirmed before travel. Luggage limits depend on the selected vehicle.",
     category: "Vehicle categories",
     passengers: "passengers",
     bags: "bags",
@@ -102,7 +102,7 @@ const infoCopy = {
     bookVehicle: "Transfer buchen",
     fleet: "Unsere Fahrzeuge",
     fleetTitle: "Fahrzeuge für professionelle Transfers",
-    fleetIntro: "Entdecken Sie unsere Fahrzeugkategorien und wählen Sie das passende Fahrzeug. Die Modelle dienen als Beispiele, ein vergleichbares Fahrzeug kann eingesetzt werden. Ausstattung, Verfügbarkeit und Gepäckraum werden vor Reiseantritt bestätigt. Die Gepäckgrenze hängt vom Fahrzeug ab.",
+    fleetIntro: "Entdecken Sie unsere Fahrzeugkategorien und wählen Sie das passende Fahrzeug. Die Modelle dienen als Beispiele, ein vergleichbares Fahrzeug kann eingesetzt werden. Fahrzeugzuweisung und Gepäckraum werden vor Reiseantritt bestätigt. Die Gepäckgrenze hängt vom Fahrzeug ab.",
     category: "Fahrzeugkategorien",
     passengers: "Fahrgäste",
     bags: "Gepäckstücke",
@@ -153,7 +153,7 @@ const infoCopy = {
     bookVehicle: "Забронировать трансфер",
     fleet: "Наши автомобили",
     fleetTitle: "Автомобили для трансфера",
-    fleetIntro: "Выберите подходящую категорию автомобиля. Модели приведены в качестве примера, возможна подача аналогичного автомобиля. Комплектацию, наличие и багажное пространство подтвердят до поездки. Норма багажа зависит от автомобиля.",
+    fleetIntro: "Выберите подходящую категорию автомобиля. Модели приведены в качестве примера, возможна подача аналогичного автомобиля. Назначенный автомобиль и багажное пространство подтвердят до поездки. Норма багажа зависит от автомобиля.",
     category: "Категории автомобилей",
     passengers: "пассажиров",
     bags: "мест багажа",
@@ -266,6 +266,14 @@ export function FAQPage() {
   )
 }
 
+const confirmedAmenities = {
+  en: ['Free Wi-Fi', 'Air conditioning', 'USB charging', 'Complimentary water', 'TV & entertainment', 'Leather seating', 'Child seats on request'],
+  de: ['Kostenloses WLAN', 'Klimaanlage', 'USB-Lademöglichkeit', 'Kostenloses Wasser', 'TV & Unterhaltung', 'Ledersitze', 'Kindersitze auf Anfrage'],
+  ru: ['Бесплатный Wi-Fi', 'Кондиционер', 'USB-зарядка', 'Бесплатная вода', 'ТВ и развлечения', 'Кожаные сиденья', 'Детские кресла по запросу'],
+} as const
+
+const amenityIcons = ['wifi', 'ac_unit', 'usb', 'water_drop', 'tv', 'airline_seat_recline_extra', 'child_care'] as const
+
 export function VehiclesPage() {
   const { language } = useLanguage()
   const copy = infoCopy[language]
@@ -293,11 +301,11 @@ export function VehiclesPage() {
                     <span className="flex items-center gap-1"><span className="material-symbols-outlined text-lg">luggage</span>{vehicle.luggage} {copy.bags}</span>
                   </div>
                   <p className="text-sm text-on-surface-variant">{details.feature}</p>
-                  <ul className="space-y-2 text-sm text-on-surface-variant">
-                    {details.amenities.map((amenity) => (
+                  <ul className="grid grid-cols-1 gap-2 text-sm text-on-surface-variant sm:grid-cols-2">
+                    {confirmedAmenities[language].map((amenity, index) => (
                       <li className="flex items-center gap-2" key={amenity}>
-                        <span className="material-symbols-outlined text-base text-secondary">check_circle</span>
-                        {amenity}
+                        <span aria-hidden="true" className="material-symbols-outlined text-lg text-secondary">{amenityIcons[index]}</span>
+                        <span>{amenity}</span>
                       </li>
                     ))}
                   </ul>
