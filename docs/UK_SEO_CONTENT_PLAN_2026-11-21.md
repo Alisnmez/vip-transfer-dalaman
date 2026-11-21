@@ -36,8 +36,11 @@ The first two established URLs were retained so existing links and canonicals co
 - The Travel Guides link appears in desktop and mobile navigation. The homepage links to the hub; the hub links to every guide.
 - Prerendering emits each full page in the first HTML response with a unique title/description, one H1, self-canonical and production `index,follow`.
 - Staging builds remain `noindex,nofollow` without canonicals and an empty sitemap.
-- Render needs explicit rewrites for `/guides` and each nested guide path to its generated `/index.html`, before the general app-shell fallback.
-- Local verification: all 88 frontend tests passed, ESLint passed, and both production and staging builds passed. Staging and production UI verification is pending for this set of changes.
+- Render rewrite rules for `/guides` and all four nested guide URLs now point to the generated `/index.html` files. The rules were saved in both staging and production.
+- Staging verification: the hub, all four guide URLs, and the mobile navigation link opened successfully on 21 November 2026. Each guide links onward to its matching private-transfer route and booking flow.
+- Production release: commit `00b0922345e7241cbf16a278d8f39aafdf40f581` is live on 21 November 2026 (Render deploy `dep-dc0hbqjm8hqs73ehcrj0`). The hub and all four article URLs were opened directly; the Travel Guides link appears in navigation.
+- Local verification: all 88 frontend tests passed, ESLint passed, and both production and staging builds passed. Production pages emit self-canonicals and `index,follow`; staging remains `noindex,nofollow` without canonicals.
+- Search Console follow-up: monitor indexing, UK query impressions/clicks, and qualified booking enquiries. No traffic increase is claimed until those data appear.
 
 ## Suggested next pages
 
