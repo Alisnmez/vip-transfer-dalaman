@@ -31,7 +31,7 @@ const homeCopy = {
     badge: "DALAMAN ROUTE",
     fethiye: "Dalaman to Fethiye",
     fethiyeDetail: "Request a private transfer to Fethiye and review your route price.",
-    viewPrice: "View prices when booking",
+    viewPrice: "View transfer prices",
     gocek: "Dalaman to Gocek",
     marmaris: "Marmaris",
     oludeniz: "Oludeniz",
@@ -70,7 +70,7 @@ const homeCopy = {
     badge: "STRECKE AB DALAMAN",
     fethiye: "Von Dalaman nach Fethiye",
     fethiyeDetail: "Fragen Sie einen privaten Transfer nach Fethiye an und prüfen Sie den Preis.",
-    viewPrice: "Preise bei der Buchung ansehen",
+    viewPrice: "Transferpreise ansehen",
     gocek: "Von Dalaman nach Göcek",
     marmaris: "Marmaris",
     oludeniz: "Ölüdeniz",
@@ -109,7 +109,7 @@ const homeCopy = {
     badge: "МАРШРУТ ИЗ ДАЛАМАНА",
     fethiye: "Из Даламана в Фетхие",
     fethiyeDetail: "Закажите индивидуальный трансфер в Фетхие и проверьте цену поездки.",
-    viewPrice: "Цены при бронировании",
+    viewPrice: "Посмотреть цены трансфера",
     gocek: "Из Даламана в Гёджек",
     marmaris: "Мармарис",
     oludeniz: "Олюдениз",
@@ -293,7 +293,7 @@ export function HomePage() {
                 <p className="text-white/80 mb-4">
                   {copy.fethiyeDetail}
                 </p>
-                <div className="text-secondary font-bold text-2xl">{copy.viewPrice}</div>
+                <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Fethiye#all-routes">{copy.viewPrice}</Link>
               </div>
             </div>
 
@@ -310,7 +310,7 @@ export function HomePage() {
                 <h3 className="font-headline-lg text-2xl text-white mb-1">
                   {copy.gocek}
                 </h3>
-                <div className="text-secondary font-bold">{copy.viewPrice}</div>
+                <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Gocek#all-routes">{copy.viewPrice}</Link>
               </div>
             </div>
 
@@ -325,7 +325,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">{copy.marmaris}</h3>
-                <div className="text-secondary font-bold">{copy.viewPrice}</div>
+                <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Marmaris#all-routes">{copy.viewPrice}</Link>
               </div>
             </div>
 
@@ -341,7 +341,7 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">{copy.oludeniz}</h3>
-                <div className="text-secondary font-bold">{copy.viewPrice}</div>
+                <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Oludeniz#all-routes">{copy.viewPrice}</Link>
               </div>
             </div>
           </div>
