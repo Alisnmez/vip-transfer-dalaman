@@ -13,6 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.UUID;
 import java.util.List;
@@ -25,10 +30,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        HttpSessionCsrfTokenRepository csrfRepository = new HttpSessionCsrfTokenRepository();
+        csrfRepository.setHeaderName("X-CSRF-TOKEN");
+        CsrfTokenRequestAttributeHandler csrfHandler = new CsrfTokenRequestAttributeHandler();
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.csrfTokenRepository(csrfRepository)
+                        .csrfTokenRequestHandler(csrfHandler)
+                        .ignoringRequestMatchers(
+                                new AntPathRequestMatcher("/admin/session/login", "POST"),
+                                new AntPathRequestMatcher("/bookings", "POST"),
+                                new AntPathRequestMatcher("/bookings/management-requests", "POST"),
+                                new AntPathRequestMatcher("/reviews", "POST")))
+                .securityContext(context -> context.securityContextRepository(securityContextRepository()))
                 .cors(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(HttpMethod.GET, "/route-prices").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/route-prices").hasRole("ADMIN")
@@ -45,6 +60,9 @@ public class SecurityConfig {
                         // Customer support uses external messaging, not public booking APIs.
                         .requestMatchers("/bookings/support/**").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/bookings/**").denyAll()
+                        .requestMatchers(HttpMethod.GET, "/admin/session/csrf").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/admin/session/login").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/admin/session/logout").hasRole("ADMIN")
                         .requestMatchers("/bookings", "/bookings/**", "/admin/auth-check").hasRole("ADMIN")
                         .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
@@ -57,15 +75,22 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(frontendOrigin));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key", "X-CSRF-TOKEN"));
+        config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/bookings/**", config);
         source.registerCorsConfiguration("/bookings", config);
         source.registerCorsConfiguration("/admin/auth-check", config);
+        source.registerCorsConfiguration("/admin/session/**", config);
         source.registerCorsConfiguration("/reviews", config);
         source.registerCorsConfiguration("/reviews/**", config);
         source.registerCorsConfiguration("/route-prices", config);
         return source;
+    }
+
+    @Bean
+    public SecurityContextRepository securityContextRepository() {
+        return new HttpSessionSecurityContextRepository();
     }
 
     @Bean
