@@ -68,7 +68,12 @@ export function BookingFormPage() {
   const requestedVehicleId = searchParams.get('vehicle')
   const initialRoute = initialTransferRoute(searchParams.get('destination'), draft)
   const initialVehicleId = bookingVehicles.some(vehicle => vehicle.id === requestedVehicleId) ? requestedVehicleId! : draft.vehicleId
-  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(draft.tripType === 'round-trip' ? 'round-trip' : 'one-way')
+  const requestedTripType = searchParams.get('tripType')
+  const [tripType, setTripType] = useState<'one-way' | 'round-trip'>(
+    requestedTripType === 'one-way' || requestedTripType === 'round-trip'
+      ? requestedTripType
+      : draft.tripType ?? 'one-way',
+  )
   const [selectedVehicleId, setSelectedVehicleId] = useState(bookingVehicles.some((vehicle) => vehicle.id === initialVehicleId) ? initialVehicleId! : 'vip-minivan')
   const [pickUpLocation, setPickUpLocation] = useState(initialRoute.pickUpLocation)
   const [dropOffLocation, setDropOffLocation] = useState(initialRoute.dropOffLocation)
