@@ -31,25 +31,37 @@ Google's own guidance prioritises helpful, reliable, original, people-first cont
 
 No fixed fare, journey duration, service guarantee or keyword-volume claim is made. The official airport says HAVAŞ and MUTTAŞ serve Dalaman Airport and Marmaris city centre, and directs passengers to the operators for current times/fares. The article asks readers to recheck those details before travel.
 
+## Second article implemented
+
+**URL:** `/guides/dalaman-airport-to-fethiye`
+
+**Title:** “Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey”
+
+**Reader intent:** A visitor deciding whether an airport shuttle will reach their Fethiye accommodation or whether they need an onward ride.
+
+**Content included:** official MUTTAŞ route 48-25 details and named stops, HAVAŞ as an option to verify, Fethiye Otogar as the MUTTAŞ airport route endpoint, practical last-leg planning for Fethiye town, Göcek, Çalış and Ölüdeniz, a travel checklist and FAQs. It distinguishes the published direction-specific stops and directs readers to current operator pages.
+
+No fare or fixed journey-time estimate is stated. The guide uses official operator and airport sources and tells visitors to recheck schedules, stops and payment details before travel. Production build, metadata, canonical, one-H1 output, homepage link and sitemap inclusion have passed locally; staging and production release verification are still pending.
+
 ## Suggested next pages
 
 Prioritise one at a time, after reviewing real Search Console questions and business facts:
 
-1. Dalaman Airport to Fethiye: shuttle stops and onward travel.
-2. Dalaman Airport to Ölüdeniz: planning the last leg from Fethiye or other connection points.
-3. How to choose an airport transfer vehicle for passengers and luggage — only using the verified live fleet capacity.
-4. Late-night or delayed arrival planning at Dalaman Airport — only after pickup, waiting and contingency policies are confirmed by the operator.
-5. Marmaris or İçmeler drop-off planning — only after exact service coverage and pickup/drop-off policy are confirmed.
+1. Dalaman Airport to Ölüdeniz: planning the last leg from Fethiye or other connection points.
+2. How to choose an airport transfer vehicle for passengers and luggage — only using the verified live fleet capacity.
+3. Late-night or delayed arrival planning at Dalaman Airport — only after pickup, waiting and contingency policies are confirmed by the operator.
+4. Marmaris or İçmeler drop-off planning — only after exact service coverage and pickup/drop-off policy are confirmed.
 
 Do not publish pages 3–5 until the underlying business details are verified. Avoid translating the guide mechanically for DE/RU; prepare native-quality versions with language-specific search intent and accurate local facts.
 
 ## Technical release checks
 
 - The guide is registered in the React router and shared SEO metadata.
-- The homepage links to it in English, and the production sitemap generator includes it.
-- Build-time prerendering emits the complete article in the first HTML response with one H1, title, description, canonical and production `index,follow`.
+- Both guides are registered in the React router and shared SEO metadata.
+- The homepage links to both guides in English, and the production sitemap generator includes both.
+- Build-time prerendering emits each complete article in the first HTML response with one H1, title, description, canonical and production `index,follow`.
 - Preview builds should remain `noindex,nofollow` and have no canonical.
-- Render must serve `/guides/dalaman-airport-to-marmaris` as its generated `/guides/dalaman-airport-to-marmaris/index.html` before the general app-shell rewrite. Verify the actual staging response before live publication.
+- Render must serve each nested guide URL as its generated `/index.html` before the general app-shell rewrite. Verify each actual staging response before live publication.
 
 ## Sources
 

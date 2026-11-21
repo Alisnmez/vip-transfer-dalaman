@@ -27,7 +27,9 @@ import { HomePage } from '../pages/public/HomePage'
 import { RoutesPage } from '../pages/public/RoutesPage'
 import { ReviewsPage } from '../pages/public/ReviewsPage'
 import { RouteDetailPage } from '../pages/public/RouteDetailPage'
-import { DalamanMarmarisGuidePage } from '../pages/public/DalamanMarmarisGuidePage'
+import { TravelGuidePage } from '../pages/public/TravelGuidePage'
+import { dalamanFethiyeGuide } from '../content/guides/dalaman-fethiye'
+import { dalamanMarmarisGuide } from '../content/guides/dalaman-marmaris'
 import {
   ContactPage,
   FAQPage,
@@ -45,7 +47,7 @@ function ScrollToTop() {
     if (matchLocalizedRoute(pathname)) return
     const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
     const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
-    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews', '/guides/dalaman-airport-to-marmaris']
+    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews', dalamanMarmarisGuide.path, dalamanFethiyeGuide.path]
     const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler|dalyan|sarigerme)$/.test(pathname)
     let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
     if (!robots) {
@@ -62,7 +64,8 @@ function ScrollToTop() {
       '/contact': { title: 'Contact DalamanWay | Airport Transfer Support', description: 'Contact DalamanWay about transfer bookings, changes and cancellations.' },
       '/faq': { title: 'Dalaman Airport Transfer FAQ | DalamanWay', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
       '/reviews': { title: 'Customer Reviews | DalamanWay', description: 'Share your experience with DalamanWay and learn how customer feedback is reviewed.' },
-      '/guides/dalaman-airport-to-marmaris': { title: 'Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer? | DalamanWay', description: 'Compare practical ways to travel from Dalaman Airport to Marmaris, what to check before you fly, and how to choose for your group.' },
+      [dalamanMarmarisGuide.path]: { title: `${dalamanMarmarisGuide.title} | DalamanWay`, description: dalamanMarmarisGuide.description },
+      [dalamanFethiyeGuide.path]: { title: `${dalamanFethiyeGuide.title} | DalamanWay`, description: dalamanFethiyeGuide.description },
     }
     const destinationNames: Record<string, string> = {
       marmaris: 'Marmaris',
@@ -120,7 +123,8 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       { path: 'routes', element: <RoutesPage /> },
       { path: 'routes/:slug', element: <RouteDetailPage /> },
-      { path: 'guides/dalaman-airport-to-marmaris', element: <DalamanMarmarisGuidePage /> },
+      { path: 'guides/dalaman-airport-to-marmaris', element: <TravelGuidePage guide={dalamanMarmarisGuide} /> },
+      { path: 'guides/dalaman-airport-to-fethiye', element: <TravelGuidePage guide={dalamanFethiyeGuide} /> },
       ...translatedRoutes,
       { path: 'vehicles', element: <VehiclesPage /> },
       { path: 'services', element: <ServicesPage /> },

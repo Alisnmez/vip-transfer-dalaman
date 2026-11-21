@@ -1,5 +1,7 @@
 export const dalamanMarmarisGuide = {
   path: '/guides/dalaman-airport-to-marmaris',
+  destination: 'Marmaris',
+  destinationSlug: 'marmaris',
   title: 'Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer?',
   description: 'Compare the practical ways to travel from Dalaman Airport to Marmaris, what to check before you fly, and how to choose the right option for your group.',
   intro: 'Landing at Dalaman Airport and heading to Marmaris? The right onward journey depends on your arrival time, accommodation address, group size and how much luggage you have. This guide compares the main options and points you to official sources for current public transport information.',

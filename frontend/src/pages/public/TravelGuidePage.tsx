@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom'
 import { PublicNavbar } from './PublicNavbar'
-import { dalamanMarmarisGuide as guide } from '../../content/guides/dalaman-marmaris'
+import { dalamanFethiyeGuide } from '../../content/guides/dalaman-fethiye'
+import { dalamanMarmarisGuide } from '../../content/guides/dalaman-marmaris'
 
-export function DalamanMarmarisGuidePage() {
+type Guide = typeof dalamanFethiyeGuide | typeof dalamanMarmarisGuide
+
+export function TravelGuidePage({ guide }: { guide: Guide }) {
+  const relatedGuide = guide.destinationSlug === 'marmaris'
+    ? { path: dalamanFethiyeGuide.path, label: 'Fethiye airport shuttle guide' }
+    : { path: dalamanMarmarisGuide.path, label: 'Marmaris transfer options guide' }
+
   return (
     <>
       <PublicNavbar />
       <main className="bg-background">
         <article className="mx-auto max-w-4xl px-gutter py-12 sm:py-16">
           <nav aria-label="Breadcrumb" className="mb-6 text-sm text-on-surface-variant">
-            <Link className="underline" to="/">Home</Link> <span aria-hidden="true">/</span> Travel guides <span aria-hidden="true">/</span> Marmaris
+            <Link className="underline" to="/">Home</Link> <span aria-hidden="true">/</span> Travel guides <span aria-hidden="true">/</span> {guide.destination}
           </nav>
           <header className="mb-10">
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">Dalaman airport travel guide</p>
@@ -38,11 +45,11 @@ export function DalamanMarmarisGuidePage() {
           </div>
 
           <aside className="my-12 rounded-2xl bg-primary p-7 text-white sm:p-9">
-            <h2 className="mb-3 text-2xl font-bold">Prefer a pre-arranged ride to Marmaris?</h2>
+            <h2 className="mb-3 text-2xl font-bold">Prefer a pre-arranged ride to {guide.destination}?</h2>
             <p className="mb-6 leading-7 text-white/80">Compare the available vehicle options and review the route estimate in the booking flow before sending a request.</p>
             <div className="flex flex-wrap gap-4">
-              <Link className="rounded-lg bg-secondary px-5 py-3 font-bold text-on-secondary" to="/routes/marmaris">View Dalaman to Marmaris transfer</Link>
-              <Link className="rounded-lg border border-white/50 px-5 py-3 font-bold text-white" to="/booking?destination=Marmaris">Check booking options</Link>
+              <Link className="rounded-lg bg-secondary px-5 py-3 font-bold text-on-secondary" to={`/routes/${guide.destinationSlug}`}>View Dalaman to {guide.destination} transfer</Link>
+              <Link className="rounded-lg border border-white/50 px-5 py-3 font-bold text-white" to={`/booking?destination=${encodeURIComponent(guide.destination)}`}>Check booking options</Link>
             </div>
           </aside>
 
@@ -54,9 +61,10 @@ export function DalamanMarmarisGuidePage() {
           </section>
 
           <nav aria-label="Related pages" className="mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t border-outline pt-6 text-sm font-semibold">
-            <Link className="text-secondary underline" to="/routes/marmaris">Marmaris transfer route</Link>
+            <Link className="text-secondary underline" to={`/routes/${guide.destinationSlug}`}>{guide.destination} transfer route</Link>
             <Link className="text-secondary underline" to="/vehicles">Compare vehicle options</Link>
             <Link className="text-secondary underline" to="/faq">Transfer booking FAQs</Link>
+            <Link className="text-secondary underline" to={relatedGuide.path}>{relatedGuide.label}</Link>
           </nav>
         </article>
       </main>

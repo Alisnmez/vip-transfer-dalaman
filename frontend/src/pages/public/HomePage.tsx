@@ -348,9 +348,12 @@ export function HomePage() {
         <section className="border-b border-outline bg-background py-16">
           <div className="mx-auto max-w-container-max px-gutter">
             <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Travel guide</p>
-            <h2 className="mb-3 text-2xl font-bold text-on-surface">Getting from Dalaman Airport to Marmaris</h2>
-            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Compare shuttle, taxi, rental car and private transfer options, with official links for checking current public transport details.</p>
-            <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-marmaris">Read the Dalaman to Marmaris travel guide</Link>
+            <h2 className="mb-3 text-2xl font-bold text-on-surface">Plan your journey from Dalaman Airport</h2>
+            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Compare transfer options, check official shuttle information and plan the final leg to your accommodation.</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-marmaris">Marmaris: bus, taxi or private transfer</Link>
+              <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-fethiye">Fethiye: shuttle stops and onward travel</Link>
+            </div>
           </div>
         </section>
       )}

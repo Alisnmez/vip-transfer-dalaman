@@ -51,6 +51,10 @@ export const seoPages: Record<string, SeoPage> = {
     title: 'Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer? | DalamanWay',
     description: 'Compare practical ways to travel from Dalaman Airport to Marmaris, what to check before you fly, and how to choose for your group.',
   },
+  '/guides/dalaman-airport-to-fethiye': {
+    title: 'Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey | DalamanWay',
+    description: 'Find the official Dalaman Airport to Fethiye shuttle details, route stops and what to plan for your hotel or beach area.',
+  },
   '/booking': {
     title: 'Book a Dalaman Airport Transfer',
     description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.',
