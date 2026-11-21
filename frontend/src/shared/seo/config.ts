@@ -47,6 +47,10 @@ export const seoPages: Record<string, SeoPage> = {
     title: 'Customer Reviews | DalamanWay',
     description: 'Learn about customer feedback and how to share your Dalaman airport transfer experience with DalamanWay.',
   },
+  '/guides/dalaman-airport-to-marmaris': {
+    title: 'Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer? | DalamanWay',
+    description: 'Compare practical ways to travel from Dalaman Airport to Marmaris, what to check before you fly, and how to choose for your group.',
+  },
   '/booking': {
     title: 'Book a Dalaman Airport Transfer',
     description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.',
