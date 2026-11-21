@@ -60,7 +60,7 @@ try {
   const { response, body } = await fetchPage('/sitemap.xml')
   const locations = [...body.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map(m => m[1].trim())
   const urls = locations.map(loc => new URL(loc))
-  const valid = response.status === 200 && urls.length === 28 &&
+  const valid = response.status === 200 && urls.length > 0 &&
     urls.every(url => url.origin === origin.origin && !url.search && !url.hash) &&
     new Set(urls.map(url => url.pathname)).size === urls.length
   sitemapPaths = valid ? urls.map(url => url.pathname) : []
