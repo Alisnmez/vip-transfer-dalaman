@@ -1,5 +1,7 @@
 # CANLI YAYIN SONRASI GELİŞTİRME PLANI
 
+UK rakip araştırması: [DalamanWay UK competitor deep research and 90-day roadmap](DALAMANWAY_UK_COMPETITOR_DEEP_RESEARCH.md).
+
 Bu dosya, ilk sürüm yayınlandıktan sonra yapılacak iyileştirmeleri ve yeni sürüm fikirlerini toplar. **Mevcut sürümün eksikleri ve doğrulama kayıtları** için `docs/EKSIKLERIMIZ.md`; **yayın öncesi zorunlu kontroller** için `docs/ILK_YAYIN_KONTROL_LISTESI.md` kullanılır. Bu dosyadaki maddeler, aksi açıkça kararlaştırılmadıkça ilk yayın engeli değildir.
 
 ## Çalışma yöntemi
