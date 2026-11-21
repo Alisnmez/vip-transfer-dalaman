@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 
 import { languages, parseLanguage, useLanguage } from '../../shared/localization/language'
@@ -6,18 +6,44 @@ import { publicNavItems } from './publicNavigation'
 import { matchLocalizedRoute, routeLanguagePath } from '../../shared/localization/route-locales'
 
 const navigationCopy = {
-  en: { main: 'Main navigation', mobile: 'Mobile navigation', book: 'Book Now', open: 'Open menu', close: 'Close menu', language: 'Website language' },
-  de: { main: 'Hauptnavigation', mobile: 'Mobile Navigation', book: 'Jetzt buchen', open: 'Menü öffnen', close: 'Menü schließen', language: 'Sprache der Website' },
-  ru: { main: 'Главное меню', mobile: 'Мобильное меню', book: 'Забронировать', open: 'Открыть меню', close: 'Закрыть меню', language: 'Язык сайта' },
+  en: { main: 'Main navigation', mobile: 'Mobile navigation', book: 'Book Now', open: 'Open menu', close: 'Close menu', language: 'Website language', explore: 'Explore' },
+  de: { main: 'Hauptnavigation', mobile: 'Mobile Navigation', book: 'Jetzt buchen', open: 'Menü öffnen', close: 'Menü schließen', language: 'Sprache der Website', explore: 'Entdecken' },
+  ru: { main: 'Главное меню', mobile: 'Мобильное меню', book: 'Забронировать', open: 'Открыть меню', close: 'Закрыть меню', language: 'Язык сайта', explore: 'Обзор' },
 }
 
 export function PublicNavbar() {
+  const { pathname } = useLocation()
+  return <PublicNavbarContent key={pathname} />
+}
+
+function PublicNavbarContent() {
   const { language, setLanguage } = useLanguage()
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const localized = matchLocalizedRoute(pathname)
   const copy = navigationCopy[language]
   const [menuOpen, setMenuOpen] = useState(false)
+  const [exploreOpen, setExploreOpen] = useState(false)
+  const exploreRef = useRef<HTMLDivElement>(null)
+  const mainItems = publicNavItems.filter(item => ['/', '/routes', '/vehicles'].includes(item.to))
+  const manageItem = publicNavItems.find(item => item.to === '/booking/lookup')
+  const exploreItems = publicNavItems.filter(item => ['/services', '/guides', '/faq', '/reviews', '/contact'].includes(item.to))
+
+  useEffect(() => {
+    if (!exploreOpen) return
+    const onPointer = (event: PointerEvent) => {
+      if (exploreRef.current && !exploreRef.current.contains(event.target as Node)) setExploreOpen(false)
+    }
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setExploreOpen(false)
+    }
+    document.addEventListener('pointerdown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('pointerdown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [exploreOpen])
 
   return (
     <header className="fixed left-0 top-0 z-50 h-20 w-full border-b border-outline-variant bg-white shadow-sm">
@@ -27,7 +53,7 @@ export function PublicNavbar() {
         </Link>
 
         <nav aria-label={copy.main} className="hidden min-w-0 items-center justify-center gap-3 2xl:gap-5 2xl:flex">
-          {publicNavItems.map((item) => (
+          {mainItems.map((item) => (
             <NavLink
               className={({ isActive }) =>
                 `relative whitespace-nowrap text-sm font-semibold transition-colors after:absolute after:left-0 after:top-[calc(100%+8px)] after:h-0.5 after:w-full after:rounded-full after:transition-opacity ${
@@ -43,6 +69,22 @@ export function PublicNavbar() {
               {item.translations[language]}
             </NavLink>
           ))}
+          <div className="relative" ref={exploreRef}>
+            <button type="button" aria-expanded={exploreOpen} aria-controls="explore-navigation" onClick={() => setExploreOpen(open => !open)} className="inline-flex items-center gap-1 whitespace-nowrap text-sm font-semibold text-on-surface-variant hover:text-admin-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-admin-primary">
+              {copy.explore}
+              <span aria-hidden="true" className="material-symbols-outlined text-lg">{exploreOpen ? 'expand_less' : 'expand_more'}</span>
+            </button>
+            {exploreOpen && (
+              <div id="explore-navigation" className="absolute left-0 top-full mt-4 w-56 rounded-lg border border-slate-200 bg-white p-2 shadow-xl">
+                {exploreItems.map(item => (
+                  <NavLink key={item.to} to={item.to} onClick={() => setExploreOpen(false)} className={({ isActive }) => 'block rounded-md px-3 py-2 text-sm font-semibold ' + (isActive ? 'bg-slate-100 text-admin-primary' : 'text-slate-700 hover:bg-slate-50')}>
+                    {item.translations[language]}
+                  </NavLink>
+                ))}
+              </div>
+            )}
+          </div>
+          {manageItem && <NavLink to={manageItem.to} className={({ isActive }) => 'whitespace-nowrap text-sm font-semibold ' + (isActive ? 'text-admin-primary' : 'text-on-surface-variant hover:text-admin-primary')}>{manageItem.translations[language]}</NavLink>}
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
