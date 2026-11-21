@@ -25,7 +25,7 @@ const fetchPage = async (path) => {
 }
 const attribute = (tag, name) => {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return tag.match(new RegExp('(?:^|\\s)' + escaped + '\\s*=\\s*(["\\\'])(.*?)\\1', 'i'))?.[2] || ''
+  return tag.match(new RegExp("(?:^|\\s)" + escaped + "\\s*=\\s*([\\\"'])(.*?)\\1", 'i'))?.[2] || ''
 }
 const tags = (html, name) => [...html.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(m => m[0])
 const canonicalHref = (html) => tags(html, 'link')
