@@ -10,7 +10,8 @@ const publicPaths = ['', 'routes', 'routes/marmaris', 'routes/fethiye', 'routes/
   'routes/gocek', 'routes/icmeler', 'routes/dalyan', 'routes/sarigerme', 'vehicles', 'services', 'contact', 'faq', 'reviews',
   'de/routes/marmaris', 'ru/routes/marmaris', 'de/routes/gocek', 'ru/routes/gocek',
   'de/routes/fethiye', 'ru/routes/fethiye', 'de/routes/oludeniz', 'ru/routes/oludeniz',
-  'de/routes/icmeler', 'ru/routes/icmeler', 'de/routes/dalyan', 'ru/routes/dalyan', 'de/routes/sarigerme', 'ru/routes/sarigerme']
+  'de/routes/icmeler', 'ru/routes/icmeler', 'de/routes/dalyan', 'ru/routes/dalyan', 'de/routes/sarigerme', 'ru/routes/sarigerme',
+  'guides/dalaman-airport-to-marmaris']
 const template = '<!doctype html><html lang="en"><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div><script type="module" src="/assets/app.js"></script></body></html>'
 
 async function render(siteUrl) {
@@ -62,6 +63,12 @@ test('production prerendered route has crawlable title, description, canonical a
   })
   assert.doesNotMatch(pages.get('routes/dalyan'), /application\/ld\+json/)
   assert.match(pages.get('faq'), /<h1>Frequently Asked Questions<\/h1>/)
+  const guide = pages.get('guides/dalaman-airport-to-marmaris')
+  assert.match(guide, /<title>Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer\? \| DalamanWay<\/title>/)
+  assert.match(guide, /<h1>Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer\?<\/h1>/)
+  assert.match(guide, /href="https:\/\/www\.dalamanairport\.aero\/en\/passengers\/public-transport\/"/)
+  assert.match(guide, /href="\/routes\/marmaris"/)
+  assert.match(guide, /name="robots" content="index,follow"/)
 })
 
 test('all staging pages remain noindex without production canonicals', async () => {
@@ -72,6 +79,24 @@ test('all staging pages remain noindex without production canonicals', async () 
       assert.doesNotMatch(html, /rel="canonical"|<link rel="alternate"|property="og:url"|application\/ld\+json/, path)
     }
   }
+})
+
+test('homepage and sitemap discover the Marmaris travel guide', async () => {
+  const { pages } = await render('https://dalamanway.com')
+  assert.match(pages.get(''), /href="\/guides\/dalaman-airport-to-marmaris"/)
+  const { robots, sitemap } = await (async () => {
+    const script = resolve('scripts/generate-seo.mjs')
+    const dir = await mkdtemp(join(tmpdir(), 'vip-guide-sitemap-'))
+    try {
+      const result = spawnSync(process.execPath, [script], { cwd: dir, encoding: 'utf8', env: { ...process.env, VITE_PUBLIC_SITE_URL: 'https://dalamanway.com' } })
+      assert.equal(result.status, 0, result.stderr)
+      return { robots: await readFile(join(dir, 'public/robots.txt'), 'utf8'), sitemap: await readFile(join(dir, 'public/sitemap.xml'), 'utf8') }
+    } finally {
+      await rm(dir, { recursive: true, force: true })
+    }
+  })()
+  assert.match(robots, /Sitemap: https:\/\/dalamanway\.com\/sitemap\.xml/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/dalaman-airport-to-marmaris<\/loc>/)
 })
 
 test('pilot route languages have reciprocal alternates and localized initial HTML', async () => {

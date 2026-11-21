@@ -344,6 +344,17 @@ export function HomePage() {
         </div>
       </section>
 
+      {language === 'en' && (
+        <section className="border-b border-outline bg-background py-16">
+          <div className="mx-auto max-w-container-max px-gutter">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Travel guide</p>
+            <h2 className="mb-3 text-2xl font-bold text-on-surface">Getting from Dalaman Airport to Marmaris</h2>
+            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Compare shuttle, taxi, rental car and private transfer options, with official links for checking current public transport details.</p>
+            <Link className="font-bold text-secondary underline underline-offset-4" to="/guides/dalaman-airport-to-marmaris">Read the Dalaman to Marmaris travel guide</Link>
+          </div>
+        </section>
+      )}
+
       <section className="py-24 relative bg-background">
         <div className="max-w-container-max mx-auto px-gutter text-center relative z-10">
           <h2 className="font-display-lg text-display-lg text-on-surface mb-stack-md">
