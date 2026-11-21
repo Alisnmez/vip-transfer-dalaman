@@ -44,7 +44,7 @@ These branch refs have 0 ahead commits. Prior PR records show the related work w
 | `release/candidate-verified-staging-20261119` | Release-candidate reference; verify deployment/recovery use before considering archival |
 | `safety/*` | Recovery snapshots; retain until backup policy and branch-specific use are reviewed |
 
-The four open PRs (#16, #22, #26, #28, #42) have live head branches and must not be treated as cleanup candidates. PR #16 uses `main` as its head and targets `integration/safe-main-work-20261119`.
+The five open PRs (#16, #22, #26, #28, #42) have live head branches and must not be treated as cleanup candidates. PR #16 uses `main` as its head and targets `integration/safe-main-work-20261119`.
 
 ## Needs a unique-work and purpose review
 
