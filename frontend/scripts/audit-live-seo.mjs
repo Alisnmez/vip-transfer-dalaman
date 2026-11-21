@@ -13,8 +13,8 @@ for (const path of paths) {
     const response = await fetch(new URL(path, origin), { redirect: 'follow', signal: AbortSignal.timeout(15000) })
     const html = await response.text()
     const isPublicPage = !['/robots.txt', '/sitemap.xml', '/booking', '/admin', '/routes/not-a-real-destination'].includes(path)
-    const canonical = html.match(/<link\\b[^>]*rel=["']canonical["'][^>]*>/i)?.[0] || ''
-    const robots = html.match(/<meta\\b[^>]*name=["']robots["'][^>]*>/i)?.[0] || ''
+    const canonical = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i)?.[0] || ''
+    const robots = html.match(/<meta\b[^>]*name=["']robots["'][^>]*>/i)?.[0] || ''
     const ok = path === '/routes/not-a-real-destination' ? response.status === 404
       : isPublicPage ? response.status === 200 && canonical.includes('dalamanway.com') && !/noindex/i.test(robots)
       : path === '/booking' || path === '/admin' ? response.status === 200 && /noindex/i.test(robots)
