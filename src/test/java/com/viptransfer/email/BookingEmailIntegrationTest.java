@@ -22,9 +22,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest(properties = {
         "app.email.enabled=true", "app.email.provider=resend", "app.email.api-key=test-key-not-real",
         "app.email.from=DalamanWay <bookings@example.com>", "app.email.reply-to=operator@example.com",
-        "app.email.operator=operator@example.com", "app.email.initial-delay-ms=86400000",
-        // This suite runs only against the disposable CI database. Accommodate tables from earlier suites.
-        "spring.flyway.enabled=true", "spring.flyway.baseline-on-migrate=true", "spring.flyway.baseline-version=1"
+        "app.email.operator=operator@example.com", "app.email.initial-delay-ms=86400000"
 })
 class BookingEmailIntegrationTest {
     @Autowired BookingService bookings;

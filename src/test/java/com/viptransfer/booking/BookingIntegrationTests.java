@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @SpringBootTest(properties = {"app.admin.password=test-admin-password",
         "app.frontend.origin=https://vip-transfer-dalaman-test.onrender.com"})
@@ -125,13 +126,13 @@ class BookingIntegrationTests {
                         .value(org.hamcrest.Matchers.hasItem("PENDING")));
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
                 .andExpect(status().isUnauthorized());
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
@@ -141,7 +142,7 @@ class BookingIntegrationTests {
                 "CONFIRMED", bookingRepository.findById(id).orElseThrow().getStatus());
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CANCELLED"))))
@@ -149,7 +150,7 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.status").value("CANCELLED"));
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
@@ -179,14 +180,14 @@ class BookingIntegrationTests {
         String confirmed = objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"));
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON).content(cancelled))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CANCELLED"));
 
         mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders
-                        .patch("/bookings/{id}/status", id)
+                        .patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", auth)
                         .contentType(MediaType.APPLICATION_JSON).content(confirmed))
                 .andExpect(status().isConflict());
@@ -410,11 +411,11 @@ class BookingIntegrationTests {
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
         long id = objectMapper.readTree(response).get("id").asLong();
 
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id).with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
                 .andExpect(status().isUnauthorized());
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", valid)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "CONFIRMED"))))
@@ -423,7 +424,7 @@ class BookingIntegrationTests {
         mockMvc.perform(get("/bookings/{id}", id).header("Authorization", valid))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("CONFIRMED"));
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id)
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch("/bookings/{id}/status", id).with(csrf())
                         .header("Authorization", valid)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(Map.of("status", "INVALID"))))
@@ -436,9 +437,9 @@ class BookingIntegrationTests {
                 .andExpect(status().isUnauthorized());
         mockMvc.perform(get("/bookings/1"))
                 .andExpect(status().isUnauthorized());
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("/bookings/1"))
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete("/bookings/1").with(csrf()))
                 .andExpect(status().isUnauthorized());
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/1"))
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/1").with(csrf()))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -526,7 +527,7 @@ class BookingIntegrationTests {
                 .encodeToString("admin:test-admin-password".getBytes(StandardCharsets.UTF_8));
 
         request.put("luggageCount", 6);
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id).with(csrf())
                         .header("Authorization", adminAuthorization)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
@@ -539,7 +540,7 @@ class BookingIntegrationTests {
                 .andExpect(jsonPath("$.luggageCount").value(5));
 
         request.put("luggageCount", 5);
-        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id)
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/{id}", id).with(csrf())
                         .header("Authorization", adminAuthorization)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))

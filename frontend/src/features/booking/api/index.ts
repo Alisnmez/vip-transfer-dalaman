@@ -7,6 +7,34 @@ import { bookingHttpError, bookingInvalidSuccessResponse, classifyBookingFailure
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 const BOOKING_URL = `${API_BASE_URL}/bookings`
 const ADMIN_AUTH_URL = `${API_BASE_URL}/admin/auth-check`
+const ADMIN_SESSION_URL = `${API_BASE_URL}/admin/session`
+
+async function fetchCsrfToken(): Promise<string> {
+  const response = await fetch(`${ADMIN_SESSION_URL}/csrf`, { credentials: 'include' })
+  if (!response.ok) throw bookingHttpError(response.status)
+  const body: unknown = await response.json()
+  if (!body || typeof body !== 'object' || !('token' in body) || typeof body.token !== 'string') {
+    throw new Error('Could not verify admin request security token.')
+  }
+  return body.token
+}
+
+export async function createAdminSession(): Promise<void> {
+  const authorization = getAdminAuthorization()
+  if (!authorization) throw new Error('Admin credentials are required.')
+  const response = await fetch(`${ADMIN_SESSION_URL}/login`, {
+    method: 'POST', credentials: 'include', headers: { Authorization: authorization },
+  })
+  if (!response.ok) throw bookingHttpError(response.status)
+}
+
+export async function endAdminSession(): Promise<void> {
+  const token = await fetchCsrfToken()
+  const response = await fetch(`${ADMIN_SESSION_URL}/logout`, {
+    method: 'POST', credentials: 'include', headers: { 'X-CSRF-TOKEN': token },
+  })
+  if (!response.ok) throw bookingHttpError(response.status)
+}
 
 // Retry keys survive refreshes within the same tab, with an in-memory fallback.
 const retryKeys = createRetryKeyStore(
@@ -26,15 +54,17 @@ export async function request<T>(url: string, options?: RequestInit, admin = fal
   const timeout = setTimeout(() => controller.abort(), timeoutMs)
 
   try {
-    const authorization = admin ? getAdminAuthorization() : null
+    const method = (options?.method ?? 'GET').toUpperCase()
+    const csrfToken = admin && !['GET', 'HEAD', 'OPTIONS'].includes(method) ? await fetchCsrfToken() : null
     const response = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
-        ...(authorization ? { Authorization: authorization } : {}),
+        ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
         ...options?.headers,
       },
       signal: controller.signal,
+      credentials: admin ? 'include' : 'omit',
     })
 
     if (!response.ok) {

@@ -51,12 +51,24 @@ async function adminFixture(page, { width = 1280, extraDashboardBookings = false
     const req = route.request()
     const url = new URL(req.url())
     const path = url.pathname
-    if (!['/route-prices', '/admin/auth-check', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
+    if (!['/route-prices', '/admin/auth-check', '/admin/session/login', '/admin/session/csrf', '/admin/session/logout', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
     if (req.isNavigationRequest()) return route.continue()
     requests.push({ path, search: url.search, method: req.method() })
     const reply = body => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body) })
     if (path === '/route-prices' && req.method() === 'GET') return reply(prices)
-    expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+    if (path === '/admin/session/login') {
+      expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+      return route.fulfill({ status: 204, body: '' })
+    }
+    if (path === '/admin/session/csrf') return reply({ token: 'fixture-csrf-token' })
+    if (path === '/admin/session/logout') {
+      expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
+      return route.fulfill({ status: 204, body: '' })
+    }
+    if (path === '/admin/auth-check') return route.fulfill({ status: 401, contentType: 'application/json', body: '{}' })
+    if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method())) {
+      expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
+    }
     if (path === '/route-prices') {
       const edited = req.postDataJSON()
       const row = prices.find(item => item.destination === edited.destination && item.vehicleId === edited.vehicleId)
@@ -64,7 +76,6 @@ async function adminFixture(page, { width = 1280, extraDashboardBookings = false
       Object.assign(row, edited, { version: row.version + 1 })
       return reply(row)
     }
-    if (path === '/admin/auth-check') return reply({})
     if (path === '/bookings/dashboard') return reply(extraDashboardBookings
       ? { total: 4, pending: 3, today: 0, upcoming: [later, dashboardBooking, earlier], started: [started] }
       : { total: 1, pending: 1, today: 0, upcoming: [dashboardBooking] })

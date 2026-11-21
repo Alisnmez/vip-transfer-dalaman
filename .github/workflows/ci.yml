@@ -126,7 +126,16 @@ jobs:
           marker="$(PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_restore_test -Atqc 'SELECT marker FROM backup_restore_probe WHERE id=1')"
           test "$marker" = 'verified-backup'
           echo 'Backup/restore round trip verified against disposable PostgreSQL database.'
-      - run: mvn -B test
+      - name: Create isolated integration-test database
+        run: PGPASSWORD=vip_test_password psql -h localhost -U vip_test -d vip_transfer_dalaman -v ON_ERROR_STOP=1 -c 'CREATE DATABASE vip_integration_test;'
+      - name: Run PostgreSQL integration tests
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/vip_integration_test
+          SPRING_DATASOURCE_USERNAME: vip_test
+          SPRING_DATASOURCE_PASSWORD: vip_test_password
+          FLYWAY_ENABLED: 'true'
+          HIBERNATE_DDL_AUTO: validate
+        run: mvn -B test
       - name: Verify Flyway migration and Hibernate schema validation on clean database
         shell: bash
         run: |

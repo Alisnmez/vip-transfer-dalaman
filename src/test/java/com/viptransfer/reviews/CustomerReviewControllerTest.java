@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @SpringBootTest(properties = {"app.admin.username=testadmin", "app.admin.password=testpassword"})
 @AutoConfigureMockMvc
@@ -22,13 +23,13 @@ class CustomerReviewControllerTest {
     @Test
     void pendingReviewsArePrivateUntilAdminApproves() throws Exception {
         String payload = "{\"name\":\"Sample passenger\",\"rating\":5,\"comment\":\"The driver was punctual and helpful.\",\"publicationConsent\":true}";
-        mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON).content(payload))
+        mvc.perform(post("/reviews").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(payload))
             .andExpect(status().isAccepted());
         mvc.perform(get("/reviews?page=0")).andExpect(status().isOk()).andExpect(jsonPath("$.content").isEmpty());
         mvc.perform(get("/reviews/moderation")).andExpect(status().isUnauthorized());
 
         CustomerReview review = repository.findByStatus("PENDING", PageRequest.of(0, 10)).getContent().get(0);
-        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+        mvc.perform(patch("/reviews/" + review.id + "/moderation").with(csrf())
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isOk()).andExpect(jsonPath("$.status").value("APPROVED"));
@@ -38,11 +39,11 @@ class CustomerReviewControllerTest {
 
     @Test
     void rejectedReviewNeverAppearsPublicly() throws Exception {
-        mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post("/reviews").with(csrf()).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Rejected passenger\",\"rating\":2,\"comment\":\"The pickup was not on time.\",\"publicationConsent\":true}"))
             .andExpect(status().isAccepted());
         CustomerReview review = repository.findByStatus("PENDING", PageRequest.of(0, 10)).getContent().get(0);
-        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+        mvc.perform(patch("/reviews/" + review.id + "/moderation").with(csrf())
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"REJECTED\"}"))
             .andExpect(status().isOk());
@@ -51,14 +52,14 @@ class CustomerReviewControllerTest {
 
     @Test
     void anonymousUserCannotModerateReviews() throws Exception {
-        mvc.perform(patch("/reviews/123/moderation").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(patch("/reviews/123/moderation").with(csrf()).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isUnauthorized());
     }
 
     @Test
     void rejectsReviewWithoutPublicationConsent() throws Exception {
-        mvc.perform(post("/reviews").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post("/reviews").with(csrf()).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"Passenger\",\"rating\":5,\"comment\":\"A valid length comment.\",\"publicationConsent\":false}"))
             .andExpect(status().isBadRequest());
     }
@@ -78,7 +79,7 @@ class CustomerReviewControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.content[0].customerName").value("Archive passenger"));
 
-        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+        mvc.perform(patch("/reviews/" + review.id + "/moderation").with(csrf())
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"ARCHIVED\"}"))
             .andExpect(status().isOk());
@@ -89,7 +90,7 @@ class CustomerReviewControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.content[0].customerName").value("Archive passenger"));
 
-        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+        mvc.perform(patch("/reviews/" + review.id + "/moderation").with(csrf())
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isOk());
@@ -119,7 +120,7 @@ class CustomerReviewControllerTest {
         review.status = "REJECTED";
         repository.saveAndFlush(review);
 
-        mvc.perform(patch("/reviews/" + review.id + "/moderation")
+        mvc.perform(patch("/reviews/" + review.id + "/moderation").with(csrf())
                 .with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic("testadmin", "testpassword"))
                 .contentType(MediaType.APPLICATION_JSON).content("{\"status\":\"APPROVED\"}"))
             .andExpect(status().isConflict());
