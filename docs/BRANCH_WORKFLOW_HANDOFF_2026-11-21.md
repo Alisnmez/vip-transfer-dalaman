@@ -127,3 +127,12 @@ Bu PR'lar açıktır; eşzamanlı Work/Codex değişikliklerini takip et. PR #16
 ## 6. Devir notunun güvenilirlik sınırı
 
 Bu envanter GitHub branch listesi ve açık PR kayıtlarıyla güncellendi; belirli kritik branch'lerde karşılaştırma yapıldı. **65 branch'in tamamının commit diff'i, CI sonucu, deploy bağımlılığı ve silinebilirliği tek tek doğrulanmış değildir.** Dolayısıyla listedeki amaçların çoğu isim temelli sınıflandırmadır; otomatik merge/silme kararı değildir.
+
+
+## 7. 21 Kasım 2026 — SEO denetimi genişletme (sonraki çalışma)
+
+- Başlamadan önce `feature/booking-integration` HEAD `8e29062eee`, `main` HEAD `7cfec8738e`, SEO çalışma dalı HEAD `e85ae56282` ve 5 açık PR tekrar kontrol edildi. Temel dallar değişmemişti.
+- `frontend/scripts/audit-live-seo.mjs` güncellendi: canlı sitemap XML içinden 28 benzersiz URL'yi toplama; tamamında HTTP 200, **tam URL ile canonical eşleşmesi**, robots noindex olmaması; booking/admin noindex; iki geçersiz URL için HTTP 404; JSON satırları ve toplam hata sayısı.
+- Kod commitleri: `89c6205034d94099f305b87fb58930ae0a94506b` ve `caf7741b1bc3885b4704da3bcc6368b2d166f035`.
+- **Doğrulama sınırı:** GitHub'daki kaynak dosya yeniden okundu; Node.js syntax testi, GitHub Actions çalışması ve canlı HTTP audit sonucu henüz elde edilmedi. Kodun başarılı çalıştığını varsayma. Bir sonraki iş: Node syntax testi, workflow çalıştırma, gerçek çıktı ve gerekirse hata düzeltmesi.
+- Üretim, staging, veritabanı ve diğer branch'lere müdahale edilmedi. Bu kayıt eklendiği için önceki bölümdeki SEO dalı HEAD'i tarihsel anlık görüntüdür; güncel HEAD'i yeniden kontrol et.
