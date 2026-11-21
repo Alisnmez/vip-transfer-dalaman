@@ -56,11 +56,16 @@ export async function request<T>(url: string, options?: RequestInit, admin = fal
   try {
     const method = (options?.method ?? 'GET').toUpperCase()
     const csrfToken = admin && !['GET', 'HEAD', 'OPTIONS'].includes(method) ? await fetchCsrfToken() : null
+    // Safari may block third-party session cookies on a different API domain.
+    // Explicit Basic credentials are kept only in memory and sent for admin reads
+    // when the cookie cannot be relied on; never persist them in browser storage.
+    const fallbackAuthorization = admin && ['GET', 'HEAD'].includes(method) ? getAdminAuthorization() : null
     const response = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
         ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
+        ...(fallbackAuthorization ? { Authorization: fallbackAuthorization } : {}),
         ...options?.headers,
       },
       signal: controller.signal,
