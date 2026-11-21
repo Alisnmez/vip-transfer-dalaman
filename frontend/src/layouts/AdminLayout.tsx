@@ -36,11 +36,13 @@ export function AdminLayout() {
   async function handleSignOut() {
     try {
       await endAdminSession()
+    } catch {
+      // The session cookie may be blocked by Safari. Clear the in-memory
+      // fallback regardless; a page refresh cannot restore those credentials.
+    } finally {
       clearAdminCredentials()
       setAuthenticated(false)
       setPassword('')
-    } catch {
-      setLoginError('Could not sign out. Please check your connection and retry.')
     }
   }
 
@@ -51,7 +53,8 @@ export function AdminLayout() {
     setAdminCredentials(username, password)
     try {
       await createAdminSession()
-      clearAdminCredentials()
+      // Keep credentials in memory for Safari's cross-site-cookie fallback.
+      // They are cleared on logout or page refresh, never stored persistently.
       setAuthenticated(true)
       setPassword('')
     } catch (error) {
@@ -75,7 +78,7 @@ export function AdminLayout() {
       <main className="min-h-screen bg-surface flex items-center justify-center p-6">
         <form onSubmit={(event) => { void handleLogin(event) }} className="w-full max-w-sm space-y-5 rounded-xl bg-white p-8 border border-outline-variant shadow-lg">
           <h1 className="text-2xl font-bold text-admin-primary">Admin sign in</h1>
-          <p className="text-sm text-on-surface-variant">Sign in to view private booking requests. Your password is never saved in browser storage. Your secure session remains active when you refresh.</p>
+          <p className="text-sm text-on-surface-variant">Sign in to view private booking requests. Your password is never saved in browser storage. Your session may require signing in again after refreshing on browsers that block cross-site cookies.</p>
           <label className="block text-sm font-semibold">Username
             <input autoComplete="username" required value={username} onChange={(event) => setUsername(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
           </label>
