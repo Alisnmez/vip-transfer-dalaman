@@ -1,37 +1,34 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import type { PublicReview } from '../../features/reviews/api'
-import { isReviewDemoPreview, isReviewTestHost } from '../../features/reviews/demoPreview'
 import { loadReviewPage } from '../../features/reviews/reviewFeed'
 import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
 
 const reviewCopy = {
-  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', fiction: 'Sample reviews', rating: (value: number) => `${value} out of 5 stars` },
-  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', fiction: 'Beispielbewertungen', rating: (value: number) => `${value} von 5 Sternen` },
-  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', fiction: 'Примеры отзывов', rating: (value: number) => `${value} из 5 звёзд` },
+  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews' rating: (value: number) => `${value} out of 5 stars` },
+  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen' rating: (value: number) => `${value} von 5 Sternen` },
+  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку' rating: (value: number) => `${value} из 5 звёзд` },
 }
 
 export function HomeReviewStrip() {
-  const { search } = useLocation()
-  const demo = isReviewDemoPreview(search)
-  return <ReviewStrip key={String(demo)} demo={demo} />
+  return <ReviewStrip />
 }
 
-function ReviewStrip({ demo }: { demo: boolean }) {
+function ReviewStrip() {
   const { language } = useLanguage()
   const copy = reviewCopy[language]
   const [reviews, setReviews] = useState<PublicReview[]>([])
   const [paused, setPaused] = useState(false)
   useEffect(() => {
     let active = true
-    loadReviewPage(0, demo).then(result => {
+    loadReviewPage(0).then(result => {
       if (active) setReviews(result.content)
     }).catch(() => {
       // Reviews are optional on the home page. The reviews page reports API errors.
     })
     return () => { active = false }
-  }, [demo])
+  }, [])
 
   if (!reviews.length) return null
 
@@ -44,7 +41,7 @@ function ReviewStrip({ demo }: { demo: boolean }) {
         <div className="mb-stack-md flex flex-wrap items-center justify-between gap-3">
           <h2 id="home-review-heading" className="font-headline-lg text-headline-lg">{copy.heading}</h2>
           <div className="flex flex-wrap items-center gap-4">
-            <Link to={isReviewTestHost() && !demo ? "/reviews?demo-reviews=0" : "/reviews"} className="font-semibold underline underline-offset-4">{copy.all}</Link>
+            <Link to="/reviews" className="font-semibold underline underline-offset-4">{copy.all}</Link>
             {canScroll && (
               <button type="button" className="home-review-pause rounded-lg border border-outline px-3 py-2" onClick={() => setPaused(value => !value)}>
                 {paused ? copy.resume : copy.pause}
@@ -52,7 +49,6 @@ function ReviewStrip({ demo }: { demo: boolean }) {
             )}
           </div>
         </div>
-        {demo && <p className="mb-3 text-sm font-semibold">{copy.fiction}</p>}
         <div className="home-review-viewport" data-motion={canScroll && !paused}>
           <div className="home-review-track">
             {copies.map(duplicate => (
