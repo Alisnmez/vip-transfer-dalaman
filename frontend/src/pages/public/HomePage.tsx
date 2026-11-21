@@ -8,6 +8,7 @@ import { GuestPhotos } from './GuestPhotos'
 import { PublicNavbar } from './PublicNavbar'
 import { HomeReviewStrip } from './HomeReviewStrip'
 import { VehiclePhoto } from './VehiclePhoto'
+import { TransferJourneyGuide } from './TransferJourneyGuide'
 
 const homeCopy = {
   en: {
@@ -261,6 +262,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <TransferJourneyGuide />
 
       <GuestPhotos />
 
