@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { clearAdminCredentials, setAdminCredentials } from '../features/booking/adminCredentials'
-import { checkAdminAccess } from '../features/booking/api'
+import { checkAdminAccess, createAdminSession, endAdminSession } from '../features/booking/api'
 import { BookingApiError } from '../features/booking/api/errors'
 import { ProcessingButton } from '../components/ProcessingButton'
 
@@ -17,12 +17,32 @@ const navItems = [
 
 export function AdminLayout() {
   const location = useLocation()
-  const [authenticated, setAuthenticated] = useState(false)
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [checking, setChecking] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    let active = true
+    void checkAdminAccess().then(
+      () => { if (active) setAuthenticated(true) },
+      () => { if (active) setAuthenticated(false) },
+    )
+    return () => { active = false }
+  }, [])
+
+  async function handleSignOut() {
+    try {
+      await endAdminSession()
+      clearAdminCredentials()
+      setAuthenticated(false)
+      setPassword('')
+    } catch {
+      setLoginError('Could not sign out. Please check your connection and retry.')
+    }
+  }
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -30,7 +50,8 @@ export function AdminLayout() {
     setChecking(true)
     setAdminCredentials(username, password)
     try {
-      await checkAdminAccess()
+      await createAdminSession()
+      clearAdminCredentials()
       setAuthenticated(true)
       setPassword('')
     } catch (error) {
@@ -45,12 +66,16 @@ export function AdminLayout() {
     }
   }
 
+  if (authenticated === null) {
+    return <main role="status" className="min-h-screen flex items-center justify-center">Checking admin session…</main>
+  }
+
   if (!authenticated) {
     return (
       <main className="min-h-screen bg-surface flex items-center justify-center p-6">
         <form onSubmit={(event) => { void handleLogin(event) }} className="w-full max-w-sm space-y-5 rounded-xl bg-white p-8 border border-outline-variant shadow-lg">
           <h1 className="text-2xl font-bold text-admin-primary">Admin sign in</h1>
-          <p className="text-sm text-on-surface-variant">Sign in to view private booking requests. Credentials are not saved in browser storage.</p>
+          <p className="text-sm text-on-surface-variant">Sign in to view private booking requests. Your password is never saved in browser storage. Your secure session remains active when you refresh.</p>
           <label className="block text-sm font-semibold">Username
             <input autoComplete="username" required value={username} onChange={(event) => setUsername(event.target.value)} className="mt-2 w-full rounded-lg border p-3" />
           </label>
@@ -109,7 +134,7 @@ export function AdminLayout() {
         </nav>
 
         <div className="mt-auto border-t border-primary-container/30 pt-6 space-y-1">
-          <button type="button" className="w-full rounded-lg border border-primary-container/50 px-4 py-2 text-on-primary-container" onClick={() => { clearAdminCredentials(); setAuthenticated(false); setPassword('') }}>Sign out</button>
+          <button type="button" className="w-full rounded-lg border border-primary-container/50 px-4 py-2 text-on-primary-container" onClick={() => { void handleSignOut() }}>Sign out</button>
         </div>
       </aside>
 
