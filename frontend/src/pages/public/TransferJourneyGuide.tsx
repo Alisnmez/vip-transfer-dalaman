@@ -8,7 +8,7 @@ const copy = {
     steps: [
       ['1. Send your request', 'Choose your route, vehicle, pickup time and contact details. A request is not confirmed until our team accepts it.'],
       ['2. Receive confirmation', 'We confirm your transfer details and the applicable price and cancellation terms in writing. Keep your booking reference handy.'],
-      ['3. Confirm your pickup on WhatsApp', 'Around 24 hours before your pickup, we aim to message you on WhatsApp to ask if you’re still travelling as planned. Reply to confirm or let us know if anything has changed.'],
+      ['3. Confirm your pickup on WhatsApp', 'Around 24 hours before your pickup, we’ll message you on WhatsApp to ask if you’re still travelling as planned. Reply to confirm or let us know if anything has changed.'],
       ['4. On transfer day', 'Your driver or our team will share where to meet. After landing, use the contact details in your pickup instructions to reach your driver directly if you need help finding them.'],
       ['5. Meet your driver', 'Follow the meeting instructions provided for your terminal or accommodation. If you cannot find your driver, contact our team before leaving the pickup area.'],
       ['6. Enjoy your private transfer', 'Travel directly to the destination on your confirmed booking. If your flight or plans change, tell us as soon as possible.'],
@@ -22,7 +22,7 @@ const copy = {
     steps: [
       ['1. Anfrage senden', 'Wählen Sie Strecke, Fahrzeug, Abholzeit und Kontaktdaten. Die Anfrage gilt erst nach Bestätigung durch unser Team als gebucht.'],
       ['2. Bestätigung erhalten', 'Wir bestätigen Transferdaten, Preis und geltende Stornobedingungen schriftlich. Bewahren Sie Ihre Buchungsnummer auf.'],
-      ['3. Abholung per WhatsApp bestätigen', 'Etwa 24 Stunden vor der Abholung möchten wir Sie per WhatsApp fragen, ob Ihre Fahrt wie geplant stattfindet. Antworten Sie kurz zur Bestätigung oder teilen Sie uns Änderungen mit.'],
+      ['3. Abholung per WhatsApp bestätigen', 'Etwa 24 Stunden vor der Abholung fragen wir Sie per WhatsApp, ob Ihre Fahrt wie geplant stattfindet. Antworten Sie kurz zur Bestätigung oder teilen Sie uns Änderungen mit.'],
       ['4. Am Transfertag', 'Ihr Fahrer oder unser Team teilt Ihnen den Treffpunkt mit. Wenn Sie nach der Landung Hilfe brauchen, erreichen Sie Ihren Fahrer direkt über die Kontaktdaten in den Abholhinweisen.'],
       ['5. Fahrer treffen', 'Folgen Sie den mitgeteilten Anweisungen für Terminal oder Unterkunft. Falls Sie den Fahrer nicht finden, kontaktieren Sie uns, bevor Sie den Treffpunkt verlassen.'],
       ['6. Privattransfer genießen', 'Fahren Sie zu Ihrem bestätigten Ziel. Informieren Sie uns möglichst früh über Flug- oder Planänderungen.'],
@@ -36,7 +36,7 @@ const copy = {
     steps: [
       ['1. Отправьте заявку', 'Выберите маршрут, автомобиль, время подачи и укажите контакты. Заявка считается подтверждённой только после ответа нашей команды.'],
       ['2. Получите подтверждение', 'Мы письменно подтвердим детали поездки, цену и условия отмены. Сохраните номер бронирования.'],
-      ['3. Подтвердите поездку в WhatsApp', 'Примерно за 24 часа до подачи машины мы постараемся написать вам в WhatsApp и уточнить, всё ли в силе. Подтвердите поездку ответным сообщением или сообщите нам об изменениях.'],
+      ['3. Подтвердите поездку в WhatsApp', 'Примерно за 24 часа до подачи машины мы напишем вам в WhatsApp и уточнить, всё ли в силе. Подтвердите поездку ответным сообщением или сообщите нам об изменениях.'],
       ['4. В день трансфера', 'Ваш водитель или наша команда сообщит место встречи. Если после приземления вам понадобится помощь, свяжитесь напрямую с водителем по контактам в инструкции по встрече.'],
       ['5. Встреча с водителем', 'Следуйте полученным инструкциям для терминала или отеля. Если не можете найти водителя, свяжитесь с нами, прежде чем уходить с места встречи.'],
       ['6. Частная поездка', 'Отправляйтесь по подтверждённому маршруту. Если рейс или планы изменились, сообщите нам как можно раньше.'],
