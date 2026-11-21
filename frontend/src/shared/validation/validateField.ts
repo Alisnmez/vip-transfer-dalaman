@@ -1,7 +1,7 @@
-import { validateFieldValue } from './rules'
-import type { FieldKind, FieldOptions, FieldErrorCode } from './rules'
-import { validationMessage } from './messages'
-import type { ValidationLanguage } from './messages'
+import { validateFieldValue } from './rules.ts'
+import type { FieldKind, FieldOptions, FieldErrorCode } from './rules.ts'
+import { validationMessage } from './messages.ts'
+import type { ValidationLanguage } from './messages.ts'
 export type FieldValidationResult = { valid: true; code: null; message: null } | { valid: false; code: FieldErrorCode; message: string }
 export function validateField(kind: FieldKind, value: string | number | null | undefined, options: FieldOptions = {}, language: ValidationLanguage = 'en'): FieldValidationResult {
  const code = validateFieldValue(kind, value, options)
