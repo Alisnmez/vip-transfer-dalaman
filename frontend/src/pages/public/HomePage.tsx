@@ -255,6 +255,21 @@ export function HomePage() {
               <article key={vehicle.bookingVehicleId} className="professional-card accent-border-left flex min-w-0 flex-col rounded-xl p-6">
                 <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-36 rounded-lg" />
                 <h3 className="mb-4 font-title-md text-on-surface">{vehicle.name}</h3>
+                <div className="mb-5 flex flex-wrap gap-2 text-xs text-on-surface-variant" aria-label="Vehicle comfort features">
+                  {[
+                    ['wifi', 'Wi-Fi'],
+                    ['ac_unit', 'A/C'],
+                    ['usb', 'USB'],
+                    ['water_drop', 'Water'],
+                    ['tv', 'TV'],
+                    ['airline_seat_recline_extra', 'Leather seats'],
+                    ['child_care', 'Child seats on request'],
+                  ].map(([icon, label]) => (
+                    <span key={label} className="inline-flex items-center gap-1 rounded-md bg-surface-container-low px-2 py-1">
+                      <span aria-hidden="true" className="material-symbols-outlined text-base">{icon}</span>{label}
+                    </span>
+                  ))}
+                </div>
                 <Link to={`/booking?vehicle=${encodeURIComponent(vehicle.bookingVehicleId)}`} className="mt-auto block w-full rounded-lg bg-primary px-2 py-3 text-center font-bold text-white transition-all hover:opacity-90">
                   {copy.options}
                 </Link>
