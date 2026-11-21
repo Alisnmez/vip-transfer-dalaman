@@ -65,7 +65,7 @@ async function adminFixture(page, { width = 1280, extraDashboardBookings = false
       expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
       return route.fulfill({ status: 204, body: '' })
     }
-    if (path === '/admin/auth-check') return route.fulfill({ status: 204, body: '' })
+    if (path === '/admin/auth-check') return route.fulfill({ status: 401, contentType: 'application/json', body: '{}' })
     if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method())) {
       expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
     }
