@@ -79,7 +79,7 @@ export function DashboardPage() {
     .sort((a, b) => bookingPickupMs(b.transferDateTime) - bookingPickupMs(a.transferDateTime) || a.id - b.id)
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-6 p-4 sm:p-8">
+    <div className="mx-auto w-full min-w-0 max-w-7xl space-y-6 overflow-x-hidden p-4 sm:p-8">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-admin-primary sm:text-3xl">Booking overview</h1>
@@ -91,7 +91,7 @@ export function DashboardPage() {
           <ProcessingButton type="button" onClick={() => { void refresh(true) }} processing={loading || refreshing} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 text-sm font-semibold text-admin-primary disabled:opacity-50">Refresh</ProcessingButton>
         </div>
       </header>
-      {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
+      {error && <p role="alert" className="min-w-0 max-w-full break-words rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
       {loading && <p role="status" className="text-on-surface-variant">Loading bookings…</p>}
       {summary && (
         <>
