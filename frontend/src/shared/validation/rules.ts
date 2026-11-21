@@ -1,4 +1,4 @@
-import { isValidEmail, isValidPersonName, normalizeFlightNumber, sanitizePersonName, sanitizePhoneDigits } from '../utils/inputValidation'
+import { isValidEmail, isValidPersonName, normalizeFlightNumber, sanitizePersonName, sanitizePhoneDigits } from '../utils/inputValidation.ts'
 
 /** Reuse existing booking input rules; do not silently change production behaviour. */
 export { isValidEmail, isValidPersonName, normalizeFlightNumber, sanitizePersonName, sanitizePhoneDigits }
