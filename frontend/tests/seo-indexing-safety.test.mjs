@@ -38,6 +38,8 @@ test('production sitemap includes only canonical public URLs with no booking dat
   assert.match(robots, /^Disallow: \/admin$/m)
   assert.doesNotMatch(robots, /^Disallow: \/(?:booking.*)?$/m)
   assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/routes\/marmaris<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/dalamanway\.com\/guides\/dalyan-kaunos-iztuzu<\/loc>/)
   assert.doesNotMatch(sitemap, /<loc>[^<]*(booking|admin|token|reference)/i)
   assert.doesNotMatch(sitemap, /dalamanway\.com\/\//)
   assert.doesNotMatch(sitemap, /onrender\.com/)

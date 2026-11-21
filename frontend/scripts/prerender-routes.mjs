@@ -4,8 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import airportArrivalNotes from '../src/features/route-price/airport-arrival-notes.json' with { type: 'json' }
 import { isLocalizedRoute, localizedRouteCopy, routeAlternates, routeLanguageLabels, routeLanguagePath, routeLanguages } from '../src/shared/localization/route-locales.ts'
-import { dalamanFethiyeGuide } from '../src/content/guides/dalaman-fethiye.ts'
-import { dalamanMarmarisGuide } from '../src/content/guides/dalaman-marmaris.ts'
+import { travelGuides } from '../src/content/guides/index.ts'
 
 const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
@@ -63,11 +62,10 @@ console.log(`Generated static route HTML pages (${production ? 'production' : 'n
 const destinationLinks = destinationRoutes
   .map(({ slug, name }) => `<a href="/routes/${slug}">${name}</a>`)
   .join(' ')
-const guideLinks = [dalamanMarmarisGuide, dalamanFethiyeGuide]
-  .map(guide => `<a href="${guide.path}">${guide.destination}: travel guide</a>`)
-  .join(' ')
+const guideLinks = '<a href="/guides">Explore local travel guides</a>'
 const landingPages = [
   { path: '', title: 'Dalaman Airport Transfers | DalamanWay', description: 'Private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz, Gocek, Icmeler, Dalyan and Sarigerme.', heading: 'Private Dalaman Airport Transfers', body: 'Explore private airport transfers and choose your destination.', links: `${destinationLinks} ${guideLinks} <a href="/routes">Explore all transfer routes</a> <a href="/booking">Request a transfer</a>` },
+  { path: 'guides', title: 'Travel Guides for the Turquoise Coast | DalamanWay', description: 'Explore original ideas for Marmaris, Fethiye, Kayaköy, Ölüdeniz and Dalyan, then plan a private airport pickup.', heading: 'Travel Guides for your time on the Turquoise Coast', body: 'Original ideas for history, coast and local character. Choose a place to explore, then plan your private airport pickup around the trip you want to have.', links: travelGuides.map(guide => `<a href="${guide.path}">${guide.title}</a>`).join(' ') + ' <a href="/booking">Plan your pickup</a>' },
   { path: 'vehicles', title: 'Airport Transfer Vehicles | DalamanWay', description: 'Explore vehicle categories for private Dalaman airport transfers and request the right option for your passengers and luggage.', heading: 'Private Airport Transfer Vehicles', body: 'Choose a vehicle category based on passenger count and luggage needs. Vehicle availability and details will be confirmed before travel.', links: '<a href="/booking">Choose a vehicle</a>' },
   { path: 'services', title: 'Private Dalaman Airport Transfer Services | DalamanWay', description: 'Arrange airport pickup, hotel transfers and return journeys from Dalaman Airport to nearby holiday destinations.', heading: 'Dalaman Airport Transfer Services', body: 'Request airport pickup, hotel transfers and return journeys. Add flight details and accommodation information in the booking form.', links: '<a href="/booking">Request a transfer</a>' },
   { path: 'contact', title: 'Contact DalamanWay | Airport Transfer Support', description: 'Contact DalamanWay about airport transfer booking requests, changes and cancellations.', heading: 'Contact DalamanWay', body: 'For new transfer requests use the booking form. For changes or cancellations, contact us with your booking reference.', links: '<a href="/booking">Make a booking request</a>' },
@@ -94,12 +92,10 @@ for (const page of landingPages) {
 console.log(`Generated ${landingPages.length} landing HTML pages`)
 
 const escapeHtml = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#39;')
-const guides = [dalamanMarmarisGuide, dalamanFethiyeGuide]
-for (const guide of guides) {
+for (const guide of travelGuides) {
   const guideSections = guide.sections.map((section) => {
     let content = `<h2>${escapeHtml(section.heading)}</h2>`
     if ('paragraphs' in section) content += section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join('')
-    if ('options' in section) content += `<table><thead><tr><th>Option</th><th>May suit</th><th>Check before choosing</th></tr></thead><tbody>${section.options.map((option) => `<tr><th scope="row">${escapeHtml(option.name)}</th><td>${escapeHtml(option.bestFor)}</td><td>${escapeHtml(option.check)}</td></tr>`).join('')}</tbody></table>`
     if ('bullets' in section) content += `<ul>${section.bullets.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`
     if ('faqs' in section) content += section.faqs.map((faq) => `<div><h3>${escapeHtml(faq.question)}</h3><p>${escapeHtml(faq.answer)}</p></div>`).join('')
     return `<section>${content}</section>`
@@ -108,9 +104,7 @@ for (const guide of guides) {
   const guideCanonical = production ? `<link rel="canonical" href="${site}${guide.path}" />` : ''
   const guideRobots = production ? 'index,follow' : 'noindex,nofollow'
   const guideSources = guide.sources.map((source) => `<li><a href="${escapeHtml(source.url)}">${escapeHtml(source.label)}</a></li>`).join('')
-  const relatedPath = guide.destinationSlug === 'marmaris' ? dalamanFethiyeGuide.path : dalamanMarmarisGuide.path
-  const relatedLabel = guide.destinationSlug === 'marmaris' ? 'Fethiye airport shuttle guide' : 'Marmaris transfer options guide'
-  const guideBody = `<main data-prerender-fallback><article><nav aria-label="Breadcrumb"><a href="/">Home</a> / Travel guides / ${escapeHtml(guide.destination)}</nav><p>Dalaman airport travel guide</p><h1>${escapeHtml(guide.title)}</h1><p>${escapeHtml(guide.intro)}</p><p>Reviewed: ${escapeHtml(guide.reviewed)} · Public transport details can change; check the linked operators before departure.</p>${guideSections}<aside><h2>Prefer a pre-arranged ride to ${escapeHtml(guide.destination)}?</h2><p>Compare the available vehicle options and review the route estimate in the booking flow before sending a request.</p><a href="/routes/${guide.destinationSlug}">View Dalaman to ${escapeHtml(guide.destination)} transfer</a> <a href="/booking?destination=${encodeURIComponent(guide.destination)}">Check booking options</a></aside><section><h2>Official information</h2><ul>${guideSources}</ul></section><nav aria-label="Related pages"><a href="/routes/${guide.destinationSlug}">${escapeHtml(guide.destination)} transfer route</a> <a href="/vehicles">Compare vehicle options</a> <a href="/faq">Transfer booking FAQs</a> <a href="${relatedPath}">${relatedLabel}</a></nav></article></main>`
+  const guideBody = `<main data-prerender-fallback><article><nav aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/guides">Travel Guides</a> / ${escapeHtml(guide.destination)}</nav><p>${escapeHtml(guide.category)}</p><h1>${escapeHtml(guide.title)}</h1><p>${escapeHtml(guide.intro)}</p><p>Updated: ${escapeHtml(guide.reviewed)} · Check current opening information and local notices before visiting.</p>${guideSections}<aside><h2>Make more time for your ${escapeHtml(guide.destination)} plans</h2><p>Arrange a private Dalaman Airport pickup and plan your first day around the places you want to see.</p><a href="/routes/${guide.destinationSlug}">View private transfers to ${escapeHtml(guide.transferDestination)}</a> <a href="/booking?destination=${encodeURIComponent(guide.transferDestination)}">Plan your pickup</a></aside><section><h2>Further reading</h2><ul>${guideSources}</ul></section><nav aria-label="Related pages"><a href="/guides">Explore all travel guides</a> <a href="/routes/${guide.destinationSlug}">${escapeHtml(guide.transferDestination)} transfer details</a> <a href="/vehicles">Compare private vehicles</a></nav></article></main>`
   const guideHtml = template
     .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(guideTitle)}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${escapeHtml(guide.description)}" />`)
@@ -121,4 +115,4 @@ for (const guide of guides) {
   await mkdir(guideFolder, { recursive: true })
   await writeFile(join(guideFolder, 'index.html'), guideHtml)
 }
-console.log(`Generated ${guides.length} guide HTML pages (${production ? 'indexable production' : 'noindex staging'})`)
+console.log(`Generated ${travelGuides.length} travel guide pages (${production ? 'indexable production' : 'noindex staging'})`)

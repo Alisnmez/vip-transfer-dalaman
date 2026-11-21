@@ -1,14 +1,14 @@
-# UK SEO content plan — 21 November 2026
+# SEO content plan — 21 November 2026
 
 ## Starting point
 
 Search Console's latest available baseline showed no measurable impressions or clicks yet. That means query demand, UK rankings and conversion potential have not been verified for this site. The query ideas below are hypotheses based on the service and visible search intent, not keyword-volume claims.
 
-The site already has destination and booking pages. Supporting guides should answer travel-planning questions, then link naturally to the matching route and booking flow. A blog is useful only when each page helps a traveller make a decision; publishing many near-identical pages for SEO would add little value.
+The site already has destination and booking pages. Supporting guides should help visitors imagine what to do in the region, then link naturally to the matching private-transfer route and booking flow. Use a clearly labelled **Travel Guides** section rather than a generic blog. Do not compare or promote buses, shuttles, taxis or competing transport operators in these guides.
 
 ## What experienced SEO teams do from a cold start
 
-1. **Build a small topic map around the service.** Separate booking intent (airport transfer to a destination) from research intent (bus, taxi, stops, baggage, late arrival). Route pages serve the first group; guides answer the second.
+1. **Build a small topic map around the service.** Route pages serve booking intent. Travel guides answer destination-planning intent with original itineraries, heritage, coastal scenery and local character, then connect readers to the relevant private transfer.
 2. **Study the search results and real customer questions.** Look at the formats and details Google already surfaces; use Search Console queries once impressions begin. Do not treat a competitor's fare, journey time or promise as verified for DalamanWay.
 3. **Publish genuinely useful pages with evidence.** Include who the page helps, checked/updated dates, official references, practical decision points and information that is not obvious from a generic rewrite. Keep facts current.
 4. **Link the journey through the site.** Home or destination page → guide → route/vehicle information → booking request. Use descriptive links and give a reader a next step that matches their question.
@@ -17,66 +17,47 @@ The site already has destination and booking pages. Supporting guides should ans
 
 Google's own guidance prioritises helpful, reliable, original, people-first content, and recommends clear page titles and crawlable descriptive links. It cautions against making content primarily to manipulate rankings or mass-producing pages without added value.
 
-**SERP/competitor review:** GET4S and intransfers both publish Dalaman destination guides; GET4S structures its guide around distance, transport choices, late arrivals and FAQs, then connects the reader to booking. This supports the usefulness of a practical comparison format. Their exact prices, travel times, and operational claims are competitor-specific and were not copied or treated as verified DalamanWay facts.
+**Content direction:** destination inspiration is the chosen editorial strategy. The guides use official Turkish tourism and museum sources for historical/site facts, add a practical original day-plan angle, and lead to DalamanWay's private-transfer routes. Search demand and booking impact still need to be measured in Search Console and analytics; no traffic lift is assumed.
 
-## First article implemented
+## Travel Guides hub and articles
 
-**URL:** `/guides/dalaman-airport-to-marmaris`
+**Hub:** `/guides` — linked from the desktop and mobile navigation and from the homepage. Each card explains a distinct trip idea and links to a detailed page.
 
-**Title:** “Dalaman Airport to Marmaris: Bus, Taxi or Private Transfer?”
+1. **`/guides/dalaman-airport-to-marmaris` — Marmaris Old Town: Castle, Harbour and a Slower First Day.** A history-first first-day plan around the castle museum, old quarter and harbour.
+2. **`/guides/dalaman-airport-to-fethiye` — Fethiye in One Day: Telmessos, Paspatur and the Harbour.** Connects Lycian heritage, the old bazaar quarter and the waterfront.
+3. **`/guides/kayakoy-oludeniz-day-plan` — Kayaköy and Ölüdeniz: A Heritage-and-Coast Day from Fethiye.** Pairs the hillside archaeological settlement with the lagoon landscape.
+4. **`/guides/dalyan-kaunos-iztuzu` — Dalyan, Kaunos and İztuzu: A Day of River Views and Ancient History.** Explains the river, former harbour city, rock tombs and protected coast.
 
-**Reader intent:** A UK visitor arriving at Dalaman who is deciding how to continue to Marmaris.
+The first two established URLs were retained so existing links and canonicals continue to work, while their article content and titles were changed to match the new destination-guide strategy. The new guides use official tourism and museum references, original itinerary suggestions, practical comfort/conservation notes and a contextual CTA to the matching DalamanWay private transfer route. There are no public-transport comparisons or shuttle-operator recommendations in the new guide content.
 
-**Content included:** comparison of shuttle, taxi, private transfer and rental car; current-info checks; accommodation drop-off planning; flight-arrival checklist; FAQs; links to official airport/HAVAŞ/MUTTAŞ information; contextual links to Marmaris route, vehicles, FAQ and booking.
+## Technical implementation and checks
 
-No fixed fare, journey duration, service guarantee or keyword-volume claim is made. The official airport says HAVAŞ and MUTTAŞ serve Dalaman Airport and Marmaris city centre, and directs passengers to the operators for current times/fares. The article asks readers to recheck those details before travel.
-
-## Second article implemented
-
-**URL:** `/guides/dalaman-airport-to-fethiye`
-
-**Title:** “Dalaman Airport to Fethiye: Shuttle Stops and Your Final Journey”
-
-**Reader intent:** A visitor deciding whether an airport shuttle will reach their Fethiye accommodation or whether they need an onward ride.
-
-**Content included:** official MUTTAŞ route 48-25 details and named stops, HAVAŞ as an option to verify, Fethiye Otogar as the MUTTAŞ airport route endpoint, practical last-leg planning for Fethiye town, Göcek, Çalış and Ölüdeniz, a travel checklist and FAQs. It distinguishes the published direction-specific stops and directs readers to current operator pages.
-
-No fare or fixed journey-time estimate is stated. The guide uses official operator and airport sources and tells visitors to recheck schedules, stops and payment details before travel. Production and staging builds, metadata, canonical, one-H1 output, homepage link and sitemap inclusion passed locally. Staging and production are now deployed and checked: staging is `noindex,nofollow` with no canonical and an empty sitemap; production is `index,follow` with the exact self-canonical URL and both guides in the homepage and sitemap. The Render rewrite serves the nested article path directly.
+- Guides are registered in the router and shared SEO metadata; the index and all four articles are included in sitemap generation.
+- The Travel Guides link appears in desktop and mobile navigation. The homepage links to the hub; the hub links to every guide.
+- Prerendering emits each full page in the first HTML response with a unique title/description, one H1, self-canonical and production `index,follow`.
+- Staging builds remain `noindex,nofollow` without canonicals and an empty sitemap.
+- Render needs explicit rewrites for `/guides` and each nested guide path to its generated `/index.html`, before the general app-shell fallback.
+- Local verification: all 88 frontend tests passed, ESLint passed, and both production and staging builds passed. Staging and production UI verification is pending for this set of changes.
 
 ## Suggested next pages
 
 Prioritise one at a time, after reviewing real Search Console questions and business facts:
 
-1. Dalaman Airport to Ölüdeniz: planning the last leg from Fethiye or other connection points.
-2. How to choose an airport transfer vehicle for passengers and luggage — only using the verified live fleet capacity.
-3. Late-night or delayed arrival planning at Dalaman Airport — only after pickup, waiting and contingency policies are confirmed by the operator.
-4. Marmaris or İçmeler drop-off planning — only after exact service coverage and pickup/drop-off policy are confirmed.
+1. Gocek's harbours and coastline: a day-plan built around the marina and nearby bays.
+2. A family-friendly day in Sarigerme: beach time, shade and easy pacing, based on verified places and access.
+3. Fethiye's wider heritage: a separate guide to ancient sites such as Tlos or Pınara, with current official visitor details.
 
-Do not publish pages 3–5 until the underlying business details are verified. Avoid translating the guide mechanically for DE/RU; prepare native-quality versions with language-specific search intent and accurate local facts.
-
-## Technical release checks
-
-- The guide is registered in the React router and shared SEO metadata.
-- Both guides are registered in the React router and shared SEO metadata.
-- The homepage links to both guides in English, and the production sitemap generator includes both.
-- Build-time prerendering emits each complete article in the first HTML response with one H1, title, description, canonical and production `index,follow`.
-- Preview builds should remain `noindex,nofollow` and have no canonical.
-- Render must serve each nested guide URL as its generated `/index.html` before the general app-shell rewrite. Verify each actual staging response before live publication.
-
-## Release record — Fethiye guide
-
-- Pull request #56 was merged on 21 November 2026.
-- All 88 frontend tests passed; ESLint passed; production and staging builds passed.
-- Staging route verified at `https://vip-transfer-dalaman-test.onrender.com/guides/dalaman-airport-to-fethiye` with `noindex,nofollow`, no canonical, one H1, and the expected shuttle content. The staging sitemap stayed empty.
-- Production route verified at `https://dalamanway.com/guides/dalaman-airport-to-fethiye` with `index,follow`, a self-canonical, one H1, the booking link and the expected content. The production sitemap contains both guides, and the homepage links to both.
-- Live Render deploy: `dep-dc0h0dec6qcc73eb61og`.
+Avoid translating mechanically for DE/RU; prepare language-specific versions only when the underlying editorial review can ensure natural language and accurate local facts.
 
 ## Sources
 
 - Google, helpful and reliable people-first content: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google SEO Starter Guide: https://developers.google.com/search/docs/fundamentals/seo-starter-guide
-- YDA Dalaman Airport, public transport: https://www.dalamanairport.aero/en/passengers/public-transport/
-- DHMİ Dalaman Airport, transport: https://www.dhmi.gov.tr/Sayfalar/Havalimani/Dalaman/Ulasim.aspx
-- HAVAŞ services: https://www.havas.net/otobus-hizmetleri
-- MUTTAŞ airport services: https://www.muttas.com.tr/sayfa/havalimani-seferleri
+- GoTürkiye, Marmaris: https://goturkiye.com/digitalnomads/discover-and-work-from-marmaris
+- Turkish Museums, Marmaris Museum and Castle: https://muze.gov.tr/muze-detay?DistId=MRK&SectionId=MRM01
+- GoTürkiye, Telmessos: https://goturkiye.com/fethiye/telmessos
+- GoTürkiye, Ölüdeniz: https://goturkiye.com/tr/fethiye/oludeniz
+- Turkish Museums, Kayaköy archaeological site: https://muze.gov.tr/muze-detay?DistId=KYK&SectionId=KYK02
+- Turkish Museums, Kaunos archaeological site: https://muze.gov.tr/muze-detay?DistId=KAU&SectionId=KAU02
+- GoTürkiye, Caretta caretta season route: https://goturkiye.com/routes/2-day-caretta-caretta-hatching-season-route
 - Render redirects and rewrites: https://render.com/docs/redirects-rewrites
