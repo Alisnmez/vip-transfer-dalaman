@@ -7,6 +7,7 @@ const policyCopy = {
     changes: 'Changes and cancellations',
     changesText: 'If you have a booking reference, use Manage Booking to contact us. We verify your request using the contact details on the booking. Wait for written confirmation before treating your transfer as changed or cancelled. Our team will explain any terms that apply to your request.',
     manage: 'Manage Booking',
+    fullPolicy: 'Read the 24-hour policy',
     privacy: 'How we use your booking details',
     privacyText: 'We use your name, contact details and journey information to review your request, arrange the transfer and contact you about your booking. For questions about your booking data, email us at',
   },
@@ -14,6 +15,7 @@ const policyCopy = {
     changes: 'Änderungen und Stornierungen',
     changesText: 'Wenn Sie eine Buchungsnummer haben, kontaktieren Sie uns über „Buchung verwalten“. Wir prüfen Ihre Anfrage anhand der Kontaktdaten Ihrer Buchung. Warten Sie auf unsere schriftliche Bestätigung einer Änderung oder Stornierung. Unser Team erläutert Ihnen die geltenden Bedingungen.',
     manage: 'Buchung verwalten',
+    fullPolicy: '24-Stunden-Regeln lesen',
     privacy: 'So verwenden wir Ihre Buchungsdaten',
     privacyText: 'Wir verwenden Ihren Namen, Ihre Kontaktdaten und Ihre Reisedaten, um Ihre Anfrage zu prüfen, den Transfer zu organisieren und Sie zu Ihrer Buchung zu kontaktieren. Bei Fragen zu Ihren Buchungsdaten schreiben Sie an',
   },
@@ -21,6 +23,7 @@ const policyCopy = {
     changes: 'Изменение и отмена бронирования',
     changesText: 'Если у вас есть номер бронирования, свяжитесь с нами через раздел «Управление бронированием». Мы проверим запрос по контактным данным из бронирования. Дождитесь письменного подтверждения изменения или отмены. Наша команда сообщит вам применимые условия.',
     manage: 'Управление бронированием',
+    fullPolicy: 'Правила за 24 часа',
     privacy: 'Как мы используем данные бронирования',
     privacyText: 'Мы используем ваше имя, контактные данные и сведения о поездке, чтобы рассмотреть заявку, организовать трансфер и связаться с вами по поводу бронирования. С вопросами об этих данных пишите на',
   },
@@ -36,6 +39,7 @@ export function BookingPolicyLinks() {
         <summary className="cursor-pointer font-semibold text-admin-primary">{copy.changes}</summary>
         <p className="mt-2">{copy.changesText}</p>
         <Link to="/booking/lookup" className="mt-2 inline-block font-semibold text-admin-primary underline">{copy.manage}</Link>
+        <span className="mx-2">·</span><Link to="/booking-policy" className="inline-block font-semibold text-admin-primary underline">{copy.fullPolicy}</Link>
       </details>
       <details className="px-4 py-3">
         <summary className="cursor-pointer font-semibold text-admin-primary">{copy.privacy}</summary>

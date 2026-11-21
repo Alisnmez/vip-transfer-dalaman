@@ -1,4 +1,4 @@
-import type { Booking, BookingRequest } from '../types'
+import type { Booking, BookingManagementRequest, BookingManagementRequestSubmission, BookingRequest } from '../types'
 import { getAdminAuthorization } from '../adminCredentials'
 import { createSingleFlight } from '../singleFlight'
 import { createRetryKeyStore } from '../retryKeys'
@@ -158,4 +158,31 @@ export type BookingEmailStatus = {
 
 export function getBookingEmailStatuses(id: number) {
   return request<BookingEmailStatus[]>(`${BOOKING_URL}/${id}/email-status`, undefined, true)
+}
+
+export function submitBookingManagementRequest(data: BookingManagementRequestSubmission, idempotencyKey: string) {
+  return request<{ message: string }>(`${BOOKING_URL}/management-requests`, {
+    method: 'POST',
+    headers: { 'Idempotency-Key': idempotencyKey },
+    body: JSON.stringify(data),
+  })
+}
+
+export function getBookingManagementRequests(status = 'ALL') {
+  const params = new URLSearchParams({ status })
+  return request<BookingManagementRequest[]>(`${BOOKING_URL}/management-requests?${params.toString()}`, undefined, true)
+}
+
+export function updateBookingManagementRequest(id: number, status: BookingManagementRequest['status'], adminNote: string) {
+  return request<BookingManagementRequest>(`${BOOKING_URL}/management-requests/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ status, adminNote }),
+  }, true)
+}
+
+export function cancelBookingFromManagementRequest(id: number, adminNote: string) {
+  return request<BookingManagementRequest>(`${BOOKING_URL}/management-requests/${id}/cancel-booking`, {
+    method: 'POST',
+    body: JSON.stringify({ adminNote }),
+  }, true)
 }

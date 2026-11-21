@@ -41,3 +41,28 @@ export type BookingRequest = {
   specialRequests?: string
   tripType: 'one-way' | 'round-trip'
 }
+
+export type BookingManagementRequest = {
+  id: number
+  bookingId: number
+  requestType: 'CHANGE' | 'CANCEL'
+  message: string
+  status: 'NEW' | 'IN_PROGRESS' | 'RESOLVED' | 'DECLINED'
+  adminNote?: string | null
+  createdAt: string
+  updatedAt: string
+  customerName: string
+  customerEmail: string
+  pickup: string
+  destination: string
+  transferDateTime: string | null
+  returnDateTime: string | null
+  bookingStatus: string
+}
+
+export type BookingManagementRequestSubmission = {
+  bookingReference: string
+  email: string
+  requestType: 'CHANGE' | 'CANCEL'
+  message: string
+}

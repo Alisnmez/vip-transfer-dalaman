@@ -1,125 +1,170 @@
 import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
-import { bookingSupportLink, whatsappSupportEnabled } from '../../features/booking/support'
+import { ProcessingButton } from '../../components/ProcessingButton'
+import { submitBookingManagementRequest } from '../../features/booking/api'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
 
-const lookupCopy = {
+const copy = {
   en: {
-    title: "Manage My Booking",
-    intro: "Need to change or cancel your transfer? Enter your booking reference to contact our team.",
-    support: "Booking support request",
-    reference: "Booking reference",
-    example: "e.g. 1042",
-    identity: "Your reference is included in the message. We will verify your identity using the contact details saved with the booking before making any changes.",
-    change: "Request Change via",
-    cancel: "Request Cancellation via",
-    invalid: "Enter a valid booking reference to continue.",
-    confirmation: "Sending a message does not change or cancel your booking. Wait for written confirmation from our team.",
-    security: "Do not share passwords, payment card details or verification codes in messages.",
-    newBooking: "New Booking Request",
-    contact: "Contact",
-    email: "Email",
+    title: 'Manage My Booking',
+    intro: 'Request a change or cancellation. Enter the reference and the email address used for the booking so we can verify the request.',
+    reference: 'Booking reference', example: 'e.g. 1042', email: 'Booking email address',
+    requestType: 'What do you need?', change: 'Request a change', cancel: 'Request a cancellation',
+    message: 'Tell us what you need', changePlaceholder: 'For example: request a different pickup time, update the hotel address, or change the passenger count.',
+    cancelPlaceholder: 'Please confirm that you would like to cancel and add any details we should know.',
+    sendChange: 'Send change request', sendCancel: 'Send cancellation request', sending: 'Sending request…',
+    required: 'Complete all fields with the details saved for the booking.',
+    successTitle: 'Request submitted',
+    success: 'If the reference and email match, we have recorded your request and will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.',
+    another: 'Submit another request',
+    error: 'We could not send the request. Please try again. If the issue continues, email our team with your booking reference.',
+    policyTitle: 'Our change and cancellation policy',
+    policy: 'Request a free change or cancellation at least 24 hours before the affected pickup time (Türkiye local time). Changes depend on availability; any fare difference will be shown before you approve it. Requests made within 24 hours are still accepted, but availability and any applicable charge must be confirmed by our team. Sending a request does not change or cancel the booking. Wait for written confirmation.',
+    policyLink: 'Read the full policy',
+    security: 'For your privacy, this page does not display booking details. We match the reference to the email saved on the booking. Never send card details, passwords or verification codes.',
+    newBooking: 'New booking', contact: 'Contact us',
   },
   de: {
-    title: "Meine Buchung verwalten",
-    intro: "Möchten Sie Ihren Transfer ändern oder stornieren? Geben Sie Ihre Buchungsnummer ein, um unser Team zu kontaktieren.",
-    support: "Anfrage zu einer Buchung",
-    reference: "Buchungsnummer",
-    example: "z. B. 1042",
-    identity: "Ihre Buchungsnummer wird in die Nachricht übernommen. Vor einer Änderung bestätigen wir Ihre Identität anhand der bei der Buchung gespeicherten Kontaktdaten.",
-    change: "Änderung anfragen per",
-    cancel: "Stornierung anfragen per",
-    invalid: "Geben Sie eine gültige Buchungsnummer ein, um fortzufahren.",
-    confirmation: "Ihre Buchung wird durch das Senden der Nachricht weder geändert noch storniert. Warten Sie auf die schriftliche Bestätigung unseres Teams.",
-    security: "Senden Sie keine Passwörter, Kartendaten oder Bestätigungscodes in Nachrichten.",
-    newBooking: "Neue Buchungsanfrage",
-    contact: "Kontakt",
-    email: "E-Mail",
+    title: 'Meine Buchung verwalten',
+    intro: 'Beantragen Sie eine Änderung oder Stornierung. Geben Sie die Buchungsnummer und die für die Buchung verwendete E-Mail-Adresse ein.',
+    reference: 'Buchungsnummer', example: 'z. B. 1042', email: 'E-Mail-Adresse der Buchung',
+    requestType: 'Worum geht es?', change: 'Änderung anfragen', cancel: 'Stornierung anfragen',
+    message: 'Was möchten Sie ändern?', changePlaceholder: 'Zum Beispiel: andere Abholzeit, Hoteladresse aktualisieren oder Fahrgastzahl ändern.',
+    cancelPlaceholder: 'Bestätigen Sie bitte Ihren Stornierungswunsch und ergänzen Sie wichtige Hinweise.',
+    sendChange: 'Änderungsanfrage senden', sendCancel: 'Stornierungsanfrage senden', sending: 'Anfrage wird gesendet…',
+    required: 'Bitte füllen Sie alle Felder mit den bei der Buchung verwendeten Angaben aus.',
+    successTitle: 'Anfrage übermittelt',
+    success: 'Wenn Buchungsnummer und E-Mail übereinstimmen, speichern wir Ihre Anfrage und schreiben an die in der Buchung hinterlegte Adresse. Ihre Buchung bleibt unverändert, bis wir das Ergebnis schriftlich bestätigen.',
+    another: 'Weitere Anfrage senden',
+    error: 'Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut. Falls das Problem bleibt, schreiben Sie uns mit Ihrer Buchungsnummer.',
+    policyTitle: 'Regeln für Änderungen und Stornierungen',
+    policy: 'Änderungs- und Stornierungswünsche sind bis mindestens 24 Stunden vor der jeweiligen Abholzeit (Ortszeit Türkiye) kostenlos möglich. Änderungen hängen von der Verfügbarkeit ab; einen möglichen Preisunterschied zeigen wir vor Ihrer Zustimmung. Anfragen innerhalb von 24 Stunden nehmen wir weiterhin an; Verfügbarkeit und mögliche Kosten bestätigt unser Team. Die Anfrage allein ändert oder storniert die Buchung nicht. Warten Sie auf unsere schriftliche Bestätigung.',
+    policyLink: 'Vollständige Richtlinie lesen',
+    security: 'Aus Datenschutzgründen zeigen wir hier keine Buchungsdetails an. Wir gleichen die Buchungsnummer mit der bei der Buchung gespeicherten E-Mail-Adresse ab. Senden Sie niemals Kartendaten, Passwörter oder Bestätigungscodes.',
+    newBooking: 'Neue Buchung', contact: 'Kontakt',
   },
   ru: {
-    title: "Управление бронированием",
-    intro: "Хотите изменить или отменить трансфер? Введите номер бронирования, чтобы связаться с нашей командой.",
-    support: "Запрос в службу поддержки",
-    reference: "Номер бронирования",
-    example: "например, 1042",
-    identity: "Номер бронирования будет указан в сообщении. Перед внесением изменений мы подтвердим вашу личность по контактным данным, указанным при бронировании.",
-    change: "Запросить изменение через",
-    cancel: "Запросить отмену через",
-    invalid: "Введите действительный номер бронирования, чтобы продолжить.",
-    confirmation: "Отправка сообщения сама по себе не изменяет и не отменяет бронирование. Дождитесь письменного подтверждения от нашей команды.",
-    security: "Не отправляйте пароли, данные банковских карт или коды подтверждения в сообщениях.",
-    newBooking: "Новая заявка на бронирование",
-    contact: "Контакты",
-    email: "электронную почту",
+    title: 'Управление бронированием',
+    intro: 'Запросите изменение или отмену. Укажите номер бронирования и адрес электронной почты, использованный при бронировании.',
+    reference: 'Номер бронирования', example: 'например, 1042', email: 'Электронная почта из бронирования',
+    requestType: 'Что нужно сделать?', change: 'Запросить изменение', cancel: 'Запросить отмену',
+    message: 'Опишите запрос', changePlaceholder: 'Например: изменить время встречи, обновить адрес отеля или число пассажиров.',
+    cancelPlaceholder: 'Подтвердите, что хотите отменить поездку, и добавьте важные сведения.',
+    sendChange: 'Отправить запрос на изменение', sendCancel: 'Отправить запрос на отмену', sending: 'Отправка запроса…',
+    required: 'Заполните все поля данными, указанными при бронировании.',
+    successTitle: 'Запрос отправлен',
+    success: 'Если номер и адрес электронной почты совпадают, мы зарегистрировали запрос и напишем на адрес из бронирования. Бронирование не изменится, пока мы письменно не подтвердим результат.',
+    another: 'Отправить ещё один запрос',
+    error: 'Не удалось отправить запрос. Попробуйте ещё раз. Если проблема повторится, напишите нам и укажите номер бронирования.',
+    policyTitle: 'Правила изменения и отмены',
+    policy: 'Запрос на бесплатное изменение или отмену нужно отправить не позднее чем за 24 часа до соответствующего времени подачи автомобиля (местное время Турции). Изменения зависят от наличия автомобиля; возможную разницу в цене мы сообщим до вашего согласия. Запросы менее чем за 24 часа также принимаются, но наличие и возможные расходы подтвердит наша команда. Отправка запроса сама по себе не меняет и не отменяет бронирование. Дождитесь письменного подтверждения.',
+    policyLink: 'Полные правила',
+    security: 'Для защиты данных эта страница не показывает сведения о поездке. Мы сверяем номер с адресом электронной почты, сохранённым при бронировании. Не отправляйте данные карты, пароли или коды подтверждения.',
+    newBooking: 'Новое бронирование', contact: 'Связаться с нами',
   },
+}
+
+function createRequestKey() {
+  try {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  } catch { /* Use a random fallback for older browsers. */ }
+  return `${Date.now()}_${Math.random().toString(36).slice(2)}_${Math.random().toString(36).slice(2)}`
 }
 
 export function BookingLookupPage() {
   const { language } = useLanguage()
-  const copy = lookupCopy[language]
-  const [reference, setReference] = useState('')
-  const validReference = /^[1-9][0-9]{0,15}$/.test(reference.trim())
-  const contactMethod = whatsappSupportEnabled() ? 'WhatsApp' : copy.email
+  const text = copy[language]
+  const [bookingReference, setBookingReference] = useState('')
+  const [email, setEmail] = useState('')
+  const [requestType, setRequestType] = useState<'CHANGE' | 'CANCEL'>('CHANGE')
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+  const [submitted, setSubmitted] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [requestKey, setRequestKey] = useState(createRequestKey)
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setError('')
+    setBusy(true)
+    try {
+      await submitBookingManagementRequest({ bookingReference: bookingReference.trim(), email: email.trim(), requestType, message: message.trim() }, requestKey)
+      setSubmitted(true)
+      setBookingReference('')
+      setEmail('')
+      setMessage('')
+      setRequestKey(createRequestKey())
+    } catch {
+      setError(text.error)
+    } finally {
+      setBusy(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background text-on-surface">
       <PublicNavbar />
       <main className="mx-auto max-w-2xl px-5 pb-24 pt-32">
-        <h1 className="mb-4 text-3xl font-bold text-admin-primary">{copy.title}</h1>
-        <p className="mb-8 text-on-surface-variant">
-          {copy.intro}
-        </p>
-        <section className="rounded-lg border border-outline bg-white p-6" aria-label={copy.support}>
-          <label htmlFor="booking-reference" className="block text-sm font-semibold">
-            {copy.reference}
-          </label>
-          <input
-            id="booking-reference"
-            type="text"
-            inputMode="numeric"
-            autoComplete="off"
-            value={reference}
-            onChange={event => setReference(event.target.value)}
-            placeholder={copy.example}
-            className="mt-2 block w-full rounded-lg border border-outline px-4 py-3"
-          />
-          <p className="mt-3 text-sm text-on-surface-variant">
-            {copy.identity}
-          </p>
-          {validReference ? (
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a href={bookingSupportLink(reference, 'change')}
-                target={whatsappSupportEnabled() ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white">
-                {copy.change} {contactMethod}
-              </a>
-              <a href={bookingSupportLink(reference, 'cancel')}
-                target={whatsappSupportEnabled() ? '_blank' : undefined}
-                rel="noopener noreferrer"
-                className="rounded-lg border border-outline px-5 py-3 font-semibold text-admin-primary">
-                {copy.cancel} {contactMethod}
-              </a>
+        <h1 className="mb-4 text-3xl font-bold text-admin-primary">{text.title}</h1>
+        <p className="mb-8 text-on-surface-variant">{text.intro}</p>
+
+        <section className="rounded-lg border border-outline bg-white p-5 sm:p-6" aria-label={text.title}>
+          {submitted ? (
+            <div role="status" aria-live="polite">
+              <h2 className="text-xl font-bold text-admin-primary">{text.successTitle}</h2>
+              <p className="mt-3 text-on-surface-variant">{text.success}</p>
+              <button type="button" onClick={() => setSubmitted(false)} className="mt-5 rounded-lg border border-outline px-4 py-3 font-semibold text-admin-primary">{text.another}</button>
             </div>
           ) : (
-            <p className="mt-5 text-sm text-on-surface-variant">
-              {copy.invalid}
-            </p>
+            <form onSubmit={event => { void submit(event) }} className="space-y-5">
+              <label htmlFor="booking-reference" className="block text-sm font-semibold">
+                {text.reference}
+                <input id="booking-reference" type="text" inputMode="numeric" autoComplete="off" required maxLength={17}
+                  pattern="#?[1-9][0-9]{0,15}" value={bookingReference} onChange={event => setBookingReference(event.target.value)}
+                  placeholder={text.example} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+              </label>
+              <label htmlFor="booking-email" className="block text-sm font-semibold">
+                {text.email}
+                <input id="booking-email" type="email" autoComplete="email" required maxLength={255} value={email}
+                  onChange={event => setEmail(event.target.value)} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+              </label>
+              <label htmlFor="request-type" className="block text-sm font-semibold">
+                {text.requestType}
+                <select id="request-type" value={requestType} onChange={event => setRequestType(event.target.value as 'CHANGE' | 'CANCEL')}
+                  className="mt-2 block w-full rounded-lg border border-outline bg-white px-4 py-3">
+                  <option value="CHANGE">{text.change}</option>
+                  <option value="CANCEL">{text.cancel}</option>
+                </select>
+              </label>
+              <label htmlFor="request-message" className="block text-sm font-semibold">
+                {text.message}
+                <textarea id="request-message" required maxLength={2000} rows={5} value={message}
+                  onChange={event => setMessage(event.target.value)}
+                  placeholder={requestType === 'CHANGE' ? text.changePlaceholder : text.cancelPlaceholder}
+                  className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+              </label>
+              <p className="text-sm text-on-surface-variant">{text.required}</p>
+              {error && <p role="alert" className="text-sm text-error">{error}</p>}
+              <ProcessingButton type="submit" processing={busy} processingLabel={text.sending}
+                className="rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">
+                {requestType === 'CHANGE' ? text.sendChange : text.sendCancel}
+              </ProcessingButton>
+            </form>
           )}
-          <p className="mt-5 text-sm text-on-surface-variant">
-            {copy.confirmation}
-          </p>
         </section>
-        <p className="mt-6 text-sm text-on-surface-variant">
-          {copy.security}
-        </p>
+
+        <section className="mt-6 rounded-lg border border-outline-variant bg-slate-50 p-5" aria-label={text.policyTitle}>
+          <h2 className="font-bold text-admin-primary">{text.policyTitle}</h2>
+          <p className="mt-2 text-sm leading-6 text-on-surface-variant">{text.policy}</p>
+          <Link to="/booking-policy" className="mt-3 inline-block font-semibold text-admin-primary underline">{text.policyLink}</Link>
+        </section>
+        <p className="mt-5 text-sm text-on-surface-variant">{text.security}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white"
-            to="/booking">{copy.newBooking}</Link>
-          <Link className="rounded-lg border border-outline bg-white px-6 py-3 font-semibold text-admin-primary"
-            to="/contact">{copy.contact}</Link>
+          <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to="/booking">{text.newBooking}</Link>
+          <Link className="rounded-lg border border-outline bg-white px-6 py-3 font-semibold text-admin-primary" to="/contact">{text.contact}</Link>
         </div>
       </main>
     </div>

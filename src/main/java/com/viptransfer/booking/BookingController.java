@@ -1,6 +1,9 @@
 package com.viptransfer.booking;
 
 import com.viptransfer.booking.dto.BookingRequestDto;
+import com.viptransfer.booking.dto.BookingManagementRequestDto;
+import com.viptransfer.booking.dto.BookingManagementRequestUpdateDto;
+import com.viptransfer.booking.dto.BookingManagementRequestView;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +15,11 @@ import org.springframework.data.domain.Page;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final BookingManagementRequestService managementRequestService;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, BookingManagementRequestService managementRequestService) {
         this.bookingService = bookingService;
+        this.managementRequestService = managementRequestService;
     }
 
 
@@ -67,6 +72,32 @@ public class BookingController {
     @PatchMapping("/{id:[0-9]+}/status")
     public Booking updateStatus(@PathVariable Long id, @RequestBody java.util.Map<String, String> payload) {
         return bookingService.updateStatus(id, payload.get("status"));
+    }
+
+    @PostMapping("/management-requests")
+    @org.springframework.web.bind.annotation.ResponseStatus(org.springframework.http.HttpStatus.ACCEPTED)
+    public java.util.Map<String, String> submitManagementRequest(
+            @Valid @RequestBody BookingManagementRequestDto dto,
+            @RequestHeader(value = "Idempotency-Key", required = false) String idempotencyKey) {
+        return managementRequestService.submit(dto, idempotencyKey);
+    }
+
+    @GetMapping("/management-requests")
+    public List<BookingManagementRequestView> getManagementRequests(
+            @RequestParam(required = false) String status) {
+        return managementRequestService.list(status);
+    }
+
+    @PatchMapping("/management-requests/{id:[0-9]+}")
+    public BookingManagementRequestView updateManagementRequest(
+            @PathVariable Long id, @Valid @RequestBody BookingManagementRequestUpdateDto dto) {
+        return managementRequestService.update(id, dto);
+    }
+
+    @PostMapping("/management-requests/{id:[0-9]+}/cancel-booking")
+    public BookingManagementRequestView cancelBookingFromRequest(
+            @PathVariable Long id, @RequestBody(required = false) java.util.Map<String, String> payload) {
+        return managementRequestService.cancelBookingAndResolve(id, payload == null ? null : payload.get("adminNote"));
     }
 
 }

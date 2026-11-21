@@ -16,6 +16,8 @@ const BookingListPage = lazy(() => import('../pages/admin/BookingListPage').then
 // eslint-disable-next-line react-refresh/only-export-components
 const ReviewModerationPage = lazy(() => import('../pages/admin/ReviewModerationPage').then((module) => ({ default: module.ReviewModerationPage })))
 // eslint-disable-next-line react-refresh/only-export-components
+const BookingManagementRequestsPage = lazy(() => import('../pages/admin/BookingManagementRequestsPage').then((module) => ({ default: module.BookingManagementRequestsPage })))
+// eslint-disable-next-line react-refresh/only-export-components
 const RoutePricePage = lazy(() => import('../pages/admin/RoutePricePage').then((module) => ({ default: module.RoutePricePage })))
 // eslint-disable-next-line react-refresh/only-export-components
 const DashboardPage = lazy(() => import('../pages/admin/DashboardPage').then((module) => ({ default: module.DashboardPage })))
@@ -23,6 +25,7 @@ import { BookingConfirmationPage } from '../pages/public/BookingConfirmationPage
 import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
+import { BookingPolicyPage } from '../pages/public/BookingPolicyPage'
 import { HomePage } from '../pages/public/HomePage'
 import { RoutesPage } from '../pages/public/RoutesPage'
 import { ReviewsPage } from '../pages/public/ReviewsPage'
@@ -62,6 +65,7 @@ function ScrollToTop() {
       '/vehicles': { title: 'Airport Transfer Vehicles | DalamanWay', description: 'Explore private Dalaman airport transfer vehicle categories for your passengers and luggage.' },
       '/services': { title: 'Private Airport Transfer Services | DalamanWay', description: 'Request airport pickup, hotel transfers and return journeys from Dalaman Airport.' },
       '/contact': { title: 'Contact DalamanWay | Airport Transfer Support', description: 'Contact DalamanWay about transfer bookings, changes and cancellations.' },
+      '/booking-policy': { title: 'Booking Changes, Cancellations and Refunds | DalamanWay', description: 'Read DalamanWay rules for transfer changes, cancellations, pickup deadlines and refunds.' },
       '/faq': { title: 'Dalaman Airport Transfer FAQ | DalamanWay', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
       '/reviews': { title: 'Customer Reviews | DalamanWay', description: 'Share your experience with DalamanWay and learn how customer feedback is reviewed.' },
       '/guides': { title: 'Travel Guides for the Turquoise Coast | DalamanWay', description: 'Explore original ideas for Marmaris, Fethiye, Kayaköy, Ölüdeniz and Dalyan, then plan a private airport pickup.' },
@@ -135,6 +139,7 @@ export const router = createBrowserRouter([
       { path: 'booking/passenger', element: <BookingPassengerPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
       { path: 'booking/lookup', element: <BookingLookupPage /> },
+      { path: 'booking-policy', element: <BookingPolicyPage /> },
     ],
   },
   {
@@ -145,6 +150,7 @@ export const router = createBrowserRouter([
       { path: 'calendar', element: <Suspense fallback={<div role="status">Loading...</div>}><CalendarPage /></Suspense> },
       { path: 'bookings', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingListPage /></Suspense> },
       { path: 'reviews', element: <Suspense fallback={<div role="status">Loading...</div>}><ReviewModerationPage /></Suspense> },
+      { path: 'management-requests', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingManagementRequestsPage /></Suspense> },
       { path: 'bookings/:bookingId', element: <Suspense fallback={<div role="status">Loading...</div>}><BookingDetailPage /></Suspense> },
       { path: 'fleet-management', element: <Navigate to="/admin/bookings" replace /> },
       { path: 'route-prices', element: <Suspense fallback={<div role="status">Loading...</div>}><RoutePricePage /></Suspense> },

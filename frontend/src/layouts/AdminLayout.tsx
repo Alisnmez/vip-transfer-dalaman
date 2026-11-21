@@ -10,6 +10,7 @@ const navItems = [
   { to: '/admin', label: 'Dashboard', icon: 'dashboard', end: true },
   { to: '/admin/calendar', label: 'Calendar', icon: 'calendar_month' },
   { to: '/admin/bookings', label: 'Bookings', icon: 'list_alt' },
+  { to: '/admin/management-requests', label: 'Manage Booking Requests', icon: 'manage_search' },
   { to: '/admin/route-prices', label: 'Route Prices', icon: 'payments' },
   { to: '/admin/reviews', label: 'Customer Reviews', icon: 'rate_review' }
 ]

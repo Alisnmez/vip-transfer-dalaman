@@ -3,6 +3,7 @@ package com.viptransfer.email;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.viptransfer.booking.Booking;
+import com.viptransfer.booking.BookingManagementRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
@@ -60,6 +61,55 @@ public class BookingEmails {
             enqueue(booking.getId(), event, settings.operator(), "[Operator] DalamanWay #" + booking.getId() + " — " + event,
                     description + "\n\n" + details + "\nReview details in the admin panel: https://dalamanway.com/admin/bookings/" + booking.getId(), null);
         }
+    }
+
+    /** Customer request receipts and operator alerts use the existing transactional outbox. */
+    public void queueManagementRequest(Booking booking, BookingManagementRequest request) {
+        if (!settings.enabled()) return;
+        String kind = "CHANGE".equals(request.getRequestType()) ? "change" : "cancellation";
+        String event = "MANAGEMENT_REQUEST";
+        String customerText = "DalamanWay\n\nWe received your " + kind + " request for booking #" + booking.getId()
+                + ". Your booking has not been changed or cancelled. Please wait for our written confirmation.\n\n"
+                + "Request: " + request.getMessage()
+                + "\n\nIf you did not send this request, contact us by replying to this email.\nhttps://dalamanway.com/booking/lookup";
+        String email = booking.getEmail();
+        if (email != null && !email.isBlank() && !email.toLowerCase(Locale.ROOT).endsWith(".invalid")) {
+            enqueue(booking.getId(), event, email,
+                    "DalamanWay | We received your booking " + kind + " request (#" + booking.getId() + ")",
+                    customerText, null);
+        }
+        if (settings.operator() != null && !settings.operator().isBlank()) {
+            String operatorText = "New " + kind + " request received in Manage My Booking.\n\n"
+                    + "Request ID: " + request.getId()
+                    + "\nBooking reference: #" + booking.getId()
+                    + "\nCustomer: " + booking.getCustomerName()
+                    + "\nCustomer email: " + booking.getEmail()
+                    + "\nPhone: " + booking.getPhoneNumber()
+                    + "\nJourney: " + booking.getPickUpLocation() + " → " + booking.getDropOffLocation()
+                    + "\nPickup time (Türkiye): " + booking.getTransferDateTime()
+                    + "\n\nCustomer's request:\n" + request.getMessage()
+                    + "\n\nReview and update the request in the admin panel: https://dalamanway.com/admin/management-requests";
+            enqueue(booking.getId(), event, settings.operator(),
+                    "[Manage booking] " + kind + " request #" + request.getId() + " for booking #" + booking.getId(),
+                    operatorText, null);
+        }
+    }
+
+    /** Notify the customer when an operator declines or resolves a change request. */
+    public void queueManagementRequestDecision(Booking booking, BookingManagementRequest request) {
+        if (!settings.enabled() || booking.getEmail() == null || booking.getEmail().isBlank()
+                || booking.getEmail().toLowerCase(Locale.ROOT).endsWith(".invalid")) return;
+        String result = "DECLINED".equals(request.getStatus()) ? "could not be approved" : "has been handled";
+        String message = "Your " + ("CHANGE".equals(request.getRequestType()) ? "change" : "cancellation")
+                + " request for booking #" + booking.getId() + " " + result + ".";
+        if (request.getAdminNote() != null && !request.getAdminNote().isBlank()) {
+            message += "\n\nMessage from our team: " + request.getAdminNote();
+        }
+        message += "\n\nCurrent booking status: " + booking.getStatus()
+                + ". If a change was approved, please review the updated booking email.\n"
+                + "https://dalamanway.com/booking/lookup";
+        enqueue(booking.getId(), "MANAGEMENT_DECISION", booking.getEmail(),
+                "DalamanWay | Update on booking request #" + request.getId(), message, null);
     }
 
 
