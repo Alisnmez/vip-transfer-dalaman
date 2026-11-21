@@ -6,9 +6,9 @@ import { useLanguage } from '../../shared/localization/language'
 import './HomeReviewStrip.css'
 
 const reviewCopy = {
-  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews' more: 'Read full review', less: 'Show less', rating: (value: number) => `${value} out of 5 stars` },
-  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen' more: 'Bewertung ganz lesen', less: 'Weniger anzeigen', rating: (value: number) => `${value} von 5 Sternen` },
-  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку' more: 'Читать весь отзыв', less: 'Свернуть отзыв', rating: (value: number) => `${value} из 5 звёзд` },
+  en: { heading: 'Customer Reviews', all: 'Read all reviews', pause: 'Pause reviews', resume: 'Resume reviews', more: 'Read full review', less: 'Show less', rating: (value: number) => `${value} out of 5 stars` },
+  de: { heading: 'Kundenbewertungen', all: 'Alle Bewertungen lesen', pause: 'Bewertungen anhalten', resume: 'Bewertungen fortsetzen', more: 'Bewertung ganz lesen', less: 'Weniger anzeigen', rating: (value: number) => `${value} von 5 Sternen` },
+  ru: { heading: 'Отзывы клиентов', all: 'Читать все отзывы', pause: 'Приостановить прокрутку', resume: 'Продолжить прокрутку', more: 'Читать весь отзыв', less: 'Свернуть отзыв', rating: (value: number) => `${value} из 5 звёзд` },
 }
 
 export function HomeReviewStrip() {
