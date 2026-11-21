@@ -20,8 +20,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest(properties={
  "app.email.enabled=true", "app.email.provider=resend", "app.email.api-key=fake-ci-key",
  "app.email.from=CI <sender@example.com>", "app.email.reply-to=operator@example.com",
- "app.email.operator=operator@example.com", "app.email.initial-delay-ms=86400000",
- "spring.flyway.enabled=true", "spring.flyway.baseline-on-migrate=true", "spring.flyway.baseline-version=1"})
+ "app.email.operator=operator@example.com", "app.email.initial-delay-ms=86400000"})
 class EmailDispatchCapacityTest {
  @Autowired BookingService bookings;
  @Autowired JdbcTemplate jdbc;

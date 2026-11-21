@@ -36,7 +36,7 @@ class BookingSecurityTest {
         mockMvc.perform(get("/bookings/dashboard")).andExpect(status().isUnauthorized());
         mockMvc.perform(get("/bookings/1")).andExpect(status().isUnauthorized());
         mockMvc.perform(patch("/bookings/1/status").contentType("application/json")
-                .content("{\"status\":\"CONFIRMED\"}")).andExpect(status().isUnauthorized());
+                .content("{\"status\":\"CONFIRMED\"}")).andExpect(status().isForbidden());
         mockMvc.perform(get("/admin/auth-check")).andExpect(status().isUnauthorized());
     }
 
