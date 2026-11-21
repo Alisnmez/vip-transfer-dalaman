@@ -2,6 +2,7 @@ import { supportEmail } from '../../features/booking/support'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import { travelGuides } from '../../content/guides'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { useLanguage } from '../../shared/localization/language'
 import { GuestPhotos } from './GuestPhotos'
@@ -348,12 +349,28 @@ export function HomePage() {
       </section>
 
       {language === 'en' && (
-        <section className="border-b border-outline bg-background py-16">
+        <section aria-labelledby="travel-guides-title" className="border-b border-outline bg-background py-16 sm:py-20">
           <div className="mx-auto max-w-container-max px-gutter">
-            <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-secondary">Travel Guides</p>
-            <h2 className="mb-3 text-2xl font-bold text-on-surface">Find your kind of day on the Turquoise Coast</h2>
-            <p className="mb-5 max-w-2xl leading-7 text-on-surface-variant">Discover old towns, Lycian history, quiet hillside places and coastal scenery, then plan a private pickup around the places you want to see.</p>
-            <Link className="font-bold text-secondary underline underline-offset-4" to="/guides">Explore local travel guides</Link>
+            <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <h2 id="travel-guides-title" className="font-headline-lg text-headline-lg text-on-surface">Dalaman transfer and travel guides</h2>
+                <p className="mt-3 max-w-2xl leading-7 text-on-surface-variant">Compare ways to get from Dalaman Airport to Fethiye or Marmaris, or plan a day around Dalyan, Kayaköy and Ölüdeniz.</p>
+              </div>
+              <Link className="shrink-0 self-start rounded-lg border border-outline bg-white px-5 py-3 font-bold text-primary hover:border-secondary sm:self-auto" to="/guides">
+                View all travel guides
+              </Link>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {travelGuides.map((guide) => (
+                <article key={guide.path} className="flex min-w-0 flex-col rounded-2xl border border-outline bg-white p-6 shadow-sm">
+                  <p className="mb-2 text-sm font-semibold text-secondary">{guide.category}</p>
+                  <h3 className="mb-3 text-xl font-bold leading-snug text-on-surface">
+                    <Link className="hover:underline focus-visible:underline" to={guide.path}>{guide.title}</Link>
+                  </h3>
+                  <p className="leading-7 text-on-surface-variant">{guide.cardDescription}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       )}
