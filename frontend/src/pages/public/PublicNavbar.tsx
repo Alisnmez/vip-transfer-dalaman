@@ -12,6 +12,11 @@ const navigationCopy = {
 }
 
 export function PublicNavbar() {
+  const { pathname } = useLocation()
+  return <PublicNavbarContent key={pathname} />
+}
+
+function PublicNavbarContent() {
   const { language, setLanguage } = useLanguage()
   const { pathname } = useLocation()
   const navigate = useNavigate()
@@ -23,11 +28,6 @@ export function PublicNavbar() {
   const mainItems = publicNavItems.filter(item => ['/', '/routes', '/vehicles'].includes(item.to))
   const manageItem = publicNavItems.find(item => item.to === '/booking/lookup')
   const exploreItems = publicNavItems.filter(item => ['/services', '/guides', '/faq', '/reviews', '/contact'].includes(item.to))
-
-  useEffect(() => {
-    setExploreOpen(false)
-    setMenuOpen(false)
-  }, [pathname])
 
   useEffect(() => {
     if (!exploreOpen) return
