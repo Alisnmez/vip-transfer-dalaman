@@ -1,32 +1,76 @@
-// Read-only production SEO smoke audit. Run: node frontend/scripts/audit-live-seo.mjs
-// Uses only GET requests. Never modifies site or Search Console data.
-const origin = process.env.SEO_AUDIT_ORIGIN || 'https://dalamanway.com'
-const expected = new URL(origin)
-if (expected.protocol !== 'https:' || !['dalamanway.com', 'www.dalamanway.com'].includes(expected.hostname)) {
-  throw new Error('Audit origin must be an approved DalamanWay HTTPS host')
+// Read-only SEO audit. Run: node frontend/scripts/audit-live-seo.mjs
+// GET requests only; no Search Console, booking, database, or deployment writes.
+const origin = new URL(process.env.SEO_AUDIT_ORIGIN || 'https://dalamanway.com')
+if (origin.protocol !== 'https:' || !['dalamanway.com', 'www.dalamanway.com'].includes(origin.hostname) ||
+    origin.pathname !== '/' || origin.search || origin.hash || origin.username || origin.password) {
+  throw new Error('SEO audit origin must be an approved DalamanWay HTTPS origin')
 }
-const paths = ['/', '/robots.txt', '/sitemap.xml', '/routes/marmaris', '/routes/gocek',
-  '/de/routes/marmaris', '/ru/routes/marmaris', '/booking', '/admin', '/routes/not-a-real-destination']
+
 let failures = 0
-for (const path of paths) {
+const report = (item) => {
+  if (!item.ok) failures++
+  console.log(JSON.stringify(item))
+}
+const fetchPage = async (path) => {
+  const response = await fetch(new URL(path, origin), {
+    redirect: 'follow',
+    signal: AbortSignal.timeout(15000),
+    headers: { 'user-agent': 'DalamanWay-ReadOnly-SEO-Audit/1.0' },
+  })
+  const url = new URL(response.url)
+  if (url.hostname !== origin.hostname || url.protocol !== 'https:') {
+    throw new Error('Unexpected redirect outside approved HTTPS host')
+  }
+  return { response, body: await response.text() }
+}
+const attribute = (tag, name) => {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return tag.match(new RegExp('(?:^|\\s)' + escaped + '\\s*=\\s*(["\\\'])(.*?)\\1', 'i'))?.[2] || ''
+}
+const tags = (html, name) => [...html.matchAll(new RegExp('<' + name + '\\b[^>]*>', 'gi'))].map(m => m[0])
+const canonicalHref = (html) => tags(html, 'link')
+  .filter(tag => attribute(tag, 'rel').toLowerCase().split(/\s+/).includes('canonical'))
+  .map(tag => attribute(tag, 'href'))
+const robotsContent = (html) => tags(html, 'meta')
+  .filter(tag => attribute(tag, 'name').toLowerCase() === 'robots')
+  .map(tag => attribute(tag, 'content').toLowerCase())
+
+async function check(path, kind) {
   try {
-    const response = await fetch(new URL(path, origin), { redirect: 'follow', signal: AbortSignal.timeout(15000) })
-    const html = await response.text()
-    const isPublicPage = !['/robots.txt', '/sitemap.xml', '/booking', '/admin', '/routes/not-a-real-destination'].includes(path)
-    const canonical = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*>/i)?.[0] || ''
-    const robots = html.match(/<meta\b[^>]*name=["']robots["'][^>]*>/i)?.[0] || ''
-    const ok = path === '/routes/not-a-real-destination' ? response.status === 404
-      : isPublicPage ? response.status === 200 && canonical.includes('dalamanway.com') && !/noindex/i.test(robots)
-      : path === '/booking' || path === '/admin' ? response.status === 200 && /noindex/i.test(robots)
-      : response.status === 200
-    if (!ok) failures++
-    console.log(JSON.stringify({ path, status: response.status, finalUrl: response.url, canonical, robots, ok }))
+    const { response, body } = await fetchPage(path)
+    const canonical = canonicalHref(body)
+    const robots = robotsContent(body)
+    const expectedUrl = new URL(path, origin).href
+    const noindex = robots.some(value => /(?:^|[,\s])noindex(?:[,\s]|$)/i.test(value))
+    const ok = kind === 'public'
+      ? response.status === 200 && canonical.length === 1 && canonical[0] === expectedUrl && !noindex
+      : kind === 'private'
+        ? response.status === 200 && noindex
+        : kind === 'missing'
+          ? response.status === 404
+          : response.status === 200
+    report({ path, kind, status: response.status, canonical, robots, ok })
   } catch (error) {
-    failures++
-    console.error(JSON.stringify({ path, ok: false, error: String(error) }))
+    report({ path, kind, ok: false, error: String(error) })
   }
 }
-if (failures) {
-  console.error(`SEO audit failed: ${failures} checks`)
-  process.exitCode = 1
-} else console.log('SEO audit passed')
+
+let sitemapPaths = []
+try {
+  const { response, body } = await fetchPage('/sitemap.xml')
+  const locations = [...body.matchAll(/<loc>\s*([^<]+)\s*<\/loc>/gi)].map(m => m[1].trim())
+  const urls = locations.map(loc => new URL(loc))
+  const valid = response.status === 200 && urls.length === 28 &&
+    urls.every(url => url.origin === origin.origin && !url.search && !url.hash) &&
+    new Set(urls.map(url => url.pathname)).size === urls.length
+  sitemapPaths = valid ? urls.map(url => url.pathname) : []
+  report({ path: '/sitemap.xml', kind: 'sitemap', status: response.status, urlCount: urls.length, unique: new Set(urls.map(url => url.pathname)).size, ok: valid })
+} catch (error) {
+  report({ path: '/sitemap.xml', kind: 'sitemap', ok: false, error: String(error) })
+}
+for (const path of sitemapPaths) await check(path, 'public')
+await check('/robots.txt', 'resource')
+for (const path of ['/booking', '/admin']) await check(path, 'private')
+for (const path of ['/routes/not-a-real-destination', '/not-a-real-page']) await check(path, 'missing')
+console.log(JSON.stringify({ summary: { sitemapUrlsChecked: sitemapPaths.length, failures, passed: failures === 0 } }))
+if (failures) process.exitCode = 1
