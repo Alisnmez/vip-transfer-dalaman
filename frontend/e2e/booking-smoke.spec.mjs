@@ -62,12 +62,14 @@ async function adminFixture(page, { width = 1280, extraDashboardBookings = false
     }
     if (path === '/admin/session/csrf') return reply({ token: 'fixture-csrf-token' })
     if (path === '/admin/session/logout') {
-      expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
+      expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+      expect(req.headers()['x-admin-request']).toBe('1')
       return route.fulfill({ status: 204, body: '' })
     }
     if (path === '/admin/auth-check') return route.fulfill({ status: 401, contentType: 'application/json', body: '{}' })
     if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method())) {
-      expect(req.headers()['x-csrf-token']).toBe('fixture-csrf-token')
+      expect(req.headers().authorization).toBe(`Basic ${Buffer.from('fixture-admin:fixture-only').toString('base64')}`)
+      expect(req.headers()['x-admin-request']).toBe('1')
     }
     if (path === '/route-prices') {
       const edited = req.postDataJSON()

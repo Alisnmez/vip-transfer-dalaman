@@ -18,6 +18,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.UUID;
 import java.util.List;
@@ -33,6 +34,25 @@ public class SecurityConfig {
         HttpSessionCsrfTokenRepository csrfRepository = new HttpSessionCsrfTokenRepository();
         csrfRepository.setHeaderName("X-CSRF-TOKEN");
         CsrfTokenRequestAttributeHandler csrfHandler = new CsrfTokenRequestAttributeHandler();
+        // An explicit Authorization header plus a non-simple custom header is required
+        // for stateless admin mutations. Browser forms cannot produce this request,
+        // and cross-origin scripts must pass the strict CORS preflight first.
+        // Never exempt cookie-only requests from CSRF validation.
+        RequestMatcher explicitAdminRequest = request -> {
+            String authorization = request.getHeader("Authorization");
+            if (authorization == null || !authorization.startsWith("Basic ")
+                    || !"1".equals(request.getHeader("X-Admin-Request"))) {
+                return false;
+            }
+            return new AntPathRequestMatcher("/bookings/*", "PUT").matches(request)
+                    || new AntPathRequestMatcher("/bookings/*/status", "PATCH").matches(request)
+                    || new AntPathRequestMatcher("/bookings/management-requests/*", "PATCH").matches(request)
+                    || new AntPathRequestMatcher("/bookings/management-requests/*/cancel-booking", "POST").matches(request)
+                    || new AntPathRequestMatcher("/route-prices", "PUT").matches(request)
+                    || new AntPathRequestMatcher("/reviews/moderation", "PATCH").matches(request)
+                    || new AntPathRequestMatcher("/reviews/*/moderation", "PATCH").matches(request)
+                    || new AntPathRequestMatcher("/admin/session/logout", "POST").matches(request);
+        };
         return http
                 .csrf(csrf -> csrf.csrfTokenRepository(csrfRepository)
                         .csrfTokenRequestHandler(csrfHandler)
@@ -40,7 +60,8 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/admin/session/login", "POST"),
                                 new AntPathRequestMatcher("/bookings", "POST"),
                                 new AntPathRequestMatcher("/bookings/management-requests", "POST"),
-                                new AntPathRequestMatcher("/reviews", "POST")))
+                                new AntPathRequestMatcher("/reviews", "POST"),
+                                explicitAdminRequest))
                 .securityContext(context -> context.securityContextRepository(securityContextRepository()))
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
@@ -76,7 +97,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(frontendOrigin));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key", "X-CSRF-TOKEN"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Idempotency-Key", "X-CSRF-TOKEN", "X-Admin-Request"));
         config.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/bookings/**", config);

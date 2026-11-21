@@ -29,9 +29,13 @@ export async function createAdminSession(): Promise<void> {
 }
 
 export async function endAdminSession(): Promise<void> {
-  const token = await fetchCsrfToken()
+  const authorization = getAdminAuthorization()
+  const token = authorization ? null : await fetchCsrfToken()
   const response = await fetch(`${ADMIN_SESSION_URL}/logout`, {
-    method: 'POST', credentials: 'include', headers: { 'X-CSRF-TOKEN': token },
+    method: 'POST', credentials: 'include',
+    headers: authorization
+      ? { Authorization: authorization, 'X-Admin-Request': '1' }
+      : { 'X-CSRF-TOKEN': token! },
   })
   if (!response.ok) throw bookingHttpError(response.status)
 }
@@ -55,17 +59,18 @@ export async function request<T>(url: string, options?: RequestInit, admin = fal
 
   try {
     const method = (options?.method ?? 'GET').toUpperCase()
-    const csrfToken = admin && !['GET', 'HEAD', 'OPTIONS'].includes(method) ? await fetchCsrfToken() : null
-    // Safari may block third-party session cookies on a different API domain.
-    // Explicit Basic credentials are kept only in memory and sent for admin reads
-    // when the cookie cannot be relied on; never persist them in browser storage.
-    const fallbackAuthorization = admin && ['GET', 'HEAD'].includes(method) ? getAdminAuthorization() : null
+    const unsafe = !['GET', 'HEAD', 'OPTIONS'].includes(method)
+    // The server accepts explicitly authenticated admin writes with a custom
+    // preflighted header; cookie-only writes still require their CSRF token.
+    const fallbackAuthorization = admin ? getAdminAuthorization() : null
+    const csrfToken = admin && unsafe && !fallbackAuthorization ? await fetchCsrfToken() : null
     const response = await fetch(url, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
         ...(csrfToken ? { 'X-CSRF-TOKEN': csrfToken } : {}),
         ...(fallbackAuthorization ? { Authorization: fallbackAuthorization } : {}),
+        ...(fallbackAuthorization && unsafe ? { 'X-Admin-Request': '1' } : {}),
         ...options?.headers,
       },
       signal: controller.signal,
