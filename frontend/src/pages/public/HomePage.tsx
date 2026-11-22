@@ -354,16 +354,6 @@ export function HomePage() {
                 src="https://commons.wikimedia.org/wiki/Special:FilePath/%C3%96l%C3%BCdeniz%2C_Blue_Lagoon.jpg?width=1200"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-              <a
-                className="absolute right-2 top-2 rounded bg-primary/80 px-2 py-1 text-[10px] text-white underline underline-offset-2 hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-                href="https://commons.wikimedia.org/wiki/File:%C3%96l%C3%BCdeniz,_Blue_Lagoon.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Photo: Kadirxmert / Wikimedia Commons · CC BY-SA 4.0 (license and attribution details)"
-                aria-label="Ölüdeniz photo by Kadirxmert, Wikimedia Commons, CC BY-SA 4.0 — view attribution and license"
-              >
-                Photo credit
-              </a>
               <div className="absolute bottom-0 left-0 p-stack-md">
                 <h3 className="font-title-md text-white mb-1">{copy.oludeniz}</h3>
                 <Link className="inline-flex rounded-lg bg-white px-4 py-2 text-sm font-bold text-primary hover:bg-background" to="/routes?destination=Oludeniz#all-routes">{copy.viewPrice}</Link>
