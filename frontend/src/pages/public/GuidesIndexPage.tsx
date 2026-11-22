@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { travelGuides } from '../../content/guides'
 import { PublicNavbar } from './PublicNavbar'
+import { useLanguage } from '../../shared/localization/language'
 
 export function GuidesIndexPage() {
+  const { language } = useLanguage()
   return (
     <>
       <PublicNavbar />
@@ -16,14 +18,15 @@ export function GuidesIndexPage() {
           </header>
 
           <div className="grid gap-5 md:grid-cols-2">
-            {travelGuides.map((guide) => (
-              <article className="flex h-full flex-col rounded-2xl border border-outline bg-white p-6 shadow-sm sm:p-8" key={guide.path}>
-                <p className="mb-3 text-xs font-bold uppercase tracking-wide text-secondary">{guide.category}</p>
-                <h2 className="mb-3 text-2xl font-bold leading-snug text-on-surface">{guide.title}</h2>
-                <p className="mb-6 flex-1 leading-7 text-on-surface-variant">{guide.cardDescription}</p>
+            {travelGuides.map((guide) => {
+              const article = 'translations' in guide ? guide.translations[language] : guide
+              return <article className="flex h-full flex-col rounded-2xl border border-outline bg-white p-6 shadow-sm sm:p-8" key={guide.path}>
+                <p className="mb-3 text-xs font-bold uppercase tracking-wide text-secondary">{article.category}</p>
+                <h2 className="mb-3 text-2xl font-bold leading-snug text-on-surface">{article.title}</h2>
+                <p className="mb-6 flex-1 leading-7 text-on-surface-variant">{article.cardDescription}</p>
                 <Link className="font-bold text-secondary underline underline-offset-4" to={guide.path}>Explore this guide <span aria-hidden="true">→</span></Link>
               </article>
-            ))}
+            })}
           </div>
 
           <aside className="mt-10 flex flex-col justify-between gap-5 rounded-2xl bg-primary p-7 text-white sm:flex-row sm:items-center sm:p-9">

@@ -155,8 +155,8 @@ export function BookingConfirmationPage() {
         {receipt !== null ? (
           <section role="status" className="mx-auto max-w-2xl rounded-2xl border border-green-200 bg-white p-10 text-center shadow-lg">
             <div className="mb-5 text-6xl text-green-600" aria-hidden="true">✓</div>
-            <h1 className="text-3xl font-bold text-admin-primary mb-3">{t("Your Booking Request Was Received!")}</h1>
-            <p className="mb-3 text-on-surface-variant">{t("Your transfer request is pending confirmation. Please save your booking reference.")}</p>
+            <h1 className="text-3xl font-bold text-admin-primary mb-3">{t("Your Transfer Booking Details Are Received!")}</h1>
+            <p className="mb-3 text-on-surface-variant">{t("Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.")}</p>
             <p className="mb-6 text-sm text-on-surface-variant">{import.meta.env.VITE_EMAIL_NOTIFICATIONS_ENABLED === 'true' ? t("Booking updates will be sent by email. Please check your inbox and spam folder, and keep this reference.") : t("Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.")}</p>
             <p className="text-sm uppercase tracking-wide">{t("Booking Reference")}</p>
             <p className="text-4xl font-bold text-admin-primary mb-8">#{receipt.id}</p>
@@ -191,7 +191,7 @@ export function BookingConfirmationPage() {
               <p><strong>{t("Destination:")}</strong> {t(display(receipt.dropOffLocation))}</p>
               {receipt.returnSchedule && <p><strong>{t("Return:")}</strong> {receipt.returnSchedule} ({receipt.dropOffLocation} → {receipt.pickUpLocation})</p>}
               <p><strong>{t("Schedule:")}</strong> {receipt.schedule}</p>
-              <p className="text-sm text-on-surface-variant">{t("Keep this reference for your records. Your request is awaiting confirmation.")}</p>
+              <p className="text-sm text-on-surface-variant">{t("Keep this reference for your records. Our team will confirm your transfer arrangements by email.")}</p>
             </div>
             <Link to="/" className="mt-8 inline-block rounded-full bg-admin-primary px-8 py-3 text-white">{t("Back to Home")}</Link>
           </section>
