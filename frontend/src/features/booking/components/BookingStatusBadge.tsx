@@ -2,6 +2,7 @@ import { bookingStatus } from '../formatters'
 
 const colors: Record<string, string> = {
   PENDING: 'bg-amber-100 text-amber-950',
+  'New Request': 'bg-amber-100 text-amber-950',
   CONFIRMED: 'bg-emerald-100 text-emerald-900',
   COMPLETED: 'bg-slate-200 text-slate-700',
   CANCELLED: 'bg-rose-100 text-rose-900',
