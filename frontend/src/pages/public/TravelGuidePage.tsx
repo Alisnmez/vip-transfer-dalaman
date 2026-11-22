@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom'
 import { travelGuides } from '../../content/guides'
 import { PublicNavbar } from './PublicNavbar'
+import { useLanguage } from '../../shared/localization/language'
 
 type Guide = (typeof travelGuides)[number]
 
 export function TravelGuidePage({ guide }: { guide: Guide }) {
+  const { language } = useLanguage()
+  const article = 'translations' in guide ? guide.translations[language] : guide
   return (
     <>
       <PublicNavbar />
@@ -15,14 +18,14 @@ export function TravelGuidePage({ guide }: { guide: Guide }) {
             <Link className="underline" to="/guides">Travel Guides</Link> <span aria-hidden="true">/</span> {guide.destination}
           </nav>
           <header className="mb-10">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">{guide.category}</p>
-            <h1 className="mb-5 text-4xl font-bold leading-tight text-on-surface sm:text-5xl">{guide.title}</h1>
-            <p className="text-lg leading-8 text-on-surface-variant">{guide.intro}</p>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-secondary">{article.category}</p>
+            <h1 className="mb-5 text-4xl font-bold leading-tight text-on-surface sm:text-5xl">{article.title}</h1>
+            <p className="text-lg leading-8 text-on-surface-variant">{article.intro}</p>
             <p className="mt-4 text-sm text-on-surface-variant">Updated: {guide.reviewed} · Check current opening information and local notices before visiting.</p>
           </header>
 
           <div className="space-y-10 text-on-surface">
-            {guide.sections.map((section) => (
+            {article.sections.map((section) => (
               <section key={section.heading}>
                 <h2 className="mb-4 text-2xl font-bold">{section.heading}</h2>
                 {'paragraphs' in section && section.paragraphs?.map((paragraph) => <p className="mb-4 leading-7 text-on-surface-variant" key={paragraph}>{paragraph}</p>)}
