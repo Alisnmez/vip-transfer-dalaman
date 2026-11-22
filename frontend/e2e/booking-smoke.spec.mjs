@@ -427,8 +427,8 @@ test('successful booking clears both drafts and keeps the receipt in the current
   await page.getByRole('checkbox', { name: 'I confirm that all information provided is correct.' }).check()
   await page.getByRole('button', { name: 'Submit booking request' }).click()
   await expect(page.getByText('#902', { exact: true })).toBeVisible()
-  await expect(page.getByRole('heading', { name: 'Your Booking Request Was Received!' })).toBeVisible()
-  await expect(page.getByText('Your transfer request is pending confirmation. Please save your booking reference.')).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Your Transfer Booking Details Are Received!' })).toBeVisible()
+  await expect(page.getByText('Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.')).toBeVisible()
   const storage = await page.evaluate(() => ({
     transfer: sessionStorage.getItem('bookingTransferInfo'),
     passenger: sessionStorage.getItem('bookingPassengerInfo'),
