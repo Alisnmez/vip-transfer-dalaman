@@ -67,7 +67,7 @@ class BookingEmailIntegrationTest {
         assertEquals(0, count("PENDING"));
     }
 
-    @Test void customerReceivesOnePendingAndOneConfirmedMessageForTheSameBooking() throws Exception {
+    @Test void customerReceivesBookingDetailsThenConfirmedMessageForTheSameBooking() throws Exception {
         when(gateway.send(anyString(), anyString())).thenReturn("provider-test-id");
         String key = UUID.randomUUID().toString();
         var dto = request();
@@ -85,10 +85,11 @@ class BookingEmailIntegrationTest {
             if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
         }
         assertEquals(1, messages.size());
-        assertEquals("DalamanWay | We received your transfer request (#" + booking.getId() + ")",
+        assertEquals("DalamanWay | Your transfer booking details (#" + booking.getId() + ")",
                 messages.getFirst().path("subject").asText());
-        assertTrue(messages.getFirst().path("text").asText().contains("not yet confirmed"));
-        assertTrue(messages.getFirst().path("html").asText().contains("PENDING"));
+        assertTrue(messages.getFirst().path("text").asText().contains("reviewing the arrangements"));
+        assertTrue(messages.getFirst().path("html").asText().contains("BOOKING RECEIVED"));
+        assertFalse(messages.getFirst().path("html").asText().contains(">PENDING<"));
 
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         bookings.updateStatus(booking.getId(), "CONFIRMED");
