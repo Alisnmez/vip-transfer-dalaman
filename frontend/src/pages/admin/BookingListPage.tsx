@@ -51,7 +51,7 @@ export function BookingListPage() {
           <label className="text-sm font-semibold">Status
             <select aria-label="Status" value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
               <option value="all">All statuses</option>
-              {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{status.replaceAll("_", " ")}</option>)}
+              {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{status === "PENDING" ? "New Requests" : status.replaceAll("_", " ")}</option>)}
             </select>
           </label>
           <label className="text-sm font-semibold">Transfer date from (Turkey)
