@@ -8,6 +8,6 @@ const colors: Record<string, string> = {
 }
 
 export function BookingStatusBadge({ status }: { status?: string | null }) {
-  const label = bookingStatus(status)
+  const label = bookingStatus(status) === 'PENDING' ? 'New Request' : bookingStatus(status)
   return <span className={`inline-flex shrink-0 rounded-full px-3 py-1 text-xs font-bold ${colors[label] ?? 'bg-slate-100 text-slate-800'}`}>{label}</span>
 }
