@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { travelGuides } from '../../content/guides'
 import { PublicNavbar } from './PublicNavbar'
 import { useLanguage } from '../../shared/localization/language'
@@ -8,6 +9,11 @@ type Guide = (typeof travelGuides)[number]
 export function TravelGuidePage({ guide }: { guide: Guide }) {
   const { language } = useLanguage()
   const article = 'translations' in guide ? guide.translations[language] : guide
+  useEffect(() => {
+    document.title = `${article.title} | DalamanWay`
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    if (description) description.content = article.description
+  }, [article])
   return (
     <>
       <PublicNavbar />
