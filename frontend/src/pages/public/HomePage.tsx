@@ -46,6 +46,14 @@ const homeCopy = {
     faq: "FAQ",
     reviews: "Customer Reviews",
     rights: "DalamanWay. All rights reserved.",
+    tagline: "Private airport transfers from Dalaman to the Turquoise Coast.",
+    explore: "Explore",
+    help: "Customer support",
+    routesLabel: "Routes & Prices",
+    guidesLabel: "Travel Guides",
+    manage: "Manage Booking",
+    booking: "Book a Transfer",
+    note: "Your journey, carefully arranged.",
     photo: "Ölüdeniz photo:",
     marinaAlt: "Fethiye Marina",
     gocekAlt: "Gocek",
@@ -85,6 +93,14 @@ const homeCopy = {
     faq: "Häufige Fragen",
     reviews: "Kundenbewertungen",
     rights: "DalamanWay. Alle Rechte vorbehalten.",
+    tagline: "Private Flughafentransfers von Dalaman an die Türkisküste.",
+    explore: "Entdecken",
+    help: "Kundenservice",
+    routesLabel: "Strecken & Preise",
+    guidesLabel: "Reiseführer",
+    manage: "Buchung verwalten",
+    booking: "Transfer buchen",
+    note: "Ihre Fahrt, sorgfältig geplant.",
     photo: "Foto von Ölüdeniz:",
     marinaAlt: "Jachthafen von Fethiye",
     gocekAlt: "Göcek",
@@ -124,6 +140,14 @@ const homeCopy = {
     faq: "Частые вопросы",
     reviews: "Отзывы клиентов",
     rights: "DalamanWay. Все права защищены.",
+    tagline: "Индивидуальные трансферы из аэропорта Даламан на Бирюзовое побережье.",
+    explore: "Узнайте больше",
+    help: "Поддержка клиентов",
+    routesLabel: "Маршруты и цены",
+    guidesLabel: "Путеводители",
+    manage: "Управление бронированием",
+    booking: "Забронировать трансфер",
+    note: "Ваша поездка продумана до мелочей.",
     photo: "Фото Олюдениза:",
     marinaAlt: "Яхтенная гавань Фетхие",
     gocekAlt: "Гёджек",
@@ -412,28 +436,39 @@ export function HomePage() {
 
       <HomeReviewStrip />
 
-      <footer className="bg-primary border-t border-primary/20 py-stack-lg">
-        <div className="max-w-container-max mx-auto px-gutter">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-stack-lg mb-stack-lg">
-            <Link to="/" aria-label={copy.homeLabel} className="inline-flex items-center">
-              <img src="/dalamanway-logo-light.svg" alt={copy.logo} className="h-16 w-auto max-w-[270px] object-contain sm:h-20 sm:max-w-[340px]" />
-            </Link>
-            <div className="flex flex-wrap gap-stack-lg">
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/services">{copy.services}</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/vehicles">{copy.fleet}</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/faq">{copy.faq}</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/reviews">{copy.reviews}</Link>
-              <Link className="text-white/60 hover:text-white transition-colors font-body-md" to="/contact">{copy.contact}</Link>
+      <footer className="border-t border-white/10 bg-primary text-white">
+        <div className="mx-auto max-w-container-max px-gutter">
+          <div className="grid gap-10 py-14 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-5">
+              <Link to="/" aria-label={copy.homeLabel} className="inline-flex items-center">
+                <img src="/dalamanway-logo-light.svg" alt={copy.logo} className="h-16 w-auto max-w-[270px] object-contain" />
+              </Link>
+              <p className="mt-4 max-w-sm text-sm leading-7 text-white/75">{copy.tagline}</p>
+              <p className="mt-3 text-sm font-medium text-white/90">{copy.note}</p>
             </div>
+            <nav aria-label={copy.explore} className="md:col-span-3">
+              <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">{copy.explore}</h2>
+              <ul className="space-y-3 text-sm text-white/75">
+                <li><Link className="hover:text-white focus-visible:underline" to="/routes">{copy.routesLabel}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/vehicles">{copy.fleet}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/services">{copy.services}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/guides">{copy.guidesLabel}</Link></li>
+              </ul>
+            </nav>
+            <nav aria-label={copy.help} className="md:col-span-4">
+              <h2 className="mb-4 text-sm font-bold uppercase tracking-widest text-white">{copy.help}</h2>
+              <ul className="space-y-3 text-sm text-white/75">
+                <li><Link className="hover:text-white focus-visible:underline" to="/booking/lookup">{copy.manage}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/faq">{copy.faq}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/reviews">{copy.reviews}</Link></li>
+                <li><Link className="hover:text-white focus-visible:underline" to="/contact">{copy.contact}</Link></li>
+              </ul>
+              <a className="mt-5 inline-block break-all text-sm font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white" href={`mailto:${supportEmail}`}>{supportEmail}</a>
+            </nav>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 pb-stack-md">
-            <a className="text-white/80 hover:text-white underline underline-offset-4" href={`mailto:${supportEmail}`}>{supportEmail}</a>
-          </div>
-          <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-stack-md">
-            <p className="text-white/40 font-body-md">
-              © {new Date().getFullYear()} {copy.rights}
-            </p>
-
+          <div className="flex flex-col gap-4 border-t border-white/15 py-6 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} {copy.rights}</p>
+            <Link className="inline-flex w-fit items-center justify-center rounded-md bg-secondary px-5 py-3 font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" to="/booking">{copy.booking}</Link>
           </div>
         </div>
       </footer>
