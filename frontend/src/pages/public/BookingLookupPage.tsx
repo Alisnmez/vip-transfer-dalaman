@@ -30,7 +30,7 @@ const copy = {
     policyTitle: 'Our change and cancellation policy',
     policy: 'Request a free change or cancellation at least 24 hours before the affected pickup time (Türkiye local time). Changes depend on availability; any fare difference will be shown before you approve it. Requests made within 24 hours are still accepted, but availability and any applicable charge must be confirmed by our team. Sending a request does not change or cancel the booking. Wait for written confirmation.',
     policyLink: 'Read the full policy',
-    security: 'For your privacy, this page does not display booking details. We match the reference to the email saved on the booking. Never send card details, passwords or verification codes.',
+    security: 'For your privacy, booking details are shown only when the reference and booking email match. Never share card details, passwords or verification codes.',
     newBooking: 'New booking', contact: 'Contact us',
   },
   de: {
@@ -51,7 +51,7 @@ const copy = {
     policyTitle: 'Regeln für Änderungen und Stornierungen',
     policy: 'Änderungs- und Stornierungswünsche sind bis mindestens 24 Stunden vor der jeweiligen Abholzeit (Ortszeit Türkiye) kostenlos möglich. Änderungen hängen von der Verfügbarkeit ab; einen möglichen Preisunterschied zeigen wir vor Ihrer Zustimmung. Anfragen innerhalb von 24 Stunden nehmen wir weiterhin an; Verfügbarkeit und mögliche Kosten bestätigt unser Team. Die Anfrage allein ändert oder storniert die Buchung nicht. Warten Sie auf unsere schriftliche Bestätigung.',
     policyLink: 'Vollständige Richtlinie lesen',
-    security: 'Aus Datenschutzgründen zeigen wir hier keine Buchungsdetails an. Wir gleichen die Buchungsnummer mit der bei der Buchung gespeicherten E-Mail-Adresse ab. Senden Sie niemals Kartendaten, Passwörter oder Bestätigungscodes.',
+    security: 'Zum Schutz Ihrer Daten werden Buchungsdetails nur bei Übereinstimmung von Buchungsnummer und E-Mail-Adresse angezeigt. Senden Sie niemals Kartendaten, Passwörter oder Bestätigungscodes.',
     newBooking: 'Neue Buchung', contact: 'Kontakt',
   },
   ru: {
@@ -72,7 +72,7 @@ const copy = {
     policyTitle: 'Правила изменения и отмены',
     policy: 'Запрос на бесплатное изменение или отмену нужно отправить не позднее чем за 24 часа до соответствующего времени подачи автомобиля (местное время Турции). Изменения зависят от наличия автомобиля; возможную разницу в цене мы сообщим до вашего согласия. Запросы менее чем за 24 часа также принимаются, но наличие и возможные расходы подтвердит наша команда. Отправка запроса сама по себе не меняет и не отменяет бронирование. Дождитесь письменного подтверждения.',
     policyLink: 'Полные правила',
-    security: 'Для защиты данных эта страница не показывает сведения о поездке. Мы сверяем номер с адресом электронной почты, сохранённым при бронировании. Не отправляйте данные карты, пароли или коды подтверждения.',
+    security: 'Для защиты данных сведения о поездке отображаются только при совпадении номера бронирования и адреса электронной почты. Не отправляйте данные карты, пароли или коды подтверждения.',
     newBooking: 'Новое бронирование', contact: 'Связаться с нами',
   },
 }
