@@ -120,6 +120,11 @@ export function BookingConfirmationPage() {
         specialRequests: passengerData.specialRequests || '',
         tripType: transferData.tripType,
       })
+      if (typeof booking.reference !== 'string' || !/^[A-Z]{4}[0-9]{3}$/.test(booking.reference)) {
+        setSubmissionUncertain(true)
+        setError('Your booking request was received, but its reference could not be displayed. Please contact support; do not submit another booking.')
+        return
+      }
       const savedReceipt: BookingReceipt = {
         id: booking.id,
         reference: booking.reference,
@@ -160,13 +165,13 @@ export function BookingConfirmationPage() {
             <p className="mb-3 text-on-surface-variant">{t("Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.")}</p>
             <p className="mb-6 text-sm text-on-surface-variant">{import.meta.env.VITE_EMAIL_NOTIFICATIONS_ENABLED === 'true' ? t("Booking updates will be sent by email. Please check your inbox and spam folder, and keep this reference.") : t("Automatic confirmation emails are not available yet. Please keep this reference and contact us if you need an update.")}</p>
             <p className="text-sm uppercase tracking-wide">{t("Booking Reference")}</p>
-            <p className="text-4xl font-bold text-admin-primary mb-8">{receipt.reference ?? `#${receipt.id}`}</p>
+            <p className="text-4xl font-bold text-admin-primary mb-8">{receipt.reference}</p>
             <div className="mb-6 flex flex-wrap justify-center gap-3">
               <button
                 className="rounded-lg border border-admin-primary px-5 py-2 font-semibold text-admin-primary hover:bg-slate-100"
                 onClick={() => {
                   if (navigator.clipboard?.writeText) {
-                    void navigator.clipboard.writeText((receipt.reference ?? `#${receipt.id}`)).catch(() => setError('Unable to copy automatically. Please select the booking reference above.'))
+                    void navigator.clipboard.writeText((receipt.reference)).catch(() => setError('Unable to copy automatically. Please select the booking reference above.'))
                   } else {
                     setError('Automatic copy is unavailable. Please select the booking reference above.')
                   }
@@ -177,7 +182,7 @@ export function BookingConfirmationPage() {
               </button>
               <a
                 className="rounded-lg bg-admin-primary px-5 py-2 font-semibold text-white"
-                href={`mailto:${supportEmail}?subject=${encodeURIComponent(`Booking request ${receipt.reference ?? `#${receipt.id}`}`)}&body=${encodeURIComponent(`Hello, I am contacting you about booking request #${receipt.id}.\n\nPlease let me know the status of my request.\n\nThank you.`)}`}
+                href={`mailto:${supportEmail}?subject=${encodeURIComponent(`Booking request ${receipt.reference}`)}&body=${encodeURIComponent(`Hello, I am contacting you about booking request ${receipt.reference}.\n\nPlease let me know the status of my request.\n\nThank you.`)}`}
               >
                 {t("Contact About This Booking")}
               </a>
