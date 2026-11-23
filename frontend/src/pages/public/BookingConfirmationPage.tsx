@@ -284,7 +284,7 @@ export function BookingConfirmationPage() {
                 <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
-                {t("This is the published fare for your selected route and vehicle. There are no extra charges. Water and soft drinks are complimentary.")}
+                {t("This is the published fare for your selected route and vehicle. There are no extra charges.")}
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
