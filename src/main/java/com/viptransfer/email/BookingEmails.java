@@ -154,7 +154,7 @@ public class BookingEmails {
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
         String status = "RECEIVED".equals(event) ? "BOOKING REQUEST SUCCESSFUL" : event;
-        String statusColor = switch (status) {
+        String statusColor = switch (event) {
             case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED" -> "#2A9D8F";
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
