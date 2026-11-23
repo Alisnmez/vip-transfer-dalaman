@@ -31,7 +31,7 @@ public class BookingEmails {
         String email = booking.getEmail();
         if (email == null || email.isBlank() || email.toLowerCase(java.util.Locale.ROOT).endsWith(".invalid")) return;
         String description = switch (event) {
-            case "RECEIVED" -> "Thank you for choosing DalamanWay. We have received your transfer request. Please review your journey details below and keep your booking reference. Our team will arrange your transfer.";
+            case "RECEIVED" -> "Thank you for choosing DalamanWay! Your booking request has been successfully submitted. Your journey details are listed below. Please keep your booking reference for future communication. Our team will arrange your transfer.";
             case "CONFIRMED" -> "Your transfer booking has been confirmed by the operator.";
             case "CANCELLED" -> "Your booking has been cancelled by the operator.";
             case "PENDING" -> "Your booking is now pending operator confirmation.";
@@ -49,7 +49,7 @@ public class BookingEmails {
                 + "\n\nNo online payment has been collected. Payment terms are confirmed by the operator."
                 + "\nFor questions, reply to this email quoting your booking reference.\nhttps://dalamanway.com";
         String subject = switch (event) {
-            case "RECEIVED" -> "Your transfer booking details";
+            case "RECEIVED" -> "Your booking request was successfully submitted";
             case "CONFIRMED" -> "Your airport transfer is confirmed";
             case "CANCELLED" -> "Your transfer booking has been cancelled";
             case "PENDING" -> "Update: your booking is awaiting confirmation";
@@ -145,7 +145,7 @@ public class BookingEmails {
 
     private static String customerHtml(Booking booking, String event, String description) {
         String headline = switch (event) {
-            case "RECEIVED" -> "Your transfer booking details";
+            case "RECEIVED" -> "Your booking request was successfully submitted";
             case "CONFIRMED" -> "Your transfer is confirmed";
             case "CANCELLED" -> "Your booking has been cancelled";
             case "PENDING" -> "Your booking is awaiting confirmation";
@@ -153,9 +153,9 @@ public class BookingEmails {
             case "UPDATED" -> "Your transfer details have been updated";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
-        String status = "RECEIVED".equals(event) ? "BOOKING RECEIVED" : event;
+        String status = "RECEIVED".equals(event) ? "BOOKING REQUEST SUCCESSFUL" : event;
         String statusColor = switch (status) {
-            case "CONFIRMED", "COMPLETED", "UPDATED" -> "#087F69";
+            case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED" -> "#2A9D8F";
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
         };
