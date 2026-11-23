@@ -75,13 +75,13 @@ public class BookingEmails {
         String email = booking.getEmail();
         if (email != null && !email.isBlank() && !email.toLowerCase(Locale.ROOT).endsWith(".invalid")) {
             enqueue(booking.getId(), event, email,
-                    "DalamanWay | We received your booking " + kind + " request (#" + booking.getId() + ")",
+                    "DalamanWay | We received your booking " + kind + " request (" + booking.getReference() + ")",
                     customerText, null);
         }
         if (settings.operator() != null && !settings.operator().isBlank()) {
             String operatorText = "New " + kind + " request received in Manage My Booking.\n\n"
                     + "Request ID: " + request.getId()
-                    + "\nBooking reference: #" + booking.getId()
+                    + "\nBooking reference: " + booking.getReference()
                     + "\nCustomer: " + booking.getCustomerName()
                     + "\nCustomer email: " + booking.getEmail()
                     + "\nPhone: " + booking.getPhoneNumber()
@@ -120,13 +120,13 @@ public class BookingEmails {
         String description = "Your transfer details have been updated. Please review the changes below. "
                 + "If you did not request this change, reply to this email.";
         String text = "DalamanWay\n\n" + description + "\n\nChanges:\n" + changes
-                + "\n\nBooking reference: #" + booking.getId()
+                + "\n\nBooking reference: " + booking.getReference()
                 + "\nNo online payment has been collected. Payment arrangements are confirmed by our team.";
         String html = customerHtml(booking, "UPDATED", description)
                 .replace("DETAIL_CHANGES", "<div style='white-space:pre-line;padding:14px;background:#f1f5f9;color:#1E3A5F;font-size:14px'>"
                         + escape(changes).replace("\n", "<br>") + "</div>");
         enqueue(booking.getId(), "UPDATED", booking.getEmail(),
-                "DalamanWay | Your transfer details have been updated (#" + booking.getId() + ")", text, html);
+                "DalamanWay | Your transfer details have been updated (" + booking.getReference() + ")", text, html);
     }
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("EEE, d MMM yyyy 'at' HH:mm", Locale.UK);
