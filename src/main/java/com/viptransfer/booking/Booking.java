@@ -42,6 +42,11 @@ public class Booking {
     private String tripType;
     private String status = "PENDING";
 
+    @jakarta.persistence.Column(name = "reference", length = 7, unique = true)
+    private String reference;
+
+    public void setReference(String reference) { this.reference = reference; }
+
     @jakarta.persistence.Column(name = "created_at", updatable = false)
     private Instant createdAt;
 
@@ -79,7 +84,7 @@ public class Booking {
     }
 
     public String getReference() {
-        return id == null ? null : BookingReference.fromId(id);
+        return reference != null ? reference : (id == null ? null : BookingReference.fromId(id));
     }
 
     public Long getId() {
