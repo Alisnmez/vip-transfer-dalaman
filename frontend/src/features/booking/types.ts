@@ -46,6 +46,7 @@ export type BookingRequest = {
 export type BookingManagementRequest = {
   id: number
   bookingId: number
+  bookingReference: string | null
   requestType: 'CHANGE' | 'CANCEL'
   message: string
   status: 'NEW' | 'IN_PROGRESS' | 'RESOLVED' | 'DECLINED'
