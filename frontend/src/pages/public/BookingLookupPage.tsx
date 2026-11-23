@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { isValidEmail } from '../../shared/utils/inputValidation'
+import { BookingApiError } from '../../features/booking/api/errors'
 import { submitBookingManagementRequest } from '../../features/booking/api'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
@@ -18,9 +19,10 @@ const copy = {
     cancelPlaceholder: 'Please confirm that you would like to cancel and add any details we should know.',
     sendChange: 'Send change request', sendCancel: 'Send cancellation request', sending: 'Sending request…',
     referenceError: 'Enter your booking reference (4 letters followed by 3 numbers).', emailRequired: 'Enter the email address used for your booking.', emailInvalid: 'Enter a valid email address.', messageError: 'Describe the change or cancellation you are requesting.',
+    bookingNotFound: 'No booking matches this reference and email address. Check both details and try again.', bookingUnavailable: 'This booking cannot accept a new request right now. It may already have an open request or the pickup date may have passed.',
     required: 'Complete all fields with the details saved for the booking.',
     successTitle: 'Request submitted',
-    success: 'If the reference and email match, we have recorded your request and will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.',
+    success: 'Your request has been recorded. We will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.',
     another: 'Submit another request',
     error: 'We could not send the request. Please try again. If the issue continues, email our team with your booking reference.',
     policyTitle: 'Our change and cancellation policy',
@@ -38,9 +40,10 @@ const copy = {
     cancelPlaceholder: 'Bestätigen Sie bitte Ihren Stornierungswunsch und ergänzen Sie wichtige Hinweise.',
     sendChange: 'Änderungsanfrage senden', sendCancel: 'Stornierungsanfrage senden', sending: 'Anfrage wird gesendet…',
     referenceError: 'Geben Sie Ihre Buchungsnummer ein (4 Buchstaben und 3 Ziffern).', emailRequired: 'Geben Sie die E-Mail-Adresse Ihrer Buchung ein.', emailInvalid: 'Geben Sie eine gültige E-Mail-Adresse ein.', messageError: 'Beschreiben Sie Ihre Änderungs- oder Stornierungsanfrage.',
+    bookingNotFound: 'Keine Buchung stimmt mit dieser Buchungsnummer und E-Mail-Adresse überein. Bitte überprüfen Sie beide Angaben.', bookingUnavailable: 'Für diese Buchung kann derzeit keine neue Anfrage gestellt werden. Möglicherweise liegt bereits eine offene Anfrage vor oder die Abholzeit ist vorbei.',
     required: 'Bitte füllen Sie alle Felder mit den bei der Buchung verwendeten Angaben aus.',
     successTitle: 'Anfrage übermittelt',
-    success: 'Wenn Buchungsnummer und E-Mail übereinstimmen, speichern wir Ihre Anfrage und schreiben an die in der Buchung hinterlegte Adresse. Ihre Buchung bleibt unverändert, bis wir das Ergebnis schriftlich bestätigen.',
+    success: 'Ihre Anfrage wurde gespeichert. Wir schreiben an die in der Buchung hinterlegte Adresse. Ihre Buchung bleibt unverändert, bis wir das Ergebnis schriftlich bestätigen.',
     another: 'Weitere Anfrage senden',
     error: 'Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut. Falls das Problem bleibt, schreiben Sie uns mit Ihrer Buchungsnummer.',
     policyTitle: 'Regeln für Änderungen und Stornierungen',
@@ -58,9 +61,10 @@ const copy = {
     cancelPlaceholder: 'Подтвердите, что хотите отменить поездку, и добавьте важные сведения.',
     sendChange: 'Отправить запрос на изменение', sendCancel: 'Отправить запрос на отмену', sending: 'Отправка запроса…',
     referenceError: 'Введите номер бронирования (4 буквы и 3 цифры).', emailRequired: 'Введите адрес электронной почты из бронирования.', emailInvalid: 'Введите действительный адрес электронной почты.', messageError: 'Опишите необходимое изменение или отмену.',
+    bookingNotFound: 'Бронирование с таким номером и адресом электронной почты не найдено. Проверьте оба поля.', bookingUnavailable: 'Сейчас нельзя отправить новый запрос для этого бронирования. Возможно, запрос уже открыт или время поездки прошло.',
     required: 'Заполните все поля данными, указанными при бронировании.',
     successTitle: 'Запрос отправлен',
-    success: 'Если номер и адрес электронной почты совпадают, мы зарегистрировали запрос и напишем на адрес из бронирования. Бронирование не изменится, пока мы письменно не подтвердим результат.',
+    success: 'Ваш запрос зарегистрирован. Мы напишем на адрес из бронирования. Бронирование не изменится, пока мы письменно не подтвердим результат.',
     another: 'Отправить ещё один запрос',
     error: 'Не удалось отправить запрос. Попробуйте ещё раз. Если проблема повторится, напишите нам и укажите номер бронирования.',
     policyTitle: 'Правила изменения и отмены',
@@ -109,8 +113,14 @@ export function BookingLookupPage() {
       setEmail('')
       setMessage('')
       setRequestKey(createRequestKey())
-    } catch {
-      setError(text.error)
+    } catch (failure) {
+      if (failure instanceof BookingApiError && failure.status === 404) {
+        setFieldErrors(previous => ({ ...previous, reference: text.bookingNotFound }))
+      } else if (failure instanceof BookingApiError && failure.status === 409) {
+        setError(text.bookingUnavailable)
+      } else {
+        setError(text.error)
+      }
     } finally {
       setBusy(false)
     }
