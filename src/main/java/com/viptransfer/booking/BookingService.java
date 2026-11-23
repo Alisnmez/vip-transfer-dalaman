@@ -43,6 +43,27 @@ public class BookingService {
         return createBooking(dto, null);
     }
 
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public com.viptransfer.booking.dto.PublicBookingView publicLookup(
+            com.viptransfer.booking.dto.PublicBookingLookupDto dto) {
+        String reference = dto.bookingReference().strip().toUpperCase(java.util.Locale.ROOT);
+        Booking matched = bookingRepository.findByReference(reference).orElse(null);
+        if (matched == null) {
+            Long legacyId = BookingReference.toId(reference);
+            if (legacyId != null) {
+                Booking legacy = bookingRepository.findById(legacyId).orElse(null);
+                if (legacy != null && reference.equals(legacy.getReference())) matched = legacy;
+            }
+        }
+        if (matched == null || matched.getEmail() == null ||
+                !matched.getEmail().strip().equalsIgnoreCase(dto.email().strip())) {
+            throw new org.springframework.web.server.ResponseStatusException(
+                    org.springframework.http.HttpStatus.NOT_FOUND,
+                    "No booking matches this reference and email address.");
+        }
+        return com.viptransfer.booking.dto.PublicBookingView.from(matched);
+    }
+
     private static final int MAX_REFERENCE_INSERT_ATTEMPTS = 10;
 
     public Booking createBooking(BookingRequestDto dto, String key) {
