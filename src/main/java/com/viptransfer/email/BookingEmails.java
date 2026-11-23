@@ -90,7 +90,7 @@ public class BookingEmails {
                     + "\n\nCustomer's request:\n" + request.getMessage()
                     + "\n\nReview and update the request in the admin panel: https://dalamanway.com/admin/management-requests";
             enqueue(booking.getId(), event, settings.operator(),
-                    "[Manage booking] " + kind + " request #" + request.getId() + " for booking #" + booking.getId(),
+                    "[Manage booking] " + kind + " request #" + request.getId() + " for booking " + booking.getReference(),
                     operatorText, null);
         }
     }
