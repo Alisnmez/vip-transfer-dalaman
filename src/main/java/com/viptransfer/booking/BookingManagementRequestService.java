@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class BookingManagementRequestService {
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BookingManagementRequestService.class);
-    private static final String PUBLIC_MESSAGE = "If the booking reference and email match, we have recorded your request and will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.";
+    private static final String PUBLIC_MESSAGE = "Your request has been recorded. Your booking remains unchanged until we confirm the outcome in writing.";
     private final BookingRepository bookingRepository;
     private final BookingManagementRequestRepository requestRepository;
     private final BookingEmails bookingEmails;
@@ -42,7 +42,7 @@ public class BookingManagementRequestService {
         }
 
         Long bookingId = BookingReference.toId(dto.getBookingReference());
-        if (bookingId == null) return Map.of("message", PUBLIC_MESSAGE);
+        if (bookingId == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No booking matches this reference and email address.");
 
         Booking booking = bookingRepository.findByIdForUpdate(bookingId).orElse(null);
         if (requestRepository.findByIdempotencyKey(idempotencyKey).isPresent()) {
@@ -56,13 +56,16 @@ public class BookingManagementRequestService {
                 || !booking.getEmail().strip().equalsIgnoreCase(dto.getEmail().strip())
                 || !Set.of("PENDING", "CONFIRMED").contains(booking.getStatus() == null ? "PENDING" : booking.getStatus())
                 || !hasUpcomingLeg) {
-            // Keep the public response identical so booking references cannot be enumerated.
-            log.info("Management request not recorded: booking ID {} failed eligibility or email validation.", bookingId);
-            return Map.of("message", PUBLIC_MESSAGE);
+            log.info("Management request rejected: booking ID {} failed eligibility or email validation.", bookingId);
+            if (booking == null || booking.getEmail() == null || !booking.getEmail().strip().equalsIgnoreCase(dto.getEmail().strip())) {
+                // Do not reveal whether the reference or email is the incorrect value.
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No booking matches this reference and email address.");
+            }
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "This booking is not eligible for changes or cancellation requests.");
         }
         if (requestRepository.existsByBookingIdAndStatusIn(bookingId, List.of("NEW", "IN_PROGRESS"))) {
             log.info("Management request not recorded: booking ID {} already has an open request.", bookingId);
-            return Map.of("message", PUBLIC_MESSAGE);
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "This booking already has an open request.");
         }
 
         BookingManagementRequest request = new BookingManagementRequest();
