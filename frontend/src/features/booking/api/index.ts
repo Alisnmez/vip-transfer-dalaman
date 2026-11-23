@@ -1,4 +1,4 @@
-import type { Booking, BookingManagementRequest, BookingManagementRequestSubmission, BookingRequest } from '../types'
+import type { Booking, BookingManagementRequest, BookingManagementRequestSubmission, BookingRequest, PublicBookingView } from '../types'
 import { getAdminAuthorization } from '../adminCredentials'
 import { createSingleFlight } from '../singleFlight'
 import { createRetryKeyStore } from '../retryKeys'
@@ -142,6 +142,13 @@ export function getBookingPage(page: number, size = 25, filters: BookingFilters 
   if (filters.to) params.set('to', filters.to)
   if (filters.search?.trim()) params.set('search', filters.search.trim())
   return request<BookingPage>(`${BOOKING_URL}/page?${params.toString()}`, undefined, true)
+}
+
+export function lookupPublicBooking(bookingReference: string, email: string) {
+  return request<PublicBookingView>(`${BOOKING_URL}/public-lookup`, {
+    method: 'POST',
+    body: JSON.stringify({ bookingReference, email }),
+  })
 }
 
 export function getBooking(id: number) {
