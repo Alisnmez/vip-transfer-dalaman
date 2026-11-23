@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
-import { formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
+import { adminBookingStatusLabel, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { BookingStatusIndicators } from '../../features/booking/components/BookingStatusIndicators'
 import { LiveBookingBadge } from '../../features/booking/components/LiveBookingBadge'
 import { useBookingClock } from '../../features/booking/useBookingClock'
@@ -51,7 +51,7 @@ export function BookingListPage() {
           <label className="text-sm font-semibold">Status
             <select aria-label="Status" value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
               <option value="all">All statuses</option>
-              {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{status === "PENDING" ? "New Requests" : status.replaceAll("_", " ")}</option>)}
+              {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
             </select>
           </label>
           <label className="text-sm font-semibold">Transfer date from (Turkey)
