@@ -23,7 +23,7 @@ function pickupTime(value: string | null) {
 }
 
 export function BookingManagementRequestsPage() {
-  const [filter, setFilter] = useState('NEW')
+  const [filter, setFilter] = useState('ALL')
   const [requests, setRequests] = useState<BookingManagementRequest[]>([])
   const [notes, setNotes] = useState<Record<number, string>>({})
   const [loading, setLoading] = useState(true)
