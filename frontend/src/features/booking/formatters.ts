@@ -19,6 +19,13 @@ export function bookingStatus(value?: string | null): string {
   return value || 'PENDING'
 }
 
+export function adminBookingStatusLabel(value?: string | null): string {
+  const status = bookingStatus(value)
+  if (status === 'PENDING') return 'New Request'
+  if (status === 'CONFIRMED') return 'Driver Assigned'
+  return status.charAt(0) + status.slice(1).toLowerCase()
+}
+
 const receivedTime = new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Europe/Istanbul', dateStyle: 'medium', timeStyle: 'short',
 })
