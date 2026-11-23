@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
+import { isValidEmail } from '../../shared/utils/inputValidation'
 import { submitBookingManagementRequest } from '../../features/booking/api'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
@@ -16,6 +17,7 @@ const copy = {
     message: 'Tell us what you need', changePlaceholder: 'For example: request a different pickup time, update the hotel address, or change the passenger count.',
     cancelPlaceholder: 'Please confirm that you would like to cancel and add any details we should know.',
     sendChange: 'Send change request', sendCancel: 'Send cancellation request', sending: 'Sending request…',
+    referenceError: 'Enter your booking reference (4 letters followed by 3 numbers).', emailRequired: 'Enter the email address used for your booking.', emailInvalid: 'Enter a valid email address.', messageError: 'Describe the change or cancellation you are requesting.',
     required: 'Complete all fields with the details saved for the booking.',
     successTitle: 'Request submitted',
     success: 'If the reference and email match, we have recorded your request and will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.',
@@ -35,6 +37,7 @@ const copy = {
     message: 'Was möchten Sie ändern?', changePlaceholder: 'Zum Beispiel: andere Abholzeit, Hoteladresse aktualisieren oder Fahrgastzahl ändern.',
     cancelPlaceholder: 'Bestätigen Sie bitte Ihren Stornierungswunsch und ergänzen Sie wichtige Hinweise.',
     sendChange: 'Änderungsanfrage senden', sendCancel: 'Stornierungsanfrage senden', sending: 'Anfrage wird gesendet…',
+    referenceError: 'Geben Sie Ihre Buchungsnummer ein (4 Buchstaben und 3 Ziffern).', emailRequired: 'Geben Sie die E-Mail-Adresse Ihrer Buchung ein.', emailInvalid: 'Geben Sie eine gültige E-Mail-Adresse ein.', messageError: 'Beschreiben Sie Ihre Änderungs- oder Stornierungsanfrage.',
     required: 'Bitte füllen Sie alle Felder mit den bei der Buchung verwendeten Angaben aus.',
     successTitle: 'Anfrage übermittelt',
     success: 'Wenn Buchungsnummer und E-Mail übereinstimmen, speichern wir Ihre Anfrage und schreiben an die in der Buchung hinterlegte Adresse. Ihre Buchung bleibt unverändert, bis wir das Ergebnis schriftlich bestätigen.',
@@ -54,6 +57,7 @@ const copy = {
     message: 'Опишите запрос', changePlaceholder: 'Например: изменить время встречи, обновить адрес отеля или число пассажиров.',
     cancelPlaceholder: 'Подтвердите, что хотите отменить поездку, и добавьте важные сведения.',
     sendChange: 'Отправить запрос на изменение', sendCancel: 'Отправить запрос на отмену', sending: 'Отправка запроса…',
+    referenceError: 'Введите номер бронирования (4 буквы и 3 цифры).', emailRequired: 'Введите адрес электронной почты из бронирования.', emailInvalid: 'Введите действительный адрес электронной почты.', messageError: 'Опишите необходимое изменение или отмену.',
     required: 'Заполните все поля данными, указанными при бронировании.',
     successTitle: 'Запрос отправлен',
     success: 'Если номер и адрес электронной почты совпадают, мы зарегистрировали запрос и напишем на адрес из бронирования. Бронирование не изменится, пока мы письменно не подтвердим результат.',
@@ -82,6 +86,7 @@ export function BookingLookupPage() {
   const [requestType, setRequestType] = useState<'CHANGE' | 'CANCEL'>('CHANGE')
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<{ reference?: string; email?: string; message?: string }>({})
   const [submitted, setSubmitted] = useState(false)
   const [busy, setBusy] = useState(false)
   const [requestKey, setRequestKey] = useState(createRequestKey)
@@ -89,6 +94,13 @@ export function BookingLookupPage() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setError('')
+    const nextErrors: { reference?: string; email?: string; message?: string } = {}
+    if (!/^[A-Za-z]{4}[0-9]{3}$/.test(bookingReference.trim())) nextErrors.reference = text.referenceError
+    if (!email.trim()) nextErrors.email = text.emailRequired
+    else if (!isValidEmail(email)) nextErrors.email = text.emailInvalid
+    if (!message.trim()) nextErrors.message = text.messageError
+    setFieldErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) return
     setBusy(true)
     try {
       await submitBookingManagementRequest({ bookingReference: bookingReference.trim(), email: email.trim(), requestType, message: message.trim() }, requestKey)
@@ -119,17 +131,19 @@ export function BookingLookupPage() {
               <button type="button" onClick={() => setSubmitted(false)} className="mt-5 rounded-lg border border-outline px-4 py-3 font-semibold text-admin-primary">{text.another}</button>
             </div>
           ) : (
-            <form onSubmit={event => { void submit(event) }} className="space-y-5">
+            <form noValidate onSubmit={event => { void submit(event) }} className="space-y-5">
               <label htmlFor="booking-reference" className="block text-sm font-semibold">
                 {text.reference}
-                <input id="booking-reference" type="text" autoComplete="off" required maxLength={7}
-                  pattern="[A-Za-z]{4}[0-9]{3}" value={bookingReference} onChange={event => setBookingReference(event.target.value)}
+                <input id="booking-reference" type="text" autoComplete="off" maxLength={7} aria-invalid={Boolean(fieldErrors.reference)} aria-describedby={fieldErrors.reference ? "booking-reference-error" : undefined}
+                  pattern="[A-Za-z]{4}[0-9]{3}" value={bookingReference} onChange={event => { setBookingReference(event.target.value); setFieldErrors(previous => ({ ...previous, reference: undefined })) }}
                   placeholder={text.example} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+                {fieldErrors.reference && <span id="booking-reference-error" role="alert" className="mt-1 block text-sm text-error">{fieldErrors.reference}</span>}
               </label>
               <label htmlFor="booking-email" className="block text-sm font-semibold">
                 {text.email}
-                <input id="booking-email" type="email" autoComplete="email" required maxLength={255} value={email}
-                  onChange={event => setEmail(event.target.value)} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+                <input id="booking-email" type="email" autoComplete="email" maxLength={255} value={email} aria-invalid={Boolean(fieldErrors.email)} aria-describedby={fieldErrors.email ? "booking-email-error" : undefined}
+                  onChange={event => { setEmail(event.target.value); setFieldErrors(previous => ({ ...previous, email: undefined })) }} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+                {fieldErrors.email && <span id="booking-email-error" role="alert" className="mt-1 block text-sm text-error">{fieldErrors.email}</span>}
               </label>
               <label htmlFor="request-type" className="block text-sm font-semibold">
                 {text.requestType}
@@ -141,10 +155,11 @@ export function BookingLookupPage() {
               </label>
               <label htmlFor="request-message" className="block text-sm font-semibold">
                 {text.message}
-                <textarea id="request-message" required maxLength={2000} rows={5} value={message}
-                  onChange={event => setMessage(event.target.value)}
+                <textarea id="request-message" maxLength={2000} aria-invalid={Boolean(fieldErrors.message)} aria-describedby={fieldErrors.message ? "request-message-error" : undefined} rows={5} value={message}
+                  onChange={event => { setMessage(event.target.value); setFieldErrors(previous => ({ ...previous, message: undefined })) }}
                   placeholder={requestType === 'CHANGE' ? text.changePlaceholder : text.cancelPlaceholder}
                   className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+                {fieldErrors.message && <span id="request-message-error" role="alert" className="mt-1 block text-sm text-error">{fieldErrors.message}</span>}
               </label>
               <p className="text-sm text-on-surface-variant">{text.required}</p>
               {error && <p role="alert" className="text-sm text-error">{error}</p>}
