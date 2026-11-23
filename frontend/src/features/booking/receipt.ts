@@ -3,6 +3,7 @@ export const RECEIPT_MAX_AGE_MS = 24 * 60 * 60 * 1000
 
 export type BookingReceipt = {
   id: number
+  reference?: string
   customerName: string
   pickUpLocation: string
   dropOffLocation: string
@@ -27,6 +28,7 @@ export function readReceiptFromStorages(storages: readonly ReceiptStorage[], now
       if (typeof receipt.id !== 'number' || !Number.isSafeInteger(receipt.id) || receipt.id < 1 ||
           typeof receipt.savedAt !== 'number' || !Number.isFinite(receipt.savedAt) ||
           receipt.savedAt > now || now - receipt.savedAt > RECEIPT_MAX_AGE_MS ||
+          (receipt.reference !== undefined && (typeof receipt.reference !== 'string' || !/^[A-Z]{4}[0-9]{3}$/.test(receipt.reference))) ||
           typeof receipt.customerName !== 'string' ||
           typeof receipt.pickUpLocation !== 'string' ||
           typeof receipt.dropOffLocation !== 'string' ||
