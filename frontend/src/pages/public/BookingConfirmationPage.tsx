@@ -120,7 +120,7 @@ export function BookingConfirmationPage() {
         specialRequests: passengerData.specialRequests || '',
         tripType: transferData.tripType,
       })
-      if (typeof booking.reference !== 'string' || !/^[A-Z]{4}[0-9]{3}$/.test(booking.reference)) {
+      if (typeof booking.reference !== 'string' || !/^[A-Z0-9]{7}$/.test(booking.reference)) {
         setSubmissionUncertain(true)
         setError('Your booking request was received, but its reference could not be displayed. Please contact support; do not submit another booking.')
         return
