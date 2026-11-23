@@ -96,6 +96,7 @@ public class BookingManagementRequestService {
         return requests.stream().map(request -> {
             Booking booking = bookings.get(request.getBookingId());
             return new BookingManagementRequestView(request.getId(), request.getBookingId(),
+                    booking == null ? null : booking.getReference(),
                     request.getRequestType(), request.getMessage(), request.getStatus(), request.getAdminNote(),
                     request.getCreatedAt(), request.getUpdatedAt(),
                     booking == null ? "Unavailable" : booking.getCustomerName(),
@@ -161,6 +162,7 @@ public class BookingManagementRequestService {
     private BookingManagementRequestView view(BookingManagementRequest request) {
         Booking booking = bookingRepository.findById(request.getBookingId()).orElse(null);
         return new BookingManagementRequestView(request.getId(), request.getBookingId(),
+                    booking == null ? null : booking.getReference(),
                 request.getRequestType(), request.getMessage(), request.getStatus(), request.getAdminNote(),
                 request.getCreatedAt(), request.getUpdatedAt(),
                 booking == null ? "Unavailable" : booking.getCustomerName(),
