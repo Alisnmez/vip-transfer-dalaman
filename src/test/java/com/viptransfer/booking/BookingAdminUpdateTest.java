@@ -216,7 +216,7 @@ class BookingAdminUpdateTest {
         Booking updated = service.updateStatus(10L, "PENDING");
         assertEquals("PENDING", updated.getStatus());
         verify(repository).save(booking);
-        verify(bookingEmails).queue(booking, "PENDING");
+        verify(bookingEmails, never()).queue(any(), anyString());
     }
 
     @Test
