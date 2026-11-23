@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { isValidEmail } from '../../shared/utils/inputValidation'
 import { BookingApiError } from '../../features/booking/api/errors'
-import { submitBookingManagementRequest } from '../../features/booking/api'
+import { submitBookingManagementRequest, lookupPublicBooking } from '../../features/booking/api'
+import { downloadBookingPdf } from '../../features/booking/bookingPdf'
+import type { PublicBookingView } from '../../features/booking/types'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
 
@@ -94,6 +96,26 @@ export function BookingLookupPage() {
   const [submitted, setSubmitted] = useState(false)
   const [busy, setBusy] = useState(false)
   const [requestKey, setRequestKey] = useState(createRequestKey)
+  const [bookingDetails, setBookingDetails] = useState<PublicBookingView | null>(null)
+  const [lookupBusy, setLookupBusy] = useState(false)
+  const [lookupError, setLookupError] = useState('')
+
+  async function findBooking() {
+    setLookupError('')
+    setBookingDetails(null)
+    if (!/^[A-Za-z0-9]{7}$/.test(bookingReference.trim()) || !isValidEmail(email.trim())) {
+      setLookupError(text.referenceError + ' ' + text.emailInvalid)
+      return
+    }
+    setLookupBusy(true)
+    try {
+      setBookingDetails(await lookupPublicBooking(bookingReference.trim().toUpperCase(), email.trim()))
+    } catch (failure) {
+      setLookupError(failure instanceof BookingApiError && failure.status === 404 ? text.bookingNotFound : text.error)
+    } finally {
+      setLookupBusy(false)
+    }
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -132,6 +154,47 @@ export function BookingLookupPage() {
       <main className="mx-auto max-w-2xl px-5 pb-24 pt-32">
         <h1 className="mb-4 text-3xl font-bold text-admin-primary">{text.title}</h1>
         <p className="mb-8 text-on-surface-variant">{text.intro}</p>
+
+        <section className="mb-6 rounded-lg border border-outline bg-white p-5 sm:p-6" aria-label="View booking">
+          <h2 className="text-xl font-bold text-admin-primary">{language === 'de' ? 'Buchung anzeigen und herunterladen' : language === 'ru' ? 'Просмотреть и скачать бронирование' : 'View & Download My Booking'}</h2>
+          <p className="mt-2 text-sm text-on-surface-variant">{language === 'de' ? 'Geben Sie Ihre Buchungsnummer und E-Mail-Adresse ein.' : language === 'ru' ? 'Введите номер бронирования и адрес электронной почты.' : 'Enter your booking reference and booking email to securely view your transfer details.'}</p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <label className="text-sm font-semibold">{text.reference}
+              <input type="text" maxLength={7} autoComplete="off" value={bookingReference} onChange={event => { setBookingReference(event.target.value.toUpperCase()); setBookingDetails(null) }} placeholder={text.example} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+            </label>
+            <label className="text-sm font-semibold">{text.email}
+              <input type="email" autoComplete="email" value={email} onChange={event => { setEmail(event.target.value); setBookingDetails(null) }} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
+            </label>
+          </div>
+          <button type="button" disabled={lookupBusy} onClick={() => { void findBooking() }} className="mt-4 rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white disabled:opacity-50">{lookupBusy ? 'Searching…' : language === 'de' ? 'Buchung suchen' : language === 'ru' ? 'Найти бронирование' : 'Find My Booking'}</button>
+          {lookupError && <p role="alert" className="mt-3 text-sm text-error">{lookupError}</p>}
+          {bookingDetails && (
+            <div className="mt-6 rounded-xl border border-outline-variant bg-slate-50 p-5">
+              <h3 className="text-lg font-bold text-admin-primary">Booking {bookingDetails.reference}</h3>
+              <p className="mt-1 font-semibold">{bookingDetails.status === 'CONFIRMED' ? 'Confirmed' : bookingDetails.status === 'PENDING' ? 'Pending Confirmation' : bookingDetails.status}</p>
+              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                {([
+                  ['Passenger', bookingDetails.customerName],
+                  ['Passengers', String(bookingDetails.passengerCount)],
+                  ['Pickup', bookingDetails.pickUpLocation],
+                  ['Destination', bookingDetails.dropOffLocation],
+                  ['Pickup date/time (Türkiye)', bookingDetails.transferDateTime.replace('T', ' ')],
+                  ['Return date/time (Türkiye)', bookingDetails.returnDateTime?.replace('T', ' ')],
+                  ['Vehicle', bookingDetails.vehicleId],
+                  ['Trip', bookingDetails.tripType],
+                  ['Price', bookingDetails.price == null ? 'To be confirmed' : '£' + bookingDetails.price.toFixed(2)],
+                  ['Flight', bookingDetails.flightNumber],
+                  ['Hotel', bookingDetails.hotelName],
+                  ['Transfer address', bookingDetails.transferAddress],
+                ] as [string, string | null | undefined][]).filter(([, value]) => value != null && value !== '').map(([label, value]) => (
+                  <div key={label}><dt className="text-on-surface-variant">{label}</dt><dd className="font-semibold">{value}</dd></div>
+                ))}
+              </dl>
+              <p className="mt-4 text-sm text-on-surface-variant">{bookingDetails.status === 'CONFIRMED' ? 'Your transfer has been confirmed.' : 'Your transfer is not confirmed until our team confirms it in writing.'}</p>
+              <button type="button" onClick={() => downloadBookingPdf(bookingDetails)} className="mt-4 rounded-lg bg-admin-primary px-5 py-3 font-semibold text-white">Download Booking PDF</button>
+            </div>
+          )}
+        </section>
 
         <section className="rounded-lg border border-outline bg-white p-5 sm:p-6" aria-label={text.title}>
           {submitted ? (
