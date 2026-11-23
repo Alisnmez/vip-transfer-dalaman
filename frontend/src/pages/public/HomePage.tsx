@@ -289,8 +289,8 @@ export function HomePage() {
                     ['airline_seat_recline_extra', 'Leather seats'],
                     ['child_care', 'Child seats on request'],
                   ].map(([icon, label]) => (
-                    <span key={label} className="inline-flex items-center gap-1 rounded-md bg-surface-container-low px-2 py-1">
-                      <span aria-hidden="true" className="material-symbols-outlined text-base">{icon}</span>{label}
+                    <span key={label} className="inline-flex items-center gap-1 rounded-md border border-outline-variant bg-white px-2 py-1 text-on-surface-variant">
+                      <span aria-hidden="true" className="material-symbols-outlined text-base text-secondary">{icon}</span>{label}
                     </span>
                   ))}
                 </div>
