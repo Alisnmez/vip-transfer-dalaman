@@ -36,7 +36,7 @@ class BookingManagementReferenceIntegrationTest {
         dto.setMessage("Please change my pickup date.");
         requests.submit(dto, UUID.randomUUID().toString());
         assertTrue(repository.existsByBookingIdAndStatusIn(booking.getId(), java.util.List.of("NEW")));
-        assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId().equals(booking.getId())));
+        assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId() == booking.getId()));
 
         // The old #17 / 17 form is accepted by the parser for existing customers.
         assertEquals(booking.getId(), BookingReference.toId("#" + booking.getId()));
