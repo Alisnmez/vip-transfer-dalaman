@@ -85,7 +85,7 @@ class BookingEmailIntegrationTest {
             if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
         }
         assertEquals(1, messages.size());
-        assertEquals("DalamanWay | Your booking request was successfully submitted (#" + booking.getId() + ")",
+        assertEquals("DalamanWay | Your booking request was successfully submitted (" + booking.getReference() + ")",
                 messages.getFirst().path("subject").asText());
         assertTrue(messages.getFirst().path("text").asText().contains("successfully submitted"));
         assertTrue(messages.getFirst().path("html").asText().contains("BOOKING REQUEST SUCCESSFUL"));
@@ -102,7 +102,7 @@ class BookingEmailIntegrationTest {
         var completedPayloads = org.mockito.ArgumentCaptor.forClass(String.class);
         verify(gateway, times(4)).send(anyString(), completedPayloads.capture());
         var completed = mapper.readTree(completedPayloads.getAllValues().get(2));
-        assertEquals("DalamanWay | Thank you for travelling with DalamanWay (#" + booking.getId() + ")",
+        assertEquals("DalamanWay | Thank you for travelling with DalamanWay (" + booking.getReference() + ")",
                 completed.path("subject").asText());
         assertTrue(completed.path("text").asText().contains("Thank you for choosing DalamanWay"));
         assertEquals(4, count("ACCEPTED"));
