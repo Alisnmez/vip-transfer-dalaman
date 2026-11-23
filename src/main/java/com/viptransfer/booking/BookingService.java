@@ -43,27 +43,46 @@ public class BookingService {
         return createBooking(dto, null);
     }
 
+    private static final int MAX_REFERENCE_INSERT_ATTEMPTS = 10;
+
     public Booking createBooking(BookingRequestDto dto, String key) {
-        if (key == null) {
-            return transactionTemplate.execute(status -> createNewBooking(dto, null, null));
-        }
-        if (!key.matches("[A-Za-z0-9_-]{16,64}")) {
+        if (key != null && !key.matches("[A-Za-z0-9_-]{16,64}")) {
             throw new IllegalArgumentException("Invalid Idempotency-Key.");
         }
-        String fingerprint = fingerprint(dto);
-        var existing = bookingRepository.findByIdempotencyKey(key);
-        if (existing.isPresent()) {
-            return verifySameRequest(existing.get(), fingerprint);
+        String fingerprint = key == null ? null : fingerprint(dto);
+        if (key != null) {
+            var existing = bookingRepository.findByIdempotencyKey(key);
+            if (existing.isPresent()) return verifySameRequest(existing.get(), fingerprint);
         }
-        try {
-            // Commit before returning; a competing request can safely read the winner.
-            return transactionTemplate.execute(status -> createNewBooking(dto, key, fingerprint));
-        } catch (DataIntegrityViolationException collision) {
-            // PostgreSQL unique constraint arbitrates concurrent requests across instances.
-            return bookingRepository.findByIdempotencyKey(key)
-                    .map(booking -> verifySameRequest(booking, fingerprint))
-                    .orElseThrow(() -> collision);
+
+        // Each retry runs in a fresh transaction. A PostgreSQL unique violation aborts
+        // the current transaction, so retrying saveAndFlush inside it would never work.
+        for (int attempt = 0; attempt < MAX_REFERENCE_INSERT_ATTEMPTS; attempt++) {
+            try {
+                return transactionTemplate.execute(status -> createNewBooking(dto, key, fingerprint));
+            } catch (DataIntegrityViolationException collision) {
+                // A concurrent request with the same idempotency key must return its
+                // existing booking, not create a second one with a new reference.
+                if (key != null) {
+                    var existing = bookingRepository.findByIdempotencyKey(key);
+                    if (existing.isPresent()) return verifySameRequest(existing.get(), fingerprint);
+                }
+                if (!isReferenceUniqueViolation(collision)) throw collision;
+                // Another request won the reference race: generate a fresh code in
+                // a new transaction and retry the entire booking + email outbox write.
+            }
         }
+        throw new IllegalStateException("Could not allocate a unique booking reference after retries.");
+    }
+
+    private static boolean isReferenceUniqueViolation(Throwable error) {
+        for (Throwable cause = error; cause != null; cause = cause.getCause()) {
+            if (cause instanceof java.sql.SQLException sql && "23505".equals(sql.getSQLState())) {
+                String message = sql.getMessage() == null ? "" : sql.getMessage().toLowerCase(java.util.Locale.ROOT);
+                return message.contains("reference") || message.contains("uq_booking_public_reference");
+            }
+        }
+        return false;
     }
 
     private Booking verifySameRequest(Booking booking, String fingerprint) {
