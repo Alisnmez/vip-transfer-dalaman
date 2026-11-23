@@ -16,7 +16,7 @@ class BookingManagementReferenceIntegrationTest {
     @Autowired BookingManagementRequestService requests;
     @Autowired BookingManagementRequestRepository repository;
 
-    @Test void newPublicReferenceCreatesVisibleChangeRequestAndLegacyNumericReferenceStillWorks() {
+    @Test void newPublicReferenceCreatesVisibleChangeRequestAndNumericReferenceIsRejected() {
         BookingRequestDto bookingDto = new BookingRequestDto();
         bookingDto.setCustomerName("Management test");
         bookingDto.setEmail("management@example.com");
@@ -38,7 +38,7 @@ class BookingManagementReferenceIntegrationTest {
         assertTrue(repository.existsByBookingIdAndStatusIn(booking.getId(), java.util.List.of("NEW")));
         assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId() == booking.getId()));
 
-        // The old #17 / 17 form is accepted by the parser for existing customers.
-        assertEquals(booking.getId(), BookingReference.toId("#" + booking.getId()));
+        assertNull(BookingReference.toId("#" + booking.getId()));
+        assertNull(BookingReference.toId(String.valueOf(booking.getId())));
     }
 }
