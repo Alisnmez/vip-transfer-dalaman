@@ -63,12 +63,12 @@ export function BookingManagementRequestsPage() {
 
   async function cancelBooking(request: BookingManagementRequest) {
     if (busyId !== null) return
-    const confirmed = window.confirm(`Cancel booking #${request.bookingId} and resolve this request? This sends a cancellation email to the customer.`)
+    const confirmed = window.confirm(`Cancel booking ${request.bookingReference ?? '(unavailable)'} and resolve this request? This sends a cancellation email to the customer.`)
     if (!confirmed) return
     setBusyId(request.id); setError(''); setNotice('')
     try {
       await cancelBookingFromManagementRequest(request.id, notes[request.id] ?? '')
-      setNotice(`Booking #${request.bookingId} cancelled and the request resolved. The customer has been emailed.`)
+      setNotice(`Booking ${request.bookingReference ?? '(unavailable)'} cancelled and the request resolved. The customer has been emailed.`)
       refresh()
     } catch {
       setError('Could not cancel this booking. It may already be completed or the request may be closed; refresh to check.')
@@ -91,7 +91,7 @@ export function BookingManagementRequestsPage() {
           const closed = request.status === 'RESOLVED' || request.status === 'DECLINED'
           return <article key={request.id} className="rounded-xl border border-outline-variant bg-white p-5 sm:p-6">
             <div className="flex flex-wrap items-start justify-between gap-3">
-              <div><h2 className="text-lg font-bold text-admin-primary">{request.requestType === 'CANCEL' ? 'Cancellation request' : 'Change request'} · booking #{request.bookingId}</h2><p className="mt-1 text-sm text-on-surface-variant">Received {new Date(request.createdAt).toLocaleString()} · <span className="font-semibold">{request.status.replace('_', ' ')}</span></p></div>
+              <div><h2 className="text-lg font-bold text-admin-primary">{request.requestType === 'CANCEL' ? 'Cancellation request' : 'Change request'} · booking {request.bookingReference ?? '(unavailable)'}</h2><p className="mt-1 text-sm text-on-surface-variant">Received {new Date(request.createdAt).toLocaleString()} · <span className="font-semibold">{request.status.replace('_', ' ')}</span></p></div>
               <span className={`rounded-full px-3 py-1 text-xs font-bold ${request.requestType === 'CANCEL' ? 'bg-red-50 text-red-700' : 'bg-sky-50 text-sky-800'}`}>{request.requestType}</span>
             </div>
             <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
