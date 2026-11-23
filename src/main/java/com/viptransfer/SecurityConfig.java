@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .ignoringRequestMatchers(
                                 new AntPathRequestMatcher("/admin/session/login", "POST"),
                                 new AntPathRequestMatcher("/bookings", "POST"),
+                                new AntPathRequestMatcher("/bookings/public-lookup", "POST"),
                                 new AntPathRequestMatcher("/bookings/management-requests", "POST"),
                                 new AntPathRequestMatcher("/reviews", "POST"),
                                 explicitAdminRequest))
@@ -70,6 +71,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/route-prices").hasRole("ADMIN")
                         .requestMatchers("/route-prices/**").denyAll()
                         .requestMatchers(HttpMethod.POST, "/bookings").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/bookings/public-lookup").permitAll()
                         .requestMatchers(HttpMethod.POST, "/bookings/management-requests").permitAll()
                         .requestMatchers(HttpMethod.GET, "/bookings/management-requests", "/bookings/management-requests/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PATCH, "/bookings/management-requests/**").hasRole("ADMIN")
