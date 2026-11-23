@@ -284,7 +284,7 @@ export function HomePage() {
                     ['wifi', 'Wi-Fi'],
                     ['ac_unit', 'A/C'],
                     ['usb', 'USB'],
-                    ['water_drop', 'Water'],
+                    ['water_drop', language === 'de' ? 'Kostenloses Wasser & Getränke' : language === 'ru' ? 'Бесплатная вода и напитки' : 'Complimentary water & drinks'],
                     ['tv', 'TV'],
                     ['airline_seat_recline_extra', 'Leather seats'],
                     ['child_care', 'Child seats on request'],
