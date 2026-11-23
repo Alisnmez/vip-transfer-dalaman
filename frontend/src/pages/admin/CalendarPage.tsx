@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getCalendarBookings } from '../../features/booking/api'
 import { ProcessingButton } from '../../components/ProcessingButton'
-import { bookingStatus } from '../../features/booking/formatters'
+import { adminBookingStatusLabel, bookingStatus } from '../../features/booking/formatters'
 import { turkeyToday } from '../../features/booking/turkeyTime'
 import type { Booking } from '../../features/booking/types'
 
@@ -118,7 +118,7 @@ export function CalendarPage() {
         <div className="flex flex-wrap items-center gap-2">
           <select aria-label="Booking status" value={filter} onChange={event => setFilter(event.target.value)} className="rounded-lg border bg-white px-3 py-2 text-sm">
             <option value="ALL">All statuses</option><option value="ACTIVE">Active transfers</option>
-            <option value="PENDING">Pending</option><option value="CONFIRMED">Confirmed</option>
+            <option value="PENDING">New Request</option><option value="CONFIRMED">Driver Assigned</option>
             <option value="COMPLETED">Completed</option><option value="CANCELLED">Cancelled</option>
           </select>
           <ProcessingButton type="button" processing={loading} processingLabel="Refreshing..." onClick={() => setRefreshKey(value => value + 1)} className="rounded-lg border px-3 py-2 text-sm">Refresh</ProcessingButton>
@@ -155,7 +155,7 @@ export function CalendarPage() {
                       className={`event-card block rounded-lg border border-l-4 p-2 shadow-sm transition-shadow hover:shadow-md ${statusColors[status] ?? 'border-l-primary bg-white'}`}>
                       <div className="mb-1 flex items-center justify-between gap-1">
                         <strong className="text-xs">{booking.transferDateTime.slice(11, 16)}</strong>
-                        <span className="truncate text-[10px] font-semibold">{status}</span>
+                        <span className="truncate text-[10px] font-semibold">{adminBookingStatusLabel(status)}</span>
                       </div>
                       <p className="truncate text-xs font-bold" title={booking.customerName}>{booking.customerName}</p>
                       <p className="mt-1 line-clamp-2 text-[11px] text-on-surface-variant">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
@@ -187,7 +187,7 @@ export function CalendarPage() {
             {selectedBookings.map(booking => {
               const status = bookingStatus(booking.status)
               return <Link key={booking.id} to={`/admin/bookings/${booking.id}`} className={`block rounded-lg border border-l-4 p-4 shadow-sm ${statusColors[status] ?? 'border-l-primary'}`}>
-                <div className="flex justify-between gap-2"><strong>{booking.transferDateTime.slice(11, 16)} · {booking.customerName}</strong><span className="text-xs font-bold">{status}</span></div>
+                <div className="flex justify-between gap-2"><strong>{booking.transferDateTime.slice(11, 16)} · {booking.customerName}</strong><span className="text-xs font-bold">{adminBookingStatusLabel(status)}</span></div>
                 <p className="mt-2 text-sm">{booking.pickUpLocation} → {booking.dropOffLocation}</p>
                 <p className="mt-2 text-xs text-on-surface-variant">Booking #{booking.id} · {booking.passengerCount} passengers · £{Number(booking.price).toFixed(2)}</p>
                 <p className="mt-2 text-xs font-semibold text-primary">Open booking details</p>
