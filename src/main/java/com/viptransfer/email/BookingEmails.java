@@ -31,11 +31,11 @@ public class BookingEmails {
         String email = booking.getEmail();
         if (email == null || email.isBlank() || email.toLowerCase(java.util.Locale.ROOT).endsWith(".invalid")) return;
         String description = switch (event) {
-            case "RECEIVED" -> "Thank you for booking with DalamanWay! We have received your transfer details. Our team is reviewing the arrangements and will email you once the transfer is confirmed.";
+            case "RECEIVED" -> "Thank you for choosing DalamanWay. We have received your transfer request. Please review your journey details below and keep your booking reference. Our team will arrange your transfer.";
             case "CONFIRMED" -> "Your transfer booking has been confirmed by the operator.";
             case "CANCELLED" -> "Your booking has been cancelled by the operator.";
             case "PENDING" -> "Your booking is now pending operator confirmation.";
-            case "COMPLETED" -> "Thank you for travelling with DalamanWay. We hope you enjoyed a comfortable journey and look forward to welcoming you again.";
+            case "COMPLETED" -> "Thank you for choosing DalamanWay for your transfer. We hope you enjoyed a comfortable journey and look forward to welcoming you again.";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
         String details = "Booking reference: #" + booking.getId()
@@ -145,7 +145,7 @@ public class BookingEmails {
 
     private static String customerHtml(Booking booking, String event, String description) {
         String headline = switch (event) {
-            case "RECEIVED" -> "Thank you for booking with DalamanWay!";
+            case "RECEIVED" -> "Your transfer booking details";
             case "CONFIRMED" -> "Your transfer is confirmed";
             case "CANCELLED" -> "Your booking has been cancelled";
             case "PENDING" -> "Your booking is awaiting confirmation";
@@ -166,6 +166,8 @@ public class BookingEmails {
                 + (booking.getReturnDateTime() == null ? "" :
                     row("Return date & time", booking.getReturnDateTime().format(DATE_FORMAT) + " (Türkiye time)"))
                 + row("Passengers", String.valueOf(booking.getPassengerCount()))
+                + (booking.getVehicleId() == null || booking.getVehicleId().isBlank() ? "" : row("Vehicle", booking.getVehicleId()))
+                + (booking.getFlightNumber() == null || booking.getFlightNumber().isBlank() ? "" : row("Flight number", booking.getFlightNumber()))
                 + row("Quoted fare", "£" + booking.getPrice().setScale(2, java.math.RoundingMode.HALF_UP).toPlainString());
         return """
                 <!doctype html><html lang="en"><head><meta charset="UTF-8">
