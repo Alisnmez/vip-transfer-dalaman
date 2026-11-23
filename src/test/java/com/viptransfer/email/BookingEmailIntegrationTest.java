@@ -67,7 +67,7 @@ class BookingEmailIntegrationTest {
         assertEquals(0, count("PENDING"));
     }
 
-    @Test void customerReceivesBookingDetailsThenConfirmedMessageForTheSameBooking() throws Exception {
+    @Test void customerReceivesBookingDetailsAndCompletionButNoDriverAssignmentEmail() throws Exception {
         when(gateway.send(anyString(), anyString())).thenReturn("provider-test-id");
         String key = UUID.randomUUID().toString();
         var dto = request();
@@ -94,12 +94,7 @@ class BookingEmailIntegrationTest {
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         dispatcher.dispatch();
-        var allPayloads = org.mockito.ArgumentCaptor.forClass(String.class);
-        verify(gateway, times(2)).send(anyString(), allPayloads.capture());
-        for (String payload : allPayloads.getAllValues().subList(2, 2)) {
-            var message = mapper.readTree(payload);
-            if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
-        }
+        verify(gateway, times(2)).send(anyString(), anyString());
         assertEquals(1, messages.size()); // Assignment stays internal.
         bookings.updateStatus(booking.getId(), "COMPLETED");
         dispatcher.dispatch();
