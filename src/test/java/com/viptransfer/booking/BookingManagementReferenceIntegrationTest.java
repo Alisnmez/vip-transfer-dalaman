@@ -35,7 +35,7 @@ class BookingManagementReferenceIntegrationTest {
         var found = bookings.publicLookup(publicDto);
         assertEquals(booking.getReference(), found.reference());
         assertEquals(booking.getCustomerName(), found.customerName());
-        assertEquals(booking.getTransferDateTime().truncatedTo(java.time.temporal.ChronoUnit.MICROS), found.transferDateTime());
+        assertEquals(bookings.getBooking(booking.getId()).getTransferDateTime(), found.transferDateTime());
         assertFalse(java.util.Arrays.stream(found.getClass().getRecordComponents())
                 .anyMatch(field -> java.util.Set.of("email", "phoneNumber", "idempotencyKey",
                         "requestFingerprint", "specialRequests").contains(field.getName())));
