@@ -1,6 +1,7 @@
 package com.viptransfer.booking;
 
 import java.util.Locale;
+import java.security.SecureRandom;
 
 /** Stable public display reference; the numeric database ID remains the internal key. */
 public final class BookingReference {
@@ -10,7 +11,30 @@ public final class BookingReference {
     private static final long INVERSE = java.math.BigInteger.valueOf(MULTIPLIER)
             .modInverse(java.math.BigInteger.valueOf(SPACE)).longValue();
 
+    private static final SecureRandom RANDOM = new SecureRandom();
+    private static final String ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
     private BookingReference() {}
+
+    /** Random 7-character code; exclude ambiguous characters and legacy reference format. */
+    public static String generate() {
+        while (true) {
+            StringBuilder code = new StringBuilder(7);
+            boolean letter = false, digit = false;
+            for (int i = 0; i < 7; i++) {
+                char next = ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length()));
+                code.append(next);
+                letter |= Character.isLetter(next);
+                digit |= Character.isDigit(next);
+            }
+            String result = code.toString();
+            if (letter && digit && !result.matches("[A-Z]{4}[0-9]{3}")) return result;
+        }
+    }
+
+    public static boolean isValid(String input) {
+        return input != null && input.strip().toUpperCase(Locale.ROOT).matches("[A-Z0-9]{7}");
+    }
 
     public static String fromId(long id) {
         if (id < 1 || id > SPACE) throw new IllegalArgumentException("Booking reference capacity exceeded.");
