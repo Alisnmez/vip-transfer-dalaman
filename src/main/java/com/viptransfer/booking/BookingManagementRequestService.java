@@ -40,10 +40,8 @@ public class BookingManagementRequestService {
             return Map.of("message", PUBLIC_MESSAGE);
         }
 
-        String reference = dto.getBookingReference().strip().replaceFirst("^#", "");
-        long bookingId;
-        try { bookingId = Long.parseLong(reference); }
-        catch (NumberFormatException invalid) { return Map.of("message", PUBLIC_MESSAGE); }
+        Long bookingId = BookingReference.toId(dto.getBookingReference());
+        if (bookingId == null) return Map.of("message", PUBLIC_MESSAGE);
 
         Booking booking = bookingRepository.findByIdForUpdate(bookingId).orElse(null);
         if (requestRepository.findByIdempotencyKey(idempotencyKey).isPresent()) {
