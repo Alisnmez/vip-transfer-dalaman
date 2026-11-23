@@ -275,16 +275,16 @@ export function BookingConfirmationPage() {
                 {t("Price Details")}
               </h3>
               <p className="font-label-xs text-label-xs opacity-70 mb-4 uppercase">
-                {t("Published Route Estimate")}
+                {t("Published Route Price")}
               </p>
             </div>
             <div className="py-6 border-y border-on-primary-container/20">
               <div className="flex justify-between items-baseline">
-                <span className="font-body-md text-body-md">{t("Estimated Price")}</span>
+                <span className="font-body-md text-body-md">{t("Published Price")}</span>
                 <span className="font-title-lg text-title-lg text-white">{price}</span>
               </div>
               <p className="font-label-xs text-label-xs text-primary-fixed-dim mt-2">
-                {t("The final fare and any additional charges will be confirmed before your transfer.")}
+                {t("This is the published fare for your selected route and vehicle. There are no extra charges.")}
               </p>
             </div>
             <div className="mt-4 flex items-center gap-2">
@@ -322,7 +322,7 @@ export function BookingConfirmationPage() {
             </div>
             <div className="flex-grow space-y-4">
               <p className="font-body-md text-on-surface-variant">
-                {t("Payment is cash only. No online or card payment is collected. The payment timing, accepted cash currency and any additional charges will be confirmed by the operator before your transfer.")}
+                {t("Payment is made in cash to the driver at the end of the journey.")}
               </p>
               <p className="font-label-sm text-on-surface-variant">
                 {t("Submitting a booking request does not mean the transfer has been confirmed.")}

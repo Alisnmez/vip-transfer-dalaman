@@ -647,7 +647,7 @@ function BookingSummary({
               verified_user
             </span>
             <span className="text-[12px] text-secondary font-medium leading-tight">
-              {t("This is a booking request. Cancellation and payment terms will be confirmed by the operator.")}
+              {t("This is a booking request. Cancellation terms will be confirmed by the operator. Payment is made in cash to the driver at the end of the journey.")}
             </span>
           </div>
         </div>

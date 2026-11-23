@@ -267,9 +267,9 @@ export function FAQPage() {
 }
 
 const confirmedAmenities = {
-  en: ['Free Wi-Fi', 'Air conditioning', 'USB charging', 'Complimentary water', 'TV & entertainment', 'Leather seating', 'Child seats on request'],
-  de: ['Kostenloses WLAN', 'Klimaanlage', 'USB-Lademöglichkeit', 'Kostenloses Wasser', 'TV & Unterhaltung', 'Ledersitze', 'Kindersitze auf Anfrage'],
-  ru: ['Бесплатный Wi-Fi', 'Кондиционер', 'USB-зарядка', 'Бесплатная вода', 'ТВ и развлечения', 'Кожаные сиденья', 'Детские кресла по запросу'],
+  en: ['Free Wi-Fi', 'Air conditioning', 'USB charging', 'Complimentary water & drinks', 'TV & entertainment', 'Leather seating', 'Child seats on request'],
+  de: ['Kostenloses WLAN', 'Klimaanlage', 'USB-Lademöglichkeit', 'Kostenloses Wasser & Getränke', 'TV & Unterhaltung', 'Ledersitze', 'Kindersitze auf Anfrage'],
+  ru: ['Бесплатный Wi-Fi', 'Кондиционер', 'USB-зарядка', 'Бесплатная вода и напитки', 'ТВ и развлечения', 'Кожаные сиденья', 'Детские кресла по запросу'],
 } as const
 
 const amenityIcons = ['wifi', 'ac_unit', 'usb', 'water_drop', 'tv', 'airline_seat_recline_extra', 'child_care'] as const
