@@ -23,6 +23,12 @@ public class BookingController {
     }
 
 
+    @PostMapping("/public-lookup")
+    public com.viptransfer.booking.dto.PublicBookingView publicLookup(
+            @Valid @RequestBody com.viptransfer.booking.dto.PublicBookingLookupDto dto) {
+        return bookingService.publicLookup(dto);
+    }
+
     @GetMapping("/{id:[0-9]+}")
     public Booking getBooking(@PathVariable Long id) {
         return bookingService.getBooking(id);
