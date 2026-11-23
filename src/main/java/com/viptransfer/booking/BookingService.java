@@ -299,7 +299,10 @@ public class BookingService {
         }
         booking.setStatus(status);
         Booking saved = bookingRepository.save(booking);
-        bookingEmails.queue(saved, status);
+        // Driver assignment is an internal operation; notify only for completion or cancellation.
+        if ("COMPLETED".equals(status) || "CANCELLED".equals(status)) {
+            bookingEmails.queue(saved, status);
+        }
         return saved;
     }
 
