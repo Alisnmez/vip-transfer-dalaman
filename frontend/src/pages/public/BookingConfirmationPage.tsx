@@ -322,7 +322,7 @@ export function BookingConfirmationPage() {
             </div>
             <div className="flex-grow space-y-4">
               <p className="font-body-md text-on-surface-variant">
-                {t("No online payment is collected. The operator will confirm the accepted payment method, currency and timing before your transfer.")}
+                {t("No online or card payment is collected. Pay the driver in cash at the end of your journey.")}
               </p>
               <p className="font-label-sm text-on-surface-variant">
                 {t("Submitting a booking request does not mean the transfer has been confirmed.")}
