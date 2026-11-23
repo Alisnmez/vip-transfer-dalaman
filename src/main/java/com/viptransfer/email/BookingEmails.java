@@ -56,7 +56,7 @@ public class BookingEmails {
             case "COMPLETED" -> "Thank you for travelling with DalamanWay";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
-        enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (#" + booking.getId() + ")", text, customerHtml(booking, event, description).replace("DETAIL_CHANGES", ""));
+        enqueue(booking.getId(), event, email, "DalamanWay | " + subject + " (" + booking.getReference() + ")", text, customerHtml(booking, event, description).replace("DETAIL_CHANGES", ""));
         if (settings.operator() != null && !settings.operator().isBlank()) {
             enqueue(booking.getId(), event, settings.operator(), "[Operator] DalamanWay #" + booking.getId() + " — " + event,
                     description + "\n\n" + details + "\nReview details in the admin panel: https://dalamanway.com/admin/bookings/" + booking.getId(), null);
@@ -68,7 +68,7 @@ public class BookingEmails {
         if (!settings.enabled()) return;
         String kind = "CHANGE".equals(request.getRequestType()) ? "change" : "cancellation";
         String event = "MANAGEMENT_REQUEST";
-        String customerText = "DalamanWay\n\nWe received your " + kind + " request for booking #" + booking.getId()
+        String customerText = "DalamanWay\n\nWe received your " + kind + " request for booking " + booking.getReference()
                 + ". Your booking has not been changed or cancelled. Please wait for our written confirmation.\n\n"
                 + "Request: " + request.getMessage()
                 + "\n\nIf you did not send this request, contact us by replying to this email.\nhttps://dalamanway.com/booking/lookup";
@@ -101,7 +101,7 @@ public class BookingEmails {
                 || booking.getEmail().toLowerCase(Locale.ROOT).endsWith(".invalid")) return;
         String result = "DECLINED".equals(request.getStatus()) ? "could not be approved" : "has been handled";
         String message = "Your " + ("CHANGE".equals(request.getRequestType()) ? "change" : "cancellation")
-                + " request for booking #" + booking.getId() + " " + result + ".";
+                + " request for booking " + booking.getReference() + " " + result + ".";
         if (request.getAdminNote() != null && !request.getAdminNote().isBlank()) {
             message += "\n\nMessage from our team: " + request.getAdminNote();
         }
