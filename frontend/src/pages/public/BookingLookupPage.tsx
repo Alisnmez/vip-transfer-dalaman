@@ -11,7 +11,7 @@ const copy = {
   en: {
     title: 'Manage My Booking',
     intro: 'Request a change or cancellation. Enter the reference and the email address used for the booking so we can verify the request.',
-    reference: 'Booking reference', example: 'e.g. 1042', email: 'Booking email address',
+    reference: 'Booking reference', example: 'e.g. ABCD123 (or #17 for older bookings)', email: 'Booking email address',
     requestType: 'What do you need?', change: 'Request a change', cancel: 'Request a cancellation',
     message: 'Tell us what you need', changePlaceholder: 'For example: request a different pickup time, update the hotel address, or change the passenger count.',
     cancelPlaceholder: 'Please confirm that you would like to cancel and add any details we should know.',
@@ -30,7 +30,7 @@ const copy = {
   de: {
     title: 'Meine Buchung verwalten',
     intro: 'Beantragen Sie eine Änderung oder Stornierung. Geben Sie die Buchungsnummer und die für die Buchung verwendete E-Mail-Adresse ein.',
-    reference: 'Buchungsnummer', example: 'z. B. 1042', email: 'E-Mail-Adresse der Buchung',
+    reference: 'Buchungsnummer', example: 'z. B. ABCD123 (ältere Buchungen: #17)', email: 'E-Mail-Adresse der Buchung',
     requestType: 'Worum geht es?', change: 'Änderung anfragen', cancel: 'Stornierung anfragen',
     message: 'Was möchten Sie ändern?', changePlaceholder: 'Zum Beispiel: andere Abholzeit, Hoteladresse aktualisieren oder Fahrgastzahl ändern.',
     cancelPlaceholder: 'Bestätigen Sie bitte Ihren Stornierungswunsch und ergänzen Sie wichtige Hinweise.',
@@ -49,7 +49,7 @@ const copy = {
   ru: {
     title: 'Управление бронированием',
     intro: 'Запросите изменение или отмену. Укажите номер бронирования и адрес электронной почты, использованный при бронировании.',
-    reference: 'Номер бронирования', example: 'например, 1042', email: 'Электронная почта из бронирования',
+    reference: 'Номер бронирования', example: 'например, ABCD123 (старые брони: #17)', email: 'Электронная почта из бронирования',
     requestType: 'Что нужно сделать?', change: 'Запросить изменение', cancel: 'Запросить отмену',
     message: 'Опишите запрос', changePlaceholder: 'Например: изменить время встречи, обновить адрес отеля или число пассажиров.',
     cancelPlaceholder: 'Подтвердите, что хотите отменить поездку, и добавьте важные сведения.',
@@ -122,8 +122,8 @@ export function BookingLookupPage() {
             <form onSubmit={event => { void submit(event) }} className="space-y-5">
               <label htmlFor="booking-reference" className="block text-sm font-semibold">
                 {text.reference}
-                <input id="booking-reference" type="text" inputMode="numeric" autoComplete="off" required maxLength={17}
-                  pattern="#?[1-9][0-9]{0,15}" value={bookingReference} onChange={event => setBookingReference(event.target.value)}
+                <input id="booking-reference" type="text" autoComplete="off" required maxLength={17}
+                  pattern="#?([A-Za-z]{4}[0-9]{3}|[1-9][0-9]{0,15})" value={bookingReference} onChange={event => setBookingReference(event.target.value)}
                   placeholder={text.example} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
               </label>
               <label htmlFor="booking-email" className="block text-sm font-semibold">
