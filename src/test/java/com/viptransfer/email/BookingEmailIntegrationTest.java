@@ -51,9 +51,9 @@ class BookingEmailIntegrationTest {
         assertEquals(2, count("PENDING")); // Customer and operator, never a shared To list.
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         bookings.updateStatus(booking.getId(), "CONFIRMED");
-        assertEquals(4, count("PENDING"));
+        assertEquals(2, count("PENDING")); // Driver assignment does not queue email.
         bookings.updateStatus(booking.getId(), "CANCELLED");
-        assertEquals(6, count("PENDING"));
+        assertEquals(4, count("PENDING"));
         verifyNoInteractions(gateway); // No network request in booking transaction.
     }
     @Test void bookingAndQueuedMessagesRollBackTogether() {
@@ -67,7 +67,7 @@ class BookingEmailIntegrationTest {
         assertEquals(0, count("PENDING"));
     }
 
-    @Test void customerReceivesBookingDetailsThenConfirmedMessageForTheSameBooking() throws Exception {
+    @Test void customerReceivesBookingDetailsAndCompletionButNoDriverAssignmentEmail() throws Exception {
         when(gateway.send(anyString(), anyString())).thenReturn("provider-test-id");
         String key = UUID.randomUUID().toString();
         var dto = request();
@@ -87,25 +87,23 @@ class BookingEmailIntegrationTest {
         assertEquals(1, messages.size());
         assertEquals("DalamanWay | Your transfer booking details (#" + booking.getId() + ")",
                 messages.getFirst().path("subject").asText());
-        assertTrue(messages.getFirst().path("text").asText().contains("reviewing the arrangements"));
+        assertTrue(messages.getFirst().path("text").asText().contains("review your journey details"));
         assertTrue(messages.getFirst().path("html").asText().contains("BOOKING RECEIVED"));
         assertFalse(messages.getFirst().path("html").asText().contains(">PENDING<"));
 
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         dispatcher.dispatch();
-        var allPayloads = org.mockito.ArgumentCaptor.forClass(String.class);
-        verify(gateway, times(4)).send(anyString(), allPayloads.capture());
-        for (String payload : allPayloads.getAllValues().subList(2, 4)) {
-            var message = mapper.readTree(payload);
-            if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
-        }
-        assertEquals(2, messages.size());
-        var confirmed = messages.getLast();
-        assertEquals("DalamanWay | Your airport transfer is confirmed (#" + booking.getId() + ")",
-                confirmed.path("subject").asText());
-        assertTrue(confirmed.path("html").asText().contains("CONFIRMED"));
-        assertFalse(confirmed.path("text").asText().contains("not yet confirmed"));
+        verify(gateway, times(2)).send(anyString(), anyString());
+        assertEquals(1, messages.size()); // Assignment stays internal.
+        bookings.updateStatus(booking.getId(), "COMPLETED");
+        dispatcher.dispatch();
+        var completedPayloads = org.mockito.ArgumentCaptor.forClass(String.class);
+        verify(gateway, times(4)).send(anyString(), completedPayloads.capture());
+        var completed = mapper.readTree(completedPayloads.getAllValues().get(2));
+        assertEquals("DalamanWay | Thank you for travelling with DalamanWay (#" + booking.getId() + ")",
+                completed.path("subject").asText());
+        assertTrue(completed.path("text").asText().contains("Thank you for choosing DalamanWay"));
         assertEquals(4, count("ACCEPTED"));
     }
 
