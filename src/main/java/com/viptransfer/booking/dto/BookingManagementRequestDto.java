@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 
 public class BookingManagementRequestDto {
     @NotBlank
-    @Pattern(regexp = "(?i)[A-Z]{4}[0-9]{3}")
+    @Pattern(regexp = "(?i)[A-Z0-9]{7}")
     private String bookingReference;
 
     @NotBlank
