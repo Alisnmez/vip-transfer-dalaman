@@ -38,7 +38,7 @@ public class BookingEmails {
             case "COMPLETED" -> "Thank you for choosing DalamanWay for your transfer. We hope you enjoyed a comfortable journey and look forward to welcoming you again.";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
-        String details = "Booking reference: #" + booking.getId()
+        String details = "Booking reference: " + booking.getReference()
                 + "\nPickup: " + booking.getPickUpLocation()
                 + "\nDestination: " + booking.getDropOffLocation()
                 + "\nPickup time (Turkey local time): " + booking.getTransferDateTime()
@@ -159,7 +159,7 @@ public class BookingEmails {
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
         };
-        String rows = row("Booking reference", "#" + booking.getId())
+        String rows = row("Booking reference", booking.getReference())
                 + row("Pick-up", booking.getPickUpLocation())
                 + row("Destination", booking.getDropOffLocation())
                 + row("Pick-up date & time", booking.getTransferDateTime().format(DATE_FORMAT) + " (Türkiye time)")
