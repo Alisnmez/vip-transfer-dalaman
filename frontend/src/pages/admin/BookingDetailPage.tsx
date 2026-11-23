@@ -6,7 +6,7 @@ import { ProcessingButton } from '../../components/ProcessingButton'
 
 import { getBooking, getBookingEmailStatuses, updateBooking, updateBookingStatus } from '../../features/booking/api'
 import type { BookingEmailStatus } from '../../features/booking/api'
-import { bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
+import { adminBookingStatusLabel, bookingStatus, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
 import { bookingErrorMessage } from '../../features/booking/api/errors'
 import type { Booking, BookingRequest } from '../../features/booking/types'
 import { transferPrices } from '../../features/booking/pricing'
@@ -59,7 +59,7 @@ export function BookingDetailPage() {
 
   async function changeStatus(status: string) {
     if (!booking || status === bookingStatus(booking.status)) return
-    if (bookingStatus(booking.status) === 'CONFIRMED' && status === 'PENDING' && !window.confirm('Move this confirmed booking back to pending? The customer will be notified that confirmation is no longer active.')) return
+    if (bookingStatus(booking.status) === 'CONFIRMED' && status === 'PENDING' && !window.confirm('Move this driver-assigned booking back to New Request? No status email will be sent.')) return
     if (status === 'COMPLETED' && !window.confirm('Mark this transfer as completed? A thank-you email will be queued for the customer.')) return
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
     if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${status}? Only do this to correct an incorrectly completed booking.`)) return
@@ -140,7 +140,7 @@ export function BookingDetailPage() {
       {booking && <div className="mb-5 flex flex-wrap items-end gap-3 rounded-xl border border-outline-variant bg-white p-4">
         <label className="text-sm font-semibold">Booking status
           <select aria-label="Booking status" disabled={saving} value={bookingStatus(booking.status)} onChange={event => { void changeStatus(event.target.value) }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-4 py-3 text-gray-900">
-            {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{status}</option>)}
+            {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
           </select>
         </label>
         <button type="button" disabled={saving} onClick={editing ? () => setEditing(false) : beginEdit} className="rounded-lg border border-outline-variant bg-white px-4 py-3 font-semibold text-gray-900">{editing ? 'Cancel editing' : 'Edit booking details'}</button>
