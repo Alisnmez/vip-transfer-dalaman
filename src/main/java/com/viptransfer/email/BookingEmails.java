@@ -95,23 +95,43 @@ public class BookingEmails {
         }
     }
 
-    /** Notify the customer when an operator declines or resolves a change request. */
+    /** Send branded customer notifications for approved or declined management requests. */
     public void queueManagementRequestDecision(Booking booking, BookingManagementRequest request) {
         if (!settings.enabled() || booking.getEmail() == null || booking.getEmail().isBlank()
                 || booking.getEmail().toLowerCase(Locale.ROOT).endsWith(".invalid")) return;
-        String result = "DECLINED".equals(request.getStatus()) ? "could not be approved" : "has been handled";
-        String message = "Your " + ("CHANGE".equals(request.getRequestType()) ? "change" : "cancellation")
-                + " request for booking " + booking.getReference() + " " + result + ".";
-        if (request.getAdminNote() != null && !request.getAdminNote().isBlank()) {
-            message += "\n\nMessage from our team: " + request.getAdminNote();
-        }
-        message += "\n\nCurrent booking status: " + booking.getStatus()
-                + ". If a change was approved, please review the updated booking email.\n"
-                + "https://dalamanway.com/booking/lookup";
-        enqueue(booking.getId(), "MANAGEMENT_DECISION", booking.getEmail(),
-                "DalamanWay | Update on booking request #" + request.getId(), message, null);
-    }
 
+        boolean change = "CHANGE".equals(request.getRequestType());
+        boolean approved = "RESOLVED".equals(request.getStatus());
+        // A successful cancellation already queues the branded CANCELLED booking email.
+        // Do not send a second, confusing decision email for the same cancellation.
+        if (!change && approved) return;
+
+        String event = change
+                ? (approved ? "CHANGE_APPROVED" : "CHANGE_DECLINED")
+                : "CANCELLATION_DECLINED";
+        String subject = switch (event) {
+            case "CHANGE_APPROVED" -> "Your booking change request has been approved";
+            case "CHANGE_DECLINED" -> "Update on your booking change request";
+            default -> "Update on your booking cancellation request";
+        };
+        String description = switch (event) {
+            case "CHANGE_APPROVED" -> "Your requested change has been approved. Please review your updated transfer details below.";
+            case "CHANGE_DECLINED" -> "We are sorry, but we could not approve your requested change. Your existing transfer arrangements remain unchanged.";
+            default -> "We are sorry, but we could not approve your cancellation request. Your booking has not been cancelled.";
+        };
+        String note = request.getAdminNote();
+        String noteText = note == null || note.isBlank() ? "" : "\n\nMessage from our team: " + note;
+        String text = "DalamanWay\n\n" + description + "\n\nBooking reference: " + booking.getReference()
+                + noteText + "\n\nIf you need assistance, reply to this email.\nhttps://dalamanway.com/booking/lookup";
+        String html = customerHtml(booking, event, description)
+                .replace("DETAIL_CHANGES", note == null || note.isBlank() ? ""
+                        : "<div style='padding:16px;margin-bottom:20px;background:#f1f5f9;border-radius:8px'>"
+                        + "<strong style='color:#1E3A5F'>Message from our team</strong>"
+                        + "<p style='white-space:pre-wrap;color:#475569;font-size:14px;line-height:1.6'>"
+                        + escape(note) + "</p></div>");
+        enqueue(booking.getId(), "MANAGEMENT_DECISION", booking.getEmail(),
+                "DalamanWay | " + subject + " (" + booking.getReference() + ")", text, html);
+    }
 
     /** Notify only when customer-facing journey details change, with a before/after summary. */
     public void queueUpdated(Booking booking, String changes) {
@@ -151,11 +171,21 @@ public class BookingEmails {
             case "PENDING" -> "Your booking is awaiting confirmation";
             case "COMPLETED" -> "Thank you for travelling with us";
             case "UPDATED" -> "Your transfer details have been updated";
+            case "CHANGE_APPROVED" -> "Your booking change is approved";
+            case "CHANGE_DECLINED" -> "Update on your change request";
+            case "CANCELLATION_DECLINED" -> "Update on your cancellation request";
             default -> throw new IllegalArgumentException("Unsupported booking email event.");
         };
-        String status = "RECEIVED".equals(event) ? "BOOKING REQUEST SUCCESSFUL" : event;
+        String status = switch (event) {
+            case "RECEIVED" -> "BOOKING REQUEST SUCCESSFUL";
+            case "CHANGE_APPROVED" -> "CHANGE APPROVED";
+            case "CHANGE_DECLINED" -> "CHANGE NOT APPROVED";
+            case "CANCELLATION_DECLINED" -> "CANCELLATION NOT APPROVED";
+            default -> event;
+        };
         String statusColor = switch (event) {
-            case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED" -> "#2A9D8F";
+            case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED", "CHANGE_APPROVED" -> "#2A9D8F";
+            case "CHANGE_DECLINED", "CANCELLATION_DECLINED" -> "#B42318";
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
         };
