@@ -5,6 +5,7 @@ import java.time.Instant;
 public record BookingManagementRequestView(
         long id,
         long bookingId,
+        String bookingReference,
         String requestType,
         String message,
         String status,
