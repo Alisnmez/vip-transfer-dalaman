@@ -1,11 +1,10 @@
 import { adminBookingStatusLabel } from '../formatters'
 
 const colors: Record<string, string> = {
-  PENDING: 'bg-amber-100 text-amber-950',
   'New Request': 'bg-amber-100 text-amber-950',
   'Driver Assigned': 'bg-emerald-100 text-emerald-900',
-  COMPLETED: 'bg-slate-200 text-slate-700',
-  CANCELLED: 'bg-rose-100 text-rose-900',
+  Completed: 'bg-slate-200 text-slate-700',
+  Cancelled: 'bg-rose-100 text-rose-900',
 }
 
 export function BookingStatusBadge({ status }: { status?: string | null }) {
