@@ -85,11 +85,12 @@ class BookingEmailIntegrationTest {
             if (message.path("to").path(0).asText().equals(dto.getEmail())) messages.add(message);
         }
         assertEquals(1, messages.size());
-        assertEquals("DalamanWay | Your transfer booking details (#" + booking.getId() + ")",
+        assertEquals("DalamanWay | Your booking request was successfully submitted (#" + booking.getId() + ")",
                 messages.getFirst().path("subject").asText());
-        assertTrue(messages.getFirst().path("text").asText().contains("review your journey details"));
-        assertTrue(messages.getFirst().path("html").asText().contains("BOOKING RECEIVED"));
+        assertTrue(messages.getFirst().path("text").asText().contains("successfully submitted"));
+        assertTrue(messages.getFirst().path("html").asText().contains("BOOKING REQUEST SUCCESSFUL"));
         assertFalse(messages.getFirst().path("html").asText().contains(">PENDING<"));
+        assertTrue(messages.getFirst().path("html").asText().contains("color:#2A9D8F"));
 
         bookings.updateStatus(booking.getId(), "CONFIRMED");
         bookings.updateStatus(booking.getId(), "CONFIRMED");
