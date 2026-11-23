@@ -68,3 +68,22 @@ export type BookingManagementRequestSubmission = {
   requestType: 'CHANGE' | 'CANCEL'
   message: string
 }
+
+export type PublicBookingView = {
+  reference: string
+  status: string
+  customerName: string
+  passengerCount: number
+  pickUpLocation: string
+  dropOffLocation: string
+  transferDateTime: string
+  returnDateTime?: string | null
+  vehicleId?: string | null
+  tripType?: string | null
+  price?: number | null
+  flightNumber?: string | null
+  luggageCount?: number | null
+  babySeatCount?: number | null
+  hotelName?: string | null
+  transferAddress?: string | null
+}
