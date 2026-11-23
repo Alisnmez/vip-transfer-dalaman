@@ -108,6 +108,14 @@ public class BookingService {
         booking.setTripType(dto.getTripType());
         booking.setPrice(transferPricingService.calculatePrice(dto.getPickUpLocation(), dto.getDropOffLocation(), dto.getVehicleId(), dto.getTripType(), dto.getPassengerCount()));
 
+        for (int attempt = 0; attempt < 30; attempt++) {
+            String candidate = BookingReference.generate();
+            if (!bookingRepository.existsByReference(candidate)) {
+                booking.setReference(candidate);
+                break;
+            }
+        }
+        if (booking.getReference() == null) throw new IllegalStateException("Could not allocate a unique booking reference.");
         Booking saved = bookingRepository.saveAndFlush(booking);
         bookingEmails.queue(saved, "RECEIVED");
         return saved;
