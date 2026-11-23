@@ -12,7 +12,7 @@ function memoryStorage() {
 }
 const now = Date.parse('2027-01-01T12:00:00Z')
 const receipt = {
-  id: 42, customerName: 'Test Customer', pickUpLocation: 'Dalaman Airport',
+  id: 42, reference: 'ABCD123', customerName: 'Test Customer', pickUpLocation: 'Dalaman Airport',
   dropOffLocation: 'Marmaris', schedule: '2027-01-03 15:00', savedAt: now,
 }
 
@@ -30,6 +30,9 @@ test('expired, future-dated and malformed receipts are discarded', () => {
     { ...receipt, savedAt: now - RECEIPT_MAX_AGE_MS - 1 },
     { ...receipt, savedAt: now + 1 },
     { ...receipt, id: -1 },
+    { ...receipt, reference: undefined },
+    { ...receipt, reference: '#18' },
+    { ...receipt, reference: '18' },
     { ...receipt, returnSchedule: 123 },
     [],
     null,
