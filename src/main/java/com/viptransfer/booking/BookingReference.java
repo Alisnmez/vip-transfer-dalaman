@@ -26,10 +26,7 @@ public final class BookingReference {
 
     public static Long toId(String input) {
         if (input == null) return null;
-        String value = input.strip().replaceFirst("^#", "").toUpperCase(Locale.ROOT);
-        if (value.matches("[1-9][0-9]{0,15}")) {
-            try { return Long.parseLong(value); } catch (NumberFormatException invalid) { return null; }
-        }
+        String value = input.strip().toUpperCase(Locale.ROOT);
         if (!value.matches("[A-Z]{4}[0-9]{3}")) return null;
         long letters = 0;
         long factor = 1;
