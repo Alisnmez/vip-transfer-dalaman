@@ -76,7 +76,7 @@ public class BookingEmails {
         if (email != null && !email.isBlank() && !email.toLowerCase(Locale.ROOT).endsWith(".invalid")) {
             enqueue(booking.getId(), event, email,
                     "DalamanWay | We received your booking " + kind + " request (" + booking.getReference() + ")",
-                    customerText, null);
+                    customerText, managementReceiptHtml(booking, request, kind));
         }
         if (settings.operator() != null && !settings.operator().isBlank()) {
             String operatorText = "New " + kind + " request received in Manage My Booking.\n\n"
@@ -93,6 +93,18 @@ public class BookingEmails {
                     "[Manage booking] " + kind + " request #" + request.getId() + " for booking " + booking.getReference(),
                     operatorText, null);
         }
+    }
+
+    private static String managementReceiptHtml(Booking booking, BookingManagementRequest request, String kind) {
+        String description = "We have received your " + kind + " request. Your existing booking remains unchanged until our team confirms the outcome in writing.";
+        String html = customerHtml(booking, "MANAGEMENT_RECEIVED", description);
+        String messageBlock = "<div style='padding:16px;margin-bottom:20px;background:#f1f5f9;border-radius:8px'>"
+                + "<strong style='color:#1E3A5F'>Your request</strong>"
+                + "<p style='white-space:pre-wrap;color:#475569;font-size:14px;line-height:1.6'>"
+                + escape(request.getMessage()) + "</p></div>";
+        return html.replace("DETAIL_CHANGES", messageBlock)
+                .replace("Visit DalamanWay", "Manage My Booking")
+                .replace("href=\"https://dalamanway.com\"", "href=\"https://dalamanway.com/booking/lookup\"");
     }
 
     /** Send branded customer notifications for approved or declined management requests. */
@@ -171,6 +183,7 @@ public class BookingEmails {
             case "PENDING" -> "Your booking is awaiting confirmation";
             case "COMPLETED" -> "Thank you for travelling with us";
             case "UPDATED" -> "Your transfer details have been updated";
+            case "MANAGEMENT_RECEIVED" -> "We received your booking request";
             case "CHANGE_APPROVED" -> "Your booking change is approved";
             case "CHANGE_DECLINED" -> "Update on your change request";
             case "CANCELLATION_DECLINED" -> "Update on your cancellation request";
@@ -178,13 +191,14 @@ public class BookingEmails {
         };
         String status = switch (event) {
             case "RECEIVED" -> "BOOKING REQUEST SUCCESSFUL";
+            case "MANAGEMENT_RECEIVED" -> "REQUEST RECEIVED";
             case "CHANGE_APPROVED" -> "CHANGE APPROVED";
             case "CHANGE_DECLINED" -> "CHANGE NOT APPROVED";
             case "CANCELLATION_DECLINED" -> "CANCELLATION NOT APPROVED";
             default -> event;
         };
         String statusColor = switch (event) {
-            case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED", "CHANGE_APPROVED" -> "#2A9D8F";
+            case "RECEIVED", "CONFIRMED", "COMPLETED", "UPDATED", "CHANGE_APPROVED", "MANAGEMENT_RECEIVED" -> "#2A9D8F";
             case "CHANGE_DECLINED", "CANCELLATION_DECLINED" -> "#B42318";
             case "CANCELLED" -> "#B42318";
             default -> "#A16207";
