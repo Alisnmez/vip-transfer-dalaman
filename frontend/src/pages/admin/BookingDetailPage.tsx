@@ -62,7 +62,7 @@ export function BookingDetailPage() {
     if (bookingStatus(booking.status) === 'CONFIRMED' && status === 'PENDING' && !window.confirm('Move this driver-assigned booking back to New Request? No status email will be sent.')) return
     if (status === 'COMPLETED' && !window.confirm('Mark this transfer as completed? A thank-you email will be queued for the customer.')) return
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
-    if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${status}? Only do this to correct an incorrectly completed booking.`)) return
+    if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${adminBookingStatusLabel(status)}? Only do this to correct an incorrectly completed booking.`)) return
     await runSaving(async () => {
       setError(''); setNotice('')
       try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
@@ -196,7 +196,7 @@ export function BookingDetailPage() {
             ['Pickup time (Turkey)', formatTransferDateTime(booking.transferDateTime)],
             ['Return time (Turkey)', booking.returnDateTime ? formatTransferDateTime(booking.returnDateTime) : 'One-way'],
             ['Flight', booking.flightNumber || 'Not provided'],
-            ['Status', bookingStatus(booking.status)],
+            ['Status', adminBookingStatusLabel(booking.status)],
             ['Email', booking.email || 'Not provided'],
             ['Phone', booking.phoneNumber || 'Not provided'],
             ['Hotel', booking.hotelName || 'Not provided'],
