@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class BookingManagementRequestService {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(BookingManagementRequestService.class);
     private static final String PUBLIC_MESSAGE = "If the booking reference and email match, we have recorded your request and will email the address on the booking. Your booking remains unchanged until we confirm the outcome in writing.";
     private final BookingRepository bookingRepository;
     private final BookingManagementRequestRepository requestRepository;
@@ -56,9 +57,11 @@ public class BookingManagementRequestService {
                 || !Set.of("PENDING", "CONFIRMED").contains(booking.getStatus() == null ? "PENDING" : booking.getStatus())
                 || !hasUpcomingLeg) {
             // Keep the public response identical so booking references cannot be enumerated.
+            log.info("Management request not recorded: booking ID {} failed eligibility or email validation.", bookingId);
             return Map.of("message", PUBLIC_MESSAGE);
         }
         if (requestRepository.existsByBookingIdAndStatusIn(bookingId, List.of("NEW", "IN_PROGRESS"))) {
+            log.info("Management request not recorded: booking ID {} already has an open request.", bookingId);
             return Map.of("message", PUBLIC_MESSAGE);
         }
 
