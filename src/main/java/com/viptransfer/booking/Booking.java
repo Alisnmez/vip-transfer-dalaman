@@ -78,6 +78,10 @@ public class Booking {
     public Booking() {
     }
 
+    public String getReference() {
+        return id == null ? null : BookingReference.fromId(id);
+    }
+
     public Long getId() {
         return id;
     }
