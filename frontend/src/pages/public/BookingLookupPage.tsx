@@ -13,12 +13,12 @@ const copy = {
   en: {
     title: 'Manage My Booking',
     intro: 'Request a change or cancellation. Enter the reference and the email address used for the booking so we can verify the request.',
-    reference: 'Booking reference', example: 'e.g. ABCD123', email: 'Booking email address',
+    reference: 'Booking reference', example: 'e.g. T7K2MA8', email: 'Booking email address',
     requestType: 'What do you need?', change: 'Request a change', cancel: 'Request a cancellation',
     message: 'Tell us what you need', changePlaceholder: 'For example: request a different pickup time, update the hotel address, or change the passenger count.',
     cancelPlaceholder: 'Please confirm that you would like to cancel and add any details we should know.',
     sendChange: 'Send change request', sendCancel: 'Send cancellation request', sending: 'Sending request…',
-    referenceError: 'Enter your booking reference (4 letters followed by 3 numbers).', emailRequired: 'Enter the email address used for your booking.', emailInvalid: 'Enter a valid email address.', messageError: 'Describe the change or cancellation you are requesting.',
+    referenceError: 'Enter your 7-character booking reference (letters and numbers).', emailRequired: 'Enter the email address used for your booking.', emailInvalid: 'Enter a valid email address.', messageError: 'Describe the change or cancellation you are requesting.',
     bookingNotFound: 'No booking matches this reference and email address. Check both details and try again.', bookingUnavailable: 'This booking cannot accept a new request right now. It may already have an open request or the pickup date may have passed.',
     required: 'Complete all fields with the details saved for the booking.',
     successTitle: 'Request submitted',
@@ -34,12 +34,12 @@ const copy = {
   de: {
     title: 'Meine Buchung verwalten',
     intro: 'Beantragen Sie eine Änderung oder Stornierung. Geben Sie die Buchungsnummer und die für die Buchung verwendete E-Mail-Adresse ein.',
-    reference: 'Buchungsnummer', example: 'z. B. ABCD123', email: 'E-Mail-Adresse der Buchung',
+    reference: 'Buchungsnummer', example: 'z. B. T7K2MA8', email: 'E-Mail-Adresse der Buchung',
     requestType: 'Worum geht es?', change: 'Änderung anfragen', cancel: 'Stornierung anfragen',
     message: 'Was möchten Sie ändern?', changePlaceholder: 'Zum Beispiel: andere Abholzeit, Hoteladresse aktualisieren oder Fahrgastzahl ändern.',
     cancelPlaceholder: 'Bestätigen Sie bitte Ihren Stornierungswunsch und ergänzen Sie wichtige Hinweise.',
     sendChange: 'Änderungsanfrage senden', sendCancel: 'Stornierungsanfrage senden', sending: 'Anfrage wird gesendet…',
-    referenceError: 'Geben Sie Ihre Buchungsnummer ein (4 Buchstaben und 3 Ziffern).', emailRequired: 'Geben Sie die E-Mail-Adresse Ihrer Buchung ein.', emailInvalid: 'Geben Sie eine gültige E-Mail-Adresse ein.', messageError: 'Beschreiben Sie Ihre Änderungs- oder Stornierungsanfrage.',
+    referenceError: 'Geben Sie Ihre 7-stellige Buchungsnummer aus Buchstaben und Ziffern ein.', emailRequired: 'Geben Sie die E-Mail-Adresse Ihrer Buchung ein.', emailInvalid: 'Geben Sie eine gültige E-Mail-Adresse ein.', messageError: 'Beschreiben Sie Ihre Änderungs- oder Stornierungsanfrage.',
     bookingNotFound: 'Keine Buchung stimmt mit dieser Buchungsnummer und E-Mail-Adresse überein. Bitte überprüfen Sie beide Angaben.', bookingUnavailable: 'Für diese Buchung kann derzeit keine neue Anfrage gestellt werden. Möglicherweise liegt bereits eine offene Anfrage vor oder die Abholzeit ist vorbei.',
     required: 'Bitte füllen Sie alle Felder mit den bei der Buchung verwendeten Angaben aus.',
     successTitle: 'Anfrage übermittelt',
@@ -55,12 +55,12 @@ const copy = {
   ru: {
     title: 'Управление бронированием',
     intro: 'Запросите изменение или отмену. Укажите номер бронирования и адрес электронной почты, использованный при бронировании.',
-    reference: 'Номер бронирования', example: 'например, ABCD123', email: 'Электронная почта из бронирования',
+    reference: 'Номер бронирования', example: 'например, T7K2MA8', email: 'Электронная почта из бронирования',
     requestType: 'Что нужно сделать?', change: 'Запросить изменение', cancel: 'Запросить отмену',
     message: 'Опишите запрос', changePlaceholder: 'Например: изменить время встречи, обновить адрес отеля или число пассажиров.',
     cancelPlaceholder: 'Подтвердите, что хотите отменить поездку, и добавьте важные сведения.',
     sendChange: 'Отправить запрос на изменение', sendCancel: 'Отправить запрос на отмену', sending: 'Отправка запроса…',
-    referenceError: 'Введите номер бронирования (4 буквы и 3 цифры).', emailRequired: 'Введите адрес электронной почты из бронирования.', emailInvalid: 'Введите действительный адрес электронной почты.', messageError: 'Опишите необходимое изменение или отмену.',
+    referenceError: 'Введите 7-значный номер бронирования из букв и цифр.', emailRequired: 'Введите адрес электронной почты из бронирования.', emailInvalid: 'Введите действительный адрес электронной почты.', messageError: 'Опишите необходимое изменение или отмену.',
     bookingNotFound: 'Бронирование с таким номером и адресом электронной почты не найдено. Проверьте оба поля.', bookingUnavailable: 'Сейчас нельзя отправить новый запрос для этого бронирования. Возможно, запрос уже открыт или время поездки прошло.',
     required: 'Заполните все поля данными, указанными при бронировании.',
     successTitle: 'Запрос отправлен',
@@ -99,7 +99,7 @@ export function BookingLookupPage() {
     event.preventDefault()
     setError('')
     const nextErrors: { reference?: string; email?: string; message?: string } = {}
-    if (!/^[A-Za-z]{4}[0-9]{3}$/.test(bookingReference.trim())) nextErrors.reference = text.referenceError
+    if (!/^[A-Za-z0-9]{7}$/.test(bookingReference.trim())) nextErrors.reference = text.referenceError
     if (!email.trim()) nextErrors.email = text.emailRequired
     else if (!isValidEmail(email)) nextErrors.email = text.emailInvalid
     if (!message.trim()) nextErrors.message = text.messageError
@@ -145,7 +145,7 @@ export function BookingLookupPage() {
               <label htmlFor="booking-reference" className="block text-sm font-semibold">
                 {text.reference}
                 <input id="booking-reference" type="text" autoComplete="off" maxLength={7} aria-invalid={Boolean(fieldErrors.reference)} aria-describedby={fieldErrors.reference ? "booking-reference-error" : undefined}
-                  pattern="[A-Za-z]{4}[0-9]{3}" value={bookingReference} onChange={event => { setBookingReference(event.target.value); setFieldErrors(previous => ({ ...previous, reference: undefined })) }}
+                  pattern="[A-Za-z0-9]{7}" value={bookingReference} onChange={event => { setBookingReference(event.target.value); setFieldErrors(previous => ({ ...previous, reference: undefined })) }}
                   placeholder={text.example} className="mt-2 block w-full rounded-lg border border-outline px-4 py-3" />
                 {fieldErrors.reference && <span id="booking-reference-error" role="alert" className="mt-1 block text-sm text-error">{fieldErrors.reference}</span>}
               </label>
