@@ -41,9 +41,17 @@ public class BookingManagementRequestService {
             return Map.of("message", PUBLIC_MESSAGE);
         }
 
-        Long bookingId = BookingReference.toId(dto.getBookingReference());
-        if (bookingId == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No booking matches this reference and email address.");
-
+        String reference = dto.getBookingReference().strip().toUpperCase(java.util.Locale.ROOT);
+        Booking matched = bookingRepository.findByReference(reference).orElse(null);
+        if (matched == null) {
+            Long legacyId = BookingReference.toId(reference);
+            if (legacyId != null) {
+                Booking legacy = bookingRepository.findById(legacyId).orElse(null);
+                if (legacy != null && legacy.getReference().equals(reference)) matched = legacy;
+            }
+        }
+        if (matched == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No booking matches this reference and email address.");
+        Long bookingId = matched.getId();
         Booking booking = bookingRepository.findByIdForUpdate(bookingId).orElse(null);
         if (requestRepository.findByIdempotencyKey(idempotencyKey).isPresent()) {
             return Map.of("message", PUBLIC_MESSAGE);
