@@ -402,7 +402,7 @@ test('successful booking clears both drafts and keeps the receipt in the current
   await page.route('**/bookings', async route => {
     expect(route.request().method()).toBe('POST')
     expect(route.request().postDataJSON().email).toBe('booking@example.invalid')
-    await route.fulfill({ json: { id: 902 } })
+    await route.fulfill({ json: { id: 902, reference: 'ABCD123' } })
   })
   await page.goto('http://127.0.0.1:4173/booking')
   const tomorrow = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Istanbul', year: 'numeric', month: '2-digit', day: '2-digit' })
@@ -426,7 +426,7 @@ test('successful booking clears both drafts and keeps the receipt in the current
   await continueButton.click()
   await page.getByRole('checkbox', { name: 'I confirm that all information provided is correct.' }).check()
   await page.getByRole('button', { name: 'Submit booking request' }).click()
-  await expect(page.getByText('#902', { exact: true })).toBeVisible()
+  await expect(page.getByText('ABCD123', { exact: true })).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Your Transfer Booking Details Are Received!' })).toBeVisible()
   await expect(page.getByText('Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.')).toBeVisible()
   const storage = await page.evaluate(() => ({
@@ -436,11 +436,11 @@ test('successful booking clears both drafts and keeps the receipt in the current
   }))
   expect(storage).toEqual({ transfer: null, passenger: null, persistent: [null, null, null] })
   await page.reload()
-  await expect(page.getByText('#902', { exact: true })).toBeVisible()
+  await expect(page.getByText('ABCD123', { exact: true })).toBeVisible()
   const freshTab = await context.newPage()
   await freshTab.goto('http://127.0.0.1:4173/booking/confirmation')
   await expect(freshTab.getByRole('heading', { name: 'Review Your Booking Request' })).toBeVisible()
-  await expect(freshTab.getByText('#902', { exact: true })).toHaveCount(0)
+  await expect(freshTab.getByText('ABCD123', { exact: true })).toHaveCount(0)
   await freshTab.close()
 })
 
