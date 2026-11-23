@@ -31,6 +31,9 @@ class BookingManagementReferenceIntegrationTest {
         bookingDto.setTransferDateTime(LocalDateTime.now(ZoneId.of("Europe/Istanbul")).plusDays(4));
         Booking booking = bookings.createBooking(bookingDto, UUID.randomUUID().toString());
 
+        assertTrue(booking.getReference().matches("[A-Z0-9]{7}"));
+        assertFalse(booking.getReference().matches("[A-Z]{4}[0-9]{3}"));
+        assertEquals(booking.getReference(), bookings.getBooking(booking.getId()).getReference());
         BookingManagementRequestDto dto = new BookingManagementRequestDto();
         dto.setBookingReference(booking.getReference());
         dto.setEmail("management@example.com");
@@ -53,7 +56,8 @@ class BookingManagementReferenceIntegrationTest {
 
         requests.submit(dto, UUID.randomUUID().toString());
         assertTrue(repository.existsByBookingIdAndStatusIn(booking.getId(), java.util.List.of("NEW")));
-        assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId() == booking.getId()));
+        assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId() == booking.getId()
+                && booking.getReference().equals(r.bookingReference())));
         ResponseStatusException duplicate = assertThrows(ResponseStatusException.class,
                 () -> requests.submit(dto, UUID.randomUUID().toString()));
         assertEquals(HttpStatus.CONFLICT, duplicate.getStatusCode());
