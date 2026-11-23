@@ -1,5 +1,6 @@
 export type Booking = {
   id: number
+  reference: string
   createdAt?: string | null
   customerName: string
   passengerCount: number
