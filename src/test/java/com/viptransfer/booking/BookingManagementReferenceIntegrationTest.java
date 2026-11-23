@@ -3,6 +3,8 @@ package com.viptransfer.booking;
 import com.viptransfer.booking.dto.BookingManagementRequestDto;
 import com.viptransfer.booking.dto.BookingRequestDto;
 import org.junit.jupiter.api.Test;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
@@ -34,9 +36,27 @@ class BookingManagementReferenceIntegrationTest {
         dto.setEmail("management@example.com");
         dto.setRequestType("CHANGE");
         dto.setMessage("Please change my pickup date.");
+        BookingManagementRequestDto mismatched = new BookingManagementRequestDto();
+        mismatched.setBookingReference(booking.getReference());
+        mismatched.setEmail("wrong@example.com");
+        mismatched.setRequestType("CHANGE");
+        mismatched.setMessage("Change pickup time.");
+        ResponseStatusException mismatch = assertThrows(ResponseStatusException.class,
+                () -> requests.submit(mismatched, UUID.randomUUID().toString()));
+        assertEquals(HttpStatus.NOT_FOUND, mismatch.getStatusCode());
+        assertFalse(repository.existsByBookingIdAndStatusIn(booking.getId(), java.util.List.of("NEW")));
+
+        mismatched.setBookingReference("ZZZZ999");
+        ResponseStatusException missing = assertThrows(ResponseStatusException.class,
+                () -> requests.submit(mismatched, UUID.randomUUID().toString()));
+        assertEquals(HttpStatus.NOT_FOUND, missing.getStatusCode());
+
         requests.submit(dto, UUID.randomUUID().toString());
         assertTrue(repository.existsByBookingIdAndStatusIn(booking.getId(), java.util.List.of("NEW")));
         assertTrue(requests.list("ALL").stream().anyMatch(r -> r.bookingId() == booking.getId()));
+        ResponseStatusException duplicate = assertThrows(ResponseStatusException.class,
+                () -> requests.submit(dto, UUID.randomUUID().toString()));
+        assertEquals(HttpStatus.CONFLICT, duplicate.getStatusCode());
 
         assertNull(BookingReference.toId("#" + booking.getId()));
         assertNull(BookingReference.toId(String.valueOf(booking.getId())));
