@@ -2,6 +2,7 @@ import { useLanguage, type Language } from './language'
 
 const bookingCopy: Record<Exclude<Language, 'en'>, ReadonlyMap<string, string>> = {
   de: new Map([
+    ["No online or card payment is collected. Pay the driver in cash at the end of your journey.", "Es wird keine Online- oder Kartenzahlung eingezogen. Bezahlen Sie den Fahrer am Ende der Fahrt in bar."],
     ["Your Transfer Booking Details Are Received!", "Ihre Transferbuchung ist eingegangen!"],
     ["Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.", "Vielen Dank für Ihre Buchung bei DalamanWay! Unser Team prüft Ihre Transferdetails. Sobald alles bestätigt ist, erhalten Sie eine E-Mail. Bitte bewahren Sie Ihre Buchungsnummer auf."],
     ["Keep this reference for your records. Our team will confirm your transfer arrangements by email.", "Bewahren Sie Ihre Buchungsnummer auf. Unser Team bestätigt Ihren Transfer per E-Mail."],
@@ -211,6 +212,7 @@ const bookingCopy: Record<Exclude<Language, 'en'>, ReadonlyMap<string, string>> 
     ["Passenger, luggage or baby seat count is invalid for the selected vehicle. Please review your transfer.", "Die Anzahl der Fahrgäste, Gepäckstücke oder Kindersitze ist für dieses Fahrzeug ungültig. Prüfen Sie die Angaben."],
   ]),
   ru: new Map([
+    ["No online or card payment is collected. Pay the driver in cash at the end of your journey.", "Онлайн-оплата и оплата картой не принимаются. Оплатите поездку водителю наличными в конце поездки."],
     ["Your Transfer Booking Details Are Received!", "Данные вашего трансфера получены!"],
     ["Thank you for booking with DalamanWay! Our team is reviewing your transfer arrangements. We will email you once everything is confirmed. Please keep your booking reference.", "Спасибо за бронирование в DalamanWay! Наша команда проверяет детали трансфера. Когда всё будет подтверждено, мы отправим вам письмо. Сохраните номер бронирования."],
     ["Keep this reference for your records. Our team will confirm your transfer arrangements by email.", "Сохраните номер бронирования. Наша команда подтвердит трансфер по электронной почте."],
