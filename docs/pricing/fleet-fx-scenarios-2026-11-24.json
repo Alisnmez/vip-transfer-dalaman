@@ -9,12 +9,12 @@
   "policy": "Scenarios only; no automatically selected minimum; historical competitor evidence requires independent recheck, capacity, direction and cost validation; Touransfer and Sundream excluded.",
   "stats": {
     "standard-vito": {
-      "one": 27,
-      "round": 17
+      "one": 28,
+      "round": 18
     },
     "vip-vito": {
-      "one": 31,
-      "round": 25
+      "one": 32,
+      "round": 26
     },
     "vip-maybach": {
       "one": 17,
@@ -5733,9 +5733,20 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-kundu-transfer",
+          "currency": "EUR",
+          "originalOneWay": 215,
+          "originalRoundTrip": 420,
+          "oneWayScenario": 170.5,
+          "roundTripScenario": 333.5,
+          "passengers": 6,
+          "verification": "Comparable standard minivan VW/Ford, not exact Mercedes; provisional FX"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -5743,9 +5754,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-kundu-transfer",
+          "currency": "EUR",
+          "originalOneWay": 245,
+          "originalRoundTrip": 478,
+          "oneWayScenario": 194.5,
+          "roundTripScenario": 379.5,
+          "passengers": 6,
+          "verification": "Published VIP Vito tariff updated 2026-10-28; provisional FX"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
