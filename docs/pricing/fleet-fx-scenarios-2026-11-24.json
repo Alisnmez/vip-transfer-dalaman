@@ -13,8 +13,8 @@
       "round": 17
     },
     "vip-vito": {
-      "one": 25,
-      "round": 23
+      "one": 30,
+      "round": 24
     },
     "vip-maybach": {
       "one": 17,
@@ -6313,6 +6313,16 @@
           "roundTripScenario": 317.5,
           "passengers": 6,
           "verification": "Source inspected 2026-11-24; published per-vehicle VIP Vito tariff updated 2026-10-28; planning FX unverified; capacity and cost floor pending"
+        },
+        {
+          "url": "https://www.aeroviavip.com/",
+          "currency": "GBP",
+          "originalOneWay": 240,
+          "originalRoundTrip": null,
+          "oneWayScenario": 228,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published VIP Vito reference; direction/one-way interpretation and capacity need confirmation; not approved"
         }
       ],
       "missingOneWay": false,
@@ -6524,8 +6534,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.aeroviavip.com/",
+          "currency": "GBP",
+          "originalOneWay": 240,
+          "originalRoundTrip": null,
+          "oneWayScenario": 228,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published VIP Vito reference; direction/one-way interpretation and capacity need confirmation; not approved"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -6804,9 +6825,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/en/dalaman-airport-to-torba-transfer",
+          "currency": "EUR",
+          "originalOneWay": 195,
+          "originalRoundTrip": 381,
+          "oneWayScenario": 155,
+          "roundTripScenario": 302.5,
+          "passengers": 6,
+          "verification": "Direct published six passenger VIP Vito tariff, updated 2026-10-28; planning FX unverified"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -6874,8 +6906,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.aeroviavip.com/",
+          "currency": "GBP",
+          "originalOneWay": 240,
+          "originalRoundTrip": null,
+          "oneWayScenario": 228,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published VIP Vito reference; direction/one-way interpretation and capacity need confirmation; not approved"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -6944,8 +6987,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.aeroviavip.com/",
+          "currency": "GBP",
+          "originalOneWay": 240,
+          "originalRoundTrip": null,
+          "oneWayScenario": 228,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published VIP Vito reference; direction/one-way interpretation and capacity need confirmation; not approved"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -7014,8 +7068,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.aeroviavip.com/",
+          "currency": "GBP",
+          "originalOneWay": 240,
+          "originalRoundTrip": null,
+          "oneWayScenario": 228,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published VIP Vito reference; direction/one-way interpretation and capacity need confirmation; not approved"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
