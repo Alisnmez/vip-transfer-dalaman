@@ -18,7 +18,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 96,
+          "roundTrip": 192,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris(Any Hotel)",
@@ -34,15 +45,34 @@
         "roundTrip": 100
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 115,
+          "roundTrip": 230,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "vip-maybach",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 71,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://www.dalamantransfer.com/price-list/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "oneWay": 75,
+        "roundTrip": null,
+        "passengers": 6,
+        "luggage": 6
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -88,7 +118,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 134,
+          "roundTrip": 268,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris(Any Hotel)",
@@ -97,7 +138,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 173,
+          "roundTrip": 346,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris(Any Hotel)",
@@ -123,7 +175,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 104,
+          "roundTrip": 208,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -139,7 +202,18 @@
         "roundTrip": 100
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 125,
+          "roundTrip": 250,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -184,7 +258,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 146,
+          "roundTrip": 292,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -193,7 +278,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 187,
+          "roundTrip": 374,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -516,7 +612,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 117,
+          "roundTrip": 234,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Turunc",
@@ -532,7 +639,18 @@
         "roundTrip": 130
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 140,
+          "roundTrip": 280,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Turunc",
@@ -559,7 +677,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 163,
+          "roundTrip": 326,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Turunc",
@@ -568,7 +697,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 210,
+          "roundTrip": 420,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Turunc",
@@ -779,7 +919,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 50,
+          "roundTrip": 100,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Gocek",
@@ -788,15 +939,34 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": 110,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Gocek",
       "category": "vip-maybach",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 61.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://www.dalamantransfer.com/price-list/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "oneWay": 65,
+        "roundTrip": null,
+        "passengers": 6,
+        "luggage": 6
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -843,7 +1013,18 @@
         "serviceClass": "private transfer; standard/VIP class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 65,
+          "roundTrip": 130,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Gocek",
@@ -852,7 +1033,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 75,
+          "roundTrip": 150,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Gocek",
@@ -878,7 +1070,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 50,
+          "roundTrip": 100,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -894,7 +1097,18 @@
         "roundTrip": 70
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": 110,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -939,7 +1153,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 65,
+          "roundTrip": 130,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -948,7 +1173,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 75,
+          "roundTrip": 150,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -974,7 +1210,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": 110,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
@@ -990,7 +1237,18 @@
         "roundTrip": 100
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 66,
+          "roundTrip": 132,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
@@ -1044,7 +1302,18 @@
         "serviceClass": "private transfer; standard/VIP class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 76,
+          "roundTrip": 152,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
@@ -1053,7 +1322,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 98,
+          "roundTrip": 196,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
@@ -1221,7 +1501,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 66,
+          "roundTrip": 132,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
@@ -1237,15 +1528,34 @@
         "roundTrip": 100
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 80,
+          "roundTrip": 160,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "vip-maybach",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 71,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://www.dalamantransfer.com/price-list/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "oneWay": 75,
+        "roundTrip": null,
+        "passengers": 6,
+        "luggage": 6
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1298,7 +1608,18 @@
         "serviceClass": "private; class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 93,
+          "roundTrip": 186,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
@@ -1307,7 +1628,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 120,
+          "roundTrip": 240,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
@@ -1333,7 +1665,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 122,
+          "roundTrip": 244,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -1342,7 +1685,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 146,
+          "roundTrip": 292,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -1397,7 +1751,18 @@
         "serviceClass": "private transfer; standard/VIP class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 171,
+          "roundTrip": 342,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -1406,7 +1771,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 219,
+          "roundTrip": 438,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -1432,7 +1808,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 149,
+          "roundTrip": 298,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kas",
@@ -1441,7 +1828,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 179,
+          "roundTrip": 358,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kas",
@@ -1496,7 +1894,18 @@
         "serviceClass": "private transfer; standard/VIP class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 208,
+          "roundTrip": 416,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kas",
@@ -1505,7 +1914,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 268,
+          "roundTrip": 536,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Kas",
@@ -1523,7 +1943,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 72,
+          "roundTrip": 144,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Akyaka",
@@ -1532,7 +1963,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 86,
+          "roundTrip": 172,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Akyaka",
@@ -1569,7 +2011,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 101,
+          "roundTrip": 202,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Akyaka",
@@ -1578,7 +2031,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 129,
+          "roundTrip": 258,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Akyaka",
@@ -1604,7 +2068,18 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 163,
+          "roundTrip": 326,
+          "passengers": 6,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Datça",
@@ -1613,7 +2088,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 195,
+          "roundTrip": 390,
+          "passengers": 4,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Datça",
@@ -1650,7 +2136,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 228,
+          "roundTrip": 456,
+          "passengers": 15,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Datça",
@@ -1659,7 +2156,18 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "oneWay": 293,
+          "roundTrip": 586,
+          "passengers": 10,
+          "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        }
+      ]
     },
     {
       "destination": "Datça",
