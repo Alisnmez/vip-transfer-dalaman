@@ -6,18 +6,18 @@
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": 47.5,
-      "roundTripCandidate": null,
+      "oneWayCandidate": 42.5,
+      "roundTripCandidate": 85.5,
       "evidence": {
-        "url": "https://reductus.com/prices/",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "4–6",
-        "oneWay": 50,
-        "roundTrip": null,
-        "serviceClass": "private transfer; vehicle model not specified"
+        "checked": "2026-11-24",
+        "passengers": "1–5",
+        "oneWay": 45,
+        "roundTrip": 90,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -60,6 +60,15 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://reductus.com/prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "4–6",
+          "oneWay": 50,
+          "roundTrip": null,
+          "serviceClass": "private transfer; vehicle model not specified"
         }
       ]
     },
@@ -70,11 +79,12 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -109,6 +119,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
         }
       ]
     },
@@ -178,10 +196,18 @@
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 152,
+      "evidence": {
+        "url": "https://www.transfersviadalaman.com/prices",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "6–15",
+        "oneWay": 80,
+        "roundTrip": 160,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -220,10 +246,18 @@
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -335,11 +369,12 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -374,6 +409,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
         }
       ]
     },
@@ -468,10 +511,18 @@
     {
       "destination": "Icmeler(Any Hotel)",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -540,14 +591,25 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
+        }
+      ]
     },
     {
       "destination": "Netsel Marina",
@@ -579,10 +641,18 @@
     {
       "destination": "Netsel Marina",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
@@ -618,14 +688,25 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
+        }
+      ]
     },
     {
       "destination": "Albatros Marina",
@@ -657,10 +738,18 @@
     {
       "destination": "Albatros Marina",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
@@ -720,11 +809,12 @@
       "roundTripCandidate": 104.5,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 60,
-        "roundTrip": 110
+        "roundTrip": 110,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -750,6 +840,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 60,
+          "roundTrip": 110
         }
       ]
     },
@@ -807,10 +905,18 @@
     {
       "destination": "Yacht Marina",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 123.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 70,
+        "roundTrip": 130,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
@@ -930,11 +1036,12 @@
       "roundTripCandidate": 123.5,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 70,
-        "roundTrip": 130
+        "roundTrip": 130,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -947,6 +1054,14 @@
           "roundTrip": 280,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 70,
+          "roundTrip": 130
         }
       ]
     },
@@ -1003,10 +1118,18 @@
     {
       "destination": "Turunc",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1109,11 +1232,12 @@
       "roundTripCandidate": 123.5,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 65,
-        "roundTrip": 130
+        "roundTrip": 130,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -1139,6 +1263,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 65,
+          "roundTrip": 130
         }
       ]
     },
@@ -1208,10 +1340,18 @@
     {
       "destination": "D Maris Bay",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 133,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 70,
+        "roundTrip": 140,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1301,10 +1441,18 @@
     {
       "destination": "Sarigerme",
       "category": "vip-vito",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 28.5,
+      "roundTripCandidate": 57,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "5–6",
+        "oneWay": 30,
+        "roundTrip": 60,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1431,10 +1579,18 @@
     {
       "destination": "Sarigerme",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 76,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 40,
+        "roundTrip": 80,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1473,18 +1629,18 @@
     {
       "destination": "Gocek",
       "category": "standard-vito",
-      "oneWayCandidate": 42.5,
-      "roundTripCandidate": null,
+      "oneWayCandidate": 33,
+      "roundTripCandidate": 66.5,
       "evidence": {
-        "url": "https://reductus.com/prices/",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "4–6",
-        "oneWay": 45,
-        "roundTrip": null,
-        "serviceClass": "private transfer; vehicle model not specified"
+        "checked": "2026-11-24",
+        "passengers": "1–5",
+        "oneWay": 35,
+        "roundTrip": 70,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1527,16 +1683,33 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://reductus.com/prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "4–6",
+          "oneWay": 45,
+          "roundTrip": null,
+          "serviceClass": "private transfer; vehicle model not specified"
         }
       ]
     },
     {
       "destination": "Gocek",
       "category": "vip-vito",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 66.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "5–6",
+        "oneWay": 40,
+        "roundTrip": 70,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1630,19 +1803,18 @@
     {
       "destination": "Gocek",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": 76,
-      "roundTripCandidate": 152,
+      "oneWayCandidate": 42.5,
+      "roundTripCandidate": 85.5,
       "evidence": {
-        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
-        "checked": "2026-11-24",
-        "published": "2026-05-31",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "11–16",
-        "oneWay": 80,
-        "roundTrip": 160,
-        "serviceClass": "private transfer; standard/VIP class unverified"
+        "checked": "2026-11-24",
+        "passengers": "6–15",
+        "oneWay": 45,
+        "roundTrip": 90,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1675,16 +1847,34 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "published": "2026-05-31",
+          "currency": "GBP",
+          "passengers": "11–16",
+          "oneWay": 80,
+          "roundTrip": 160,
+          "serviceClass": "private transfer; standard/VIP class unverified"
         }
       ]
     },
     {
       "destination": "Gocek",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 47.5,
+      "roundTripCandidate": 85.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 50,
+        "roundTrip": 90,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1732,18 +1922,18 @@
     {
       "destination": "Dalyan",
       "category": "standard-vito",
-      "oneWayCandidate": 42.5,
-      "roundTripCandidate": null,
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 76,
       "evidence": {
-        "url": "https://reductus.com/prices/",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "4–6",
-        "oneWay": 45,
-        "roundTrip": null,
-        "serviceClass": "private transfer; vehicle model not specified"
+        "checked": "2026-11-24",
+        "passengers": "1–5",
+        "oneWay": 40,
+        "roundTrip": 80,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1786,6 +1976,15 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://reductus.com/prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "4–6",
+          "oneWay": 45,
+          "roundTrip": null,
+          "serviceClass": "private transfer; vehicle model not specified"
         }
       ]
     },
@@ -1796,11 +1995,12 @@
       "roundTripCandidate": 66.5,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 40,
-        "roundTrip": 70
+        "roundTrip": 70,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -1835,6 +2035,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 40,
+          "roundTrip": 70
         }
       ]
     },
@@ -1887,10 +2095,18 @@
     {
       "destination": "Dalyan",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 47.5,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.transfersviadalaman.com/prices",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "6–15",
+        "oneWay": 50,
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1929,10 +2145,18 @@
     {
       "destination": "Dalyan",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 47.5,
+      "roundTripCandidate": 85.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 50,
+        "roundTrip": 90,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -1980,18 +2204,18 @@
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": 57,
-      "roundTripCandidate": null,
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 76,
       "evidence": {
-        "url": "https://reductus.com/prices/",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "4–6",
-        "oneWay": 60,
-        "roundTrip": null,
-        "serviceClass": "private transfer; vehicle model not specified"
+        "checked": "2026-11-24",
+        "passengers": "1–5",
+        "oneWay": 40,
+        "roundTrip": 80,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2034,6 +2258,15 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://reductus.com/prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "4–6",
+          "oneWay": 60,
+          "roundTrip": null,
+          "serviceClass": "private transfer; vehicle model not specified"
         }
       ]
     },
@@ -2044,11 +2277,12 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -2083,6 +2317,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
         }
       ]
     },
@@ -2135,19 +2377,18 @@
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": 95,
-      "roundTripCandidate": 190,
+      "oneWayCandidate": 57,
+      "roundTripCandidate": 114,
       "evidence": {
-        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
-        "checked": "2026-11-24",
-        "published": "2026-05-31",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "11–16",
-        "oneWay": 100,
-        "roundTrip": 200,
-        "serviceClass": "private transfer; standard/VIP class unverified"
+        "checked": "2026-11-24",
+        "passengers": "6–15",
+        "oneWay": 60,
+        "roundTrip": 120,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2180,16 +2421,34 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "published": "2026-05-31",
+          "currency": "GBP",
+          "passengers": "11–16",
+          "oneWay": 100,
+          "roundTrip": 200,
+          "serviceClass": "private transfer; standard/VIP class unverified"
         }
       ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 118.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 70,
+        "roundTrip": 125,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2379,18 +2638,18 @@
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": 57,
-      "roundTripCandidate": null,
+      "oneWayCandidate": 42.5,
+      "roundTripCandidate": 85.5,
       "evidence": {
-        "url": "https://reductus.com/prices/",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "4–6",
-        "oneWay": 60,
-        "roundTrip": null,
-        "serviceClass": "private transfer; vehicle model not specified"
+        "checked": "2026-11-24",
+        "passengers": "1–5",
+        "oneWay": 45,
+        "roundTrip": 90,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2433,6 +2692,15 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://reductus.com/prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "4–6",
+          "oneWay": 60,
+          "roundTrip": null,
+          "serviceClass": "private transfer; vehicle model not specified"
         }
       ]
     },
@@ -2443,11 +2711,12 @@
       "roundTripCandidate": 95,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 55,
-        "roundTrip": 100
+        "roundTrip": 100,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
       "approved": false,
@@ -2482,6 +2751,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 55,
+          "roundTrip": 100
         }
       ]
     },
@@ -2550,18 +2827,18 @@
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": 95,
-      "roundTripCandidate": 190,
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 133,
       "evidence": {
-        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
-        "checked": "2026-11-24",
+        "url": "https://www.transfersviadalaman.com/prices",
         "currency": "GBP",
-        "passengers": "11–16",
-        "oneWay": 100,
-        "roundTrip": 200,
-        "serviceClass": "private; class unverified"
+        "checked": "2026-11-24",
+        "passengers": "6–15",
+        "oneWay": 70,
+        "roundTrip": 140,
+        "verification": "source table directly inspected; own class and scope pending"
       },
-      "status": "vehicle-class-and-capacity-pending",
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2594,16 +2871,33 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "11–16",
+          "oneWay": 100,
+          "roundTrip": 200,
+          "serviceClass": "private; class unverified"
         }
       ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 123.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 70,
+        "roundTrip": 130,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2701,10 +2995,18 @@
     {
       "destination": "Kalkan",
       "category": "vip-vito",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 142.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "5–6",
+        "oneWay": 80,
+        "roundTrip": 150,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2831,10 +3133,18 @@
     {
       "destination": "Kalkan",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 90,
+      "roundTripCandidate": 171,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 95,
+        "roundTrip": 180,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -2910,10 +3220,18 @@
     {
       "destination": "Kas",
       "category": "vip-vito",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 80.5,
+      "roundTripCandidate": 152,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "5–6",
+        "oneWay": 85,
+        "roundTrip": 160,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -3040,10 +3358,18 @@
     {
       "destination": "Kas",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 95,
+      "roundTripCandidate": 180.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 100,
+        "roundTrip": 190,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false,
       "additionalEvidence": [
         {
@@ -3939,14 +4265,25 @@
       "roundTripCandidate": 74,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 40,
-        "roundTrip": 78
+        "roundTrip": 78,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 40,
+          "roundTrip": 78
+        }
+      ]
     },
     {
       "destination": "Fethiye Kayakoy",
@@ -3978,10 +4315,18 @@
     {
       "destination": "Fethiye Kayakoy",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 49,
+      "roundTripCandidate": 98.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 52,
+        "roundTrip": 104,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
@@ -4009,14 +4354,25 @@
       "roundTripCandidate": 91,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 48,
-        "roundTrip": 96
+        "roundTrip": 96,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 48,
+          "roundTrip": 96
+        }
+      ]
     },
     {
       "destination": "Kabak",
@@ -4048,10 +4404,18 @@
     {
       "destination": "Kabak",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 58.5,
+      "roundTripCandidate": 117.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 62,
+        "roundTrip": 124,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
@@ -4079,14 +4443,25 @@
       "roundTripCandidate": 91,
       "evidence": {
         "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
-        "checked": "2026-11-24",
         "currency": "GBP",
+        "checked": "2026-11-24",
         "passengers": "5–6",
         "oneWay": 48,
-        "roundTrip": 96
+        "roundTrip": 96,
+        "verification": "source table directly inspected; own class and scope pending"
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "passengers": "5–6",
+          "oneWay": 48,
+          "roundTrip": 96
+        }
+      ]
     },
     {
       "destination": "Faralya",
@@ -4118,10 +4493,18 @@
     {
       "destination": "Faralya",
       "category": "vip-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 58.5,
+      "roundTripCandidate": 117.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "currency": "GBP",
+        "checked": "2026-11-24",
+        "passengers": "7–12",
+        "oneWay": 62,
+        "roundTrip": 124,
+        "verification": "source table directly inspected; own class and scope pending"
+      },
+      "status": "capacity-and-scope-pending",
       "approved": false
     },
     {
