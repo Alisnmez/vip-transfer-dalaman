@@ -13,8 +13,8 @@
       "round": 17
     },
     "vip-vito": {
-      "one": 23,
-      "round": 21
+      "one": 25,
+      "round": 23
     },
     "vip-maybach": {
       "one": 14,
@@ -5111,9 +5111,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/en/dalaman-airport-to-belek-transfer",
+          "currency": "EUR",
+          "originalOneWay": 270,
+          "originalRoundTrip": 527,
+          "oneWayScenario": 214.5,
+          "roundTripScenario": 418.5,
+          "passengers": 6,
+          "verification": "Source inspected 2026-11-24; published per-vehicle VIP Vito tariff updated 2026-10-28; planning FX unverified; capacity and cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -5881,9 +5892,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/en/dalaman-airport-to-bitez-transfer",
+          "currency": "EUR",
+          "originalOneWay": 205,
+          "originalRoundTrip": 400,
+          "oneWayScenario": 162.5,
+          "roundTripScenario": 317.5,
+          "passengers": 6,
+          "verification": "Source inspected 2026-11-24; published per-vehicle VIP Vito tariff updated 2026-10-28; planning FX unverified; capacity and cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
