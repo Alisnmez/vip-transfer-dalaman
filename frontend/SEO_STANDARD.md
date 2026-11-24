@@ -455,3 +455,19 @@ Kullanıcının önceki Search Console aktarımı: UK 32 gösterim, 0 tıklama, 
 - [ ] SEO-08/P1: Marmaris sonrası Fethiye, ardından Ölüdeniz ve diğer rotalar; aynı kabul ölçütleriyle. Yeni sayfa açmadan önce mevcut sayfaların niteliği ve indeks durumu değerlendirilsin.
 
 19 Kasım tarihli 21/21 rota-dil kapsamı, 28 sitemap URL'si, 36/36 HTTP kontrolü, kapasite ve ön doldurma önceki doğrulamalardır; eski araştırma dosyasındaki SEO-05/06 ve dil genişletme kayıtları tarihsel kabul edilir. Güncel yeniden ölçüm ayrı görevdir. Bu belge güncellemesi uygulama kodu veya canlı yayın değişikliği değildir.
+
+
+### Kullanıcı kararı — branch yönetimi (24 Kasım)
+Yeni branch açmamak esastır. Önce mevcut branch'ler, main ile farkları, birleşme durumları ve aktif çalışmalar incelenir; uygun mevcut branch yeniden kullanılır. Yeni branch gerçekten zorunluysa gerekçesiyle kullanıcıdan önceden açık onay alınır. Branch silme veya birleştirme körlemesine yapılmaz. Bu doküman güncellemesi mevcut docs/seo-plan-2026-11-24 branch'inde yapılmıştır.
+
+### Sıralı uygulama ve kabul kapıları
+1. Branch envanteri ve tek güncel çalışma planı; mevcut değişiklikleri koru.
+2. Teknik SEO: production/staging, GSC URL inspection, canonical, robots, sitemap, hreflang, HTTP, prerender, favicon, mobil ve Core Web Vitals (LCP/INP/CLS); geçmiş testleri güncel sonuç sayma.
+3. GSC başlangıç ölçümü: aynı tarih/ülke/sorgu/URL/cihaz filtreleri; düşük örneklemde günlük değişiklik yapma.
+4. UK ticari sorgularında rakip örneklemi: başlık, içerik, fiyat, rezervasyon, filo, güven, mobil, bağlantılar ve otorite; doğrulanmamış sıralama iddiası yok.
+5. Marmaris pilotu, sonra Fethiye ve Ölüdeniz; kalan rotaların sırası talep ve rekabet verisine göre. Mevcut özellikleri eksik sayma; özgün rota içeriği, fiyat kaynağı, karşılama, SSS, iç bağlantı.
+6. Ana sayfa, güven ve rezervasyon dönüşümü; doğrulanmış olanaklar, gerçek yorumlar, WhatsApp Business hazır olmadan numara yok.
+7. İçerik rehberleri ve iç bağlantılar; mevcut rehberleri denetle, çakışan arama niyetleri ve gereksiz sayfa üretiminden kaçın.
+8. Otorite: gerçek işletme profilleri, ilgili turizm ortaklıkları ve doğal bağlantılar; satın alınan spam bağlantılar yok.
+9. Ölçüm: organik rezervasyon hunisi, kişisel veri içermeyen olaylar, 7/28 günlük karşılaştırmalar ve 30/60/90 günlük hedef değerlendirmesi.
+10. Her uygulamada test/staging kapısı, kontrollü yayın ve canlı doğrulama; kanıt, commit, açık işler aynı MD dosyasında tutulur. Yeni branch için kullanıcı onayı şarttır.
