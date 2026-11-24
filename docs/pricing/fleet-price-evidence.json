@@ -37,7 +37,8 @@
           "direction": "airport-to-resort",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -47,7 +48,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3750,
+          "roundTrip": 7500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -84,7 +96,8 @@
           "direction": "airport-to-resort",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -94,7 +107,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -130,6 +144,16 @@
           "direction": "not explicit",
           "publishedPrice": 112.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4250,
+          "roundTrip": 8500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -177,7 +201,8 @@
           "direction": "airport-to-resort",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -187,7 +212,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -208,6 +234,16 @@
           "roundTrip": 346,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6500,
+          "roundTrip": 13000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -218,7 +254,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -254,7 +302,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -264,7 +313,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3750,
+          "roundTrip": 7500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -301,7 +361,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -311,7 +372,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -339,6 +401,16 @@
           "direction": "not explicit",
           "publishedPrice": 112.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4250,
+          "roundTrip": 8500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -377,7 +449,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -387,7 +460,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -408,6 +482,16 @@
           "roundTrip": 374,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6500,
+          "roundTrip": 13000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -418,7 +502,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Netsel Marina",
@@ -601,7 +697,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -611,7 +708,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -639,7 +737,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -649,7 +748,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -688,7 +788,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -698,7 +799,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -808,6 +910,16 @@
           "roundTrip": 234,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5000,
+          "roundTrip": 10000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -845,7 +957,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5500,
+          "roundTrip": 11000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Turunc",
@@ -893,6 +1017,16 @@
           "roundTrip": 420,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -903,7 +1037,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8500,
+          "roundTrip": 17000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -930,7 +1076,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -940,7 +1087,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6500,
+          "roundTrip": 13000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -968,7 +1126,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -978,7 +1137,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -989,7 +1149,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7000,
+          "roundTrip": 14000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -1017,7 +1189,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1027,7 +1200,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1038,7 +1212,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8000,
+          "roundTrip": 16000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -1047,7 +1233,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 9000,
+          "roundTrip": 18000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -1074,7 +1272,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1084,7 +1283,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 2000,
+          "roundTrip": 4000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1105,7 +1315,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1115,7 +1326,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1143,6 +1355,16 @@
           "direction": "not explicit",
           "publishedPrice": 62.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 2500,
+          "roundTrip": 5000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1190,7 +1412,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1200,7 +1423,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1211,7 +1435,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3000,
+          "roundTrip": 6000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -1220,7 +1456,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4000,
+          "roundTrip": 8000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Gocek",
@@ -1256,7 +1504,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1266,7 +1515,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 2750,
+          "roundTrip": 5500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1296,7 +1556,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1306,7 +1567,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1334,6 +1596,16 @@
           "direction": "not explicit",
           "publishedPrice": 75,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3250,
+          "roundTrip": 6500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1390,7 +1662,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1400,7 +1673,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1421,6 +1695,16 @@
           "roundTrip": 150,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4000,
+          "roundTrip": 8000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1431,7 +1715,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5000,
+          "roundTrip": 10000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -1467,7 +1763,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1477,7 +1774,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 2500,
+          "roundTrip": 5000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1514,7 +1822,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1524,7 +1833,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1552,6 +1862,16 @@
           "direction": "not explicit",
           "publishedPrice": 87.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3000,
+          "roundTrip": 6000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1590,7 +1910,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1600,7 +1921,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1621,6 +1943,16 @@
           "roundTrip": 150,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3500,
+          "roundTrip": 7000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1631,7 +1963,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4500,
+          "roundTrip": 9000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
@@ -1667,7 +2011,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1677,7 +2022,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3250,
+          "roundTrip": 6500,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1714,7 +2070,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1724,7 +2081,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1744,6 +2102,16 @@
           "direction": "not explicit",
           "publishedPrice": 100,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3500,
+          "roundTrip": 7000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1799,7 +2167,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -1809,7 +2178,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -1830,6 +2200,16 @@
           "roundTrip": 196,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5000,
+          "roundTrip": 10000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -1840,7 +2220,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6000,
+          "roundTrip": 12000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye Liberty Fabay , Liberty Signa",
@@ -2018,7 +2410,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2028,7 +2421,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4000,
+          "roundTrip": 8000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2065,7 +2469,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2075,7 +2480,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2111,6 +2517,16 @@
           "direction": "not explicit",
           "publishedPrice": 112.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 4500,
+          "roundTrip": 9000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2165,7 +2581,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2175,7 +2592,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2196,6 +2614,16 @@
           "roundTrip": 240,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6500,
+          "roundTrip": 13000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2206,7 +2634,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -2242,7 +2682,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2252,7 +2693,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2282,7 +2724,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2292,7 +2735,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2368,7 +2812,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2378,7 +2823,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2445,7 +2891,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2455,7 +2902,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2485,7 +2933,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2495,7 +2944,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2571,7 +3021,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2581,7 +3032,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2640,7 +3092,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2650,7 +3103,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3000,
+          "roundTrip": 6000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2680,7 +3144,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2690,7 +3155,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2710,6 +3176,16 @@
           "direction": "not explicit",
           "publishedPrice": 112.5,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 3500,
+          "roundTrip": 7000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2748,7 +3224,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2758,7 +3235,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2779,6 +3257,16 @@
           "roundTrip": 258,
           "passengers": 10,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5000,
+          "roundTrip": 10000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -2789,7 +3277,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6000,
+          "roundTrip": 12000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Datça",
@@ -2825,7 +3325,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2835,7 +3336,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2865,7 +3367,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2875,7 +3378,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -2933,7 +3437,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -2943,7 +3448,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3064,7 +3570,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3074,7 +3581,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -3095,7 +3613,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3105,7 +3624,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3125,6 +3645,16 @@
           "direction": "not explicit",
           "publishedPrice": 175,
           "passengers": null
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8000,
+          "roundTrip": 16000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -3154,7 +3684,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3164,7 +3695,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3175,7 +3707,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 10000,
+          "roundTrip": 20000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Selimiye",
@@ -3184,7 +3728,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 11000,
+          "roundTrip": 22000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -3203,7 +3759,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3213,7 +3770,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6500,
+          "roundTrip": 13000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -3234,7 +3802,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3244,7 +3813,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3255,7 +3825,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7000,
+          "roundTrip": 14000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -3283,7 +3865,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3293,7 +3876,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3304,7 +3888,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 9000,
+          "roundTrip": 18000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -3313,7 +3909,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 10000,
+          "roundTrip": 20000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Fethiye Kayakoy",
@@ -3550,7 +4158,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3560,7 +4169,18 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8000,
+          "roundTrip": 16000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
         }
       ]
     },
@@ -3581,7 +4201,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3591,7 +4212,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3602,7 +4224,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8500,
+          "roundTrip": 17000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Bozburun",
@@ -3630,7 +4264,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3640,7 +4275,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3651,7 +4287,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 11000,
+          "roundTrip": 22000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Bozburun",
@@ -3660,7 +4308,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 12000,
+          "roundTrip": 24000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Sogut",
@@ -3695,7 +4355,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3705,7 +4366,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3726,7 +4388,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3736,7 +4399,8 @@
           "direction": "resort-to-airport",
           "passengers": 6,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -3775,7 +4439,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         },
         {
           "url": "https://sundreamtransfer.com/en/prices",
@@ -3785,7 +4450,8 @@
           "direction": "resort-to-airport",
           "passengers": 16,
           "roundTrip": null,
-          "scope": "starting fare; exact service and reverse direction unverified"
+          "scope": "starting fare; exact service and reverse direction unverified",
+          "verification": "quarantined: prior derived amounts must be checked against published individual cells"
         }
       ]
     },
@@ -4027,7 +4693,19 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 5500,
+          "roundTrip": 11000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris Hisaronu",
@@ -4045,7 +4723,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 6000,
+          "roundTrip": 12000,
+          "passengers": 5,
+          "luggage": 5,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris Hisaronu",
@@ -4072,7 +4762,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 7500,
+          "roundTrip": 15000,
+          "passengers": 10,
+          "luggage": 10,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Marmaris Hisaronu",
@@ -4081,7 +4783,19 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "checked": "2026-11-24",
+          "currency": "TRY",
+          "oneWay": 8500,
+          "roundTrip": 17000,
+          "passengers": 16,
+          "luggage": 18,
+          "verification": "published table observed; capacity and GBP conversion pending"
+        }
+      ]
     },
     {
       "destination": "Antalya City Center",
