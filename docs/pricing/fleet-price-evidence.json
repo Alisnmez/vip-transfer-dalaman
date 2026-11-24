@@ -69,6 +69,14 @@
           "oneWay": 50,
           "roundTrip": null,
           "serviceClass": "private transfer; vehicle model not specified"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 55,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -127,6 +135,14 @@
           "passengers": "5–6",
           "oneWay": 55,
           "roundTrip": 100
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 70,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -172,6 +188,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 85,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -240,6 +264,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 100,
+          "direction": "airport-to-destination",
+          "passengers": 16,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -278,6 +310,14 @@
           "passengers": 10,
           "luggage": 10,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 80,
+          "direction": "airport-to-destination",
+          "passengers": 10,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -359,6 +399,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 60,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -417,6 +465,14 @@
           "passengers": "5–6",
           "oneWay": 55,
           "roundTrip": 100
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 70,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -454,6 +510,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 85,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -505,6 +569,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 100,
+          "direction": "airport-to-destination",
+          "passengers": 16,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -543,6 +615,14 @@
           "passengers": 10,
           "luggage": 10,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 85,
+          "direction": "airport-to-destination",
+          "passengers": 10,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1435,6 +1515,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 25,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1476,6 +1564,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 35,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1513,6 +1609,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 45,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1573,6 +1677,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 50,
+          "direction": "airport-to-destination",
+          "passengers": 16,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1602,6 +1714,14 @@
           "passengers": 10,
           "luggage": 10,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 45,
+          "direction": "airport-to-destination",
+          "passengers": 10,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -1985,6 +2105,14 @@
           "oneWay": 45,
           "roundTrip": null,
           "serviceClass": "private transfer; vehicle model not specified"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 30,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2043,6 +2171,14 @@
           "passengers": "5–6",
           "oneWay": 40,
           "roundTrip": 70
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 40,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2080,6 +2216,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 50,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2139,6 +2283,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 60,
+          "direction": "airport-to-destination",
+          "passengers": 16,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2177,6 +2329,14 @@
           "passengers": 10,
           "luggage": 10,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 45,
+          "direction": "airport-to-destination",
+          "passengers": 10,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2701,6 +2861,14 @@
           "oneWay": 60,
           "roundTrip": null,
           "serviceClass": "private transfer; vehicle model not specified"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 55,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2759,6 +2927,14 @@
           "passengers": "5–6",
           "oneWay": 55,
           "roundTrip": 100
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 70,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2804,6 +2980,14 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 85,
+          "direction": "airport-to-destination",
+          "passengers": 6,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2880,6 +3064,14 @@
           "oneWay": 100,
           "roundTrip": 200,
           "serviceClass": "private; class unverified"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 100,
+          "direction": "airport-to-destination",
+          "passengers": 16,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -2918,6 +3110,14 @@
           "passengers": 10,
           "luggage": 10,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "currency": "EUR",
+          "publishedPrice": 80,
+          "direction": "airport-to-destination",
+          "passengers": 10,
+          "verification": "observed in current search extract; return and own capacity pending"
         }
       ]
     },
@@ -6943,6 +7143,72 @@
       "evidence": null,
       "status": "missing-reverified-evidence",
       "approved": false
+    }
+  ],
+  "unclassifiedRouteEvidence": [
+    {
+      "destination": "Didim",
+      "currency": "EUR",
+      "startingPrice": 190,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Kusadasi",
+      "currency": "EUR",
+      "startingPrice": 205,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Konyaalti",
+      "currency": "EUR",
+      "startingPrice": 210,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Lara",
+      "currency": "EUR",
+      "startingPrice": 215,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Kundu",
+      "currency": "EUR",
+      "startingPrice": 215,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Kemer",
+      "currency": "EUR",
+      "startingPrice": 235,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Belek",
+      "currency": "EUR",
+      "startingPrice": 235,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Antalya City Center",
+      "currency": "EUR",
+      "startingPrice": 205,
+      "url": "https://dalamangotransfer.com/en/destinations",
+      "verification": "current search extract; airport section DLM; class not specified"
+    },
+    {
+      "destination": "Bozburun",
+      "currency": "EUR",
+      "vito": 115,
+      "sprinter": 140,
+      "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+      "verification": "current search extract; capacity and return not specified"
     }
   ]
 }
