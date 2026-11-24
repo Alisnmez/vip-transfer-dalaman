@@ -434,3 +434,24 @@ Search Console URL denetiminde İngilizce Marmaris ve Göcek dizinde. İngilizce
 Canlı site haritasındaki 28 benzersiz adresin tamamı doğrudan HTTP 200, tek H1, index,follow ve kendi canonical adresini döndürdü. Yedi rotanın 21 EN/DE/RU sürümünde HTML dili, karşılıklı en/de/ru/x-default hedefleri ve destinasyon parametreli rezervasyon bağlantısı doğrulandı. Dört rezervasyon ve iki yönetim adresi HTTP 200 ve noindex,nofollow döndürdü. İki geçersiz adres HTTP 404 döndürdü. 36/36 adres kontrolü geçti.
 
 Search Console, son okuma tarihi 19 Kasım olan başarılı site haritasında 28 keşfedilen sayfa bildirdi (önceki kayıt 22). Her rota URL'si ayrı denetlendi. İngilizce Marmaris ve Göcek dizinde; diğer beş İngilizce rota ve 14 Almanca/Rusça rota henüz dizinde görünmüyor. Sonuç yalnızca 21 rota URL'sini kapsar. Ülkeler sekmesi henüz etkin değildi ve performans raporu verilerin işlendiğini gösteriyordu. Birleşik Krallık, Almanya ve Rusya için gösterim, tıklama veya konum değeri doğrulanamadı. Bu kontrolde uygulama kodu veya yayın yapılandırması için düzeltme gerekmedi.
+
+
+## 24 Kasım 2026 — Birleşik SEO çalışma planı (güncel devam noktası)
+
+Bu bölüm eski görev listelerinin önceliklerini günceller; tarihsel kayıtları silmez. Dört pazar araştırması için [araştırma eki](../docs/SEO_FOUR_MARKETS_RESEARCH_2026-11-19.md). UK birincil ölçüm pazarıdır; DE/RU mevcut kapsam korunur. TR ayrı izlenir.
+
+### Başlangıç verisi ve kanıt sınırı
+
+Kullanıcının önceki Search Console aktarımı: UK 32 gösterim, 0 tıklama, 62,7 ortalama konum; TR 8/0/76,4; DE 3/0/44,7. Marmaris 22 gösterim ve 67,9 konum olarak aktarılmıştır; sonraki denetimde UK Marmaris 21, UK toplam 34 bildirilmiştir. Filtre ve tarih aralıkları eşitlenmeden bu sayılar trend olarak karşılaştırılmaz. Orijinal ekran görüntüleri bu oturumda yeniden doğrulanmadı. Marka aramasında kaybolma kullanıcı bildirimi; indeks kaybı henüz kanıtlanmadı. 66. konum geleneksel 10 sonuç düzeninde yaklaşık 7. sayfadır. Yeni siteler için evrensel beşinci gün sıralama standardı yoktur.
+
+### Birleşik görev listesi
+
+- [ ] SEO-05/P0: Güncel production ve staging HTTP, redirect, canonical, robots/noindex, sitemap, hreflang, ilk HTML, JS metadata ve geçersiz URL kontrollerini tekrarla; marka araması kaybını GSC URL denetimi, Google-selected canonical ve son tarama ile araştır. Ana sayfa ve Marmaris öncelikli. Favicon erişimi, HTML linki ve Google yönergelerini doğrula; favicon indeksleme ile aynı sorun değildir.
+- [ ] SEO-01/P1: UK hedefli Marmaris ticari sorgularında ilk 10 organik rakibi, tarih/konum/cihaz ve ölçüm yöntemiyle kaydet. Gerçek UK sıralaması doğrulanamıyorsa örneklem olarak etiketle. Fiyat, içerik, güven, araç, karşılama, rezervasyon ve iç bağlantıları karşılaştır.
+- [ ] SEO-08/P1: Marmaris özgün rota içeriği, doğrulanmış yolculuk ve otel/buluşma bilgileri, meta açıklaması, SSS ve iç bağlantılar. Fiyatı mevcut fiyat kaynağından göster; sabit kopya veya doğrulanmamış garanti kullanma. Doğrulanmış araç olanaklarını (Wi-Fi, klima, su, USB, TV, deri koltuk, talep üzerine çocuk koltuğu) uygun biçimde sun. Mevcut kapasite ve rezervasyon ön doldurma korunmalı.
+- [ ] SEO-11/P1: Güven bilgileri, ana sayfa ve rezervasyon akışı denetimi; yalnızca gerçek işletme verisi. WhatsApp Business hazır olana kadar numara ekleme.
+- [ ] SEO-13/P0: Ayrı branch, lint/unit/build/browser smoke, staging HTTP ve rezervasyon testleri; yalnızca başarılı testlerden sonra kontrollü production yayını ve canlı tekrar kontrolü. Başarısızlıkta yayın yok.
+- [ ] SEO-12/P2: GSC UK marka/markasız sorgu ve URL bazında eşit 7/28 günlük dönemler; gösterim, tıklama, CTR, konum, indeks ve organik rezervasyon ölçümü. Düşük örneklemde kesin sonuç çıkarma. 30/60/90 gün için ilk 50/30/20 izleme hedefleri, garanti veya tahmin değil.
+- [ ] SEO-08/P1: Marmaris sonrası Fethiye, ardından Ölüdeniz ve diğer rotalar; aynı kabul ölçütleriyle. Yeni sayfa açmadan önce mevcut sayfaların niteliği ve indeks durumu değerlendirilsin.
+
+19 Kasım tarihli 21/21 rota-dil kapsamı, 28 sitemap URL'si, 36/36 HTTP kontrolü, kapasite ve ön doldurma önceki doğrulamalardır; eski araştırma dosyasındaki SEO-05/06 ve dil genişletme kayıtları tarihsel kabul edilir. Güncel yeniden ölçüm ayrı görevdir. Bu belge güncellemesi uygulama kodu veya canlı yayın değişikliği değildir.
