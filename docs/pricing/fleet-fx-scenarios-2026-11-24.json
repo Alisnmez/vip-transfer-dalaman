@@ -9,7 +9,7 @@
   "policy": "Scenarios only; no automatically selected minimum; historical competitor evidence requires independent recheck, capacity, direction and cost validation; Touransfer and Sundream excluded.",
   "stats": {
     "standard-vito": {
-      "one": 24,
+      "one": 27,
       "round": 17
     },
     "vip-vito": {
@@ -17,11 +17,11 @@
       "round": 23
     },
     "vip-maybach": {
-      "one": 14,
+      "one": 17,
       "round": 14
     },
     "standard-sprinter-9": {
-      "one": 8,
+      "one": 13,
       "round": 8
     },
     "standard-sprinter-15": {
@@ -113,6 +113,16 @@
           "roundTripScenario": 164.5,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 76,
+          "originalRoundTrip": null,
+          "oneWayScenario": 60,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -174,6 +184,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 96,
+          "originalRoundTrip": null,
+          "oneWayScenario": 76,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -215,6 +235,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": null,
+          "oneWayScenario": 91,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -236,6 +266,16 @@
           "roundTripScenario": 152,
           "passengers": "7–9",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 191,
+          "originalRoundTrip": null,
+          "oneWayScenario": 151.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1446,6 +1486,16 @@
           "roundTripScenario": 57,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1487,6 +1537,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1518,6 +1578,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1539,6 +1609,16 @@
           "roundTripScenario": 95,
           "passengers": "7–10",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 74,
+          "originalRoundTrip": null,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1713,6 +1793,16 @@
           "roundTripScenario": 57,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1754,6 +1844,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1785,6 +1885,16 @@
           "roundTripScenario": 93,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -1806,6 +1916,16 @@
           "roundTripScenario": 133,
           "passengers": "7–10",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 74,
+          "originalRoundTrip": null,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2010,6 +2130,16 @@
           "roundTripScenario": 78.5,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2081,6 +2211,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2112,6 +2252,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2123,8 +2273,19 @@
       "category": "standard-sprinter-9",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 74,
+          "originalRoundTrip": null,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -2326,6 +2487,16 @@
           "roundTripScenario": 93,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2377,6 +2548,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2398,6 +2579,16 @@
           "roundTripScenario": 100.5,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2419,6 +2610,16 @@
           "roundTripScenario": 133,
           "passengers": "7–10",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 111,
+          "originalRoundTrip": null,
+          "oneWayScenario": 88,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2785,6 +2986,16 @@
           "roundTripScenario": 114,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 53,
+          "originalRoundTrip": null,
+          "oneWayScenario": 42,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2846,6 +3057,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 66,
+          "originalRoundTrip": null,
+          "oneWayScenario": 52,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2887,6 +3108,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 79,
+          "originalRoundTrip": null,
+          "oneWayScenario": 62.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -2908,6 +3139,16 @@
           "roundTripScenario": 152,
           "passengers": "7–10",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 132,
+          "originalRoundTrip": null,
+          "oneWayScenario": 104.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -3472,6 +3713,16 @@
           "roundTripScenario": 86,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 56,
+          "originalRoundTrip": null,
+          "oneWayScenario": 44.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -3493,6 +3744,16 @@
           "roundTripScenario": 136.5,
           "passengers": 4,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 71,
+          "originalRoundTrip": null,
+          "oneWayScenario": 56,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -3514,6 +3775,16 @@
           "roundTripScenario": 100.5,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": null,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -3525,8 +3796,19 @@
       "category": "standard-sprinter-9",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 141,
+          "originalRoundTrip": null,
+          "oneWayScenario": 112,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4051,8 +4333,19 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 50,
+          "originalRoundTrip": null,
+          "oneWayScenario": 39.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4081,6 +4374,16 @@
           "roundTripScenario": 74,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 62,
+          "originalRoundTrip": null,
+          "oneWayScenario": 49,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -4092,8 +4395,19 @@
       "category": "vip-maybach",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 74,
+          "originalRoundTrip": null,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4102,8 +4416,19 @@
       "category": "standard-sprinter-9",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 124,
+          "originalRoundTrip": null,
+          "oneWayScenario": 98.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4153,8 +4478,19 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 62,
+          "originalRoundTrip": null,
+          "oneWayScenario": 49,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4183,6 +4519,16 @@
           "roundTripScenario": 91,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 78,
+          "originalRoundTrip": null,
+          "oneWayScenario": 62,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -4194,8 +4540,19 @@
       "category": "vip-maybach",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 93,
+          "originalRoundTrip": null,
+          "oneWayScenario": 73.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4204,8 +4561,19 @@
       "category": "standard-sprinter-9",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 155,
+          "originalRoundTrip": null,
+          "oneWayScenario": 123,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4255,8 +4623,19 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": null,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4285,6 +4664,16 @@
           "roundTripScenario": 91,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 69,
+          "originalRoundTrip": null,
+          "oneWayScenario": 54.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
         }
       ],
       "missingOneWay": false,
@@ -4296,8 +4685,19 @@
       "category": "vip-maybach",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 83,
+          "originalRoundTrip": null,
+          "oneWayScenario": 65.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4306,8 +4706,19 @@
       "category": "standard-sprinter-9",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 138,
+          "originalRoundTrip": null,
+          "oneWayScenario": 109.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
