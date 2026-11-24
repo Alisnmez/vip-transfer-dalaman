@@ -471,3 +471,51 @@ Yeni branch açmamak esastır. Önce mevcut branch'ler, main ile farkları, birl
 8. Otorite: gerçek işletme profilleri, ilgili turizm ortaklıkları ve doğal bağlantılar; satın alınan spam bağlantılar yok.
 9. Ölçüm: organik rezervasyon hunisi, kişisel veri içermeyen olaylar, 7/28 günlük karşılaştırmalar ve 30/60/90 günlük hedef değerlendirmesi.
 10. Her uygulamada test/staging kapısı, kontrollü yayın ve canlı doğrulama; kanıt, commit, açık işler aynı MD dosyasında tutulur. Yeni branch için kullanıcı onayı şarttır.
+
+
+## 2026-11-24 — SEO v2: UK-first, canlı ana sayfa denetimi ve ilerleme kaydı
+
+Bu bölüm önceki uygulama sırasını günceller; tarihsel kayıtlar korunur. V2 görev kodları önceki SEO kodlarıyla karışmaması için V2-SEO öneki taşır. Branch temizliği başka çalışma tarafından yürütülüyor; bu branch aktif dokümantasyon çalışmasıdır, silinmeden önce içeriği korunmalıdır. Yeni branch açma, merge veya silme yok. Performans çalışması şimdilik ertelendi; belirgin sorun kanıtla kaydedilir.
+
+### Pazar ve araştırma
+UK birincil, DE ve RU ikincil; önerilen iş yükü 70/15/15, ölçülmüş pazar payı değildir. EN-GB, doğal DE/RU metinler, mevcut dil URL'leri ve hreflang korunur. UK ana sayfa: dalaman airport transfers, private dalaman airport transfers, VIP transfer; fiyat listesi: dalaman airport transfer prices; Marmaris: dalaman airport to marmaris transfer, private transfer dalaman to marmaris, dalaman to marmaris transfer cost; Fethiye ve Oludeniz sonraki pilotlar. DE: Flughafentransfer Dalaman, Privattransfer, Transfer Dalaman Marmaris/Fethiye/Ölüdeniz, Preise. RU: трансфер из аэропорта Даламан, индивидуальный трансфер, Даламан Мармарис/Фетхие/Олюдениз, цена. Rusça kitle ile Rusya coğrafyası ayrı; Yandex araştırılacak.
+
+Ön araştırma notları (önceki sohbetten aktarım; fiyatlar ve gerçek ülke SERP sırası yeniden doğrulanmalı):
+- UK: https://www.transfersviadalaman.com/prices ; https://www.transferonly.com/ ; https://www.joytransfer.com/en/transfers ; https://www.dalamantravel.com/en/dalaman-airport-transfer ; https://www.holidayextras.com/dalaman-airport-transfers.html . Karşılaştırılacak fiyat/araç kapasitesi, süre, ödeme, karşılama, gecikme, iptal, güven. Kişi başı ve araç başı fiyatları karıştırma.
+- DE: https://www.hieracitytravel.com/de/flughafentransfer/flughafen-dalaman/ ; https://privat-flughafentransfer.com/ziele/ ; https://dalamangotransfer.com/de/reiseziele .
+- RU: https://www.dalamanairporttransfer.com/ru/blog/ceny-na-transfer-iz-aeroporta-dalaman-dalaman-transfer ; https://dalamangotransfer.com/ru ; https://www.pac.ru/fru/help/tour/services/private-transfer/tur-dlm/ ; https://vixride.com/ru/dalaman-to-fethiye-transfer .
+- Arama hacmi, KD, backlink ve UK konumlu ilk 10 sıralaması doğrulanmadı; tahminleri ölçüm gibi sunma.
+
+### Canlı ana sayfa — 24 Kasım tarayıcı metin denetimi
+Canlı sekme title: Dalaman Airport Transfers | Private Airport Taxi & Transfers. H1: Professional Airport Transfers from Dalaman. Dört araçta iç/dış fotoğraf ve yedi olanak, araç bazlı booking bağlantıları; altı aşamalı transfer süreci, 24 saat önce WhatsApp teyidi, uçuş takibi, karşılama, müşteri galerisi, yorumlar, beş rehber, dört filtreli rota fiyat bağlantısı, footer ve dil seçimi mevcut. Önceki eksik olanak ve bağlantı iddiaları geri çekildi. Canlı commit, mobil/desktop görsel, buton işlevleri ve HTML metadata henüz doğrulanmadı. İçerik puanları öznel: navigasyon 85, hero 65, avantajlar 65, araçlar 90, süreç 92, galeri 90, rotalar 80, rehberler 85, yorumlar 85, footer 80.
+
+- [ ] DW-HOME-001: EN/DE/RU H1, title ve meta araştırma sonrası doğrula. Aday EN H1: Dalaman Airport Transfers – Private & VIP; DE: Privater Flughafentransfer Dalaman – VIP-Service; RU: Индивидуальный VIP-трансфер из аэропорта Даламан. Mevcut güçlü title'ı ölçmeden değiştirme. GBP ve gerçek hizmet kapsamı; kesinleşmemiş rezervasyonu onaylanmış gibi sunma.
+- [ ] DW-HOME-002: Professional Drivers açıklaması araç seçeneklerini anlatıyor; başlıkla uyumsuz. Aday kartlar Clear Transfer Prices, Flight Tracking, Private VIP Vehicles; doğal üç dilde metin. Doğrulanmamış sabit fiyat, ücretsiz iptal/bekleme, 24/7 destek iddiası yok.
+- [ ] DW-HOME-003: /routes?destination=Marmaris#all-routes ve diğer mevcut fiyat bağlantıları korunacak; /routes/marmaris, fethiye, oludeniz, gocek SEO sayfalarına doğal doğrudan bağlantılar değerlendirilecek; DE/RU yerel URL'leri doğrulanacak.
+- [ ] DW-HOME-004: /guides/dalaman-airport-to-marmaris ve fethiye URL'leri ile gezi başlıklarının arama niyeti uyumu incelenecek. Mevcut rehberleri silmeden transfer maliyeti, taksi karşılaştırması, aile/çocuk koltuğu ve gece varışı içeriklerini değerlendir; cannibalization kontrolü.
+- Korunacak: araç olanakları, kapasiteler, GBP, rezervasyon ön doldurma, gerçek müşteri fotoğrafları/yorumları, transfer süreci, mevcut çok dilli altyapı. Kurumsal WhatsApp numarası onay olmadan eklenmez.
+
+### V2 takip listesi
+- [x] V2-SEO-01 UK rakip ön araştırması — önceki sohbet kaynak listesi kaydedildi; tam SERP analizi ayrı.
+- [x] V2-SEO-02 DE/RU rakip ön araştırması — kaynak adayları kaydedildi.
+- [x] V2-SEO-03 Üç dilde aday anahtar kelimeler — sayfa niyetine göre ayrıldı; hacim doğrulanmadı.
+- [ ] V2-SEO-04 Gerçek hacim ve rekabet ölçümü.
+- [ ] V2-SEO-05 UK ilk 10 organik sonuç analizi.
+- [ ] V2-SEO-06 Güncel GSC başlangıç ölçümü.
+- [ ] V2-SEO-07 Canlı commit, indeksleme, canonical, sitemap, robots, hreflang.
+- [ ] V2-SEO-08 Ana sayfa tam denetimi (metin kısmı yapıldı).
+- [ ] V2-SEO-09 Routes & Prices.
+- [ ] V2-SEO-10 Vehicles.
+- [ ] V2-SEO-11 Marmaris pilotu.
+- [ ] V2-SEO-12 Fethiye ve Ölüdeniz; diğer rotalar da envanterde.
+- [ ] V2-SEO-13 Rehberler, services, reviews, FAQ, contact, booking/lookup, yasal sayfalar, tüm dil varyantları.
+- [ ] V2-SEO-14 Backlink ve otorite.
+- [ ] V2-SEO-15 EN/DE/RU metin ve bağlantılar.
+- [ ] V2-SEO-16 Onay, mevcut uygun branch, lint/unit/build/browser smoke, staging ve kontrollü canlı doğrulama.
+- [ ] V2-SEO-17 7/28 günlük ölçüm ve 30/60/90 gün hedef değerlendirmesi.
+
+### Tamamlama günlüğü (her görevde zorunlu)
+Tarih | görev | durum | kanıt/sorun | çözüm ve dosyalar | test/sonuç | commit/yayın | kalan iş.
+2026-11-24 | V2-SEO-01/02/03 | ön araştırma tamamlandı | önceki sohbet kaynak ve kelime adayları | bu MD'ye aktarıldı | doküman kaydı; bağımsız SERP/hacim testi yok | yalnız doküman | V2-SEO-04/05.
+2026-11-24 | V2-SEO-08 | kısmi | canlı ana sayfa tarayıcı metni | yanlış eksik özellik iddiaları düzeltildi; DW-HOME-001–004 adayları kaydedildi | görsel/işlevsel test yapılmadı | yalnız doküman | canlı commit ve browser testleri.
+Tamamlandı işareti sadece ilgili kabul ölçütü sağlanınca konur; araştırma ve uygulama ayrıdır. Her tamamlanan görevde aynı MD güncellenir; eski kayıtlar silinmez. Kullanıcı onayı olmadan uygulama kodu ve canlı ayarlar değiştirilmez.
