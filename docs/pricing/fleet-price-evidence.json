@@ -43,7 +43,25 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 85,
+          "passengers": 6
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 112.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Marmaris(Any Hotel)",
@@ -130,7 +148,25 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 85,
+          "passengers": 6
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 112.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Icmeler(Any Hotel)",
@@ -654,7 +690,25 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 45,
+          "passengers": 6
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 62.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -743,7 +797,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 75,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Gocek",
@@ -839,7 +903,25 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 50,
+          "passengers": 6
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 87.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Dalyan",
@@ -917,15 +999,33 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 100,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 133,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 70,
+        "roundTrip": 140,
+        "serviceClass": "private; class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -994,19 +1094,35 @@
     {
       "destination": "Fethiye Liberty Fabay , Liberty Signa",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 133,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 70,
+        "roundTrip": 140,
+        "serviceClass": "private; class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Fethiye Liberty Fabay , Liberty Signa",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 85.5,
+      "roundTripCandidate": 171,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 90,
+        "roundTrip": 180,
+        "serviceClass": "private; class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1130,24 +1246,58 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://dalamanfogyatransfer.com/en/pricelist",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 85,
+          "passengers": 6
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 112.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 152,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 80,
+        "roundTrip": 160,
+        "serviceClass": "private; class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 95,
+      "roundTripCandidate": 190,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 100,
+        "roundTrip": 200,
+        "serviceClass": "private; class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1201,7 +1351,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 150,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Kalkan",
@@ -1290,7 +1450,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 175,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Kas",
@@ -1371,7 +1541,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 112.5,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Akyaka",
@@ -1442,7 +1622,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 200,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Datça",
@@ -1576,7 +1766,17 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "checked": "2026-11-24",
+          "currency": "EUR",
+          "direction": "not explicit",
+          "publishedPrice": 175,
+          "passengers": null
+        }
+      ]
     },
     {
       "destination": "Selimiye",
