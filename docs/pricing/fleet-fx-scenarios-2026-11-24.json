@@ -13,8 +13,8 @@
       "round": 18
     },
     "vip-vito": {
-      "one": 32,
-      "round": 26
+      "one": 33,
+      "round": 27
     },
     "vip-maybach": {
       "one": 17,
@@ -33,8 +33,8 @@
       "round": 23
     },
     "vip-sprinter-15": {
-      "one": 14,
-      "round": 14
+      "one": 19,
+      "round": 15
     }
   },
   "rows": [
@@ -194,6 +194,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 75,
+          "originalRoundTrip": null,
+          "oneWayScenario": 59.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -409,6 +419,16 @@
           "roundTripScenario": 215,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 105,
+          "originalRoundTrip": null,
+          "oneWayScenario": 83,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1156,6 +1176,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 90,
+          "originalRoundTrip": null,
+          "oneWayScenario": 71.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1270,6 +1300,16 @@
           "roundTripScenario": 244,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 125,
+          "originalRoundTrip": null,
+          "oneWayScenario": 99,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1342,6 +1382,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 105,
+          "originalRoundTrip": null,
+          "oneWayScenario": 83,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1435,6 +1485,16 @@
           "roundTripScenario": 258.5,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": null,
+          "oneWayScenario": 107,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1547,6 +1607,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/sarigerme",
+          "currency": "EUR",
+          "originalOneWay": 35,
+          "originalRoundTrip": 70,
+          "oneWayScenario": 27.5,
+          "roundTripScenario": 55.5,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1722,6 +1792,16 @@
           "roundTripScenario": 114.5,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/sarigerme",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": 120,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": 95,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1854,6 +1934,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2049,6 +2139,16 @@
           "roundTripScenario": 143.5,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2221,6 +2321,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 45,
+          "originalRoundTrip": null,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2416,6 +2526,16 @@
           "roundTripScenario": 129,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2558,6 +2678,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2743,6 +2873,16 @@
           "roundTripScenario": 172,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": null,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3067,6 +3207,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3292,6 +3442,16 @@
           "roundTripScenario": 215,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 95,
+          "originalRoundTrip": null,
+          "oneWayScenario": 75.5,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3364,6 +3524,16 @@
           "roundTripScenario": 232,
           "passengers": 4,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 95,
+          "originalRoundTrip": null,
+          "oneWayScenario": 75.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3478,8 +3648,19 @@
       "category": "vip-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": null,
+          "oneWayScenario": 107,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -3559,6 +3740,16 @@
           "roundTripScenario": 284.5,
           "passengers": 4,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": null,
+          "oneWayScenario": 91,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3683,8 +3874,19 @@
       "category": "vip-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 150,
+          "originalRoundTrip": null,
+          "oneWayScenario": 119,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -3931,6 +4133,16 @@
           "roundTripScenario": 310,
           "passengers": 4,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": null,
+          "oneWayScenario": 111,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4004,8 +4216,19 @@
       "category": "vip-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 180,
+          "originalRoundTrip": null,
+          "oneWayScenario": 143,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4125,6 +4348,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 105,
+          "originalRoundTrip": null,
+          "oneWayScenario": 83,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4208,6 +4441,16 @@
           "roundTripScenario": 316,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": null,
+          "oneWayScenario": 111,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4674,6 +4917,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": null,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4758,8 +5011,19 @@
       "category": "vip-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": null,
+          "oneWayScenario": 91,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4809,6 +5073,16 @@
           "roundTripScenario": null,
           "passengers": "1–6",
           "verification": "current web extract; FX assumption and own capacity pending"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": null,
+          "oneWayScenario": 91,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4892,6 +5166,16 @@
           "roundTripScenario": 344.5,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": null,
+          "oneWayScenario": 111,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
         }
       ],
       "missingOneWay": false,
@@ -5166,9 +5450,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/orhaniye",
+          "currency": "EUR",
+          "originalOneWay": 95,
+          "originalRoundTrip": 190,
+          "oneWayScenario": 75.5,
+          "roundTripScenario": 151,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -5216,9 +5511,20 @@
       "category": "vip-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/orhaniye",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": 270,
+          "oneWayScenario": 107,
+          "roundTripScenario": 214.5,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
