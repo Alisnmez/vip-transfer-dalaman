@@ -1,0 +1,1165 @@
+{
+  "sourceBlob": "671ccd85c77d32cb5fe7d0bbaf5efcfcafe69ed0",
+  "policy": "Review queue only. Market scenarios are not independently verified. No price changes or cost-floor approval.",
+  "counts": {
+    "vip-sprinter-9": 28,
+    "vip-sprinter-15": 24,
+    "standard-sprinter-15": 12,
+    "vip-vito": 11,
+    "standard-sprinter-9": 9,
+    "vip-maybach": 23,
+    "standard-vito": 8
+  },
+  "rows": [
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 117.5,
+      "scenarioLowerGBP": 117.5,
+      "minimumReductionGBP": 237.5,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 335,
+      "scenarioUpperGBP": 117.5,
+      "scenarioLowerGBP": 117.5,
+      "minimumReductionGBP": 217.5,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 485,
+      "scenarioUpperGBP": 316,
+      "scenarioLowerGBP": 316,
+      "minimumReductionGBP": 169,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 445,
+      "scenarioUpperGBP": 287,
+      "scenarioLowerGBP": 287,
+      "minimumReductionGBP": 158,
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 297.5,
+      "scenarioUpperGBP": 143,
+      "scenarioLowerGBP": 143,
+      "minimumReductionGBP": 154.5,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 495,
+      "scenarioUpperGBP": 344.5,
+      "scenarioLowerGBP": 344.5,
+      "minimumReductionGBP": 150.5,
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 214.5,
+      "scenarioLowerGBP": 214.5,
+      "minimumReductionGBP": 130.5,
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 185,
+      "scenarioLowerGBP": 185,
+      "minimumReductionGBP": 130,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 247.5,
+      "scenarioUpperGBP": 119,
+      "scenarioLowerGBP": 119,
+      "minimumReductionGBP": 128.5,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 119,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 167.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 109,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 197.5,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 106.5,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 330.5,
+      "scenarioLowerGBP": 285,
+      "minimumReductionGBP": 104.5,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 104,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 207.5,
+      "scenarioUpperGBP": 107,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 100.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 98.5,
+      "scenarioLowerGBP": 98.5,
+      "minimumReductionGBP": 96.5,
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 215,
+      "scenarioUpperGBP": 123.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 91.5,
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 258.5,
+      "scenarioLowerGBP": 258.5,
+      "minimumReductionGBP": 86.5,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 209,
+      "scenarioLowerGBP": 209,
+      "minimumReductionGBP": 86,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 242.5,
+      "scenarioUpperGBP": 158,
+      "scenarioLowerGBP": 111,
+      "minimumReductionGBP": 84.5,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 84,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 271.5,
+      "scenarioLowerGBP": 228,
+      "minimumReductionGBP": 83.5,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 266,
+      "scenarioLowerGBP": 266,
+      "minimumReductionGBP": 79,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 222.5,
+      "scenarioUpperGBP": 143.5,
+      "scenarioLowerGBP": 143.5,
+      "minimumReductionGBP": 79,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 247.5,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 111,
+      "minimumReductionGBP": 75.5,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 73.5,
+      "scenarioLowerGBP": 73.5,
+      "minimumReductionGBP": 74,
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 362,
+      "scenarioLowerGBP": 362,
+      "minimumReductionGBP": 73,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 137.5,
+      "scenarioUpperGBP": 65.5,
+      "scenarioLowerGBP": 65.5,
+      "minimumReductionGBP": 72,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 71,
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 302.5,
+      "scenarioUpperGBP": 236.5,
+      "scenarioLowerGBP": 236.5,
+      "minimumReductionGBP": 66,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 229.5,
+      "scenarioLowerGBP": 229.5,
+      "minimumReductionGBP": 65.5,
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 107,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 65.5,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 258.5,
+      "scenarioLowerGBP": 258.5,
+      "minimumReductionGBP": 56.5,
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 51,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 166.5,
+      "scenarioLowerGBP": 131,
+      "minimumReductionGBP": 51,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 51,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 49,
+      "minimumReductionGBP": 48.5,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 335,
+      "scenarioUpperGBP": 287,
+      "scenarioLowerGBP": 287,
+      "minimumReductionGBP": 48,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 49,
+      "minimumReductionGBP": 46,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 44.5,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 44.5,
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 43.5,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 104.5,
+      "scenarioLowerGBP": 104.5,
+      "minimumReductionGBP": 43,
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 185,
+      "scenarioUpperGBP": 142.5,
+      "scenarioLowerGBP": 142.5,
+      "minimumReductionGBP": 42.5,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 85,
+      "scenarioUpperGBP": 43.5,
+      "scenarioLowerGBP": 43.5,
+      "minimumReductionGBP": 41.5,
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 107.5,
+      "scenarioUpperGBP": 66.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 41,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 133,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 39.5,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 316,
+      "scenarioLowerGBP": 316,
+      "minimumReductionGBP": 39,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 139,
+      "scenarioLowerGBP": 114,
+      "minimumReductionGBP": 38.5,
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 181,
+      "scenarioLowerGBP": 181,
+      "minimumReductionGBP": 36.5,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 62,
+      "scenarioLowerGBP": 45.5,
+      "minimumReductionGBP": 35.5,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 157.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 35.5,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 235,
+      "scenarioUpperGBP": 201,
+      "scenarioLowerGBP": 201,
+      "minimumReductionGBP": 34,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 114.5,
+      "scenarioLowerGBP": 114.5,
+      "minimumReductionGBP": 33,
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 142.5,
+      "scenarioLowerGBP": 142.5,
+      "minimumReductionGBP": 32.5,
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 123.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 31.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 105,
+      "scenarioUpperGBP": 74,
+      "scenarioLowerGBP": 74,
+      "minimumReductionGBP": 31,
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 135,
+      "scenarioUpperGBP": 104.5,
+      "scenarioLowerGBP": 104.5,
+      "minimumReductionGBP": 30.5,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 245,
+      "scenarioUpperGBP": 215,
+      "scenarioLowerGBP": 215,
+      "minimumReductionGBP": 30,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 29,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 157.5,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 129,
+      "minimumReductionGBP": 28.5,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 137.5,
+      "scenarioUpperGBP": 109.5,
+      "scenarioLowerGBP": 109.5,
+      "minimumReductionGBP": 28,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 129,
+      "minimumReductionGBP": 26,
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 99,
+      "minimumReductionGBP": 25.5,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 25.5,
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 123,
+      "scenarioLowerGBP": 123,
+      "minimumReductionGBP": 24.5,
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 167.5,
+      "scenarioUpperGBP": 143.5,
+      "scenarioLowerGBP": 143.5,
+      "minimumReductionGBP": 24,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 23,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 23,
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 67.5,
+      "scenarioLowerGBP": 45.5,
+      "minimumReductionGBP": 20,
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 158,
+      "scenarioLowerGBP": 158,
+      "minimumReductionGBP": 19.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 55.5,
+      "scenarioLowerGBP": 50,
+      "minimumReductionGBP": 17,
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 117.5,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 17,
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 92.5,
+      "scenarioUpperGBP": 76,
+      "scenarioLowerGBP": 76,
+      "minimumReductionGBP": 16.5,
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-vito",
+      "direction": "roundTrip",
+      "currentGBP": 350,
+      "scenarioUpperGBP": 333.5,
+      "scenarioLowerGBP": 333.5,
+      "minimumReductionGBP": 16.5,
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 245,
+      "scenarioUpperGBP": 229.5,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 15.5,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 122.5,
+      "scenarioUpperGBP": 107.5,
+      "scenarioLowerGBP": 75.5,
+      "minimumReductionGBP": 15,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 152,
+      "scenarioLowerGBP": 152,
+      "minimumReductionGBP": 13,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 133,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 12,
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 76,
+      "scenarioLowerGBP": 76,
+      "minimumReductionGBP": 11.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 67.5,
+      "minimumReductionGBP": 11.5,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 11.5,
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 67.5,
+      "scenarioUpperGBP": 57,
+      "scenarioLowerGBP": 57,
+      "minimumReductionGBP": 10.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 50,
+      "scenarioUpperGBP": 39.5,
+      "scenarioLowerGBP": 39.5,
+      "minimumReductionGBP": 10.5,
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 105,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 95,
+      "minimumReductionGBP": 10,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 155.5,
+      "scenarioLowerGBP": 118.5,
+      "minimumReductionGBP": 9.5,
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 9,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 426,
+      "scenarioLowerGBP": 180.5,
+      "minimumReductionGBP": 9,
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 65,
+      "scenarioUpperGBP": 57,
+      "scenarioLowerGBP": 57,
+      "minimumReductionGBP": 8,
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 122.5,
+      "scenarioUpperGBP": 114.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 8,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 348,
+      "scenarioLowerGBP": 171,
+      "minimumReductionGBP": 7,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 77.5,
+      "scenarioUpperGBP": 71,
+      "scenarioLowerGBP": 62.5,
+      "minimumReductionGBP": 6.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 77.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 5,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 190,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 5,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 67.5,
+      "scenarioLowerGBP": 50,
+      "minimumReductionGBP": 5,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 190.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 213,
+      "scenarioLowerGBP": 95,
+      "minimumReductionGBP": 4.5,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 160.5,
+      "scenarioLowerGBP": 160.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 170.5,
+      "scenarioLowerGBP": 170.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 79,
+      "scenarioLowerGBP": 79,
+      "minimumReductionGBP": 3.5,
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 75,
+      "scenarioUpperGBP": 71.5,
+      "scenarioLowerGBP": 71.5,
+      "minimumReductionGBP": 3.5,
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 174,
+      "scenarioLowerGBP": 90,
+      "minimumReductionGBP": 3.5,
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 52.5,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 38,
+      "minimumReductionGBP": 3.5,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 125,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 3,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 152,
+      "scenarioLowerGBP": 152,
+      "minimumReductionGBP": 3,
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 125,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 3,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 3,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 2.5,
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 63.5,
+      "minimumReductionGBP": 2.5,
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 80,
+      "scenarioLowerGBP": 80,
+      "minimumReductionGBP": 2.5,
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 93,
+      "scenarioLowerGBP": 93,
+      "minimumReductionGBP": 2,
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 71,
+      "scenarioLowerGBP": 71,
+      "minimumReductionGBP": 1.5,
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 1.5,
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "standard-vito",
+      "direction": "roundTrip",
+      "currentGBP": 265,
+      "scenarioUpperGBP": 263.5,
+      "scenarioLowerGBP": 263.5,
+      "minimumReductionGBP": 1.5,
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 52.5,
+      "scenarioUpperGBP": 52,
+      "scenarioLowerGBP": 52,
+      "minimumReductionGBP": 0.5,
+      "approved": false
+    }
+  ]
+}
