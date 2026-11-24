@@ -103,6 +103,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": 207,
+          "oneWayScenario": 91,
+          "roundTripScenario": 164.5,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -267,6 +277,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": 252,
+          "oneWayScenario": 111,
+          "roundTripScenario": 200,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -1386,6 +1406,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 40,
+          "originalRoundTrip": 72,
+          "oneWayScenario": 31.5,
+          "roundTripScenario": 57,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -1500,6 +1530,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": 108,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": 85.5,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -1623,6 +1663,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 40,
+          "originalRoundTrip": 72,
+          "oneWayScenario": 31.5,
+          "roundTripScenario": 57,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -1757,6 +1807,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": 108,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": 85.5,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -1890,6 +1950,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": 99,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": 78.5,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2043,6 +2113,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 75,
+          "originalRoundTrip": 135,
+          "oneWayScenario": 59.5,
+          "roundTripScenario": 107,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2176,6 +2256,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 65,
+          "originalRoundTrip": 117,
+          "oneWayScenario": 51.5,
+          "roundTripScenario": 93,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2310,6 +2400,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": 153,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": 121.5,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2605,6 +2705,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 80,
+          "originalRoundTrip": 144,
+          "oneWayScenario": 63.5,
+          "roundTripScenario": 114,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2779,6 +2889,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 100,
+          "originalRoundTrip": 180,
+          "oneWayScenario": 79,
+          "roundTripScenario": 143,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2882,6 +3002,16 @@
           "roundTripScenario": 193.5,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 145,
+          "originalRoundTrip": 261,
+          "oneWayScenario": 115,
+          "roundTripScenario": 207,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -2975,6 +3105,16 @@
           "roundTripScenario": 271.5,
           "passengers": 15,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": 315,
+          "oneWayScenario": 139,
+          "roundTripScenario": 250,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -3057,6 +3197,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": 315,
+          "oneWayScenario": 139,
+          "roundTripScenario": 250,
+          "passengers": "1–7",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -3160,6 +3310,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 210,
+          "originalRoundTrip": 378,
+          "oneWayScenario": 166.5,
+          "roundTripScenario": 300,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
         }
       ],
       "missingOneWay": false,
@@ -6631,6 +6791,74 @@
       "missingOneWay": true,
       "missingRoundTrip": true,
       "approved": false
+    }
+  ],
+  "reverseOnlyEvidence": [
+    {
+      "destination": "Antalya",
+      "direction": "resort-to-airport",
+      "currency": "EUR",
+      "prices": [
+        180,
+        220,
+        250,
+        250,
+        280
+      ],
+      "columns": [
+        "standard-vito-6",
+        "vip-vito-6",
+        "maybach-6",
+        "vip-sprinter-10",
+        "standard-sprinter-16"
+      ],
+      "url": "https://dalamanfogyatransfer.com/en/pricelist",
+      "checked": "2026-11-24",
+      "note": "not used for outbound or return total; Antalya scope unresolved"
+    },
+    {
+      "destination": "Turgutreis",
+      "direction": "resort-to-airport",
+      "currency": "EUR",
+      "prices": [
+        200,
+        230,
+        270,
+        260,
+        300
+      ],
+      "columns": [
+        "standard-vito-6",
+        "vip-vito-6",
+        "maybach-6",
+        "vip-sprinter-10",
+        "standard-sprinter-16"
+      ],
+      "url": "https://dalamanfogyatransfer.com/en/pricelist",
+      "checked": "2026-11-24",
+      "note": "not used for outbound or return total; Antalya scope unresolved"
+    },
+    {
+      "destination": "Yalikavak",
+      "direction": "resort-to-airport",
+      "currency": "EUR",
+      "prices": [
+        200,
+        225,
+        260,
+        250,
+        300
+      ],
+      "columns": [
+        "standard-vito-6",
+        "vip-vito-6",
+        "maybach-6",
+        "vip-sprinter-10",
+        "standard-sprinter-16"
+      ],
+      "url": "https://dalamanfogyatransfer.com/en/pricelist",
+      "checked": "2026-11-24",
+      "note": "not used for outbound or return total; Antalya scope unresolved"
     }
   ]
 }
