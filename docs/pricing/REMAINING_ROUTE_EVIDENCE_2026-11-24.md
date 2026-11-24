@@ -1,0 +1,6 @@
+# Remaining route evidence — 2026-11-24
+
+Sources independently retrieved 2026-11-24. https://dalamangotransfer.com/dalaman-havalimani-bozburun-transfer (rates updated 6 November 2026): EUR one-way / return: standard minivan VW Transporter/Ford Tourneo 6 passengers/6 bags 143/279; VIP Vito 6/6 152/297; Sprinter 13/13 197/385. Includes VAT, flight tracking, waiting and child seat. Return leg discounted; use published totals. No exact 15-seat match. https://www.skywayvip.com/fiyatlandirma lists Sogutkoy EUR146 and Bozburun EUR135 starting, sync 29 July 2026. Combined Bozburun / Sogut route not exactly quoted. https://dalamangotransfer.com/transfer-bolgeleri lists Muratpasa grouping starting EUR205, Antalya EUR205 and Lara EUR215; no uniform Muratpasa quote. Kaynar and Konacik exact rates unresolved. No FX conversion, no new approved prices.
+
+## Next gate
+Build machine-readable evidence matrix with explicit missing cells, source URL, retrieval date, currency, capacity, service class and return terms. Reverify earlier research before adoption. Existing legacy tariffs remain unchanged; fallback use for new vehicles requires explicit approval and cost/capacity checks. Prior 55 provisional route references plus two partial regional references = 57/59; neither counts as approved fare coverage. No runtime changes.
