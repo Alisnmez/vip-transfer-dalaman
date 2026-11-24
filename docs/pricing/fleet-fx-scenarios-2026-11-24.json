@@ -17,7 +17,7 @@
       "round": 29
     },
     "vip-maybach": {
-      "one": 17,
+      "one": 19,
       "round": 14
     },
     "standard-sprinter-9": {
@@ -123,6 +123,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 96,
+          "originalRoundTrip": 192,
+          "oneWayScenario": 76,
+          "roundTripScenario": 152.5,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -204,6 +214,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": 230,
+          "oneWayScenario": 91,
+          "roundTripScenario": 182.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -255,6 +275,16 @@
           "roundTripScenario": null,
           "passengers": 4,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 112.5,
+          "originalRoundTrip": null,
+          "oneWayScenario": 89,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -347,6 +377,16 @@
           "roundTripScenario": 200,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 134,
+          "originalRoundTrip": 268,
+          "oneWayScenario": 106.5,
+          "roundTripScenario": 213,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -398,6 +438,16 @@
           "roundTripScenario": null,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 173,
+          "originalRoundTrip": 346,
+          "oneWayScenario": 137.5,
+          "roundTripScenario": 275,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -480,6 +530,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 104,
+          "originalRoundTrip": 208,
+          "oneWayScenario": 82.5,
+          "roundTripScenario": 165,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -531,6 +591,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 125,
+          "originalRoundTrip": 250,
+          "oneWayScenario": 99,
+          "roundTripScenario": 198.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -562,6 +632,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 112.5,
+          "originalRoundTrip": null,
+          "oneWayScenario": 89,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -603,6 +683,16 @@
           "roundTripScenario": null,
           "passengers": 16,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 146,
+          "originalRoundTrip": 292,
+          "oneWayScenario": 116,
+          "roundTripScenario": 232,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -654,6 +744,16 @@
           "roundTripScenario": null,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 187,
+          "originalRoundTrip": 374,
+          "oneWayScenario": 148.5,
+          "roundTripScenario": 297,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1125,6 +1225,16 @@
           "roundTripScenario": 143.5,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 117,
+          "originalRoundTrip": 234,
+          "oneWayScenario": 93,
+          "roundTripScenario": 186,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1186,6 +1296,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": 280,
+          "oneWayScenario": 111,
+          "roundTripScenario": 222.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1207,6 +1327,16 @@
           "roundTripScenario": 158,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 150,
+          "originalRoundTrip": null,
+          "oneWayScenario": 119,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1238,6 +1368,16 @@
           "roundTripScenario": 259,
           "passengers": 15,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 163,
+          "originalRoundTrip": 326,
+          "oneWayScenario": 129.5,
+          "roundTripScenario": 259,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1279,6 +1419,16 @@
           "roundTripScenario": 215,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 210,
+          "originalRoundTrip": 420,
+          "oneWayScenario": 166.5,
+          "roundTripScenario": 333.5,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1883,6 +2033,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 50,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 39.5,
+          "roundTripScenario": 79,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -1944,6 +2104,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": 87,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2077,6 +2247,16 @@
           "roundTripScenario": 85.5,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 65,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 51.5,
+          "roundTripScenario": 103,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2118,6 +2298,16 @@
           "roundTripScenario": 114.5,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 75,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 59.5,
+          "roundTripScenario": 119,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2240,6 +2430,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 50,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 39.5,
+          "roundTripScenario": 79,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2331,6 +2531,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": 87,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2454,6 +2664,16 @@
           "roundTripScenario": 107,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 65,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 51.5,
+          "roundTripScenario": 103,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2505,6 +2725,16 @@
           "roundTripScenario": null,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 75,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 59.5,
+          "roundTripScenario": 119,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2617,6 +2847,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": 87,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2688,6 +2928,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 66,
+          "originalRoundTrip": 132,
+          "oneWayScenario": 52,
+          "roundTripScenario": 104.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2719,6 +2969,16 @@
           "roundTripScenario": null,
           "passengers": 4,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 100,
+          "originalRoundTrip": null,
+          "oneWayScenario": 79,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2811,6 +3071,16 @@
           "roundTripScenario": 121.5,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 76,
+          "originalRoundTrip": 152,
+          "oneWayScenario": 60,
+          "roundTripScenario": 120.5,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -2852,6 +3122,16 @@
           "roundTripScenario": 143.5,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 98,
+          "originalRoundTrip": 196,
+          "oneWayScenario": 77.5,
+          "roundTripScenario": 155.5,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3136,6 +3416,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 66,
+          "originalRoundTrip": 132,
+          "oneWayScenario": 52,
+          "roundTripScenario": 104.5,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3217,6 +3507,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 80,
+          "originalRoundTrip": 160,
+          "oneWayScenario": 63.5,
+          "roundTripScenario": 127,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3268,6 +3568,16 @@
           "roundTripScenario": null,
           "passengers": 4,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 112.5,
+          "originalRoundTrip": null,
+          "oneWayScenario": 89,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3370,6 +3680,16 @@
           "roundTripScenario": 143,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 93,
+          "originalRoundTrip": 186,
+          "oneWayScenario": 73.5,
+          "roundTripScenario": 147.5,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3421,6 +3741,16 @@
           "roundTripScenario": null,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 120,
+          "originalRoundTrip": 240,
+          "oneWayScenario": 95,
+          "roundTripScenario": 190.5,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3493,6 +3823,16 @@
           "roundTripScenario": 207,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 122,
+          "originalRoundTrip": 244,
+          "oneWayScenario": 96.5,
+          "roundTripScenario": 193.5,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3534,6 +3874,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 146,
+          "originalRoundTrip": 292,
+          "oneWayScenario": 116,
+          "roundTripScenario": 232,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3545,8 +3895,19 @@
       "category": "vip-maybach",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 150,
+          "originalRoundTrip": null,
+          "oneWayScenario": 119,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -3606,6 +3967,16 @@
           "roundTripScenario": 250,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 171,
+          "originalRoundTrip": 342,
+          "oneWayScenario": 135.5,
+          "roundTripScenario": 271.5,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3637,6 +4008,16 @@
           "roundTripScenario": 348,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 219,
+          "originalRoundTrip": 438,
+          "oneWayScenario": 174,
+          "roundTripScenario": 348,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3709,6 +4090,16 @@
           "roundTripScenario": 250,
           "passengers": "1–7",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 149,
+          "originalRoundTrip": 298,
+          "oneWayScenario": 118,
+          "roundTripScenario": 236.5,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3750,6 +4141,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 179,
+          "originalRoundTrip": 358,
+          "oneWayScenario": 142,
+          "roundTripScenario": 284.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3832,6 +4233,16 @@
           "roundTripScenario": 300,
           "passengers": "8–16",
           "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 208,
+          "originalRoundTrip": 416,
+          "oneWayScenario": 165,
+          "roundTripScenario": 330.5,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3863,6 +4274,16 @@
           "roundTripScenario": 426,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 268,
+          "originalRoundTrip": 536,
+          "oneWayScenario": 213,
+          "roundTripScenario": 426,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3925,6 +4346,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 72,
+          "originalRoundTrip": 144,
+          "oneWayScenario": 57,
+          "roundTripScenario": 114,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -3956,6 +4387,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 86,
+          "originalRoundTrip": 172,
+          "oneWayScenario": 68,
+          "roundTripScenario": 136.5,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4029,6 +4470,16 @@
           "roundTripScenario": 160.5,
           "passengers": 15,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 101,
+          "originalRoundTrip": 202,
+          "oneWayScenario": 80,
+          "roundTripScenario": 160.5,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4060,6 +4511,16 @@
           "roundTripScenario": 143.5,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 129,
+          "originalRoundTrip": 258,
+          "oneWayScenario": 102.5,
+          "roundTripScenario": 205,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4112,6 +4573,16 @@
           "roundTripScenario": 259,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 163,
+          "originalRoundTrip": 326,
+          "oneWayScenario": 129.5,
+          "roundTripScenario": 259,
+          "passengers": 6,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4143,6 +4614,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 195,
+          "originalRoundTrip": 390,
+          "oneWayScenario": 155,
+          "roundTripScenario": 310,
+          "passengers": 4,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4184,6 +4665,16 @@
           "roundTripScenario": 362,
           "passengers": 15,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 228,
+          "originalRoundTrip": 456,
+          "oneWayScenario": 181,
+          "roundTripScenario": 362,
+          "passengers": 15,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4205,6 +4696,16 @@
           "roundTripScenario": 465.5,
           "passengers": 10,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 293,
+          "originalRoundTrip": 586,
+          "oneWayScenario": 232.5,
+          "roundTripScenario": 465.5,
+          "passengers": 10,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -4379,6 +4880,16 @@
           "roundTripScenario": 229.5,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": null,
+          "oneWayScenario": 139,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -5104,6 +5615,16 @@
           "roundTripScenario": 244,
           "passengers": 5,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": null,
+          "oneWayScenario": 139,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
         }
       ],
       "missingOneWay": false,
@@ -5471,8 +5992,19 @@
       "category": "vip-maybach",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": null,
+          "oneWayScenario": 139,
+          "roundTripScenario": null,
+          "passengers": null,
+          "verification": "2026-11-24 web extract verified; exact address, own capacity and FX pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
