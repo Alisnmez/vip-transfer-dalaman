@@ -48,10 +48,19 @@
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 152,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "7–9",
+        "oneWay": 80,
+        "roundTrip": 160,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -650,19 +659,37 @@
     {
       "destination": "Sarigerme",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 47.5,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 50,
+        "roundTrip": 100,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Sarigerme",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 61.5,
+      "roundTripCandidate": 123.5,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 65,
+        "roundTrip": 130,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -721,19 +748,37 @@
     {
       "destination": "Gocek",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 133,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 70,
+        "roundTrip": 140,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Gocek",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 76,
+      "roundTripCandidate": 152,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 80,
+        "roundTrip": 160,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -886,10 +931,19 @@
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 95,
+      "roundTripCandidate": 190,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 100,
+        "roundTrip": 200,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1152,19 +1206,37 @@
     {
       "destination": "Kalkan",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 104.5,
+      "roundTripCandidate": 209,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 110,
+        "roundTrip": 220,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Kalkan",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 114,
+      "roundTripCandidate": 228,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 120,
+        "roundTrip": 240,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1223,19 +1295,37 @@
     {
       "destination": "Kas",
       "category": "standard-sprinter-9",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 133,
+      "roundTripCandidate": 266,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "7–10",
+        "oneWay": 140,
+        "roundTrip": 280,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
       "destination": "Kas",
       "category": "standard-sprinter-15",
-      "oneWayCandidate": null,
-      "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "oneWayCandidate": 142.5,
+      "roundTripCandidate": 285,
+      "evidence": {
+        "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+        "checked": "2026-11-24",
+        "published": "2026-05-31",
+        "currency": "GBP",
+        "passengers": "11–16",
+        "oneWay": 150,
+        "roundTrip": 300,
+        "serviceClass": "private transfer; standard/VIP class unverified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
