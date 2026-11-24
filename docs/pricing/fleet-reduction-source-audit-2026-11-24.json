@@ -1,0 +1,3143 @@
+{
+  "stats": {
+    "total": 115,
+    "extreme": 10,
+    "noTrace": 0,
+    "fx": 81
+  },
+  "policy": "Internal traceability only; external source not verified; all reductions blocked pending comparable capacity, direction and cost.",
+  "rows": [
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 117.5,
+      "scenarioLowerGBP": 117.5,
+      "minimumReductionGBP": 237.5,
+      "approved": false,
+      "reductionPercent": 66.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 62,
+          "originalRoundTrip": 124,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": 117.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 335,
+      "scenarioUpperGBP": 117.5,
+      "scenarioLowerGBP": 117.5,
+      "minimumReductionGBP": 217.5,
+      "approved": false,
+      "reductionPercent": 64.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 62,
+          "originalRoundTrip": 124,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": 117.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent"
+      ]
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 485,
+      "scenarioUpperGBP": 316,
+      "scenarioLowerGBP": 316,
+      "minimumReductionGBP": 169,
+      "approved": false,
+      "reductionPercent": 34.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 11000,
+          "originalRoundTrip": 22000,
+          "oneWayScenario": 158,
+          "roundTripScenario": 316,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 445,
+      "scenarioUpperGBP": 287,
+      "scenarioLowerGBP": 287,
+      "minimumReductionGBP": 158,
+      "approved": false,
+      "reductionPercent": 35.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 10000,
+          "originalRoundTrip": 20000,
+          "oneWayScenario": 143.5,
+          "roundTripScenario": 287,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 297.5,
+      "scenarioUpperGBP": 143,
+      "scenarioLowerGBP": 143,
+      "minimumReductionGBP": 154.5,
+      "approved": false,
+      "reductionPercent": 51.9,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 180,
+          "originalRoundTrip": null,
+          "oneWayScenario": 143,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent",
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 495,
+      "scenarioUpperGBP": 344.5,
+      "scenarioLowerGBP": 344.5,
+      "minimumReductionGBP": 150.5,
+      "approved": false,
+      "reductionPercent": 30.4,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 12000,
+          "originalRoundTrip": 24000,
+          "oneWayScenario": 172,
+          "roundTripScenario": 344.5,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 214.5,
+      "scenarioLowerGBP": 214.5,
+      "minimumReductionGBP": 130.5,
+      "approved": false,
+      "reductionPercent": 37.8,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/orhaniye",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": 270,
+          "oneWayScenario": 107,
+          "roundTripScenario": 214.5,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 185,
+      "scenarioLowerGBP": 185,
+      "minimumReductionGBP": 130,
+      "approved": false,
+      "reductionPercent": 41.3,
+      "sourceReferences": [
+        {
+          "url": "https://www.dalamantransfer.com/price-list/",
+          "currency": "GBP",
+          "originalOneWay": 195,
+          "originalRoundTrip": null,
+          "oneWayScenario": 185,
+          "roundTripScenario": null,
+          "passengers": "1–12",
+          "verification": "web extract inspected 2026-11-24; capacity/trim mismatch and return unverified"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 247.5,
+      "scenarioUpperGBP": 119,
+      "scenarioLowerGBP": 119,
+      "minimumReductionGBP": 128.5,
+      "approved": false,
+      "reductionPercent": 51.9,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 150,
+          "originalRoundTrip": null,
+          "oneWayScenario": 119,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent",
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 119,
+      "approved": false,
+      "reductionPercent": 67,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 62,
+          "originalRoundTrip": 124,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": 117.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 167.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 109,
+      "approved": false,
+      "reductionPercent": 65.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 62,
+          "originalRoundTrip": 124,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": 117.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 197.5,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 106.5,
+      "approved": false,
+      "reductionPercent": 53.9,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 115,
+          "originalRoundTrip": null,
+          "oneWayScenario": 91,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent",
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 330.5,
+      "scenarioLowerGBP": 285,
+      "minimumReductionGBP": 104.5,
+      "approved": false,
+      "reductionPercent": 24,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 208,
+          "originalRoundTrip": 416,
+          "oneWayScenario": 165,
+          "roundTripScenario": 330.5,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 104,
+      "approved": false,
+      "reductionPercent": 53.3,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 48,
+          "originalRoundTrip": 96,
+          "oneWayScenario": 45.5,
+          "roundTripScenario": 91,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 48,
+          "originalRoundTrip": 96,
+          "oneWayScenario": 45.5,
+          "roundTripScenario": 91,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 207.5,
+      "scenarioUpperGBP": 107,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 100.5,
+      "approved": false,
+      "reductionPercent": 48.4,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": null,
+          "oneWayScenario": 107,
+          "roundTripScenario": null,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 98.5,
+      "scenarioLowerGBP": 98.5,
+      "minimumReductionGBP": 96.5,
+      "approved": false,
+      "reductionPercent": 49.5,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 52,
+          "originalRoundTrip": 104,
+          "oneWayScenario": 49,
+          "roundTripScenario": 98.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 215,
+      "scenarioUpperGBP": 123.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 91.5,
+      "approved": false,
+      "reductionPercent": 42.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 70,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 66.5,
+          "roundTripScenario": 123.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 258.5,
+      "scenarioLowerGBP": 258.5,
+      "minimumReductionGBP": 86.5,
+      "approved": false,
+      "reductionPercent": 25.1,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 9000,
+          "originalRoundTrip": 18000,
+          "oneWayScenario": 129,
+          "roundTripScenario": 258.5,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 209,
+      "scenarioLowerGBP": 209,
+      "minimumReductionGBP": 86,
+      "approved": false,
+      "reductionPercent": 29.2,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 110,
+          "originalRoundTrip": 220,
+          "oneWayScenario": 104.5,
+          "roundTripScenario": 209,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 242.5,
+      "scenarioUpperGBP": 158,
+      "scenarioLowerGBP": 111,
+      "minimumReductionGBP": 84.5,
+      "approved": false,
+      "reductionPercent": 34.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 11000,
+          "originalRoundTrip": 22000,
+          "oneWayScenario": 158,
+          "roundTripScenario": 316,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 91,
+      "scenarioLowerGBP": 91,
+      "minimumReductionGBP": 84,
+      "approved": false,
+      "reductionPercent": 48,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 48,
+          "originalRoundTrip": 96,
+          "oneWayScenario": 45.5,
+          "roundTripScenario": 91,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 48,
+          "originalRoundTrip": 96,
+          "oneWayScenario": 45.5,
+          "roundTripScenario": 91,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 271.5,
+      "scenarioLowerGBP": 228,
+      "minimumReductionGBP": 83.5,
+      "approved": false,
+      "reductionPercent": 23.5,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 171,
+          "originalRoundTrip": 342,
+          "oneWayScenario": 135.5,
+          "roundTripScenario": 271.5,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 345,
+      "scenarioUpperGBP": 266,
+      "scenarioLowerGBP": 266,
+      "minimumReductionGBP": 79,
+      "approved": false,
+      "reductionPercent": 22.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 140,
+          "originalRoundTrip": 280,
+          "oneWayScenario": 133,
+          "roundTripScenario": 266,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 222.5,
+      "scenarioUpperGBP": 143.5,
+      "scenarioLowerGBP": 143.5,
+      "minimumReductionGBP": 79,
+      "approved": false,
+      "reductionPercent": 35.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 10000,
+          "originalRoundTrip": 20000,
+          "oneWayScenario": 143.5,
+          "roundTripScenario": 287,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 247.5,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 111,
+      "minimumReductionGBP": 75.5,
+      "approved": false,
+      "reductionPercent": 30.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 12000,
+          "originalRoundTrip": 24000,
+          "oneWayScenario": 172,
+          "roundTripScenario": 344.5,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 73.5,
+      "scenarioLowerGBP": 73.5,
+      "minimumReductionGBP": 74,
+      "approved": false,
+      "reductionPercent": 50.2,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 93,
+          "originalRoundTrip": null,
+          "oneWayScenario": 73.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent",
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 362,
+      "scenarioLowerGBP": 362,
+      "minimumReductionGBP": 73,
+      "approved": false,
+      "reductionPercent": 16.8,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 228,
+          "originalRoundTrip": 456,
+          "oneWayScenario": 181,
+          "roundTripScenario": 362,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 137.5,
+      "scenarioUpperGBP": 65.5,
+      "scenarioLowerGBP": 65.5,
+      "minimumReductionGBP": 72,
+      "approved": false,
+      "reductionPercent": 52.4,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 83,
+          "originalRoundTrip": null,
+          "oneWayScenario": 65.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "reduction-at-least-50-percent",
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 71,
+      "approved": false,
+      "reductionPercent": 22.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Didim",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 302.5,
+      "scenarioUpperGBP": 236.5,
+      "scenarioLowerGBP": 236.5,
+      "minimumReductionGBP": 66,
+      "approved": false,
+      "reductionPercent": 21.8,
+      "sourceReferences": [
+        {
+          "url": "https://dtstransfer.com/en/airport-transfer",
+          "currency": "GBP",
+          "originalOneWay": 249,
+          "originalRoundTrip": null,
+          "oneWayScenario": 236.5,
+          "roundTripScenario": null,
+          "passengers": "8–14",
+          "verification": "web extract inspected 2026-11-24; capacity/trim mismatch and return unverified"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 229.5,
+      "scenarioLowerGBP": 229.5,
+      "minimumReductionGBP": 65.5,
+      "approved": false,
+      "reductionPercent": 22.2,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8000,
+          "originalRoundTrip": 16000,
+          "oneWayScenario": 114.5,
+          "roundTripScenario": 229.5,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 107,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 65.5,
+      "approved": false,
+      "reductionPercent": 38,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani/orhaniye",
+          "currency": "EUR",
+          "originalOneWay": 135,
+          "originalRoundTrip": 270,
+          "oneWayScenario": 107,
+          "roundTripScenario": 214.5,
+          "passengers": 16,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 315,
+      "scenarioUpperGBP": 258.5,
+      "scenarioLowerGBP": 258.5,
+      "minimumReductionGBP": 56.5,
+      "approved": false,
+      "reductionPercent": 17.9,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 9000,
+          "originalRoundTrip": 18000,
+          "oneWayScenario": 129,
+          "roundTripScenario": 258.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 51,
+      "approved": false,
+      "reductionPercent": 17.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 166.5,
+      "scenarioLowerGBP": 131,
+      "minimumReductionGBP": 51,
+      "approved": false,
+      "reductionPercent": 23.4,
+      "sourceReferences": [
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 210,
+          "originalRoundTrip": 378,
+          "oneWayScenario": 166.5,
+          "roundTripScenario": 300,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 295,
+      "scenarioUpperGBP": 244,
+      "scenarioLowerGBP": 244,
+      "minimumReductionGBP": 51,
+      "approved": false,
+      "reductionPercent": 17.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 49,
+      "minimumReductionGBP": 48.5,
+      "approved": false,
+      "reductionPercent": 49.7,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 52,
+          "originalRoundTrip": 104,
+          "oneWayScenario": 49,
+          "roundTripScenario": 98.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 335,
+      "scenarioUpperGBP": 287,
+      "scenarioLowerGBP": 287,
+      "minimumReductionGBP": 48,
+      "approved": false,
+      "reductionPercent": 14.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 10000,
+          "originalRoundTrip": 20000,
+          "oneWayScenario": 143.5,
+          "roundTripScenario": 287,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 49,
+      "minimumReductionGBP": 46,
+      "approved": false,
+      "reductionPercent": 48.4,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 62,
+          "originalRoundTrip": null,
+          "oneWayScenario": 49,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 44.5,
+      "approved": false,
+      "reductionPercent": 30.7,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 3500,
+          "originalRoundTrip": 7000,
+          "oneWayScenario": 50,
+          "roundTripScenario": 100.5,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 44.5,
+      "approved": false,
+      "reductionPercent": 30.7,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 3500,
+          "originalRoundTrip": 7000,
+          "oneWayScenario": 50,
+          "roundTripScenario": 100.5,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 107,
+      "minimumReductionGBP": 43.5,
+      "approved": false,
+      "reductionPercent": 25.2,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 9000,
+          "originalRoundTrip": 18000,
+          "oneWayScenario": 129,
+          "roundTripScenario": 258.5,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 104.5,
+      "scenarioLowerGBP": 104.5,
+      "minimumReductionGBP": 43,
+      "approved": false,
+      "reductionPercent": 29.2,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 110,
+          "originalRoundTrip": 220,
+          "oneWayScenario": 104.5,
+          "roundTripScenario": 209,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 185,
+      "scenarioUpperGBP": 142.5,
+      "scenarioLowerGBP": 142.5,
+      "minimumReductionGBP": 42.5,
+      "approved": false,
+      "reductionPercent": 23,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 76,
+          "roundTripScenario": 142.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 85,
+      "scenarioUpperGBP": 43.5,
+      "scenarioLowerGBP": 43.5,
+      "minimumReductionGBP": 41.5,
+      "approved": false,
+      "reductionPercent": 48.8,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": null,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 107.5,
+      "scenarioUpperGBP": 66.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 41,
+      "approved": false,
+      "reductionPercent": 38.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 70,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 66.5,
+          "roundTripScenario": 123.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 172.5,
+      "scenarioUpperGBP": 133,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 39.5,
+      "approved": false,
+      "reductionPercent": 22.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 140,
+          "originalRoundTrip": 280,
+          "oneWayScenario": 133,
+          "roundTripScenario": 266,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 316,
+      "scenarioLowerGBP": 316,
+      "minimumReductionGBP": 39,
+      "approved": false,
+      "reductionPercent": 11,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 11000,
+          "originalRoundTrip": 22000,
+          "oneWayScenario": 158,
+          "roundTripScenario": 316,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 139,
+      "scenarioLowerGBP": 114,
+      "minimumReductionGBP": 38.5,
+      "approved": false,
+      "reductionPercent": 21.7,
+      "sourceReferences": [
+        {
+          "url": "https://www.pickupspoint.com/en/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 175,
+          "originalRoundTrip": 315,
+          "oneWayScenario": 139,
+          "roundTripScenario": 250,
+          "passengers": "8–16",
+          "verification": "source inspected 2026-11-24; published return discount 10%; previous FX assumption and vehicle match pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 181,
+      "scenarioLowerGBP": 181,
+      "minimumReductionGBP": 36.5,
+      "approved": false,
+      "reductionPercent": 16.8,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 228,
+          "originalRoundTrip": 456,
+          "oneWayScenario": 181,
+          "roundTripScenario": 362,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 62,
+      "scenarioLowerGBP": 45.5,
+      "minimumReductionGBP": 35.5,
+      "approved": false,
+      "reductionPercent": 36.4,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 78,
+          "originalRoundTrip": null,
+          "oneWayScenario": 62,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 157.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 35.5,
+      "approved": false,
+      "reductionPercent": 22.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 235,
+      "scenarioUpperGBP": 201,
+      "scenarioLowerGBP": 201,
+      "minimumReductionGBP": 34,
+      "approved": false,
+      "reductionPercent": 14.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 7000,
+          "originalRoundTrip": 14000,
+          "oneWayScenario": 100.5,
+          "roundTripScenario": 201,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 114.5,
+      "scenarioLowerGBP": 114.5,
+      "minimumReductionGBP": 33,
+      "approved": false,
+      "reductionPercent": 22.4,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8000,
+          "originalRoundTrip": 16000,
+          "oneWayScenario": 114.5,
+          "roundTripScenario": 229.5,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 142.5,
+      "scenarioLowerGBP": 142.5,
+      "minimumReductionGBP": 32.5,
+      "approved": false,
+      "reductionPercent": 18.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 76,
+          "roundTripScenario": 142.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 123.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 31.5,
+      "approved": false,
+      "reductionPercent": 20.3,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 65,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 61.5,
+          "roundTripScenario": 123.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 65,
+          "originalRoundTrip": 130,
+          "oneWayScenario": 61.5,
+          "roundTripScenario": 123.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 105,
+      "scenarioUpperGBP": 74,
+      "scenarioLowerGBP": 74,
+      "minimumReductionGBP": 31,
+      "approved": false,
+      "reductionPercent": 29.5,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 40,
+          "originalRoundTrip": 78,
+          "oneWayScenario": 38,
+          "roundTripScenario": 74,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 40,
+          "originalRoundTrip": 78,
+          "oneWayScenario": 38,
+          "roundTripScenario": 74,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 135,
+      "scenarioUpperGBP": 104.5,
+      "scenarioLowerGBP": 104.5,
+      "minimumReductionGBP": 30.5,
+      "approved": false,
+      "reductionPercent": 22.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 60,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 57,
+          "roundTripScenario": 104.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 60,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 57,
+          "roundTripScenario": 104.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 245,
+      "scenarioUpperGBP": 215,
+      "scenarioLowerGBP": 215,
+      "minimumReductionGBP": 30,
+      "approved": false,
+      "reductionPercent": 12.2,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 7500,
+          "originalRoundTrip": 15000,
+          "oneWayScenario": 107.5,
+          "roundTripScenario": 215,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 58.5,
+      "scenarioLowerGBP": 58.5,
+      "minimumReductionGBP": 29,
+      "approved": false,
+      "reductionPercent": 33.1,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 74,
+          "originalRoundTrip": null,
+          "oneWayScenario": 58.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 157.5,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 129,
+      "minimumReductionGBP": 28.5,
+      "approved": false,
+      "reductionPercent": 18.1,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 9000,
+          "originalRoundTrip": 18000,
+          "oneWayScenario": 129,
+          "roundTripScenario": 258.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 137.5,
+      "scenarioUpperGBP": 109.5,
+      "scenarioLowerGBP": 109.5,
+      "minimumReductionGBP": 28,
+      "approved": false,
+      "reductionPercent": 20.4,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 138,
+          "originalRoundTrip": null,
+          "oneWayScenario": 109.5,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 129,
+      "scenarioLowerGBP": 129,
+      "minimumReductionGBP": 26,
+      "approved": false,
+      "reductionPercent": 16.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 4500,
+          "originalRoundTrip": 9000,
+          "oneWayScenario": 64.5,
+          "roundTripScenario": 129,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 99,
+      "minimumReductionGBP": 25.5,
+      "approved": false,
+      "reductionPercent": 17.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 25.5,
+      "approved": false,
+      "reductionPercent": 17.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8500,
+          "originalRoundTrip": 17000,
+          "oneWayScenario": 122,
+          "roundTripScenario": 244,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 147.5,
+      "scenarioUpperGBP": 123,
+      "scenarioLowerGBP": 123,
+      "minimumReductionGBP": 24.5,
+      "approved": false,
+      "reductionPercent": 16.6,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 155,
+          "originalRoundTrip": null,
+          "oneWayScenario": 123,
+          "roundTripScenario": null,
+          "passengers": 10,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 167.5,
+      "scenarioUpperGBP": 143.5,
+      "scenarioLowerGBP": 143.5,
+      "minimumReductionGBP": 24,
+      "approved": false,
+      "reductionPercent": 14.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 10000,
+          "originalRoundTrip": 20000,
+          "oneWayScenario": 143.5,
+          "roundTripScenario": 287,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 23,
+      "approved": false,
+      "reductionPercent": 11.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 23,
+      "approved": false,
+      "reductionPercent": 11.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 67.5,
+      "scenarioLowerGBP": 45.5,
+      "minimumReductionGBP": 20,
+      "approved": false,
+      "reductionPercent": 22.9,
+      "sourceReferences": [
+        {
+          "url": "https://anatolianviptransfer.com/en/transfer/dalaman-havalimani",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": null,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Source directly inspected 2026-11-24; EUR approximate published equivalents; VIP service, exact interior class and planning FX pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 158,
+      "scenarioLowerGBP": 158,
+      "minimumReductionGBP": 19.5,
+      "approved": false,
+      "reductionPercent": 11,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 11000,
+          "originalRoundTrip": 22000,
+          "oneWayScenario": 158,
+          "roundTripScenario": 316,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 55.5,
+      "scenarioLowerGBP": 50,
+      "minimumReductionGBP": 17,
+      "approved": false,
+      "reductionPercent": 23.4,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 70,
+          "originalRoundTrip": null,
+          "oneWayScenario": 55.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 117.5,
+      "scenarioUpperGBP": 100.5,
+      "scenarioLowerGBP": 100.5,
+      "minimumReductionGBP": 17,
+      "approved": false,
+      "reductionPercent": 14.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 7000,
+          "originalRoundTrip": 14000,
+          "oneWayScenario": 100.5,
+          "roundTripScenario": 201,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 92.5,
+      "scenarioUpperGBP": 76,
+      "scenarioLowerGBP": 76,
+      "minimumReductionGBP": 16.5,
+      "approved": false,
+      "reductionPercent": 17.8,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 76,
+          "roundTripScenario": 142.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-vito",
+      "direction": "roundTrip",
+      "currentGBP": 350,
+      "scenarioUpperGBP": 333.5,
+      "scenarioLowerGBP": 333.5,
+      "minimumReductionGBP": 16.5,
+      "approved": false,
+      "reductionPercent": 4.7,
+      "sourceReferences": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-kundu-transfer",
+          "currency": "EUR",
+          "originalOneWay": 215,
+          "originalRoundTrip": 420,
+          "oneWayScenario": 170.5,
+          "roundTripScenario": 333.5,
+          "passengers": 6,
+          "verification": "Comparable standard minivan VW/Ford, not exact Mercedes; provisional FX"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 245,
+      "scenarioUpperGBP": 229.5,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 15.5,
+      "approved": false,
+      "reductionPercent": 6.3,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8000,
+          "originalRoundTrip": 16000,
+          "oneWayScenario": 114.5,
+          "roundTripScenario": 229.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 122.5,
+      "scenarioUpperGBP": 107.5,
+      "scenarioLowerGBP": 75.5,
+      "minimumReductionGBP": 15,
+      "approved": false,
+      "reductionPercent": 12.2,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 7500,
+          "originalRoundTrip": 15000,
+          "oneWayScenario": 107.5,
+          "roundTripScenario": 215,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 152,
+      "scenarioLowerGBP": 152,
+      "minimumReductionGBP": 13,
+      "approved": false,
+      "reductionPercent": 7.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 160,
+          "oneWayScenario": 76,
+          "roundTripScenario": 152,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 145,
+      "scenarioUpperGBP": 133,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 12,
+      "approved": false,
+      "reductionPercent": 8.3,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 70,
+          "originalRoundTrip": 140,
+          "oneWayScenario": 66.5,
+          "roundTripScenario": 133,
+          "passengers": "7–10",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 76,
+      "scenarioLowerGBP": 76,
+      "minimumReductionGBP": 11.5,
+      "approved": false,
+      "reductionPercent": 13.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 150,
+          "oneWayScenario": 76,
+          "roundTripScenario": 142.5,
+          "passengers": "7–12",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 67.5,
+      "minimumReductionGBP": 11.5,
+      "approved": false,
+      "reductionPercent": 11.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 11.5,
+      "approved": false,
+      "reductionPercent": 11.8,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 16,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 67.5,
+      "scenarioUpperGBP": 57,
+      "scenarioLowerGBP": 57,
+      "minimumReductionGBP": 10.5,
+      "approved": false,
+      "reductionPercent": 15.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 60,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 57,
+          "roundTripScenario": 104.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 60,
+          "originalRoundTrip": 110,
+          "oneWayScenario": 57,
+          "roundTripScenario": 104.5,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 50,
+      "scenarioUpperGBP": 39.5,
+      "scenarioLowerGBP": 39.5,
+      "minimumReductionGBP": 10.5,
+      "approved": false,
+      "reductionPercent": 21,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 50,
+          "originalRoundTrip": null,
+          "oneWayScenario": 39.5,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-vito",
+      "direction": "roundTrip",
+      "currentGBP": 105,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 95,
+      "minimumReductionGBP": 10,
+      "approved": false,
+      "reductionPercent": 9.5,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 55,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 52,
+          "roundTripScenario": 95,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 55,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 52,
+          "roundTripScenario": 95,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 155.5,
+      "scenarioLowerGBP": 118.5,
+      "minimumReductionGBP": 9.5,
+      "approved": false,
+      "reductionPercent": 5.8,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 98,
+          "originalRoundTrip": 196,
+          "oneWayScenario": 77.5,
+          "roundTripScenario": 155.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 9,
+      "approved": false,
+      "reductionPercent": 9.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 3000,
+          "originalRoundTrip": 6000,
+          "oneWayScenario": 43,
+          "roundTripScenario": 86,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 435,
+      "scenarioUpperGBP": 426,
+      "scenarioLowerGBP": 180.5,
+      "minimumReductionGBP": 9,
+      "approved": false,
+      "reductionPercent": 2.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 268,
+          "originalRoundTrip": 536,
+          "oneWayScenario": 213,
+          "roundTripScenario": 426,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 65,
+      "scenarioUpperGBP": 57,
+      "scenarioLowerGBP": 57,
+      "minimumReductionGBP": 8,
+      "approved": false,
+      "reductionPercent": 12.3,
+      "sourceReferences": [
+        {
+          "url": "https://reductus.com/prices/",
+          "currency": "GBP",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 57,
+          "roundTripScenario": null,
+          "passengers": "4–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 122.5,
+      "scenarioUpperGBP": 114.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 8,
+      "approved": false,
+      "reductionPercent": 6.5,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 8000,
+          "originalRoundTrip": 16000,
+          "oneWayScenario": 114.5,
+          "roundTripScenario": 229.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 355,
+      "scenarioUpperGBP": 348,
+      "scenarioLowerGBP": 171,
+      "minimumReductionGBP": 7,
+      "approved": false,
+      "reductionPercent": 2,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 219,
+          "originalRoundTrip": 438,
+          "oneWayScenario": 174,
+          "roundTripScenario": 348,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 77.5,
+      "scenarioUpperGBP": 71,
+      "scenarioLowerGBP": 62.5,
+      "minimumReductionGBP": 6.5,
+      "approved": false,
+      "reductionPercent": 8.4,
+      "sourceReferences": [
+        {
+          "url": "https://www.dalamantransfer.com/price-list/",
+          "currency": "GBP",
+          "originalOneWay": 75,
+          "originalRoundTrip": null,
+          "oneWayScenario": 71,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 77.5,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 5,
+      "approved": false,
+      "reductionPercent": 6.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 98,
+          "originalRoundTrip": 196,
+          "oneWayScenario": 77.5,
+          "roundTripScenario": 155.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 190,
+      "scenarioLowerGBP": 133,
+      "minimumReductionGBP": 5,
+      "approved": false,
+      "reductionPercent": 2.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 100,
+          "originalRoundTrip": 200,
+          "oneWayScenario": 95,
+          "roundTripScenario": 190,
+          "passengers": "11–16",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 67.5,
+      "scenarioLowerGBP": 50,
+      "minimumReductionGBP": 5,
+      "approved": false,
+      "reductionPercent": 6.9,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 85,
+          "originalRoundTrip": null,
+          "oneWayScenario": 67.5,
+          "roundTripScenario": null,
+          "passengers": 4,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 195,
+      "scenarioUpperGBP": 190.5,
+      "scenarioLowerGBP": 123.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false,
+      "reductionPercent": 2.3,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 120,
+          "originalRoundTrip": 240,
+          "oneWayScenario": 95,
+          "roundTripScenario": 190.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 217.5,
+      "scenarioUpperGBP": 213,
+      "scenarioLowerGBP": 95,
+      "minimumReductionGBP": 4.5,
+      "approved": false,
+      "reductionPercent": 2.1,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 268,
+          "originalRoundTrip": 536,
+          "oneWayScenario": 213,
+          "roundTripScenario": 426,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-15",
+      "direction": "roundTrip",
+      "currentGBP": 165,
+      "scenarioUpperGBP": 160.5,
+      "scenarioLowerGBP": 160.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false,
+      "reductionPercent": 2.7,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 101,
+          "originalRoundTrip": 202,
+          "oneWayScenario": 80,
+          "roundTripScenario": 160.5,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 170.5,
+      "scenarioLowerGBP": 170.5,
+      "minimumReductionGBP": 4.5,
+      "approved": false,
+      "reductionPercent": 2.6,
+      "sourceReferences": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-kundu-transfer",
+          "currency": "EUR",
+          "originalOneWay": 215,
+          "originalRoundTrip": 420,
+          "oneWayScenario": 170.5,
+          "roundTripScenario": 333.5,
+          "passengers": 6,
+          "verification": "Comparable standard minivan VW/Ford, not exact Mercedes; provisional FX"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 79,
+      "scenarioLowerGBP": 79,
+      "minimumReductionGBP": 3.5,
+      "approved": false,
+      "reductionPercent": 4.2,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 5500,
+          "originalRoundTrip": 11000,
+          "oneWayScenario": 79,
+          "roundTripScenario": 158,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 75,
+      "scenarioUpperGBP": 71.5,
+      "scenarioLowerGBP": 71.5,
+      "minimumReductionGBP": 3.5,
+      "approved": false,
+      "reductionPercent": 4.7,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 2500,
+          "originalRoundTrip": 5000,
+          "oneWayScenario": 35.5,
+          "roundTripScenario": 71.5,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 177.5,
+      "scenarioUpperGBP": 174,
+      "scenarioLowerGBP": 90,
+      "minimumReductionGBP": 3.5,
+      "approved": false,
+      "reductionPercent": 2,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 219,
+          "originalRoundTrip": 438,
+          "oneWayScenario": 174,
+          "roundTripScenario": 348,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 52.5,
+      "scenarioUpperGBP": 49,
+      "scenarioLowerGBP": 38,
+      "minimumReductionGBP": 3.5,
+      "approved": false,
+      "reductionPercent": 6.7,
+      "sourceReferences": [
+        {
+          "url": "https://wecaretransfer.com/en/pricing/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 62,
+          "originalRoundTrip": null,
+          "oneWayScenario": 49,
+          "roundTripScenario": null,
+          "passengers": 6,
+          "verification": "Published tariff checked 2026-11-24; planning FX not independently verified; class/cost floor pending"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 125,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 3,
+      "approved": false,
+      "reductionPercent": 2.4,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 4250,
+          "originalRoundTrip": 8500,
+          "oneWayScenario": 61,
+          "roundTripScenario": 122,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "direction": "roundTrip",
+      "currentGBP": 155,
+      "scenarioUpperGBP": 152,
+      "scenarioLowerGBP": 152,
+      "minimumReductionGBP": 3,
+      "approved": false,
+      "reductionPercent": 1.9,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 80,
+          "originalRoundTrip": 160,
+          "oneWayScenario": 76,
+          "roundTripScenario": 152,
+          "passengers": "7–9",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 125,
+      "scenarioUpperGBP": 122,
+      "scenarioLowerGBP": 122,
+      "minimumReductionGBP": 3,
+      "approved": false,
+      "reductionPercent": 2.4,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 4250,
+          "originalRoundTrip": 8500,
+          "oneWayScenario": 61,
+          "roundTripScenario": 122,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 175,
+      "scenarioUpperGBP": 172,
+      "scenarioLowerGBP": 172,
+      "minimumReductionGBP": 3,
+      "approved": false,
+      "reductionPercent": 1.7,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 66.5,
+      "minimumReductionGBP": 2.5,
+      "approved": false,
+      "reductionPercent": 2.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices",
+          "currency": "GBP",
+          "originalOneWay": 100,
+          "originalRoundTrip": 200,
+          "oneWayScenario": 95,
+          "roundTripScenario": 190,
+          "passengers": "11–16",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "direction": "oneWay",
+      "currentGBP": 97.5,
+      "scenarioUpperGBP": 95,
+      "scenarioLowerGBP": 63.5,
+      "minimumReductionGBP": 2.5,
+      "approved": false,
+      "reductionPercent": 2.6,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 120,
+          "originalRoundTrip": 240,
+          "oneWayScenario": 95,
+          "roundTripScenario": 190.5,
+          "passengers": 10,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-15",
+      "direction": "oneWay",
+      "currentGBP": 82.5,
+      "scenarioUpperGBP": 80,
+      "scenarioLowerGBP": 80,
+      "minimumReductionGBP": 2.5,
+      "approved": false,
+      "reductionPercent": 3,
+      "sourceReferences": [
+        {
+          "url": "https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices",
+          "currency": "EUR",
+          "originalOneWay": 101,
+          "originalRoundTrip": 202,
+          "oneWayScenario": 80,
+          "roundTripScenario": 160.5,
+          "passengers": 15,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-maybach",
+      "direction": "roundTrip",
+      "currentGBP": 95,
+      "scenarioUpperGBP": 93,
+      "scenarioLowerGBP": 93,
+      "minimumReductionGBP": 2,
+      "approved": false,
+      "reductionPercent": 2.1,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 3250,
+          "originalRoundTrip": 6500,
+          "oneWayScenario": 46.5,
+          "roundTripScenario": 93,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "standard-vito",
+      "direction": "oneWay",
+      "currentGBP": 72.5,
+      "scenarioUpperGBP": 71,
+      "scenarioLowerGBP": 71,
+      "minimumReductionGBP": 1.5,
+      "approved": false,
+      "reductionPercent": 2.1,
+      "sourceReferences": [
+        {
+          "url": "https://reductus.com/prices/",
+          "currency": "GBP",
+          "originalOneWay": 75,
+          "originalRoundTrip": null,
+          "oneWayScenario": 71,
+          "roundTripScenario": null,
+          "passengers": "4–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-maybach",
+      "direction": "oneWay",
+      "currentGBP": 87.5,
+      "scenarioUpperGBP": 86,
+      "scenarioLowerGBP": 86,
+      "minimumReductionGBP": 1.5,
+      "approved": false,
+      "reductionPercent": 1.7,
+      "sourceReferences": [
+        {
+          "url": "https://monarchtransfer.com/transfer-fiyatlari",
+          "currency": "TRY",
+          "originalOneWay": 6000,
+          "originalRoundTrip": 12000,
+          "oneWayScenario": 86,
+          "roundTripScenario": 172,
+          "passengers": 5,
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Oren",
+      "category": "standard-vito",
+      "direction": "roundTrip",
+      "currentGBP": 265,
+      "scenarioUpperGBP": 263.5,
+      "scenarioLowerGBP": 263.5,
+      "minimumReductionGBP": 1.5,
+      "approved": false,
+      "reductionPercent": 0.6,
+      "sourceReferences": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-oren-transfer",
+          "currency": "EUR",
+          "originalOneWay": 170,
+          "originalRoundTrip": 332,
+          "oneWayScenario": 135,
+          "roundTripScenario": 263.5,
+          "passengers": 6,
+          "verification": "Published fare updated 2026-10-28; inspected 2026-11-24; planning FX unverified; VW/Ford comparable minivan, not exact Vito"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": [
+        "fx-verification-required"
+      ]
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-vito",
+      "direction": "oneWay",
+      "currentGBP": 52.5,
+      "scenarioUpperGBP": 52,
+      "scenarioLowerGBP": 52,
+      "minimumReductionGBP": 0.5,
+      "approved": false,
+      "reductionPercent": 1,
+      "sourceReferences": [
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 55,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 52,
+          "roundTripScenario": 95,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+          "currency": "GBP",
+          "originalOneWay": 55,
+          "originalRoundTrip": 100,
+          "oneWayScenario": 52,
+          "roundTripScenario": 95,
+          "passengers": "5–6",
+          "verification": "historical evidence not independently confirmed; scenario only"
+        }
+      ],
+      "reviewStatus": "blocked-unverified-source-and-cost",
+      "flags": []
+    }
+  ]
+}
