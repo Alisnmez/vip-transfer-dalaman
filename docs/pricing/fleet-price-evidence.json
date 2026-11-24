@@ -1,0 +1,3815 @@
+{
+  "schemaVersion": 1,
+  "categoryKeys": "research only; not runtime IDs",
+  "rule": "floor(reference GBP * 95 / 50) / 2",
+  "rows": [
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Icmeler(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Netsel Marina",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Albatros Marina",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-vito",
+      "oneWayCandidate": 57,
+      "roundTripCandidate": 104.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 60,
+        "roundTrip": 110
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yacht Marina",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Cook's Club Adakoy&Adakoy Marina",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-vito",
+      "oneWayCandidate": 66.5,
+      "roundTripCandidate": 123.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 70,
+        "roundTrip": 130
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-vito",
+      "oneWayCandidate": 61.5,
+      "roundTripCandidate": 123.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 65,
+        "roundTrip": 130
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "D Maris Bay",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sarigerme",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gocek",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-vito",
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 66.5,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 40,
+        "roundTrip": 70
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Dalyan",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye City Center(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Liberty Fabay , Liberty Signa",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-vito",
+      "oneWayCandidate": 52,
+      "roundTripCandidate": 95,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 55,
+        "roundTrip": 100
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oludeniz(Any Hotel)",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kalkan",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kas",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyaka",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Datça",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun / Sogut",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Selimiye",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Angels Marmaris Hotel",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-vito",
+      "oneWayCandidate": 38,
+      "roundTripCandidate": 74,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 40,
+        "roundTrip": 78
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Fethiye Kayakoy",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-vito",
+      "oneWayCandidate": 45.5,
+      "roundTripCandidate": 91,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 48,
+        "roundTrip": 96
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kabak",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-vito",
+      "oneWayCandidate": 45.5,
+      "roundTripCandidate": 91,
+      "evidence": {
+        "url": "https://www.icmelertransfer.com/dalaman-airport-transfer-prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "5–6",
+        "oneWay": 48,
+        "roundTrip": 96
+      },
+      "status": "capacity-and-scope-pending",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Faralya",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bozburun",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Sogut",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Cruise Port",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turunc Kumlubuk",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Orhaniye",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Marmaris Hisaronu",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Antalya City Center",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Lara",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Belek",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Side",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kemer",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kundu",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Manavgat",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Muratpasa",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Alanya",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Avsallar",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konyaalti",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Mahmutlar",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Akyarlar",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Bitez",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gulluk",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gumbet",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Gundogan",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Güvercinlik",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kaynar",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Konacik",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Torba",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turgutreis",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Turkbuku",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yalikavak",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Yaliciftlik",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Oren",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Kusadasi",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "standard-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "vip-vito",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "vip-maybach",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "standard-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "standard-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "vip-sprinter-9",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    },
+    {
+      "destination": "Didim",
+      "category": "vip-sprinter-15",
+      "oneWayCandidate": null,
+      "roundTripCandidate": null,
+      "evidence": null,
+      "status": "missing-reverified-evidence",
+      "approved": false
+    }
+  ]
+}
