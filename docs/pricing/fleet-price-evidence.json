@@ -28,6 +28,26 @@
           "roundTrip": 192,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 55,
+          "direction": "airport-to-resort",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 38,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -55,6 +75,26 @@
           "roundTrip": 230,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 75,
+          "direction": "airport-to-resort",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 43.7,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -128,6 +168,26 @@
           "roundTrip": 268,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 79,
+          "direction": "airport-to-resort",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 53.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -185,6 +245,26 @@
           "roundTrip": 208,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 49.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 45,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -212,6 +292,26 @@
           "roundTrip": 250,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 67.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 51.75,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -268,6 +368,26 @@
           "roundTrip": 292,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 71.1,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 63,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -471,7 +591,29 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 60.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 50,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Yacht Marina",
@@ -487,7 +629,29 @@
         "roundTrip": 110
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 82.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 57.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Yacht Marina",
@@ -514,7 +678,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 86.9,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 70,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Yacht Marina",
@@ -734,7 +920,29 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 80,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -750,7 +958,29 @@
         "roundTrip": 130
       },
       "status": "capacity-and-scope-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 92,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -777,7 +1007,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 112,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "D Maris Bay",
@@ -812,7 +1064,29 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 33,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 30,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -821,7 +1095,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 45,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 34.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -884,7 +1180,29 @@
         "serviceClass": "private transfer; standard/VIP class unverified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 47.4,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 42,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Sarigerme",
@@ -929,6 +1247,26 @@
           "roundTrip": 100,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 38.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 35,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -949,6 +1287,26 @@
           "roundTrip": 110,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 52.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 40.25,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1023,6 +1381,26 @@
           "roundTrip": 130,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 55.3,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 49,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1080,6 +1458,26 @@
           "roundTrip": 100,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 33,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 30,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1107,6 +1505,26 @@
           "roundTrip": 110,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 45,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 34.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1163,6 +1581,26 @@
           "roundTrip": 130,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 47.4,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 42,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1220,6 +1658,26 @@
           "roundTrip": 110,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 49.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 45,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1247,6 +1705,26 @@
           "roundTrip": 132,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 67.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 51.75,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1312,6 +1790,26 @@
           "roundTrip": 152,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 71.1,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 63,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1511,6 +2009,26 @@
           "roundTrip": 132,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 55,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 50,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1538,6 +2056,26 @@
           "roundTrip": 160,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 75,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 57.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1618,6 +2156,26 @@
           "roundTrip": 186,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 79,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 70,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1675,6 +2233,26 @@
           "roundTrip": 244,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 88,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 80,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1695,6 +2273,26 @@
           "roundTrip": 292,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 120,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 92,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1761,6 +2359,26 @@
           "roundTrip": 342,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126.4,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 112,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1818,6 +2436,26 @@
           "roundTrip": 298,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 90,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1838,6 +2476,26 @@
           "roundTrip": 358,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 103.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1904,6 +2562,26 @@
           "roundTrip": 416,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1953,6 +2631,26 @@
           "roundTrip": 144,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 49.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 45,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -1973,6 +2671,26 @@
           "roundTrip": 172,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 67.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 51.75,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2021,6 +2739,26 @@
           "roundTrip": 202,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 71.1,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 63,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2078,6 +2816,26 @@
           "roundTrip": 326,
           "passengers": 6,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 110,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 100,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2098,6 +2856,26 @@
           "roundTrip": 390,
           "passengers": 4,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 150,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 115,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2146,6 +2924,26 @@
           "roundTrip": 456,
           "passengers": 15,
           "scope": "town centre starting fare; symmetric legs; capacity match pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 158,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 140,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2256,7 +3054,29 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 90,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Selimiye",
@@ -2265,7 +3085,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 103.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Selimiye",
@@ -2302,7 +3144,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Selimiye",
@@ -2329,7 +3193,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 90,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -2338,7 +3224,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 103.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -2365,7 +3273,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Angels Marmaris Hotel",
@@ -2610,7 +3540,29 @@
         "serviceClass": "private transfer; vehicle model not specified"
       },
       "status": "vehicle-class-and-capacity-pending",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 90,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Bozburun",
@@ -2619,7 +3571,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 103.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Bozburun",
@@ -2646,7 +3620,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Bozburun",
@@ -2690,6 +3686,26 @@
           "oneWay": 100,
           "passengers": 6,
           "vehicle": "Mercedes-Benz Vito"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 99,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 90,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
         }
       ]
     },
@@ -2700,7 +3716,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 135,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 103.5,
+          "direction": "resort-to-airport",
+          "passengers": 6,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Sogut",
@@ -2727,7 +3765,29 @@
       "roundTripCandidate": null,
       "evidence": null,
       "status": "missing-reverified-evidence",
-      "approved": false
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 142.2,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        },
+        {
+          "url": "https://sundreamtransfer.com/en/prices",
+          "currency": "EUR",
+          "checked": "2026-11-24",
+          "oneWay": 126,
+          "direction": "resort-to-airport",
+          "passengers": 16,
+          "roundTrip": null,
+          "scope": "starting fare; exact service and reverse direction unverified"
+        }
+      ]
     },
     {
       "destination": "Sogut",
