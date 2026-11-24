@@ -6,10 +6,18 @@
     {
       "destination": "Marmaris(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 47.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 50,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -76,10 +84,18 @@
     {
       "destination": "Icmeler(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 47.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 50,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -146,10 +162,18 @@
     {
       "destination": "Netsel Marina",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 47.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 50,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -216,10 +240,18 @@
     {
       "destination": "Albatros Marina",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 57,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 60,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -286,10 +318,18 @@
     {
       "destination": "Yacht Marina",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 57,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 60,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -419,10 +459,18 @@
     {
       "destination": "Turunc",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 76,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 80,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -489,10 +537,18 @@
     {
       "destination": "D Maris Bay",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 76,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 80,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -559,10 +615,18 @@
     {
       "destination": "Sarigerme",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 42.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 45,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -622,10 +686,18 @@
     {
       "destination": "Gocek",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 42.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 45,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -685,10 +757,18 @@
     {
       "destination": "Dalyan",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 42.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 45,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -755,10 +835,18 @@
     {
       "destination": "Fethiye City Center(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 57,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 60,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -951,10 +1039,18 @@
     {
       "destination": "Oludeniz(Any Hotel)",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 57,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 60,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1021,10 +1117,18 @@
     {
       "destination": "Kalkan",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1084,10 +1188,18 @@
     {
       "destination": "Kas",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1210,10 +1322,18 @@
     {
       "destination": "Datça",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1336,10 +1456,18 @@
     {
       "destination": "Selimiye",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1672,10 +1800,18 @@
     {
       "destination": "Bozburun",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1735,11 +1871,29 @@
     {
       "destination": "Sogut",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 80.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
-      "approved": false
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 85,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
+      "approved": false,
+      "additionalEvidence": [
+        {
+          "url": "https://www.fogyatransfer.com/dalaman-havalimani-sogut-transfer?pb=3",
+          "checked": "2026-11-24",
+          "currency": "GBP",
+          "oneWay": 100,
+          "passengers": 6,
+          "vehicle": "Mercedes-Benz Vito"
+        }
+      ]
     },
     {
       "destination": "Sogut",
@@ -1861,10 +2015,18 @@
     {
       "destination": "Turunc Kumlubuk",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 76,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 80,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1924,10 +2086,18 @@
     {
       "destination": "Orhaniye",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 71,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 75,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
@@ -1987,10 +2157,18 @@
     {
       "destination": "Marmaris Hisaronu",
       "category": "standard-vito",
-      "oneWayCandidate": null,
+      "oneWayCandidate": 66.5,
       "roundTripCandidate": null,
-      "evidence": null,
-      "status": "missing-reverified-evidence",
+      "evidence": {
+        "url": "https://reductus.com/prices/",
+        "checked": "2026-11-24",
+        "currency": "GBP",
+        "passengers": "4–6",
+        "oneWay": 70,
+        "roundTrip": null,
+        "serviceClass": "private transfer; vehicle model not specified"
+      },
+      "status": "vehicle-class-and-capacity-pending",
       "approved": false
     },
     {
