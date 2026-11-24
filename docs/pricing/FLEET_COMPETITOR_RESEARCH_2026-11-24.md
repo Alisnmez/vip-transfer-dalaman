@@ -31,3 +31,20 @@ Other sources screened:
 - https://www.joytransfer.com/en/blog/2026-dalaman-airport-transfer-prices — further vehicle-class research pending.
 
 No runtime prices changed. Combined destination names require exact catalogue mapping. No claims of being cheaper than every competitor.
+
+## Additional evidence — 2026-11-24
+
+GBP published per vehicle:
+
+| Source | Route | Published vehicle / capacity | One way GBP | Return GBP | Candidate one way | Candidate return |
+|---|---|---|---:|---:|---:|---:|
+| Joy Transfer | Fethiye | VIP Vito 4–6 | 60 | 120 | 57 | 114 |
+| Joy Transfer | Fethiye | VIP Sprinter class 7–10 | 70 | 140 | 66.50 | 133 |
+| Ersinler | Marmaris | VIP Vito 6, luggage 4 | 51 | Unverified | 48 | Pending |
+| Ersinler | Marmaris | VIP Sprinter 12, luggage 8 | 68 | Unverified | 64.50 | Pending |
+
+Sources: https://www.joytransfer.com/en/blog/vip-transfer-prices-from-dalaman-airport-to-fethiye-2026 ; https://ersinlertravels.co.uk/transfer/marmaris-transfer . VIP Sprinter capacity mismatches are reference-only, not exact matches. Joy also lists 1–3 VIP Vito at GBP 50/100; do not treat that as a full six-passenger fare. 
+
+Additional EUR evidence, not converted or adopted: https://dalamanfogyatransfer.com/en/pricelist (Marmaris and Oludeniz Maybach 6: EUR 85; VIP Vito 6: EUR 70); https://www.airportstransferturkey.com/guides/dalaman-airport-transfer-prices (14 destinations, dated 2 Nov 2026, same rate for return leg); https://www.kayatransfer.co.uk/dalaman-airport-transfer-prices (Maybach Fethiye EUR 100, Marmaris and Oludeniz EUR 112.50). Verify dated GBP conversion, return terms and service match before adoption. No exact GBP Maybach or 15-seat VIP Sprinter fare established in this pass.
+
+No runtime changes. Existing 32 candidate cells remain provisional; new VIP Vito candidates add three cells pending capacity confirmation. Do not count mismatched Sprinter references as completed matrix cells.
