@@ -9,12 +9,12 @@
   "policy": "Scenarios only; no automatically selected minimum; historical competitor evidence requires independent recheck, capacity, direction and cost validation; Touransfer and Sundream excluded.",
   "stats": {
     "standard-vito": {
-      "one": 28,
-      "round": 18
+      "one": 30,
+      "round": 20
     },
     "vip-vito": {
-      "one": 33,
-      "round": 27
+      "one": 35,
+      "round": 29
     },
     "vip-maybach": {
       "one": 17,
@@ -6723,9 +6723,20 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/en/dalaman-airport-to-gulluk-transfer",
+          "currency": "EUR",
+          "originalOneWay": 155,
+          "originalRoundTrip": 303,
+          "oneWayScenario": 123,
+          "roundTripScenario": 240.5,
+          "passengers": 6,
+          "verification": "Published fare updated 2026-10-28; inspected 2026-11-24; planning FX unverified; VW/Ford comparable minivan, not exact Vito"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -6733,9 +6744,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/en/dalaman-airport-to-gulluk-transfer",
+          "currency": "EUR",
+          "originalOneWay": 180,
+          "originalRoundTrip": 351,
+          "oneWayScenario": 143,
+          "roundTripScenario": 279,
+          "passengers": 6,
+          "verification": "Published fare updated 2026-10-28; inspected 2026-11-24; planning FX unverified; VIP Vito"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -7548,9 +7570,20 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-oren-transfer",
+          "currency": "EUR",
+          "originalOneWay": 170,
+          "originalRoundTrip": 332,
+          "oneWayScenario": 135,
+          "roundTripScenario": 263.5,
+          "passengers": 6,
+          "verification": "Published fare updated 2026-10-28; inspected 2026-11-24; planning FX unverified; VW/Ford comparable minivan, not exact Vito"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
@@ -7558,9 +7591,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-oren-transfer",
+          "currency": "EUR",
+          "originalOneWay": 195,
+          "originalRoundTrip": 381,
+          "oneWayScenario": 155,
+          "roundTripScenario": 302.5,
+          "passengers": 6,
+          "verification": "Published fare updated 2026-10-28; inspected 2026-11-24; planning FX unverified; VIP Vito"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
