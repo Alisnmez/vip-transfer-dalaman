@@ -1,0 +1,11 @@
+{
+  "sourceBlob": "671ccd85c77d32cb5fe7d0bbaf5efcfcafe69ed0",
+  "comparison": {
+    "belowAll": 101,
+    "aboveAll": 115,
+    "within": 58,
+    "missing": 552
+  },
+  "issues": [],
+  "policy": "Comparisons against unverified discounted scenarios, not confirmed market prices. No automatic price changes. Class ordering is a review heuristic, not a binding commercial rule."
+}
