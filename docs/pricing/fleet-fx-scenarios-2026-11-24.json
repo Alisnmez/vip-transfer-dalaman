@@ -9,7 +9,7 @@
   "policy": "Scenarios only; no automatically selected minimum; historical competitor evidence requires independent recheck, capacity, direction and cost validation; Touransfer and Sundream excluded.",
   "stats": {
     "standard-vito": {
-      "one": 23,
+      "one": 24,
       "round": 17
     },
     "vip-vito": {
@@ -25,7 +25,7 @@
       "round": 8
     },
     "standard-sprinter-15": {
-      "one": 13,
+      "one": 15,
       "round": 13
     },
     "vip-sprinter-9": {
@@ -4979,8 +4979,19 @@
       "category": "standard-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.dalamantransfer.com/price-list/",
+          "currency": "GBP",
+          "originalOneWay": 195,
+          "originalRoundTrip": null,
+          "oneWayScenario": 185,
+          "roundTripScenario": null,
+          "passengers": "1–12",
+          "verification": "web extract inspected 2026-11-24; capacity/trim mismatch and return unverified"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -6829,8 +6840,19 @@
       "category": "standard-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://dtstransfer.com/en/airport-transfer",
+          "currency": "GBP",
+          "originalOneWay": 180,
+          "originalRoundTrip": null,
+          "oneWayScenario": 171,
+          "roundTripScenario": null,
+          "passengers": "4–8",
+          "verification": "web extract inspected 2026-11-24; capacity/trim mismatch and return unverified"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -6869,8 +6891,19 @@
       "category": "standard-sprinter-15",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://dtstransfer.com/en/airport-transfer",
+          "currency": "GBP",
+          "originalOneWay": 249,
+          "originalRoundTrip": null,
+          "oneWayScenario": 236.5,
+          "roundTripScenario": null,
+          "passengers": "8–14",
+          "verification": "web extract inspected 2026-11-24; capacity/trim mismatch and return unverified"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
