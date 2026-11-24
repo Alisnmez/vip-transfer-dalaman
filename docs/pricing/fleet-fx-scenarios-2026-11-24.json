@@ -13,7 +13,7 @@
       "round": 17
     },
     "vip-vito": {
-      "one": 19,
+      "one": 21,
       "round": 19
     },
     "vip-maybach": {
@@ -164,6 +164,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 90,
+          "originalRoundTrip": null,
+          "oneWayScenario": 71.5,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -1096,6 +1106,16 @@
           "roundTripScenario": 123.5,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 111,
+          "originalRoundTrip": null,
+          "oneWayScenario": 88,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -1272,6 +1292,16 @@
           "roundTripScenario": 123.5,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": null,
+          "oneWayScenario": 111,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -1447,6 +1477,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 55,
+          "originalRoundTrip": null,
+          "oneWayScenario": 43.5,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -1704,6 +1744,16 @@
           "roundTripScenario": 87,
           "passengers": 4,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -2021,6 +2071,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 60,
+          "originalRoundTrip": null,
+          "oneWayScenario": 47.5,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -2307,6 +2367,16 @@
           "roundTripScenario": 95,
           "passengers": "5–6",
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 90,
+          "originalRoundTrip": null,
+          "oneWayScenario": 71.5,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -2766,6 +2836,16 @@
           "roundTripScenario": null,
           "passengers": 6,
           "verification": "historical evidence not independently confirmed; scenario only"
+        },
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 100,
+          "originalRoundTrip": null,
+          "oneWayScenario": 79,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
         }
       ],
       "missingOneWay": false,
@@ -3753,8 +3833,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 130,
+          "originalRoundTrip": null,
+          "oneWayScenario": 103,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
@@ -4297,8 +4388,19 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
+      "alternatives": [
+        {
+          "url": "https://www.dalamantransfer.co/en/",
+          "currency": "EUR",
+          "originalOneWay": 140,
+          "originalRoundTrip": null,
+          "oneWayScenario": 111,
+          "roundTripScenario": null,
+          "passengers": "1–6",
+          "verification": "current web extract; FX assumption and own capacity pending"
+        }
+      ],
+      "missingOneWay": false,
       "missingRoundTrip": true,
       "approved": false
     },
