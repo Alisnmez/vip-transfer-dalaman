@@ -77,6 +77,23 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "airport-to-resort",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 75,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -143,6 +160,15 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 75,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "airport-to-resort",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -272,6 +298,23 @@
           "direction": "airport-to-destination",
           "passengers": 16,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 79,
+          "roundTrip": null,
+          "passengers": 16,
+          "direction": "airport-to-resort",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 115,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -1812,6 +1855,23 @@
           "oneWay": 45,
           "roundTrip": null,
           "serviceClass": "private transfer; vehicle model not specified"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 38.5,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 35,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -1862,6 +1922,15 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 52.5,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -1977,6 +2046,23 @@
           "oneWay": 80,
           "roundTrip": 160,
           "serviceClass": "private transfer; standard/VIP class unverified"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 55.3,
+          "roundTrip": null,
+          "passengers": 16,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2113,6 +2199,14 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 40,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2179,6 +2273,15 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://ersinlertravels.co.uk/transfer/dalyan-transfer",
+          "currency": "GBP",
+          "oneWay": 38,
+          "roundTrip": null,
+          "passengers": 6,
+          "luggage": 4,
+          "verification": "direct source extract"
         }
       ]
     },
@@ -2291,6 +2394,14 @@
           "direction": "airport-to-destination",
           "passengers": 16,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 60,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2427,6 +2538,23 @@
           "oneWay": 60,
           "roundTrip": null,
           "serviceClass": "private transfer; vehicle model not specified"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 49.5,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 50,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2485,6 +2613,15 @@
           "passengers": "5–6",
           "oneWay": 55,
           "roundTrip": 100
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 67.5,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -2591,6 +2728,23 @@
           "oneWay": 100,
           "roundTrip": 200,
           "serviceClass": "private transfer; standard/VIP class unverified"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 71.1,
+          "roundTrip": null,
+          "passengers": 16,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 80,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2869,6 +3023,23 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 55,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -2935,6 +3106,15 @@
           "direction": "airport-to-destination",
           "passengers": 6,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 75,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -3072,6 +3252,23 @@
           "direction": "airport-to-destination",
           "passengers": 16,
           "verification": "observed in current search extract; return and own capacity pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 79,
+          "roundTrip": null,
+          "passengers": 16,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 85,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -3414,6 +3611,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 110,
+          "roundTrip": null,
+          "passengers": 6,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -3552,6 +3757,14 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.hieracitytravel.com/en/airport-transfer/",
+          "currency": "EUR",
+          "oneWay": 165,
+          "roundTrip": null,
+          "passengers": 16,
+          "verification": "direct source extract; trim and return unverified"
         }
       ]
     },
@@ -4764,6 +4977,15 @@
           "passengers": 5,
           "luggage": 5,
           "verification": "published table observed; capacity and GBP conversion pending"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 99,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -4797,6 +5019,15 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 135,
+          "roundTrip": null,
+          "passengers": 6,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
@@ -4860,6 +5091,15 @@
           "roundTrip": null,
           "scope": "starting fare; exact service and reverse direction unverified",
           "verification": "quarantined: prior derived amounts must be checked against published individual cells"
+        },
+        {
+          "url": "https://www.touransfer.co.uk/en/price",
+          "currency": "EUR",
+          "oneWay": 142.2,
+          "roundTrip": null,
+          "passengers": 16,
+          "direction": "resort-to-airport",
+          "verification": "direct source extract checked 2026-11-24; capacity and reverse fare pending"
         }
       ]
     },
