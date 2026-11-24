@@ -13,8 +13,8 @@
       "round": 17
     },
     "vip-vito": {
-      "one": 30,
-      "round": 24
+      "one": 31,
+      "round": 25
     },
     "vip-maybach": {
       "one": 17,
@@ -6233,9 +6233,20 @@
       "category": "vip-vito",
       "existingOneWay": null,
       "existingRoundTrip": null,
-      "alternatives": [],
-      "missingOneWay": true,
-      "missingRoundTrip": true,
+      "alternatives": [
+        {
+          "url": "https://dalamangotransfer.com/dalaman-havalimani-akyarlar-transfer",
+          "currency": "EUR",
+          "originalOneWay": 225,
+          "originalRoundTrip": 439,
+          "oneWayScenario": 178.5,
+          "roundTripScenario": 348.5,
+          "passengers": 6,
+          "verification": "Published outbound and return vehicle fares, updated 2026-10-28; FX and cost floor pending"
+        }
+      ],
+      "missingOneWay": false,
+      "missingRoundTrip": false,
       "approved": false
     },
     {
