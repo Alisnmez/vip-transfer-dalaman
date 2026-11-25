@@ -206,40 +206,12 @@ function frequentlyAskedQuestions(copy: InfoCopy) {
 
 const fleetCopy = {
   de: {
-    'vip-minivan': {
-      feature: 'Mercedes-Benz Vito mit VIP-Standardausstattung für Familien und kleine Gruppen.',
-      amenities: ['Bequeme VIP-Sitze', 'Offener Innenraum ohne Fahrertrennwand', 'Klimaanlage', 'WLAN und Wasser nach Bestätigung'],
-    },
-    maybach: {
-      feature: 'Mercedes-Benz Vito mit Innenraum im Maybach-Stil und zusätzlicher Privatsphäre.',
-      amenities: ['Premiumsitze und Ambientebeleuchtung', 'Fahrertrennwand', 'TV, Kühlschrank und Multimedia nach Bestätigung', 'WLAN und Erfrischungen nach Bestätigung'],
-    },
-    'minibus-long': {
-      feature: 'Mercedes-Benz Sprinter mit viel Platz für Familien und Gruppen.',
-      amenities: ['VIP-Standardausstattung und bequeme Sitze', 'Offener Innenraum ohne Fahrertrennwand', 'Klimaanlage', 'Gepäckmaße vor der Reise mit dem Anbieter klären'],
-    },
-    'vip-minibus': {
-      feature: 'Mercedes-Benz Sprinter mit gehobener VIP-Ausstattung für kleinere Gruppen.',
-      amenities: ['Premiumsitze und Fahrertrennwand', 'Zwei Bildschirme und PlayStation nach Bestätigung', 'WLAN und Erfrischungen nach Bestätigung', 'Gepäckmaße vor der Reise mit dem Anbieter klären'],
-    },
+    feature: (count: number) => `Privater Transfer für bis zu ${count} Fahrgäste.`,
+    amenities: ['Klimaanlage', 'Wasser in Flaschen', 'Kindersitze auf Anfrage'],
   },
   ru: {
-    'vip-minivan': {
-      feature: 'Mercedes-Benz Vito со стандартным VIP-салоном для семей и небольших групп.',
-      amenities: ['Удобные VIP-кресла', 'Открытый салон без перегородки', 'Кондиционер', 'Wi-Fi и вода после подтверждения'],
-    },
-    maybach: {
-      feature: 'Mercedes-Benz Vito с салоном в стиле Maybach и повышенной приватностью.',
-      amenities: ['Премиальные кресла и подсветка', 'Перегородка между салоном и водителем', 'Телевизор, холодильник и мультимедиа после подтверждения', 'Wi-Fi и напитки после подтверждения'],
-    },
-    'minibus-long': {
-      feature: 'Просторный микроавтобус Mercedes-Benz Sprinter для семей и групп.',
-      amenities: ['Стандартный VIP-салон и удобные сиденья', 'Открытый салон без перегородки', 'Кондиционер', 'Уточните размеры багажа у оператора до поездки'],
-    },
-    'vip-minibus': {
-      feature: 'Mercedes-Benz Sprinter с улучшенным VIP-салоном для небольших групп.',
-      amenities: ['Премиальные кресла и перегородка', 'Два экрана и PlayStation после подтверждения', 'Wi-Fi и напитки после подтверждения', 'Уточните размеры багажа у оператора до поездки'],
-    },
+    feature: (count: number) => `Индивидуальный трансфер до ${count} пассажиров.`,
+    amenities: ['Кондиционер', 'Бутилированная вода', 'Детские кресла по запросу'],
   },
 }
 
@@ -290,7 +262,7 @@ export function VehiclesPage() {
         </header>
         <section aria-label={copy.category} className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {fleetCatalogue.map((vehicle) => {
-            const details = language === 'en' ? vehicle : fleetCopy[language][vehicle.bookingVehicleId]
+            const details = language === 'en' ? vehicle : { feature: fleetCopy[language].feature(vehicle.maxPassengers), amenities: fleetCopy[language].amenities }
             return (
               <article className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
                 <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="h-56 shrink-0" />

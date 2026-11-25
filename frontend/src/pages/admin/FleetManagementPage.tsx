@@ -1,3 +1,4 @@
+import { VehiclePhoto } from '../public/VehiclePhoto'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { Link } from 'react-router-dom'
 
@@ -21,13 +22,14 @@ export function FleetManagementPage() {
       </div>
 
       <div className="rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-900">
-        These are the four vehicle categories shown on the public Vehicles page.
+        These are the vehicle categories shown on the public Vehicles page.
         Availability and individual vehicle assignments are not tracked here yet.
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
         {fleetCatalogue.map((vehicle) => (
           <article className="glass-card min-w-0 overflow-hidden rounded-xl" key={vehicle.name}>
+            <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} />
             <div aria-hidden="true" className="h-52 w-full bg-surface-container-low" />
             <div className="space-y-4 p-5">
               <h2 className="font-title-md text-title-md text-on-surface">{vehicle.name}</h2>

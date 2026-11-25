@@ -68,20 +68,20 @@ export const transferPrices = [
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
+    "oneWay": 42.5,
+    "roundTrip": 85.5
   },
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 57.5,
-    "roundTrip": 115
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Marmaris(Any Hotel)",
@@ -92,26 +92,26 @@ export const transferPrices = [
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "minibus",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "vip-minibus",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Marmaris(Any Hotel)",
     "vehicleId": "minibus-long",
-    "oneWay": 80.5,
-    "roundTrip": 160
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Icmeler(Any Hotel)",
@@ -122,20 +122,20 @@ export const transferPrices = [
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
+    "oneWay": 42.5,
+    "roundTrip": 85.5
   },
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 57.5,
-    "roundTrip": 115
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Icmeler(Any Hotel)",
@@ -146,26 +146,26 @@ export const transferPrices = [
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "minibus",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "vip-minibus",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Icmeler(Any Hotel)",
     "vehicleId": "minibus-long",
-    "oneWay": 80.5,
-    "roundTrip": 160
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Netsel Marina",
@@ -176,20 +176,20 @@ export const transferPrices = [
   {
     "destination": "Netsel Marina",
     "vehicleId": "vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
+    "oneWay": 42.5,
+    "roundTrip": 85.5
   },
   {
     "destination": "Netsel Marina",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 57.5,
-    "roundTrip": 115
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Netsel Marina",
     "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Netsel Marina",
@@ -200,26 +200,26 @@ export const transferPrices = [
   {
     "destination": "Netsel Marina",
     "vehicleId": "minibus",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Netsel Marina",
     "vehicleId": "vip-minibus",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Netsel Marina",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Netsel Marina",
     "vehicleId": "minibus-long",
-    "oneWay": 80.5,
-    "roundTrip": 160
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Albatros Marina",
@@ -230,20 +230,20 @@ export const transferPrices = [
   {
     "destination": "Albatros Marina",
     "vehicleId": "vip-minivan",
-    "oneWay": 52.5,
-    "roundTrip": 105
+    "oneWay": 45.5,
+    "roundTrip": 90.0
   },
   {
     "destination": "Albatros Marina",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 62.5,
-    "roundTrip": 115
+    "oneWay": 55.0,
+    "roundTrip": 109.0
   },
   {
     "destination": "Albatros Marina",
     "vehicleId": "maybach",
-    "oneWay": 67.5,
-    "roundTrip": 135
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Albatros Marina",
@@ -254,26 +254,26 @@ export const transferPrices = [
   {
     "destination": "Albatros Marina",
     "vehicleId": "minibus",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "Albatros Marina",
     "vehicleId": "vip-minibus",
-    "oneWay": 92.5,
-    "roundTrip": 185
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Albatros Marina",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 104.5,
+    "roundTrip": 209.0
   },
   {
     "destination": "Albatros Marina",
     "vehicleId": "minibus-long",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Yacht Marina",
@@ -284,20 +284,20 @@ export const transferPrices = [
   {
     "destination": "Yacht Marina",
     "vehicleId": "vip-minivan",
-    "oneWay": 67.5,
-    "roundTrip": 135
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Yacht Marina",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "Yacht Marina",
     "vehicleId": "maybach",
-    "oneWay": 82.5,
-    "roundTrip": 155
+    "oneWay": 80.5,
+    "roundTrip": 152.0
   },
   {
     "destination": "Yacht Marina",
@@ -308,26 +308,26 @@ export const transferPrices = [
   {
     "destination": "Yacht Marina",
     "vehicleId": "minibus",
-    "oneWay": 92.5,
-    "roundTrip": 185
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Yacht Marina",
     "vehicleId": "vip-minibus",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Yacht Marina",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 132.5,
-    "roundTrip": 265
+    "oneWay": 128.0,
+    "roundTrip": 256.5
   },
   {
     "destination": "Yacht Marina",
     "vehicleId": "minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
@@ -338,20 +338,20 @@ export const transferPrices = [
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "vip-minivan",
-    "oneWay": 67.5,
-    "roundTrip": 135
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "maybach",
-    "oneWay": 82.5,
-    "roundTrip": 155
+    "oneWay": 80.5,
+    "roundTrip": 152.0
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
@@ -362,26 +362,26 @@ export const transferPrices = [
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "minibus",
-    "oneWay": 92.5,
-    "roundTrip": 185
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "vip-minibus",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 132.5,
-    "roundTrip": 265
+    "oneWay": 128.0,
+    "roundTrip": 256.5
   },
   {
     "destination": "Cook's Club Adakoy&Adakoy Marina",
     "vehicleId": "minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Turunc",
@@ -392,20 +392,20 @@ export const transferPrices = [
   {
     "destination": "Turunc",
     "vehicleId": "vip-minivan",
-    "oneWay": 67.5,
-    "roundTrip": 135
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Turunc",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "Turunc",
     "vehicleId": "maybach",
-    "oneWay": 82.5,
-    "roundTrip": 155
+    "oneWay": 80.5,
+    "roundTrip": 152.0
   },
   {
     "destination": "Turunc",
@@ -416,26 +416,26 @@ export const transferPrices = [
   {
     "destination": "Turunc",
     "vehicleId": "minibus",
-    "oneWay": 92.5,
-    "roundTrip": 185
+    "oneWay": 90.0,
+    "roundTrip": 180.5
   },
   {
     "destination": "Turunc",
     "vehicleId": "vip-minibus",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Turunc",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Turunc",
     "vehicleId": "minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "D Maris Bay",
@@ -446,20 +446,20 @@ export const transferPrices = [
   {
     "destination": "D Maris Bay",
     "vehicleId": "vip-minivan",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "D Maris Bay",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "D Maris Bay",
     "vehicleId": "maybach",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "D Maris Bay",
@@ -470,26 +470,26 @@ export const transferPrices = [
   {
     "destination": "D Maris Bay",
     "vehicleId": "minibus",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "D Maris Bay",
     "vehicleId": "vip-minibus",
-    "oneWay": 122.5,
-    "roundTrip": 245
+    "oneWay": 118.5,
+    "roundTrip": 237.5
   },
   {
     "destination": "D Maris Bay",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 172.5,
-    "roundTrip": 345
+    "oneWay": 166.0,
+    "roundTrip": 332.5
   },
   {
     "destination": "D Maris Bay",
     "vehicleId": "minibus-long",
-    "oneWay": 122.5,
-    "roundTrip": 245
+    "oneWay": 118.5,
+    "roundTrip": 237.5
   },
   {
     "destination": "Sarigerme",
@@ -500,20 +500,20 @@ export const transferPrices = [
   {
     "destination": "Sarigerme",
     "vehicleId": "vip-minivan",
-    "oneWay": 25.5,
-    "roundTrip": 50
+    "oneWay": 26.5,
+    "roundTrip": 52.0
   },
   {
     "destination": "Sarigerme",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 30.5,
-    "roundTrip": 60
+    "oneWay": 31.0,
+    "roundTrip": 61.5
   },
   {
     "destination": "Sarigerme",
     "vehicleId": "maybach",
-    "oneWay": 37.5,
-    "roundTrip": 75
+    "oneWay": 38.0,
+    "roundTrip": 76.0
   },
   {
     "destination": "Sarigerme",
@@ -524,26 +524,26 @@ export const transferPrices = [
   {
     "destination": "Sarigerme",
     "vehicleId": "minibus",
-    "oneWay": 35.5,
-    "roundTrip": 70
+    "oneWay": 36.0,
+    "roundTrip": 71.0
   },
   {
     "destination": "Sarigerme",
     "vehicleId": "vip-minibus",
     "oneWay": 42.5,
-    "roundTrip": 85
+    "roundTrip": 85.5
   },
   {
     "destination": "Sarigerme",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 52.5,
-    "roundTrip": 105
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Sarigerme",
     "vehicleId": "minibus-long",
     "oneWay": 42.5,
-    "roundTrip": 85
+    "roundTrip": 85.5
   },
   {
     "destination": "Gocek",
@@ -554,20 +554,20 @@ export const transferPrices = [
   {
     "destination": "Gocek",
     "vehicleId": "vip-minivan",
-    "oneWay": 32.5,
-    "roundTrip": 65
+    "oneWay": 33.0,
+    "roundTrip": 66.5
   },
   {
     "destination": "Gocek",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 37.5,
-    "roundTrip": 75
+    "oneWay": 38.0,
+    "roundTrip": 76.0
   },
   {
     "destination": "Gocek",
     "vehicleId": "maybach",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Gocek",
@@ -579,25 +579,25 @@ export const transferPrices = [
     "destination": "Gocek",
     "vehicleId": "minibus",
     "oneWay": 42.5,
-    "roundTrip": 85
+    "roundTrip": 85.5
   },
   {
     "destination": "Gocek",
     "vehicleId": "vip-minibus",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Gocek",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Gocek",
     "vehicleId": "minibus-long",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Dalyan",
@@ -608,20 +608,20 @@ export const transferPrices = [
   {
     "destination": "Dalyan",
     "vehicleId": "vip-minivan",
-    "oneWay": 27.5,
-    "roundTrip": 55
+    "oneWay": 28.5,
+    "roundTrip": 57.0
   },
   {
     "destination": "Dalyan",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 37.5,
-    "roundTrip": 75
+    "oneWay": 38.0,
+    "roundTrip": 76.0
   },
   {
     "destination": "Dalyan",
     "vehicleId": "maybach",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Dalyan",
@@ -633,25 +633,25 @@ export const transferPrices = [
     "destination": "Dalyan",
     "vehicleId": "minibus",
     "oneWay": 42.5,
-    "roundTrip": 85
+    "roundTrip": 85.5
   },
   {
     "destination": "Dalyan",
     "vehicleId": "vip-minibus",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Dalyan",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Dalyan",
     "vehicleId": "minibus-long",
     "oneWay": 47.5,
-    "roundTrip": 95
+    "roundTrip": 95.0
   },
   {
     "destination": "Fethiye City Center(Any Hotel)",
@@ -661,183 +661,183 @@ export const transferPrices = [
   },
   {
     "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "vip-minivan",
+    "oneWay": 42.5,
+    "roundTrip": 85.5
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 52.0,
+    "roundTrip": 104.5
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "maybach",
+    "oneWay": 71.0,
+    "roundTrip": 142.5
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "maybach-plus",
+    "oneWay": 82.5,
+    "roundTrip": 165
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "minibus",
+    "oneWay": 66.5,
+    "roundTrip": 133.0
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "vip-minibus",
+    "oneWay": 80.5,
+    "roundTrip": 161.5
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 95.0,
+    "roundTrip": 190.0
+  },
+  {
+    "destination": "Fethiye City Center(Any Hotel)",
+    "vehicleId": "minibus-long",
+    "oneWay": 80.5,
+    "roundTrip": 161.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "taxi",
+    "oneWay": 37.5,
+    "roundTrip": 75
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "vip-minivan",
+    "oneWay": 38.0,
+    "roundTrip": 76.0
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 42.5,
+    "roundTrip": 85.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "maybach",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "maybach-plus",
+    "oneWay": 72.5,
+    "roundTrip": 145
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "minibus",
+    "oneWay": 52.0,
+    "roundTrip": 104.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "vip-minibus",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 71.0,
+    "roundTrip": 142.5
+  },
+  {
+    "destination": "Fethiye Liberty Fabay , Liberty Signa",
+    "vehicleId": "minibus-long",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "taxi",
+    "oneWay": 37.5,
+    "roundTrip": 75
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "vip-minivan",
+    "oneWay": 38.0,
+    "roundTrip": 76.0
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 42.5,
+    "roundTrip": 85.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "maybach",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "maybach-plus",
+    "oneWay": 72.5,
+    "roundTrip": 145
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "minibus",
+    "oneWay": 52.0,
+    "roundTrip": 104.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "vip-minibus",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 71.0,
+    "roundTrip": 142.5
+  },
+  {
+    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
+    "vehicleId": "minibus-long",
+    "oneWay": 61.5,
+    "roundTrip": 123.5
+  },
+  {
+    "destination": "Oludeniz(Any Hotel)",
+    "vehicleId": "taxi",
+    "oneWay": 47.5,
+    "roundTrip": 95
+  },
+  {
+    "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "vip-minivan",
     "oneWay": 45.5,
-    "roundTrip": 90
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "premium-vip-minivan",
-    "oneWay": 52.5,
-    "roundTrip": 105
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "maybach",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "maybach-plus",
-    "oneWay": 82.5,
-    "roundTrip": 165
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "minibus",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "vip-minibus",
-    "oneWay": 82.5,
-    "roundTrip": 165
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
-  },
-  {
-    "destination": "Fethiye City Center(Any Hotel)",
-    "vehicleId": "minibus-long",
-    "oneWay": 82.5,
-    "roundTrip": 165
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "taxi",
-    "oneWay": 37.5,
-    "roundTrip": 75
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "vip-minivan",
-    "oneWay": 42.5,
-    "roundTrip": 85
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "premium-vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "maybach-plus",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "minibus",
-    "oneWay": 52.5,
-    "roundTrip": 105
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "vip-minibus",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "vip-minibus-long",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye Liberty Fabay , Liberty Signa",
-    "vehicleId": "minibus-long",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "taxi",
-    "oneWay": 37.5,
-    "roundTrip": 75
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "vip-minivan",
-    "oneWay": 42.5,
-    "roundTrip": 85
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "premium-vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "maybach-plus",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "minibus",
-    "oneWay": 52.5,
-    "roundTrip": 105
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "vip-minibus",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "vip-minibus-long",
-    "oneWay": 72.5,
-    "roundTrip": 145
-  },
-  {
-    "destination": "Fethiye Sensatori Barut Akra, XO Arnna",
-    "vehicleId": "minibus-long",
-    "oneWay": 62.5,
-    "roundTrip": 125
-  },
-  {
-    "destination": "Oludeniz(Any Hotel)",
-    "vehicleId": "taxi",
-    "oneWay": 47.5,
-    "roundTrip": 95
-  },
-  {
-    "destination": "Oludeniz(Any Hotel)",
-    "vehicleId": "vip-minivan",
-    "oneWay": 52.5,
-    "roundTrip": 105
+    "roundTrip": 90.0
   },
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 55.5,
-    "roundTrip": 110
+    "oneWay": 55.0,
+    "roundTrip": 109.0
   },
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "maybach",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 76.0,
+    "roundTrip": 152.0
   },
   {
     "destination": "Oludeniz(Any Hotel)",
@@ -848,26 +848,26 @@ export const transferPrices = [
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "minibus",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "vip-minibus",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 122.5,
-    "roundTrip": 245
+    "oneWay": 118.5,
+    "roundTrip": 237.5
   },
   {
     "destination": "Oludeniz(Any Hotel)",
     "vehicleId": "minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Kalkan",
@@ -878,20 +878,20 @@ export const transferPrices = [
   {
     "destination": "Kalkan",
     "vehicleId": "vip-minivan",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Kalkan",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Kalkan",
     "vehicleId": "maybach",
-    "oneWay": 122.5,
-    "roundTrip": 245
+    "oneWay": 118.5,
+    "roundTrip": 237.5
   },
   {
     "destination": "Kalkan",
@@ -902,26 +902,26 @@ export const transferPrices = [
   {
     "destination": "Kalkan",
     "vehicleId": "minibus",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Kalkan",
     "vehicleId": "vip-minibus",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Kalkan",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 207.5,
-    "roundTrip": 415
+    "oneWay": 199.5,
+    "roundTrip": 399.0
   },
   {
     "destination": "Kalkan",
     "vehicleId": "minibus-long",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Kas",
@@ -932,20 +932,20 @@ export const transferPrices = [
   {
     "destination": "Kas",
     "vehicleId": "vip-minivan",
-    "oneWay": 92.5,
-    "roundTrip": 185
+    "oneWay": 90.0,
+    "roundTrip": 180.5
   },
   {
     "destination": "Kas",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 127.5,
-    "roundTrip": 255
+    "oneWay": 123.5,
+    "roundTrip": 247.0
   },
   {
     "destination": "Kas",
     "vehicleId": "maybach",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Kas",
@@ -956,26 +956,26 @@ export const transferPrices = [
   {
     "destination": "Kas",
     "vehicleId": "minibus",
-    "oneWay": 172.5,
-    "roundTrip": 345
+    "oneWay": 166.0,
+    "roundTrip": 332.5
   },
   {
     "destination": "Kas",
     "vehicleId": "vip-minibus",
-    "oneWay": 217.5,
-    "roundTrip": 435
+    "oneWay": 209.0,
+    "roundTrip": 418.0
   },
   {
     "destination": "Kas",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 247.5,
-    "roundTrip": 495
+    "oneWay": 237.5,
+    "roundTrip": 475.0
   },
   {
     "destination": "Kas",
     "vehicleId": "minibus-long",
-    "oneWay": 217.5,
-    "roundTrip": 435
+    "oneWay": 209.0,
+    "roundTrip": 418.0
   },
   {
     "destination": "Akyaka",
@@ -987,19 +987,19 @@ export const transferPrices = [
     "destination": "Akyaka",
     "vehicleId": "vip-minivan",
     "oneWay": 42.5,
-    "roundTrip": 85
+    "roundTrip": 85.5
   },
   {
     "destination": "Akyaka",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 52.5,
-    "roundTrip": 105
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Akyaka",
     "vehicleId": "maybach",
-    "oneWay": 72.5,
-    "roundTrip": 145
+    "oneWay": 71.0,
+    "roundTrip": 142.5
   },
   {
     "destination": "Akyaka",
@@ -1010,26 +1010,26 @@ export const transferPrices = [
   {
     "destination": "Akyaka",
     "vehicleId": "minibus",
-    "oneWay": 67.5,
-    "roundTrip": 135
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Akyaka",
     "vehicleId": "vip-minibus",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Akyaka",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Akyaka",
     "vehicleId": "minibus-long",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Datça",
@@ -1040,20 +1040,20 @@ export const transferPrices = [
   {
     "destination": "Datça",
     "vehicleId": "vip-minivan",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 104.5,
+    "roundTrip": 209.0
   },
   {
     "destination": "Datça",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Datça",
     "vehicleId": "maybach",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Datça",
@@ -1064,26 +1064,26 @@ export const transferPrices = [
   {
     "destination": "Datça",
     "vehicleId": "minibus",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Datça",
     "vehicleId": "vip-minibus",
-    "oneWay": 217.5,
-    "roundTrip": 435
+    "oneWay": 209.0,
+    "roundTrip": 418.0
   },
   {
     "destination": "Datça",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 297.5,
-    "roundTrip": 595
+    "oneWay": 285.0,
+    "roundTrip": 570.0
   },
   {
     "destination": "Datça",
     "vehicleId": "minibus-long",
-    "oneWay": 217.5,
-    "roundTrip": 435
+    "oneWay": 209.0,
+    "roundTrip": 418.0
   },
   {
     "destination": "Bozburun / Sogut",
@@ -1094,20 +1094,20 @@ export const transferPrices = [
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "maybach",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Bozburun / Sogut",
@@ -1118,26 +1118,26 @@ export const transferPrices = [
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "minibus",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "vip-minibus",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 247.5,
-    "roundTrip": 495
+    "oneWay": 237.5,
+    "roundTrip": 475.0
   },
   {
     "destination": "Bozburun / Sogut",
     "vehicleId": "minibus-long",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Selimiye",
@@ -1148,20 +1148,20 @@ export const transferPrices = [
   {
     "destination": "Selimiye",
     "vehicleId": "vip-minivan",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Selimiye",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 112.5,
-    "roundTrip": 225
+    "oneWay": 109.0,
+    "roundTrip": 218.5
   },
   {
     "destination": "Selimiye",
     "vehicleId": "maybach",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Selimiye",
@@ -1172,26 +1172,26 @@ export const transferPrices = [
   {
     "destination": "Selimiye",
     "vehicleId": "minibus",
-    "oneWay": 112.5,
-    "roundTrip": 225
+    "oneWay": 109.0,
+    "roundTrip": 218.5
   },
   {
     "destination": "Selimiye",
     "vehicleId": "vip-minibus",
-    "oneWay": 167.5,
-    "roundTrip": 335
+    "oneWay": 161.5,
+    "roundTrip": 323.0
   },
   {
     "destination": "Selimiye",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 242.5,
-    "roundTrip": 485
+    "oneWay": 232.5,
+    "roundTrip": 465.5
   },
   {
     "destination": "Selimiye",
     "vehicleId": "minibus-long",
-    "oneWay": 167.5,
-    "roundTrip": 335
+    "oneWay": 161.5,
+    "roundTrip": 323.0
   },
   {
     "destination": "Angels Marmaris Hotel",
@@ -1202,20 +1202,20 @@ export const transferPrices = [
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "maybach",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Angels Marmaris Hotel",
@@ -1226,26 +1226,26 @@ export const transferPrices = [
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "minibus",
-    "oneWay": 127.5,
-    "roundTrip": 255
+    "oneWay": 123.5,
+    "roundTrip": 247.0
   },
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "vip-minibus",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 222.5,
-    "roundTrip": 445
+    "oneWay": 213.5,
+    "roundTrip": 427.5
   },
   {
     "destination": "Angels Marmaris Hotel",
     "vehicleId": "minibus-long",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Fethiye Kayakoy",
@@ -1256,20 +1256,20 @@ export const transferPrices = [
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "vip-minivan",
-    "oneWay": 52.5,
-    "roundTrip": 105
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "maybach",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Fethiye Kayakoy",
@@ -1280,26 +1280,26 @@ export const transferPrices = [
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "minibus",
-    "oneWay": 82.5,
-    "roundTrip": 165
+    "oneWay": 80.5,
+    "roundTrip": 161.5
   },
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "vip-minibus",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Fethiye Kayakoy",
     "vehicleId": "minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Kabak",
@@ -1310,20 +1310,20 @@ export const transferPrices = [
   {
     "destination": "Kabak",
     "vehicleId": "vip-minivan",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Kabak",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Kabak",
     "vehicleId": "maybach",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Kabak",
@@ -1334,26 +1334,26 @@ export const transferPrices = [
   {
     "destination": "Kabak",
     "vehicleId": "minibus",
-    "oneWay": 147.5,
-    "roundTrip": 295
+    "oneWay": 142.5,
+    "roundTrip": 285.0
   },
   {
     "destination": "Kabak",
     "vehicleId": "vip-minibus",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Kabak",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 207.5,
-    "roundTrip": 415
+    "oneWay": 199.5,
+    "roundTrip": 399.0
   },
   {
     "destination": "Kabak",
     "vehicleId": "minibus-long",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Faralya",
@@ -1364,20 +1364,20 @@ export const transferPrices = [
   {
     "destination": "Faralya",
     "vehicleId": "vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Faralya",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 107.5,
-    "roundTrip": 215
+    "oneWay": 104.5,
+    "roundTrip": 209.0
   },
   {
     "destination": "Faralya",
     "vehicleId": "maybach",
-    "oneWay": 137.5,
-    "roundTrip": 275
+    "oneWay": 133.0,
+    "roundTrip": 266.0
   },
   {
     "destination": "Faralya",
@@ -1388,26 +1388,26 @@ export const transferPrices = [
   {
     "destination": "Faralya",
     "vehicleId": "minibus",
-    "oneWay": 137.5,
-    "roundTrip": 275
+    "oneWay": 133.0,
+    "roundTrip": 266.0
   },
   {
     "destination": "Faralya",
     "vehicleId": "vip-minibus",
-    "oneWay": 167.5,
-    "roundTrip": 335
+    "oneWay": 161.5,
+    "roundTrip": 323.0
   },
   {
     "destination": "Faralya",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 197.5,
-    "roundTrip": 395
+    "oneWay": 190.0,
+    "roundTrip": 380.0
   },
   {
     "destination": "Faralya",
     "vehicleId": "minibus-long",
-    "oneWay": 167.5,
-    "roundTrip": 335
+    "oneWay": 161.5,
+    "roundTrip": 323.0
   },
   {
     "destination": "Bozburun",
@@ -1418,104 +1418,104 @@ export const transferPrices = [
   {
     "destination": "Bozburun",
     "vehicleId": "vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 85.5,
+    "roundTrip": 171.0
   },
   {
     "destination": "Bozburun",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Bozburun",
     "vehicleId": "maybach",
-    "oneWay": 157.5,
-    "roundTrip": 315
+    "oneWay": 152.0,
+    "roundTrip": 304.0
   },
   {
     "destination": "Bozburun",
-    "vehicleId": "maybach-plus",
-    "oneWay": 172.5,
-    "roundTrip": 345
-  },
-  {
-    "destination": "Bozburun",
-    "vehicleId": "minibus",
-    "oneWay": 117.5,
-    "roundTrip": 235
-  },
-  {
-    "destination": "Bozburun",
-    "vehicleId": "vip-minibus",
-    "oneWay": 177.5,
-    "roundTrip": 355
-  },
-  {
-    "destination": "Bozburun",
-    "vehicleId": "vip-minibus-long",
-    "oneWay": 247.5,
-    "roundTrip": 495
-  },
-  {
-    "destination": "Bozburun",
-    "vehicleId": "minibus-long",
-    "oneWay": 177.5,
-    "roundTrip": 355
-  },
-  {
-    "destination": "Sogut",
-    "vehicleId": "taxi",
-    "oneWay": 82.5,
-    "roundTrip": 165
-  },
-  {
-    "destination": "Sogut",
-    "vehicleId": "vip-minivan",
-    "oneWay": 87.5,
-    "roundTrip": 175
-  },
-  {
-    "destination": "Sogut",
-    "vehicleId": "premium-vip-minivan",
-    "oneWay": 117.5,
-    "roundTrip": 235
-  },
-  {
-    "destination": "Sogut",
-    "vehicleId": "maybach",
-    "oneWay": 157.5,
-    "roundTrip": 315
-  },
-  {
-    "destination": "Sogut",
     "vehicleId": "maybach-plus",
     "oneWay": 172.5,
     "roundTrip": 345
   },
   {
+    "destination": "Bozburun",
+    "vehicleId": "minibus",
+    "oneWay": 114.0,
+    "roundTrip": 228.0
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "vip-minibus",
+    "oneWay": 171.0,
+    "roundTrip": 342.0
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "vip-minibus-long",
+    "oneWay": 237.5,
+    "roundTrip": 475.0
+  },
+  {
+    "destination": "Bozburun",
+    "vehicleId": "minibus-long",
+    "oneWay": 171.0,
+    "roundTrip": 342.0
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "taxi",
+    "oneWay": 82.5,
+    "roundTrip": 165
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "vip-minivan",
+    "oneWay": 85.5,
+    "roundTrip": 171.0
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "premium-vip-minivan",
+    "oneWay": 114.0,
+    "roundTrip": 228.0
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "maybach",
+    "oneWay": 152.0,
+    "roundTrip": 304.0
+  },
+  {
+    "destination": "Sogut",
+    "vehicleId": "maybach-plus",
+    "oneWay": 172.5,
+    "roundTrip": 345
+  },
+  {
     "destination": "Sogut",
     "vehicleId": "minibus",
-    "oneWay": 117.5,
-    "roundTrip": 235
+    "oneWay": 114.0,
+    "roundTrip": 228.0
   },
   {
     "destination": "Sogut",
     "vehicleId": "vip-minibus",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Sogut",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 247.5,
-    "roundTrip": 495
+    "oneWay": 237.5,
+    "roundTrip": 475.0
   },
   {
     "destination": "Sogut",
     "vehicleId": "minibus-long",
-    "oneWay": 177.5,
-    "roundTrip": 355
+    "oneWay": 171.0,
+    "roundTrip": 342.0
   },
   {
     "destination": "Marmaris Cruise Port",
@@ -1526,20 +1526,20 @@ export const transferPrices = [
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "vip-minivan",
-    "oneWay": 47.5,
-    "roundTrip": 95
+    "oneWay": 42.5,
+    "roundTrip": 85.5
   },
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "premium-vip-minivan",
-    "oneWay": 57.5,
-    "roundTrip": 115
+    "oneWay": 52.0,
+    "roundTrip": 104.5
   },
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "maybach",
-    "oneWay": 62.5,
-    "roundTrip": 125
+    "oneWay": 61.5,
+    "roundTrip": 123.5
   },
   {
     "destination": "Marmaris Cruise Port",
@@ -1550,26 +1550,26 @@ export const transferPrices = [
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "minibus",
-    "oneWay": 77.5,
-    "roundTrip": 155
+    "oneWay": 66.5,
+    "roundTrip": 133.0
   },
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "vip-minibus",
-    "oneWay": 87.5,
-    "roundTrip": 175
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "vip-minibus-long",
-    "oneWay": 97.5,
-    "roundTrip": 195
+    "oneWay": 95.0,
+    "roundTrip": 190.0
   },
   {
     "destination": "Marmaris Cruise Port",
     "vehicleId": "minibus-long",
-    "oneWay": 80.5,
-    "roundTrip": 160
+    "oneWay": 78.5,
+    "roundTrip": 156.5
   },
   {
     "destination": "Turunc Kumlubuk",

@@ -22,7 +22,7 @@ class TransferPricingServiceTests {
     void calculatesAirportToMarmarisPriceFromCatalog() {
         BigDecimal price = pricingService.calculatePrice(
                 "Dalaman Airport", "Marmaris(Any Hotel)", "vip-minivan", "one-way", 2);
-        assertEquals(0, new BigDecimal("47.5").compareTo(price));
+        assertEquals(0, new BigDecimal("42.5").compareTo(price));
     }
 
     @Test
@@ -31,7 +31,7 @@ class TransferPricingServiceTests {
                 "Dalaman Airport", "Marmaris Cruise Port", "taxi", "one-way", 2)));
         assertEquals(0, new BigDecimal("85").compareTo(pricingService.calculatePrice(
                 "Marmaris Cruise Port", "Dalaman Airport", "taxi", "round-trip", 2)));
-        assertEquals(0, new BigDecimal("47.50").compareTo(pricingService.calculatePrice(
+        assertEquals(0, new BigDecimal("42.50").compareTo(pricingService.calculatePrice(
                 "Dalaman Airport", "Marmaris Cruise Port", "vip-minivan", "one-way", 2)));
     }
 
@@ -62,14 +62,14 @@ class TransferPricingServiceTests {
     void calculatesReverseJourneyUsingSameCatalogPrice() {
         BigDecimal price = pricingService.calculatePrice(
                 "Marmaris(Any Hotel)", "Dalaman Airport", "vip-minivan", "one-way", 2);
-        assertEquals(0, new BigDecimal("47.5").compareTo(price));
+        assertEquals(0, new BigDecimal("42.5").compareTo(price));
     }
 
     @Test
     void calculatesRoundTripPriceFromCatalog() {
         BigDecimal price = pricingService.calculatePrice(
                 "Dalaman Airport", "Marmaris(Any Hotel)", "vip-minivan", "round-trip", 2);
-        assertEquals(0, new BigDecimal("95").compareTo(price));
+        assertEquals(0, new BigDecimal("85.5").compareTo(price));
     }
 
     @Test

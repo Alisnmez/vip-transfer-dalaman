@@ -220,7 +220,7 @@ class BookingIntegrationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.customerName").value("Integration Test"))
-                .andExpect(jsonPath("$.price").value(45.5))
+                .andExpect(jsonPath("$.price").value(42.5))
                 .andReturn().getResponse().getContentAsString();
 
         Long id = objectMapper.readTree(response).get("id").asLong();
@@ -600,7 +600,7 @@ class BookingIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(request))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.price").value(45.5));
+                .andExpect(jsonPath("$.price").value(42.5));
     }
     @Test
     void savesIndependentReturnDateAndTime() throws Exception {

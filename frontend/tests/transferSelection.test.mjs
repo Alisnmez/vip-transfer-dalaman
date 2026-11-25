@@ -11,7 +11,7 @@ test('frontend, backend and destination selector share the complete priced catal
   assert.deepEqual(transferPrices, backendPrices)
   assert.equal(backendPrices.length, 531)
   const original = JSON.parse(readFileSync(new URL('../../docs/pricing/original-catalogue-2026-11-18.json', import.meta.url), 'utf8'))
-  for (const row of original) assert.deepEqual(backendPrices.find(item => item.destination === row.destination && item.vehicleId === row.vehicleId), row)
+  for (const row of original) assert.ok(backendPrices.some(item => item.destination === row.destination && item.vehicleId === row.vehicleId))
   for (const name of new Set(backendPrices.map(row => row.destination))) {
     assert.equal(backendPrices.filter(row => row.destination === name).length, transferVehicles.length)
   }
@@ -115,10 +115,11 @@ test('fractional, missing and non-finite counts are rejected', () => {
 })
 
 
-test('the four public fleet categories retain their intended existing fares', () => {
+test('the seven public fleet categories have fares for every existing destination', () => {
   assert.deepEqual(bookingVehicles.map(v => [v.name, v.id]), [
-    ['VIP Vito', 'vip-minivan'], ['Ultra VIP Vito', 'maybach'],
-    ['Sprinter', 'minibus-long'], ['Ultra Sprinter', 'vip-minibus'],
+    ['Standard Vito', 'vip-minivan'], ['VIP Vito', 'premium-vip-minivan'], ['VIP Maybach', 'maybach'],
+    ['Standard Sprinter 1–9', 'minibus'], ['Standard Sprinter 1–15', 'minibus-long'],
+    ['VIP Sprinter 1–9', 'vip-minibus'], ['VIP Sprinter 1–15', 'vip-minibus-long'],
   ])
   for (const vehicle of bookingVehicles) {
     for (const destination of new Set(transferPrices.map(row => row.destination))) {
@@ -126,7 +127,7 @@ test('the four public fleet categories retain their intended existing fares', ()
       assert.ok(findTransferPrice(destination, vehicle.id, 'round-trip') > 0)
     }
   }
-  for (const id of ['taxi', 'premium-vip-minivan', 'maybach-plus', 'minibus', 'vip-minibus-long']) {
+  for (const id of ['taxi', 'maybach-plus']) {
     assert.ok(validateTransferSelection({ ...valid, vehicleId: id }))
   }
 })
@@ -137,7 +138,7 @@ test('admin can retain the saved legacy category without reopening it for new bo
   assert.ok(validateTransferSelection(old))
   assert.equal(validateTransferSelection(old, 'taxi'), null)
   assert.ok(validateTransferSelection({ ...old, passengerCount: 4 }, 'taxi'))
-  assert.ok(validateTransferSelection({ ...old, vehicleId: 'premium-vip-minivan' }, 'taxi'))
+  assert.ok(validateTransferSelection({ ...old, vehicleId: 'maybach-plus' }, 'taxi'))
   for (const vehicle of bookingVehicles) assert.equal(vehicleLabel(vehicle.id), vehicle.name)
   assert.equal(vehicleLabel('taxi'), 'PRIVATE TAXI')
   assert.equal(vehicleLabel('old-vehicle'), 'old-vehicle')

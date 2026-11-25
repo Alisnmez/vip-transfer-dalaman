@@ -88,10 +88,11 @@ public class TransferPricingService {
         }
         int capacity = switch (vehicleId) {
             case "taxi" -> 3;
-            case "vip-minivan", "premium-vip-minivan", "maybach", "maybach-plus" -> 5;
-            case "minibus" -> 12;
+            case "vip-minivan", "premium-vip-minivan", "maybach-plus" -> 5;
+            case "maybach" -> 4;
+            case "minibus" -> 9;
             case "vip-minibus" -> 9;
-            case "vip-minibus-long", "minibus-long" -> 16;
+            case "vip-minibus-long", "minibus-long" -> 15;
             default -> 0;
         };
         if (passengerCount < 1 || passengerCount > capacity) {

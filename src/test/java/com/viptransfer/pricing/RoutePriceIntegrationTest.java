@@ -98,7 +98,7 @@ class RoutePriceIntegrationTest {
             "transferDateTime", LocalDateTime.now().plusDays(4).withNano(0).toString(),
             "phoneNumber", "+905551234567", "email", "price-test@example.invalid", "vehicleId", "vip-minivan", "tripType", "one-way"));
         String before = mvc.perform(post("/bookings").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
-            .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(47.5)).andReturn().getResponse().getContentAsString();
+            .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(42.5)).andReturn().getResponse().getContentAsString();
         long originalId = mapper.readTree(before).get("id").asLong();
         mvc.perform(put("/route-prices").with(csrf()).with(httpBasic("testadmin", "testpassword"))
             .contentType(MediaType.APPLICATION_JSON).content(edit(60, 115, -1))).andExpect(status().isOk());
@@ -111,6 +111,6 @@ class RoutePriceIntegrationTest {
         mvc.perform(post("/bookings").with(csrf()).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(request)))
             .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(115));
         mvc.perform(get("/bookings/" + originalId).with(httpBasic("testadmin", "testpassword")))
-            .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(47.5));
+            .andExpect(status().isOk()).andExpect(jsonPath("$.price").value(42.5));
     }
 }
