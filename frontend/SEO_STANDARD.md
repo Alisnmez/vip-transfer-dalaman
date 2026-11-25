@@ -526,3 +526,53 @@ Kaynak: https://search.google.com/search-console/performance/search-analytics?re
 Ana sayfa URL denetimi: indexed, son tarama 21 Kasım 11:43:18, Googlebot smartphone, crawl/index allowed, fetch successful, declared canonical https://dalamanway.com/, Google-selected inspected URL, HTTPS. Taranan HTML title Dalaman Airport Transfers | Private Airport Taxi & Transfers; description Book private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz and more. Explore vehicles, routes and transparent GBP prices.; index,follow, Organization JSON-LD, og:locale en_GB. 24 Kasım canlı test HTTP 200, JS console mesaj yok. Genel indeks raporu veri işliyor. Bu bulgu tüm rotaların indekslendiğini kanıtlamaz.
 - [ ] DW-TECH-001/P1: 24 Kasım 10:03:58 GMT canlı testte 5/34 kaynak yüklenemedi: Wikimedia Ölüdeniz görseli robots engeli, images.openai.com kaynaklı Ultra Sprinter dış/iç, Sprinter iç, Ultra VIP Vito iç görselleri diğer hata. Normal kullanıcıda bozuk oldukları kanıtlanmadı. Kullanım hakkı ve gerçek araçla uyum doğrulanınca aynı görselleri kendi domaininde sunmayı değerlendir; atıfları koru, staging ve Google canlı testte yeniden doğrula. Görsel erişilebilirliği, genel performans optimizasyonu değil.
 2026-11-24 | V2-SEO-06/07 | kısmi | GSC açık sekme ve URL denetimi | UK baseline ve DW-TECH-001 kaydedildi | ana sayfa indeks/canonical/HTTP doğrulandı; 5 kaynak hatası açık | yalnız MD | DE/RU, sitemap, rota URL denetimleri, canlı commit ve çözüm testi bekliyor.
+
+
+## 2026-11-25 — GSC güncellemesi ve Google Search Central sıralama stratejisi
+
+### Doğrudan GSC kanıtı
+Kaynak: https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3Adalamanway.com&last_24_hours=true&time_granularity=HOUR&breakdown=query&country=gbr
+25 Kasım sabahı açık tarayıcı sekmesi: UK, Web, 24–25 Kasım, son 24 saat, son güncelleme 4 saat önce. 26 gösterim, 0 tıklama, %0 CTR, 59.2 ortalama konum. Aşağıdaki 16 sorgu toplam 25 gösterim içerir; rapor toplamı 26'dır, sorgu tablosu toplamı ile mülk toplamı eşit olmak zorunda değildir.
+
+| Sorgu | Gösterim | Konum |
+| --- | ---: | ---: |
+| dalaman airport transfers | 6 | 56.3 |
+| transfer from dalaman airport | 2 | 56 |
+| oludeniz airport | 2 | 59 |
+| dalaman to oludeniz transfer | 2 | 71 |
+| airport for fethiye | 2 | 72 |
+| dalaman transfers | 1 | 16 |
+| transfers from dalaman airport | 1 | 36 |
+| dalaman airport taxi | 1 | 37 |
+| transfers dalaman airport | 1 | 47 |
+| fethiye to dalaman airport | 1 | 59 |
+| dalaman airport transfer | 1 | 66 |
+| taxi from dalaman airport to fethiye | 1 | 67 |
+| dalaman to marmaris transfer | 1 | 72 |
+| dalaman to marmaris transfers | 1 | 74 |
+| dalaman taxi | 1 | 80 |
+| airport transfer dalaman | 1 | 82 |
+
+Tüm sorgularda 0 tıklama. Tek gösterimde 16. konum kalıcı sıralama değildir. 18–22 Kasım tüm ülkeler: 49 gösterim, 1 tıklama, %2 CTR, 60 konum; UK 34/0/62.7, TR 12/1/56, DE 3/0/44.7. UK günlük ortalama 6.8 ile son 24 saat 26 arasındaki fark yaklaşık 3.82 kat; farklı dönemler ve geçici veri nedeniyle sürdürülebilir trend kanıtı değildir. Eşit 7/28 günlük dönemlerle ölç.
+Sitemap sekmesi: https://search.google.com/search-console/sitemaps?resource_id=sc-domain%3Adalamanway.com ; sitemap.xml başarılı, gönderim 21 Kasım, son okuma 23 Kasım, 34 keşfedilen sayfa. Genel bakışta 15 HTTPS, 0 HTTPS olmayan URL; indeks raporu veri işliyor, CWV verisi yok. Keşif indeksleme değildir.
+
+### Resmi Google kaynaklarına dayalı çalışma standardı
+- [Ranking systems](https://developers.google.com/search/docs/appearance/ranking-systems-guide): sayfa düzeyinde ve site genelinde sinyaller; PageRank dahil bağlantı analizi. Tek faktör veya sabit ağırlık varsayma.
+- [Helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content): özgün, güvenilir, kullanıcı odaklı içerik; E-E-A-T tek başına sıralama faktörü değildir; zorunlu kelime sayısı yok.
+- [SEO starter guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide) ve [Search Essentials](https://developers.google.com/search/docs/essentials): doğal dil, açıklayıcı başlıklar, erişilebilir içerik; her kelime varyasyonu için ayrı sayfa açma.
+- [Spam policies](https://developers.google.com/search/docs/essentials/spam-policies): doorway, keyword stuffing, ölçekli düşük değerli içerik ve manipülatif link satın alma yok.
+- [JavaScript SEO](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics), [crawlable links](https://developers.google.com/search/docs/crawling-indexing/links-crawlable), [localized versions](https://developers.google.com/search/docs/specialty/international/localized-versions): ilk HTML ve hydration tutarlılığı, gerçek href bağlantıları, karşılıklı hreflang.
+- [Recrawl](https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl): sitemap ve URL denetimi sıralama garantisi değil; tekrar tekrar indeksleme isteme.
+
+### Uygulama sırası (önceki V2 görevleriyle birlikte)
+- [ ] V2-SEO-07 / P0: 34 sitemap URL'sini tek tek HTTP, canonical, robots, hreflang, ilk HTML ve GSC indeks durumu açısından doğrula. DW-TECH-001 görsel erişim sorunlarını kullanım hakları ve gerçek araç uyumu doğrulanarak yerel görsellerle çöz; staging ve canlı Google testi. Mobil performansı ölç, veri yoksa başarı iddia etme.
+- [ ] V2-SEO-05/08/11/12 / P1: Ana sayfa, Marmaris, Fethiye, Ölüdeniz için UK SERP rakip karşılaştırması; sorgu-sayfa eşleşmesini GSC sayfa kırılımıyla doğrula. Ana sayfa hedefi dalaman airport transfers, dalaman transfers, transfers from dalaman airport, dalaman airport taxi (hizmetle uyumluysa). Rota sayfaları ilgili transfer sorguları; oludeniz airport ve airport for fethiye bilgilendirici rehber niyeti. Mevcut title'ı tek günlük veriyle değiştirme.
+- [ ] V2-SEO-11/12 / P1: Her rota için doğrulanmış süre/mesafe, otel ve karşılama bilgisi, araç başına GBP tek/çift yön dinamik fiyat, gerçek kapasite ve bagaj, mevcut rezervasyon ön doldurma, doğru iptal/rötar/çocuk koltuğu bilgisi, tarafsız ulaşım karşılaştırması ve ilgili rehber bağlantıları. Yedi araç fiyat taslağı onaylanmadan canlıya alma. 59 destinasyon için toplu ince sayfa üretme.
+- [ ] V2-SEO-13/15 / P1: Ana sayfa -> rota -> ilgili rehber ve rezervasyon; rehber -> ilgili rota; doğal EN-GB, DE/RU metin ve bağlantılar. Mevcut özellikleri koru.
+- [ ] V2-SEO-14 / P1: Gerçek otel, villa, seyahat acentesi ve UK seyahat rehberi ortaklıkları; doğal editoryal bağlantılar, gerçek yorumlar, doğrulanmış işletme/izin/iletişim bilgileri. Backlink profili henüz ölçülmedi. WhatsApp Business onayı bekleniyor.
+- [ ] V2-SEO-17 / P2: 7/28 günlük eşit dönemlerde ülke, sorgu, sayfa, cihaz, CTR, konum, indeks ve organik rezervasyonları izle. 30 günlük çalışma hedefi UK günlük 50–100 gösterim, 35–50 ortalama konum, 1+ ilk 10 sorgu, 1–3 günlük organik tıklama; 90 günlük hedef 150–400, 20–35, 5+, 5–15. Bunlar doğrulanmış tahmin veya garanti değil; sezon ve örneklemle yeniden değerlendir. İlk organik rezervasyon ticari başarı ölçütü.
+- [ ] V2-SEO-16 / P0 yayın kapısı: mevcut branch kullan, kullanıcı onayı, lint/unit/build/browser smoke, staging, kontrollü yayın ve canlı doğrulama; uygulama kodu bu doküman güncellemesinde değişmedi.
+
+### Tamamlama günlüğü
+2026-11-25 | V2-SEO-06/07 | kısmi | doğrudan GSC tarayıcı raporları, 16 sorgu ve sitemap | frontend/SEO_STANDARD.md güncellendi | rapor metni doğrulandı; yeni HTTP, indeks URL denetimi, Lighthouse veya kod testi yapılmadı | yalnız dokümantasyon commit'i | eşit dönemler, sayfa kırılımı, DE/RU, 34 URL denetimi açık.
+2026-11-25 | V2-SEO-05/11/14/17 | plan güncellendi | önceki sohbet Google resmi kaynak değerlendirmesi ve GSC sinyalleri | öncelikler, kabul ölçütleri, hedefler | yeni rakip SERP/backlink ölçümü veya uygulama testi yok | yalnız dokümantasyon | rakip denetimi ve uygulama bekliyor.
