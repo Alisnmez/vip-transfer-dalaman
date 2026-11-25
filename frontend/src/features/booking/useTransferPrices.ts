@@ -9,13 +9,14 @@ export function updateTransferPrice(price: TransferPrice) {
 }
 
 /** Fetch once per page visit or explicit refresh; searches stay entirely local. */
-export function useTransferPrices() {
+export function useTransferPrices(enabled = true) {
   const [prices, setPrices] = useState<TransferPrice[]>([])
   const [revision, setRevision] = useState(0)
   const [loadedRevision, setLoadedRevision] = useState(-1)
   const [error, setError] = useState('')
   const refresh = useCallback(() => setRevision(value => value + 1), [])
   useEffect(() => {
+    if (!enabled) return
     let active = true
     request<TransferPrice[]>(url).then(data => {
       if (active) { setPrices(data); setError('') }
@@ -23,8 +24,8 @@ export function useTransferPrices() {
       if (active) { setPrices([]); setError('Unable to load current prices. Please refresh and try again.') }
     }).finally(() => { if (active) setLoadedRevision(revision) })
     return () => { active = false }
-  }, [revision])
-  const loading = loadedRevision !== revision
+  }, [enabled, revision])
+  const loading = enabled && loadedRevision !== revision
   function findPrice(destination: string, vehicleId: string, tripType: 'one-way' | 'round-trip') {
     if (loading || error) return null
     const entry = prices.find(item => item.destination === destination && item.vehicleId === vehicleId)

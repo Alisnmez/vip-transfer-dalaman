@@ -1,5 +1,6 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
+import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { transferPrices } from '../../features/booking/pricing'
 import airportArrivalNotes from '../../features/route-price/airport-arrival-notes.json'
 import { useLanguage } from '../../shared/localization/language'
@@ -67,6 +68,12 @@ const routeCopy = {
   },
 }
 
+const fareCopy = {
+  en: { oneWay: 'One way', roundTrip: 'Return', unit: 'Prices in GBP per vehicle', loading: 'Loading current prices…', error: 'Current prices could not be loaded.', missing: 'Unavailable' },
+  de: { oneWay: 'Hinfahrt', roundTrip: 'Hin und zurück', unit: 'Preise in GBP pro Fahrzeug', loading: 'Aktuelle Preise werden geladen…', error: 'Aktuelle Preise konnten nicht geladen werden.', missing: 'Nicht verfügbar' },
+  ru: { oneWay: 'В одну сторону', roundTrip: 'Туда и обратно', unit: 'Цены в GBP за автомобиль', loading: 'Загружаются актуальные цены…', error: 'Не удалось загрузить актуальные цены.', missing: 'Недоступно' },
+}
+
 export function RouteDetailPage() {
   const { language, setLanguage } = useLanguage()
   const copy = routeCopy[language]
@@ -74,6 +81,9 @@ export function RouteDetailPage() {
   const { slug } = useParams()
   const localized = matchLocalizedRoute(useLocation().pathname)
   const route = destinations.find((item) => item.slug === (localized?.slug ?? slug))
+  const showFares = route?.slug === 'marmaris'
+  const { findPrice, loading, error } = useTransferPrices(showFares)
+  const fares = fareCopy[language]
   const available = route ? transferPrices.some((price) => price.destination.toLowerCase().includes(route.match.toLowerCase())) : false
 
   if (!route || !available) {
@@ -87,6 +97,9 @@ export function RouteDetailPage() {
   }[language]
   const title = `Dalaman Airport to ${route.name} Private Transfer | DalamanWay`
   const description = `Plan a private Dalaman Airport to ${route.name} transfer. Compare available vehicles and request a one-way or return journey.`
+
+  const farePath = showFares ? '/routes?destination=Marmaris#all-routes' : '/routes'
+  const formatFare = (price: number | null) => price === null ? fares.missing : `£${price.toFixed(2)}`
 
   return (
     <>
@@ -102,25 +115,32 @@ export function RouteDetailPage() {
             to={routeLanguagePath(route.slug, option)} onClick={() => setLanguage(option)}>{routeLanguageLabels[option].name}</Link>)}
         </nav>}
         <section className="mt-8 max-w-3xl">
-          <h2 className="text-2xl font-bold text-admin-primary">{copy.arrival}</h2>
+          <h2 className="text-2xl font-bold text-admin-primary">{showFares ? labels.pickupAndDropoff : copy.arrival}</h2>
           <p className="mt-3 leading-relaxed">{airportArrivalNotes[route.slug][language]}</p>
         </section>
         <section className="mt-8 max-w-3xl">
           <h2 className="text-2xl font-bold text-admin-primary">{labels.fleet}</h2>
-          <table className="my-4 w-full text-left text-sm">
-            <thead><tr>{[labels.vehicle, labels.passengers, labels.luggage].map(label => <th scope="col" className="py-2" key={label}>{label}</th>)}</tr></thead>
-            <tbody>{fleetCatalogue.map(vehicle => <tr key={vehicle.bookingVehicleId} className="border-t border-outline-variant">
-              <th scope="row" className="py-2">{vehicle.name}</th><td>{vehicle.maxPassengers}</td><td>{vehicle.luggage}</td>
-            </tr>)}</tbody>
-          </table>
-          <Link className="underline" to="/routes">{labels.fare}</Link>
+          {showFares && <p className="mt-2 text-sm">{fares.unit}</p>}
+          {showFares && (loading || error) && <p role="status" className="mt-2 text-sm">{loading ? fares.loading : fares.error}</p>}
+          <div className="overflow-x-auto">
+            <table className="my-4 w-full text-left text-sm">
+              <thead><tr>{[labels.vehicle, labels.passengers, labels.luggage, ...(showFares ? [fares.oneWay, fares.roundTrip] : [])].map(label => <th scope="col" className="py-2" key={label}>{label}</th>)}</tr></thead>
+              <tbody>{fleetCatalogue.map(vehicle => <tr key={vehicle.bookingVehicleId} className="border-t border-outline-variant">
+                <th scope="row" className="py-2">{vehicle.name}</th><td>{vehicle.maxPassengers}</td><td>{vehicle.luggage}</td>
+                {showFares && (['one-way', 'round-trip'] as const).map(tripType => (
+                  <td key={tripType} className="whitespace-nowrap px-2 tabular-nums">{loading || error ? '—' : formatFare(findPrice(route.match, vehicle.bookingVehicleId, tripType))}</td>
+                ))}
+              </tr>)}</tbody>
+            </table>
+          </div>
+          <Link className="underline" to={farePath}>{labels.fare}</Link>
         </section>
         <section className="mt-12 rounded-2xl border border-outline-variant bg-white p-6 sm:p-8">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.plan}</h2>
           <p className="mt-3 leading-relaxed">{copy.planDetails}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to={`/booking?destination=${encodeURIComponent(route.match)}`}>{copy.request}</Link>
-            <Link className="rounded-lg border border-outline-variant px-6 py-3 font-semibold text-admin-primary" to="/routes">{copy.compare}</Link>
+            <Link className="rounded-lg border border-outline-variant px-6 py-3 font-semibold text-admin-primary" to={farePath}>{copy.compare}</Link>
           </div>
         </section>
         <section className="mt-12">
