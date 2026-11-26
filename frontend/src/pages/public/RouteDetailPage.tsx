@@ -68,6 +68,12 @@ const routeCopy = {
   },
 }
 
+const airportWaitingCopy = {
+  en: '60 min free waiting after landing',
+  de: '60 Min. kostenlose Wartezeit nach der Landung',
+  ru: '60 мин. бесплатного ожидания после посадки самолёта',
+}
+
 const fareCopy = {
   en: { oneWay: 'One way', roundTrip: 'Return', unit: 'Prices in GBP per vehicle', loading: 'Loading current prices…', error: 'Current prices could not be loaded.', missing: 'Unavailable' },
   de: { oneWay: 'Hinfahrt', roundTrip: 'Hin und zurück', unit: 'Preise in GBP pro Fahrzeug', loading: 'Aktuelle Preise werden geladen…', error: 'Aktuelle Preise konnten nicht geladen werden.', missing: 'Nicht verfügbar' },
@@ -133,6 +139,7 @@ export function RouteDetailPage() {
               </tr>)}</tbody>
             </table>
           </div>
+          <p className="mb-3 flex items-center gap-2 text-sm text-on-surface-variant"><span aria-hidden="true" className="material-symbols-outlined text-lg text-secondary">schedule</span>{airportWaitingCopy[language]}</p>
           <Link className="underline" to={farePath}>{labels.fare}</Link>
         </section>
         <section className="mt-12 rounded-2xl border border-outline-variant bg-white p-6 sm:p-8">
