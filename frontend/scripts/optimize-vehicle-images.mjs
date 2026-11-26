@@ -1,8 +1,9 @@
-import { readdir, stat, unlink } from 'node:fs/promises'
+import { readdir, stat, unlink, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fleetCatalogue } from '../src/features/vehicle-type/fleetCatalogue.ts'
 
+const variants = {}
 const directory = 'public/images/vehicles'
 const files = (await readdir(directory)).filter(name => /-(exterior|interior)\.webp$/.test(name))
 const originals = fleetCatalogue.flatMap(vehicle => [
@@ -14,6 +15,8 @@ if (files.length !== 14 || originals.some(([file]) => !files.includes(file))) {
 }
 for (const [file, originalWidth] of originals) {
   const source = join(directory, file)
+  const candidates = []
+  variants['/images/vehicles/' + file] = candidates
   const originalSize = (await stat(source)).size
   for (const width of [480, 800]) {
     const target = source.replace(/\.webp$/, '-' + width + '.webp')
@@ -27,6 +30,9 @@ for (const [file, originalWidth] of originals) {
       await unlink(target)
       continue
     }
+    candidates.push({ src: '/images/vehicles/' + target.split('/').pop(), width })
     console.log(target, size, 'bytes; original:', originalSize)
   }
 }
+
+await writeFile('src/features/vehicle-type/imageVariants.json', JSON.stringify(variants, null, 2) + '\n')
