@@ -316,7 +316,7 @@ export function BookingFormPage() {
                         type="button"
                         aria-pressed={isSelected}
                       >
-                        <VehiclePhoto vehicleId={vehicle.id} name={vehicle.name} className="h-32 mb-4 rounded-lg" showToggle={false} />
+                        <VehiclePhoto vehicleId={vehicle.id} name={vehicle.name} className="h-40 mb-4 rounded-lg" showToggle={false} />
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>
