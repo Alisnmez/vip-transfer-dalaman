@@ -305,18 +305,18 @@ export function BookingFormPage() {
                     const isSelected = effectiveVehicleId === vehicle.id
 
                     return (
-                      <div key={vehicle.id} className="min-w-0">
-                        <VehiclePhoto vehicleId={vehicle.id} name={vehicle.name} className="mb-2 rounded-lg" />
                       <button
-                        className={`relative w-full min-w-0 text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
+                        className={`relative min-w-0 text-left rounded-xl p-4 cursor-pointer transition-all active:scale-95 ${
                           isSelected
                             ? 'border-2 border-admin-primary bg-primary-fixed/20'
                             : 'border border-outline-variant hover:border-admin-primary bg-white'
                         }`}
+                        key={vehicle.id}
                         onClick={() => setSelectedVehicleId(vehicle.id)}
                         type="button"
                         aria-pressed={isSelected}
                       >
+                        <VehiclePhoto vehicleId={vehicle.id} name={vehicle.name} className="h-32 mb-4 rounded-lg" showToggle={false} />
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>
@@ -341,7 +341,6 @@ export function BookingFormPage() {
                           </span>
                         </div>
                       </button>
-                      </div>
                     )
                   })}
                 </div>
