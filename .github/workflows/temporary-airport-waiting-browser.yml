@@ -1,5 +1,7 @@
 name: Temporary airport waiting browser smoke
 on:
+  pull_request:
+    branches: [feature/booking-integration]
   push:
     branches: [test/airport-waiting-browser]
 jobs:
