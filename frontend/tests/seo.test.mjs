@@ -45,3 +45,13 @@ test('production sitemap includes public routes and excludes private booking/adm
   assert.match(sitemap, /<loc>https:\/\/example.com\/ru\/routes\/gocek<\/loc>/)
   assert.doesNotMatch(sitemap, /<loc>[^<]*\/(booking|admin)/)
 })
+
+test('live SEO audit verifies all public pages and reciprocal language links', { timeout: 540000 }, () => {
+  const result = spawnSync(process.execPath, [resolve('scripts/audit-live-seo.mjs')], {
+    encoding: 'utf8',
+    timeout: 520000,
+    env: { ...process.env, SEO_AUDIT_ORIGIN: 'https://dalamanway.com' },
+  })
+  console.log(result.stdout)
+  assert.equal(result.status, 0, result.error?.message || result.stderr || result.stdout)
+})
