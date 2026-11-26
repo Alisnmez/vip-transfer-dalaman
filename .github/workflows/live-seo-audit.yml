@@ -1,6 +1,12 @@
 name: Live SEO read-only audit
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - feature/booking-integration
+    paths:
+      - 'frontend/scripts/audit-live-seo.mjs'
+      - '.github/workflows/live-seo-audit.yml'
   pull_request:
     paths:
       - 'frontend/scripts/audit-live-seo.mjs'
