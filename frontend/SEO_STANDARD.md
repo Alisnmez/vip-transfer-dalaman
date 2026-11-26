@@ -23,9 +23,12 @@
    - **İlk UK sorgu kümesi (ticari niyet):** `dalaman airport transfers`, `dalaman airport private transfer`, `dalaman airport transfer prices`, `dalaman airport to marmaris transfer`, `dalaman to fethiye transfer`, `dalaman to oludeniz transfer`, `dalaman to dalyan transfer`, `dalaman to gocek transfer`, `dalaman to icmeler transfer`. Bilgi niyeti ayrı: `airport for fethiye`, `oludeniz airport`. Sorguların ilgili rota URL'lerine eşleşmesi 03'teki mevcut haritayla kontrol edilecek; doğrulanmadan yeni rota yayınlanmayacak.
    - **DE/RU sonraki adım:** Var olan gerçek çevirilerden arama ifadesi adayları çıkar, ülke bazlı ölç. Otomatik tercümeyi kanıtlanmış anahtar kelime hacmi olarak sayma. Rusya pazarına yönelik erişim/araç kapsamı sınırlıysa bunu açıkça not et.
    - **Kabul ve kapanış kriteri:** Üç hedef ülkede en az birer ölçülmüş sorgu kümesi; tarihlenmiş kaynağı, hacmi, rekabet metriği, niyet ve hedef URL'si; sıralama için ilk üç uygulanabilir fırsat. **Durum: AÇIK / ölçüm erişimi bekleniyor. Test sunucusu: uygulanmaz (araştırma). Canlı: uygulanmaz (araştırma).**
+   - 26 Kasım — Kullanıcı KWS Trends (https://www.kwstrends.com/google-ads-keyword-tool) ölçümünü bilgisayardan yapacak. GB/DE/RU sonuçları alınana kadar 04 beklemede; 05 paralel ilerler.
+
 
 5. **V2-SEO-05 UK ilk 10 organik sonuç analizi.**
    - Bekliyor. Önce Marmaris’te UK ilk 10 organik sonucu tarih ve cihazla kaydet; fiyat, karşılama, güven ve rezervasyon akışını karşılaştır.
+   - 26 Kasım — Marmaris genel web aramasında rakip sayfaları incelendi (UK Google ilk 10 sırası veya cihaz doğrulanmadı): hoppa.co.uk/en/turkey/marmaris özel araç £38 başlangıç; kalkan-turkey.com/transfers/dalaman-marmaris/ £47 yaklaşık, Vito 7 yolcu; batmantransfer.com/en/dalaman-airport-to-marmaris-transfer £49 başlangıç, terminal masa 39; dalamantravel.com/en/dalaman-airport-to-marmaris-transfer Vito 1–4 kişi £65, ödeme yolculuk sonunda; hydego.com/dalaman-airport-dlm-to-marmaris-transfer £45.58 başlangıç, 3 yolcu/3 bagaj. Fiyatlar sayfaların ilanlarıdır, aynı tarih/araç için teklif değildir. Ortak güven unsurları sabit araç fiyatı, uçuş takibi, karşılama, çocuk koltuğu, bagaj ve ödeme açıklığı. UK SERP ve DalamanWay karşılaştırması açık.
 
 6. **V2-SEO-06 Güncel GSC başlangıç ölçümü.**
    - Kısmi. 18–24 Kasım UK 64 gösterim, 0 tıklama. UK + rota + sorgu ve cihaz kırılımını tamamla; TR/LT’yi dışarıda tut.
