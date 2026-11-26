@@ -26,11 +26,13 @@ jobs:
             const page = await browser.newPage({viewport:{width:390,height:844},isMobile:true,deviceScaleFactor:2,hasTouch:true});
             await page.route('**/*', route => ['GET','HEAD','OPTIONS'].includes(route.request().method()) ? route.continue() : route.abort());
             await page.goto(base+'/routes/marmaris');
-            await page.getByText('60 min free waiting after landing',{exact:true}).waitFor();
+            console.log('Route URL:',page.url());
+            await page.screenshot({path:'mobile-initial.png',fullPage:true});
+            await page.locator('p').filter({hasText:'60 min free waiting after landing'}).waitFor();
             assert.equal(await page.locator('span.material-symbols-outlined').filter({hasText:/^schedule$/}).count() > 0,true);
             assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),true,'Mobile horizontal overflow');
             await page.screenshot({path:'mobile-route.png',fullPage:true});
-            await page.getByRole('link',{name:'Request a transfer',exact:true}).click();
+            await page.getByRole('link',{name:'Request a transfer',exact:true}).first().click();
             await page.getByRole('combobox',{name:'Destination',exact:true}).waitFor();
             assert.match(await page.getByRole('combobox',{name:'Destination',exact:true}).inputValue(),/Marmaris/i);
             const date = new Date(Date.now()+7*86400000).toISOString().slice(0,10);
