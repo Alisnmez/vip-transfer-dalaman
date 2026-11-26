@@ -1905,3 +1905,10 @@ Bu envanter GitHub branch listesi ve açık PR kayıtlarıyla güncellendi; beli
 - Kod commitleri: `89c6205034d94099f305b87fb58930ae0a94506b` ve `caf7741b1bc3885b4704da3bcc6368b2d166f035`.
 - **Doğrulama sınırı:** GitHub'daki kaynak dosya yeniden okundu; Node.js syntax testi, GitHub Actions çalışması ve canlı HTTP audit sonucu henüz elde edilmedi. Kodun başarılı çalıştığını varsayma. Bir sonraki iş: Node syntax testi, workflow çalıştırma, gerçek çıktı ve gerekirse hata düzeltmesi.
 - Üretim, staging, veritabanı ve diğer branch'lere müdahale edilmedi. Bu kayıt eklendiği için önceki bölümdeki SEO dalı HEAD'i tarihsel anlık görüntüdür; güncel HEAD'i yeniden kontrol et.
+
+
+## 26 Kasım 2026 — Search Console ölçümü ve ilk rota çalışması
+
+Web araması, alan adı mülkü, tüm ülkeler. Seçim: 3 ay. Grafikte veri bulunan aralık: 18–24 Kasım. 95 gösterim, 4 tıklama, %4,2 TO, ortalama konum 56,4. İngiltere: 64 gösterim, 0 tıklama, konum 61,4. Ana sayfa 4 tıklamanın tamamını aldı.
+
+Marmaris: 27 gösterim / 0 tıklama / 63,2 konum. Dalyan: 12 / 0 / 25,0. Öncelik: İngiltere filtresinde Marmaris URL’sinin sorgularını izle. Tüm ülkelerde “transfer from dalaman airport to marmaris” 6, “dalaman to marmaris transfer” 5 gösterim aldı. 25 Kasım’daki ücret ve karşılama güncellemesi bu veri aralığından sonra yayımlandı. Ölçüm penceresi dolmadan aynı rota metnini yeniden değiştirme. Sonraki karşılaştırmada ülke, sayfa ve sorgu filtrelerini sabit tut; gösterim, tıklama ve konumu birlikte değerlendir.
