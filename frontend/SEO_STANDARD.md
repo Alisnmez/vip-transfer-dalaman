@@ -1912,3 +1912,7 @@ Bu envanter GitHub branch listesi ve açık PR kayıtlarıyla güncellendi; beli
 Web araması, alan adı mülkü, tüm ülkeler. Seçim: 3 ay. Grafikte veri bulunan aralık: 18–24 Kasım. 95 gösterim, 4 tıklama, %4,2 TO, ortalama konum 56,4. İngiltere: 64 gösterim, 0 tıklama, konum 61,4. Ana sayfa 4 tıklamanın tamamını aldı.
 
 Marmaris: 27 gösterim / 0 tıklama / 63,2 konum. Dalyan: 12 / 0 / 25,0. Öncelik: İngiltere filtresinde Marmaris URL’sinin sorgularını izle. Tüm ülkelerde “transfer from dalaman airport to marmaris” 6, “dalaman to marmaris transfer” 5 gösterim aldı. 25 Kasım’daki ücret ve karşılama güncellemesi bu veri aralığından sonra yayımlandı. Ölçüm penceresi dolmadan aynı rota metnini yeniden değiştirme. Sonraki karşılaştırmada ülke, sayfa ve sorgu filtrelerini sabit tut; gösterim, tıklama ve konumu birlikte değerlendir.
+
+
+### 26 Kasım — hedef pazar ölçümü ve ilk içerik denemesi
+Türkiye ve Litvanya dışarıda tutulur. 18–24 Kasım: kalan 69 gösterim, 0 tıklama; İngiltere 64 gösterim, 0 tıklama, ortalama konum 61,4. Sayfa ve sorgu toplamlarını ülke filtresi uygulanmadıkça İngiltere'ye atfetmeyin. “airport for fethiye” ve “oludeniz airport” sorgularının işaret ettiği bilgi ihtiyacına göre İngilizce rota sayfalarında Dalaman (DLM) ve doğru otel bölgesini seçme açıklamaları test sürümüne eklendi. Yayın onayından sonra İngiltere + ilgili sayfa filtresiyle gösterim, tıklama ve konumu izleyin.
