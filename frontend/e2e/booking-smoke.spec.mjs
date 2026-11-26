@@ -2,6 +2,9 @@ import { test, expect } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 
 const catalogue = JSON.parse(readFileSync(new URL('../../src/main/resources/transfer-prices.json', import.meta.url), 'utf8')).map(item => ({ ...item, version: -1 }))
+const marmarisFares = [["Standard Vito","£42.50"],["VIP Vito","£52.00"],["VIP Maybach","£61.50"],["Standard Sprinter 1–9","£66.50"],["Standard Sprinter 1–15","£78.50"],["VIP Sprinter 1–9","£78.50"],["VIP Sprinter 1–15","£95.00"]]
+const fleetNames = marmarisFares.map(([name]) => name)
+
 test.beforeEach(async ({ page }) => {
   await page.route('**/route-prices', route => route.request().method() === 'GET' && !route.request().isNavigationRequest()
     ? route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(catalogue) })
@@ -121,7 +124,7 @@ test('admin Dashboard puts the nearest pickup first on mobile and separates past
   await expect(upcoming.getByRole('link')).toHaveText([/Nearest pickup/, /Menu test passenger/, /Later pickup/])
   const first = upcoming.getByRole('link').first()
   await expect(first).toContainText('09:00')
-  await expect(first).toContainText('VIP Vito')
+  await expect(first).toContainText('Standard Vito')
   await expect(first).toContainText('LS123')
   await expect(first).toContainText('£52.50')
   await expect(first).toHaveAttribute('href', '/admin/bookings/904')
@@ -221,8 +224,8 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
   await expect(page.getByRole('heading', { name: 'Route Prices', exact: true })).toBeVisible()
   await expect(page.getByRole('row')).toHaveCount(26)
-  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText(['All vehicles', 'VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter'])
-  await expect(page.getByText('236', { exact: true })).toBeVisible()
+  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText(['All vehicles', ...fleetNames])
+  await expect(page.getByText('413', { exact: true })).toBeVisible()
   const readsBeforeSearch = requests.filter(r => r.path === '/route-prices').length
   await page.getByLabel('Search route or vehicle').fill('marmaris')
   await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
@@ -231,8 +234,8 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
   await page.getByLabel('Destination', { exact: true }).selectOption({ label: 'Marmaris(Any Hotel)' })
   await expect(page.getByRole('cell', { name: 'Marmaris(Any Hotel)', exact: true }).first()).toBeVisible()
   await expect(page.getByRole('cell', { name: 'Fethiye', exact: true })).toHaveCount(0)
-  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'VIP Vito' })
-  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) VIP Vito', exact: true }).click()
+  await page.getByLabel('Vehicle', { exact: true }).selectOption({ label: 'Standard Vito' })
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) Standard Vito', exact: true }).click()
   await page.getByLabel('One-way price (GBP)', { exact: true }).fill('60.25')
   await page.getByLabel('Round-trip price (GBP)', { exact: true }).fill('115.50')
   await page.getByRole('button', { name: 'Save prices', exact: true }).click()
@@ -250,7 +253,7 @@ test('admin Route Prices requires sign-in, filters, saves and publishes edited f
 test('admin stale price edit shows a useful conflict and reloads current prices', async ({ page }) => {
   const { prices } = await adminFixture(page)
   await page.getByRole('link', { name: 'Route Prices', exact: true }).click()
-  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) VIP Vito', exact: true }).click()
+  await page.getByRole('button', { name: 'Edit Marmaris(Any Hotel) Standard Vito', exact: true }).click()
   await page.getByLabel('One-way price (GBP)', { exact: true }).fill('55.25')
   const current = prices.find(row => row.destination === 'Marmaris(Any Hotel)' && row.vehicleId === 'vip-minivan')
   current.version = 0
@@ -460,7 +463,7 @@ test('booking terms and data-use summary are available before entering passenger
 test('expanded resorts show all vehicle fares and return prices before booking', async ({ page }) => {
   await page.goto('http://127.0.0.1:4173/routes')
   await expect(page.getByText('59 destinations found · Prices in GBP, per vehicle', { exact: true })).toBeVisible()
-  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText(['VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter'])
+  await expect(page.getByLabel('Vehicle', { exact: true }).locator('option')).toHaveText([...fleetNames])
   await page.getByLabel('Vehicle', { exact: true }).selectOption('vip-minivan')
   await page.getByPlaceholder('Search destinations', { exact: true }).fill('Alanya')
   await expect(page.getByText('£250.00', { exact: true })).toBeVisible()
@@ -475,30 +478,30 @@ test('expanded resorts show all vehicle fares and return prices before booking',
   }
 })
 
-test('booking uses the four public fleet categories with their existing fares and limits', async ({ page }) => {
+test('booking uses the seven public fleet categories with their existing fares and limits', async ({ page }) => {
   await page.goto('http://127.0.0.1:4173/booking')
   const vehicleCard = name => page.getByRole('button').filter({ has: page.getByRole('heading', { name, exact: true }) })
   await expect(page.getByRole('button', { pressed: true })).toHaveCount(1)
-  for (const name of ['VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter']) {
+  for (const name of [...fleetNames]) {
     await expect(vehicleCard(name)).toBeVisible()
   }
   for (const name of ['PRIVATE TAXI', 'PRIVATE PREMIUM VIP MINIVAN', 'PRIVATE MERCEDES MAYBACH +', 'PRIVATE VIP MINIBUS LONG']) {
     await expect(page.getByRole('heading', { name, exact: true })).toHaveCount(0)
   }
   await page.getByRole('combobox', { name: 'Destination', exact: true }).selectOption('Marmaris(Any Hotel)')
-  for (const [name, amount] of [['VIP Vito', '£47.50'], ['Ultra VIP Vito', '£62.50'], ['Sprinter', '£80.50'], ['Ultra Sprinter', '£87.50']]) {
+  for (const [name, amount] of marmarisFares) {
     await vehicleCard(name).click()
     await expect(vehicleCard(name)).toHaveAttribute('aria-pressed', 'true')
     await expect(vehicleCard(name).getByText(amount, { exact: true })).toBeVisible()
   }
-  await vehicleCard('Ultra VIP Vito').click()
+  await vehicleCard('VIP Maybach').click()
   for (let i = 0; i < 3; i++) await page.getByRole('button', { name: 'Increase Passengers', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Increase Passengers', exact: true })).toBeDisabled()
   for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Increase Luggages', exact: true }).click()
   await expect(page.getByRole('button', { name: 'Increase Luggages', exact: true })).toBeDisabled()
-  await vehicleCard('Sprinter').click()
+  await vehicleCard('Standard Sprinter 1–9').click()
   await page.getByRole('button', { name: 'Round Trip', exact: true }).click()
-  await expect(vehicleCard('Sprinter').getByText('£160.00', { exact: true })).toBeVisible()
+  await expect(vehicleCard('Standard Sprinter 1–9').getByText('£133.00', { exact: true })).toBeVisible()
 })
 
 
@@ -508,7 +511,7 @@ test('admin vehicle editing offers the current fleet and preserves only the save
   await page.getByRole('button', { name: 'Edit booking details', exact: true }).click()
   const vehicle = page.getByRole('combobox', { name: 'Vehicle', exact: true })
   await expect(vehicle).toHaveValue('mercedes-vito')
-  await expect(vehicle.locator('option')).toHaveText(['Select vehicle', 'VIP Vito', 'Ultra VIP Vito', 'Sprinter', 'Ultra Sprinter', 'mercedes-vito (previous category)'])
+  await expect(vehicle.locator('option')).toHaveText(['Select vehicle', ...fleetNames, 'mercedes-vito (previous category)'])
   await vehicle.selectOption('maybach')
   await expect(vehicle).toHaveValue('maybach')
 })
