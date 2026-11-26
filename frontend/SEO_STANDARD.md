@@ -34,6 +34,8 @@
 7. **V2-SEO-07 Canlı commit, indeksleme, canonical, sitemap, robots, hreflang.**
    - Kısmi. Ana sayfa indeksli, yeniden tarama talebi kabul edildi. Güncel sitemap listesini çıkarıp her URL’de HTTP, ilk HTML, canonical ve dil bağlantılarını denetle.
    - 26 Kasım — GSC sitemap son okuma 25 Kasım, başarılı, 34 keşfedilen URL. Ana sayfa indeksli, HTTP 200, tarama ve indeksleme izinli, Google canonical ana sayfa. 25 Kasım 17:50 UTC tarihli akıllı telefon Googlebot kaydında 33/41 kaynak yüklenemedi: Wikimedia Ölüdeniz görseli robots.txt engeli; diğer görseller, fontlar ve reviews API için diğer hata. Bu eski tarama güncel canlı hata kanıtı değildir. Yeni canlı URL testi ve kaynak HTTP doğrulaması açık; kod değişmedi.
+   - 26 Kasım 12:22 UTC — Canlı HTTP/HTML SEO denetimi başarılı: 34 sitemap URL, 21 EN/DE/RU rota sayfasında karşılıklı hreflang ve x-default, canonical, robots.txt HTTP 200, booking/admin noindex, iki geçersiz URL HTTP 404; failures=0, passed=true. [CI kanıtı](https://github.com/Alisnmez/vip-transfer-dalaman/actions/runs/45818960746/job/139905908302). Denetim commitleri 29eb92b, 653380b, 8f40fdf; frontend/backend/browser durumları success. Kullanıcı onayıyla frontend 8f40fdf Render dep-dc429ip7lnhs73f6m6mg 12:23:55 UTC live; staging dep-dc428ou0tbcc73cg4acg live. Uygulama kodu değişmedi; backend dağıtımı gerekmedi. Hreflang alt işi kapalı; Googlebot kaynak yükleme, yeni GSC canlı URL testi ve yayın sonrası HTTP denetimi açık. Canlı HTTP testi frontend CI içine eklendiğinden dış ağ erişimine bağımlılık oluştu.
+
 
 8. **V2-SEO-08 Ana sayfa tam denetimi (metin kısmı yapıldı).**
    - Kısmi. Ana sayfa metni incelendi. Mobil görünüm, performans ve rezervasyona geçişi ölç.
