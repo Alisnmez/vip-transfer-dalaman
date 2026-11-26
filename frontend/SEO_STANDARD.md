@@ -4,6 +4,8 @@
 
 ## Ayrıntılı SEO çalışma listesi — 26 Kasım 2026
 
+**Takip kuralı (26 Kasım):** Her V2 maddesinin altında tarih, kısa geliştirme, commit, test sonucu ve ortam (geliştiriliyor / test sunucusunda / canlıda) tutulur. Canlıya alınan geliştirme kapatılır; maddeye ait kalan denetim veya ölçüm varsa ayrı açık alt görev olarak belirtilir. Araştırma görevleri kanıt ve kabul ölçütüyle kapanır. Canlı dağıtım için kullanıcı onayı gerekir.
+
 Önceki planda 13 SEO kodu, V2 planında 17 görev kodu vardır. Bazı kodlar aynı işi farklı tarihlerde ele alır. Aşağıdaki 17 satır V2 uygulama listesidir. Sonraki 10 başlık yönetim özetidir. 25 Kasım tarihli kabul ölçütleri ve özgün araştırmalar aşağıda korunur.
 
 1. **V2-SEO-01 UK rakip ön araştırması — önceki sohbet kaynak listesi kaydedildi; tam SERP analizi ayrı.**
@@ -40,7 +42,7 @@
    - Kısmi. Marmaris fiyat ve karşılama güncellemesi canlı. UK verisini yayın öncesiyle karşılaştır.
 
 12. **V2-SEO-12 Fethiye ve Ölüdeniz; diğer rotalar da envanterde.**
-   - Kısmi. Fethiye ve Ölüdeniz için DLM ve otel bölgesi açıklamaları testte. Onay sonrası yayın ve ölçüm bekliyor.
+   - 26 Kasım — **Canlıda (geliştirme yayını tamamlandı):** Fethiye ve Ölüdeniz DLM ve otel bölgesi açıklamaları `02483ff`; `b5afe85` bu commit'in devamı (3 commit ileride, rota kodu değişmemiş). Render test ve üretim frontend dağıtımları başarılı. Üretim deploy `dep-dc413gjl550s73fslu80`, 11:02:46 UTC. GitHub CI üç grup başarılı. Açık alt görev: canlı URL/rezervasyon bağlantısı bağımsız kontrolü ve UK performans ölçümü (17).
 
 13. **V2-SEO-13 Rehberler, services, reviews, FAQ, contact, booking/lookup, yasal sayfalar, tüm dil varyantları.**
    - Denetim açık. Rehberlerden ilgili rotaya bağlantıyı, destek sayfalarının doğruluğunu ve özel sayfaların noindex durumunu URL bazında kontrol et.
@@ -52,7 +54,7 @@
    - Denetim açık. İngilizce, Almanca ve Rusça karşılıkların metinlerini ve karşılıklı bağlantılarını rota bazında doğrula.
 
 16. **V2-SEO-16 Onay, mevcut uygun branch, lint/unit/build/browser smoke, staging ve kontrollü canlı doğrulama.**
-   - Her yayın için tekrarlanır. Son rota değişikliği testte; son test sonucu, kullanıcı onayı ve canlı URL kontrolünü kaydet.
+   - 26 Kasım — `b5afe85` test ve canlı frontend dağıtımı başarılı. Frontend lint/test/build, backend PostgreSQL ve booking browser smoke başarılı (Actions 45806561261 ve 45806561313). Canlı URL bağımsız kontrolü henüz yapılmadı. Her yayın için tekrarlanır.
 
 17. **V2-SEO-17 7/28 günlük ölçüm ve 30/60/90 gün hedef değerlendirmesi.**
    - Bekliyor. Eşit dönemlerde UK sorgu ve sayfa sonuçlarını ve organik rezervasyonları karşılaştır; 30/60/90 gün hedeflerini gerçekleşen değerlerle değerlendir.
