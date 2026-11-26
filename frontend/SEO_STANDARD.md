@@ -24,6 +24,7 @@
    - **DE/RU sonraki adım:** Var olan gerçek çevirilerden arama ifadesi adayları çıkar, ülke bazlı ölç. Otomatik tercümeyi kanıtlanmış anahtar kelime hacmi olarak sayma. Rusya pazarına yönelik erişim/araç kapsamı sınırlıysa bunu açıkça not et.
    - **Kabul ve kapanış kriteri:** Üç hedef ülkede en az birer ölçülmüş sorgu kümesi; tarihlenmiş kaynağı, hacmi, rekabet metriği, niyet ve hedef URL'si; sıralama için ilk üç uygulanabilir fırsat. **Durum: AÇIK / ölçüm erişimi bekleniyor. Test sunucusu: uygulanmaz (araştırma). Canlı: uygulanmaz (araştırma).**
    - 26 Kasım — Kullanıcı KWS Trends (https://www.kwstrends.com/google-ads-keyword-tool) ölçümünü bilgisayardan yapacak. GB/DE/RU sonuçları alınana kadar 04 beklemede; 05 paralel ilerler.
+   - Bilgisayara geçildiğinde ayrıca V2-SEO-05 kapsamında Dalaman Havalimanı fiziksel buluşma noktası ve şoförün müşteri isim tabelasıyla karşılayıp karşılamadığı kullanıcıyla doğrulanacak. Mevcut transfer rehberi 5. adımı ancak operasyon doğrulandıktan sonra gerekirse güncellenecek; bu madde şimdilik ertelendi.
 
 
 5. **V2-SEO-05 UK ilk 10 organik sonuç analizi.**
