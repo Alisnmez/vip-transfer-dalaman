@@ -4,7 +4,7 @@
 
 ## Ayrıntılı SEO çalışma listesi — 26 Kasım 2026
 
-**Takip kuralı (26 Kasım):** Her V2 maddesinin altında tarih, kısa geliştirme, commit, test sonucu ve ortam (geliştiriliyor / test sunucusunda / canlıda) tutulur. Canlıya alınan geliştirme kapatılır; maddeye ait kalan denetim veya ölçüm varsa ayrı açık alt görev olarak belirtilir. Araştırma görevleri kanıt ve kabul ölçütüyle kapanır. Canlı dağıtım için kullanıcı onayı gerekir.
+**Takip kuralı (26 Kasım):** Her V2 maddesinin altında tarih, kısa geliştirme, commit, test sonucu ve ortam (geliştiriliyor / test sunucusunda / canlıda) tutulur. Canlıya alınan geliştirme kapatılır; maddeye ait kalan denetim veya ölçüm varsa ayrı açık alt görev olarak belirtilir. Araştırma görevleri kanıt ve kabul ölçütüyle kapanır. Canlı dağıtım için kullanıcı onayı gerekir. Küçük paketlerle ilerle: madde bazında değişiklik, CI, test sunucusu doğrulaması, kullanıcı onayı, canlı dağıtım ve canlı doğrulama. Ücretli araç satın alınmaz; ücretsiz kaynaklar önceliklidir. Kullanıcı izni olmadan yeni branch oluşturulmaz veya mevcut branch silinmez; aktif geliştirme dalı kullanılır.
 
 Önceki planda 13 SEO kodu, V2 planında 17 görev kodu vardır. Bazı kodlar aynı işi farklı tarihlerde ele alır. Aşağıdaki 17 satır V2 uygulama listesidir. Sonraki 10 başlık yönetim özetidir. 25 Kasım tarihli kabul ölçütleri ve özgün araştırmalar aşağıda korunur.
 
@@ -29,9 +29,11 @@
 
 6. **V2-SEO-06 Güncel GSC başlangıç ölçümü.**
    - Kısmi. 18–24 Kasım UK 64 gösterim, 0 tıklama. UK + rota + sorgu ve cihaz kırılımını tamamla; TR/LT’yi dışarıda tut.
+   - 26 Kasım GSC açık raporu, 18–24 Kasım, web, GB/DE/US filtresi: GB 64 gösterim, konum 61,4; DE 4, konum 45,8; US 1, konum 47,0; toplam 69, konum 60,3, tıklama 0. RU bu filtrede yok.
 
 7. **V2-SEO-07 Canlı commit, indeksleme, canonical, sitemap, robots, hreflang.**
    - Kısmi. Ana sayfa indeksli, yeniden tarama talebi kabul edildi. Güncel sitemap listesini çıkarıp her URL’de HTTP, ilk HTML, canonical ve dil bağlantılarını denetle.
+   - 26 Kasım — GSC sitemap son okuma 25 Kasım, başarılı, 34 keşfedilen URL. Ana sayfa indeksli, HTTP 200, tarama ve indeksleme izinli, Google canonical ana sayfa. 25 Kasım 17:50 UTC tarihli akıllı telefon Googlebot kaydında 33/41 kaynak yüklenemedi: Wikimedia Ölüdeniz görseli robots.txt engeli; diğer görseller, fontlar ve reviews API için diğer hata. Bu eski tarama güncel canlı hata kanıtı değildir. Yeni canlı URL testi ve kaynak HTTP doğrulaması açık; kod değişmedi.
 
 8. **V2-SEO-08 Ana sayfa tam denetimi (metin kısmı yapıldı).**
    - Kısmi. Ana sayfa metni incelendi. Mobil görünüm, performans ve rezervasyona geçişi ölç.
@@ -53,11 +55,13 @@
 
 14. **V2-SEO-14 Backlink ve otorite.**
    - Bekliyor. Mevcut bağlantıları ölç, ilgili otel ve seyahat yayınlarını belirle; kazanılan yönlendirmeleri kaydet.
+   - 26 Kasım Ahrefs Free dashboard (project 10771467): DR 0, referring domains 304, tahmini organik trafik ve tespit edilen organik kelime 0; Health Score henüz taranmamış. Alan adlarının kalitesi doğrulanmadı; spam veya kazanılmış kaliteli backlink olarak sınıflandırma. Referring domains raporu ve GSC Links karşılaştırması açık.
 
 15. **V2-SEO-15 EN/DE/RU metin ve bağlantılar.**
    - Denetim açık. İngilizce, Almanca ve Rusça karşılıkların metinlerini ve karşılıklı bağlantılarını rota bazında doğrula.
 
 16. **V2-SEO-16 Onay, mevcut uygun branch, lint/unit/build/browser smoke, staging ve kontrollü canlı doğrulama.**
+   - 26 Kasım — PR #78, dört CI grubu başarılı (build, booking smoke, comprehensive quality gate, dependency security). Merge `0e3d7518c5750724af859094c931c23fa5f0a2d8`; staging `dep-dc41cf0473hc738usf40` canlı 11:21:49 UTC; production `dep-dc41flqjnfac73b7fsog` canlı 11:28:40 UTC. Yalnız SEO_STANDARD.md değişti. Yayın tamamlandı; bağımsız URL denetimi açık.
    - 26 Kasım — `b5afe85` test ve canlı frontend dağıtımı başarılı. Frontend lint/test/build, backend PostgreSQL ve booking browser smoke başarılı (Actions 45806561261 ve 45806561313). Canlı URL bağımsız kontrolü henüz yapılmadı. Her yayın için tekrarlanır.
 
 17. **V2-SEO-17 7/28 günlük ölçüm ve 30/60/90 gün hedef değerlendirmesi.**
