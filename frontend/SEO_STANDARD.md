@@ -2,6 +2,50 @@
 
 26 Kasım 2026 — Birleştirme kaydı. Bu belge ana SEO çalışma kaydıdır. Aşağıdaki tarihsel kaynaklar aynen korunmuştur; eski durum, tahmin ve görevler güncel canlı doğrulama sayılmaz. Çelişkilerde yeni tarihli doğrulanmış kanıt esas alınmalı; yayın veya silme bu işlem kapsamında değildir. Göreli kaynak bağlantıları eski konumlarına göre yazılmış olabilir.
 
+## 26 Kasım 2026 — Aktif SEO görev takibi
+
+24 Kasım planındaki **10 ana madde** aynı sırayla izlenir. **1 tamamlandı, 7 kısmen tamamlandı, 2 bekliyor.** Arşivde tekrarlanan listeler bu sayıya eklenmez.
+
+1. **Plan ve çalışma dalı — Tamamlandı**
+   - Yapılan ve yöntem: Çalışma kaydı bu dosyada birleştirildi. Aktif dal `feature/booking-integration`. Branch temizliği ayrı iş olarak izleniyor.
+   - Sonraki adım: Her SEO değişikliğinin tarihini, ilgili URL’yi ve doğrulamasını bu listeye ekle.
+
+2. **Teknik SEO ve indeksleme — Kısmen tamamlandı**
+   - Yapılan ve yöntem: 96×96 PNG favicon canlıda. Search Console ana sayfanın dizinde olduğunu gösterdi ve 26 Kasım’da yeniden tarama talebini kabul etti.
+   - Sonraki adım: Canlı sitemap URL’lerinde HTTP 200, canonical, hreflang ve ilk HTML’i kontrol et. Özel sayfaların sitemap dışında ve noindex olduğunu doğrula. Mobil LCP, INP ve CLS sonuçlarını veri varsa kaydet.
+
+3. **Hedef pazar başlangıç ölçümü — Kısmen tamamlandı**
+   - Yapılan ve yöntem: 18–24 Kasım GSC ülke verisi kaydedildi. Türkiye ve Litvanya hariç 69 gösterim ve 0 tıklama. İngiltere 64 gösterim, 0 tıklama, konum 61,4.
+   - Sonraki adım: Aynı tarih aralığı için İngiltere + rota URL’si filtreleriyle sorgu ve cihaz kırılımlarını kaydet. Almanya ve Rusya’yı ayrı izle.
+
+4. **İngiltere rakip karşılaştırması — Kısmen tamamlandı**
+   - Yapılan ve yöntem: Önceki araştırmada rakiplerin rota fiyatları, buluşma açıklamaları ve güven unsurları karşılaştırıldı. Araştırma bu dosyanın arşivinde.
+   - Sonraki adım: Marmaris için İngiltere arama sonuçlarından güncel bir örneklem al. Sorguyu, tarihi ve örnek URL’leri kaydet. Yolcunun hangi sorularına daha iyi yanıt verdiklerini belirle.
+
+5. **Rota sayfalarını iyileştirme — Kısmen tamamlandı**
+   - Yapılan ve yöntem: Marmaris ücret ve karşılama güncellemesi 25 Kasım’da canlıya çıktı. Fethiye ve Ölüdeniz için DLM ve otel bölgesi açıklamaları 26 Kasım’da test sunucusuna alındı (`02483ff`).
+   - Sonraki adım: Fethiye ve Ölüdeniz metinlerini mobilde kontrol et. Test ve onay sonrası yayınla. Sonraki rota için Dalyan’ın İngiltere verisini incele.
+
+6. **Ana sayfa, güven ve rezervasyon — Kısmen tamamlandı**
+   - Yapılan ve yöntem: Transfer adımları ve rezervasyon yönetimi yayında. Referans, e-posta ve 24 saat politikası müşteri ekranında kontrol edildi.
+   - Sonraki adım: Mobilde rota seçiminden talep onayına kadar akışı test verisiyle dene. E-posta ve admin kaydını doğrula. Yalnız doğrulanmış olanakları ve iletişim bilgilerini kullan.
+
+7. **Rehberler ve iç bağlantılar — Kısmen tamamlandı**
+   - Yapılan ve yöntem: Sitede seyahat rehberleri ve ana sayfadan rehberlere erişim bulunuyor.
+   - Sonraki adım: Her İngilizce rehber için ilgili rota bağlantısını ve rezervasyondaki hedef seçimini kontrol et. Aynı soruyu tekrarlayan içerikleri belirle.
+
+8. **İşletme görünürlüğü ve turizm ortaklıkları — Bekliyor**
+   - Yapılan ve yöntem: Önceki araştırmada aday kanallar belirlendi. Doğrulanmış yeni ortaklık veya kazanılmış bağlantı kaydı bulunmuyor.
+   - Sonraki adım: Uygun işletme profillerini ve ilgili otel/turizm ortaklarını listele. Kazanılan bağlantının URL’sini ve yönlendirdiği sayfayı kaydet.
+
+9. **Organik rezervasyon ve dönem karşılaştırması — Bekliyor**
+   - Yapılan ve yöntem: Search Console başlangıç değerleri var. Organik ziyaretin rezervasyona dönüşümünü gösteren doğrulanmış ölçüm henüz yok.
+   - Sonraki adım: Kişisel veri göndermeden rota→rezervasyon başlangıcı→başarılı talep olaylarını doğrula. Aynı filtrelerle 7 ve 28 günlük değişimi izle; 30/60/90 günde sonuçları değerlendir.
+
+10. **Test, yayın onayı ve canlı kontrol — Kısmen tamamlandı**
+   - Yapılan ve yöntem: Son rota içerikleri test ortamında. Arayüz kontrolü başarılı olarak kaydedildi.
+   - Sonraki adım: Son sürümün tarayıcı testini doğrula, kullanıcı onayı al, yayınlanan URL’nin ilk HTML’ini ve rezervasyon bağlantısını kontrol edip sonucu buraya yaz.
+
 ## Kaynak dizini
 
 - [frontend/SEO_STANDARD.md (feature/booking-integration)](https://github.com/Alisnmez/vip-transfer-dalaman/blob/feature/booking-integration/frontend/SEO_STANDARD.md)
