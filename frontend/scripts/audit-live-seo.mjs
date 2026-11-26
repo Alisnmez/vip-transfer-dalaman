@@ -35,6 +35,24 @@ const robotsContent = (html) => tags(html, 'meta')
   .filter(tag => attribute(tag, 'name').toLowerCase() === 'robots')
   .map(tag => attribute(tag, 'content').toLowerCase())
 
+
+const hreflangLinks = (html) => tags(html, 'link')
+  .filter(tag => attribute(tag, 'rel').toLowerCase().split(/\s+/).includes('alternate') && attribute(tag, 'hreflang'))
+  .map(tag => ({ language: attribute(tag, 'hreflang').toLowerCase(), href: attribute(tag, 'href') }))
+const localizedSlugs = new Set(['marmaris', 'fethiye', 'oludeniz', 'icmeler', 'dalyan', 'sarigerme', 'gocek'])
+function checkHreflang(path, body) {
+  const match = path.match(/^\/(?:de\/|ru\/)?routes\/([^/]+)$/)
+  if (!match || !localizedSlugs.has(match[1])) return
+  const base = '/routes/' + match[1]
+  const expected = { en: base, de: '/de' + base, ru: '/ru' + base, 'x-default': base }
+  const links = hreflangLinks(body)
+  const ok = links.length === Object.keys(expected).length &&
+    Object.entries(expected).every(([language, target]) =>
+      links.filter(link => link.language === language && link.href === new URL(target, origin).href).length === 1 &&
+      sitemapPaths.includes(target))
+  report({ path, kind: 'hreflang', links, ok })
+}
+
 async function check(path, kind) {
   try {
     const { response, body } = await fetchPage(path)
@@ -50,6 +68,7 @@ async function check(path, kind) {
           ? response.status === 404
           : response.status === 200
     report({ path, kind, status: response.status, canonical, robots, ok })
+    if (kind === 'public') checkHreflang(path, body)
   } catch (error) {
     report({ path, kind, ok: false, error: String(error) })
   }
@@ -67,6 +86,12 @@ try {
   report({ path: '/sitemap.xml', kind: 'sitemap', status: response.status, urlCount: urls.length, unique: new Set(urls.map(url => url.pathname)).size, ok: valid })
 } catch (error) {
   report({ path: '/sitemap.xml', kind: 'sitemap', ok: false, error: String(error) })
+}
+for (const slug of localizedSlugs) {
+  for (const prefix of ['', '/de', '/ru']) {
+    const path = prefix + '/routes/' + slug
+    if (!sitemapPaths.includes(path)) report({ path, kind: 'hreflang-sitemap', ok: false })
+  }
 }
 for (const path of sitemapPaths) await check(path, 'public')
 await check('/robots.txt', 'resource')
