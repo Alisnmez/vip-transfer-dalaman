@@ -4,6 +4,12 @@ import { spawnSync } from 'node:child_process'
 import { fleetCatalogue } from '../src/features/vehicle-type/fleetCatalogue.ts'
 
 const variants = {}
+const encoder = spawnSync('cwebp', ['-version'], { encoding: 'utf8' })
+if (encoder.error || encoder.status !== 0) {
+  console.warn('cwebp unavailable; using original fleet photos')
+  await writeFile('src/features/vehicle-type/imageVariants.json', '{}\n')
+  process.exit(0)
+}
 const directory = 'public/images/vehicles'
 const files = (await readdir(directory)).filter(name => /-(exterior|interior)\.webp$/.test(name))
 const originals = fleetCatalogue.flatMap(vehicle => [
