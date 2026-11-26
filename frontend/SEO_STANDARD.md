@@ -2031,3 +2031,11 @@ Marmaris: 27 gösterim / 0 tıklama / 63,2 konum. Dalyan: 12 / 0 / 25,0. Önceli
 
 ### 26 Kasım — hedef pazar ölçümü ve ilk içerik denemesi
 Türkiye ve Litvanya dışarıda tutulur. 18–24 Kasım: kalan 69 gösterim, 0 tıklama; İngiltere 64 gösterim, 0 tıklama, ortalama konum 61,4. Sayfa ve sorgu toplamlarını ülke filtresi uygulanmadıkça İngiltere'ye atfetmeyin. “airport for fethiye” ve “oludeniz airport” sorgularının işaret ettiği bilgi ihtiyacına göre İngilizce rota sayfalarında Dalaman (DLM) ve doğru otel bölgesini seçme açıklamaları test sürümüne eklendi. Yayın onayından sonra İngiltere + ilgili sayfa filtresiyle gösterim, tıklama ve konumu izleyin.
+
+
+## 27 Kasım 2026 — Performans ve erişilebilirlik yayın kaydı
+
+- Kullanıcının PageSpeed mobil başlangıç ölçümü: performans 95, erişilebilirlik 93, best practices 100, SEO 100; LCP 2 s, CLS 0. Görsel tasarruf tahmini mobil 1709 KiB, masaüstü 3138 KiB. Bunlar yeni yayın öncesi laboratuvar ölçümleridir.
+- Ana sayfa main landmark ve ilk güven başlıkları: `45d74a2`; araç iç görsellerini etkileşime kadar erteleme: `deb7921`; 14 WebP dosyasının gerçek boyutları ve img width/height: `ec379ef`, `b9effe8`.
+- `b9effe8` için GitHub Actions 45911789905: frontend 100/100, backend 120/120, lint/build ve 34 sitemap URL denetimi başarılı. Browser run 45911790040: 26/26 başarılı. Staging deploy `dep-dc4c494s6fmc73dopn8g` live. Kullanıcı onayıyla production frontend deploy `dep-dc4c63lg1s2s73dv8cpg` live (26 Kasım 23:39 UTC). Backend deploy yapılmadı.
+- Açık işler: bağımsız canlı HTTP ve görsel etkileşim kontrolü, yeni Lighthouse ölçümü, responsive WebP varyantları, diğer görsellerin boyutları, kontrast ve cache/JS denetimi. Genel testler yeni performans kazanımını ölçmez. Orijinal fotoğraflar korunur; yeni branch açılmaz veya silinmez.
