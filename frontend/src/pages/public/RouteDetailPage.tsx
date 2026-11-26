@@ -1,4 +1,5 @@
 import { Link, useLocation, useParams } from 'react-router-dom'
+import { travelGuides } from '../../content/guides'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 import { transferPrices } from '../../features/booking/pricing'
@@ -156,6 +157,8 @@ export function RouteDetailPage() {
   const title = `Dalaman Airport to ${route.name} Private Transfer | DalamanWay`
   const description = `Plan a private Dalaman Airport to ${route.name} transfer. Compare available vehicles and request a one-way or return journey.`
 
+  const relatedGuides = travelGuides.filter(guide => guide.destinationSlug === route.slug)
+  const relatedGuideHeading = { en: 'Related travel guides', de: 'Passende Reiseführer', ru: 'Путеводители по направлению' }[language]
   const farePath = showFares ? `/routes?destination=${encodeURIComponent(route.name)}#all-routes` : '/routes'
   const formatFare = (price: number | null) => price === null ? fares.missing : `£${price.toFixed(2)}`
 
@@ -208,6 +211,15 @@ export function RouteDetailPage() {
             <h3 className="font-semibold">{question}</h3>
             <p className="mt-2 leading-relaxed">{answer}</p>
           </div>)}
+        </section>}
+        {relatedGuides.length > 0 && <section className="mt-12 max-w-3xl">
+          <h2 className="text-2xl font-bold text-admin-primary">{relatedGuideHeading}</h2>
+          <ul className="mt-4 list-disc space-y-1 pl-5 leading-relaxed">
+            {relatedGuides.map(guide => {
+              const article = 'translations' in guide ? guide.translations[language] : guide
+              return <li key={guide.path}><Link className="font-semibold underline underline-offset-2" to={guide.path}>{article.title}</Link></li>
+            })}
+          </ul>
         </section>}
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.prepare}</h2>
