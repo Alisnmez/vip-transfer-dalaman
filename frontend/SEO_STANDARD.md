@@ -2,7 +2,62 @@
 
 26 Kasım 2026 — Birleştirme kaydı. Bu belge ana SEO çalışma kaydıdır. Aşağıdaki tarihsel kaynaklar aynen korunmuştur; eski durum, tahmin ve görevler güncel canlı doğrulama sayılmaz. Çelişkilerde yeni tarihli doğrulanmış kanıt esas alınmalı; yayın veya silme bu işlem kapsamında değildir. Göreli kaynak bağlantıları eski konumlarına göre yazılmış olabilir.
 
-## 26 Kasım 2026 — Aktif SEO görev takibi
+## Ayrıntılı SEO çalışma listesi — 26 Kasım 2026
+
+Önceki planda 13 SEO kodu, V2 planında 17 görev kodu vardır. Bazı kodlar aynı işi farklı tarihlerde ele alır. Aşağıdaki 17 satır V2 uygulama listesidir. Sonraki 10 başlık yönetim özetidir. 25 Kasım tarihli kabul ölçütleri ve özgün araştırmalar aşağıda korunur.
+
+1. **V2-SEO-01 UK rakip ön araştırması — önceki sohbet kaynak listesi kaydedildi; tam SERP analizi ayrı.**
+   - Ön araştırma kaynakları kayıtlı. Güncel ilk 10 karşılaştırması 05’te.
+
+2. **V2-SEO-02 DE/RU rakip ön araştırması — kaynak adayları kaydedildi.**
+   - DE/RU kaynak adayları kayıtlı. Pazar bazında performansı ayrıca ölç.
+
+3. **V2-SEO-03 Üç dilde aday anahtar kelimeler — sayfa niyetine göre ayrıldı; hacim doğrulanmadı.**
+   - Üç dil için adaylar ayrıldı. Hacim ölçümü 04’te.
+
+4. **V2-SEO-04 Gerçek hacim ve rekabet ölçümü.**
+   - Bekliyor. UK, DE ve RU için hacim, dönem ve veri kaynağını kaydet.
+
+5. **V2-SEO-05 UK ilk 10 organik sonuç analizi.**
+   - Bekliyor. Önce Marmaris’te UK ilk 10 organik sonucu tarih ve cihazla kaydet; fiyat, karşılama, güven ve rezervasyon akışını karşılaştır.
+
+6. **V2-SEO-06 Güncel GSC başlangıç ölçümü.**
+   - Kısmi. 18–24 Kasım UK 64 gösterim, 0 tıklama. UK + rota + sorgu ve cihaz kırılımını tamamla; TR/LT’yi dışarıda tut.
+
+7. **V2-SEO-07 Canlı commit, indeksleme, canonical, sitemap, robots, hreflang.**
+   - Kısmi. Ana sayfa indeksli, yeniden tarama talebi kabul edildi. Güncel sitemap listesini çıkarıp her URL’de HTTP, ilk HTML, canonical ve dil bağlantılarını denetle.
+
+8. **V2-SEO-08 Ana sayfa tam denetimi (metin kısmı yapıldı).**
+   - Kısmi. Ana sayfa metni incelendi. Mobil görünüm, performans ve rezervasyona geçişi ölç.
+
+9. **V2-SEO-09 Routes & Prices.**
+   - Denetim açık. Rota, araç, tek/çift yön seçimi ve formdaki GBP fiyatının tutarlılığını doğrula.
+
+10. **V2-SEO-10 Vehicles.**
+   - Denetim açık. Yedi aracın görsellerini, açıklamalarını, kapasite ve bagaj bilgisini mobilde ve üç dilde kontrol et.
+
+11. **V2-SEO-11 Marmaris pilotu.**
+   - Kısmi. Marmaris fiyat ve karşılama güncellemesi canlı. UK verisini yayın öncesiyle karşılaştır.
+
+12. **V2-SEO-12 Fethiye ve Ölüdeniz; diğer rotalar da envanterde.**
+   - Kısmi. Fethiye ve Ölüdeniz için DLM ve otel bölgesi açıklamaları testte. Onay sonrası yayın ve ölçüm bekliyor.
+
+13. **V2-SEO-13 Rehberler, services, reviews, FAQ, contact, booking/lookup, yasal sayfalar, tüm dil varyantları.**
+   - Denetim açık. Rehberlerden ilgili rotaya bağlantıyı, destek sayfalarının doğruluğunu ve özel sayfaların noindex durumunu URL bazında kontrol et.
+
+14. **V2-SEO-14 Backlink ve otorite.**
+   - Bekliyor. Mevcut bağlantıları ölç, ilgili otel ve seyahat yayınlarını belirle; kazanılan yönlendirmeleri kaydet.
+
+15. **V2-SEO-15 EN/DE/RU metin ve bağlantılar.**
+   - Denetim açık. İngilizce, Almanca ve Rusça karşılıkların metinlerini ve karşılıklı bağlantılarını rota bazında doğrula.
+
+16. **V2-SEO-16 Onay, mevcut uygun branch, lint/unit/build/browser smoke, staging ve kontrollü canlı doğrulama.**
+   - Her yayın için tekrarlanır. Son rota değişikliği testte; son test sonucu, kullanıcı onayı ve canlı URL kontrolünü kaydet.
+
+17. **V2-SEO-17 7/28 günlük ölçüm ve 30/60/90 gün hedef değerlendirmesi.**
+   - Bekliyor. Eşit dönemlerde UK sorgu ve sayfa sonuçlarını ve organik rezervasyonları karşılaştır; 30/60/90 gün hedeflerini gerçekleşen değerlerle değerlendir.
+
+## 26 Kasım 2026 — Yönetim özeti (10 başlık)
 
 24 Kasım planındaki **10 ana madde** aynı sırayla izlenir. **1 tamamlandı, 7 kısmen tamamlandı, 2 bekliyor.** Arşivde tekrarlanan listeler bu sayıya eklenmez.
 
