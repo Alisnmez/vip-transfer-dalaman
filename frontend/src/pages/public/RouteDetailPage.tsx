@@ -80,6 +80,58 @@ const fareCopy = {
   ru: { oneWay: 'В одну сторону', roundTrip: 'Туда и обратно', unit: 'Цены в GBP за автомобиль', loading: 'Загружаются актуальные цены…', error: 'Не удалось загрузить актуальные цены.', missing: 'Недоступно' },
 }
 
+const destinationFaq: Partial<Record<string, Record<'en' | 'de' | 'ru', [string, string]>>> = {
+  "fethiye": {
+    "en": [
+      "Can I book a transfer to my hotel in Fethiye?",
+      "Yes. Enter your hotel or exact address in Fethiye city centre when requesting your transfer."
+    ],
+    "de": [
+      "Kann ich einen Transfer zu meinem Hotel in Fethiye buchen?",
+      "Ja. Geben Sie bei der Anfrage Ihr Hotel oder die genaue Adresse im Stadtzentrum von Fethiye an."
+    ],
+    "ru": [
+      "Можно ли заказать трансфер до отеля в Фетхие?",
+      "Да. Укажите отель или точный адрес в центре Фетхие при оформлении заявки."
+    ]
+  },
+  "oludeniz": {
+    "en": [
+      "Can I request a transfer to my accommodation in Ölüdeniz?",
+      "Enter your accommodation name and address so our team can confirm the pickup or drop-off location."
+    ],
+    "de": [
+      "Kann ich einen Transfer zu meiner Unterkunft in Ölüdeniz anfragen?",
+      "Geben Sie Name und Adresse Ihrer Unterkunft an, damit unser Team den Abhol- oder Zielort bestätigen kann."
+    ],
+    "ru": [
+      "Можно ли заказать трансфер до жилья в Олюденизе?",
+      "Укажите название и адрес жилья, чтобы наша команда могла подтвердить место посадки или высадки."
+    ]
+  },
+  "dalyan": {
+    "en": [
+      "Can I request a private transfer to a villa in Dalyan?",
+      "Provide the villa name and exact address so our team can review your requested drop-off."
+    ],
+    "de": [
+      "Kann ich einen privaten Transfer zu einer Villa in Dalyan anfragen?",
+      "Geben Sie den Namen und die genaue Adresse der Villa an, damit unser Team den Zielort prüfen kann."
+    ],
+    "ru": [
+      "Можно ли заказать индивидуальный трансфер до виллы в Дальяне?",
+      "Укажите название и точный адрес виллы, чтобы наша команда могла проверить место высадки."
+    ]
+  }
+}
+
+const fareFaq = {
+  en: ['How much is a private airport transfer?', 'Compare the current one-way and return fares in the table above. Prices are in GBP per vehicle.'],
+  de: ['Was kostet ein privater Flughafentransfer?', 'Vergleichen Sie die aktuellen Preise für Hin- und Rückfahrten in der Tabelle oben. Die Preise gelten in GBP pro Fahrzeug.'],
+  ru: ['Сколько стоит индивидуальный трансфер из аэропорта?', 'Сравните актуальные цены на поездки в одну сторону и туда и обратно в таблице выше. Цены указаны в GBP за автомобиль.'],
+}
+const faqHeading = { en: 'Frequently asked questions', de: 'Häufig gestellte Fragen', ru: 'Часто задаваемые вопросы' }
+
 export function RouteDetailPage() {
   const { language, setLanguage } = useLanguage()
   const copy = routeCopy[language]
@@ -87,7 +139,7 @@ export function RouteDetailPage() {
   const { slug } = useParams()
   const localized = matchLocalizedRoute(useLocation().pathname)
   const route = destinations.find((item) => item.slug === (localized?.slug ?? slug))
-  const showFares = route?.slug === 'marmaris'
+  const showFares = !!route && ['marmaris', 'fethiye', 'oludeniz', 'dalyan'].includes(route.slug)
   const { findPrice, loading, error } = useTransferPrices(showFares)
   const fares = fareCopy[language]
   const available = route ? transferPrices.some((price) => price.destination.toLowerCase().includes(route.match.toLowerCase())) : false
@@ -104,7 +156,7 @@ export function RouteDetailPage() {
   const title = `Dalaman Airport to ${route.name} Private Transfer | DalamanWay`
   const description = `Plan a private Dalaman Airport to ${route.name} transfer. Compare available vehicles and request a one-way or return journey.`
 
-  const farePath = showFares ? '/routes?destination=Marmaris#all-routes' : '/routes'
+  const farePath = showFares ? `/routes?destination=${encodeURIComponent(route.name)}#all-routes` : '/routes'
   const formatFare = (price: number | null) => price === null ? fares.missing : `£${price.toFixed(2)}`
 
   return (
@@ -121,7 +173,7 @@ export function RouteDetailPage() {
             to={routeLanguagePath(route.slug, option)} onClick={() => setLanguage(option)}>{routeLanguageLabels[option].name}</Link>)}
         </nav>}
         <section className="mt-8 max-w-3xl">
-          <h2 className="text-2xl font-bold text-admin-primary">{showFares ? labels.pickupAndDropoff : copy.arrival}</h2>
+          <h2 className="text-2xl font-bold text-admin-primary">{route.slug === 'marmaris' ? labels.pickupAndDropoff : copy.arrival}</h2>
           <p className="mt-3 leading-relaxed">{airportArrivalNotes[route.slug][language]}</p>
         </section>
         <section className="mt-8 max-w-3xl">
@@ -150,6 +202,13 @@ export function RouteDetailPage() {
             <Link className="rounded-lg border border-outline-variant px-6 py-3 font-semibold text-admin-primary" to={farePath}>{copy.compare}</Link>
           </div>
         </section>
+        {destinationFaq[route.slug] && <section className="mt-12 max-w-3xl">
+          <h2 className="text-2xl font-bold text-admin-primary">{faqHeading[language]}</h2>
+          {[fareFaq[language], destinationFaq[route.slug]![language]].map(([question, answer]) => <div key={question} className="mt-4">
+            <h3 className="font-semibold">{question}</h3>
+            <p className="mt-2 leading-relaxed">{answer}</p>
+          </div>)}
+        </section>}
         <section className="mt-12">
           <h2 className="text-2xl font-bold text-admin-primary">{copy.prepare}</h2>
           <p className="mt-3 leading-relaxed">{copy.prepareDetails}</p>
