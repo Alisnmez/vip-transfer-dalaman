@@ -1,6 +1,14 @@
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
+import imageVariants from '../../features/vehicle-type/imageVariants.json'
 import { useState } from 'react'
 import { useLanguage } from '../../shared/localization/language'
+
+const variants: Record<string, { src: string; width: number }[]> = imageVariants
+function responsiveSources(src: string, width: number | undefined) {
+  const candidates = variants[src]
+  if (!width || !candidates?.length) return undefined
+  return [...candidates.map(item => `${item.src} ${item.width}w`), `${src} ${width}w`].join(', ')
+}
 
 const photoCopy = {
   en: {
@@ -46,10 +54,10 @@ export function VehiclePhoto({ vehicleId, name, className = 'h-56', showToggle =
       onPointerEnter={event => { if (interior && event.pointerType === 'mouse') { setInteriorRequested(true); setPreviewInterior(true) } }}
       onPointerLeave={() => setPreviewInterior(false)}>
       {exterior && !exteriorFailed ? (
-        <img src={exterior} width={vehicle?.exteriorWidth} height={vehicle?.exteriorHeight} alt={copy.exteriorAlt(name)} aria-hidden={interiorVisible} loading="lazy" decoding="async"
+        <img src={exterior} srcSet={responsiveSources(exterior, vehicle?.exteriorWidth)} sizes="auto, (max-width: 767px) 100vw, 50vw" width={vehicle?.exteriorWidth} height={vehicle?.exteriorHeight} alt={copy.exteriorAlt(name)} aria-hidden={interiorVisible} loading="lazy" decoding="async"
           onError={() => setExteriorFailed(true)} className="h-full w-full object-cover" />
       ) : <div className="flex h-full items-center justify-center text-sm text-slate-500">{name}</div>}
-      {interior && !interiorFailed && interiorRequested && <img src={interior} width={vehicle?.interiorWidth} height={vehicle?.interiorHeight} alt={copy.interiorAlt(name)} aria-hidden={!interiorVisible} loading="lazy" decoding="async"
+      {interior && !interiorFailed && interiorRequested && <img src={interior} srcSet={responsiveSources(interior, vehicle?.interiorWidth)} sizes="auto, (max-width: 767px) 100vw, 50vw" width={vehicle?.interiorWidth} height={vehicle?.interiorHeight} alt={copy.interiorAlt(name)} aria-hidden={!interiorVisible} loading="lazy" decoding="async"
         onError={() => setInteriorFailed(true)}
         className={`pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${interiorVisible ? 'opacity-100' : 'opacity-0'}`} />}
       {interior && !interiorFailed && showToggle && <button type="button" aria-label={showInterior ? copy.showExterior(name) : copy.showInterior(name)}
