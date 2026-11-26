@@ -40,7 +40,8 @@ for (const [slug, name, intro] of pages) {
     const vehicleRows = fleetCatalogue.map(vehicle =>
       `<tr><th scope="row">${vehicle.name}</th><td>${vehicle.maxPassengers}</td><td>${vehicle.luggage}</td></tr>`,
     ).join('')
-    const fleet = `<section><h2>${labels.fleet}</h2><table><thead><tr><th scope="col">${labels.vehicle}</th><th scope="col">${labels.passengers}</th><th scope="col">${labels.luggage}</th></tr></thead><tbody>${vehicleRows}</tbody></table><a href="/routes">${labels.fare}</a></section>`
+    const waiting = { en: '60 min free waiting after landing', de: '60 Min. kostenlose Wartezeit nach der Landung', ru: '60 мин. бесплатного ожидания после посадки самолёта' }[language]
+    const fleet = `<section><h2>${labels.fleet}</h2><table><thead><tr><th scope="col">${labels.vehicle}</th><th scope="col">${labels.passengers}</th><th scope="col">${labels.luggage}</th></tr></thead><tbody>${vehicleRows}</tbody></table><p>${waiting}</p><a href="/routes">${labels.fare}</a></section>`
     const booking = pilot ? `/booking?destination=${encodeURIComponent(pilot.destination)}` : '/booking'
     const routeLink = language === 'en' ? ' <a href="/routes">Compare routes and prices</a>' : ''
     const html = template
