@@ -17,8 +17,12 @@
 3. **V2-SEO-03 Üç dilde aday anahtar kelimeler — sayfa niyetine göre ayrıldı; hacim doğrulanmadı.**
    - Üç dil için adaylar ayrıldı. Hacim ölçümü 04’te.
 
-4. **V2-SEO-04 Gerçek hacim ve rekabet ölçümü.**
-   - Bekliyor. UK, DE ve RU için hacim, dönem ve veri kaynağını kaydet.
+4. **V2-SEO-04 Gerçek hacim ve rekabet ölçümü — veri erişimi bekleniyor.**
+   - **26 Kasım 2026 | Araştırma yapıldı, yayın gerektirmeyen dokümantasyon hazırlığı:** Ahrefs bağlantısı doğrulandı. API abonelik bilgisi `Free, billed monthly`; workspace API birim limiti `0`. `keywords-explorer-overview` ile GB için `dalaman airport transfer` ve `dalaman airport to marmaris transfer` sorgularının hacim/KD/CPC ölçümü denendi, **Insufficient plan** hatası döndü. Dolayısıyla UK/DE/RU için **doğrulanmış hacim, KD ve CPC yoktur**; sayı tahmin edilmez. Ahrefs bağlantısı tek başına veri yetkisi anlamına gelmez. Ahrefs erişimi veya eşdeğer güvenilir ölçüm kaynağı sağlanınca 04 tamamlanacak.
+   - **Ölçüm protokolü:** Önce GB (ülke GB), sonra DE ve RU. Kaynak ve erişim tarihi, arama terimi, arama dili, ülke, son 12 ay ortalama aylık arama hacmi, mümkünse ay bazında sezon dağılımı, Ahrefs KD (organik), CPC (reklam; USD), kullanıcı niyeti, hedef URL ve mevcut GSC gösterimi kaydedilecek. GSC gösterimi piyasa arama hacmi değildir. Google Ads reklam rekabeti organik KD yerine kullanılmaz. Veri yoksa **veri yok** yazılır.
+   - **İlk UK sorgu kümesi (ticari niyet):** `dalaman airport transfers`, `dalaman airport private transfer`, `dalaman airport transfer prices`, `dalaman airport to marmaris transfer`, `dalaman to fethiye transfer`, `dalaman to oludeniz transfer`, `dalaman to dalyan transfer`, `dalaman to gocek transfer`, `dalaman to icmeler transfer`. Bilgi niyeti ayrı: `airport for fethiye`, `oludeniz airport`. Sorguların ilgili rota URL'lerine eşleşmesi 03'teki mevcut haritayla kontrol edilecek; doğrulanmadan yeni rota yayınlanmayacak.
+   - **DE/RU sonraki adım:** Var olan gerçek çevirilerden arama ifadesi adayları çıkar, ülke bazlı ölç. Otomatik tercümeyi kanıtlanmış anahtar kelime hacmi olarak sayma. Rusya pazarına yönelik erişim/araç kapsamı sınırlıysa bunu açıkça not et.
+   - **Kabul ve kapanış kriteri:** Üç hedef ülkede en az birer ölçülmüş sorgu kümesi; tarihlenmiş kaynağı, hacmi, rekabet metriği, niyet ve hedef URL'si; sıralama için ilk üç uygulanabilir fırsat. **Durum: AÇIK / ölçüm erişimi bekleniyor. Test sunucusu: uygulanmaz (araştırma). Canlı: uygulanmaz (araştırma).**
 
 5. **V2-SEO-05 UK ilk 10 organik sonuç analizi.**
    - Bekliyor. Önce Marmaris’te UK ilk 10 organik sonucu tarih ve cihazla kaydet; fiyat, karşılama, güven ve rezervasyon akışını karşılaştır.
