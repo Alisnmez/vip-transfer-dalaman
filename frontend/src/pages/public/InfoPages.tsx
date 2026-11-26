@@ -265,7 +265,7 @@ export function VehiclesPage() {
             const details = language === 'en' ? vehicle : { feature: fleetCopy[language].feature(vehicle.maxPassengers), amenities: fleetCopy[language].amenities }
             return (
               <article className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-white shadow-sm" key={vehicle.name}>
-                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="h-40 shrink-0" />
+                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="h-56 shrink-0" />
                 <div className="flex flex-1 flex-col gap-4 p-6">
                   <h2 className="text-xl font-bold text-admin-primary">{vehicle.name}</h2>
                   <div className="flex flex-wrap gap-4 text-sm text-on-surface-variant">

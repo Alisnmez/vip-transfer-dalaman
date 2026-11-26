@@ -277,7 +277,7 @@ export function HomePage() {
           <div className="grid grid-cols-1 gap-stack-lg sm:grid-cols-2 lg:grid-cols-4">
             {fleetCatalogue.map((vehicle) => (
               <article key={vehicle.bookingVehicleId} className="professional-card accent-border-left flex min-w-0 flex-col rounded-xl p-6">
-                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-40 rounded-lg" />
+                <VehiclePhoto vehicleId={vehicle.bookingVehicleId} name={vehicle.name} className="mb-6 h-36 rounded-lg" />
                 <h3 className="mb-4 font-title-md text-on-surface">{vehicle.name}</h3>
                 <div className="mb-5 flex flex-wrap gap-2 text-xs text-on-surface-variant" aria-label="Vehicle comfort features">
                   {[
