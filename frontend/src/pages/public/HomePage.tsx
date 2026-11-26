@@ -181,6 +181,7 @@ export function HomePage() {
     <>
       <PublicNavbar />
 
+      <main>
       <header className="relative min-h-[700px] flex items-center justify-center overflow-hidden bg-primary">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary" />
         <div className="relative z-10 w-full min-w-0 max-w-container-max mx-auto px-gutter text-center">
@@ -218,7 +219,7 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">{copy.assistance}</h3>
+                <h2 className="font-title-md text-on-surface">{copy.assistance}</h2>
                 <p className="font-body-md text-on-surface-variant">
                   {copy.assistanceDetail}
                 </p>
@@ -231,7 +232,7 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">{copy.estimates}</h3>
+                <h2 className="font-title-md text-on-surface">{copy.estimates}</h2>
                 <p className="font-body-md text-on-surface-variant">
                   {copy.estimateDetail}
                 </p>
@@ -244,9 +245,9 @@ export function HomePage() {
                 </span>
               </div>
               <div>
-                <h3 className="font-title-md text-on-surface">
+                <h2 className="font-title-md text-on-surface">
                   {copy.drivers}
-                </h3>
+                </h2>
                 <p className="font-body-md text-on-surface-variant">
                   {copy.driversDetail}
                 </p>
@@ -435,6 +436,7 @@ export function HomePage() {
       </section>
 
       <HomeReviewStrip />
+      </main>
 
       <footer className="border-t border-white/10 bg-primary text-white">
         <div className="mx-auto max-w-container-max px-gutter">
