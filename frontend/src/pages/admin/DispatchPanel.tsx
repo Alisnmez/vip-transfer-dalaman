@@ -306,7 +306,7 @@ function QueueResults({
           })}
           {[
             ['driver', 'Driver name'],
-            ['route', 'Destination'],
+            ['route', 'Route or destination'],
             ['from', 'Pickup from'],
             ['to', 'Pickup through'],
           ].map(([k, label]) => (
