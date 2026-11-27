@@ -81,3 +81,20 @@ test('booking prerender produces correct HTML for production and staging', async
     }
   }
 })
+
+test('Render staging serves distinct booking HTML before JavaScript', { timeout: 90000 }, async () => {
+  const origin = 'https://vip-transfer-dalaman-test.onrender.com'
+  for (const [path, title] of [
+    ['/booking', 'Book a Dalaman Airport Transfer'],
+    ['/booking/lookup', 'Manage My Booking'],
+    ['/booking-policy', 'Booking and Cancellation Policy'],
+  ]) {
+    const response = await fetch(origin + path, { signal: AbortSignal.timeout(20000) })
+    const html = await response.text()
+    assert.equal(response.status, 200, path)
+    assert.ok(html.includes('<title>' + title), path + ': incorrect initial HTML title')
+    assert.ok(html.includes('data-prerender-fallback'), path + ': missing prerendered content')
+    assert.match(html, /<meta name="robots" content="noindex,nofollow"/)
+    console.log(path + ': verified staging prerender HTML and noindex')
+  }
+})
