@@ -56,3 +56,28 @@ test('live SEO audit verifies all public pages and reciprocal language links', {
   console.log(result.stdout)
   assert.equal(result.status, 0, result.error?.message || result.stderr || result.stdout)
 })
+
+test('booking prerender produces correct HTML for production and staging', async () => {
+  const script = resolve('scripts/prerender-routes.mjs')
+  const { mkdir, writeFile } = await import('node:fs/promises')
+  for (const domain of ['https://dalamanway.com', 'https://vip-transfer-dalaman-test.onrender.com']) {
+    const directory = await mkdtemp(join(tmpdir(), 'vip-prerender-'))
+    try {
+      await mkdir(join(directory, 'dist'))
+      await writeFile(join(directory, 'dist/index.html'), '<html><head><title>Template</title><meta name="description" content="Template" /><meta name="robots" content="noindex,nofollow" /></head><body><div id="root"></div></body></html>')
+      const result = spawnSync(process.execPath, [script], { cwd: directory, encoding: 'utf8', env: { ...process.env, VITE_PUBLIC_SITE_URL: domain } })
+      assert.equal(result.status, 0, result.stderr)
+      const production = domain === 'https://dalamanway.com'
+      for (const path of ['booking', 'booking/lookup', 'booking-policy']) {
+        const html = await readFile(join(directory, 'dist', path, 'index.html'), 'utf8')
+        assert.equal(await readFile(join(directory, 'dist', path + '.html'), 'utf8'), html)
+        assert.ok(html.includes(production ? 'content="index,follow"' : 'content="noindex,nofollow"'))
+        if (production) assert.ok(html.includes('href="' + domain + '/' + path + '"'))
+        else assert.doesNotMatch(html, /rel="canonical"/)
+      }
+      assert.match(await readFile(join(directory, 'dist/app-shell.html'), 'utf8'), /content="noindex,nofollow"/)
+    } finally {
+      await rm(directory, { recursive: true, force: true })
+    }
+  }
+})
