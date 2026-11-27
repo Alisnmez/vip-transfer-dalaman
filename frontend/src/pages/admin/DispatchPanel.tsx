@@ -444,6 +444,7 @@ export function DispatchDetails({ id, readNoticeLeg }: { id: number; readNoticeL
   const { data, error, reload } = useDispatchData(loader)
   const [loadHistory] = useState(() => () => dispatchHistory(id))
   const history = useDispatchData(loadHistory)
+  const [notice, setNotice] = useState('')
   const readAttempt = useRef(false)
   useEffect(() => {
     const row = data?.find(item => item.leg === readNoticeLeg)
@@ -454,7 +455,6 @@ export function DispatchDetails({ id, readNoticeLeg }: { id: number; readNoticeL
       window.dispatchEvent(new Event('dispatch-updated'))
     }).catch(() => { setNotice('Could not mark notice as read. Please use Mark notice as read.') })
   }, [data, readNoticeLeg, reload])
-  const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
   return (
     <section className="mb-5 space-y-3">
