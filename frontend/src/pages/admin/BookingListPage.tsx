@@ -107,7 +107,7 @@ function BookingRecords() {
               <p className="mt-3 break-words text-sm">{booking.route}</p>
               <p className="mt-2 text-sm text-on-surface-variant">{formatTransferDateTime(booking.displayedTime)} · {booking.passengerCount} passengers</p>
               <p className="mt-1 text-xs text-on-surface-variant">Received: {formatBookingReceivedAt(booking.createdAt)}</p>
-              <div className="mt-4 flex items-center justify-between gap-3 border-t border-outline-variant pt-3"><strong>£{Number(booking.price).toFixed(2)}</strong><Link className="rounded-lg bg-admin-primary px-4 py-2 text-sm font-semibold text-white" to={`/admin/bookings/${booking.id}`}>View details</Link></div>
+              <div className="mt-4 flex items-center justify-between gap-3 border-t border-outline-variant pt-3"><strong>£{Number(booking.price).toFixed(2)}</strong><Link className="rounded-lg bg-admin-primary px-4 py-2 text-sm font-semibold text-white" state={{ dispatchQuery:params.toString() }} to={`/admin/bookings/${booking.id}`}>View details</Link></div>
             </article>
           ))}</div><div className="hidden max-w-full overflow-x-auto md:block"><table className="w-full min-w-[760px] border-collapse bg-white text-left">
             <thead>
@@ -130,7 +130,7 @@ function BookingRecords() {
                   <td className="p-4 font-semibold">£{Number(booking.price).toFixed(2)}</td>
                   <td className="p-4"><BookingStatusIndicators status={booking.status} transferDateTime={undefined} nowMs={nowMs} /></td>
                   <td className="p-4">
-                    <Link className="text-admin-primary underline" to={`/admin/bookings/${booking.id}`}>View details</Link>
+                    <Link className="text-admin-primary underline" state={{ dispatchQuery:params.toString() }} to={`/admin/bookings/${booking.id}`}>View details</Link>
                   </td>
                 </tr>
               ))}

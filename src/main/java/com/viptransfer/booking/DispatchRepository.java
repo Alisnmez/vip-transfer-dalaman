@@ -4,6 +4,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 interface DispatchRepository extends JpaRepository<DispatchLeg, Long> {
-    Optional<DispatchLeg> findByBookingIdAndLeg(Long bookingId, String leg);
-    void deleteByBookingIdAndLeg(Long bookingId, String leg);
+  Optional<DispatchLeg> findByBookingIdAndLeg(Long bookingId, String leg);
+
 }

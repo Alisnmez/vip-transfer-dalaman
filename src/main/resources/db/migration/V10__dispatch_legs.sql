@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS dispatch_leg (
     leg varchar(255) NOT NULL,
     driver varchar(255), phone varchar(255), plate varchar(255), capacity integer,
     stage varchar(255), assigned_at timestamp with time zone, reviewed_at timestamp with time zone,
+    verified_at timestamp with time zone, reviewed_priority integer,
     revision integer NOT NULL DEFAULT 0,
     UNIQUE (booking_id, leg)
 );
