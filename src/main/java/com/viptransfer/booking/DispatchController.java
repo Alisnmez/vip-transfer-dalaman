@@ -40,7 +40,7 @@ with legs as (
         d.driver, d.phone, d.plate, d.capacity, d.available_after, cast(d.available_after as varchar) as available_local, d.assigned_at, d.reviewed_at, d.verified_at, d.reviewed_priority,
         coalesce(d.stage,'Unassigned') as stage, coalesce(d.revision,0) as revision,
         case when b.status in ('CANCELLED','COMPLETED') or d.stage='Finished' then 5
-             when b.pickup < :now or (b.pickup < :two and d.driver is null) then 0
+             when (b.pickup < :now and coalesce(d.stage,'Unassigned') <> 'In progress') or (b.pickup < :two and d.driver is null) then 0
              when b.pickup < :day and d.driver is null then 1
              when d.reviewed_at is null or exists (select 1 from booking_management_request m where m.booking_id=b.id and m.status='NEW') then 2
              when b.pickup < :twoDays and d.driver is null then 3
@@ -118,7 +118,7 @@ with legs as (
       }
     }
     if (!route.isBlank()) {
-      where += " and (lower(origin)=lower(:route) or lower(destination)=lower(:route))";
+      where += " and (position(lower(:route) in lower(origin))>0 or position(lower(:route) in lower(destination))>0)";
       p.put("route", route.strip());
     }
     if (!direction.isEmpty())
