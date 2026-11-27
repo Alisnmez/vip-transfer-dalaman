@@ -36,16 +36,17 @@ with legs as (
         b.passenger_count, b.baby_seat_count, b.special_requests, b.created_at,
         case when b.leg='outbound' then b.pick_up_location else b.drop_off_location end as origin,
         case when b.leg='outbound' then b.drop_off_location else b.pick_up_location end as destination,
-        (select max(m.created_at) from booking_management_request m where m.booking_id=b.id and m.status='NEW') as last_request,
+        m.last_request,
         d.driver, d.phone, d.plate, d.capacity, d.available_after, cast(d.available_after as varchar) as available_local, d.assigned_at, d.reviewed_at, d.verified_at, d.reviewed_priority,
         coalesce(d.stage,'Unassigned') as stage, coalesce(d.revision,0) as revision,
         case when b.status in ('CANCELLED','COMPLETED') or d.stage='Finished' then 5
              when (b.pickup < :now and coalesce(d.stage,'Unassigned') <> 'In progress') or (b.pickup < :two and coalesce(d.stage,'Unassigned')='Unassigned') then 0
              when b.pickup < :day and coalesce(d.stage,'Unassigned')='Unassigned' then 1
-             when d.reviewed_at is null or exists (select 1 from booking_management_request m where m.booking_id=b.id and m.status='NEW') then 2
+             when d.reviewed_at is null or m.last_request is not null then 2
              when b.pickup < :twoDays and coalesce(d.stage,'Unassigned')='Unassigned' then 3
              else 4 end as priority
     from legs b left join dispatch_leg d on b.id=d.booking_id and b.leg=d.leg
+    left join lateral (select max(r.created_at) as last_request from booking_management_request r where r.booking_id=b.id and r.status='NEW') m on true
 )
 """;
 
