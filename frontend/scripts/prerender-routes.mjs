@@ -92,6 +92,9 @@ for (const page of landingPages) {
   const folder = join('dist', page.path)
   await mkdir(folder, { recursive: true })
   await writeFile(join(folder, 'index.html'), html)
+  if (['booking', 'booking/lookup', 'booking-policy'].includes(page.path)) {
+    await writeFile(join('dist', `${page.path}.html`), html)
+  }
 }
 console.log(`Generated ${landingPages.length} landing HTML pages`)
 
