@@ -87,6 +87,7 @@ export function DashboardPage() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Link to="/admin/bookings?status=PENDING" className="rounded-lg bg-admin-primary px-4 py-3 text-sm font-semibold text-white">New requests{summary && ` (${summary.pending})`}</Link>
+          <Link to="/admin/bookings?sort=upcoming" className="rounded-lg border border-outline-variant bg-white px-4 py-3 text-sm font-semibold text-admin-primary">Upcoming transfers</Link>
           <Link to="/admin/calendar" className="rounded-lg border border-outline-variant bg-white px-4 py-2 text-sm font-semibold text-admin-primary">Open calendar</Link>
           <Link to="/admin/bookings" className="rounded-lg bg-admin-primary px-4 py-2 text-sm font-semibold text-white">All bookings</Link>
           <ProcessingButton type="button" onClick={() => { void refresh(true) }} processing={loading || refreshing} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 text-sm font-semibold text-admin-primary disabled:opacity-50">Refresh</ProcessingButton>

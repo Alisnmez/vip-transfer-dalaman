@@ -210,6 +210,14 @@ public class BookingService {
     }
 
     public Page<Booking> getBookingPage(int page, int size, String status, java.time.LocalDate from, java.time.LocalDate to, String search) {
+        return getBookingPage(page, size, status, from, to, search, "newest");
+    }
+
+    public Page<Booking> getBookingPage(int page, int size, String status, java.time.LocalDate from, java.time.LocalDate to, String search, String sort) {
+        if (!java.util.Set.of("newest", "upcoming").contains(sort)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking order.");
+        }
+        var now = java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Istanbul"));
         if (status != null && !java.util.Set.of("PENDING", "CONFIRMED", "COMPLETED", "CANCELLED").contains(status)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid booking status filter.");
         }
@@ -238,11 +246,32 @@ public class BookingService {
                 }
                 predicates.add(cb.or(matches.toArray(new jakarta.persistence.criteria.Predicate[0])));
             }
-            if (from != null) predicates.add(cb.greaterThanOrEqualTo(root.get("transferDateTime"), from.atStartOfDay()));
-            if (to != null) predicates.add(cb.lessThan(root.get("transferDateTime"), to.plusDays(1).atStartOfDay()));
+            var outbound = root.<java.time.LocalDateTime>get("transferDateTime");
+            var inbound = root.<java.time.LocalDateTime>get("returnDateTime");
+            if ("upcoming".equals(sort)) {
+                predicates.add(root.get("status").in("PENDING", "CONFIRMED"));
+                predicates.add(cb.or(cb.greaterThanOrEqualTo(outbound, now), cb.greaterThanOrEqualTo(inbound, now)));
+                var nextPickup = cb.<java.time.LocalDateTime>selectCase()
+                        .when(cb.greaterThanOrEqualTo(outbound, now), outbound).otherwise(inbound);
+                if (from != null) predicates.add(cb.greaterThanOrEqualTo(nextPickup, from.atStartOfDay()));
+                if (to != null) predicates.add(cb.lessThan(nextPickup, to.plusDays(1).atStartOfDay()));
+                if (query != null && query.getResultType() != Long.class) {
+                    query.orderBy(cb.asc(nextPickup), cb.desc(root.get("id")));
+                }
+            } else if (from != null || to != null) {
+                var legs = new java.util.ArrayList<jakarta.persistence.criteria.Predicate>();
+                for (var leg : java.util.List.of(outbound, inbound)) {
+                    var inRange = cb.isNotNull(leg);
+                    if (from != null) inRange = cb.and(inRange, cb.greaterThanOrEqualTo(leg, from.atStartOfDay()));
+                    if (to != null) inRange = cb.and(inRange, cb.lessThan(leg, to.plusDays(1).atStartOfDay()));
+                    legs.add(inRange);
+                }
+                predicates.add(cb.or(legs.toArray(new jakarta.persistence.criteria.Predicate[0])));
+            }
             return cb.and(predicates.toArray(new jakarta.persistence.criteria.Predicate[0]));
         };
-        return bookingRepository.findAll(filters, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
+        var order = "upcoming".equals(sort) ? Sort.unsorted() : Sort.by(Sort.Direction.DESC, "id");
+        return bookingRepository.findAll(filters, PageRequest.of(page, size, order));
     }
 
     public Page<Booking> getBookingPage(int page, int size) {

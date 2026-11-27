@@ -66,8 +66,9 @@ public class BookingController {
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String search,
             @RequestParam(required = false) java.time.LocalDate from,
-            @RequestParam(required = false) java.time.LocalDate to) {
-        return bookingService.getBookingPage(page, size, status, from, to, search);
+            @RequestParam(required = false) java.time.LocalDate to,
+            @RequestParam(defaultValue = "newest") String sort) {
+        return bookingService.getBookingPage(page, size, status, from, to, search, sort);
     }
 
     @PutMapping("/{id:[0-9]+}")

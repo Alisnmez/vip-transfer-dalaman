@@ -133,10 +133,11 @@ export function getCalendarBookings(month: string) {
   return request<Booking[]>(`${BOOKING_URL}/calendar?month=${encodeURIComponent(month)}`, undefined, true)
 }
 
-export type BookingFilters = { status?: string; from?: string; to?: string; search?: string }
+export type BookingFilters = { sort?: string; status?: string; from?: string; to?: string; search?: string }
 
 export function getBookingPage(page: number, size = 25, filters: BookingFilters = {}) {
   const params = new URLSearchParams({ page: String(page), size: String(size) })
+  if (filters.sort) params.set('sort', filters.sort)
   if (filters.status) params.set('status', filters.status)
   if (filters.from) params.set('from', filters.from)
   if (filters.to) params.set('to', filters.to)

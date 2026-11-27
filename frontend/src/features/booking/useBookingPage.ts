@@ -14,14 +14,14 @@ export function useBookingPage(filters: BookingFilters = {}) {
   const [lastUpdatedAt, setLastUpdatedAt] = useState<number | null>(null)
   const [refreshing, setRefreshing] = useState(false)
 
-  const { status = '', from = '', to = '', search = '' } = filters
-  const filterKey = `${status}:${from}:${to}:${search}`
+  const { sort = 'newest', status = '', from = '', to = '', search = '' } = filters
+  const filterKey = `${sort}:${status}:${from}:${to}:${search}`
   const requestKey = `${page}:${revision}:${filterKey}`
   const loading = loadedKey !== requestKey
 
   useEffect(() => {
     let active = true
-    getBookingPage(page, 25, { status, from, to, search })
+    getBookingPage(page, 25, { sort, status, from, to, search })
       .then(data => {
         if (!active) return
         setResult(data)
@@ -38,7 +38,7 @@ export function useBookingPage(filters: BookingFilters = {}) {
         setRefreshing(false)
       })
     return () => { active = false }
-  }, [page, requestKey, status, from, to, search])
+  }, [page, requestKey, sort, status, from, to, search])
 
   function refresh() {
     if (loading) return
