@@ -36,62 +36,6 @@ function ScrollToTop() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
     trackPublicPage(pathname)
-    if (matchLocalizedRoute(pathname)) return
-    const site = (import.meta.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
-    const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
-    const publicPaths = ['/', '/routes', '/vehicles', '/services', '/contact', '/faq', '/reviews', '/guides', ...travelGuides.map(guide => guide.path)]
-    const indexable = publicPaths.includes(pathname) || /^\/routes\/(marmaris|fethiye|oludeniz|gocek|icmeler|dalyan|sarigerme)$/.test(pathname)
-    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
-    if (!robots) {
-      robots = document.createElement('meta')
-      robots.name = 'robots'
-      document.head.appendChild(robots)
-    }
-    robots.content = production && indexable ? 'index,follow' : 'noindex,nofollow'
-    const pageMetadata: Record<string, { title: string; description: string }> = {
-      '/': { title: 'Dalaman Airport Transfers | DalamanWay', description: 'Request private Dalaman Airport transfers to Marmaris, Fethiye, Oludeniz and nearby destinations.' },
-      '/routes': { title: 'Dalaman Airport Transfer Routes | DalamanWay', description: 'Explore Dalaman Airport private transfer routes to Marmaris, Fethiye, Oludeniz, Gocek and Icmeler.' },
-      '/vehicles': { title: 'Airport Transfer Vehicles | DalamanWay', description: 'Explore private Dalaman airport transfer vehicle categories for your passengers and luggage.' },
-      '/services': { title: 'Private Airport Transfer Services | DalamanWay', description: 'Request airport pickup, hotel transfers and return journeys from Dalaman Airport.' },
-      '/contact': { title: 'Contact DalamanWay | Airport Transfer Support', description: 'Contact DalamanWay about transfer bookings, changes and cancellations.' },
-      '/booking-policy': { title: 'Booking Changes, Cancellations and Refunds | DalamanWay', description: 'Read DalamanWay rules for transfer changes, cancellations, pickup deadlines and refunds.' },
-      '/faq': { title: 'Dalaman Airport Transfer FAQ | DalamanWay', description: 'Answers to questions about airport transfers, return journeys, flight details and child seats.' },
-      '/reviews': { title: 'Customer Reviews | DalamanWay', description: 'Share your experience with DalamanWay and learn how customer feedback is reviewed.' },
-      '/guides': { title: 'Travel Guides for the Turquoise Coast | DalamanWay', description: 'Explore original ideas for Marmaris, Fethiye, Kayaköy, Ölüdeniz and Dalyan, then plan a private airport pickup.' },
-      ...Object.fromEntries(travelGuides.map(guide => [guide.path, { title: `${guide.title} | DalamanWay`, description: guide.description }])),
-    }
-    const destinationNames: Record<string, string> = {
-      marmaris: 'Marmaris',
-      fethiye: 'Fethiye',
-      oludeniz: 'Oludeniz',
-      gocek: 'Gocek',
-      icmeler: 'Icmeler',
-      dalyan: 'Dalyan',
-      sarigerme: 'Sarigerme',
-    }
-    const destinationSlug = /^\/routes\/([a-z]+)$/.exec(pathname)?.[1]
-    const destination = destinationSlug ? destinationNames[destinationSlug] : undefined
-    const metadata = destination
-      ? {
-          title: `Dalaman Airport to ${destination} Private Transfer | DalamanWay`,
-          description: `Request a private transfer from Dalaman Airport to ${destination}. Compare available vehicle options and plan your journey.`,
-        }
-      : pageMetadata[pathname]
-    document.title = metadata?.title ?? (indexable ? 'Dalaman Airport Private Transfer | DalamanWay' : 'DalamanWay')
-    let description = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    if (!description) {
-      description = document.createElement('meta')
-      description.name = 'description'
-      document.head.appendChild(description)
-    }
-    description.content = metadata?.description ?? 'Request and manage private Dalaman Airport transfer bookings.'
-    document.querySelector('link[rel="canonical"]')?.remove()
-    if (production && indexable) {
-      const canonical = document.createElement('link')
-      canonical.rel = 'canonical'
-      canonical.href = site + pathname
-      document.head.appendChild(canonical)
-    }
   }, [pathname])
   return null
 }
