@@ -73,6 +73,15 @@ function TransferSummary({ row }: { row: DispatchRow }) {
   )
 }
 
+// Share concurrent counter requests across the dashboard and both navigation layouts.
+let countRequest: ReturnType<typeof dispatchCounts> | undefined
+function sharedDispatchCounts() {
+  if (!countRequest) {
+    countRequest = dispatchCounts().finally(() => { countRequest = undefined })
+  }
+  return countRequest
+}
+
 function useDispatchData<T>(load: () => Promise<T>) {
   const [data, setData] = useState<T>()
   const [error, setError] = useState('')
@@ -116,7 +125,7 @@ const loadAttention = () => dispatchQueue('view=all')
 const loadToday = () => dispatchQueue('view=today')
 
 export function DispatchNotices() {
-  const { data, error } = useDispatchData(dispatchCounts)
+  const { data, error } = useDispatchData(sharedDispatchCounts)
   const count = data?.unread ?? 0
   return (
     <Link
@@ -176,7 +185,7 @@ export function DashboardWork() {
 }
 
 export function DispatchCards() {
-  const { data, error } = useDispatchData(dispatchCounts)
+  const { data, error } = useDispatchData(sharedDispatchCounts)
   return (
     <section
       aria-label="Transfer operations"
