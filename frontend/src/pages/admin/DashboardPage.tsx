@@ -1,3 +1,4 @@
+import { DispatchCards, DashboardWork } from './DispatchPanel'
 import { Link } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
@@ -93,6 +94,8 @@ export function DashboardPage() {
           <ProcessingButton type="button" onClick={() => { void refresh(true) }} processing={loading || refreshing} processingLabel="Refreshing..." className="rounded-lg border border-outline-variant bg-white px-4 py-2 text-sm font-semibold text-admin-primary disabled:opacity-50">Refresh</ProcessingButton>
         </div>
       </header>
+      <DispatchCards />
+      <DashboardWork />
       {error && <p role="alert" className="rounded-lg border border-error p-4 text-error">Could not load booking data: {error}</p>}
       {loading && <p role="status" className="text-on-surface-variant">Loading bookings…</p>}
       {summary && (

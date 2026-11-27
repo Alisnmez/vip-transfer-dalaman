@@ -234,3 +234,18 @@ export function cancelBookingFromManagementRequest(id: number, adminNote: string
     body: JSON.stringify({ adminNote }),
   }, true)
 }
+
+export type DispatchRow = {
+  id: number; leg: string; local_pickup: string; customer_name: string; origin: string; destination: string
+  status: string; priority: number; driver: string | null; phone: string | null; plate: string | null
+  capacity: number | null; stage: string; revision: number; reviewed_at: string | null; assigned_at: string | null
+}
+export const dispatchQueue = (params: string) => request<{ rows: DispatchRow[]; total: number }>(`${BOOKING_URL}/dispatch?${params}`, undefined, true)
+export const dispatchCounts = () => request<Record<string, number>>(`${BOOKING_URL}/dispatch/counts`, undefined, true)
+export const dispatchDetails = (id: number) => request<DispatchRow[]>(`${BOOKING_URL}/dispatch/${id}`, undefined, true)
+export const updateDispatch = (row: DispatchRow, values: Record<string, unknown>) =>
+  request<{warning: string}>(`${BOOKING_URL}/dispatch/${row.id}/${row.leg}`, {
+    method: 'PUT', body: JSON.stringify({ ...values, revision: row.revision }),
+  }, true)
+
+export const dispatchHistory = (id: number) => request<{leg:string; description:string; occurred_at:string}[]>(`${BOOKING_URL}/dispatch/${id}/history`, undefined, true)

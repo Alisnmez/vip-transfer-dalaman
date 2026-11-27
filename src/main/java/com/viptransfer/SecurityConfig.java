@@ -45,6 +45,7 @@ public class SecurityConfig {
                 return false;
             }
             return new AntPathRequestMatcher("/bookings/*", "PUT").matches(request)
+                    || new AntPathRequestMatcher("/bookings/dispatch/*/*", "PUT").matches(request)
                     || new AntPathRequestMatcher("/bookings/*/status", "PATCH").matches(request)
                     || new AntPathRequestMatcher("/bookings/management-requests/*", "PATCH").matches(request)
                     || new AntPathRequestMatcher("/bookings/management-requests/*/cancel-booking", "POST").matches(request)

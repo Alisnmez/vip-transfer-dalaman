@@ -1,3 +1,4 @@
+import { DispatchNotices } from '../pages/admin/DispatchPanel'
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
@@ -109,12 +110,13 @@ export function AdminLayout() {
           <h1 className="text-title-lg font-title-lg text-primary-fixed">
             VIP Transfer
           </h1>
+          <DispatchNotices />
           <p className="text-label-xs text-on-primary-container opacity-70">
             Management System
           </p>
         </div>
 
-        <nav className="flex-1 space-y-1">
+        <nav className="min-h-0 flex-1 space-y-1 overflow-y-auto">
           {navItems.map((item) => (
             <NavLink
               key={`${item.to}-${item.label}`}
@@ -162,6 +164,7 @@ export function AdminLayout() {
         )}
 
         <Outlet />
+        <nav aria-label="Mobile shortcuts" className="sticky bottom-0 z-30 mt-auto flex justify-around border-t bg-white md:hidden">{[['/admin','Home'],['/admin/bookings','Bookings'],['/admin/calendar','Calendar'],['/admin/bookings?view=unread','Notices']].map(([to,label])=><NavLink key={label} className="flex min-h-12 items-center px-2 font-semibold" to={to}>{label}</NavLink>)}</nav>
 
         {!usesCustomPageChrome && (
           <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-4 sm:px-8">

@@ -1,3 +1,4 @@
+import { DispatchQueue } from './DispatchPanel'
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
@@ -10,6 +11,12 @@ import { useBookingClock } from '../../features/booking/useBookingClock'
 import { useBookingPage } from '../../features/booking/useBookingPage'
 
 export function BookingListPage() {
+  const [params] = useSearchParams()
+  if (params.has("view") || params.size === 0) return <DispatchQueue />
+  return <BookingRecords />
+}
+
+function BookingRecords() {
   const nowMs = useBookingClock()
   const [search, setSearch] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
@@ -85,7 +92,7 @@ export function BookingListPage() {
           <label className="text-sm font-semibold">Transfer date to (Turkey)
             <input type="date" value={dateTo} min={dateFrom || undefined} onChange={event => { updateFilter('to', event.target.value) }} className="mt-2 block min-h-11 w-full min-w-0 rounded-lg border border-outline-variant px-3 py-3" />
           </label>
-          <button type="button" onClick={() => { setSearch(""); setParams({}, { replace: true }); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
+          <button type="button" onClick={() => { setSearch(""); setParams({sort: "newest"}, { replace: true }); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
         </div>
         <p className="mt-2 text-xs text-on-surface-variant">Search, status and transfer date filters apply across all bookings.</p>
       </section>
