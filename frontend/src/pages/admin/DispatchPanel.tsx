@@ -123,7 +123,7 @@ export function DashboardWork() {
                 </strong>
                 <p>
                   {row.local_pickup.slice(0, 16)} · {row.origin} →{' '}
-                  {row.destination} · {row.driver || 'Driver required'}
+                  {row.destination} · {row.driver || (row.stage === 'Unassigned' ? 'Driver required' : 'Driver assigned')}
                 </p>
               </Link>
             ))}
@@ -371,7 +371,7 @@ function QueueResults({
                   {row.last_request && <p>Customer request awaiting review</p>}
                   <p>
                     {row.leg === 'return' ? 'Return' : 'Outbound'} ·{' '}
-                    {row.driver || (row.priority === 5 ? 'No driver recorded' : 'Driver required')} · {row.stage}
+                    {row.driver || (row.priority === 5 ? 'No driver recorded' : row.stage === 'Unassigned' ? 'Driver required' : 'Driver assigned')} · {row.stage}
                   </p>
                 </Link>
               </li>
