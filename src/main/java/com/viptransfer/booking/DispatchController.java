@@ -285,7 +285,9 @@ with legs as (
                     + " pickup<:end and not(id=:id and leg=:leg)",
                 p,
                 Long.class);
-        if (conflicts > 0) warning = "Assignment saved. This driver has an overlapping transfer.";
+        if (conflicts > 0 && !change.stage().equals("Finished"))
+          throw new ResponseStatusException(HttpStatus.CONFLICT,
+              "Driver has an overlapping transfer. Choose another driver or adjust availability.");
       }
     }
     if (change.verifyCustomer()) item.verifiedAt = Instant.now();
