@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import {
   dispatchQueue,
@@ -112,10 +112,12 @@ function useDispatchData<T>(load: () => Promise<T>) {
     void refresh()
     const timer = window.setInterval(refresh, 30000)
     document.addEventListener('visibilitychange', refresh)
+    window.addEventListener('dispatch-updated', refresh)
     return () => {
       active = false
       clearInterval(timer)
       document.removeEventListener('visibilitychange', refresh)
+      window.removeEventListener('dispatch-updated', refresh)
     }
   }, [load, revision])
   return { data, error, reload: () => setRevision((n) => n + 1) }
@@ -404,7 +406,7 @@ function QueueResults({
             {data.rows.map((row) => (
               <li key={row.id + row.leg}>
                 <Link
-                  state={{ dispatchQuery: query }}
+                  state={{ dispatchQuery: query, readNoticeLeg: params.get('view') === 'unread' ? row.leg : undefined }}
                   className={'block rounded-xl border border-l-4 bg-white p-4 hover:shadow-sm ' + (['border-l-red-500', 'border-l-orange-500', 'border-l-violet-500', 'border-l-amber-500', 'border-l-green-500', 'border-l-slate-300'][row.priority] || '')}
                   to={`/admin/bookings/${row.id}`}
                 >
@@ -437,11 +439,21 @@ function QueueResults({
   )
 }
 
-export function DispatchDetails({ id }: { id: number }) {
+export function DispatchDetails({ id, readNoticeLeg }: { id: number; readNoticeLeg?: string }) {
   const [loader] = useState(() => () => dispatchDetails(id))
   const { data, error, reload } = useDispatchData(loader)
   const [loadHistory] = useState(() => () => dispatchHistory(id))
   const history = useDispatchData(loadHistory)
+  const readAttempt = useRef(false)
+  useEffect(() => {
+    const row = data?.find(item => item.leg === readNoticeLeg)
+    if (!row || readAttempt.current) return
+    readAttempt.current = true
+    void updateDispatch(row, { reviewOnly: true, verifyCustomer: false }).then(() => {
+      reload()
+      window.dispatchEvent(new Event('dispatch-updated'))
+    }).catch(() => { setNotice('Could not mark notice as read. Please use Mark notice as read.') })
+  }, [data, readNoticeLeg, reload])
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
   return (
@@ -484,6 +496,7 @@ export function DispatchDetails({ id }: { id: number }) {
               )
               reload()
               history.reload()
+              window.dispatchEvent(new Event('dispatch-updated'))
             } catch (err) {
               setNotice(err instanceof Error ? err.message : 'Update failed.')
               reload()
