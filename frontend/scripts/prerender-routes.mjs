@@ -10,6 +10,17 @@ const site = (process.env.VITE_PUBLIC_SITE_URL ?? '').trim().replace(/\/$/, '')
 const production = /^https:\/\/[a-z0-9.-]+$/i.test(site) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(site)
 const pages = destinationRoutes.map(({ slug, name, intro }) => [slug, name, intro])
 const template = await readFile('dist/index.html', 'utf8')
+ 
+// Inline the small compiled entry stylesheet on the booking landing page only.
+// Other pages retain the shared cacheable stylesheet.
+let bookingTemplate = template
+const entryStyles = [...template.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/g)]
+for (const [tag, href] of entryStyles) {
+  const css = await readFile(join('dist', href.slice(1)), 'utf8')
+  if (/<\/style/i.test(css) || /url\(\s*['"]?(?!data:|https?:|\/|#)[^'")\s]+/i.test(css)) continue
+  bookingTemplate = bookingTemplate.replace(tag, () => `<style data-booking-entry-css>${css}</style>`)
+}
+
 
 // Render's SPA fallback uses this shell for non-prerendered paths.
 // Keep the same app entry point without the homepage's indexing metadata.
@@ -83,7 +94,7 @@ for (const page of landingPages) {
   const organization = production && page.path === ''
     ? `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@type': 'Organization', name: 'DalamanWay', url: `${site}/` })}</script>`
     : ''
-  const html = template
+  const html = (page.path === 'booking' ? bookingTemplate : template)
     .replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title>`)
     .replace(/<meta name="description" content="[^"]*"\s*\/>/, `<meta name="description" content="${page.description}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/>/, `<meta name="robots" content="${robots}" />`)
