@@ -13,7 +13,8 @@ export default {
         'admin-on-surface': '#1a1c1e',
         primary: '#1E3A5F',
         'on-primary': '#FFFFFF',
-        secondary: '#2A9D8F',
+        // Accessible teal for text and white-label buttons on public surfaces.
+        secondary: '#16766B',
         'on-secondary': '#FFFFFF',
         'surface-tint': '#455f87',
         surface: '#F8FAFC',
