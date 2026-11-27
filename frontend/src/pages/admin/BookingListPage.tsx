@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import { ProcessingButton } from '../../components/ProcessingButton'
 import { adminBookingStatusLabel, formatBookingReceivedAt, formatTransferDateTime } from '../../features/booking/formatters'
@@ -16,9 +16,17 @@ export function BookingListPage() {
     const timeout = window.setTimeout(() => setSearchTerm(search.trim()), 350)
     return () => window.clearTimeout(timeout)
   }, [search])
-  const [statusFilter, setStatusFilter] = useState('all')
-  const [dateFrom, setDateFrom] = useState('')
-  const [dateTo, setDateTo] = useState('')
+  const [params, setParams] = useSearchParams()
+  const statusFilter = params.get('status') || 'all'
+  const dateFrom = params.get('from') || ''
+  const dateTo = params.get('to') || ''
+  function updateFilter(key: string, value: string) {
+    const next = new URLSearchParams(params)
+    if (value && value !== 'all') next.set(key, value)
+    else next.delete(key)
+    setParams(next, { replace: true })
+    resetPage()
+  }
   const { bookings, totalPages, totalElements, page, loading, refreshing, error, lastUpdatedAt, refresh, changePage, resetPage } = useBookingPage({ status: statusFilter === 'all' ? undefined : statusFilter, from: dateFrom, to: dateTo, search: searchTerm })
 
   const visibleBookings = loading || error ? [] : bookings
@@ -47,20 +55,20 @@ export function BookingListPage() {
             placeholder="Customer, route or booking ID"
             className="mt-2 w-full rounded-lg border border-outline-variant px-4 py-3" />
         </label>
-        <div className="mt-4 flex flex-wrap items-end gap-4">
+        <div className="mt-4 grid gap-4 sm:flex sm:flex-wrap sm:items-end">
           <label className="text-sm font-semibold">Status
-            <select aria-label="Status" value={statusFilter} onChange={event => { setStatusFilter(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-3 py-3">
+            <select aria-label="Status" value={statusFilter} onChange={event => { updateFilter('status', event.target.value) }} className="mt-2 block min-h-11 w-full min-w-0 rounded-lg border border-outline-variant bg-white px-3 py-3">
               <option value="all">All statuses</option>
               {["PENDING", "CONFIRMED", "COMPLETED", "CANCELLED"].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
             </select>
           </label>
           <label className="text-sm font-semibold">Transfer date from (Turkey)
-            <input type="date" value={dateFrom} onChange={event => { setDateFrom(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant px-3 py-3" />
+            <input type="date" value={dateFrom} onChange={event => { updateFilter('from', event.target.value) }} className="mt-2 block min-h-11 w-full min-w-0 rounded-lg border border-outline-variant px-3 py-3" />
           </label>
           <label className="text-sm font-semibold">Transfer date to (Turkey)
-            <input type="date" value={dateTo} min={dateFrom || undefined} onChange={event => { setDateTo(event.target.value); resetPage() }} className="mt-2 block rounded-lg border border-outline-variant px-3 py-3" />
+            <input type="date" value={dateTo} min={dateFrom || undefined} onChange={event => { updateFilter('to', event.target.value) }} className="mt-2 block min-h-11 w-full min-w-0 rounded-lg border border-outline-variant px-3 py-3" />
           </label>
-          <button type="button" onClick={() => { setSearch(""); setStatusFilter("all"); setDateFrom(""); setDateTo(""); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
+          <button type="button" onClick={() => { setSearch(""); setParams({}, { replace: true }); resetPage() }} className="rounded-lg border border-outline-variant px-4 py-3 text-sm font-semibold">Clear filters</button>
         </div>
         <p className="mt-2 text-xs text-on-surface-variant">Search, status and transfer date filters apply across all bookings.</p>
       </section>
