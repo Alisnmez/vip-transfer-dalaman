@@ -117,13 +117,19 @@ const loadToday = () => dispatchQueue('view=today')
 
 export function DispatchNotices() {
   const { data, error } = useDispatchData(dispatchCounts)
+  const count = data?.unread ?? 0
   return (
     <Link
       to="/admin/bookings?view=unread"
-      className={action}
-      aria-label="Unread transfer notices"
+      className="relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+      aria-label={error ? 'Unread transfer notices, count unavailable' : 'Unread transfer notices: ' + count}
+      title="Notifications"
     >
-      Notices · {error ? '?' : (data?.unread ?? '…')}
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+        <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4" />
+      </svg>
+      {count > 0 && <span aria-hidden="true" className="absolute right-0 top-0 flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1 text-[11px] font-bold leading-none text-white ring-2 ring-admin-primary">{count > 99 ? '99+' : count}</span>}
+      {error && <span aria-hidden="true" className="absolute right-0 top-0 rounded-full bg-amber-300 px-1 text-xs font-bold text-slate-900">!</span>}
     </Link>
   )
 }
