@@ -35,6 +35,44 @@ const field =
 const action =
   'inline-flex min-h-11 items-center justify-center rounded-lg border bg-white px-4 py-2 font-semibold text-admin-primary'
 
+
+const tones: Record<string, string> = {
+  critical: 'border-red-200 bg-red-50 text-red-800',
+  urgent: 'border-orange-200 bg-orange-50 text-orange-800',
+  unread: 'border-violet-200 bg-violet-50 text-violet-800',
+  new: 'border-blue-200 bg-blue-50 text-blue-800',
+  unassigned: 'border-amber-200 bg-amber-50 text-amber-800',
+  today: 'border-teal-200 bg-teal-50 text-teal-800',
+  next24: 'border-cyan-200 bg-cyan-50 text-cyan-800',
+  active: 'border-purple-200 bg-purple-50 text-purple-800',
+  confirmed: 'border-green-200 bg-green-50 text-green-800',
+  archived: 'border-slate-200 bg-slate-100 text-slate-700',
+}
+function StatusTag({ label, tone }: { label: string; tone: string }) {
+  return <span className={'inline-flex rounded-full border px-2.5 py-1 text-xs font-semibold ' + (tones[tone] || tones.archived)}>{label}</span>
+}
+function TransferSummary({ row }: { row: DispatchRow }) {
+  const status = row.status === 'PENDING' ? 'New request' : row.status === 'CONFIRMED' ? 'Confirmed' : row.status === 'COMPLETED' ? 'Completed' : 'Cancelled'
+  const statusTone = row.status === 'PENDING' ? 'new' : row.status === 'CONFIRMED' ? 'confirmed' : row.status === 'CANCELLED' ? 'critical' : 'archived'
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <strong className="text-base text-admin-primary">{row.customer_name}</strong>
+        <span className="text-xs text-slate-500">#{row.id} · {row.leg === 'return' ? 'Return' : 'Outbound'}</span>
+      </div>
+      <p className="font-semibold tabular-nums text-slate-800">{row.local_pickup.slice(0, 16).replace('T', ' · ')}</p>
+      <p className="text-sm text-slate-600">{row.origin} → {row.destination}</p>
+      <div className="flex flex-wrap gap-1.5">
+        <StatusTag label={status} tone={statusTone} />
+        {row.priority < 5 && <StatusTag label={row.stage === 'Unassigned' ? 'Driver required' : row.stage === 'In progress' ? 'In progress' : 'Driver assigned'} tone={row.stage === 'Unassigned' ? 'unassigned' : row.stage === 'In progress' ? 'active' : 'confirmed'} />}
+        {row.priority <= 2 && <StatusTag label={priorities[row.priority]} tone={['critical', 'urgent', 'unread'][row.priority]} />}
+        {row.last_request && <StatusTag label="Customer request" tone="unread" />}
+      </div>
+      {row.driver && <p className="text-xs text-slate-600">Driver: {row.driver}</p>}
+    </div>
+  )
+}
+
 function useDispatchData<T>(load: () => Promise<T>) {
   const [data, setData] = useState<T>()
   const [error, setError] = useState('')
@@ -118,13 +156,7 @@ export function DashboardWork() {
                 className="block min-h-11 border-b py-3"
                 to={`/admin/bookings/${row.id}`}
               >
-                <strong>
-                  {priorities[row.priority]} · {row.customer_name}
-                </strong>
-                <p>
-                  {row.local_pickup.slice(0, 16)} · {row.origin} →{' '}
-                  {row.destination} · {row.driver || (row.stage === 'Unassigned' ? 'Driver required' : 'Driver assigned')}
-                </p>
+                <TransferSummary row={row} />
               </Link>
             ))}
             <Link className={action} to={`/admin/bookings?view=${view}`}>
@@ -150,7 +182,7 @@ export function DispatchCards() {
         .map(([key, label]) => (
           <Link
             key={key}
-            className="rounded-xl border bg-white p-4 font-semibold"
+            className={'rounded-xl border p-4 font-semibold transition-shadow hover:shadow-md ' + tones[key]}
             to={`/admin/bookings?view=${key}`}
           >
             {label}
@@ -227,13 +259,13 @@ function QueueResults({
           Customer requests
         </Link>
       </div>
-      <nav aria-label="Transfer queues" className="flex flex-wrap gap-2">
+      <nav aria-label="Transfer queues" className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap">
         {Object.entries(views).map(([k, v]) => (
           <button
             key={k}
             aria-pressed={(params.get('view') || 'all') === k}
             className={
-              action + ' aria-pressed:bg-admin-primary aria-pressed:text-white'
+              action + ' shrink-0 whitespace-nowrap ' + (tones[k] || '') + ' aria-pressed:ring-2 aria-pressed:ring-admin-primary'
             }
             onClick={() => {
               params.set('view', k)
@@ -358,21 +390,10 @@ function QueueResults({
               <li key={row.id + row.leg}>
                 <Link
                   state={{ dispatchQuery: query }}
-                  className="block rounded-xl border bg-white p-4"
+                  className={'block rounded-xl border border-l-4 bg-white p-4 hover:shadow-sm ' + (['border-l-red-500', 'border-l-orange-500', 'border-l-violet-500', 'border-l-amber-500', 'border-l-green-500', 'border-l-slate-300'][row.priority] || '')}
                   to={`/admin/bookings/${row.id}`}
                 >
-                  <strong>
-                    {priorities[row.priority]} · #{row.id} · {row.customer_name}
-                  </strong>
-                  <p>
-                    {row.local_pickup.slice(0, 16)} · {row.origin} →{' '}
-                    {row.destination}
-                  </p>
-                  {row.last_request && <p>Customer request awaiting review</p>}
-                  <p>
-                    {row.leg === 'return' ? 'Return' : 'Outbound'} ·{' '}
-                    {row.driver || (row.priority === 5 ? 'No driver recorded' : row.stage === 'Unassigned' ? 'Driver required' : 'Driver assigned')} · {row.stage}
-                  </p>
+                  <TransferSummary row={row} />
                 </Link>
               </li>
             ))}
@@ -411,6 +432,7 @@ export function DispatchDetails({ id }: { id: number }) {
   return (
     <section className="mb-5 space-y-3">
       <h2 className="text-xl font-bold">Driver assignment</h2>
+      <p className="text-sm text-slate-600">Choose a status and save. Driver details are optional.</p>
       {error && <p role="alert">{error}</p>}
       {notice && <p role="status">{notice}</p>}
       {data?.map((row) => (
