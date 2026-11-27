@@ -122,4 +122,22 @@ class DispatchIntegrationTest {
         ((Number) row.get("id")).longValue() == booking.getId()));
   }
 
+  @Test
+  void assignmentWithoutDriverDetailsIsValidAndClearsUrgency() {
+    Booking booking = new Booking();
+    booking.setPassengerCount(2);
+    booking.setTransferDateTime(LocalDateTime.now(ZoneId.of("Europe/Istanbul")).plusMinutes(45));
+    bookings.saveAndFlush(booking);
+    dispatch.update(booking.getId(), "outbound",
+        new DispatchController.Update(null, null, null, null, "Assigned", false, false, 0, null));
+    var row = dispatch.details(booking.getId()).get(0);
+    assertEquals("Assigned", row.get("stage"));
+    assertNull(row.get("driver"));
+    assertNotNull(row.get("assigned_at"));
+    assertTrue(((Number) row.get("priority")).intValue() > 1);
+    dispatch.update(booking.getId(), "outbound",
+        new DispatchController.Update(null, null, null, null, "Unassigned", false, false, 1, null));
+    assertEquals(0, ((Number) dispatch.details(booking.getId()).get(0).get("priority")).intValue());
+  }
+
 }
