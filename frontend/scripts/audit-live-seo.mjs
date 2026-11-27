@@ -95,7 +95,7 @@ for (const slug of localizedSlugs) {
 }
 for (const path of sitemapPaths) await check(path, 'public')
 await check('/robots.txt', 'resource')
-for (const path of ['/booking', '/admin']) await check(path, 'private')
+for (const path of ['/booking/passenger', '/booking/confirmation', '/admin']) await check(path, 'private')
 for (const path of ['/routes/not-a-real-destination', '/not-a-real-page']) await check(path, 'missing')
 console.log(JSON.stringify({ summary: { sitemapUrlsChecked: sitemapPaths.length, failures, passed: failures === 0 } }))
 if (failures) process.exitCode = 1

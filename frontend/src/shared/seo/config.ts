@@ -56,11 +56,9 @@ export const seoPages: Record<string, SeoPage> = {
     title: `${guide.title} | DalamanWay`,
     description: guide.description,
   }])),
-  '/booking': {
-    title: 'Book a Dalaman Airport Transfer',
-    description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.',
-    indexable: false,
-  },
+  '/booking': { title: 'Book a Dalaman Airport Transfer', description: 'Choose your route, vehicle and travel details to request a private Dalaman Airport transfer.' },
+  '/booking/lookup': { title: 'Manage My Booking', description: 'Request a change or cancellation with your booking reference and email address.' },
+  '/booking-policy': { title: 'Booking and Cancellation Policy', description: 'Read the conditions for changing or cancelling your Dalaman Airport transfer.' },
 }
 
 export function getSeoPage(pathname: string): SeoPage {

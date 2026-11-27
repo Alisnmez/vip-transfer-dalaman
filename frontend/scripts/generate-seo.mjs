@@ -5,7 +5,7 @@ import { travelGuides } from '../src/content/guides/index.ts'
 
 const siteUrl = process.env.VITE_PUBLIC_SITE_URL?.trim().replace(/\/$/, '')
 const isProductionSite = Boolean(siteUrl && /^https:\/\/[a-z0-9.-]+$/i.test(siteUrl) && !/onrender\.com|localhost|127\.0\.0\.1/i.test(siteUrl))
-const routes = ['/', '/routes', ...destinationRoutes.map(({ slug }) => `/routes/${slug}`), '/vehicles', '/services', '/contact', '/faq', '/reviews', '/guides', ...travelGuides.map(({ path }) => path)]
+const routes = ['/', '/booking', '/booking/lookup', '/booking-policy', '/routes', ...destinationRoutes.map(({ slug }) => `/routes/${slug}`), '/vehicles', '/services', '/contact', '/faq', '/reviews', '/guides', ...travelGuides.map(({ path }) => path)]
 routes.push(...Object.keys(localizedRouteCopy).flatMap(slug =>
   routeLanguages.filter(language => language !== 'en').map(language => routeLanguagePath(slug, language)),
 ))

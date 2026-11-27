@@ -43,7 +43,8 @@ test('production sitemap includes public routes and excludes private booking/adm
   assert.match(sitemap, /<loc>https:\/\/example.com\/reviews<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/de\/routes\/marmaris<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/ru\/routes\/gocek<\/loc>/)
-  assert.doesNotMatch(sitemap, /<loc>[^<]*\/(booking|admin)/)
+  for (const path of ['/booking', '/booking/lookup', '/booking-policy']) assert.ok(sitemap.includes('https://dalamanway.com' + path + '</loc>'))
+  assert.doesNotMatch(sitemap, /\/(?:admin|booking\/(?:passenger|confirmation))|token|reference/i)
 })
 
 test('live SEO audit verifies all public pages and reciprocal language links', { timeout: 540000 }, () => {
