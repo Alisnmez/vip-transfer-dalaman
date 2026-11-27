@@ -230,8 +230,8 @@ export function BookingFormPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">{t("Pickup Location")}<RequiredMark /></label>
-                  <select aria-label={t("Pickup Location")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
+                  <label htmlFor="booking-pickup" className="font-label-sm text-label-sm text-on-surface-variant block">{t("Pickup Location")}<RequiredMark /></label>
+                  <select id="booking-pickup" aria-label={t("Pickup Location")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
                     <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>
                     {groupedDestinationOptions.map((group) => (
                       <optgroup key={group.label} label={group.label}>
@@ -241,8 +241,8 @@ export function BookingFormPage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="font-label-sm text-label-sm text-on-surface-variant block">{t("Destination")}<RequiredMark /></label>
-                  <select aria-label={t("Destination")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
+                  <label htmlFor="booking-destination" className="font-label-sm text-label-sm text-on-surface-variant block">{t("Destination")}<RequiredMark /></label>
+                  <select id="booking-destination" aria-label={t("Destination")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">{t("Select destination")}</option>
                     {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>}
                     {pickUpLocation === "Dalaman Airport" && groupedDestinationOptions.map((group) => (
@@ -296,9 +296,9 @@ export function BookingFormPage() {
               )}
 
               <div className="space-y-4">
-                <label className="font-label-sm text-label-sm text-on-surface-variant block">
+                <h2 className="font-label-sm text-label-sm text-on-surface-variant block">
                   {t("Select Vehicle Type")}
-                </label>
+                </h2>
                 <p className="text-sm text-on-surface-variant">{t("Luggage allowance changes with your vehicle selection.")}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
@@ -512,9 +512,10 @@ function CounterField({
   value: number
 }) {
   const t = useBookingCopy()
+  const fieldId = useId()
   return (
     <div className="space-y-2">
-      <label className="font-label-sm text-label-sm text-on-surface-variant">
+      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
         {label}
       </label>
       <div className="flex items-center border border-outline-variant rounded-lg overflow-hidden">
@@ -528,6 +529,7 @@ function CounterField({
           <span translate="no" className="material-symbols-outlined">remove</span>
         </button>
         <input
+          id={fieldId}
           className="w-full text-center border-none font-body-md text-body-md focus:ring-0"
           readOnly
           type="text"
@@ -646,7 +648,7 @@ function BookingSummary({
             >
               verified_user
             </span>
-            <span className="text-[12px] text-secondary font-medium leading-tight">
+            <span className="text-[12px] text-slate-800 font-medium leading-tight">
               {t("This is a booking request. Cancellation terms will be confirmed by the operator. Payment is made in cash to the driver at the end of the journey.")}
             </span>
           </div>
