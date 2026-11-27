@@ -157,7 +157,7 @@ export function RoutesPage() {
           <div className="pointer-events-none absolute -right-28 -top-24 h-80 w-80 rounded-full border border-white/10" />
           <div className="pointer-events-none absolute -bottom-52 right-12 h-96 w-96 rounded-full border border-white/10" />
           <div className="relative mx-auto max-w-7xl">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-secondary">{copy.eyebrow}</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em] text-secondary-fixed">{copy.eyebrow}</p>
             <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               {copy.title}
             </h1>
@@ -165,7 +165,7 @@ export function RoutesPage() {
               {copy.intro}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link className="inline-flex min-h-12 items-center justify-center rounded-lg bg-secondary px-7 py-3 text-base font-bold text-admin-primary transition-opacity hover:opacity-90" to="/booking">
+              <Link className="inline-flex min-h-12 items-center justify-center rounded-lg bg-secondary px-7 py-3 text-base font-bold text-on-secondary transition-colors hover:bg-on-secondary-fixed-variant" to="/booking">
                 {copy.book} <span translate="no" aria-hidden="true" className="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
               </Link>
               <a className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-7 py-3 font-semibold text-white transition-colors hover:bg-white/10" href="#all-routes">
