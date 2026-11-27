@@ -7,6 +7,7 @@ import { isValidEmail } from '../../shared/utils/inputValidation'
 import { BookingApiError } from '../../features/booking/api/errors'
 import { submitBookingManagementRequest, lookupPublicBooking } from '../../features/booking/api'
 import { downloadBookingPdf } from '../../features/booking/bookingPdf'
+import { vehicleLabel } from '../../features/booking/bookingVehicles'
 import type { PublicBookingView } from '../../features/booking/types'
 import { useLanguage } from '../../shared/localization/language'
 import { PublicNavbar } from './PublicNavbar'
@@ -180,7 +181,7 @@ export function BookingLookupPage() {
                   ['Destination', bookingDetails.dropOffLocation],
                   ['Pickup date/time (Türkiye)', bookingDetails.transferDateTime.replace('T', ' ')],
                   ['Return date/time (Türkiye)', bookingDetails.returnDateTime?.replace('T', ' ')],
-                  ['Vehicle', bookingDetails.vehicleId],
+                  ['Vehicle', bookingDetails.vehicleId ? vehicleLabel(bookingDetails.vehicleId) : undefined],
                   ['Trip', bookingDetails.tripType],
                   ['Price', bookingDetails.price == null ? 'To be confirmed' : '£' + bookingDetails.price.toFixed(2)],
                   ['Flight', bookingDetails.flightNumber],

@@ -1,3 +1,4 @@
+import { vehicleLabel } from './bookingVehicles.ts'
 import type { PublicBookingView } from './types'
 
 /** Small, offline, single-page PDF: no external CDN or customer-data upload. */
@@ -14,7 +15,7 @@ export function bookingPdfBytes(booking: PublicBookingView): Uint8Array {
     'Destination: ' + booking.dropOffLocation,
     'Pickup date/time (Turkey): ' + booking.transferDateTime.replace('T', ' '),
     ...(booking.returnDateTime ? ['Return date/time (Turkey): ' + booking.returnDateTime.replace('T', ' ')] : []),
-    'Vehicle: ' + (booking.vehicleId || 'To be assigned'),
+    'Vehicle: ' + (booking.vehicleId ? vehicleLabel(booking.vehicleId).replaceAll('–', '-') : 'To be assigned'),
     'Trip: ' + (booking.tripType || 'One way'),
     'Price: ' + (booking.price == null ? 'To be confirmed' : 'GBP ' + booking.price.toFixed(2)),
     ...(booking.flightNumber ? ['Flight: ' + booking.flightNumber] : []),
