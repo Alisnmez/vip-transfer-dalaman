@@ -26,19 +26,8 @@ import { BookingFormPage } from '../pages/public/BookingFormPage'
 import { BookingPassengerPage } from '../pages/public/BookingPassengerPage'
 import { BookingLookupPage } from '../pages/public/BookingLookupPage'
 import { BookingPolicyPage } from '../pages/public/BookingPolicyPage'
-import { HomePage } from '../pages/public/HomePage'
-import { RoutesPage } from '../pages/public/RoutesPage'
-import { ReviewsPage } from '../pages/public/ReviewsPage'
-import { RouteDetailPage } from '../pages/public/RouteDetailPage'
 import { TravelGuidePage } from '../pages/public/TravelGuidePage'
-import { GuidesIndexPage } from '../pages/public/GuidesIndexPage'
 import { travelGuides } from '../content/guides'
-import {
-  ContactPage,
-  FAQPage,
-  ServicesPage,
-  VehiclesPage,
-} from '../pages/public/InfoPages'
 
 // Router-local layout helpers are not exported; keeping them here avoids unnecessary files.
 // eslint-disable-next-line react-refresh/only-export-components
@@ -115,7 +104,7 @@ function PublicPageLayout() {
 
 const translatedRoutes = routeLanguages.filter(language => language !== 'en').flatMap(language =>
   Object.keys(localizedRouteCopy).map(slug => ({
-    path: `${language}/routes/${slug}`, element: <RouteDetailPage />,
+    path: `${language}/routes/${slug}`, lazy: async () => ({ Component: (await import('../pages/public/RouteDetailPage')).RouteDetailPage }),
   })),
 )
 
@@ -124,17 +113,17 @@ export const router = createBrowserRouter([
     path: '/',
     element: <PublicPageLayout />,
     children: [
-      { index: true, element: <HomePage /> },
-      { path: 'routes', element: <RoutesPage /> },
-      { path: 'routes/:slug', element: <RouteDetailPage /> },
-      { path: 'guides', element: <GuidesIndexPage /> },
+      { index: true, lazy: async () => ({ Component: (await import('../pages/public/HomePage')).HomePage }) },
+      { path: 'routes', lazy: async () => ({ Component: (await import('../pages/public/RoutesPage')).RoutesPage }) },
+      { path: 'routes/:slug', lazy: async () => ({ Component: (await import('../pages/public/RouteDetailPage')).RouteDetailPage }) },
+      { path: 'guides', lazy: async () => ({ Component: (await import('../pages/public/GuidesIndexPage')).GuidesIndexPage }) },
       ...travelGuides.map(guide => ({ path: guide.path.slice(1), element: <TravelGuidePage guide={guide} /> })),
       ...translatedRoutes,
-      { path: 'vehicles', element: <VehiclesPage /> },
-      { path: 'services', element: <ServicesPage /> },
-      { path: 'contact', element: <ContactPage /> },
-      { path: 'faq', element: <FAQPage /> },
-      { path: 'reviews', element: <ReviewsPage /> },
+      { path: 'vehicles', lazy: async () => ({ Component: (await import('../pages/public/InfoPages')).VehiclesPage }) },
+      { path: 'services', lazy: async () => ({ Component: (await import('../pages/public/InfoPages')).ServicesPage }) },
+      { path: 'contact', lazy: async () => ({ Component: (await import('../pages/public/InfoPages')).ContactPage }) },
+      { path: 'faq', lazy: async () => ({ Component: (await import('../pages/public/InfoPages')).FAQPage }) },
+      { path: 'reviews', lazy: async () => ({ Component: (await import('../pages/public/ReviewsPage')).ReviewsPage }) },
       { path: 'booking', element: <BookingFormPage /> },
       { path: 'booking/passenger', element: <BookingPassengerPage /> },
       { path: 'booking/confirmation', element: <BookingConfirmationPage /> },
