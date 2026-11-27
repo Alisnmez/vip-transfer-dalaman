@@ -1,7 +1,8 @@
+import { DispatchDetails } from './DispatchPanel'
 import { bookingVehicles, vehicleLabel } from '../../features/booking/bookingVehicles'
 import { useEffect, useState } from 'react'
 import { useAsyncAction } from '../../hooks/useAsyncAction'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { ProcessingButton } from '../../components/ProcessingButton'
 
 import { getBooking, getBookingEmailStatuses, updateBooking, updateBookingStatus } from '../../features/booking/api'
@@ -24,6 +25,7 @@ const nextStatuses: Record<string, string[]> = {
 }
 
 export function BookingDetailPage() {
+  const location = useLocation()
   const { bookingId } = useParams()
   const { prices: currentPrices } = useTransferPrices()
   const id = Number(bookingId)
@@ -59,7 +61,7 @@ export function BookingDetailPage() {
 
   async function changeStatus(status: string) {
     if (!booking || status === bookingStatus(booking.status)) return
-    if (bookingStatus(booking.status) === 'CONFIRMED' && status === 'PENDING' && !window.confirm('Move this driver-assigned booking back to New Request? No status email will be sent.')) return
+    if (bookingStatus(booking.status) === 'CONFIRMED' && status === 'PENDING' && !window.confirm('Move this confirmed booking back to New Request? No status email will be sent.')) return
     if (status === 'COMPLETED' && !window.confirm('Mark this transfer as completed? A thank-you email will be queued for the customer.')) return
     if (status === 'CANCELLED' && !window.confirm('Cancel this booking request?')) return
     if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${adminBookingStatusLabel(status)}? Only do this to correct an incorrectly completed booking.`)) return
@@ -131,7 +133,7 @@ export function BookingDetailPage() {
 
   return (
     <section className="min-w-0 max-w-4xl p-4 sm:p-8">
-      <Link className="text-admin-primary underline" to="/admin/bookings">Back to bookings</Link>
+      <Link className="text-admin-primary underline" to={{pathname:'/admin/bookings',search:location.state?.dispatchQuery || ''}}>Back to bookings</Link>
       <h1 className="mt-6 mb-5 text-2xl font-bold">Booking request #{bookingId}</h1>
       {(!Number.isSafeInteger(id) || id < 1) && <p role="alert">Invalid booking reference.</p>}
       {loading && Number.isSafeInteger(id) && id > 0 && <p>Loading booking...</p>}
@@ -143,8 +145,15 @@ export function BookingDetailPage() {
             {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
           </select>
         </label>
+        {booking.phoneNumber && <a className="rounded-lg border p-3" href={`tel:${booking.phoneNumber}`}>Call customer</a>}
+        {booking.email && <a className="rounded-lg border p-3" href={`mailto:${booking.email}`}>Email customer</a>}
+        <button type="button" className="rounded-lg border p-3" onClick={async () => {
+          try { await navigator.clipboard.writeText([booking.reference, booking.customerName, booking.pickUpLocation+' → '+booking.dropOffLocation, formatTransferDateTime(booking.transferDateTime), booking.returnDateTime && 'Return '+formatTransferDateTime(booking.returnDateTime), booking.passengerCount+' passengers'].filter(Boolean).join('\n')); setNotice('Trip details copied.') }
+          catch { setNotice('Clipboard unavailable in this browser.') }
+        }}>Copy trip details</button>
         <button type="button" disabled={saving} onClick={editing ? () => setEditing(false) : beginEdit} className="rounded-lg border border-outline-variant bg-white px-4 py-3 font-semibold text-gray-900">{editing ? 'Cancel editing' : 'Edit booking details'}</button>
       </div>}
+      {booking && <DispatchDetails key={booking.id} id={booking.id} />}
       {editing && draft && <form onSubmit={event => { void saveDetails(event) }} className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
         {([
           ['customerName', 'Customer name', 'text'], ['countryOfResidence', 'Country of residence', 'text'], ['phoneNumber', 'Phone', 'tel'], ['email', 'Email', 'email'],

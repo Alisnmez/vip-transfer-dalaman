@@ -54,6 +54,10 @@ async function adminFixture(page, { width = 1280, extraDashboardBookings = false
     const req = route.request()
     const url = new URL(req.url())
     const path = url.pathname
+    if (path.startsWith('/bookings/dispatch') && !req.isNavigationRequest()) {
+      const payload = path.endsWith('/counts') ? {} : (path === '/bookings/dispatch' ? {rows:[],total:0} : [])
+      return route.fulfill({json:payload})
+    }
     if (!['/route-prices', '/admin/auth-check', '/admin/session/login', '/admin/session/csrf', '/admin/session/logout', '/bookings/dashboard', '/bookings/page', '/bookings/calendar', '/bookings/901', '/bookings/901/status', '/bookings/901/email-status', '/reviews/moderation'].includes(path) && !/^\/reviews\/\d+\/moderation$/.test(path)) return route.continue()
     if (req.isNavigationRequest()) return route.continue()
     requests.push({ path, search: url.search, method: req.method() })
@@ -136,6 +140,7 @@ test('admin Dashboard puts the nearest pickup first on mobile and separates past
 test('admin Bookings combines search, status and date filters and clears them', async ({ page }) => {
   const { requests } = await adminFixture(page)
   await page.getByRole('link', { name: 'Bookings', exact: true }).click()
+  await page.getByRole('link', { name: 'Search booking records' }).click()
   await expect(page.getByRole('heading', { name: 'Booking management' })).toBeVisible()
   await page.getByLabel('Search all bookings').fill('Menu test')
   await page.getByLabel('Status', { exact: true }).selectOption('PENDING')
@@ -514,4 +519,21 @@ test('admin vehicle editing offers the current fleet and preserves only the save
   await expect(vehicle.locator('option')).toHaveText(['Select vehicle', ...fleetNames, 'mercedes-vito (previous category)'])
   await vehicle.selectOption('maybach')
   await expect(vehicle).toHaveValue('maybach')
+})
+
+test.describe('mobile dispatch filters', () => {
+  test.use({hasTouch:true, viewport:{width:390,height:844}})
+  test('touch filters apply and survive a refresh', async ({page}) => {
+    await page.route('**/admin/auth-check',r=>r.fulfill({json:{}}))
+    await page.route('**/bookings/dispatch**',r=>r.fulfill({json:r.request().url().includes('/counts')?{}:{rows:[],total:0}}))
+    await page.goto('http://127.0.0.1:4173/admin/bookings')
+    await page.getByRole('button',{name:'Filters',exact:true}).tap()
+    await page.getByLabel('Assignment',{exact:true}).selectOption('unassigned')
+    await page.getByRole('button',{name:'Show results'}).tap()
+    await expect(page).toHaveURL(/assignment=unassigned/)
+    await page.reload()
+    await page.getByRole('button',{name:'Filters',exact:true}).tap()
+    await expect(page.getByLabel('Assignment',{exact:true})).toHaveValue('unassigned')
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
+  })
 })

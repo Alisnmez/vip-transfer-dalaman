@@ -35,6 +35,12 @@ class BookingSecurityTest {
         mockMvc.perform(get("/bookings/page")).andExpect(status().isUnauthorized());
         mockMvc.perform(get("/bookings/calendar").param("month", "2035-01")).andExpect(status().isUnauthorized());
         mockMvc.perform(get("/bookings/dashboard")).andExpect(status().isUnauthorized());
+        for (String path : java.util.List.of("/bookings/dispatch", "/bookings/dispatch/counts",
+                "/bookings/dispatch/1", "/bookings/dispatch/1/history")) {
+            mockMvc.perform(get(path)).andExpect(status().isUnauthorized());
+        }
+        mockMvc.perform(org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put("/bookings/dispatch/1/outbound")
+                .contentType("application/json").content("{}")).andExpect(status().isForbidden());
         mockMvc.perform(get("/bookings/1")).andExpect(status().isUnauthorized());
         mockMvc.perform(patch("/bookings/1/status").contentType("application/json")
                 .content("{\"status\":\"CONFIRMED\"}")).andExpect(status().isForbidden());
