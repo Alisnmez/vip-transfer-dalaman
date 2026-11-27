@@ -67,7 +67,7 @@ export function BookingDetailPage() {
     if (bookingStatus(booking.status) === 'COMPLETED' && !window.confirm(`Reopen this completed booking as ${adminBookingStatusLabel(status)}? Only do this to correct an incorrectly completed booking.`)) return
     await runSaving(async () => {
       setError(''); setNotice('')
-      try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.') }
+      try { setBooking(await updateBookingStatus(booking.id, status)); setNotice('Status updated successfully.'); window.dispatchEvent(new Event('dispatch-updated')) }
       catch (err) { setError(bookingErrorMessage(err, 'status')); setErrorAction('updating status') }
     })
   }
@@ -142,7 +142,7 @@ export function BookingDetailPage() {
       {booking && <div className="mb-5 flex flex-wrap items-end gap-3 rounded-xl border border-outline-variant bg-white p-4">
         <label className="text-sm font-semibold">Booking status
           <select aria-label="Booking status" disabled={saving} value={bookingStatus(booking.status)} onChange={event => { void changeStatus(event.target.value) }} className="mt-2 block rounded-lg border border-outline-variant bg-white px-4 py-3 text-gray-900">
-            {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
+            {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{status === 'CONFIRMED' ? 'Driver Assigned' : adminBookingStatusLabel(status)}</option>)}
           </select>
         </label>
         {booking.phoneNumber && <a className="rounded-lg border p-3" href={`tel:${booking.phoneNumber}`}>Call customer</a>}
@@ -153,7 +153,7 @@ export function BookingDetailPage() {
         }}>Copy trip details</button>
         <button type="button" disabled={saving} onClick={editing ? () => setEditing(false) : beginEdit} className="rounded-lg border border-outline-variant bg-white px-4 py-3 font-semibold text-gray-900">{editing ? 'Cancel editing' : 'Edit booking details'}</button>
       </div>}
-      {booking && <DispatchDetails key={booking.id} id={booking.id} />}
+      {booking && <DispatchDetails key={booking.id} id={booking.id} readNoticeLeg={location.state?.readNoticeLeg} />}
       {editing && draft && <form onSubmit={event => { void saveDetails(event) }} className="mb-6 grid grid-cols-1 gap-4 rounded-xl border border-outline-variant bg-white p-4 sm:grid-cols-2 sm:p-6">
         {([
           ['customerName', 'Customer name', 'text'], ['countryOfResidence', 'Country of residence', 'text'], ['phoneNumber', 'Phone', 'tel'], ['email', 'Email', 'email'],
