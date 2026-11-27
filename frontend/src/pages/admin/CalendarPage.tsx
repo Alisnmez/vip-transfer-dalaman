@@ -118,7 +118,7 @@ export function CalendarPage() {
         <div className="flex flex-wrap items-center gap-2">
           <select aria-label="Booking status" value={filter} onChange={event => setFilter(event.target.value)} className="rounded-lg border bg-white px-3 py-2 text-sm">
             <option value="ALL">All statuses</option><option value="ACTIVE">Active transfers</option>
-            <option value="PENDING">New Request</option><option value="CONFIRMED">Driver Assigned</option>
+            <option value="PENDING">New Request</option><option value="CONFIRMED">Confirmed</option>
             <option value="COMPLETED">Completed</option><option value="CANCELLED">Cancelled</option>
           </select>
           <ProcessingButton type="button" processing={loading} processingLabel="Refreshing..." onClick={() => setRefreshKey(value => value + 1)} className="rounded-lg border px-3 py-2 text-sm">Refresh</ProcessingButton>

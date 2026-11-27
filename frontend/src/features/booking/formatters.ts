@@ -22,7 +22,7 @@ export function bookingStatus(value?: string | null): string {
 export function adminBookingStatusLabel(value?: string | null): string {
   const status = bookingStatus(value)
   if (status === 'PENDING') return 'New Request'
-  if (status === 'CONFIRMED') return 'Driver Assigned'
+  if (status === 'CONFIRMED') return 'Confirmed'
   return status.charAt(0) + status.slice(1).toLowerCase()
 }
 
