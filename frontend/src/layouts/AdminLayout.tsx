@@ -102,15 +102,16 @@ export function AdminLayout() {
     <div className="min-h-screen min-w-0 bg-admin-background text-admin-on-surface">
       <div className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-outline-variant bg-admin-primary px-4 text-white md:hidden">
         <span className="font-bold">VIP Transfer Admin</span>
-        <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="admin-navigation" onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-white/40 px-3 py-2 text-sm font-semibold">{menuOpen ? "Close" : "Menu"}</button>
+        <div className="flex items-center gap-2"><DispatchNotices />
+        <button type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="admin-navigation" onClick={() => setMenuOpen(!menuOpen)} className="rounded-lg border border-white/40 px-3 py-2 text-sm font-semibold">{menuOpen ? "Close" : "Menu"}</button></div>
       </div>
       {menuOpen && <button type="button" aria-label="Close navigation" className="fixed inset-0 z-40 bg-black/50 md:hidden" onClick={() => setMenuOpen(false)} /> }
       <aside id="admin-navigation" className={`${menuOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-admin-primary px-4 py-6 shadow-md transition-transform md:translate-x-0` }>
         <div className="mb-10 px-2">
-          <h1 className="text-title-lg font-title-lg text-primary-fixed">
+          <div className="flex items-center justify-between gap-2"><h1 className="text-title-lg font-title-lg text-primary-fixed">
             VIP Transfer
           </h1>
-          <DispatchNotices />
+          <div className="hidden md:block"><DispatchNotices /></div></div>
           <p className="text-label-xs text-on-primary-container opacity-70">
             Management System
           </p>
@@ -164,7 +165,7 @@ export function AdminLayout() {
         )}
 
         <Outlet />
-        <nav aria-label="Mobile shortcuts" className="sticky bottom-0 z-30 mt-auto flex justify-around border-t bg-white md:hidden">{[['/admin','Home'],['/admin/bookings','Bookings'],['/admin/calendar','Calendar'],['/admin/bookings?view=unread','Notices']].map(([to,label])=><NavLink key={label} className="flex min-h-12 items-center px-2 font-semibold" to={to}>{label}</NavLink>)}</nav>
+        <nav aria-label="Mobile shortcuts" className="sticky bottom-0 z-30 mt-auto flex justify-around border-t bg-white md:hidden">{[['/admin','Home'],['/admin/bookings','Bookings'],['/admin/calendar','Calendar']].map(([to,label])=><NavLink key={label} className="flex min-h-12 items-center px-2 font-semibold" to={to}>{label}</NavLink>)}</nav>
 
         {!usesCustomPageChrome && (
           <footer className="mt-auto w-full py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center px-4 sm:px-8">
