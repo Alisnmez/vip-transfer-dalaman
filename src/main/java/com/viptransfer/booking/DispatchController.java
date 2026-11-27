@@ -40,10 +40,10 @@ with legs as (
         d.driver, d.phone, d.plate, d.capacity, d.available_after, cast(d.available_after as varchar) as available_local, d.assigned_at, d.reviewed_at, d.verified_at, d.reviewed_priority,
         coalesce(d.stage,'Unassigned') as stage, coalesce(d.revision,0) as revision,
         case when b.status in ('CANCELLED','COMPLETED') or d.stage='Finished' then 5
-             when (b.pickup < :now and coalesce(d.stage,'Unassigned') <> 'In progress') or (b.pickup < :two and d.driver is null) then 0
-             when b.pickup < :day and d.driver is null then 1
+             when (b.pickup < :now and coalesce(d.stage,'Unassigned') <> 'In progress') or (b.pickup < :two and coalesce(d.stage,'Unassigned')='Unassigned') then 0
+             when b.pickup < :day and coalesce(d.stage,'Unassigned')='Unassigned' then 1
              when d.reviewed_at is null or exists (select 1 from booking_management_request m where m.booking_id=b.id and m.status='NEW') then 2
-             when b.pickup < :twoDays and d.driver is null then 3
+             when b.pickup < :twoDays and coalesce(d.stage,'Unassigned')='Unassigned' then 3
              else 4 end as priority
     from legs b left join dispatch_leg d on b.id=d.booking_id and b.leg=d.leg
 )
@@ -72,7 +72,7 @@ with legs as (
           "urgent",
           "priority=1",
           "unassigned",
-          "driver is null and priority<5",
+          "stage='Unassigned' and priority<5",
           "unread",
           UNREAD + " and priority<5",
           "today",
@@ -135,7 +135,7 @@ with legs as (
       where +=
           reviewed.equals("unread") ? " and " + UNREAD : " and not coalesce(" + UNREAD + ",false)";
     if (!assignment.isEmpty())
-      where += assignment.equals("assigned") ? " and driver is not null" : " and driver is null";
+      where += assignment.equals("assigned") ? " and stage<>'Unassigned'" : " and stage='Unassigned'";
     if (!requestType.isEmpty()) {
       where +=
           " and exists(select 1 from booking_management_request m where m.booking_id=q.id and"
@@ -246,19 +246,20 @@ with legs as (
       if (change.stage() == null
           || !Set.of("Unassigned", "Assigned", "Notified", "In progress", "Finished")
               .contains(change.stage())
-          || driver.isEmpty() != change.stage().equals("Unassigned")
+          
           || (change.capacity() != null && change.capacity() < booking.getPassengerCount()))
         throw new ResponseStatusException(
             HttpStatus.BAD_REQUEST, "Check driver, stage and seat capacity.");
-      if (!Objects.equals(item.driver, driver))
-        item.assignedAt = driver.isEmpty() ? null : Instant.now();
-      item.driver = driver.isEmpty() ? null : driver;
-      item.phone = driver.isEmpty() ? null : change.phone();
-      item.plate = driver.isEmpty() ? null : change.plate();
-      item.capacity = driver.isEmpty() ? null : change.capacity();
+      boolean unassigned = change.stage().equals("Unassigned");
+      if (unassigned) item.assignedAt = null;
+      else if (item.assignedAt == null) item.assignedAt = Instant.now();
+      item.driver = unassigned || driver.isEmpty() ? null : driver;
+      item.phone = unassigned ? null : change.phone();
+      item.plate = unassigned ? null : change.plate();
+      item.capacity = unassigned ? null : change.capacity();
       item.stage = change.stage();
-      item.availableAfter = driver.isEmpty() ? null : change.availableAfter();
-      if (!driver.isEmpty()) {
+      item.availableAfter = unassigned ? null : change.availableAfter();
+      if (!unassigned && !driver.isEmpty()) {
         var p = times();
         var pickup =
             leg.equals("return") ? booking.getReturnDateTime() : booking.getTransferDateTime();
