@@ -14,7 +14,7 @@ export default {
         primary: '#1E3A5F',
         'on-primary': '#FFFFFF',
         // Accessible teal for text and white-label buttons on public surfaces.
-        secondary: '#16766B',
+        secondary: '#008075',
         'on-secondary': '#FFFFFF',
         'surface-tint': '#455f87',
         surface: '#F8FAFC',
