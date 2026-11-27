@@ -83,4 +83,43 @@ class DispatchIntegrationTest {
                 "Another driver", null, null, 4, "Assigned", false, false, 1, null));
     assertEquals("", available.get("warning"));
   }
+  @Test
+  void activeRideIsNotIncorrectlyCriticalAfterPickup() {
+    Booking booking = new Booking();
+    booking.setPassengerCount(2);
+    booking.setTransferDateTime(
+        LocalDateTime.now(ZoneId.of("Europe/Istanbul")).minusMinutes(15));
+    bookings.saveAndFlush(booking);
+
+    dispatch.update(
+        booking.getId(),
+        "outbound",
+        new DispatchController.Update(
+            "Active ride test", null, null, 4, "In progress", false, false, 0, null));
+
+    var leg = dispatch.details(booking.getId()).get(0);
+    assertEquals("In progress", leg.get("stage"));
+    assertEquals(4, ((Number) leg.get("priority")).intValue());
+  }
+
+  @Test
+  void routeSearchMatchesPartialDestinationName() {
+    Booking booking = new Booking();
+    booking.setPassengerCount(2);
+    booking.setPickUpLocation("Dalaman Airport");
+    booking.setDropOffLocation("Marmaris Centre");
+    booking.setTransferDateTime(
+        LocalDateTime.now(ZoneId.of("Europe/Istanbul")).plusDays(4));
+    bookings.saveAndFlush(booking);
+
+    var result = dispatch.queue(
+        "all", 0, "", "", "Marmaris", "", "", "", "",
+        "", "", "", "", "", null, null);
+    @SuppressWarnings("unchecked")
+    var rows = (java.util.List<java.util.Map<String, Object>>) result.get("rows");
+
+    assertTrue(rows.stream().anyMatch(row ->
+        ((Number) row.get("id")).longValue() == booking.getId()));
+  }
+
 }
