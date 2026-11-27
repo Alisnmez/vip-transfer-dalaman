@@ -196,7 +196,7 @@ export function BookingFormPage() {
               <h1 className="font-title-lg text-title-lg text-admin-primary mb-2">
                 {t("Transfer Information")}
               </h1>
-              <p className="font-body-md text-body-md text-on-surface-variant">
+              <p className="font-body-md text-body-md text-slate-600">
                 {t("Configure your transfer details to see available vehicles.")}
               </p>
             </div>
@@ -208,7 +208,7 @@ export function BookingFormPage() {
                   className={`px-8 py-2 rounded-md font-label-sm text-label-sm transition-all ${
                     tripType === 'one-way'
                       ? 'bg-admin-primary text-white'
-                      : 'text-on-surface-variant hover:bg-white'
+                      : 'text-slate-600 hover:bg-white'
                   }`}
                   onClick={() => setTripType('one-way')}
                   type="button"
@@ -219,7 +219,7 @@ export function BookingFormPage() {
                   className={`px-8 py-2 rounded-md font-label-sm text-label-sm transition-all ${
                     tripType === 'round-trip'
                       ? 'bg-admin-primary text-white'
-                      : 'text-on-surface-variant hover:bg-white'
+                      : 'text-slate-600 hover:bg-white'
                   }`}
                   onClick={() => setTripType('round-trip')}
                   type="button"
@@ -230,7 +230,7 @@ export function BookingFormPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
                 <div className="space-y-2">
-                  <label htmlFor="booking-pickup" className="font-label-sm text-label-sm text-on-surface-variant block">{t("Pickup Location")}<RequiredMark /></label>
+                  <label htmlFor="booking-pickup" className="font-label-sm text-label-sm text-slate-600 block">{t("Pickup Location")}<RequiredMark /></label>
                   <select id="booking-pickup" aria-label={t("Pickup Location")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={pickUpLocation} onChange={(event) => { const next = event.target.value; setPickUpLocation(next); setDropOffLocation(next === 'Dalaman Airport' ? '' : 'Dalaman Airport'); setFormError('') }}>
                     <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>
                     {groupedDestinationOptions.map((group) => (
@@ -241,7 +241,7 @@ export function BookingFormPage() {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="booking-destination" className="font-label-sm text-label-sm text-on-surface-variant block">{t("Destination")}<RequiredMark /></label>
+                  <label htmlFor="booking-destination" className="font-label-sm text-label-sm text-slate-600 block">{t("Destination")}<RequiredMark /></label>
                   <select id="booking-destination" aria-label={t("Destination")} className="w-full px-4 py-3 border border-outline-variant rounded-lg" value={dropOffLocation} onChange={(event) => setDropOffLocation(event.target.value)}>
                     <option value="">{t("Select destination")}</option>
                     {availableDestinations.includes("Dalaman Airport") && <option value="Dalaman Airport">{t("Dalaman Airport (DLM)")}</option>}
@@ -296,10 +296,10 @@ export function BookingFormPage() {
               )}
 
               <div className="space-y-4">
-                <h2 className="font-label-sm text-label-sm text-on-surface-variant block">
+                <h2 className="font-label-sm text-label-sm text-slate-600 block">
                   {t("Select Vehicle Type")}
                 </h2>
-                <p className="text-sm text-on-surface-variant">{t("Luggage allowance changes with your vehicle selection.")}</p>
+                <p className="text-sm text-slate-600">{t("Luggage allowance changes with your vehicle selection.")}</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-gutter-grid">
                   {availableVehicles.map((vehicle) => {
                     const isSelected = effectiveVehicleId === vehicle.id
@@ -320,7 +320,7 @@ export function BookingFormPage() {
                         <h3 className="font-label-sm text-label-sm text-admin-primary mb-1">
                           {vehicle.name}
                         </h3>
-                        <p className="text-[11px] text-on-surface-variant mb-3">
+                        <p className="text-[11px] text-slate-600 mb-3">
                           {t("Max")} {vehicle.maxPassengers} {t("passengers")}{vehicle.maxLuggage === null ? '' : `, ${vehicle.maxLuggage} ${t("luggage")}`}
                         </p>
                         <div className="flex justify-between items-center">
@@ -423,14 +423,14 @@ function BookingStepper({ activeStep }: { activeStep: number }) {
                   className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                     isActive
                       ? 'bg-admin-primary text-on-primary'
-                      : 'bg-slate-200 text-on-surface-variant border border-outline-variant'
+                      : 'bg-slate-200 text-slate-600 border border-outline-variant'
                   }`}
                 >
                   {stepNumber}
                 </div>
                 <span
                   className={`font-label-sm text-label-sm ${
-                    isActive ? 'text-admin-primary' : 'text-on-surface-variant'
+                    isActive ? 'text-admin-primary' : 'text-slate-600'
                   }`}
                 >
                   {step}
@@ -475,7 +475,7 @@ function TextField({
   const fieldId = useId()
   return (
     <div className="space-y-2">
-      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
+      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-slate-600">
         {label}{required && <RequiredMark />}
       </label>
       <div className="relative">
@@ -515,7 +515,7 @@ function CounterField({
   const fieldId = useId()
   return (
     <div className="space-y-2">
-      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-on-surface-variant">
+      <label htmlFor={fieldId} className="font-label-sm text-label-sm text-slate-600">
         {label}
       </label>
       <div className="flex items-center border border-outline-variant rounded-lg overflow-hidden">
@@ -618,7 +618,7 @@ function BookingSummary({
 
           <div className="pt-2">
             <div className="flex justify-between items-center mb-2">
-              <span className="font-body-md text-body-md text-on-surface-variant">
+              <span className="font-body-md text-body-md text-slate-600">
                 {t("Subtotal")}
               </span>
               <span className="font-label-sm text-label-sm text-admin-primary">
@@ -628,14 +628,14 @@ function BookingSummary({
 
             <div className="flex justify-between items-end bg-slate-100 p-4 rounded-lg">
               <div>
-                <span className="font-label-xs text-label-xs text-on-surface-variant uppercase">
+                <span className="font-label-xs text-label-xs text-slate-600 uppercase">
                   {t("Estimated Total")}
                 </span>
                 <div className="font-title-lg text-title-lg text-admin-primary">
                   {priceLabel}
                 </div>
               </div>
-              <div className="text-[10px] text-on-surface-variant text-right">
+              <div className="text-[10px] text-slate-600 text-right">
                 {t("Final terms will be confirmed by the operator")}
               </div>
             </div>
@@ -669,7 +669,7 @@ function BookingSummary({
 function SummaryLocation({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="font-label-xs text-label-xs text-on-surface-variant uppercase tracking-wider">
+      <p className="font-label-xs text-label-xs text-slate-600 uppercase tracking-wider">
         {label}
       </p>
       <p className="font-label-sm text-label-sm text-admin-primary">{value}</p>
@@ -688,7 +688,7 @@ function SummaryRow({
 }) {
   return (
     <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2 text-on-surface-variant">
+      <div className="flex items-center gap-2 text-slate-600">
         <span translate="no" className="material-symbols-outlined text-[20px]">{icon}</span>
         <span className="font-body-md text-body-md">{label}</span>
       </div>
@@ -705,16 +705,16 @@ function BookingFooter() {
     <footer className="w-full py-8 bg-slate-200 border-t border-outline-variant mt-12">
       <div className="max-w-7xl mx-auto px-margin-page flex flex-col gap-2">
         <img src="/dalamanway-logo.svg" alt={t("DalamanWay — Private Airport Transfers")} className="h-12 w-auto max-w-[240px] object-contain" />
-        <p className="font-body-md text-body-sm text-on-surface-variant">
+        <p className="font-body-md text-body-sm text-slate-600">
           {t("Private airport transfer booking requests for Dalaman and nearby destinations.")}
         </p>
-        <p className="font-body-md text-body-sm text-on-surface-variant">
+        <p className="font-body-md text-body-sm text-slate-600">
           {t("Prices are shown in GBP. Your request is subject to operator confirmation.")}
         </p>
-        <p className="font-body-md text-body-sm text-on-surface-variant">
+        <p className="font-body-md text-body-sm text-slate-600">
           {t("Contact:")} <a href={`mailto:${supportEmail}`} className="underline">{supportEmail}</a>
         </p>
-        <p className="font-body-md text-body-sm text-on-surface-variant">
+        <p className="font-body-md text-body-sm text-slate-600">
           © {new Date().getFullYear()} DalamanWay.
         </p>
       </div>
