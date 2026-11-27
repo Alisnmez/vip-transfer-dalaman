@@ -106,6 +106,7 @@ function QueueResults({ query, apply }: { query: string; apply: (params: URLSear
       {select('vehicle','Vehicle',Object.fromEntries(bookingVehicles.map(v=>[v.id,v.name])))}
       {select('need','Special needs',{seat:'Child seat',request:'Special request'})}
       {select('requestType','Customer request',{CHANGE:'Change',CANCEL:'Cancellation'})}
+      {select('horizon','Pickup window',{'24':'Next 24 hours','48':'Next 48 hours','168':'Next 7 days'})}
       {select('received','Received',{today:'Today',day:'Last 24 hours',week:'Last 7 days'})}
       {[['driver','Driver name'],['route','Destination'],['from','Pickup from'],['to','Pickup through']].map(([k,label]) =>
         <label key={k}>{label}<input name={k} defaultValue={params.get(k)||''} className={field} type={k==='from'||k==='to'?'date':'text'} /></label>)}
@@ -120,6 +121,7 @@ function QueueResults({ query, apply }: { query: string; apply: (params: URLSear
       <Link state={{ dispatchQuery:query }} className="block rounded-xl border bg-white p-4" to={`/admin/bookings/${row.id}`}>
         <strong>{priorities[row.priority]} · #{row.id} · {row.customer_name}</strong>
         <p>{row.local_pickup.slice(0,16)} · {row.origin} → {row.destination}</p>
+        {row.last_request && <p>Customer request awaiting review</p>}
         <p>{row.leg === 'return'?'Return':'Outbound'} · {row.driver || 'Driver required'} · {row.stage}</p></Link></li>)}</ul>
       <div className="flex gap-3"><button className={action} disabled={page<1} onClick={()=>paginate(page-1)}>Previous</button>
       <button className={action} disabled={(page+1)*25>=data.total} onClick={()=>paginate(page+1)}>Next</button></div></>:!error&&<p>Loading transfers…</p>}
@@ -150,7 +152,7 @@ export function DispatchDetails({ id }: { id:number }) {
         <input name={k} type={k==='capacity'?'number':k==='phone'?'tel':'text'} defaultValue={String(row[k as keyof DispatchRow]??'')} className={field}/></label>)}
       <label>Driver status<select name="stage" className={field} defaultValue={row.stage}>{['Unassigned','Assigned','Notified','In progress','Finished'].map(v=><option key={v}>{v}</option>)}</select></label>
       <button className={action} disabled={busy || ['COMPLETED','CANCELLED'].includes(row.status)}>Save assignment</button>
-      {!row.reviewed_at && <button className={action} disabled={busy} value="review" formNoValidate>Mark notice as read</button>}
+      {(!row.reviewed_at || (row.last_request && new Date(row.last_request)>new Date(row.reviewed_at))) && <button className={action} disabled={busy} value="review" formNoValidate>Mark notice as read</button>}
     </form>)}
     <h3 className="font-bold">Activity history</h3>
     {history.error && <p role="alert">{history.error}</p>}

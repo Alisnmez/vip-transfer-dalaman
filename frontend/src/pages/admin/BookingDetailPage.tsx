@@ -145,6 +145,12 @@ export function BookingDetailPage() {
             {[bookingStatus(booking.status), ...(nextStatuses[bookingStatus(booking.status)] ?? [])].map(status => <option key={status} value={status}>{adminBookingStatusLabel(status)}</option>)}
           </select>
         </label>
+        {booking.phoneNumber && <a className="rounded-lg border p-3" href={`tel:${booking.phoneNumber}`}>Call customer</a>}
+        {booking.email && <a className="rounded-lg border p-3" href={`mailto:${booking.email}`}>Email customer</a>}
+        <button type="button" className="rounded-lg border p-3" onClick={async () => {
+          try { await navigator.clipboard.writeText([booking.reference, booking.customerName, booking.pickUpLocation+' → '+booking.dropOffLocation, formatTransferDateTime(booking.transferDateTime), booking.returnDateTime && 'Return '+formatTransferDateTime(booking.returnDateTime), booking.passengerCount+' passengers'].filter(Boolean).join('\n')); setNotice('Trip details copied.') }
+          catch { setNotice('Clipboard unavailable in this browser.') }
+        }}>Copy trip details</button>
         <button type="button" disabled={saving} onClick={editing ? () => setEditing(false) : beginEdit} className="rounded-lg border border-outline-variant bg-white px-4 py-3 font-semibold text-gray-900">{editing ? 'Cancel editing' : 'Edit booking details'}</button>
       </div>}
       {booking && <DispatchDetails key={booking.id} id={booking.id} />}

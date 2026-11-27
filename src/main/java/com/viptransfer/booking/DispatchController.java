@@ -34,6 +34,7 @@ class DispatchController {
                 b.passenger_count, b.baby_seat_count, b.special_requests, b.created_at,
                 case when b.leg='outbound' then b.pick_up_location else b.drop_off_location end as origin,
                 case when b.leg='outbound' then b.drop_off_location else b.pick_up_location end as destination,
+                (select max(m.created_at) from booking_management_request m where m.booking_id=b.id and m.status='NEW') as last_request,
                 d.driver, d.phone, d.plate, d.capacity, d.assigned_at, d.reviewed_at,
                 coalesce(d.stage,'Unassigned') as stage, coalesce(d.revision,0) as revision,
                 case when b.status in ('CANCELLED','COMPLETED') or d.stage='Finished' then 5
@@ -57,7 +58,7 @@ class DispatchController {
 
     private static final Map<String,String> VIEWS = Map.of(
         "all","1=1", "critical","priority=0", "urgent","priority=1",
-        "unassigned","driver is null and priority<5", "unread","reviewed_at is null and priority<5",
+        "unassigned","driver is null and priority<5", "unread","(reviewed_at is null or last_request>reviewed_at) and priority<5",
         "today","pickup>=:today and pickup<:tomorrow and priority<5",
         "next24","pickup>=:now and pickup<:day and priority<5", "active","stage='In progress' and priority<5",
         "new","status='PENDING' and priority<5");
@@ -69,7 +70,7 @@ class DispatchController {
             @RequestParam(defaultValue="") String direction, @RequestParam(defaultValue="") String need,
             @RequestParam(defaultValue="") String requestType, @RequestParam(defaultValue="") String received,
             @RequestParam(defaultValue="") String status, @RequestParam(defaultValue="") String assignment,
-            @RequestParam(defaultValue="") String reviewed, @RequestParam(required=false) LocalDate from,
+            @RequestParam(defaultValue="") String reviewed, @RequestParam(defaultValue="") String horizon, @RequestParam(required=false) LocalDate from,
             @RequestParam(required=false) LocalDate to) {
         if (!VIEWS.containsKey(view) || page<0 || page>100000 || (from!=null && to!=null && from.isAfter(to)))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -96,11 +97,16 @@ class DispatchController {
             var start=received.equals("today")?(LocalDateTime)p.get("today"):((LocalDateTime)p.get("now")).minusDays(received.equals("week")?7:1);
             where+=" and created_at>=:received"; p.put("received",java.sql.Timestamp.from(start.atZone(ZoneId.of("Europe/Istanbul")).toInstant()));
         }
+        if (!horizon.isEmpty()) {
+            int hours=switch(horizon){case "24"->24;case "48"->48;case "168"->168;default->throw new ResponseStatusException(HttpStatus.BAD_REQUEST);};
+            where+=" and pickup>=:now and pickup<:horizon";p.put("horizon",((LocalDateTime)p.get("now")).plusHours(hours));
+        }
         if (from!=null) {where+=" and pickup>=:fromDate";p.put("fromDate",from.atStartOfDay());}
         if (to!=null) {where+=" and pickup<:toDate";p.put("toDate",to.plusDays(1).atStartOfDay());}
         var total=sql.queryForObject(QUEUE+"select count(*)"+where,p,Long.class);
         p.put("offset",page*25);
-        var rows=sql.queryForList(QUEUE+"select *"+where+" order by priority, pickup, id, leg limit 25 offset :offset",p);
+        String order = Set.of("today","next24","active").contains(view) ? "pickup, id, leg" : "priority, pickup, id, leg";
+        var rows=sql.queryForList(QUEUE+"select *"+where+" order by "+order+" limit 25 offset :offset",p);
         return Map.of("rows",rows,"total",total);
     }
 
@@ -155,7 +161,7 @@ class DispatchController {
                 if (conflicts>0) warning="This driver has another pickup less than one hour away.";
             }
         }
-        if (item.reviewedAt==null) item.reviewedAt=Instant.now();
+        item.reviewedAt=Instant.now();
         item.revision++;
         dispatch.saveAndFlush(item);
         var description = change.reviewOnly() ? "Notice reviewed" :

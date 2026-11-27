@@ -322,6 +322,9 @@ public class BookingService {
         existingBooking.setPickUpLocation(dto.getPickUpLocation());
         existingBooking.setDropOffLocation(dto.getDropOffLocation());
         existingBooking.setTransferDateTime(dto.getTransferDateTime());
+        if (existingBooking.getReturnDateTime()!=null && dto.getReturnDateTime()==null) {
+            bookingRepository.removeReturnAssignment(id);
+        }
         existingBooking.setReturnDateTime(dto.getReturnDateTime());
         existingBooking.setPhoneNumber(dto.getPhoneNumber());
         existingBooking.setEmail(dto.getEmail());

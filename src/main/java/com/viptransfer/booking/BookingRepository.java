@@ -7,6 +7,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface BookingRepository extends JpaRepository<Booking, Long>, JpaSpecificationExecutor<Booking> {
 
+    @org.springframework.data.jpa.repository.Modifying
+    @org.springframework.data.jpa.repository.Query("delete from DispatchLeg d where d.bookingId = :id and d.leg = 'return'")
+    void removeReturnAssignment(@org.springframework.data.repository.query.Param("id") Long id);
+
     Optional<Booking> findByIdempotencyKey(String key);
 
     Optional<Booking> findByReference(String reference);
