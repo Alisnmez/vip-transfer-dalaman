@@ -43,7 +43,7 @@ test('production sitemap includes public routes and excludes private booking/adm
   assert.match(sitemap, /<loc>https:\/\/example.com\/reviews<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/de\/routes\/marmaris<\/loc>/)
   assert.match(sitemap, /<loc>https:\/\/example.com\/ru\/routes\/gocek<\/loc>/)
-  for (const path of ['/booking', '/booking/lookup', '/booking-policy']) assert.ok(sitemap.includes('https://dalamanway.com' + path + '</loc>'))
+  for (const path of ['/booking', '/booking/lookup', '/booking-policy']) assert.ok(sitemap.includes('https://example.com' + path + '</loc>'))
   assert.doesNotMatch(sitemap, /\/(?:admin|booking\/(?:passenger|confirmation))|token|reference/i)
 })
 
