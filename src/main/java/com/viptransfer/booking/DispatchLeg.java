@@ -22,6 +22,7 @@ class DispatchLeg {
   String phone;
   String plate;
   Integer capacity;
+  java.time.LocalDateTime availableAfter;
   String stage;
   Instant assignedAt;
   Instant reviewedAt;

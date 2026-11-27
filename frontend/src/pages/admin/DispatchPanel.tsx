@@ -430,6 +430,7 @@ export function DispatchDetails({ id }: { id: number }) {
             try {
               const result = await updateDispatch(row, {
                 ...Object.fromEntries(form),
+                availableAfter: form.get('availableAfter') || null,
                 capacity: form.get('capacity')
                   ? Number(form.get('capacity'))
                   : null,
@@ -476,6 +477,10 @@ export function DispatchDetails({ id }: { id: number }) {
               />
             </label>
           ))}
+          <label>Driver available after (Turkey)
+            <input name="availableAfter" type="datetime-local" className={field} defaultValue={row.available_local?.slice(0,16).replace(' ','T') || ''} />
+            <small>Leave empty to reserve one hour from pickup.</small>
+          </label>
           <label>
             Driver status
             <select name="stage" className={field} defaultValue={row.stage}>

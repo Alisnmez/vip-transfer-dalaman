@@ -238,7 +238,7 @@ export function cancelBookingFromManagementRequest(id: number, adminNote: string
 export type DispatchRow = {
   id: number; leg: string; local_pickup: string; customer_name: string; origin: string; destination: string
   status: string; priority: number; driver: string | null; phone: string | null; plate: string | null
-  capacity: number | null; stage: string; revision: number; reviewed_at: string | null; assigned_at: string | null; last_request: string | null; verified_at: string | null; reviewed_priority: number | null
+  capacity: number | null; stage: string; revision: number; reviewed_at: string | null; assigned_at: string | null; last_request: string | null; verified_at: string | null; reviewed_priority: number | null; available_local: string | null
 }
 export const dispatchQueue = (params: string) => request<{ rows: DispatchRow[]; total: number }>(`${BOOKING_URL}/dispatch?${params}`, undefined, true)
 export const dispatchCounts = () => request<Record<string, number>>(`${BOOKING_URL}/dispatch/counts`, undefined, true)

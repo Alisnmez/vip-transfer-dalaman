@@ -37,7 +37,7 @@ with legs as (
         case when b.leg='outbound' then b.pick_up_location else b.drop_off_location end as origin,
         case when b.leg='outbound' then b.drop_off_location else b.pick_up_location end as destination,
         (select max(m.created_at) from booking_management_request m where m.booking_id=b.id and m.status='NEW') as last_request,
-        d.driver, d.phone, d.plate, d.capacity, d.assigned_at, d.reviewed_at, d.verified_at, d.reviewed_priority,
+        d.driver, d.phone, d.plate, d.capacity, d.available_after, cast(d.available_after as varchar) as available_local, d.assigned_at, d.reviewed_at, d.verified_at, d.reviewed_priority,
         coalesce(d.stage,'Unassigned') as stage, coalesce(d.revision,0) as revision,
         case when b.status in ('CANCELLED','COMPLETED') or d.stage='Finished' then 5
              when b.pickup < :now or (b.pickup < :two and d.driver is null) then 0
@@ -219,7 +219,8 @@ with legs as (
       String stage,
       boolean reviewOnly,
       boolean verifyCustomer,
-      int revision) {}
+      int revision,
+      LocalDateTime availableAfter) {}
 
   @PutMapping("/{id}/{leg}")
   @Transactional
@@ -256,23 +257,35 @@ with legs as (
       item.plate = driver.isEmpty() ? null : change.plate();
       item.capacity = driver.isEmpty() ? null : change.capacity();
       item.stage = change.stage();
+      item.availableAfter = driver.isEmpty() ? null : change.availableAfter();
       if (!driver.isEmpty()) {
         var p = times();
         var pickup =
             leg.equals("return") ? booking.getReturnDateTime() : booking.getTransferDateTime();
+        if (item.availableAfter != null && !item.availableAfter.isAfter(pickup))
+          throw new ResponseStatusException(
+              HttpStatus.BAD_REQUEST, "Availability must follow pickup.");
+        // Serialize simultaneous assignments for the same driver before checking overlap.
+        sql.query(
+            "select pg_advisory_xact_lock(hashtext(lower(:driver)))",
+            Map.of("driver", driver),
+            rs -> {
+              return null;
+            });
         p.put("driver", driver);
-        p.put("start", pickup.minusHours(1));
-        p.put("end", pickup.plusHours(1));
+        p.put("start", pickup);
+        p.put("end", item.availableAfter == null ? pickup.plusHours(1) : item.availableAfter);
         p.put("id", id);
         p.put("leg", leg);
         long conflicts =
             sql.queryForObject(
                 QUEUE
                     + "select count(*) from queue where lower(driver)=lower(:driver) and priority<5"
-                    + " and pickup>:start and pickup<:end and not(id=:id and leg=:leg)",
+                    + " and coalesce(available_after,pickup + interval '1 hour')>:start and"
+                    + " pickup<:end and not(id=:id and leg=:leg)",
                 p,
                 Long.class);
-        if (conflicts > 0) warning = "This driver has another pickup less than one hour away.";
+        if (conflicts > 0) warning = "Assignment saved. This driver has an overlapping transfer.";
       }
     }
     if (change.verifyCustomer()) item.verifiedAt = Instant.now();
