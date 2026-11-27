@@ -53,7 +53,7 @@ class DispatchIntegrationTest {
   }
 
   @Test
-  void overlappingDriverWindowsGenerateWarningAndDistinctDriversRemainAvailable() {
+  void overlappingDriverWindowsAreRejectedAndDistinctDriversRemainAvailable() {
     var pickup = LocalDateTime.now(ZoneId.of("Europe/Istanbul")).plusDays(3);
     Booking first = new Booking();
     first.setPassengerCount(2);
@@ -68,19 +68,19 @@ class DispatchIntegrationTest {
         "outbound",
         new DispatchController.Update(
             "Window test", null, null, 4, "Assigned", false, false, 0, pickup.plusHours(3)));
-    var conflict =
+    var conflict = assertThrows(ResponseStatusException.class, () ->
         dispatch.update(
             second.getId(),
             "outbound",
             new DispatchController.Update(
-                "Window test", null, null, 4, "Assigned", false, false, 0, null));
-    assertTrue(conflict.get("warning").toString().contains("overlapping"));
+                "Window test", null, null, 4, "Assigned", false, false, 0, null)));
+    assertEquals(409, conflict.getStatusCode().value());
     var available =
         dispatch.update(
             second.getId(),
             "outbound",
             new DispatchController.Update(
-                "Another driver", null, null, 4, "Assigned", false, false, 1, null));
+                "Another driver", null, null, 4, "Assigned", false, false, 0, null));
     assertEquals("", available.get("warning"));
   }
   @Test
