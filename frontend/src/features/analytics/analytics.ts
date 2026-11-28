@@ -3,7 +3,7 @@
  * Analytics stays disabled until the visitor explicitly opts in.
  * Events are allowlisted: no booking IDs, customer details, routes or free text.
  */
-export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted'
+export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted' | 'whatsapp_click'
 type AnalyticsWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }
 
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID ?? ''
