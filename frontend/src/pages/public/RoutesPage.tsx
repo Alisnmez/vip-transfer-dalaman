@@ -8,13 +8,13 @@ import { PublicNavbar } from './PublicNavbar'
 import { useTransferPrices } from '../../features/booking/useTransferPrices'
 
 const featuredDestinations = [
-  { name: 'Marmaris', slug: 'marmaris' },
-  { name: 'Fethiye', slug: 'fethiye' },
-  { name: 'Oludeniz', slug: 'oludeniz' },
-  { name: 'Gocek', slug: 'gocek' },
-  { name: 'Icmeler', slug: 'icmeler' },
-  { name: 'Dalyan', slug: 'dalyan' },
-  { name: 'Sarigerme', slug: 'sarigerme' },
+  { name: 'Marmaris', slug: 'marmaris', minutes: '90–115' },
+  { name: 'Fethiye', slug: 'fethiye', minutes: '50' },
+  { name: 'Oludeniz', slug: 'oludeniz', minutes: '65–75' },
+  { name: 'Gocek', slug: 'gocek', minutes: '30' },
+  { name: 'Icmeler', slug: 'icmeler', minutes: '95–115' },
+  { name: 'Dalyan', slug: 'dalyan', minutes: '35–45' },
+  { name: 'Sarigerme', slug: 'sarigerme', minutes: '20–30' },
 ]
 function priceLabel(price: number) {
   return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', minimumFractionDigits: 2 }).format(price)
@@ -35,6 +35,7 @@ const routesCopy = {
     starting: "Starting one-way prices per vehicle. Night transfers, parking and road tolls included.",
     private: "Private transfer",
     airport: "Dalaman Airport",
+    drive: "Approx. drive",
     from: "From",
     compare: "Compare prices for",
     plan: "PLAN YOUR TRANSFER",
@@ -68,6 +69,7 @@ const routesCopy = {
     starting: "Einfache Fahrt zum Einstiegspreis pro Fahrzeug. Nachttransfers, Park- und Mautgebühren inklusive.",
     private: "Privater Transfer",
     airport: "Flughafen Dalaman",
+    drive: "Fahrzeit ca.",
     from: "Ab",
     compare: "Preise vergleichen für",
     plan: "TRANSFER PLANEN",
@@ -101,6 +103,7 @@ const routesCopy = {
     starting: "Начальные цены за автомобиль в одну сторону. Ночные трансферы, парковка и платные дороги включены.",
     private: "Индивидуальный трансфер",
     airport: "Аэропорт Даламан",
+    drive: "Время в пути ≈",
     from: "От",
     compare: "Сравнить цены по направлению",
     plan: "СПЛАНИРУЙТЕ ТРАНСФЕР",
@@ -129,9 +132,9 @@ export function RoutesPage() {
   const featuredRoutes = useMemo(() => {
     const minimums = new Map<string, number>()
     for (const price of transferPrices.filter(row => bookingVehicles.some(vehicle => vehicle.id === row.vehicleId))) minimums.set(price.destination, Math.min(minimums.get(price.destination) ?? Infinity, price.oneWay))
-    return featuredDestinations.map(({ name, slug }) => {
+    return featuredDestinations.map(({ name, slug, minutes }) => {
       const match = [...minimums].find(([destination]) => destination.toLowerCase().includes(name.toLowerCase()))
-      return match ? { destination: match[0], from: match[1], slug } : null
+      return match ? { destination: match[0], from: match[1], slug, minutes } : null
     }).filter((route): route is NonNullable<typeof route> => route !== null)
   }, [transferPrices])
 
@@ -196,6 +199,7 @@ export function RoutesPage() {
                   <div className="min-w-0">
                     <h3 className="text-lg font-bold text-admin-primary">{route.destination}</h3>
                     <p className="mt-1 text-xs text-on-surface-variant">{copy.airport} · {copy.from} {priceLabel(route.from)}</p>
+                    <p className="mt-1 text-sm text-on-surface-variant">{copy.drive} {route.minutes} {language === 'ru' ? 'мин' : 'min'}</p>
                   </div>
                   <Link className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-outline-variant text-admin-primary transition-colors hover:bg-surface-container-low" to={routeLanguagePath(route.slug, language)} aria-label={`${copy.compare} ${route.destination}`}>
                     <span translate="no" aria-hidden="true" className="material-symbols-outlined">arrow_forward</span>
