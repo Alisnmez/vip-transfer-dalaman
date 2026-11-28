@@ -3,7 +3,7 @@
  * Analytics stays disabled until the visitor explicitly opts in.
  * Events are allowlisted: no booking IDs, customer details, routes or free text.
  */
-export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted'
+export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted' | 'whatsapp_click'
 type AnalyticsWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }
 
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID ?? ''
@@ -20,6 +20,8 @@ export function initializeAnalytics(): void {
   initialized = true
   const analyticsWindow = window as AnalyticsWindow
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? []
+  // GA expects the arguments object, not an array, in its dataLayer queue.
+  // eslint-disable-next-line prefer-rest-params
   analyticsWindow.gtag = function () { analyticsWindow.dataLayer?.push(arguments) }
   analyticsWindow.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' })
   analyticsWindow.gtag('js', new Date())
