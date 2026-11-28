@@ -160,6 +160,16 @@ export function RouteDetailPage() {
   const relatedGuides = travelGuides.filter(guide => guide.destinationSlug === route.slug)
   const relatedGuideHeading = { en: 'Related travel guides', de: 'Passende Reiseführer', ru: 'Путеводители по направлению' }[language]
   const farePath = showFares ? `/routes?destination=${encodeURIComponent(route.name)}#all-routes` : '/routes'
+  const oneWayFares = route.slug === 'marmaris' && !loading && !error
+    ? fleetCatalogue.map(vehicle => findPrice(route.match, vehicle.bookingVehicleId, 'one-way'))
+      .filter((value): value is number => typeof value === 'number' && Number.isFinite(value) && value > 0)
+    : []
+  const startingFare = oneWayFares.length ? '£' + Math.min(...oneWayFares).toFixed(2) : null
+  const fareHeadline = {
+    en: `From ${startingFare} per vehicle · One way · Pay on arrival`,
+    de: `Ab ${startingFare} pro Fahrzeug · Einfache Fahrt · Zahlung bei Ankunft`,
+    ru: `От ${startingFare} за автомобиль · В одну сторону · Оплата по прибытии`,
+  }[language]
   const formatFare = (price: number | null) => price === null ? fares.missing : `£${price.toFixed(2)}`
 
   return (
@@ -169,6 +179,10 @@ export function RouteDetailPage() {
       <main className="mx-auto max-w-5xl px-5 pb-20 pt-36 sm:px-8">
         <nav aria-label={copy.breadcrumb} className="mb-8 text-sm text-on-surface-variant"><Link className="underline" to="/routes">{copy.routes}</Link> / {language === 'ru' ? route.russianName : route.name}</nav>
         <h1 className="max-w-3xl text-4xl font-bold text-admin-primary sm:text-5xl">{heading}</h1>
+        {startingFare && <div className="mt-5 flex flex-wrap items-center gap-4">
+          <p className="text-xl font-bold text-admin-primary">{fareHeadline}</p>
+          <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to={`/booking?destination=${encodeURIComponent(route.match)}`}>{copy.request}</Link>
+        </div>}
         <p className="mt-6 max-w-3xl text-lg leading-relaxed">{localized?.copy?.intro ?? route.intro[language]}</p>
         {localized && <nav className="mt-4 flex flex-wrap gap-4 text-sm">
           {routeLanguages.map(option => <Link key={option} lang={option} hrefLang={option}
@@ -201,7 +215,7 @@ export function RouteDetailPage() {
           <h2 className="text-2xl font-bold text-admin-primary">{copy.plan}</h2>
           <p className="mt-3 leading-relaxed">{copy.planDetails}</p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to={`/booking?destination=${encodeURIComponent(route.match)}`}>{copy.request}</Link>
+            {!startingFare && <Link className="rounded-lg bg-admin-primary px-6 py-3 font-semibold text-white" to={`/booking?destination=${encodeURIComponent(route.match)}`}>{copy.request}</Link>}
             <Link className="rounded-lg border border-outline-variant px-6 py-3 font-semibold text-admin-primary" to={farePath}>{copy.compare}</Link>
           </div>
         </section>
