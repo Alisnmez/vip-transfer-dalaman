@@ -6,7 +6,7 @@ const consentCopy = {
   en: {
     preference: 'Analytics preference', title: 'Optional website analytics',
     description: 'May we use Google Analytics to understand visits and booking steps? This is optional. We do not send names, contact details or booking references.',
-    acceptAnalytics: 'Accept analytics', reject: 'Reject', privacy: 'Privacy choices',
+    acceptAnalytics: 'Accept analytics', reject: 'Reject', privacy: 'Cookie settings',
     change: 'Change analytics preference', accepted: 'Analytics: accepted. You can change your choice.',
     declined: 'Analytics: not accepted. You can change your choice.', accept: 'Accept',
   },
@@ -50,7 +50,9 @@ export function AnalyticsConsent() {
           </div>
         </aside>
       )}
-      <button type="button" className="fixed bottom-2 right-2 z-40 rounded-md bg-white/90 px-2 py-1 text-xs text-slate-700 shadow" onClick={() => setOpen(!open)}>{copy.privacy}</button>
+      <div className="border-t border-slate-200 bg-white px-4 py-4 text-center">
+      <button type="button" className="text-sm text-slate-700 underline underline-offset-4 focus-visible:outline focus-visible:outline-2" aria-expanded={open} onClick={() => setOpen(!open)}>{copy.privacy}</button>
+      </div>
       {open && <aside aria-label={copy.change} className="fixed bottom-12 right-3 z-50 max-w-xs rounded-lg border border-slate-300 bg-white p-4 shadow-lg">
         <p className="mb-3 text-sm">{analyticsConsent() ? copy.accepted : copy.declined}</p>
         <div className="flex gap-2">

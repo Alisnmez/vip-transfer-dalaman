@@ -3,7 +3,7 @@
  * Analytics stays disabled until the visitor explicitly opts in.
  * Events are allowlisted: no booking IDs, customer details, routes or free text.
  */
-export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted'
+export type AnalyticsEvent = 'booking_started' | 'booking_passenger_step' | 'booking_request_submitted' | 'whatsapp_click'
 type AnalyticsWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }
 
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID ?? ''
@@ -20,7 +20,10 @@ export function initializeAnalytics(): void {
   initialized = true
   const analyticsWindow = window as AnalyticsWindow
   analyticsWindow.dataLayer = analyticsWindow.dataLayer ?? []
-  analyticsWindow.gtag = (...args: unknown[]) => { analyticsWindow.dataLayer?.push(args) }
+  // GA expects the arguments object, not an array, in its dataLayer queue.
+  // eslint-disable-next-line prefer-rest-params
+  analyticsWindow.gtag = function () { analyticsWindow.dataLayer?.push(arguments) }
+  analyticsWindow.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' })
   analyticsWindow.gtag('js', new Date())
   analyticsWindow.gtag('config', measurementId, { send_page_view: false, anonymize_ip: true })
   const script = document.createElement('script')
@@ -31,9 +34,25 @@ export function initializeAnalytics(): void {
 
 export function setAnalyticsConsent(allowed: boolean): void {
   try { localStorage.setItem(consentKey, allowed ? 'granted' : 'denied') } catch { /* Analytics remains optional. */ }
-  if (allowed) initializeAnalytics()
-  // A revoked consent stops future events. A full GA cookie purge requires
-  // a separately tested consent-management implementation before launch.
+  if (!validId) return
+  const disableKey = `ga-disable-${measurementId}`
+  Reflect.set(window, disableKey, !allowed)
+  if (initialized) (window as AnalyticsWindow).gtag?.('consent', 'update', { analytics_storage: allowed ? 'granted' : 'denied' })
+  if (allowed) {
+    initializeAnalytics()
+    return
+  }
+  const host = window.location?.hostname ?? ''
+  const domains = host.split('.').map((_, index, parts) => parts.slice(index).join('.'))
+  for (const item of (document.cookie ?? '').split(';')) {
+    const name = item.split('=')[0].trim()
+    if (name !== '_ga' && name !== `_ga_${measurementId.slice(2)}`) continue
+    const expired = `${name}=; Max-Age=0; Path=/`
+    document.cookie = expired
+    for (const domain of domains) {
+      if (domain.includes('.')) document.cookie = `${expired}; Domain=${domain}`
+    }
+  }
 }
 
 export function trackAnalyticsEvent(event: AnalyticsEvent): void {
