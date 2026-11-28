@@ -3,29 +3,16 @@ import { useLocation } from 'react-router-dom'
 import { trackAnalyticsEvent } from '../analytics/analytics'
 
 const number = (import.meta.env.VITE_WHATSAPP_NUMBER ?? '37063416424').trim()
-const destinations: Record<string, string> = { marmaris: 'Marmaris', fethiye: 'Fethiye', oludeniz: 'Ölüdeniz', gocek: 'Göcek', icmeler: 'İçmeler', dalyan: 'Dalyan', sarigerme: 'Sarigerme' }
-
-const whatsappCopy = {
-  en: { help: 'Need help? Chat with us', chat: 'Chat on WhatsApp', label: 'Chat with DalamanWay on WhatsApp (opens in a new tab)', route: "Hello DalamanWay! I'd like information about transfers to ", vehicles: "Hello DalamanWay! I'd like to know more about your VIP vehicles.", general: copy.general },
-  de: { help: 'Brauchen Sie Hilfe?', chat: 'Chat auf WhatsApp', label: 'DalamanWay auf WhatsApp kontaktieren (öffnet einen neuen Tab)', route: 'Hallo DalamanWay! Ich möchte Informationen zu Transfers nach ', vehicles: 'Hallo DalamanWay! Ich möchte mehr über Ihre VIP-Fahrzeuge erfahren.', general: 'Hallo DalamanWay! Ich benötige Unterstützung.' },
-  ru: { help: 'Нужна помощь?', chat: 'Написать в WhatsApp', label: 'Связаться с DalamanWay в WhatsApp (откроется новая вкладка)', route: 'Здравствуйте, DalamanWay! Хотелось бы узнать о трансферах в ', vehicles: 'Здравствуйте, DalamanWay! Хотелось бы узнать больше о ваших VIP-автомобилях.', general: 'Здравствуйте, DalamanWay! Мне нужна помощь.' },
-}
+import { whatsappCopy, whatsappLink, showFloatingWhatsApp } from './whatsapp'
 
 export function WhatsAppButton({ inline = false }: { inline?: boolean }) {
   const { pathname } = useLocation()
   const { language } = useLanguage()
   const copy = whatsappCopy[language]
-  if (!/^[1-9][0-9]{7,14}$/.test(number)) return null
-  if (!inline && /^\/booking(?:\/|$)/.test(pathname)) return null
-  const slug = /\/routes\/([a-z]+)\/?$/.exec(pathname)?.[1]
-  const destination = slug ? destinations[slug] : undefined
-  const message = destination
-    ? copy.route + destination + '.'
-    : pathname === '/vehicles'
-      ? copy.vehicles
-      : 'Hello DalamanWay! I would like some assistance.'
+  const href = whatsappLink(number, pathname, language)
+  if (!href || (!inline && !showFloatingWhatsApp(pathname))) return null
   return (
-    <a href={'https://wa.me/' + number + '?text=' + encodeURIComponent(message)}
+    <a href={href}
       target="_blank" rel="noopener noreferrer"
       aria-label={copy.label}
       onClick={() => trackAnalyticsEvent('whatsapp_click')}
