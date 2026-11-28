@@ -1,3 +1,4 @@
+import { WhatsAppButton } from '../../features/booking/WhatsAppButton'
 import { VehiclePhoto } from './VehiclePhoto'
 import { fleetCatalogue } from '../../features/vehicle-type/fleetCatalogue'
 import { supportEmail } from '../../features/booking/support'
@@ -399,6 +400,7 @@ function InfoPage({
             <h2 className="font-title-md text-title-md text-admin-primary mb-4">{copy.contactUs}</h2>
             <div className="flex flex-col gap-3">
               <a className="text-admin-primary underline underline-offset-4" href={`mailto:${supportEmail}`}>{copy.email} {supportEmail}</a>
+              <WhatsAppButton inline />
             </div>
           </section>
         )}
